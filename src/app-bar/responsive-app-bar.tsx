@@ -16,7 +16,7 @@ import Link from "next/link";
 const pages = [
   // {title: 'Configurator', link: '/configurator'},
   // {title: 'Gallery', link: '/gallery'},
-  // {title: 'Materials', link: '/materials'},
+  {title: 'Materials', link: '/materials'},
   // {title: 'For partners', link: '/for-partners'},
   {title: 'About us', link: '/about-us'}
 ];
