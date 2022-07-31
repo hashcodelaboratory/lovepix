@@ -12,15 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Link from "next/link";
-
-const pages = [
-  // {title: 'Configurator', link: '/configurator'},
-  {title: 'Gallery', link: '/gallery'},
-  {title: 'Materials', link: '/materials'},
-  // {title: 'For partners', link: '/for-partners'},
-  {title: 'About us', link: '/about-us'}
-];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import {pages, settings} from "../navigation";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -154,9 +146,11 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
+                <Link key={setting.title} href={setting.link}>
+                  <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting.title}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
