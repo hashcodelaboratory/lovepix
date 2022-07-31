@@ -3,6 +3,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
+import {Container} from "@mui/material";
+import MasonryImageList from "../src/masonry-image-list/masonry-image-list";
 
 const Gallery: NextPage = () => {
   return (
@@ -18,6 +20,9 @@ const Gallery: NextPage = () => {
       </header>
 
       <main className={styles.main}>
+        <Container>
+          <MasonryImageList/>
+        </Container>
       </main>
 
       <footer className={styles.footer}>

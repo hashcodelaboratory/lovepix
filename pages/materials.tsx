@@ -40,7 +40,7 @@ const Materials: NextPage = () => {
     const textAlign = index % 2 ? "right" :  "left"
 
     return <Grid sx={{my: 8}} container rowSpacing={4} columnSpacing={4} direction={direction}>
-      <Grid item xs={12} md={2}>
+      <Grid item xs={12} md={3}>
         <Image
           style={{ borderRadius: 10 }}
           key={material.illustration}
@@ -51,7 +51,7 @@ const Materials: NextPage = () => {
           objectFit="cover"
         />
       </Grid>
-      <Grid item xs={12} md={10}>
+      <Grid item xs={12} md={9}>
         <Grid container direction="column" rowSpacing={2} alignItems={align}>
           <Grid item>
             <Typography variant="h5" fontWeight="bold" textAlign={textAlign}>{material.title}</Typography>
