@@ -13,10 +13,13 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Link from "next/link";
 import {pages, settings} from "../navigation";
+import {useTranslation} from "next-i18next";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
+  const { t } = useTranslation();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -117,7 +120,7 @@ const ResponsiveAppBar = () => {
                 sx={{my: 2, color: 'white', display: 'block'}}
               >
                 <Link href={page.link}>
-                  {page.title}
+                  {t(page.title)}
                 </Link>
               </Button>
             ))}

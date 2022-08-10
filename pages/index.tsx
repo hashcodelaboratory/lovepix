@@ -1,7 +1,8 @@
-import type {NextPage} from 'next'
+import type {GetStaticProps, NextPage} from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const Home: NextPage = () => {
   return (
@@ -27,3 +28,12 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+export const getStaticProps: GetStaticProps = async  ({ locale }) => {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale ?? 'sk', ["common"])),
+            // Will be passed to the page component as props
+        },
+    };
+}
