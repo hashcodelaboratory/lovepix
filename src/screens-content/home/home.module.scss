@@ -47,3 +47,24 @@
     padding-top: 2rem;
     max-width: 300px;
 }
+
+.galleryContainer {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.gallerySubtitle {
+    font-weight: 200;
+    padding-top: 0.5rem;
+}
+
+.galleryRow {
+    padding-top: 1rem;
+    display: flex;
+    overflow-x: auto;
+}
+
+.galleryItem {
+    margin: 0 1rem;
+    cursor: pointer;
+}

@@ -12,4 +12,7 @@ export const messages = {
   photoCanvasText: "photoCanvasText",
   photoAcrylicText: "photoAcrylicText",
   photoAluminumText: "photoAluminumText",
+  pickOneOfOurPhotos: "pickOneOfOurPhotos",
+  noPhoto: "noPhoto",
+  lookAtOurGallery: "lookAtOurGallery"
 }
