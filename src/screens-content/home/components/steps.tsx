@@ -7,14 +7,14 @@ const Steps = () => {
     const { t } = useTranslation();
 
     const columns = STEPS.map(({img, title}) =>
-        <div key={img} className={styles.step}>
-            <Image className={styles.stepImage} src={img} alt={title} width={200} height={100} />
-            <div>{String(t(title))}</div>
+        <div key={img} className={styles.horizontalItem}>
+            <Image className={styles.itemImage} src={img} alt={title} width={200} height={100} />
+            <div className={styles.itemTitle}>{String(t(title))}</div>
         </div>
     )
 
     return(
-        <div className={styles.stepsContainer}>
+        <div className={styles.horizontalContainer}>
             {columns}
         </div>
     )

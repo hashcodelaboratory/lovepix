@@ -4,9 +4,18 @@
   "About us": "About us",
   "printPhoto": "Print your photo on canvas",
   "uploadPhoto": "Upload photo / create image",
-  "uploadPhotoSubcontent": "uploadPhotoSubcontent",
+  "uploadPhotoSubcontent": "Just upload your photo, choose the size and material. We will arrange the rest. In addition to canvas, we print photos on acrylic (plexiglass) and aluminum-PVC-aluminum board.",
   "uploadPhotoStepOne": "Upload photo",
-  "uploadPhotoStepTwo": "Choose size",
-  "uploadPhotoStepThree": "Crop image",
-  "uploadPhotoStepFour": "Pick materials"
+  "uploadPhotoStepTwo": "Select dimension",
+  "uploadPhotoStepThree": "Update cropper",
+  "uploadPhotoStepFour": "Select material",
+  "photoCanvasTitle": "Photo on canvas",
+  "photoAcrylicTitle": "Photo on acrylic (plexiglass)",
+  "photoAluminumTitle": "Photo on aluminum plates",
+  "photoCanvasText": "Magnify your memories with an image on the canvas. The canvas is stretched on a quality wooden frame. This material fits into any interior.",
+  "photoAcrylicText": "Create an image with a modern, high-gloss look. Acrylic (plexiglass) is suitable for modern interiors. We recommend indenting from the wall.",
+  "photoAluminumText": "Beautiful, modern and very durable material. The printed surfaces give a matt impression with a fine structure. For a better effect, we recommend indenting or framing.",
+  "pickOneOfOurPhotos": "Pick one of our photos",
+  "noPhoto": "No photo to choose ?",
+  "lookAtOurGallery": "Look at our gallery."
 }
