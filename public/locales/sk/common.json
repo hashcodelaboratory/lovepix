@@ -1,5 +1,8 @@
 {
   "Gallery": "Galéria",
   "Materials": "Materiály",
-  "About us": "O nás"
+  "About us": "O nás",
+  "printPhoto": "Vytlačte si svoje foto na plátno",
+  "uploadPhoto": "Nahrať fotku / vytvoriť obrázok",
+  "uploadPhotoSubcontent": "Stačí nahrať Vašu fotografiu, vybrať si rozmer a materiál. Ostatné zariadime my. Okrem plátna tlačíme fotografie na akryl (plexisklo) a dosku hliník-PVC-hliník."
 }
