@@ -3,7 +3,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import Main from "../src/screens-content/home/main";
+import HomeLayout from "../src/screens-content/home/home";
 
 const Home: NextPage = () => {
   return (
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
       </header>
 
       <main className={styles.main}>
-        <Main />
+        <HomeLayout />
       </main>
 
       <footer className={styles.footer}>

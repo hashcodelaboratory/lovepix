@@ -1,8 +1,8 @@
 import {useTranslation} from "next-i18next";
 import {messages} from "../../../messages/messages";
-import styles from '../main.module.scss';
+import styles from '../home.module.scss';
 
-const UploadImagePart = () => {
+const UploadImage = () => {
     const { t } = useTranslation();
 
     return(
@@ -20,4 +20,4 @@ const UploadImagePart = () => {
     )
 }
 
-export default UploadImagePart;
+export default UploadImage;
