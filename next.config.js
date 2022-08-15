@@ -6,7 +6,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['picsum.photos']
+    domains: ['picsum.photos', 'us.123rf.com']
   },
   i18n
 }

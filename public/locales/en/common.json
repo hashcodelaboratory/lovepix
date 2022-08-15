@@ -1,5 +1,12 @@
 {
   "Gallery": "Gallery",
   "Materials": "Materials",
-  "About us": "About us"
+  "About us": "About us",
+  "printPhoto": "Print your photo on canvas",
+  "uploadPhoto": "Upload photo / create image",
+  "uploadPhotoSubcontent": "uploadPhotoSubcontent",
+  "uploadPhotoStepOne": "Upload photo",
+  "uploadPhotoStepTwo": "Choose size",
+  "uploadPhotoStepThree": "Crop image",
+  "uploadPhotoStepFour": "Pick materials"
 }
