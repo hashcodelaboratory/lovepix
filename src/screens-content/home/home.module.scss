@@ -16,20 +16,34 @@
     text-align: center;
 }
 
-.stepsContainer {
+.horizontalContainer {
     display: flex;
     width: 100%;
     justify-content: space-between;
     padding: 4rem 0;
 }
 
-.step {
+.horizontalItem {
     text-transform: uppercase;
     font-weight: 500;
     font-size: 1.25rem;
     text-align: center;
 }
 
-.stepImage {
+.itemImage {
     object-fit: cover;
+}
+
+.itemTitle {
+    padding-top: 1rem;
+}
+
+.materialsTitle {
+    font-size: 1.5rem;
+}
+
+.materialsText {
+    font-weight: 200;
+    padding-top: 2rem;
+    max-width: 300px;
 }

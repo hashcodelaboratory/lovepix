@@ -6,4 +6,10 @@ export const messages = {
   uploadPhotoStepTwo: "uploadPhotoStepTwo",
   uploadPhotoStepThree: "uploadPhotoStepThree",
   uploadPhotoStepFour: "uploadPhotoStepFour",
+  photoCanvasTitle: "photoCanvasTitle",
+  photoAcrylicTitle: "photoAcrylicTitle",
+  photoAluminumTitle: "photoAluminumTitle",
+  photoCanvasText: "photoCanvasText",
+  photoAcrylicText: "photoAcrylicText",
+  photoAluminumText: "photoAluminumText",
 }
