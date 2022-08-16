@@ -1,9 +1,9 @@
-import styles from "../home.module.scss";
+import styles from "../../home.module.scss";
 import {useTranslation} from "next-i18next";
-import {messages} from "../../../messages/messages";
-import {GALLERY} from "../utils/gallery";
+import {messages} from "../../../../messages/messages";
+import {GALLERY} from "../../utils/gallery";
 import Image from "next/image";
-import {ImageLayout} from "../enums/enums";
+import {ImageLayout} from "../../enums/enums";
 
 const Gallery = () => {
 

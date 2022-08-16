@@ -1,9 +1,9 @@
-import styles from "../home.module.scss";
+import styles from "../../home.module.scss";
 import {useTranslation} from "next-i18next";
-import {STEPS, STEPS_GRID_STYLE} from "../utils/steps";
+import {STEPS, STEPS_GRID_STYLE} from "../../utils/steps";
 import Image from "next/image";
 import {Grid} from "@mui/material";
-import {ImageLayout, ObjectFit} from "../enums/enums";
+import {ImageLayout, ObjectFit} from "../../enums/enums";
 
 const Steps = () => {
     const { t } = useTranslation();

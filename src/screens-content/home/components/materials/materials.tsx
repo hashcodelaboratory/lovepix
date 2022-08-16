@@ -1,9 +1,9 @@
-import styles from "../home.module.scss";
-import {MATERIALS, MATERIALS_GRID_STYLE} from "../utils/materials";
+import styles from "../../home.module.scss";
+import {MATERIALS, MATERIALS_GRID_STYLE} from "../../utils/materials";
 import Image from "next/image";
 import {useTranslation} from "next-i18next";
 import {Grid} from "@mui/material";
-import {ObjectFit} from "../enums/enums";
+import {ObjectFit} from "../../enums/enums";
 
 const Materials = () => {
 
