@@ -19,13 +19,11 @@
 .horizontalContainer {
     display: flex;
     width: 100%;
-    justify-content: space-between;
     padding: 2rem 0;
 }
 
 .horizontalItem {
     text-transform: uppercase;
-    font-weight: 500;
     font-size: 1.25rem;
     padding: 2rem 0;
 }
@@ -36,6 +34,8 @@
 
 .itemTitle {
     padding-top: 1rem;
+    text-align: center;
+    font-weight: 300;
 }
 
 .materialsTitle {

@@ -14,3 +14,7 @@ export enum AlignItems {
 export enum TextAlign {
     RIGHT = "right"
 }
+
+export enum ObjectFit {
+    CONTAIN = "contain"
+}
