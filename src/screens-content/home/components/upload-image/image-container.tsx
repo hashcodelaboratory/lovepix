@@ -9,14 +9,12 @@ const ImageContainer = () => (
         <ImageList variant="masonry" cols={3} gap={8}>
             {WALLER_IMAGE_LIST.map(({img, title}) => (
                 <ImageListItem key={img}>
-                    <picture>
-                        <source srcSet={`${img}?w=248&fit=crop&auto=format&dpr=2 2x`} type="image/webp" />
-                        <img
-                            src={`${img}?w=248&fit=crop&auto=format`}
-                            alt={title}
-                            loading="lazy"
-                        />
-                    </picture>
+                    <img
+                        src={`${img}?w=248&fit=crop&auto=format`}
+                        srcSet={`${img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                        alt={title}
+                        loading="lazy"
+                    />
                 </ImageListItem>
             ))}
         </ImageList>
