@@ -1,8 +1,8 @@
-import UploadImage from "./components/upload-image";
+import UploadImage from "./components/upload-image/upload-image";
 import {Container} from "@mui/material";
-import Steps from "./components/steps";
-import Materials from "./components/materials";
-import Gallery from "./components/gallery";
+import Steps from "./components/steps/steps";
+import Materials from "./components/materials/materials";
+import Gallery from "./components/gallery/gallery";
 
 const HomeLayout = () => {
     return(
