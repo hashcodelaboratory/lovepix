@@ -1,6 +1,6 @@
 import styles from "../home.module.scss";
 import {useTranslation} from "next-i18next";
-import {STEPS} from "../utils/steps";
+import {STEPS, STEPS_GRID_STYLE} from "../utils/steps";
 import Image from "next/image";
 import {Grid} from "@mui/material";
 import {ImageLayout, ObjectFit} from "../enums/enums";
@@ -19,9 +19,7 @@ const Steps = () => {
     )
 
     return(
-        <Grid container className={styles.horizontalContainer} spacing={2}
-            sx={{ justifyContent: { xs: "center", sm: "space-between", md: "space-between", lg: "space-between", xl: "space-between" } }}
-        >
+        <Grid container className={styles.horizontalContainer} spacing={2} sx={STEPS_GRID_STYLE}>
             {columns}
         </Grid>
     )

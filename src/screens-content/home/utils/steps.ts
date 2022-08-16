@@ -21,3 +21,5 @@ export const STEPS: {
         img: "https://firebasestorage.googleapis.com/v0/b/waller-development.appspot.com/o/home-page%2Fmaterial.png?alt=media&token=31b3ddb6-d30b-4e7a-a2b1-b130a470d0de"
     }
 ]
+
+export const STEPS_GRID_STYLE = { justifyContent: { xs: "center", sm: "space-between", md: "space-between", lg: "space-between", xl: "space-between" } }

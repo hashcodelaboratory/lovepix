@@ -21,3 +21,5 @@ export const MATERIALS: {
         text: messages.photoAluminumText
     }
 ]
+
+export const MATERIALS_GRID_STYLE = { justifyContent: { xs: "center", sm: "center", md: "space-between", lg: "space-between", xl: "space-between" } }

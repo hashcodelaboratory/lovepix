@@ -4,6 +4,7 @@ import styles from '../home.module.scss';
 import {Grid} from "@mui/material";
 import Image from "next/image";
 import {AlignItems, FlexWrap, TextAlign} from "../enums/enums";
+import {UPLOAD_IMG, UPLOAD_IMG_GRID_STYLE} from "../utils/image-upload";
 
 const UploadImage = () => {
     const { t } = useTranslation();
@@ -28,10 +29,10 @@ const UploadImage = () => {
                     {String(t(uploadPhotoSubcontent))}
                 </p>
             </Grid>
-            <Grid item lg={6} sm={6} sx={{ display: { xs: "none", sm: "block", md: "block", lg: "block", xl: "block" } }}
+            <Grid item lg={6} sm={6} sx={UPLOAD_IMG_GRID_STYLE}
                 textAlign={TextAlign.RIGHT}
             >
-                <Image alt="upload" src="https://firebasestorage.googleapis.com/v0/b/waller-development.appspot.com/o/home-page%2Fmain_banner.png?alt=media&token=dd65465a-f6a5-479e-8ea1-891dc07d86a2"
+                <Image alt="upload" src={UPLOAD_IMG}
                    width={500}
                    height={500}
                />

@@ -1,5 +1,5 @@
 import styles from "../home.module.scss";
-import {MATERIALS} from "../utils/materials";
+import {MATERIALS, MATERIALS_GRID_STYLE} from "../utils/materials";
 import Image from "next/image";
 import {useTranslation} from "next-i18next";
 import {Grid} from "@mui/material";
@@ -18,9 +18,8 @@ const Materials = () => {
     );
 
     return(
-        <Grid container className={styles.horizontalContainer} spacing={4}
-            sx={{ justifyContent: { xs: "center", sm: "center", md: "space-between", lg: "space-between", xl: "space-between" } }}>
-                {columns}
+        <Grid container className={styles.horizontalContainer} spacing={4} sx={MATERIALS_GRID_STYLE}>
+            {columns}
         </Grid>
     )
 }
