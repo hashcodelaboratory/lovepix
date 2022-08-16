@@ -16,5 +16,6 @@ export enum TextAlign {
 }
 
 export enum ObjectFit {
-    CONTAIN = "contain"
+    CONTAIN = "contain",
+    COVER = "cover"
 }

@@ -13,7 +13,7 @@ const Gallery = () => {
 
     const gallery = GALLERY.map(({ img }) =>
         <div key={img} className={styles.galleryItem}>
-            <Image src={img} width={350} height={300} layout={ImageLayout.FIXED}/>
+            <Image alt={img} src={img} width={350} height={300} layout={ImageLayout.FIXED}/>
         </div>
     );
 

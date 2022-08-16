@@ -10,7 +10,7 @@ const Steps = () => {
 
     const columns = STEPS.map(({img, title}) =>
         <Grid item key={img} className={styles.horizontalItem}>
-            <Image className={styles.itemImage} src={img} alt={title} width={200} height={60}
+            <Image src={img} alt={title} width={200} height={60}
                  layout={ImageLayout.FIXED}
                  objectFit={ObjectFit.CONTAIN}
             />
@@ -19,7 +19,7 @@ const Steps = () => {
     )
 
     return(
-        <Grid container className={styles.horizontalContainer}
+        <Grid container className={styles.horizontalContainer} spacing={2}
             sx={{ justifyContent: { xs: "center", sm: "space-between", md: "space-between", lg: "space-between", xl: "space-between" } }}
         >
             {columns}
