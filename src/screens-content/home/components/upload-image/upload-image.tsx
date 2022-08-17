@@ -10,6 +10,7 @@ const UploadImage = () => (
         className={styles.horizontalContainer}
         flexWrap={FlexWrap.NO_WRAP}
         alignItems={AlignItems.CENTER}
+        spacing={4}
     >
         <TextContainer />
         <ImageContainer />
