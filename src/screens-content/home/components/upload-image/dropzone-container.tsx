@@ -24,7 +24,7 @@ const DropzoneContainer = () => {
                 alignItems: 'center',
             }}
         >
-            <Group position="center" spacing="xl" style={{ minHeight: 220, pointerEvents: 'none' }}>
+            <Group position="center" spacing="xl" style={{ minHeight: 120, pointerEvents: 'none' }}>
                 <Dropzone.Accept>
                     <IconUploadPhoto width={100} height={100}/>
                 </Dropzone.Accept>
