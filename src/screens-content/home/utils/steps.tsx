@@ -1,8 +1,8 @@
 import {messages} from "../../../messages/messages";
-import IconSelectDimension from "../../../assets/icons/icon-select-dimension";
-import IconChooseMaterial from "../../../assets/icons/icon-choose-material";
-import IconUploadPhoto from "../../../assets/icons/icon-upload-photo";
-import IconUpdateCropper from "../../../assets/icons/icon-update-cropper";
+import IconSelectDimension from "@icons/icon-select-dimension";
+import IconChooseMaterial from "@icons/icon-choose-material";
+import IconUploadPhoto from "@icons/icon-upload-photo";
+import IconUpdateCropper from "@icons/icon-update-cropper";
 
 export const STEPS: {
     title: string;
