@@ -3,6 +3,7 @@ import {TextAlign} from "../../enums/enums";
 import {Grid} from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
+import styles from "../../home.module.scss";
 
 const ImageContainer = () => (
     <Grid item lg={6} sm={6} sx={UPLOAD_IMG_GRID_STYLE} textAlign={TextAlign.RIGHT}>
@@ -14,6 +15,7 @@ const ImageContainer = () => (
                         srcSet={`${img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                         alt={title}
                         loading="lazy"
+                        className={styles.roundedImage}
                     />
                 </ImageListItem>
             ))}

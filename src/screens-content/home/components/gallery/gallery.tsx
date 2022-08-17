@@ -14,7 +14,7 @@ const Gallery = () => {
 
     const gallery = GALLERY.map(({ img }) =>
         <Carousel.Slide key={img}>
-            <Image alt={img} src={img} width={350} height={300} layout={ImageLayout.FIXED}/>
+            <Image className={styles.roundedImage} alt={img} src={img} width={350} height={300} layout={ImageLayout.FIXED}/>
         </Carousel.Slide>
     );
 
