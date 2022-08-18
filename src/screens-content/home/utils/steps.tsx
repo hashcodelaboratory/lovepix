@@ -1,8 +1,5 @@
 import {messages} from "../../../messages/messages";
-import IconSelectDimension from "@icons/icon-select-dimension";
-import IconChooseMaterial from "@icons/icon-choose-material";
-import IconUploadPhoto from "@icons/icon-upload-photo";
-import IconUpdateCropper from "@icons/icon-update-cropper";
+import Icons from "@icons/icons";
 
 export const STEPS: {
     title: string;
@@ -10,19 +7,19 @@ export const STEPS: {
 }[] = [
     {
         title: messages.uploadPhotoStepOne,
-        icon: <IconUploadPhoto width={200} height={60} />
+        icon: Icons.uploadPhoto
     },
     {
         title: messages.uploadPhotoStepTwo,
-        icon: <IconSelectDimension width={200} height={60} />
+        icon: Icons.selectDimension
     },
     {
         title: messages.uploadPhotoStepThree,
-        icon: <IconUpdateCropper width={200} height={60} />
+        icon: Icons.updateCropper
     },
     {
         title: messages.uploadPhotoStepFour,
-        icon: <IconChooseMaterial width={200} height={60} />
+        icon: Icons.chooseMaterial
     }
 ]
 

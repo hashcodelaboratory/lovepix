@@ -1,9 +1,9 @@
 import {Group} from "@mantine/core";
 import {Dropzone, IMAGE_MIME_TYPE} from "@mantine/dropzone";
-import IconUploadPhoto from "@icons/icon-upload-photo";
 import styles from "../../home.module.scss";
 import {useTranslation} from "next-i18next";
 import {messages} from "../../../../messages/messages";
+import Icons from "@icons/icons";
 
 const DropzoneContainer = () => {
 
@@ -26,10 +26,10 @@ const DropzoneContainer = () => {
         >
             <Group position="center" spacing="xl" style={{ minHeight: 120, pointerEvents: 'none' }}>
                 <Dropzone.Accept>
-                    <IconUploadPhoto width={100} height={100}/>
+                    {Icons.uploadPhoto}
                 </Dropzone.Accept>
                 <Dropzone.Reject>
-                    <IconUploadPhoto width={100} height={100}/>
+                    {Icons.uploadPhoto}
                 </Dropzone.Reject>
 
                 <div>
