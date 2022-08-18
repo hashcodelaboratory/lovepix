@@ -2,7 +2,7 @@ import styles from "../../home.module.scss";
 import {Grid} from "@mui/material";
 import {useTranslation} from "next-i18next";
 import {messages} from "../../../../messages/messages";
-import DropzoneContainer from "./dropzone-container";
+import DropzoneContainer from "./dropzone/dropzone-container";
 
 const TextContainer = () => {
     const { t } = useTranslation();
