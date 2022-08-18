@@ -15,7 +15,6 @@ const DropzoneContainer = () => {
         <Dropzone
             onDrop={(files) => console.log('accepted files', files)}
             onReject={(files) => console.log('rejected files', files)}
-            maxSize={3 * 1024 ** 2}
             accept={IMAGE_MIME_TYPE}
             sx={{
                 minHeight: 120,
