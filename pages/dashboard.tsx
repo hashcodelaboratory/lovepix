@@ -1,7 +1,9 @@
 import type {NextPage} from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
+import {GetStaticProps} from "next";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import CustomDashboard from "../src/screens-content/dashboard/dashboard";
 
 const Dashboard: NextPage = () => {
   return (
@@ -12,18 +14,18 @@ const Dashboard: NextPage = () => {
         <link rel="icon" href="/favicon.ico"/>
       </Head>
 
-      <header>
-        <ResponsiveAppBar/>
-      </header>
+     <CustomDashboard  />
 
-      <main className={styles.main}>
-      </main>
-
-      <footer className={styles.footer}>
-        Powered by Hashlab s.r.o
-      </footer>
     </div>
   )
 }
 
 export default Dashboard
+
+export const getStaticProps: GetStaticProps = async  ({ locale }) => {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale ?? 'sk', ["common"])),
+        },
+    };
+}
