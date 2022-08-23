@@ -11,7 +11,7 @@ const Materials = () => {
 
     const columns = MATERIALS.map(({ img, title, text}) =>
         <Grid item key={title}>
-            <Image alt={title} src={img} width={300} height={250} objectFit={ObjectFit.COVER} />
+            <Image className={styles.roundedImage} alt={title} src={img} width={300} height={250} objectFit={ObjectFit.COVER} />
             <div className={styles.materialsTitle}>{String(t(title))}</div>
             <div className={styles.materialsText}>{String(t(text))}</div>
         </Grid>
