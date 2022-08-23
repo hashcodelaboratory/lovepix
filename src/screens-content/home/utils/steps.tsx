@@ -1,5 +1,6 @@
 import {messages} from "../../../messages/messages";
-import Icons from "@icons/icons";
+import Icon from "@icons/icon";
+import {IconType} from "@icons/enums";
 
 export const STEPS: {
     title: string;
@@ -7,19 +8,19 @@ export const STEPS: {
 }[] = [
     {
         title: messages.uploadPhotoStepOne,
-        icon: Icons.uploadPhoto
+        icon: <Icon icon={IconType.UPLOAD_PHOTO} />
     },
     {
         title: messages.uploadPhotoStepTwo,
-        icon: Icons.selectDimension
+        icon: <Icon icon={IconType.SELECT_DIMENSION} />
     },
     {
         title: messages.uploadPhotoStepThree,
-        icon: Icons.updateCropper
+        icon: <Icon icon={IconType.UPDATE_CROPPER} />
     },
     {
         title: messages.uploadPhotoStepFour,
-        icon: Icons.chooseMaterial
+        icon: <Icon icon={IconType.CHOOSE_MATERIAL} />
     }
 ]
 

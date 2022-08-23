@@ -1,10 +1,11 @@
 import {Group} from "@mantine/core";
 import {Dropzone, IMAGE_MIME_TYPE} from "@mantine/dropzone";
 import styles from "../../../home.module.scss";
-import Icons from "@icons/icons";
 import {DROPZONE_STYLE} from "./utils";
 import DropzoneIdle from "./dropzone-idle";
 import {FileRejection} from "react-dropzone";
+import Icon from "@icons/icon";
+import {IconType} from "@icons/enums";
 
 const DropzoneContainer = () => {
 
@@ -25,10 +26,10 @@ const DropzoneContainer = () => {
         >
             <Group position="center" spacing="xl" className={styles.dropzoneGroup}>
                 <Dropzone.Accept>
-                    {Icons.uploadPhoto}
+                    <Icon icon={IconType.UPLOAD_PHOTO} />
                 </Dropzone.Accept>
                 <Dropzone.Reject>
-                    {Icons.uploadPhoto}
+                    <Icon icon={IconType.UPLOAD_PHOTO} />
                 </Dropzone.Reject>
 
                 <DropzoneIdle />
