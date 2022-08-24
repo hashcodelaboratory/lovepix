@@ -20,7 +20,7 @@
 
 .sidebarHeader {
   text-align: center;
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
 }
 
 .sidebarHeaderTitle {
@@ -46,4 +46,22 @@
   background-color: silver;
   cursor: pointer;
   text-transform: uppercase;
+}
+
+.sidebarContent {
+  padding: 1rem;
+}
+
+.sidebarContentTitle {
+  margin: 0;
+  padding: 0.8rem 1rem;
+  color: white;
+  font-weight: 200;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.sidebarContentTitle:hover {
+  background-color: #505050;
+  border-radius: 0.5rem;
 }
