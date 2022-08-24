@@ -1,8 +1,18 @@
 import styles from '../../../../dashboard.module.scss'
 import {useTranslation} from "next-i18next";
-import {messages} from "../../../../../../messages/messages";
 
-const Card = () => {
+type CardProps = {
+    header: {
+        title: string;
+        count: number;
+    },
+    footer: {
+        value: string;
+        text: string;
+    }
+}
+
+const Card = ({header, footer}: CardProps) => {
 
     const { t } = useTranslation();
 
@@ -10,10 +20,13 @@ const Card = () => {
         <div className={styles.cardContainer}>
             <div className={styles.cardIconContainer}></div>
             <div className={styles.cardHeader}>
-                <p className={styles.cardHeaderTitle}>{String(t(messages.orders))}</p>
-                <p className={styles.cardHeaderNumber}>258</p>
+                <p className={styles.cardHeaderTitle}>{String(t(header.title))}</p>
+                <p className={styles.cardHeaderNumber}>{header.count}</p>
                 <hr className={styles.cardDivider}></hr>
-                <p className={styles.cardFooterTitle}><b style={{ color: 'rgb(76, 175, 80)' }}>+ 55 %</b> than last week</p>
+                <p className={styles.cardFooterTitle}>
+                    <b style={{ color: 'rgb(76, 175, 80)' }}>{footer.value} </b>
+                    {footer.text}
+                </p>
             </div>
         </div>
     )
