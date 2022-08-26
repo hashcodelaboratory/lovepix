@@ -24,7 +24,7 @@ const Card = ({header, footer}: CardProps) => {
                 <p className={styles.cardHeaderNumber}>{header.count}</p>
                 <hr className={styles.cardDivider}></hr>
                 <p className={styles.cardFooterTitle}>
-                    <b style={{ color: 'rgb(76, 175, 80)' }}>{footer.value} </b>
+                    <b className={styles.cardFooterTitleSuccess}>{footer.value} </b>
                     {footer.text}
                 </p>
             </div>
