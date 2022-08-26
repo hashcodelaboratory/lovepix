@@ -1,6 +1,5 @@
 .dashboardContainer {
   display: flex;
-  align-items: center;
   width: 100%;
   height: 100vh;
   padding: 1rem;
@@ -17,7 +16,7 @@
 
 .contentContainer {
   padding: 2rem;
-  display: flex;
+  width: 100%;
 }
 
 .sidebarHeader {
@@ -66,6 +65,10 @@
 .sidebarContentTitle:hover {
   background-color: #505050;
   border-radius: 0.5rem;
+}
+
+.cardRow {
+  display: flex;
 }
 
 .cardContainer {
@@ -134,4 +137,12 @@
 
 .cardFooterTitleSuccess {
   color: rgb(76, 175, 80);
+}
+
+.contentTable {
+  box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem, rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
+  border: none;
+  border-radius: 1rem;
+  background-color: white;
+  margin: 2rem 0 1rem 1rem;
 }
