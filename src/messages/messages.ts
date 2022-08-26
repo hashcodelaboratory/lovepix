@@ -17,5 +17,6 @@ export const messages = {
   lookAtOurGallery: "lookAtOurGallery",
   home: "home",
   orders: "orders",
-  products: "products"
+  products: "products",
+  thanLastWeek: "than last week" // TODO: add translation
 }

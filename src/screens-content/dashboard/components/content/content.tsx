@@ -11,7 +11,7 @@ const Content = () => (
             }}
             footer={{
                 value: '+ 55 %',
-                text: 'than last week'
+                text: messages.thanLastWeek
             }}
         />
         <Card
@@ -21,7 +21,7 @@ const Content = () => (
             }}
             footer={{
                 value: '+ 15 %',
-                text: 'than last week'
+                text: messages.thanLastWeek
             }}
         />
     </div>
