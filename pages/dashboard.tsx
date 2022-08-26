@@ -3,8 +3,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
 
-const Dashboard: NextPage = () => {
-  return (
+const Dashboard: NextPage = () => (
     <div className={styles.container}>
       <Head>
         <title>Dashboard</title>
@@ -23,7 +22,6 @@ const Dashboard: NextPage = () => {
         Powered by Hashlab s.r.o
       </footer>
     </div>
-  )
-}
+)
 
 export default Dashboard
