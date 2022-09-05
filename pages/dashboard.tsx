@@ -5,8 +5,7 @@ import {GetStaticProps} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import CustomDashboard from "../src/screens-content/dashboard/dashboard";
 
-const Dashboard: NextPage = () => {
-  return (
+const Dashboard: NextPage = () => (
     <div className={styles.container}>
       <Head>
         <title>Dashboard</title>
@@ -17,8 +16,7 @@ const Dashboard: NextPage = () => {
      <CustomDashboard  />
 
     </div>
-  )
-}
+)
 
 export default Dashboard
 
