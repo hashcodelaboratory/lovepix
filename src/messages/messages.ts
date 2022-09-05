@@ -14,5 +14,9 @@ export const messages = {
   photoAluminumText: "photoAluminumText",
   pickOneOfOurPhotos: "pickOneOfOurPhotos",
   noPhoto: "noPhoto",
-  lookAtOurGallery: "lookAtOurGallery"
+  lookAtOurGallery: "lookAtOurGallery",
+  home: "home",
+  orders: "orders",
+  products: "products",
+  thanLastWeek: "than last week" // TODO: add translation
 }
