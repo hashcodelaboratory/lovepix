@@ -22,5 +22,7 @@
   "orders": "Orders",
   "products": "Products",
   "fileUploaded": "File uploaded",
-  "fileRejected": "File rejected"
+  "fileRejected": "File rejected",
+  "storage": "Storage",
+  "uploadedImages": "Uploaded images"
 }
