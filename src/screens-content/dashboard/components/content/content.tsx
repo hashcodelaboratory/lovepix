@@ -2,28 +2,12 @@ import Card from "./components/home/card";
 import styles from '../../dashboard.module.scss'
 import {messages} from "../../../../messages/messages";
 import Table from "./components/home/table";
-import {storage} from "../../../../../utils/firebase/config";
-import {UPLOAD_IMAGES} from "../../../home/components/upload-image/dropzone/utils";
-import {listAll, ref, StorageReference} from "@firebase/storage";
-import {useEffect, useState} from "react";
+import {useContext} from "react";
+import DashboardContext from "../../context/dashboard-context";
 
 const Content = () => {
-    const [uploadedImages, setUploadedImages] = useState<StorageReference[]>([]);
-
-    const uploadedImagesRef = ref(storage, UPLOAD_IMAGES);
-
-    useEffect(() => {
-        listAll(uploadedImagesRef)
-            .then(res => {
-                setUploadedImages(res.items);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        // no additional dependencies needed
-    }, []);
-
-    console.log(uploadedImages);
+    const { state } = useContext(DashboardContext);
+    const { uploadedImages } = state;
 
     return (
         <div className={styles.contentContainer}>
