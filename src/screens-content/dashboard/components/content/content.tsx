@@ -20,7 +20,10 @@ const Content = () => {
             .catch(error => {
                 console.log(error);
             });
-    }, [uploadedImagesRef]);
+        // no additional dependencies needed
+    }, []);
+
+    console.log(uploadedImages);
 
     return (
         <div className={styles.contentContainer}>
