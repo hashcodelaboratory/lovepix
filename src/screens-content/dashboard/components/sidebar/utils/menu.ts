@@ -15,5 +15,9 @@ export const SIDEBAR_MENU_LIST: {
     {
         title: messages.products,
         link: ""
+    },
+    {
+        title: messages.storage,
+        link: ""
     }
 ]

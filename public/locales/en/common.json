@@ -20,5 +20,9 @@
   "lookAtOurGallery": "Look at our gallery.",
   "home": "Home",
   "orders": "Orders",
-  "products": "Products"
+  "products": "Products",
+  "fileUploaded": "File uploaded",
+  "fileRejected": "File rejected",
+  "storage": "Storage",
+  "uploadedImages": "Uploaded images"
 }

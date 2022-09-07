@@ -18,5 +18,9 @@ export const messages = {
   home: "home",
   orders: "orders",
   products: "products",
-  thanLastWeek: "than last week" // TODO: add translation
+  thanLastWeek: "than last week",
+  fileUploaded: "fileUploaded",
+  fileRejected: "fileRejected",
+  storage: "storage",
+  uploadedImages: "uploadedImages"
 }

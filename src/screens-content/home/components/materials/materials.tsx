@@ -4,13 +4,14 @@ import Image from "next/image";
 import {useTranslation} from "next-i18next";
 import {Grid} from "@mui/material";
 import {ObjectFit} from "../../enums/enums";
+import { v4 as uuidv4 } from 'uuid';
 
 const Materials = () => {
 
     const { t } = useTranslation();
 
     const columns = MATERIALS.map(({ img, title, text}) =>
-        <Grid item key={title}>
+        <Grid item key={uuidv4()}>
             <Image className={styles.roundedImage} alt={title} src={img} width={300} height={250} objectFit={ObjectFit.COVER} />
             <div className={styles.materialsTitle}>{String(t(title))}</div>
             <div className={styles.materialsText}>{String(t(text))}</div>

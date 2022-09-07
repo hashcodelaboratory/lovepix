@@ -20,5 +20,9 @@
   "lookAtOurGallery": "Vyberte si z našej galérie.",
   "home": "Domov",
   "orders": "Objednávky",
-  "products": "Produkty"
+  "products": "Produkty",
+  "fileUploaded": "Súbor nahraný",
+  "fileRejected": "Súbor zamietnutý",
+  "storage": "Úložisko",
+  "uploadedImages": "Nahrané obrázky"
 }
