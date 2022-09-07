@@ -4,3 +4,5 @@ export const DROPZONE_STYLE = {
     display: 'flex',
     alignItems: 'center',
 }
+
+export const UPLOAD_IMAGES = 'upload/images';

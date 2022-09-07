@@ -4,12 +4,13 @@ import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
 import {Container, Grid, Typography} from "@mui/material";
 import Image from "next/image";
+import { v4 as uuidv4 } from 'uuid';
 
 type Material = {
-  title: string
-  subtitle: string
-  description: string
-  illustration: string
+  title: string;
+  subtitle: string;
+  description: string;
+  illustration: string;
 }
 
 const materials: Material[] = [
@@ -39,9 +40,10 @@ const Materials: NextPage = () => {
     const align = index % 2 ? "flex-end" : "flex-start"
     const textAlign = index % 2 ? "right" :  "left"
 
-    return <Grid sx={{my: 8}} container rowSpacing={4} columnSpacing={4} direction={direction}>
+    return <Grid key={uuidv4()} sx={{my: 8}} container rowSpacing={4} columnSpacing={4} direction={direction}>
       <Grid item xs={12} md={3}>
         <Image
+          alt={material.title}
           style={{ borderRadius: 10 }}
           key={material.illustration}
           src={material.illustration}

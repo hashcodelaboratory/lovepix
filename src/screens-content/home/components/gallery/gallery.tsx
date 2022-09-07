@@ -4,7 +4,8 @@ import {messages} from "../../../../messages/messages";
 import {Carousel} from "@mantine/carousel";
 import {GALLERY} from "../../utils/gallery";
 import {ImageLayout} from "../../enums/enums";
-import Image from "next/image"
+import Image from "next/image";
+import { v4 as uuidv4 } from 'uuid';
 
 const Gallery = () => {
 
@@ -13,7 +14,7 @@ const Gallery = () => {
     const { pickOneOfOurPhotos, noPhoto, lookAtOurGallery } = messages;
 
     const gallery = GALLERY.map(({ img }) =>
-        <Carousel.Slide key={img}>
+        <Carousel.Slide key={uuidv4()}>
             <Image className={styles.roundedImage} alt={img} src={img} width={350} height={300} layout={ImageLayout.FIXED}/>
         </Carousel.Slide>
     );
