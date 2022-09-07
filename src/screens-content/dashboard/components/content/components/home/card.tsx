@@ -4,7 +4,7 @@ import {useTranslation} from "next-i18next";
 type CardProps = {
     header: {
         title: string;
-        count: number;
+        count: string;
     },
     footer: {
         value: string;

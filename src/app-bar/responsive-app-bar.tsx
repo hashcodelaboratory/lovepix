@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Link from "next/link";
 import {pages, settings} from "../navigation";
 import {useTranslation} from "next-i18next";
+import { v4 as uuidv4 } from 'uuid';
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -88,7 +89,7 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                <MenuItem key={uuidv4()} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center"><Link href={page.link}>{page.title}</Link></Typography>
                 </MenuItem>
               ))}
@@ -115,7 +116,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
             {pages.map((page) => (
               <Button
-                key={page.title}
+                key={uuidv4()}
                 onClick={handleCloseNavMenu}
                 sx={{my: 2, color: 'white', display: 'block'}}
               >
@@ -149,7 +150,7 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <Link key={setting.title} href={setting.link}>
+                <Link key={uuidv4()} href={setting.link}>
                   <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">{setting.title}</Typography>
                   </MenuItem>
