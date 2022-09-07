@@ -1,4 +1,4 @@
-import {Container, Grid, Typography} from "@mui/material";
+import {Container} from "@mui/material";
 import styles from "./about-us.module.scss";
 import {useTranslation} from "next-i18next";
 import {messages} from "../../messages/messages";
@@ -8,32 +8,16 @@ const CustomAboutUs = () => {
 
     return(
         <Container className={styles.container}>
-            <Grid container rowSpacing={2} sx={{mb: 8}}>
-                <Grid item>
-                    <Typography variant="h4">{String(t(messages.aboutUsFrom))}</Typography>
-                </Grid>
-                <Grid item>
-                    <Typography>
-                        {String(t(messages.aboutUsThanks))}
-                    </Typography>
-                </Grid>
-            </Grid>
-            <Grid container rowSpacing={2} sx={{mb: 8}}>
-                <Grid item>
-                    <Typography variant="h5">{String(t(messages.aboutUsWant))}</Typography>
-                </Grid>
-                <Grid item sx={{ mt: 8 }}>
-                    <Typography variant="h5">{String(t(messages.aboutUsHelp))}</Typography>
-                </Grid>
-            </Grid>
-            <Grid container rowSpacing={2}>
-                <Grid item>
-                    <Typography variant="h6">{String(t(messages.aboutUsPriorities))}</Typography>
-                </Grid>
-                <Grid item>
-                    <Typography variant="h3">{String(t(messages.aboutUsProud))}</Typography>
-                </Grid>
-            </Grid>
+            <div>
+                <p>{String(t(messages.aboutUsFrom))}</p>
+                <p>{String(t(messages.aboutUsThanks))}</p>
+                <p>{String(t(messages.aboutUsWant))}</p>
+                <p>{String(t(messages.aboutUsHelp))}</p>
+            </div>
+            <div className={styles.container}>
+                <p className={styles.miniTitle}>{String(t(messages.aboutUsPriorities))}</p>
+                <h1 className={styles.title}>{String(t(messages.aboutUsProud))}</h1>
+            </div>
         </Container>
     )
 }
