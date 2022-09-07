@@ -40,6 +40,7 @@ const DropzoneContainer = () => {
             onReject={(files) => onReject(files)}
             accept={IMAGE_MIME_TYPE}
             sx={DROPZONE_STYLE}
+            multiple={false}
         >
             <Group position="center" spacing="xl" className={styles.dropzoneGroup}>
                 <Dropzone.Accept>
