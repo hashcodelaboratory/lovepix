@@ -22,5 +22,12 @@ export const messages = {
   fileUploaded: "fileUploaded",
   fileRejected: "fileRejected",
   storage: "storage",
-  uploadedImages: "uploadedImages"
+  uploadedImages: "uploadedImages",
+  aboutUsFrom: "aboutUsFrom",
+  aboutUsThanks: "aboutUsThanks",
+  aboutUsTask: "aboutUsTask",
+  aboutUsWant: "aboutUsWant",
+  aboutUsHelp: "aboutUsHelp",
+  aboutUsPriorities: "aboutUsPriorities",
+  aboutUsProud: "aboutUsProud"
 }
