@@ -5,7 +5,11 @@ import Table from "./components/home/table";
 import {useContext} from "react";
 import DashboardContext from "../../context/dashboard-context";
 
-const Content = () => {
+type Props = {
+    isFetching: boolean;
+}
+
+const Content = ({ isFetching }: Props) => {
     const { state } = useContext(DashboardContext);
     const { uploadedImages } = state;
 
@@ -15,7 +19,7 @@ const Content = () => {
                 <Card
                     header={{
                         title: messages.orders,
-                        count: 258
+                        count: String(258)
                     }}
                     footer={{
                         value: '+ 55 %',
@@ -25,7 +29,7 @@ const Content = () => {
                 <Card
                     header={{
                         title: messages.products,
-                        count: 12456
+                        count: String(12456)
                     }}
                     footer={{
                         value: '+ 15 %',
@@ -35,7 +39,7 @@ const Content = () => {
                 <Card
                     header={{
                         title: messages.uploadedImages,
-                        count: uploadedImages.length
+                        count: isFetching ? "-" : uploadedImages.length.toString()
                     }}
                     footer={{
                         value: '+ 15 %',
