@@ -29,5 +29,14 @@ export const messages = {
   aboutUsWant: "aboutUsWant",
   aboutUsHelp: "aboutUsHelp",
   aboutUsPriorities: "aboutUsPriorities",
-  aboutUsProud: "aboutUsProud"
+  aboutUsProud: "aboutUsProud",
+  materialsCanvasTitle: "materialsCanvasTitle",
+  materialsCanvasSubTitle: "materialsCanvasSubTitle",
+  materialsCanvasDescription: "materialsCanvasDescription",
+  materialsAcrylTitle: "materialsAcrylTitle",
+  materialsAcrylSubTitle: "materialsAcrylSubTitle",
+  materialsAcrylDescription: "materialsAcrylDescription",
+  materialsAluminiumTitle: "materialsAluminiumTitle",
+  materialsAluminiumSubTitle: "materialsAluminiumSubTitle",
+  materialsAluminiumDescription: "materialsAluminiumDescription"
 }
