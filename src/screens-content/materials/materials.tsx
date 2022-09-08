@@ -1,8 +1,9 @@
-import {Grid, Typography} from "@mui/material";
+import {Grid} from "@mui/material";
 import Image from "next/image";
 import { v4 as uuidv4 } from 'uuid';
 import {useTranslation} from "next-i18next";
 import {messages} from "../../messages/messages";
+import styles from "./materials.module.scss";
 
 type Material = {
     title: string
@@ -38,10 +39,8 @@ const CustomMaterials = () => {
 
     const materialComponent = (material: Material, index: number) => {
         const direction = index % 2 ? "row-reverse" : "row"
-        const align = index % 2 ? "flex-end" : "flex-start"
-        const textAlign = index % 2 ? "right" :  "left"
 
-        return <Grid sx={{my: 8}} container rowSpacing={4} columnSpacing={4} direction={direction}>
+        return <Grid className={styles.component} sx={{my: 8}} container rowSpacing={4} columnSpacing={4} direction={direction} alignItems="center">
             <Grid item xs={12} md={3}>
                 <Image
                     alt={material.title}
@@ -55,17 +54,9 @@ const CustomMaterials = () => {
                 />
             </Grid>
             <Grid item xs={12} md={9}>
-                <Grid container direction="column" rowSpacing={2} alignItems={align}>
-                    <Grid item>
-                        <Typography variant="h4" fontWeight="bold" textAlign={textAlign}>{material.title}</Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography textAlign={textAlign} fontWeight="100">{material.subtitle}</Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography textAlign={textAlign} fontWeight="100">{material.description}</Typography>
-                    </Grid>
-                </Grid>
+                <p className={styles.title}>{material.title}</p>
+                <p className={styles.text}>{material.subtitle}</p>
+                <p className={styles.text}>{material.description}</p>
             </Grid>
         </Grid>
     }
