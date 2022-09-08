@@ -2,21 +2,11 @@ import type {NextPage} from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
-import {Container, Grid, Typography} from "@mui/material";
-
-const content = {
-  motto: 'We love beautiful moments.',
-  story: 'We have been operating in the field of printing since 2003.\n\nThanks to the mojkalendar.sk project, we found out that we enjoy materializing unique moments into calendars and images. We are most excited about the long-term satisfaction of customers who enjoy the works they create themselves.\n\nYou will capture unforgettable moments yourself. Our task is “only” to materialize them and produce a work for you that will remind you of them for a long time to come. Therefore, our vision is long-term quality sustainability at the highest possible level.\n\nWe want the purchase of an image to be a small experience for you, which is why we place great emphasis on the way we communicate with you. We strive to be as pro-customer as possible, listen to your needs and constantly improve.\n\nHelp us with your feedback to perfection!',
-  activity: {
-    title: 'OUR PRIORITIES',
-    description: 'WE ARE PROUD OF OUR CRAFTSMANSHIP AND QUALITY OF PAINTING.'
-  },
-}
+import CustomAboutUs from "../src/screens-content/about-us/about-us";
+import {GetStaticProps} from "next";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const AboutUs: NextPage = () => {
-  const { motto, story, activity } = content
-  const { title, description } = activity
-
   return (
     <div className={styles.container}>
       <Head>
@@ -30,26 +20,7 @@ const AboutUs: NextPage = () => {
       </header>
 
       <main className={styles.main}>
-        <Container>
-          <Grid container rowSpacing={2} sx={{mb: 8}}>
-            <Grid item>
-              <Typography variant="h4">{motto}</Typography>
-            </Grid>
-            <Grid item>
-              <Typography>
-                {story}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid container rowSpacing={2}>
-            <Grid item>
-              <Typography variant="h5">{title}</Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="h3">{description}</Typography>
-            </Grid>
-          </Grid>
-        </Container>
+        <CustomAboutUs />
       </main>
 
       <footer className={styles.footer}>
@@ -60,3 +31,11 @@ const AboutUs: NextPage = () => {
 }
 
 export default AboutUs
+
+export const getStaticProps: GetStaticProps = async  ({ locale }) => {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale ?? 'sk', ["common"])),
+        },
+    };
+}

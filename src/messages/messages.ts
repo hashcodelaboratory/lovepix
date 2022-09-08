@@ -23,6 +23,13 @@ export const messages = {
   fileRejected: "fileRejected",
   storage: "storage",
   uploadedImages: "uploadedImages",
+  aboutUsFrom: "aboutUsFrom",
+  aboutUsThanks: "aboutUsThanks",
+  aboutUsTask: "aboutUsTask",
+  aboutUsWant: "aboutUsWant",
+  aboutUsHelp: "aboutUsHelp",
+  aboutUsPriorities: "aboutUsPriorities",
+  aboutUsProud: "aboutUsProud",
   materialsCanvasTitle: "materialsCanvasTitle",
   materialsCanvasSubTitle: "materialsCanvasSubTitle",
   materialsCanvasDescription: "materialsCanvasDescription",
@@ -31,5 +38,5 @@ export const messages = {
   materialsAcrylDescription: "materialsAcrylDescription",
   materialsAluminiumTitle: "materialsAluminiumTitle",
   materialsAluminiumSubTitle: "materialsAluminiumSubTitle",
-  materialsAluminiumDescription: "materialsAluminiumDescription",
+  materialsAluminiumDescription: "materialsAluminiumDescription"
 }
