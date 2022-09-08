@@ -29,5 +29,11 @@ export const messages = {
   aboutUsWant: "aboutUsWant",
   aboutUsHelp: "aboutUsHelp",
   aboutUsPriorities: "aboutUsPriorities",
-  aboutUsProud: "aboutUsProud"
+  aboutUsProud: "aboutUsProud",
+  partnersOneTitle: "partnersOneTitle",
+  partnersOneSubtitle: "partnersOneSubtitle",
+  partnersOneDescription: "partnersOneDescription",
+  partnersTwoTitle: "partnersTwoTitle",
+  partnersTwoSubtitle: "partnersTwoSubtitle",
+  partnersTwoDescription: "partnersTwoDescription",
 }
