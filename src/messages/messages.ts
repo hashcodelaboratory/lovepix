@@ -37,5 +37,14 @@ export const messages = {
   partnersTwoSubtitle: "partnersTwoSubtitle",
   partnersTwoDescription: "partnersTwoDescription",
   partnersDetails: "partnersDetails",
-  partnersForm: "partnersForm"
+  partnersForm: "partnersForm",
+  materialsCanvasTitle: "materialsCanvasTitle",
+  materialsCanvasSubTitle: "materialsCanvasSubTitle",
+  materialsCanvasDescription: "materialsCanvasDescription",
+  materialsAcrylTitle: "materialsAcrylTitle",
+  materialsAcrylSubTitle: "materialsAcrylSubTitle",
+  materialsAcrylDescription: "materialsAcrylDescription",
+  materialsAluminiumTitle: "materialsAluminiumTitle",
+  materialsAluminiumSubTitle: "materialsAluminiumSubTitle",
+  materialsAluminiumDescription: "materialsAluminiumDescription"
 }
