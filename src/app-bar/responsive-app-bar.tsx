@@ -121,7 +121,7 @@ const ResponsiveAppBar = () => {
                 sx={{my: 2, color: 'white', display: 'block'}}
               >
                 <Link href={page.link}>
-                  {t(page.title)}
+                  {String(t(page.title))}
                 </Link>
               </Button>
             ))}
