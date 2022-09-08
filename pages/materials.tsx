@@ -4,6 +4,8 @@ import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
 import {Container} from "@mui/material";
 import CustomMaterials from "../src/screens-content/materials/materials";
+import {GetStaticProps} from "next";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const Materials: NextPage = () => {
 
@@ -33,3 +35,11 @@ const Materials: NextPage = () => {
 }
 
 export default Materials
+
+export const getStaticProps: GetStaticProps = async  ({ locale }) => {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale ?? 'sk', ["common"])),
+        },
+    };
+}

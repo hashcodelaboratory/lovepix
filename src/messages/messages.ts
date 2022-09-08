@@ -22,5 +22,14 @@ export const messages = {
   fileUploaded: "fileUploaded",
   fileRejected: "fileRejected",
   storage: "storage",
-  uploadedImages: "uploadedImages"
+  uploadedImages: "uploadedImages",
+  materialsCanvasTitle: "materialsCanvasTitle",
+  materialsCanvasSubTitle: "materialsCanvasSubTitle",
+  materialsCanvasDescription: "materialsCanvasDescription",
+  materialsAcrylTitle: "materialsAcrylTitle",
+  materialsAcrylSubTitle: "materialsAcrylSubTitle",
+  materialsAcrylDescription: "materialsAcrylDescription",
+  materialsAluminiumTitle: "materialsAluminiumTitle",
+  materialsAluminiumSubTitle: "materialsAluminiumSubTitle",
+  materialsAluminiumDescription: "materialsAluminiumDescription",
 }
