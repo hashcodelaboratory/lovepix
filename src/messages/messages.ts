@@ -36,4 +36,6 @@ export const messages = {
   partnersTwoTitle: "partnersTwoTitle",
   partnersTwoSubtitle: "partnersTwoSubtitle",
   partnersTwoDescription: "partnersTwoDescription",
+  partnersDetails: "partnersDetails",
+  partnersForm: "partnersForm"
 }
