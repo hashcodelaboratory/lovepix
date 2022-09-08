@@ -11,8 +11,6 @@ type Material = {
     illustration: string
 }
 
-
-
 const CustomMaterials = () => {
 
     const { t } = useTranslation();
@@ -62,7 +60,7 @@ const CustomMaterials = () => {
                         <Typography variant="h4" fontWeight="bold" textAlign={textAlign}>{material.title}</Typography>
                     </Grid>
                     <Grid item>
-                        <Typography textAlign={textAlign} fontWeight="100" fontSize={16}>{material.subtitle}</Typography>
+                        <Typography textAlign={textAlign} fontWeight="100">{material.subtitle}</Typography>
                     </Grid>
                     <Grid item>
                         <Typography textAlign={textAlign} fontWeight="100">{material.description}</Typography>
