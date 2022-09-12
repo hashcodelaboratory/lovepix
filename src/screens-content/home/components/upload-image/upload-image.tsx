@@ -12,7 +12,7 @@ const UploadImage = () => (
         alignItems={AlignItems.CENTER}
         spacing={4}
     >
-        <TextContainer />
+        {/*<TextContainer />*/}
         <ImageContainer />
     </Grid>
 )
