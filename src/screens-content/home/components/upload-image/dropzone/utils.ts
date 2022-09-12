@@ -1,4 +1,5 @@
 export const DROPZONE_STYLE = {
+    borderRadius: '0.5rem',
     minHeight: 120,
     width: 'fit-content',
     display: 'flex',

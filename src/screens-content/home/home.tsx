@@ -6,8 +6,8 @@ import Materials from "./components/materials/materials";
 const HomeLayout = () => (
     <Container>
         <UploadImage />
-        <Steps />
-        <Materials />
+        {/*<Steps />*/}
+        {/*<Materials />*/}
     </Container>
 
 )

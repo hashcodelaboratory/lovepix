@@ -17,6 +17,8 @@ const DropzoneContainer = () => {
 
     const { t } = useTranslation();
 
+    const { printPhoto } = messages;
+
     const { enqueueSnackbar } = useSnackbar();
 
     const onDrop = (files: File[]) => {
@@ -43,6 +45,9 @@ const DropzoneContainer = () => {
             multiple={false}
         >
             <Group position="center" spacing="xl" className={styles.dropzoneGroup}>
+                <h1 className={styles.title}>
+                    {String(t(printPhoto))}
+                </h1>
                 <Dropzone.Accept>
                     <Icon icon={IconType.UPLOAD_PHOTO} />
                 </Dropzone.Accept>
