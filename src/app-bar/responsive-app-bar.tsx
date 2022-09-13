@@ -17,12 +17,18 @@ import {useTranslation} from "next-i18next";
 import { v4 as uuidv4 } from 'uuid';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import * as PagesUrls from "../constants/pages/urls";
+import {useContext} from "react";
+import AppContext from "../app-context/app-context";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const { t } = useTranslation();
+
+  const { state } = useContext(AppContext);
+  const { uploadedImageUrl } = state;
+  console.log(uploadedImageUrl);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);

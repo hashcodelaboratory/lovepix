@@ -6,12 +6,14 @@ import DropzoneIdle from "./dropzone-idle";
 import {FileRejection} from "react-dropzone";
 import Icon from "@icons/icon";
 import {IconType} from "@icons/enums";
-import {ref, uploadBytes} from "@firebase/storage";
+import {getDownloadURL, ref, uploadBytes} from "@firebase/storage";
 import {storage} from "../../../../../../utils/firebase/config";
 import {useSnackbar} from "notistack";
 import {SNACKBAR_OPTIONS_ERROR, SNACKBAR_OPTIONS_SUCCESS} from "../../../../../snackbar/config";
 import {messages} from "../../../../../messages/messages";
 import {useTranslation} from "next-i18next";
+import {useContext} from "react";
+import AppContext from "../../../../../app-context/app-context";
 
 const DropzoneContainer = () => {
 
@@ -19,14 +21,21 @@ const DropzoneContainer = () => {
 
     const { enqueueSnackbar } = useSnackbar();
 
+    const { stateAction } = useContext(AppContext);
+    const { setUploadedImageUrl } = stateAction;
+
     const onDrop = (files: File[]) => {
         const file = files[0];
-        const url = `${UPLOAD_IMAGES}/${Date.now()}`;
+        const uploadURL = `${UPLOAD_IMAGES}/${Date.now()}`;
 
-        const storageRef = ref(storage, url);
+        const storageRef = ref(storage, uploadURL);
 
         uploadBytes(storageRef, file).then(snapshot => {
             enqueueSnackbar(String(t(messages.fileUploaded)), SNACKBAR_OPTIONS_SUCCESS);
+
+            getDownloadURL(ref(storage, `${UPLOAD_IMAGES}/${snapshot.metadata.name}`)).then(url => {
+                setUploadedImageUrl(url);
+            });
         });
     }
 
