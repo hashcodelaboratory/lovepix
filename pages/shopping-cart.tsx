@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
 import {GetStaticProps} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import CustomShoppingCart from "../src/screens-content/shopping-cart/shopping-cart";
 
 const ShoppingCart: NextPage = () => {
   return (
@@ -18,8 +19,8 @@ const ShoppingCart: NextPage = () => {
         <ResponsiveAppBar/>
       </header>
 
-      <main className={styles.main}>
-          CART
+      <main className={styles.main} style={{ minHeight: 0 }}>
+          <CustomShoppingCart />
       </main>
 
       <footer className={styles.footer}>
