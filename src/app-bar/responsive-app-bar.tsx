@@ -19,6 +19,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import * as PagesUrls from "../constants/pages/urls";
 import {useContext} from "react";
 import AppContext from "../app-context/app-context";
+import {Badge} from "@mui/material";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -135,17 +136,19 @@ const ResponsiveAppBar = () => {
             ))}
           </Box>
 
-          <Box sx={{flexGrow: 0, display: 'flex'}}>
-              <Link href={PagesUrls.SHOPPING_CART} >
-                  <ShoppingCartIcon
-                      sx={{my: 2, color: 'white', display: 'block', marginRight: 2, cursor: 'pointer' }}
-                  />
+          <Box sx={{flexGrow: 0, display: 'flex' }}>
+              <Link href={PagesUrls.SHOPPING_CART}>
+                  <Badge badgeContent={uploadedImageUrl ? 1 : 0} color="error" sx={{ my: 2, marginRight: 2 }}>
+                      <ShoppingCartIcon
+                          sx={{ color: 'white', display: 'block',  cursor: 'pointer' }}
+                      />
+                  </Badge>
               </Link>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
-              </IconButton>
-            </Tooltip>
+              <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
+                      <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
+                  </IconButton>
+              </Tooltip>
             <Menu
               sx={{mt: '45px'}}
               id="menu-appbar"
