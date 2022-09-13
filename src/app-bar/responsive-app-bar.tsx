@@ -17,8 +17,6 @@ import {useTranslation} from "next-i18next";
 import { v4 as uuidv4 } from 'uuid';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import * as PagesUrls from "../constants/pages/urls";
-import {useContext} from "react";
-import AppContext from "../app-context/app-context";
 import {Badge} from "@mui/material";
 
 const ResponsiveAppBar = () => {
@@ -26,10 +24,6 @@ const ResponsiveAppBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const { t } = useTranslation();
-
-  const { state } = useContext(AppContext);
-  const { uploadedImageUrl } = state;
-  console.log(uploadedImageUrl);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -138,7 +132,7 @@ const ResponsiveAppBar = () => {
 
           <Box sx={{flexGrow: 0, display: 'flex' }}>
               <Link href={PagesUrls.SHOPPING_CART}>
-                  <Badge badgeContent={uploadedImageUrl ? 1 : 0} color="error" sx={{ my: 2, marginRight: 2 }}>
+                  <Badge badgeContent={0} color="error" sx={{ my: 2, marginRight: 2 }}>
                       <ShoppingCartIcon
                           sx={{ color: 'white', display: 'block',  cursor: 'pointer' }}
                       />
