@@ -3,7 +3,7 @@ import {DataGrid, GridCallbackDetails, GridSelectionModel} from '@mui/x-data-gri
 import styles from '../../../../dashboard.module.scss'
 import {useContext, useState} from "react";
 import DashboardContext from "../../../../context/dashboard-context";
-import {UPLOADED_IMAGES_COLUMNS} from "./utils/utils";
+import {UPLOADED_IMAGES_COLUMNS} from "./utils/columns";
 import {deleteObject, ref} from "@firebase/storage";
 import {storage} from "../../../../../../../utils/firebase/config";
 import {messages} from "../../../../../../messages/messages";
