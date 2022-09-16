@@ -71,10 +71,10 @@ const Table = () => {
                 disableSelectionOnClick
                 onSelectionModelChange={selectionChanged}
             />
-            <button className={styles.removeButton} onClick={removeData}>
+            {selectedRows.length > 0 && <button className={styles.removeButton} onClick={removeData}>
                 {buttonText}
-                <DeleteIcon sx={{ marginLeft: 1 }} />
-            </button>
+                <DeleteIcon sx={{marginLeft: 1}}/>
+            </button>}
         </Box>
     )
 }
