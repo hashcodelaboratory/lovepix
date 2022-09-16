@@ -60,7 +60,7 @@ const Table = () => {
         setSelectedRows(selectionModel.map((item, index) => data[index].fullPath));
     }
 
-    const buttonText = `( ${selectedRows.length} ) Remove all`;
+    const buttonText = `(${selectedRows.length}) ${String(t(messages.removeAll))}`;
 
     return (
         <Box sx={{height: 400, width: '100%'}}>
