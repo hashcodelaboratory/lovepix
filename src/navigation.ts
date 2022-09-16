@@ -8,7 +8,7 @@ const pages = [
   {title: PagesTitles.GALLERY, link: PagesUrls.GALLERY},
   {title: PagesTitles.MATERIALS, link: PagesUrls.MATERIALS},
   {title: PagesTitles.FOR_PARTNERS, link: PagesUrls.FOR_PARTNERS},
-  {title: PagesTitles.ABOUT_US, link: PagesUrls.ABOUT_US}
+  {title: PagesTitles.ABOUT_US, link: PagesUrls.ABOUT_US},
 ];
 
 const settings = [
