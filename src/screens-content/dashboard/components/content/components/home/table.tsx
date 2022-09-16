@@ -3,7 +3,7 @@ import {DataGrid, GridCallbackDetails, GridSelectionModel} from '@mui/x-data-gri
 import styles from '../../../../dashboard.module.scss'
 import {useContext, useState} from "react";
 import DashboardContext from "../../../../context/dashboard-context";
-import {UPLOADED_IMAGES_COLUMNS} from "./utils";
+import {UPLOADED_IMAGES_COLUMNS} from "./utils/utils";
 import {deleteObject, ref} from "@firebase/storage";
 import {storage} from "../../../../../../../utils/firebase/config";
 import {messages} from "../../../../../../messages/messages";
@@ -76,10 +76,10 @@ const Table = () => {
                 selectionModel={selectionModel}
                 onSelectionModelChange={selectionChanged}
             />
-            {selectedRows.length > 0 && <button className={styles.removeButton} onClick={removeData}>
+            <button className={styles.removeButton} onClick={removeData} disabled={selectedRows.length === 0}>
                 {buttonText}
                 <DeleteIcon sx={{marginLeft: 1}}/>
-            </button>}
+            </button>
         </Box>
     )
 }
