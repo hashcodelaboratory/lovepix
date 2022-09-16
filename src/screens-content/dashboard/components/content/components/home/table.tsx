@@ -4,15 +4,13 @@ import styles from '../../../../dashboard.module.scss'
 import {useContext, useState} from "react";
 import DashboardContext from "../../../../context/dashboard-context";
 import {UPLOADED_IMAGES_COLUMNS} from "./utils/columns";
-import {deleteObject, ref} from "@firebase/storage";
-import {storage} from "../../../../../../../utils/firebase/config";
 import {messages} from "../../../../../../messages/messages";
 import {SNACKBAR_OPTIONS_ERROR, SNACKBAR_OPTIONS_SUCCESS} from "../../../../../../snackbar/config";
 import {useSnackbar} from "notistack";
 import {useTranslation} from "next-i18next";
 import {useQueryClient} from "react-query";
-import {UPLOADED_IMAGES_KEY} from "../../../../api/uploadedImages";
 import DeleteIcon from '@mui/icons-material/Delete';
+import {removeUploadedImages} from "./utils/removeUploadedImages";
 
 const Table = () => {
     const { state } = useContext(DashboardContext);
@@ -36,23 +34,18 @@ const Table = () => {
         }
     ));
 
-    const removeData = () => {
-        let error = "";
-        selectedRows.forEach(row => {
-            const desertRef = ref(storage, row);
-            deleteObject(desertRef).then(() => {
-                queryClient.invalidateQueries(UPLOADED_IMAGES_KEY);
-            }).catch((err) => {
-                error = err;
-            });
-        });
+    const reset = () => {
+        setSelectionModel([]);
+        setSelectedRows([]);
+    }
 
-        if (error === "") {
+    const removeData = () => {
+        const result = removeUploadedImages(selectedRows, queryClient);
+        if (result === "") {
             enqueueSnackbar(String(t(messages.fileUploaded)), SNACKBAR_OPTIONS_SUCCESS);
-            setSelectionModel([]);
-            setSelectedRows([]);
+            reset();
         } else {
-            enqueueSnackbar(error, SNACKBAR_OPTIONS_ERROR);
+            enqueueSnackbar(result, SNACKBAR_OPTIONS_ERROR);
         }
     }
 
