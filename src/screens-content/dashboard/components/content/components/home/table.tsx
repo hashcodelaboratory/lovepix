@@ -50,6 +50,7 @@ const Table = () => {
         if (error === "") {
             enqueueSnackbar(String(t(messages.fileUploaded)), SNACKBAR_OPTIONS_SUCCESS);
             setSelectionModel([]);
+            setSelectedRows([]);
         } else {
             enqueueSnackbar(error, SNACKBAR_OPTIONS_ERROR);
         }
