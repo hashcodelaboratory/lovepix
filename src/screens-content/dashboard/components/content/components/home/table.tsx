@@ -25,6 +25,7 @@ const Table = () => {
     const queryClient = useQueryClient();
 
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
+    const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
 
     const data = uploadedImages.map(({ bucket, name, fullPath }, index) => (
         {
@@ -48,12 +49,14 @@ const Table = () => {
 
         if (error === "") {
             enqueueSnackbar(String(t(messages.fileUploaded)), SNACKBAR_OPTIONS_SUCCESS);
+            setSelectionModel([]);
         } else {
             enqueueSnackbar(error, SNACKBAR_OPTIONS_ERROR);
         }
     }
 
     const selectionChanged = (selectionModel: GridSelectionModel, details: GridCallbackDetails) => {
+        setSelectionModel(selectionModel);
         setSelectedRows(selectionModel.map((item, index) => data[index].fullPath));
     }
 
@@ -69,6 +72,7 @@ const Table = () => {
                 rowsPerPageOptions={[5]}
                 checkboxSelection
                 disableSelectionOnClick
+                selectionModel={selectionModel}
                 onSelectionModelChange={selectionChanged}
             />
             {selectedRows.length > 0 && <button className={styles.removeButton} onClick={removeData}>
