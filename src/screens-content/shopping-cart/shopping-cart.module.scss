@@ -1,0 +1,21 @@
+.emptyCartContainer {
+  padding: 2rem 0;
+  position: relative;
+  height: calc(100vh - 83px - 68.5px - 4rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 200px;
+  height: 200px;
+  color: silver;
+}
+
+.title {
+  color: grey;
+  font-size: 1.25rem;
+  font-weight: 200;
+}
