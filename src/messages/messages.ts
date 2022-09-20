@@ -48,5 +48,6 @@ export const messages = {
   materialsAluminiumSubTitle: "materialsAluminiumSubTitle",
   materialsAluminiumDescription: "materialsAluminiumDescription",
   emptyCart: "emptyCart",
-  removeAll: "removeAll"
+  removeAll: "removeAll",
+  filesRemoved: "filesRemoved"
 }
