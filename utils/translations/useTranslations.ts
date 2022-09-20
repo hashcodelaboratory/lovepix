@@ -1,7 +1,7 @@
 import {useQuery, UseQueryResult} from "react-query";
 import {doc, getDoc} from "@firebase/firestore";
-import {database} from "../../../../utils/firebase/config";
-import {Collections, Languages} from "../../../../utils/firebase/enums";
+import {database} from "../firebase/config";
+import {Collections, Languages} from "../firebase/enums";
 
 const MATERIALS_TRANSLATIONS_KEY = 'MATERIALS_TRANSLATIONS';
 

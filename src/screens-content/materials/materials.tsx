@@ -1,5 +1,5 @@
 import {Material, materialSection} from "./components/section";
-import {useTranslations} from "./utils/useTranslations";
+import {useTranslations} from "../../../utils/translations/useTranslations";
 import {useTranslation} from "next-i18next";
 
 const CustomMaterials = () => {
