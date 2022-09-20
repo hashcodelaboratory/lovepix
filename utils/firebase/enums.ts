@@ -1,7 +1,7 @@
 export enum Collections {
-    MATERIALS = 'materials'
+    TRANSLATIONS = 'translations'
 }
 
-export enum Documents {
-    CANVAS_EN = 'canvas-en'
+export enum Languages {
+    EN = 'en'
 }
