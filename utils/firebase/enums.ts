@@ -3,5 +3,6 @@ export enum Collections {
 }
 
 export enum Languages {
-    EN = 'en'
+    EN = 'en',
+    SK = 'sk'
 }

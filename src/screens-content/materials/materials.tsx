@@ -1,8 +1,11 @@
 import {Material, materialSection} from "./components/section";
-import {useTranslations} from "./utils/useMaterials";
+import {useTranslations} from "./utils/useTranslations";
+import {useTranslation} from "next-i18next";
 
 const CustomMaterials = () => {
-    const { data: translations } = useTranslations();
+    const { i18n } = useTranslation();
+
+    const { data: translations } = useTranslations(i18n.language);
 
     const materials: Material[] = [
         {

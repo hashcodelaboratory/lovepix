@@ -5,8 +5,9 @@ import {Collections, Languages} from "../../../../utils/firebase/enums";
 
 const MATERIALS_TRANSLATIONS_KEY = 'MATERIALS_TRANSLATIONS';
 
-const getTranslations = async (): Promise<any> => {
-    const docRef = doc(database, Collections.TRANSLATIONS, Languages.EN);
+const getTranslations = async (language: string): Promise<any> => {
+    const document = language === 'en' ? Languages.EN : Languages.SK;
+    const docRef = doc(database, Collections.TRANSLATIONS, document);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -16,5 +17,5 @@ const getTranslations = async (): Promise<any> => {
     }
 }
 
-export const useTranslations = (): UseQueryResult<any> =>
-    useQuery([MATERIALS_TRANSLATIONS_KEY], () => getTranslations());
+export const useTranslations = (language: string): UseQueryResult<any> =>
+    useQuery([MATERIALS_TRANSLATIONS_KEY], () => getTranslations(language));
