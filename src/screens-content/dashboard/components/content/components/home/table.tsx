@@ -42,7 +42,7 @@ const Table = () => {
     const removeData = () => {
         const result = removeUploadedImages(selectedRows, queryClient);
         if (result === "") {
-            enqueueSnackbar(String(t(messages.fileUploaded)), SNACKBAR_OPTIONS_SUCCESS);
+            enqueueSnackbar(String(t(messages.filesRemoved)), SNACKBAR_OPTIONS_SUCCESS);
             reset();
         } else {
             enqueueSnackbar(result, SNACKBAR_OPTIONS_ERROR);
