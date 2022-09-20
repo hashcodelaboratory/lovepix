@@ -1,10 +1,16 @@
 import {useTranslation} from "next-i18next";
 import {messages} from "../../messages/messages";
 import {Material, materialSection} from "./components/section";
+import {database} from "../../../utils/firebase/config";
+import {doc} from "@firebase/firestore";
+import {Collections, Documents} from "../../../utils/firebase/enums";
 
 const CustomMaterials = () => {
 
     const { t } = useTranslation();
+
+    const docRef = doc(database, Collections.MATERIALS, Documents.CANVAS_EN);
+    // const docSnap = await getDoc(docRef);
 
     const materials: Material[] = [
         {
