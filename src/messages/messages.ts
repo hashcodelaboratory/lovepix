@@ -47,5 +47,7 @@ export const messages = {
   materialsAluminiumTitle: "materialsAluminiumTitle",
   materialsAluminiumSubTitle: "materialsAluminiumSubTitle",
   materialsAluminiumDescription: "materialsAluminiumDescription",
-  emptyCart: "emptyCart"
+  emptyCart: "emptyCart",
+  removeAll: "removeAll",
+  filesRemoved: "filesRemoved"
 }
