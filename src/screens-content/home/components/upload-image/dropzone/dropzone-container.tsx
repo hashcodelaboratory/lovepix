@@ -14,6 +14,7 @@ import {messages} from "../../../../../messages/messages";
 import {useTranslation} from "next-i18next";
 import {useContext} from "react";
 import AppContext from "../../../../../app-context/app-context";
+import {ImageStatus} from "../../../../../app-context/imageStatus";
 
 const DropzoneContainer = () => {
 
@@ -21,8 +22,7 @@ const DropzoneContainer = () => {
 
     const { enqueueSnackbar } = useSnackbar();
 
-    const { stateAction } = useContext(AppContext);
-    const { setUploadedImageUrl } = stateAction;
+    const { stateAction: { setImageUrl, setImageStatus } } = useContext(AppContext);
 
     const onDrop = (files: File[]) => {
         const file = files[0];
@@ -34,7 +34,8 @@ const DropzoneContainer = () => {
             enqueueSnackbar(String(t(messages.fileUploaded)), SNACKBAR_OPTIONS_SUCCESS);
 
             getDownloadURL(ref(storage, `${UPLOAD_IMAGES}/${snapshot.metadata.name}`)).then(url => {
-                setUploadedImageUrl(url);
+                setImageUrl(url);
+                setImageStatus(ImageStatus.UPLOADED);
             });
         });
     }

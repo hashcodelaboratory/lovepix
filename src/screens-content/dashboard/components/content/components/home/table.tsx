@@ -13,8 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import {removeUploadedImages} from "./utils/removeUploadedImages";
 
 const Table = () => {
-    const { state } = useContext(DashboardContext);
-    const { uploadedImages } = state;
+    const { state: { uploadedImages } } = useContext(DashboardContext);
 
     const { enqueueSnackbar } = useSnackbar();
 

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useContext} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,16 +15,21 @@ import MenuItem from '@mui/material/MenuItem';
 import Link from "next/link";
 import {pages, settings} from "../navigation";
 import {useTranslation} from "next-i18next";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import * as PagesUrls from "../constants/pages/urls";
 import {Badge} from "@mui/material";
+import AppContext from "../app-context/app-context";
+import {ImageStatus} from "../app-context/imageStatus";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const { t } = useTranslation();
+
+  const { state: { image: { url, status } } } = useContext(AppContext);
+  const badgeLength = url && status === ImageStatus.CONFIGURED ? 1 : 0;
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -132,7 +138,7 @@ const ResponsiveAppBar = () => {
 
           <Box sx={{flexGrow: 0, display: 'flex' }}>
               <Link href={PagesUrls.SHOPPING_CART}>
-                  <Badge badgeContent={0} color="error" sx={{ my: 2, marginRight: 2 }}>
+                  <Badge badgeContent={badgeLength} color="error" sx={{ my: 2, marginRight: 2 }}>
                       <ShoppingCartIcon
                           sx={{ color: 'white', display: 'block',  cursor: 'pointer' }}
                       />
