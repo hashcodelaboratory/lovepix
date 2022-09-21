@@ -35,5 +35,11 @@ export const messages = {
   filesRemoved: "filesRemoved",
   shoppingCart: "shoppingCart",
   items: "items",
-  backToShop: "backToShop"
+  backToShop: "backToShop",
+  shipping: "shipping",
+  delivery: "delivery",
+  checkout: "checkout",
+  summary: "summary",
+  code: "code",
+  payment: "payment"
 }

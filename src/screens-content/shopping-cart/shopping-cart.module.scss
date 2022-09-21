@@ -37,8 +37,9 @@
 }
 
 .deliveryContainer {
+  position: relative;
   padding: 1rem;
-  width: 300px;
+  width: 350px;
   height: 700px;
   background-color: #e5e5e5;
   border-radius: 1rem;
@@ -73,4 +74,39 @@
 .qtyField {
   width: 60px;
   margin: 0 1rem;
+}
+
+.totalContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.summarySectionTitle {
+  font-weight: 200;
+  text-transform: uppercase;
+  margin-top: 2rem;
+}
+
+.checkoutButton {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  background-color: gray;
+  color: white;
+  margin: 0 1rem;
+}
+
+.checkoutButton:hover {
+  background-color: #646464;
+}
+
+.codeField {
+  background-color: white;
+}
+
+.text {
+  font-weight: 100;
+  font-size: 0.75rem;
 }

@@ -23,7 +23,7 @@ const Cart = () => {
                     <TextField className={styles.qtyField} value={1} />
                     <Button>+</Button>
                 </div>
-                <div>17.99 eur</div>
+                <div>€ 17.99</div>
                 <Button><CloseIcon color="error" /></Button>
             </div>
             <hr/>
