@@ -64,3 +64,13 @@
   justify-content: space-around;
   align-items: center;
 }
+
+.qtyContainer {
+  display: flex;
+  align-items: center;
+}
+
+.qtyField {
+  width: 60px;
+  margin: 0 1rem;
+}
