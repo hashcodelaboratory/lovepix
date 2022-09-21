@@ -43,5 +43,6 @@
   "checkout": "Checkout",
   "summary": "Summary",
   "code": "Get code",
-  "payment": "Payment"
+  "payment": "Payment",
+  "total": "Total"
 }

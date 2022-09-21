@@ -43,5 +43,6 @@
   "checkout": "Pokračovať",
   "summary": "Zhrnutie",
   "code": "Zľavový kupón",
-  "payment": "Platba"
+  "payment": "Platba",
+  "total": "Spolu"
 }

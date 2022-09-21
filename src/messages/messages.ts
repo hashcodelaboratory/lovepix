@@ -41,5 +41,6 @@ export const messages = {
   checkout: "checkout",
   summary: "summary",
   code: "code",
-  payment: "payment"
+  payment: "payment",
+  total: "total"
 }

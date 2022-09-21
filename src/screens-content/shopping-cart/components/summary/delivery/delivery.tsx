@@ -58,11 +58,15 @@ const Delivery = () => {
                     <MenuItem value={50}>Pri osobnom odbere</MenuItem>
                 </Select>
             </FormControl>
+            <div className={styles.totalContainer}>
+                <p className={styles.summarySectionTitle}>{String(t(messages.total))}</p>
+                <p className={styles.price}>€ 18.99</p>
+            </div>
+            <p className={styles.text}>Vaše osobné údaje budú použité na spracovanie vašej objenávky, zjednodušenie používania tejto webovej stránky a na iné účely opísané v dokumente.</p>
+            <Link className={styles.text} style={{ cursor: "pointer" }}><b>Pravidlá ochrany súkromia</b></Link>
             <Button disabled={delivery === '' || payment === ''} className={styles.checkoutButton}>
                 {String(t(messages.checkout))}
             </Button>
-            <p className={styles.text}>Vaše osobné údaje budú použité na spracovanie vašej objenávky, zjednodušenie používania tejto webovej stránky a na iné účely opísané v dokumente.</p>
-            <Link className={styles.text} style={{ cursor: "pointer" }}><b>Pravidlá ochrany súkromia</b></Link>
         </div>
     )
 }
