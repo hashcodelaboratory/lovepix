@@ -20,7 +20,6 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import * as PagesUrls from "../constants/pages/urls";
 import {Badge} from "@mui/material";
 import AppContext from "../app-context/app-context";
-import {ImageStatus} from "../app-context/imageStatus";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -28,8 +27,7 @@ const ResponsiveAppBar = () => {
 
   const { t } = useTranslation();
 
-  const { state: { image: { url, status } } } = useContext(AppContext);
-  const badgeLength = url && status === ImageStatus.CONFIGURED ? 1 : 0;
+  const { state: { image: { size } } } = useContext(AppContext);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -138,7 +136,7 @@ const ResponsiveAppBar = () => {
 
           <Box sx={{flexGrow: 0, display: 'flex' }}>
               <Link href={PagesUrls.SHOPPING_CART}>
-                  <Badge badgeContent={badgeLength} color="error" sx={{ my: 2, marginRight: 2 }}>
+                  <Badge badgeContent={size} color="error" sx={{ my: 2, marginRight: 2 }}>
                       <ShoppingCartIcon
                           sx={{ color: 'white', display: 'block',  cursor: 'pointer' }}
                       />

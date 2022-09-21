@@ -4,6 +4,7 @@ import {ImageStatus} from "./imageStatus";
 export type UploadedImage = {
     url?: string;
     status: ImageStatus;
+    size: number;
 }
 
 type AppContextProps = {

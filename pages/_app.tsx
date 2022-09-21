@@ -14,7 +14,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     const [imageStatus, setImageStatus] = useState<ImageStatus>(ImageStatus.CONFIGURED);
     const [image] = useState<UploadedImage>({
         url: imageUrl,
-        status: imageStatus
+        status: imageStatus,
+        size: imageUrl && imageStatus === ImageStatus.CONFIGURED ? 1 : 0
     });
 
     const CONTEXT_VALUE = {
