@@ -19,3 +19,41 @@
   font-size: 1.25rem;
   font-weight: 200;
 }
+
+.summary {
+  padding: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cartContainer {
+  position: relative;
+  padding: 1rem;
+  width: 100%;
+  height: 700px;
+  border-radius: 1rem;
+  margin-right: 1rem;
+  box-shadow: rgb(0 0 0 / 10%) 0rem 0.25rem 0.375rem -0.0625rem, rgb(0 0 0 / 6%) 0rem 0.125rem 0.25rem -0.0625rem;
+}
+
+.deliveryContainer {
+  padding: 1rem;
+  width: 300px;
+  height: 700px;
+  background-color: #e5e5e5;
+  border-radius: 1rem;
+  box-shadow: rgb(0 0 0 / 10%) 0rem 0.25rem 0.375rem -0.0625rem, rgb(0 0 0 / 6%) 0rem 0.125rem 0.25rem -0.0625rem;
+}
+
+.itemsSize {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  color: gray;
+}
+
+.backButton {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+}

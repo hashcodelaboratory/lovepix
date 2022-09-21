@@ -9,7 +9,7 @@ const CustomShoppingCart = () => {
     if (size === 0) return <EmptyCart />;
 
     return(
-        <Summary></Summary>
+        <Summary />
     )
 }
 
