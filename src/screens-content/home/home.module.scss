@@ -73,6 +73,20 @@
   pointer-events: none;
 }
 
+.dropzoneGroupFaked {
+  flex-direction: column;
+  display: flex;
+  border: 2px dashed #ced4da;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.imagePreview {
+  border-radius: 10px;
+}
+
 .imageInDropzone {
   border-radius: 1rem;
 }
