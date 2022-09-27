@@ -4,9 +4,11 @@ import Cart from "./cart/cart";
 import Delivery from "./delivery/delivery";
 
 const Summary = () => (
-    <Container className={styles.summary}>
-        <Cart />
-        <Delivery />
+    <Container>
+        <div className={styles.summary}>
+            <Cart />
+            <Delivery />
+        </div>
     </Container>
 )
 
