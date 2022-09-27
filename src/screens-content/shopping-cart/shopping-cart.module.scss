@@ -56,6 +56,18 @@
   position: absolute;
   bottom: 2rem;
   left: 2rem;
+  background-color: white;
+  border: none;
+  text-transform: uppercase;
+  color: #1976D2;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+}
+
+.backButton:hover {
+  background-color: #f1f1f1;
+  text-decoration: underline;
 }
 
 .cartRow {
@@ -88,14 +100,25 @@
 }
 
 .checkoutButton {
+  border-radius: 0.25rem;
+  border: none;
+  padding: 0.75rem;
   background-color: gray;
   color: white;
   margin: 1rem auto 0 auto;
   width: 100%;
+  cursor: pointer;
+  text-transform: uppercase;
 }
 
 .checkoutButton:hover {
   background-color: #646464;
+}
+
+.checkoutButton:disabled {
+  color: black;
+  cursor: default;
+  background-color: gray;
 }
 
 .codeField {

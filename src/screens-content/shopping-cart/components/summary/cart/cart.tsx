@@ -39,7 +39,7 @@ const Cart = () => {
             <p className={styles.itemsSize}>{size} {String(t(messages.items))}</p>
             <hr />
             {items}
-            <Button className={styles.backButton}>{String(t(messages.backToShop))}</Button>
+            <button className={styles.backButton}>{String(t(messages.backToShop))}</button>
         </div>
     )
 }

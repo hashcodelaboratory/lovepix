@@ -3,7 +3,6 @@ import {useContext, useState} from "react";
 import AppContext from "../../../../../app-context/app-context";
 import {useTranslation} from "next-i18next";
 import {messages} from "../../../../../messages/messages";
-import Button from "@mui/material/Button";
 import {FormControl, Link, Select, SelectChangeEvent, TextField} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 
@@ -66,9 +65,9 @@ const Delivery = () => {
             <Link className={styles.text} style={{ cursor: "pointer" }}>
                 <b>{String(t(messages.privacy))}</b>
             </Link>
-            <Button disabled={delivery === '' || payment === ''} className={styles.checkoutButton}>
+            <button disabled={delivery === '' || payment === ''} className={styles.checkoutButton}>
                 {String(t(messages.checkout))}
-            </Button>
+            </button>
         </div>
     )
 }
