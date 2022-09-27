@@ -5,17 +5,6 @@ import { DROPZONE_STYLE, UPLOAD_IMAGES } from "./utils";
 import DropzoneIdle from "./dropzone-idle";
 import { FileRejection } from "react-dropzone";
 import Icon from "@icons/icon";
-import { IconType } from "@icons/enums";
-import { ref, uploadBytes } from "@firebase/storage";
-import { storage } from "../../../../../../utils/firebase/config";
-import { useSnackbar } from "notistack";
-import {
-  SNACKBAR_OPTIONS_ERROR,
-  SNACKBAR_OPTIONS_SUCCESS,
-} from "../../../../../snackbar/config";
-import { messages } from "../../../../../messages/messages";
-import { useTranslation } from "next-i18next";
-import { useContext } from "react";
 import AppContext from "../../../../../app-context/app-context";
 import { IconType } from "@icons/enums";
 import { ref, uploadBytes } from "@firebase/storage";
@@ -27,10 +16,9 @@ import {
 } from "../../../../../snackbar/config";
 import { messages } from "../../../../../messages/messages";
 import { useTranslation } from "next-i18next";
-import Image, { ImageProps } from "next/image";
-import React, { useState } from "react";
-import { imageSourceSet } from "../utils";
-import NaturalImage from "../natural-image";
+import Image from "next/image";
+import React, { useContext, useState } from "react";
+
 import { Button, Typography } from "@mui/material";
 
 const DropzoneContainer = () => {
