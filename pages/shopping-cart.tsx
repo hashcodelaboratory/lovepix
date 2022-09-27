@@ -19,7 +19,7 @@ const ShoppingCart: NextPage = () => {
         <ResponsiveAppBar/>
       </header>
 
-      <main className={styles.main} style={{ minHeight: 0 }}>
+      <main className={styles.main}>
           <CustomShoppingCart />
       </main>
 
