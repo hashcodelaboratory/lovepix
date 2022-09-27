@@ -31,7 +31,11 @@ const Cart = () => {
 
     return (
         <div className={styles.cartContainer}>
-            <h1>{String(t(messages.shoppingCart))}</h1>
+            <div className={styles.cartTitleContainer}>
+                <h1>{String(t(messages.shoppingCart))} </h1>
+                <h1 className={styles.cartTitleDivider}> {' > '} </h1>
+                <h1 className={styles.cartDisabledTitle}>{String(t(messages.shoppingCart))} </h1>
+            </div>
             <p className={styles.itemsSize}>{size} {String(t(messages.items))}</p>
             <hr />
             {items}

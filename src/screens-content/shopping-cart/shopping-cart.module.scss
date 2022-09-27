@@ -111,3 +111,19 @@
   font-size: 1.2rem;
   margin-top: 2rem;
 }
+
+.cartTitleContainer {
+  display: flex;
+  align-items: center;
+}
+
+.cartDisabledTitle {
+  font-weight: 300;
+  color: gray;
+}
+
+.cartTitleDivider {
+  margin: 0 1rem;
+  font-weight: 200;
+  color: gray;
+}

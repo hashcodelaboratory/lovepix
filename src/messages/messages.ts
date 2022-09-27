@@ -49,5 +49,6 @@ export const messages = {
   online: "online",
   personalDelivery: "personalDelivery",
   personalData: "personalData",
-  privacy: "privacy"
+  privacy: "privacy",
+  personalDataTitle: "personalDataTitle"
 }
