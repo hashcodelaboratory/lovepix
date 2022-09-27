@@ -42,5 +42,12 @@ export const messages = {
   summary: "summary",
   code: "code",
   payment: "payment",
-  total: "total"
+  total: "total",
+  courier: "courier",
+  personalCollect: "personalCollect",
+  pickup: "pickup",
+  online: "online",
+  personalDelivery: "personalDelivery",
+  personalData: "personalData",
+  privacy: "privacy"
 }

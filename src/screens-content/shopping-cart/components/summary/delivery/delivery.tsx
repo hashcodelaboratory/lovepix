@@ -39,9 +39,9 @@ const Delivery = () => {
                     value={delivery}
                     onChange={handleChangeDelivery}
                 >
-                    <MenuItem value={10}>Kuriér na adresu: 5.00 €</MenuItem>
-                    <MenuItem value={20}>Osobný odber - Spišská Nová Ves</MenuItem>
-                    <MenuItem value={30}>Zásielkovňa: 2.20 €</MenuItem>
+                    <MenuItem value={10}>{String(t(messages.courier))}</MenuItem>
+                    <MenuItem value={20}>{String(t(messages.personalCollect))}</MenuItem>
+                    <MenuItem value={30}>{String(t(messages.pickup))}</MenuItem>
                 </Select>
             </FormControl>
             <p className={styles.summarySectionTitle}>{String(t(messages.code))}</p>
@@ -54,16 +54,18 @@ const Delivery = () => {
                     value={payment}
                     onChange={handleChangePayment}
                 >
-                    <MenuItem value={40}>Online</MenuItem>
-                    <MenuItem value={50}>Pri osobnom odbere</MenuItem>
+                    <MenuItem value={40}>{String(t(messages.online))}</MenuItem>
+                    <MenuItem value={50}>{String(t(messages.personalDelivery))}</MenuItem>
                 </Select>
             </FormControl>
             <div className={styles.totalContainer}>
                 <p className={styles.summarySectionTitle}>{String(t(messages.total))}</p>
                 <p className={styles.price}>€ 18.99</p>
             </div>
-            <p className={styles.text}>Vaše osobné údaje budú použité na spracovanie vašej objenávky, zjednodušenie používania tejto webovej stránky a na iné účely opísané v dokumente.</p>
-            <Link className={styles.text} style={{ cursor: "pointer" }}><b>Pravidlá ochrany súkromia</b></Link>
+            <p className={styles.text}>{String(t(messages.personalData))}</p>
+            <Link className={styles.text} style={{ cursor: "pointer" }}>
+                <b>{String(t(messages.privacy))}</b>
+            </Link>
             <Button disabled={delivery === '' || payment === ''} className={styles.checkoutButton}>
                 {String(t(messages.checkout))}
             </Button>
