@@ -5,7 +5,6 @@ import { DROPZONE_STYLE, UPLOAD_IMAGES } from "./utils";
 import DropzoneIdle from "./dropzone-idle";
 import { FileRejection } from "react-dropzone";
 import Icon from "@icons/icon";
-import AppContext from "../../../../../app-context/app-context";
 import { IconType } from "@icons/enums";
 import { ref, uploadBytes } from "@firebase/storage";
 import { storage } from "../../../../../../utils/firebase/config";
@@ -17,7 +16,7 @@ import {
 import { messages } from "../../../../../messages/messages";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 
 import { Button, Typography } from "@mui/material";
 
@@ -36,9 +35,6 @@ const DropzoneContainer = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [imageUrl, setImageUrl] = useState<string>();
-
-  const { stateAction } = useContext(AppContext);
-  const { setUploadedImageUrl } = stateAction;
 
   const onDrop = (files: File[]) => {
     const file = files[0];
@@ -89,13 +85,18 @@ const DropzoneContainer = () => {
           <Typography>{String(t(processingOrder))}</Typography>
           <Typography>{String(t(doYouWant))}</Typography>
           <Button
+            variant="text"
             className={styles.uploadButton}
             onClick={handleContineConfiguration}
           >
             {String(t(continueInConfiguration))}
           </Button>
           <Typography>{String(t(or))}</Typography>
-          <Button className={styles.uploadButton} onClick={handleCleanImage}>
+          <Button
+            className={styles.uploadButton}
+            onClick={handleCleanImage}
+            variant="text"
+          >
             {String(t(uploadNewPicture))}
           </Button>
         </Group>
