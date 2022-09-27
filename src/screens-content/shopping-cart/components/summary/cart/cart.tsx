@@ -7,9 +7,10 @@ import {TextField} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import {useTranslation} from "next-i18next";
 import {messages} from "../../../../../messages/messages";
+import Form from "../form/form";
 
 const Cart = () => {
-    const { state: { image: { url, size } } } = useContext(AppContext);
+    const { state: { image: { url, size }, stepper } } = useContext(AppContext);
 
     const { t } = useTranslation();
 
@@ -29,16 +30,24 @@ const Cart = () => {
             <hr/>
         </>
 
+    const isDefault = stepper === 0;
+
+    const content = isDefault ? items : <Form />
+
     return (
         <div className={styles.cartContainer}>
             <div className={styles.cartTitleContainer}>
-                <h1>{String(t(messages.shoppingCart))} </h1>
+                <h1 className={isDefault ? undefined : styles.cartDisabledTitle}>
+                    {String(t(messages.shoppingCart))}
+                </h1>
                 <h1 className={styles.cartTitleDivider}> {' > '} </h1>
-                <h1 className={styles.cartDisabledTitle}>{String(t(messages.personalDataTitle))} </h1>
+                <h1 className={isDefault ? styles.cartDisabledTitle : undefined}>
+                    {String(t(messages.personalDataTitle))}
+                </h1>
             </div>
             <p className={styles.itemsSize}>{size} {String(t(messages.items))}</p>
             <hr />
-            {items}
+            {content}
             <button className={styles.backButton}>{String(t(messages.backToShop))}</button>
         </div>
     )

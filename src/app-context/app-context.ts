@@ -7,13 +7,15 @@ export type UploadedImage = {
     size: number;
 }
 
-type AppContextProps = {
+export type AppContextProps = {
     state: {
         image: UploadedImage;
+        stepper: number;
     },
     stateAction: {
         setImageUrl: Dispatch<SetStateAction<string | undefined>>;
         setImageStatus: Dispatch<SetStateAction<ImageStatus>>;
+        setStepper: Dispatch<SetStateAction<number>>;
     }
 }
 

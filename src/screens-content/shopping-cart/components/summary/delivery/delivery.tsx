@@ -7,7 +7,7 @@ import {FormControl, Link, Select, SelectChangeEvent, TextField} from "@mui/mate
 import MenuItem from "@mui/material/MenuItem";
 
 const Delivery = () => {
-    const { state: { image: { size } } } = useContext(AppContext);
+    const { state: { image: { size } }, stateAction: { setStepper } } = useContext(AppContext);
 
     const { t } = useTranslation();
 
@@ -21,6 +21,10 @@ const Delivery = () => {
     const handleChangePayment = (event: SelectChangeEvent) => {
         setPayment(event.target.value);
     };
+
+    const confirm = () => {
+        setStepper(1);
+    }
 
     return (
         <div className={styles.deliveryContainer}>
@@ -65,7 +69,7 @@ const Delivery = () => {
             <Link className={styles.text} style={{ cursor: "pointer" }}>
                 <b>{String(t(messages.privacy))}</b>
             </Link>
-            <button disabled={delivery === '' || payment === ''} className={styles.checkoutButton}>
+            <button disabled={delivery === '' || payment === ''} className={styles.checkoutButton} onClick={confirm}>
                 {String(t(messages.checkout))}
             </button>
         </div>

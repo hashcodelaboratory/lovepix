@@ -5,7 +5,7 @@ import {SnackbarProvider} from "notistack";
 import {QueryClient, QueryClientProvider} from "react-query";
 import {useState} from "react";
 import {ReactQueryDevtools} from "react-query/devtools";
-import AppContext, {UploadedImage} from "../src/app-context/app-context";
+import AppContext, {AppContextProps, UploadedImage} from "../src/app-context/app-context";
 import {ImageStatus} from "../src/app-context/imageStatus";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -17,14 +17,17 @@ function MyApp({ Component, pageProps }: AppProps) {
         status: imageStatus,
         size: imageUrl && imageStatus === ImageStatus.CONFIGURED ? 1 : 0
     });
+    const [stepper, setStepper] = useState(0);
 
-    const CONTEXT_VALUE = {
+    const CONTEXT_VALUE: AppContextProps = {
         state: {
-            image: image
+            image: image,
+            stepper: stepper
         },
         stateAction: {
             setImageUrl: setImageUrl,
-            setImageStatus: setImageStatus
+            setImageStatus: setImageStatus,
+            setStepper: setStepper
         }
     }
 

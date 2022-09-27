@@ -3,13 +3,15 @@ import {Container} from "@mui/system";
 import Cart from "./cart/cart";
 import Delivery from "./delivery/delivery";
 
-const Summary = () => (
-    <Container>
-        <div className={styles.summary}>
-            <Cart />
-            <Delivery />
-        </div>
-    </Container>
-)
+const Summary = () => {
+    return (
+        <Container>
+            <div className={styles.summary}>
+                <Cart/>
+                <Delivery/>
+            </div>
+        </Container>
+    )
+}
 
 export default Summary
