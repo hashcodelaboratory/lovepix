@@ -84,21 +84,16 @@ const DropzoneContainer = () => {
           />
           <Typography>{String(t(processingOrder))}</Typography>
           <Typography>{String(t(doYouWant))}</Typography>
-          <Button
-            variant="text"
+          <button
             className={styles.uploadButton}
             onClick={handleContineConfiguration}
           >
             {String(t(continueInConfiguration))}
-          </Button>
+          </button>
           <Typography>{String(t(or))}</Typography>
-          <Button
-            className={styles.uploadButton}
-            onClick={handleCleanImage}
-            variant="text"
-          >
+          <button className={styles.uploadButton} onClick={handleCleanImage}>
             {String(t(uploadNewPicture))}
-          </Button>
+          </button>
         </Group>
       ) : (
         <Dropzone
