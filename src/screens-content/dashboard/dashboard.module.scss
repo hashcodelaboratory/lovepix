@@ -146,3 +146,23 @@
   background-color: white;
   margin: 2rem 0 1rem 1rem;
 }
+
+.removeButton {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 1rem 0 1rem 1rem;
+  height: 2.5rem;
+  text-transform: uppercase;
+  color: white;
+  padding: 0 2rem;
+  border-radius: 0.25rem;
+  background-color: #0070f3;
+  border: none;
+  box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem, rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
+}
+
+.removeButton:disabled {
+  cursor: default;
+  opacity: 0.6;
+}

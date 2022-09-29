@@ -15,6 +15,9 @@ import Link from "next/link";
 import {pages, settings} from "../navigation";
 import {useTranslation} from "next-i18next";
 import { v4 as uuidv4 } from 'uuid';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import * as PagesUrls from "../constants/pages/urls";
+import {Badge} from "@mui/material";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -127,12 +130,19 @@ const ResponsiveAppBar = () => {
             ))}
           </Box>
 
-          <Box sx={{flexGrow: 0}}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
-              </IconButton>
-            </Tooltip>
+          <Box sx={{flexGrow: 0, display: 'flex' }}>
+              <Link href={PagesUrls.SHOPPING_CART}>
+                  <Badge badgeContent={0} color="error" sx={{ my: 2, marginRight: 2 }}>
+                      <ShoppingCartIcon
+                          sx={{ color: 'white', display: 'block',  cursor: 'pointer' }}
+                      />
+                  </Badge>
+              </Link>
+              <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
+                      <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
+                  </IconButton>
+              </Tooltip>
             <Menu
               sx={{mt: '45px'}}
               id="menu-appbar"

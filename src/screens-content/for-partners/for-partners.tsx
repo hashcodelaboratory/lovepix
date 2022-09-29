@@ -2,12 +2,13 @@ import styles from "./for-partners.module.scss";
 import Image from "next/image";
 import {Container} from "@mui/material";
 import {useTranslation} from "next-i18next";
-import {messages} from "../../messages/messages";
 import {ImageLayout} from "../home/enums/enums";
+import {useTranslations} from "../../../utils/translations/useTranslations";
 
 const CustomForPartners = () => {
 
-    const { t } = useTranslation();
+    const { i18n } = useTranslation();
+    const { data: translations } = useTranslations(i18n.language);
 
     return(
         <Container>
@@ -21,9 +22,9 @@ const CustomForPartners = () => {
                         layout={ImageLayout.FIXED}
                         className={styles.image}
                     />
-                    <p className={styles.title}>{String(t(messages.partnersOneTitle))}</p>
-                    <p className={styles.text}>{String(t(messages.partnersOneSubtitle))}</p>
-                    <p className={styles.text}>{String(t(messages.partnersOneDescription))}</p>
+                    <p className={styles.title}>{translations?.partnersOneTitle}</p>
+                    <p className={styles.text}>{translations?.partnersOneSubtitle}</p>
+                    <p className={styles.text}>{translations?.partnersOneDescription}</p>
                 </div>
                 <div className={styles.card}>
                     <Image
@@ -34,15 +35,15 @@ const CustomForPartners = () => {
                         layout={ImageLayout.FIXED}
                         className={styles.image}
                     />
-                    <p className={styles.title}>{String(t(messages.partnersTwoTitle))}</p>
-                    <p className={styles.text}>{String(t(messages.partnersTwoSubtitle))}</p>
-                    <p className={styles.text}>{String(t(messages.partnersTwoDescription))}</p>
+                    <p className={styles.title}>{translations?.partnersTwoTitle}</p>
+                    <p className={styles.text}>{translations?.partnersTwoSubtitle}</p>
+                    <p className={styles.text}>{translations?.partnersTwoDescription}</p>
                 </div>
             </div>
             <div className={styles.center}>
-                <p className={styles.miniTitle}>{String(t(messages.aboutUsPriorities))}</p>
-                <h1>{String(t(messages.partnersDetails))}</h1>
-                <p className={styles.text}>{String(t(messages.partnersForm))}</p>
+                <p className={styles.miniTitle}>{translations?.aboutUsPriorities}</p>
+                <h1>{translations?.partnersDetails}</h1>
+                <p className={styles.text}>{translations?.partnersForm}</p>
             </div>
         </Container>
     )
