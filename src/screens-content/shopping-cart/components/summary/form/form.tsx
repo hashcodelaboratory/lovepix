@@ -1,29 +1,44 @@
 import {TextField, Box} from "@mui/material";
 import styles from "../../../shopping-cart.module.scss";
+import {useForm} from "react-hook-form";
+
+type FormInputs = {
+    firstName: string;
+    lastName: string;
+    company: string;
+    address: string;
+    city: string;
+    postalCode: string;
+    phone: string;
+    email: string;
+};
 
 const Form = (): JSX.Element => {
+    const { register, formState: { errors } } = useForm<FormInputs>();
+
+    console.log(errors);
 
     return(
         <div className={styles.formContainer}>
             <Box
-                component="form"
+                component="div"
                 sx={{
                     '& > :not(style)': { m: 2 },
                 }}
-                noValidate
-                autoComplete="off"
             >
                 <TextField
                     required
                     id="outlined-required"
                     label="Meno"
                     placeholder="Meno"
+                    {...register("firstName")}
                 />
                 <TextField
                     required
                     id="outlined-required"
                     label="Priezvisko"
                     placeholder="Priezvisko"
+                    {...register("lastName")}
                 />
                 <TextField
                     required

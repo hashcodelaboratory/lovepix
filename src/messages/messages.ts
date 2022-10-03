@@ -50,5 +50,6 @@ export const messages = {
   personalDelivery: "personalDelivery",
   personalData: "personalData",
   privacy: "privacy",
-  personalDataTitle: "personalDataTitle"
+  personalDataTitle: "personalDataTitle",
+  firstName: "firstName"
 }
