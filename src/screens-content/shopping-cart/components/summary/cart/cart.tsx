@@ -49,7 +49,6 @@ const Cart = () => {
             <hr />
             {content}
             <button className={styles.backButton}>{String(t(messages.backToShop))}</button>
-            {!isDefault && <button className={styles.orderButton}>{String(t(messages.order))}</button>}
         </div>
     )
 }

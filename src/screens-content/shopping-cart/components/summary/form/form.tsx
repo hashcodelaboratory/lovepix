@@ -1,8 +1,22 @@
 import {TextField, Box} from "@mui/material";
 import styles from "../../../shopping-cart.module.scss";
-import {SubmitHandler, useForm} from "react-hook-form";
+import {SubmitHandler, useForm, Controller} from "react-hook-form";
 import {useContext} from "react";
 import AppContext from "../../../../../app-context/app-context";
+import {messages} from "../../../../../messages/messages";
+import {useTranslation} from "next-i18next";
+import {yupResolver} from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const SCHEMA = yup.object({
+    firstName: yup.string().required(),
+    lastName: yup.string().required(),
+    address: yup.string().required(),
+    city: yup.string().required(),
+    postalCode: yup.string().required(),
+    phone: yup.string().required(),
+    email: yup.string().required(),
+}).required();
 
 type FormInputs = {
     firstName: string;
@@ -20,11 +34,17 @@ const Form = (): JSX.Element => {
         stateAction: { setStepper }
     } = useContext(AppContext);
 
-    const { register, formState: { errors }, handleSubmit } = useForm<FormInputs>();
+    const { t } = useTranslation();
 
-    console.log(errors);
+    const { register, formState: { errors }, handleSubmit, control } = useForm<FormInputs>({
+        resolver: yupResolver(SCHEMA),
+        delayError: 1
+    });
+
+    console.log('errors', errors);
 
     const onSubmit: SubmitHandler<FormInputs> = (data) => {
+        console.log('onSubmit', data);
         setStepper(2);
     }
 
@@ -33,64 +53,111 @@ const Form = (): JSX.Element => {
             <Box
                 component="form"
                 sx={{
-                    '& > :not(style)': { m: 2 },
+                    '& > :not(style)': { m: 1 },
                 }}
                 onSubmit={handleSubmit(onSubmit)}
             >
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Meno"
-                    placeholder="Meno"
-                    {...register("firstName")}
+                <Controller name="firstName" control={control}
+                    render={({ field }) =>
+                        <TextField
+                            label="Meno"
+                            placeholder="Meno"
+                            {...field}
+                            {...register("firstName", {
+                                required: { message: "Name is required field.", value: true }
+                            })}
+                            error={!!errors.firstName?.message}
+                            helperText={errors.firstName?.message}
+                        />
+                    }
                 />
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Priezvisko"
-                    placeholder="Priezvisko"
-                    {...register("lastName")}
+                <Controller name="lastName" control={control}
+                    render={({ field }) =>
+                        <TextField
+                            label="Priezvisko"
+                            placeholder="Priezvisko"
+                            {...field}
+                            {...register("lastName", { required: true })}
+                            error={!!errors.lastName?.message}
+                            helperText={errors.lastName?.message}
+                        />
+                    }
                 />
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Nazov spolocnosti"
-                    placeholder="Nazov spolocnosti"
-                    fullWidth
+                <Controller name="company" control={control}
+                    render={({field}) =>
+                        <TextField
+                            label="Nazov spolocnosti"
+                            placeholder="Nazov spolocnosti"
+                            fullWidth
+                            {...field}
+                            {...register("company")}
+                        />
+                    }
                 />
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Ulica, c. domu"
-                    placeholder="Ulica, c. domu"
-                    fullWidth
+                <Controller name="address" control={control}
+                    render={({field}) =>
+                        <TextField
+                            label="Ulica, c. domu"
+                            placeholder="Ulica, c. domu"
+                            fullWidth
+                            {...field}
+                            {...register("address", {required: true})}
+                            error={!!errors.address?.message}
+                            helperText={errors.address?.message}
+                        />
+                    }
                 />
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Mesto"
-                    placeholder="Mesto"
-                    fullWidth
+                <Controller name="city" control={control}
+                    render={({field}) =>
+                        <TextField
+                            label="Mesto"
+                            placeholder="Mesto"
+                            fullWidth
+                            {...field}
+                            {...register("city", {required: true})}
+                            error={!!errors.city?.message}
+                            helperText={errors.city?.message}
+                        />
+                    }
                 />
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="PSC"
-                    placeholder="PSC"
+                <Controller name="city" control={control}
+                    render={({field}) =>
+                        <TextField
+                            label="PSC"
+                            placeholder="PSC"
+                            {...field}
+                            {...register("postalCode", {required: true})}
+                            error={!!errors.postalCode?.message}
+                            helperText={errors.postalCode?.message}
+                        />
+                    }
                 />
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Telefon"
-                    placeholder="Telefon"
+                <Controller name="city" control={control}
+                    render={({field}) =>
+                        <TextField
+                            label="Telefon"
+                            placeholder="Telefon"
+                            {...field}
+                            {...register("phone", {required: true})}
+                            error={!!errors.phone?.message}
+                            helperText={errors.phone?.message}
+                        />
+                    }
                 />
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="E-mail"
-                    placeholder="E-mail"
-                    fullWidth
+                <Controller name="city" control={control}
+                    render={({field}) =>
+                        <TextField
+                            label="E-mail"
+                            placeholder="E-mail"
+                            fullWidth
+                            {...field}
+                            {...register("email", {required: true})}
+                            error={!!errors.email?.message}
+                            helperText={errors.email?.message}
+                        />
+                    }
                 />
+                <button type="submit" className={styles.orderButton}>{String(t(messages.order))}</button>
             </Box>
         </div>
     )

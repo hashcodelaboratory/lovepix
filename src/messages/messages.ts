@@ -52,5 +52,13 @@ export const messages = {
   privacy: "privacy",
   personalDataTitle: "personalDataTitle",
   firstName: "firstName",
-  order: "order"
+  order: "order",
+  name: "name",
+  surname: "surname",
+  company: "company",
+  address: "address",
+  city: "city",
+  postalCode: "postalCode",
+  phone: "phone",
+  email: "email"
 }
