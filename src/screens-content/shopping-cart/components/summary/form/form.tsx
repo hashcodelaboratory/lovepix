@@ -1,6 +1,8 @@
 import {TextField, Box} from "@mui/material";
 import styles from "../../../shopping-cart.module.scss";
-import {useForm} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {useContext} from "react";
+import AppContext from "../../../../../app-context/app-context";
 
 type FormInputs = {
     firstName: string;
@@ -14,17 +16,26 @@ type FormInputs = {
 };
 
 const Form = (): JSX.Element => {
-    const { register, formState: { errors } } = useForm<FormInputs>();
+    const {
+        stateAction: { setStepper }
+    } = useContext(AppContext);
+
+    const { register, formState: { errors }, handleSubmit } = useForm<FormInputs>();
 
     console.log(errors);
+
+    const onSubmit: SubmitHandler<FormInputs> = (data) => {
+        setStepper(2);
+    }
 
     return(
         <div className={styles.formContainer}>
             <Box
-                component="div"
+                component="form"
                 sx={{
                     '& > :not(style)': { m: 2 },
                 }}
+                onSubmit={handleSubmit(onSubmit)}
             >
                 <TextField
                     required

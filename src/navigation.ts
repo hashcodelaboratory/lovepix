@@ -9,7 +9,6 @@ const pages = [
   {title: PagesTitles.MATERIALS, link: PagesUrls.MATERIALS},
   {title: PagesTitles.FOR_PARTNERS, link: PagesUrls.FOR_PARTNERS},
   {title: PagesTitles.ABOUT_US, link: PagesUrls.ABOUT_US},
-  {title: PagesTitles.SHOPPING_CART, link: PagesUrls.SHOPPING_CART},
 ];
 
 const settings = [
