@@ -25,11 +25,9 @@ const Delivery = () => {
     const delivery = watch("delivery");
     const payment = watch("payment");
 
-    console.log(delivery, payment);
-    console.log('errors', errors);
+    const isDisabled = !delivery || !payment;
 
-    const onSubmit: SubmitHandler<DeliveryFormInputs> = data => {
-        console.log('onSubmit', data);
+    const onSubmit: SubmitHandler<DeliveryFormInputs> = (data) => {
         setStepper(1);
     }
 
@@ -88,7 +86,7 @@ const Delivery = () => {
                 <button
                     type="submit"
                     className={styles.checkoutButton}
-                    disabled={!delivery || !payment}
+                    disabled={isDisabled}
                 >
                     {String(t(messages.checkout))}
                 </button>

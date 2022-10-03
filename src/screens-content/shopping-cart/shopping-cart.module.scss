@@ -103,7 +103,7 @@
   border-radius: 0.25rem;
   border: none;
   padding: 0.75rem;
-  background-color: gray;
+  background-color: #66BB6A;
   color: white;
   margin: 1rem auto 0 auto;
   width: 100%;
@@ -112,13 +112,13 @@
 }
 
 .checkoutButton:hover {
-  background-color: #646464;
+  background-color: #589d5b;
 }
 
 .checkoutButton:disabled {
+  background-color: gray;
   color: black;
   cursor: default;
-  background-color: gray;
 }
 
 .codeField {
