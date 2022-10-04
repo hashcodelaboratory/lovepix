@@ -37,16 +37,10 @@ const Form = (): JSX.Element => {
     const { t } = useTranslation();
 
     const { register, formState: { errors }, handleSubmit, control } = useForm<FormInputs>({
-        resolver: yupResolver(SCHEMA),
-        delayError: 1
+        resolver: yupResolver(SCHEMA)
     });
 
-    console.log('errors', errors);
-
-    const onSubmit: SubmitHandler<FormInputs> = (data) => {
-        console.log('onSubmit', data);
-        setStepper(2);
-    }
+    const onSubmit: SubmitHandler<FormInputs> = (data) => setStepper(2);
 
     return(
         <div className={styles.formContainer}>

@@ -3,11 +3,18 @@ import {useContext} from "react";
 import AppContext from "../../../../../app-context/app-context";
 import {useTranslation} from "next-i18next";
 import {messages} from "../../../../../messages/messages";
-import {FormControl, Link, Select, TextField} from "@mui/material";
+import {FormControl, FormHelperText, Link, Select, TextField} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import {useForm, Controller, SubmitHandler} from "react-hook-form";
+import * as yup from "yup";
+import {yupResolver} from "@hookform/resolvers/yup";
 
-type DeliveryFormInputs = {
+const SCHEMA = yup.object({
+    delivery: yup.string().required("Delivery is required field."),
+    payment: yup.string().required("Payment is required field."),
+}).required();
+
+type SummaryFormInputs = {
     delivery: string;
     payment: string;
 };
@@ -20,16 +27,11 @@ const Delivery = () => {
 
     const { t } = useTranslation();
 
-    const { register, handleSubmit, watch, formState: { errors }, control } = useForm<DeliveryFormInputs>();
+    const { register, handleSubmit, formState: { errors }, control } = useForm<SummaryFormInputs>({
+        resolver: yupResolver(SCHEMA)
+    });
 
-    const delivery = watch("delivery");
-    const payment = watch("payment");
-
-    const isDisabled = !delivery || !payment;
-
-    const onSubmit: SubmitHandler<DeliveryFormInputs> = (data) => {
-        setStepper(1);
-    }
+    const onSubmit: SubmitHandler<SummaryFormInputs> = (data) => setStepper(1);
 
     return (
         <div className={styles.deliveryContainer}>
@@ -45,7 +47,7 @@ const Delivery = () => {
                         name="delivery"
                         control={control}
                         render={({ field }) =>
-                            <FormControl fullWidth>
+                            <FormControl fullWidth error={!!errors.delivery?.message}>
                                 <Select
                                     {...field}
                                     {...register("delivery", { required: true })}
@@ -54,6 +56,7 @@ const Delivery = () => {
                                     <MenuItem value={"personalCollect"}>{String(t(messages.personalCollect))}</MenuItem>
                                     <MenuItem value={"pickup"}>{String(t(messages.pickup))}</MenuItem>
                                 </Select>
+                                {errors.delivery?.message && <FormHelperText error>{errors.delivery?.message}</FormHelperText>}
                             </FormControl>
                         }
                     />
@@ -64,14 +67,15 @@ const Delivery = () => {
                         name="payment"
                         control={control}
                         render={({field}) =>
-                            <FormControl fullWidth>
+                            <FormControl fullWidth error={!!errors.payment?.message}>
                                 <Select
                                     {...field}
-                                    {...register("payment", {required: true})}
+                                    {...register("payment", { required: true })}
                                 >
                                     <MenuItem value={"online"}>{String(t(messages.online))}</MenuItem>
                                     <MenuItem value={"personalDelivery"}>{String(t(messages.personalDelivery))}</MenuItem>
                                 </Select>
+                                {errors.payment?.message && <FormHelperText error>{errors.payment?.message}</FormHelperText>}
                             </FormControl>
                         }
                     />
@@ -83,13 +87,7 @@ const Delivery = () => {
                 <Link className={styles.text} style={{ cursor: "pointer" }}>
                     <b>{String(t(messages.privacy))}</b>
                 </Link>
-                <button
-                    type="submit"
-                    className={styles.checkoutButton}
-                    disabled={isDisabled}
-                >
-                    {String(t(messages.checkout))}
-                </button>
+                <button type="submit" className={styles.checkoutButton}>{String(t(messages.checkout))}</button>
             </form>
         </div>
     )
