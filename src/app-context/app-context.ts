@@ -13,8 +13,7 @@ export type AppContextProps = {
         stepper: number;
     },
     stateAction: {
-        setImageUrl: Dispatch<SetStateAction<string | undefined>>;
-        setImageStatus: Dispatch<SetStateAction<ImageStatus>>;
+        setImage: Dispatch<SetStateAction<UploadedImage>>;
         setStepper: Dispatch<SetStateAction<number>>;
     }
 }

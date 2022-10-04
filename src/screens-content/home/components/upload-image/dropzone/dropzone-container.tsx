@@ -16,24 +16,24 @@ import {useContext} from "react";
 import AppContext from "../../../../../app-context/app-context";
 import {ImageStatus} from "../../../../../app-context/imageStatus";
 import Image from "next/image";
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 const DropzoneContainer = () => {
 
     const { t } = useTranslation();
 
-  const {
-    printPhoto,
-    processingOrder,
-    doYouWant,
-    or,
-    uploadNewPicture,
-    continueInConfiguration,
-  } = messages;
+    const {
+        printPhoto,
+        processingOrder,
+        doYouWant,
+        or,
+        uploadNewPicture,
+        continueInConfiguration,
+    } = messages;
 
     const { enqueueSnackbar } = useSnackbar();
 
-    const { state: { image: { url } }, stateAction: { setImageUrl, setImageStatus } } = useContext(AppContext);
+    const { state: { image: { url } }, stateAction: { setImage } } = useContext(AppContext);
 
     const onDrop = (files: File[]) => {
         const file = files[0];
@@ -45,8 +45,12 @@ const DropzoneContainer = () => {
             enqueueSnackbar(String(t(messages.fileUploaded)), SNACKBAR_OPTIONS_SUCCESS);
 
             getDownloadURL(ref(storage, `${UPLOAD_IMAGES}/${snapshot.metadata.name}`)).then(url => {
-                setImageUrl(url);
-                setImageStatus(ImageStatus.CONFIGURED); // TODO: change to UPLOADED when cropper will be developed
+                console.log('getDownloadURL', url)
+                setImage({
+                    url: url,
+                    status: ImageStatus.CONFIGURED, // TODO: change to UPLOADED when cropper will be developed
+                    size: 1
+                });
             });
         });
     }
@@ -56,12 +60,18 @@ const DropzoneContainer = () => {
     }
 
     const handleCleanImage = () => {
-        setImageUrl(undefined);
+        setImage({
+            url: undefined,
+            status: ImageStatus.DEFAULT,
+            size: 0
+        });
     };
 
     const handleContineConfiguration = () => {
         // TODO: continue with configuration in cropper
     };
+
+    console.log(url)
 
   return (
     <>
@@ -78,6 +88,7 @@ const DropzoneContainer = () => {
             height={150}
             width={300}
             className={styles.imagePreview}
+            priority
           />
           <Typography>{String(t(processingOrder))}</Typography>
           <Typography>{String(t(doYouWant))}</Typography>

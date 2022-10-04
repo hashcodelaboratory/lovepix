@@ -10,12 +10,10 @@ import {ImageStatus} from "../src/app-context/imageStatus";
 
 function MyApp({ Component, pageProps }: AppProps) {
     const [queryClient] = useState(() => new QueryClient());
-    const [imageUrl, setImageUrl] = useState<string>();
-    const [imageStatus, setImageStatus] = useState<ImageStatus>(ImageStatus.DEFAULT);
-    const [image] = useState<UploadedImage>({
-        url: imageUrl,
-        status: imageStatus,
-        size: imageUrl && imageStatus === ImageStatus.CONFIGURED ? 1 : 0
+    const [image, setImage] = useState<UploadedImage>({
+        url: undefined,
+        status: ImageStatus.DEFAULT,
+        size: 0
     });
     const [stepper, setStepper] = useState(0);
 
@@ -25,8 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             stepper: stepper
         },
         stateAction: {
-            setImageUrl: setImageUrl,
-            setImageStatus: setImageStatus,
+            setImage: setImage,
             setStepper: setStepper
         }
     }
