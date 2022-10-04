@@ -37,7 +37,7 @@ const DropzoneContainer = () => {
 
             getDownloadURL(ref(storage, `${UPLOAD_IMAGES}/${snapshot.metadata.name}`)).then(url => {
                 setImageUrl(url);
-                setImageStatus(ImageStatus.UPLOADED);
+                setImageStatus(ImageStatus.CONFIGURED); // TODO: change to UPLOADED when cropper will be developed
             });
         });
     }

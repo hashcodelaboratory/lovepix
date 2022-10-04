@@ -1,4 +1,5 @@
 export enum ImageStatus {
+    DEFAULT = 'DEFAULT',
     UPLOADED = 'UPLOADED',
-    CONFIGURED = 'CONFIGURED' // after successfull configuration via image cropper
+    CONFIGURED = 'CONFIGURED' // after successful configuration via image cropper
 }
