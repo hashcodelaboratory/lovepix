@@ -9,13 +9,22 @@ import {useTranslation} from "next-i18next";
 import {messages} from "../../../../../messages/messages";
 import Form from "../form/form";
 import {useRouter} from "next/router";
+import {ImageStatus} from "../../../../../app-context/imageStatus";
 
 const Cart = () => {
-    const { state: { image: { url, size }, stepper } } = useContext(AppContext);
+    const { state: { image: { url, size }, stepper }, stateAction: { setImage } } = useContext(AppContext);
 
     const { t } = useTranslation();
 
     const router = useRouter();
+
+    const removeImage = () => {
+        setImage({
+            url: undefined,
+            status: ImageStatus.DEFAULT,
+            size: 0
+        });
+    }
 
     const items =
         <>
@@ -28,7 +37,7 @@ const Cart = () => {
                     <Button>+</Button>
                 </div>
                 <div>€ 17.99</div>
-                <Button><CloseIcon color="error" /></Button>
+                <Button onClick={removeImage}><CloseIcon color="error" /></Button>
             </div>
             <hr/>
         </>

@@ -45,7 +45,6 @@ const DropzoneContainer = () => {
             enqueueSnackbar(String(t(messages.fileUploaded)), SNACKBAR_OPTIONS_SUCCESS);
 
             getDownloadURL(ref(storage, `${UPLOAD_IMAGES}/${snapshot.metadata.name}`)).then(url => {
-                console.log('getDownloadURL', url)
                 setImage({
                     url: url,
                     status: ImageStatus.CONFIGURED, // TODO: change to UPLOADED when cropper will be developed
@@ -70,8 +69,6 @@ const DropzoneContainer = () => {
     const handleContineConfiguration = () => {
         // TODO: continue with configuration in cropper
     };
-
-    console.log(url)
 
   return (
     <>
