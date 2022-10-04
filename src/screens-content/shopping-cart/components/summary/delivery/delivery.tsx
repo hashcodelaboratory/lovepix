@@ -10,8 +10,8 @@ import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 
 const SCHEMA = yup.object({
-    delivery: yup.string().required("Delivery is required field."),
-    payment: yup.string().required("Payment is required field."),
+    delivery: yup.string().required("deliveryValidation"),
+    payment: yup.string().required("paymentValidation"),
 }).required();
 
 type SummaryFormInputs = {
@@ -56,7 +56,7 @@ const Delivery = () => {
                                     <MenuItem value={"personalCollect"}>{String(t(messages.personalCollect))}</MenuItem>
                                     <MenuItem value={"pickup"}>{String(t(messages.pickup))}</MenuItem>
                                 </Select>
-                                {errors.delivery?.message && <FormHelperText error>{errors.delivery?.message}</FormHelperText>}
+                                {errors.delivery?.message && <FormHelperText error>{String(t(errors.delivery?.message))}</FormHelperText>}
                             </FormControl>
                         }
                     />
@@ -75,7 +75,7 @@ const Delivery = () => {
                                     <MenuItem value={"online"}>{String(t(messages.online))}</MenuItem>
                                     <MenuItem value={"personalDelivery"}>{String(t(messages.personalDelivery))}</MenuItem>
                                 </Select>
-                                {errors.payment?.message && <FormHelperText error>{errors.payment?.message}</FormHelperText>}
+                                {errors.payment?.message && <FormHelperText error>{String(t(errors.payment?.message))}</FormHelperText>}
                             </FormControl>
                         }
                     />

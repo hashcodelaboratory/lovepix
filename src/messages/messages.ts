@@ -60,5 +60,7 @@ export const messages = {
   city: "city",
   postalCode: "postalCode",
   phone: "phone",
-  email: "email"
+  email: "email",
+  deliveryValidation: "deliveryValidation",
+  paymentValidation: "paymentValidation"
 }

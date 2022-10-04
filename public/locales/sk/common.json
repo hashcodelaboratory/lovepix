@@ -53,5 +53,7 @@
   "personalData": "Vaše osobné údaje budú použité na spracovanie vašej objenávky, zjednodušenie používania tejto webovej stránky a na iné účely opísané v dokumente.",
   "privacy": "Pravidlá ochrany súkromia",
   "personalDataTitle": "Osobné údaje",
-  "order": "Objednať"
+  "order": "Objednať",
+  "deliveryValidation": "Doprava je povinný údaj.",
+  "paymentValidation": "Platba je povinný údaj."
 }
