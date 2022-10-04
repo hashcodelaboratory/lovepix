@@ -62,5 +62,11 @@ export const messages = {
   phone: "phone",
   email: "email",
   deliveryValidation: "deliveryValidation",
-  paymentValidation: "paymentValidation"
+  paymentValidation: "paymentValidation",
+  firstNameValidation: "firstNameValidation",
+  lastNameValidation: "lastNameValidation",
+  addressValidation: "addressValidation",
+  cityValidation: "cityValidation",
+  postalCodeValidation: "postalCodeValidation",
+  phoneValidation: "phoneValidation"
 }

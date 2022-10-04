@@ -54,6 +54,20 @@
   "privacy": "Pravidlá ochrany súkromia",
   "personalDataTitle": "Personal Data",
   "order": "Order",
+  "name": "Name",
+  "surname": "Surname",
+  "company": "Company name",
+  "address": "Address",
+  "city": "City",
+  "postalCode": "Postal code",
+  "phone": "Phone",
+  "email": "E-mail",
   "deliveryValidation": "Delivery field is required.",
-  "paymentValidation": "Payment field is required."
+  "paymentValidation": "Payment field is required.",
+  "firstNameValidation": "First name field is required.",
+  "lastNameValidation": "Last name field is required.",
+  "addressValidation": "Address field is required.",
+  "cityValidation": "City field is required.",
+  "postalCodeValidation": "Postal code field is required.",
+  "phoneValidation": "Phone field is required."
 }
