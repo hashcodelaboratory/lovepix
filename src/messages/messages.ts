@@ -1,5 +1,10 @@
 export const messages = {
   printPhoto: "printPhoto",
+  processingOrder: "processingOrder",
+  doYouWant: "doYouWant",
+  continueInConfiguration: "continueInConfiguration",
+  or: "or",
+  uploadNewPicture: "uploadNewPicture",
   uploadPhoto: "uploadPhoto",
   uploadPhotoSubcontent: "uploadPhotoSubcontent",
   uploadPhotoStepOne: "uploadPhotoStepOne",

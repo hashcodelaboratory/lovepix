@@ -1,104 +1,121 @@
 .uploadButton {
-    background-color: black;
-    color: white;
-    max-width: 300px;
-    border: none;
-    padding: 1rem 1.5rem;
-    margin: 0.5rem 0 1rem 0;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 0.75rem;
-    cursor: pointer;
+  background-color: black;
+  color: white;
+  max-width: 300px;
+  border: none;
+  padding: 1rem 1.5rem;
+  margin: 0.5rem 0 1rem 0;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.75rem;
+  cursor: pointer;
 }
 
 .uploadPhotoSubcontent {
-    font-size: 1.25rem;
-    font-weight: 200;
-    margin: 1rem 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 200;
+  margin: 1rem 0 0.5rem 0;
 }
 
 .horizontalContainer {
-    display: flex;
-    width: 100%;
-    padding: 2rem 0;
-    overflow: visible;
+  display: flex;
+  width: 100%;
+  padding: 2rem 0;
+  overflow: visible;
 }
 
 .horizontalItem {
-    text-transform: uppercase;
-    font-size: 1.25rem;
-    padding: 1rem 0 2.5rem 0;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  padding: 1rem 0 2.5rem 0;
 }
 
 .itemTitle {
-    padding-top: 1rem;
-    text-align: center;
-    font-weight: 300;
+  padding-top: 1rem;
+  text-align: center;
+  font-weight: 300;
 }
 
 .materialsTitle {
-    font-size: 1.5rem;
-    padding-top: 1rem;
+  font-size: 1.5rem;
+  padding-top: 1rem;
 }
 
 .materialsText {
-    font-weight: 200;
-    padding-top: 1rem;
-    padding-bottom: 2rem;
-    max-width: 300px;
+  font-weight: 200;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  max-width: 300px;
 }
 
 .galleryContainer {
-    text-align: center;
-    padding: 1rem 0 4rem 0;
+  text-align: center;
+  padding: 1rem 0 4rem 0;
 }
 
 .gallerySubtitle {
-    font-weight: 200;
-    padding-top: 0.5rem;
+  font-weight: 200;
+  padding-top: 0.5rem;
 }
 
 .galleryRow {
-    padding-top: 1rem;
-    display: flex;
-    overflow-x: auto;
+  padding-top: 1rem;
+  display: flex;
+  overflow-x: auto;
 }
 
 .roundedImage {
-    border-radius: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .dropzoneGroup {
-    min-height: 120px;
-    pointer-events: none;
+  min-height: 120px;
+  pointer-events: none;
 }
 
+.dropzoneGroupFaked {
+  flex-direction: column;
+  display: flex;
+  border: 2px dashed #ced4da;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.imagePreview {
+  border-radius: 10px;
+}
+
+.imageInDropzone {
+  border-radius: 1rem;
+}
 .card {
-    //position: relative;
-    border-radius: 10px;
-    box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
-    transition: box-shadow 0.5s, opacity 0.5s;
-    will-change: transform;
-    overflow: hidden;
-    touch-action: none;
+  //position: relative;
+  border-radius: 10px;
+  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.5s, opacity 0.5s;
+  will-change: transform;
+  overflow: hidden;
+  touch-action: none;
 }
 
 .card:hover {
-    box-shadow: 0px 30px 100px -10px rgba(0, 0, 0, 0.4);
-    z-index: 3000;
+  box-shadow: 0px 30px 100px -10px rgba(0, 0, 0, 0.4);
+  z-index: 3000;
 }
 
 .card > div {
-    will-change: transform;
-    height: 100%;
-    margin: 0vw 0;
+  will-change: transform;
+  height: 100%;
+  margin: 0vw 0;
 }
 
 .card > div > * {
-    height: 100%;
-    background-size: cover;
-    background-position: center center;
-    margin: 0vw 0;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  margin: 0vw 0;
 }
 
 /**
@@ -106,42 +123,42 @@
  */
 
 .card:after {
-    content: "";
-    position: absolute;
-    top: -110%;
-    left: -210%;
-    width: 200%;
-    height: 200%;
-    opacity: 0;
-    transform: rotate(30deg);
+  content: "";
+  position: absolute;
+  top: -110%;
+  left: -210%;
+  width: 200%;
+  height: 200%;
+  opacity: 0;
+  transform: rotate(30deg);
 
-    background: rgba(255, 255, 255, 0.13);
-    background: linear-gradient(
-                    to right,
-                    rgba(255, 255, 255, 0.13) 0%,
-                    rgba(255, 255, 255, 0.13) 77%,
-                    rgba(255, 255, 255, 0.5) 92%,
-                    rgba(255, 255, 255, 0.0) 100%
-    );
+  background: rgba(255, 255, 255, 0.13);
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.13) 0%,
+    rgba(255, 255, 255, 0.13) 77%,
+    rgba(255, 255, 255, 0.5) 92%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 /* Hover state - trigger effect */
 
 .card:hover:after {
-    opacity: 1;
-    top: -30%;
-    left: -30%;
-    transition-property: left, top, opacity;
-    transition-duration: 0.7s, 0.7s, 0.15s;
-    transition-timing-function: ease;
+  opacity: 1;
+  top: -30%;
+  left: -30%;
+  transition-property: left, top, opacity;
+  transition-duration: 0.7s, 0.7s, 0.15s;
+  transition-timing-function: ease;
 }
 
 /* Active state */
 
 .card:active:after {
-    opacity: 0;
+  opacity: 0;
 }
 
 .imageInDropzone {
-    border-radius: 1rem;
+  border-radius: 1rem;
 }
