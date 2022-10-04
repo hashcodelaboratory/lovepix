@@ -12,7 +12,7 @@ import {useRouter} from "next/router";
 import {ImageStatus} from "../../../../../app-context/imageStatus";
 
 const Cart = () => {
-    const { state: { image: { url, size, name }, stepper }, stateAction: { setImage } } = useContext(AppContext);
+    const { state: { image: { url, size, name }, stepper }, stateAction: { setImage, setStepper } } = useContext(AppContext);
 
     const { t } = useTranslation();
 
@@ -47,7 +47,11 @@ const Cart = () => {
 
     const content = isDefault ? items : <Form />;
 
-    const redirect = () => router.push("/");
+    const redirect = () => {
+        isDefault ? router.push("/") : setStepper(0);
+    }
+
+    const backButtonTitle = isDefault ? messages.backToShop : messages.shoppingCart;
 
     return (
         <div className={styles.cartContainer}>
@@ -63,7 +67,7 @@ const Cart = () => {
             <p className={styles.itemsSize}>{size} {String(t(messages.items))}</p>
             <hr />
             {content}
-            <button onClick={redirect} className={styles.backButton}>{String(t(messages.backToShop))}</button>
+            <button onClick={redirect} className={styles.backButton}>{String(t(backButtonTitle))}</button>
         </div>
     )
 }
