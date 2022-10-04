@@ -1,22 +1,12 @@
 import {TextField, Box} from "@mui/material";
-import styles from "../../../shopping-cart.module.scss";
+import styles from "../../../../shopping-cart.module.scss";
 import {SubmitHandler, useForm, Controller} from "react-hook-form";
 import {useContext} from "react";
-import AppContext from "../../../../../app-context/app-context";
-import {messages} from "../../../../../messages/messages";
+import AppContext from "../../../../../../app-context/app-context";
+import {messages} from "../../../../../../messages/messages";
 import {useTranslation} from "next-i18next";
 import {yupResolver} from "@hookform/resolvers/yup";
-import * as yup from "yup";
-
-const SCHEMA = yup.object({
-    firstName: yup.string().required("firstNameValidation"),
-    lastName: yup.string().required("lastNameValidation"),
-    address: yup.string().required("addressValidation"),
-    city: yup.string().required("cityValidation"),
-    postalCode: yup.string().required("postalCodeValidation"),
-    phone: yup.string().required("phoneValidation"),
-    email: yup.string().email().required(),
-}).required();
+import {FORM_SCHEMA} from "./utils/schema";
 
 type FormInputs = {
     firstName: string;
@@ -30,14 +20,12 @@ type FormInputs = {
 };
 
 const Form = (): JSX.Element => {
-    const {
-        stateAction: { setStepper }
-    } = useContext(AppContext);
+    const { stateAction: { setStepper } } = useContext(AppContext);
 
     const { t } = useTranslation();
 
     const { register, formState: { errors }, handleSubmit, control } = useForm<FormInputs>({
-        resolver: yupResolver(SCHEMA)
+        resolver: yupResolver(FORM_SCHEMA)
     });
 
     const onSubmit: SubmitHandler<FormInputs> = (data) => setStepper(2);

@@ -1,18 +1,13 @@
-import styles from "../../../shopping-cart.module.scss";
+import styles from "../../../../shopping-cart.module.scss";
 import {useContext} from "react";
-import AppContext from "../../../../../app-context/app-context";
+import AppContext from "../../../../../../app-context/app-context";
 import {useTranslation} from "next-i18next";
-import {messages} from "../../../../../messages/messages";
+import {messages} from "../../../../../../messages/messages";
 import {FormControl, FormHelperText, Link, Select, TextField} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import {useForm, Controller, SubmitHandler} from "react-hook-form";
-import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
-
-const SCHEMA = yup.object({
-    delivery: yup.string().required("deliveryValidation"),
-    payment: yup.string().required("paymentValidation"),
-}).required();
+import {SUMMARY_SCHEMA} from "./utils/schema";
 
 type SummaryFormInputs = {
     delivery: string;
@@ -28,7 +23,7 @@ const Delivery = () => {
     const { t } = useTranslation();
 
     const { register, handleSubmit, formState: { errors }, control } = useForm<SummaryFormInputs>({
-        resolver: yupResolver(SCHEMA)
+        resolver: yupResolver(SUMMARY_SCHEMA)
     });
 
     const onSubmit: SubmitHandler<SummaryFormInputs> = (data) => setStepper(1);

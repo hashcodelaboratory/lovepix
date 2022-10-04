@@ -1,7 +1,7 @@
 import EmptyCart from "./components/empty-cart/empty-cart";
 import {useContext} from "react";
 import AppContext from "../../app-context/app-context";
-import Summary from "./components/summary/summary";
+import Summary from "./components/summary/summary/summary";
 
 const CustomShoppingCart = () => {
     const { state: { image: { size } } } = useContext(AppContext);

@@ -7,7 +7,7 @@ import {TextField} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import {useTranslation} from "next-i18next";
 import {messages} from "../../../../../messages/messages";
-import Form from "../form/form";
+import Form from "../components/form/form";
 import {useRouter} from "next/router";
 import {ImageStatus} from "../../../../../app-context/imageStatus";
 
