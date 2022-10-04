@@ -48,7 +48,8 @@ const DropzoneContainer = () => {
                 setImage({
                     url: url,
                     status: ImageStatus.CONFIGURED, // TODO: change to UPLOADED when cropper will be developed
-                    size: 1
+                    size: 1,
+                    name: snapshot.metadata.name
                 });
             });
         });
@@ -62,7 +63,8 @@ const DropzoneContainer = () => {
         setImage({
             url: undefined,
             status: ImageStatus.DEFAULT,
-            size: 0
+            size: 0,
+            name: undefined
         });
     };
 

@@ -13,7 +13,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     const [image, setImage] = useState<UploadedImage>({
         url: undefined,
         status: ImageStatus.DEFAULT,
-        size: 0
+        size: 0,
+        name: undefined
     });
     const [stepper, setStepper] = useState(0);
 

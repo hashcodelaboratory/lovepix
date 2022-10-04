@@ -12,7 +12,7 @@ import {useRouter} from "next/router";
 import {ImageStatus} from "../../../../../app-context/imageStatus";
 
 const Cart = () => {
-    const { state: { image: { url, size }, stepper }, stateAction: { setImage } } = useContext(AppContext);
+    const { state: { image: { url, size, name }, stepper }, stateAction: { setImage } } = useContext(AppContext);
 
     const { t } = useTranslation();
 
@@ -22,7 +22,8 @@ const Cart = () => {
         setImage({
             url: undefined,
             status: ImageStatus.DEFAULT,
-            size: 0
+            size: 0,
+            name: undefined
         });
     }
 
@@ -30,7 +31,7 @@ const Cart = () => {
         <>
             <div className={styles.cartRow}>
                 <Image alt={url} src={url ?? ''} width={80} height={80} layout="fixed" />
-                <div>Konfiguracia</div>
+                <div>{name}</div>
                 <div className={styles.qtyContainer}>
                     <Button>-</Button>
                     <TextField className={styles.qtyField} value={1} />

@@ -5,6 +5,7 @@ export type UploadedImage = {
     url?: string;
     status: ImageStatus;
     size: number;
+    name?: string;
 }
 
 export type AppContextProps = {
