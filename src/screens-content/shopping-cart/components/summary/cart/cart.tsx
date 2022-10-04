@@ -8,11 +8,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import {useTranslation} from "next-i18next";
 import {messages} from "../../../../../messages/messages";
 import Form from "../form/form";
+import {useRouter} from "next/router";
 
 const Cart = () => {
     const { state: { image: { url, size }, stepper } } = useContext(AppContext);
 
     const { t } = useTranslation();
+
+    const router = useRouter();
 
     const items =
         <>
@@ -32,7 +35,9 @@ const Cart = () => {
 
     const isDefault = stepper === 0;
 
-    const content = isDefault ? items : <Form />
+    const content = isDefault ? items : <Form />;
+
+    const redirect = () => router.push("/");
 
     return (
         <div className={styles.cartContainer}>
@@ -48,7 +53,7 @@ const Cart = () => {
             <p className={styles.itemsSize}>{size} {String(t(messages.items))}</p>
             <hr />
             {content}
-            <button className={styles.backButton}>{String(t(messages.backToShop))}</button>
+            <button onClick={redirect} className={styles.backButton}>{String(t(messages.backToShop))}</button>
         </div>
     )
 }
