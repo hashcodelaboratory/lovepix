@@ -17,8 +17,11 @@ import AppContext from "../../../../../app-context/app-context";
 import {ImageStatus} from "../../../../../app-context/imageStatus";
 import Image from "next/image";
 import { Typography } from "@mui/material";
+import {useCreateOrder} from "../../../api/order";
 
 const DropzoneContainer = () => {
+
+    const { mutate: createOrder } = useCreateOrder();
 
     const { t } = useTranslation();
 
@@ -35,24 +38,25 @@ const DropzoneContainer = () => {
 
     const { state: { image: { url } }, stateAction: { setImage } } = useContext(AppContext);
 
-    const onDrop = (files: File[]) => {
+    const onDrop = async (files: File[]) => {
         const file = files[0];
         const uploadURL = `${UPLOAD_IMAGES}/${Date.now()}`;
 
         const storageRef = ref(storage, uploadURL);
 
-        uploadBytes(storageRef, file).then(snapshot => {
+        const { metadata : { name } } = await uploadBytes(storageRef, file);
+        if (name) {
             enqueueSnackbar(String(t(messages.fileUploaded)), SNACKBAR_OPTIONS_SUCCESS);
-
-            getDownloadURL(ref(storage, `${UPLOAD_IMAGES}/${snapshot.metadata.name}`)).then(url => {
-                setImage({
-                    url: url,
-                    status: ImageStatus.CONFIGURED, // TODO: change to UPLOADED when cropper will be developed
-                    size: 1,
-                    name: snapshot.metadata.name
-                });
-            });
-        });
+            const url = await getDownloadURL(ref(storage, `${UPLOAD_IMAGES}/${name}`));
+            const data = {
+                url: url,
+                status: ImageStatus.CONFIGURED, // TODO: change to UPLOADED when cropper will be developed
+                size: 1,
+                name: name
+            }
+            setImage(data);
+            createOrder({ image: data });
+        }
     }
 
     const onReject = (files: FileRejection[]) => {
