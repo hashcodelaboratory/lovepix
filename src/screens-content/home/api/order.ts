@@ -6,7 +6,7 @@ import {UploadedImage} from "../../../app-context/app-context";
 
 export const ORDER_KEY = 'ORDER_KEY';
 
-type CreateOrderRequest = {
+export type CreateOrderRequest = {
     image: UploadedImage;
 }
 

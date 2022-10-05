@@ -4,13 +4,14 @@ import {messages} from "../../../../messages/messages";
 import Table from "./components/home/table";
 import {useContext} from "react";
 import DashboardContext from "../../context/dashboard-context";
+import OrdersTable from "./components/home/ordersTable";
 
 type Props = {
     isFetching: boolean;
 }
 
 const Content = ({ isFetching }: Props) => {
-    const { state: { uploadedImages } } = useContext(DashboardContext);
+    const { state: { uploadedImages, orders } } = useContext(DashboardContext);
 
     return (
         <div className={styles.contentContainer}>
@@ -18,7 +19,7 @@ const Content = ({ isFetching }: Props) => {
                 <Card
                     header={{
                         title: messages.orders,
-                        count: String(258)
+                        count: isFetching ? "-" : orders.length.toString()
                     }}
                     footer={{
                         value: '+ 55 %',
@@ -46,6 +47,7 @@ const Content = ({ isFetching }: Props) => {
                     }}
                 />
             </div>
+            <OrdersTable />
             <Table/>
         </div>
     )
