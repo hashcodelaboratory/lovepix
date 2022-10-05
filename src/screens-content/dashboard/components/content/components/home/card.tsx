@@ -5,6 +5,7 @@ type CardProps = {
     header: {
         title: string;
         count: string;
+        icon: JSX.Element;
     },
     footer: {
         value: string;
@@ -18,7 +19,7 @@ const Card = ({header, footer}: CardProps) => {
 
     return(
         <div className={styles.cardContainer}>
-            <div className={styles.cardIconContainer}></div>
+            <div className={styles.cardIconContainer}>{header.icon}</div>
             <div className={styles.cardHeader}>
                 <p className={styles.cardHeaderTitle}>{String(t(header.title))}</p>
                 <p className={styles.cardHeaderNumber}>{header.count}</p>
