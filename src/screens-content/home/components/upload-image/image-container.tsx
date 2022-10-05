@@ -12,7 +12,7 @@ const ImageContainer = () => (
       <DropzoneContainer/>
       {WALLER_IMAGE_LIST.map(({sourceUrl, title}) => (
         <div key={uuidv4()}>
-        <ImageCard sourceUrl={sourceUrl} title={title}/>
+            <ImageCard sourceUrl={sourceUrl} title={title}/>
         </div>
       ))}
       <button style={{ height: '200px', borderRadius: '0.5rem' }}>

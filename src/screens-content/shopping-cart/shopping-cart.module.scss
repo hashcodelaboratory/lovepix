@@ -18,4 +18,153 @@
   color: grey;
   font-size: 1.25rem;
   font-weight: 200;
+  margin-bottom: 4rem;
+}
+
+.summary {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.cartContainer {
+  position: relative;
+  padding: 1rem;
+  flex: 1;
+  border-radius: 1rem;
+  margin-right: 1rem;
+  box-shadow: rgb(0 0 0 / 10%) 0rem 0.25rem 0.375rem -0.0625rem, rgb(0 0 0 / 6%) 0rem 0.125rem 0.25rem -0.0625rem;
+}
+
+.deliveryContainer {
+  padding: 1rem;
+  width: 350px;
+  background-color: #e5e5e5;
+  border-radius: 1rem;
+  box-shadow: rgb(0 0 0 / 10%) 0rem 0.25rem 0.375rem -0.0625rem, rgb(0 0 0 / 6%) 0rem 0.125rem 0.25rem -0.0625rem;
+}
+
+.itemsSize {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  color: gray;
+}
+
+.backButton {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  background-color: white;
+  border: none;
+  text-transform: uppercase;
+  color: #1976D2;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+}
+
+.backButton:hover {
+  background-color: #f1f1f1;
+  text-decoration: underline;
+}
+
+.orderButton {
+  position: absolute;
+  bottom: 1rem;
+  right: 2rem;
+  background-color: gray;
+  border: none;
+  text-transform: uppercase;
+  color: white;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+}
+
+.orderButton:hover {
+  background-color: #606060;
+  text-decoration: underline;
+}
+
+.cartRow {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.qtyContainer {
+  display: flex;
+  align-items: center;
+}
+
+.qtyField {
+  width: 60px;
+  margin: 0 1rem;
+}
+
+.totalContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.summarySectionTitle {
+  font-weight: 200;
+  text-transform: uppercase;
+  margin-top: 2rem;
+}
+
+.checkoutButton {
+  border-radius: 0.25rem;
+  border: none;
+  padding: 0.75rem;
+  background-color: gray;
+  color: white;
+  margin: 1rem auto 0 auto;
+  width: 100%;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.checkoutButton:hover {
+  background-color: #606060;
+}
+
+.codeField {
+  background-color: white;
+}
+
+.text {
+  font-weight: 100;
+  font-size: 0.75rem;
+}
+
+.price {
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+
+.cartTitleContainer {
+  display: flex;
+  align-items: center;
+}
+
+.cartDisabledTitle {
+  font-weight: 300;
+  color: gray;
+}
+
+.cartTitleDivider {
+  margin: 0 1rem;
+  font-weight: 200;
+  color: gray;
+}
+
+.formContainer {
+  margin-right: 2rem;
 }

@@ -1,11 +1,21 @@
 import {createContext, Dispatch, SetStateAction} from "react";
+import {ImageStatus} from "./imageStatus";
 
-type AppContextProps = {
+export type UploadedImage = {
+    url?: string;
+    status: ImageStatus;
+    size: number;
+    name?: string;
+}
+
+export type AppContextProps = {
     state: {
-        uploadedImageUrl?: string;
+        image: UploadedImage;
+        stepper: number;
     },
     stateAction: {
-        setUploadedImageUrl: Dispatch<SetStateAction<string | undefined>>;
+        setImage: Dispatch<SetStateAction<UploadedImage>>;
+        setStepper: Dispatch<SetStateAction<number>>;
     }
 }
 

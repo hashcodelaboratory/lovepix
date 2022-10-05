@@ -5,82 +5,89 @@ import { DROPZONE_STYLE, UPLOAD_IMAGES } from "./utils";
 import DropzoneIdle from "./dropzone-idle";
 import { FileRejection } from "react-dropzone";
 import Icon from "@icons/icon";
-import { IconType } from "@icons/enums";
-import { ref, uploadBytes } from "@firebase/storage";
-import { storage } from "../../../../../../utils/firebase/config";
-import { useSnackbar } from "notistack";
-import {
-  SNACKBAR_OPTIONS_ERROR,
-  SNACKBAR_OPTIONS_SUCCESS,
-} from "../../../../../snackbar/config";
-import { messages } from "../../../../../messages/messages";
-import { useTranslation } from "next-i18next";
+import {IconType} from "@icons/enums";
+import {getDownloadURL, ref, uploadBytes} from "@firebase/storage";
+import {storage} from "../../../../../../utils/firebase/config";
+import {useSnackbar} from "notistack";
+import {SNACKBAR_OPTIONS_ERROR, SNACKBAR_OPTIONS_SUCCESS} from "../../../../../snackbar/config";
+import {messages} from "../../../../../messages/messages";
+import {useTranslation} from "next-i18next";
+import {useContext} from "react";
+import AppContext from "../../../../../app-context/app-context";
+import {ImageStatus} from "../../../../../app-context/imageStatus";
 import Image from "next/image";
-import React, { useState } from "react";
-
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 const DropzoneContainer = () => {
-  const { t } = useTranslation();
 
-  const {
-    printPhoto,
-    processingOrder,
-    doYouWant,
-    or,
-    uploadNewPicture,
-    continueInConfiguration,
-  } = messages;
+    const { t } = useTranslation();
 
-  const { enqueueSnackbar } = useSnackbar();
+    const {
+        printPhoto,
+        processingOrder,
+        doYouWant,
+        or,
+        uploadNewPicture,
+        continueInConfiguration,
+    } = messages;
 
-  const [imageUrl, setImageUrl] = useState<string>();
+    const { enqueueSnackbar } = useSnackbar();
 
-  const onDrop = (files: File[]) => {
-    const file = files[0];
-    const url = `${UPLOAD_IMAGES}/${Date.now()}`;
+    const { state: { image: { url } }, stateAction: { setImage } } = useContext(AppContext);
 
-    const imageUrl = URL.createObjectURL(file);
+    const onDrop = (files: File[]) => {
+        const file = files[0];
+        const uploadURL = `${UPLOAD_IMAGES}/${Date.now()}`;
 
-    setImageUrl(imageUrl);
+        const storageRef = ref(storage, uploadURL);
 
-    const storageRef = ref(storage, url);
+        uploadBytes(storageRef, file).then(snapshot => {
+            enqueueSnackbar(String(t(messages.fileUploaded)), SNACKBAR_OPTIONS_SUCCESS);
 
-    uploadBytes(storageRef, file).then((snapshot) => {
-      enqueueSnackbar(
-        String(t(messages.fileUploaded)),
-        SNACKBAR_OPTIONS_SUCCESS
-      );
-    });
-  };
+            getDownloadURL(ref(storage, `${UPLOAD_IMAGES}/${snapshot.metadata.name}`)).then(url => {
+                setImage({
+                    url: url,
+                    status: ImageStatus.CONFIGURED, // TODO: change to UPLOADED when cropper will be developed
+                    size: 1,
+                    name: snapshot.metadata.name
+                });
+            });
+        });
+    }
 
-  const onReject = (files: FileRejection[]) => {
-    enqueueSnackbar(String(t(messages.fileRejected)), SNACKBAR_OPTIONS_ERROR);
-  };
+    const onReject = (files: FileRejection[]) => {
+        enqueueSnackbar(String(t(messages.fileRejected)), SNACKBAR_OPTIONS_ERROR);
+    }
 
-  const handleCleanImage = () => {
-    setImageUrl(undefined);
-  };
+    const handleCleanImage = () => {
+        setImage({
+            url: undefined,
+            status: ImageStatus.DEFAULT,
+            size: 0,
+            name: undefined
+        });
+    };
 
-  const handleContineConfiguration = () => {
-    // TODO continue with configuration
-  };
+    const handleContineConfiguration = () => {
+        // TODO: continue with configuration in cropper
+    };
 
   return (
     <>
-      {imageUrl ? (
+      {url ? (
         <Group
           position="center"
           spacing="xs"
           className={styles.dropzoneGroupFaked}
         >
           <Image
-            src={imageUrl || ""}
+            src={url || ""}
             alt="Processing image"
             objectFit="cover"
             height={150}
             width={300}
             className={styles.imagePreview}
+            priority
           />
           <Typography>{String(t(processingOrder))}</Typography>
           <Typography>{String(t(doYouWant))}</Typography>

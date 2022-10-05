@@ -10,8 +10,7 @@ type Props = {
 }
 
 const Content = ({ isFetching }: Props) => {
-    const { state } = useContext(DashboardContext);
-    const { uploadedImages } = state;
+    const { state: { uploadedImages } } = useContext(DashboardContext);
 
     return (
         <div className={styles.contentContainer}>
