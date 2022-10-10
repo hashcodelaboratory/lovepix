@@ -20,7 +20,7 @@ const Form = (): JSX.Element => {
 
     const { clearOrderID } = useSession();
 
-    const { register, formState: { errors }, handleSubmit, control } = useForm<FormInputs>({
+    const { register, formState: { errors }, handleSubmit, control, reset } = useForm<FormInputs>({
         resolver: yupResolver(FORM_SCHEMA),
         defaultValues: { ...form }
     });
@@ -36,6 +36,7 @@ const Form = (): JSX.Element => {
         });
         setForm(undefined);
         setSummary(undefined);
+        reset();
         setStepper(2);
     }
 

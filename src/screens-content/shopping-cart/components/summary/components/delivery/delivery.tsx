@@ -1,5 +1,5 @@
 import styles from "../../../../shopping-cart.module.scss";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import AppContext from "../../../../../../app-context/app-context";
 import {useTranslation} from "next-i18next";
 import {messages} from "../../../../../../messages/messages";
@@ -13,17 +13,21 @@ import {SummaryFormInputs} from "./utils/types";
 
 const Delivery = () => {
     const {
-        state: { image: { size }, summary },
+        state: { image: { size }, summary, stepper },
         stateAction: { setStepper }
     } = useContext(AppContext);
 
     const { t } = useTranslation();
     const { mutate: updateOrder } = useUpdateOrder();
 
-    const { register, handleSubmit, formState: { errors }, control } = useForm<SummaryFormInputs>({
+    const { register, handleSubmit, formState: { errors }, control, reset } = useForm<SummaryFormInputs>({
         resolver: yupResolver(SUMMARY_SCHEMA),
         defaultValues: { ...summary }
     });
+
+    useEffect(() => {
+        stepper === 3 && reset();
+    }, [stepper]);
 
     const onSubmit: SubmitHandler<SummaryFormInputs> = (data) => {
         updateOrder({ summary: data, date: Date.now() });
