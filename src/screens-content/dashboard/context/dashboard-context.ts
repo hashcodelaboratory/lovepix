@@ -1,6 +1,6 @@
 import {createContext} from "react";
 import {StorageReference} from "@firebase/storage";
-import {Order} from "../api/orders";
+import {Order} from "../api/orders/useOrders";
 
 type DashboardContextProps = {
     state: {

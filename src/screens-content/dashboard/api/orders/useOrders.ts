@@ -1,15 +1,9 @@
 import {useQuery, UseQueryResult} from "react-query";
-import {database} from "../../../../utils/firebase/config";
+import {database} from "../../../../../utils/firebase/config";
 import {collection, getDocs} from "@firebase/firestore";
-import {Collections} from "../../../../utils/firebase/enums";
-import {UploadedImage} from "../../../app-context/app-context";
-
-export const ORDERS_KEY = 'ORDERS';
-
-export type Order = {
-    id: string;
-    image: UploadedImage;
-}
+import {Collections} from "../../../../../utils/firebase/enums";
+import {Order} from "./utils/types";
+import {ORDERS_KEY} from "./utils/keys";
 
 const getOrders = async (): Promise<Order[]> => {
     const querySnapshot = await getDocs(collection(database, Collections.ORDERS));

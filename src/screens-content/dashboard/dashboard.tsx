@@ -3,7 +3,7 @@ import Sidebar from "./components/sidebar/sidebar";
 import Content from "./components/content/content";
 import DashboardContext from './context/dashboard-context';
 import {useUploadedImages} from "./api/uploadedImages";
-import {useOrders} from "./api/orders";
+import {useOrders} from "./api/orders/useOrders";
 
 const CustomDashboard = () => {
     const { data: uploadedImages = [], isFetching } = useUploadedImages();
