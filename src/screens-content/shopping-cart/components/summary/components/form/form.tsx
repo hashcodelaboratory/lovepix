@@ -13,7 +13,7 @@ import {useSession} from "../../../../../../../utils/sessionStorage/useSessionSt
 import {ImageStatus} from "../../../../../../app-context/imageStatus";
 
 const Form = (): JSX.Element => {
-    const { state: { form }, stateAction: { setStepper, setImage } } = useContext(AppContext);
+    const { state: { form }, stateAction: { setStepper, setImage, setForm, setSummary } } = useContext(AppContext);
     const { mutate: updateOrder } = useUpdateOrder();
 
     const { t } = useTranslation();
@@ -34,6 +34,8 @@ const Form = (): JSX.Element => {
             size: 0,
             name: undefined
         });
+        setForm(undefined);
+        setSummary(undefined);
         setStepper(2);
     }
 
