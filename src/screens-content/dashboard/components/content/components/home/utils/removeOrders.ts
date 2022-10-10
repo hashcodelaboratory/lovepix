@@ -1,6 +1,6 @@
 import {database} from "../../../../../../../../utils/firebase/config";
 import {QueryClient} from "react-query";
-import {ORDERS_KEY} from "../../../../../api/orders/useOrders";
+import {ORDERS_KEY} from "../../../../../api/orders/utils/keys";
 import {deleteDoc, doc} from "@firebase/firestore";
 import {Collections} from "../../../../../../../../utils/firebase/enums";
 
