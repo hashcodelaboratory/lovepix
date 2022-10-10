@@ -6,7 +6,7 @@ import AppContext from "../../app-context/app-context";
 import {ImageStatus} from "../../app-context/imageStatus";
 
 const HomeLayout = () => {
-    const { stateAction: { setImage } } = useContext(AppContext);
+    const { stateAction: { setImage, setForm, setSummary } } = useContext(AppContext);
 
     const { data: order, isFetching } = useOrder();
 
@@ -17,6 +17,8 @@ const HomeLayout = () => {
             size: order?.image?.size ?? 0,
             name: order?.image?.name ?? undefined
         });
+        setForm(order?.form);
+        setSummary(order?.summary);
     }, [isFetching]);
 
     return (

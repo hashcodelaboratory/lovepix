@@ -13,7 +13,7 @@ import {useSession} from "../../../../../../../utils/sessionStorage/useSessionSt
 import {ImageStatus} from "../../../../../../app-context/imageStatus";
 
 const Form = (): JSX.Element => {
-    const { stateAction: { setStepper, setImage } } = useContext(AppContext);
+    const { state: { form }, stateAction: { setStepper, setImage } } = useContext(AppContext);
     const { mutate: updateOrder } = useUpdateOrder();
 
     const { t } = useTranslation();
@@ -21,7 +21,8 @@ const Form = (): JSX.Element => {
     const { clearOrderID } = useSession();
 
     const { register, formState: { errors }, handleSubmit, control } = useForm<FormInputs>({
-        resolver: yupResolver(FORM_SCHEMA)
+        resolver: yupResolver(FORM_SCHEMA),
+        defaultValues: { ...form }
     });
 
     const onSubmit: SubmitHandler<FormInputs> = (data) => {

@@ -7,6 +7,10 @@ import {useState} from "react";
 import {ReactQueryDevtools} from "react-query/devtools";
 import AppContext, {AppContextProps, UploadedImage} from "../src/app-context/app-context";
 import {ImageStatus} from "../src/app-context/imageStatus";
+import {FormInputs} from "../src/screens-content/shopping-cart/components/summary/components/form/utils/types";
+import {
+    SummaryFormInputs
+} from "../src/screens-content/shopping-cart/components/summary/components/delivery/utils/types";
 
 function MyApp({ Component, pageProps }: AppProps) {
     const [queryClient] = useState(() => new QueryClient());
@@ -17,15 +21,21 @@ function MyApp({ Component, pageProps }: AppProps) {
         name: undefined
     });
     const [stepper, setStepper] = useState(0);
+    const [form, setForm] = useState<FormInputs>();
+    const [summary, setSummary] = useState<SummaryFormInputs>();
 
     const CONTEXT_VALUE: AppContextProps = {
         state: {
             image: image,
-            stepper: stepper
+            stepper: stepper,
+            form: form,
+            summary: summary
         },
         stateAction: {
             setImage: setImage,
-            setStepper: setStepper
+            setStepper: setStepper,
+            setForm: setForm,
+            setSummary: setSummary
         }
     }
 

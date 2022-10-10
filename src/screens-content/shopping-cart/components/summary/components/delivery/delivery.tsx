@@ -13,7 +13,7 @@ import {SummaryFormInputs} from "./utils/types";
 
 const Delivery = () => {
     const {
-        state: { image: { size } },
+        state: { image: { size }, summary },
         stateAction: { setStepper }
     } = useContext(AppContext);
 
@@ -21,7 +21,8 @@ const Delivery = () => {
     const { mutate: updateOrder } = useUpdateOrder();
 
     const { register, handleSubmit, formState: { errors }, control } = useForm<SummaryFormInputs>({
-        resolver: yupResolver(SUMMARY_SCHEMA)
+        resolver: yupResolver(SUMMARY_SCHEMA),
+        defaultValues: { ...summary }
     });
 
     const onSubmit: SubmitHandler<SummaryFormInputs> = (data) => {
