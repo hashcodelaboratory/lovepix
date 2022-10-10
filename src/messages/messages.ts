@@ -73,5 +73,9 @@ export const messages = {
   addressValidation: "addressValidation",
   cityValidation: "cityValidation",
   postalCodeValidation: "postalCodeValidation",
-  phoneValidation: "phoneValidation"
+  phoneValidation: "phoneValidation",
+  thanks: "thanks",
+  forOrder: "forOrder",
+  orderInfo: "orderInfo",
+  thanksContact: "thanksContact"
 }

@@ -168,3 +168,47 @@
 .formContainer {
   margin-right: 2rem;
 }
+
+.thanksContainer {
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.thanksIcon {
+  width: 250px;
+  height: 250px;
+  color: silver;
+}
+
+.thanksTitle {
+  color: gray;
+  text-transform: uppercase;
+}
+
+.thanksSubTitle {
+  text-transform: uppercase;
+}
+
+.thanksContent {
+  white-space: pre-line;
+  font-size: 1.25rem;
+}
+
+.thanksButton {
+  border: none;
+  border-radius: 0.75rem;
+  padding: 1rem 2rem;
+  background-color: gray;
+  color: white;
+  font-size: 1rem;
+  margin: 1.5rem 0;
+}
+
+.thanksButton:hover {
+  cursor: pointer;
+  background-color: #626262;
+}
+
+.thanksLight {
+  font-weight: 200;
+}

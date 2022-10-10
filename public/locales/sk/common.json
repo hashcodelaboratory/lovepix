@@ -74,5 +74,9 @@
   "addressValidation": "Adresa je povinný údaj.",
   "cityValidation": "Mesto je povinný údaj.",
   "postalCodeValidation": "PSČ je povinný údaj.",
-  "phoneValidation": "Telefón je povinný údaj."
+  "phoneValidation": "Telefón je povinný údaj.",
+  "thanks": "Ďakujeme",
+  "forOrder": "Za vašu objednávku",
+  "orderInfo": "Vaša objednávka sa momentálne spracuváva. O zmenách Vás budeme informovať prostredníctvom e-mailu.\n Buďte trpezlivý & prajeme Vám pekný deň !",
+  "thanksContact": "Zabudli ste na niečo ? Napíšte nám alebo zavolajte +421 912 345 678"
 }

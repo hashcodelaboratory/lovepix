@@ -74,5 +74,9 @@
   "addressValidation": "Address field is required.",
   "cityValidation": "City field is required.",
   "postalCodeValidation": "Postal code field is required.",
-  "phoneValidation": "Phone field is required."
+  "phoneValidation": "Phone field is required.",
+  "thanks": "Thank you",
+  "forOrder": "For your order",
+  "orderInfo": "Our system is processing your order. We will send you an e-mail with details. Be patient & have a nice day !",
+  "thanksContact": "Anything amiss ? E-mail us or call us at +421 912 345 678"
 }
