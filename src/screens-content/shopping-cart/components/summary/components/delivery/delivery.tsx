@@ -8,11 +8,8 @@ import MenuItem from "@mui/material/MenuItem";
 import {useForm, Controller, SubmitHandler} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {SUMMARY_SCHEMA} from "./utils/schema";
-
-type SummaryFormInputs = {
-    delivery: string;
-    payment: string;
-};
+import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
+import {SummaryFormInputs} from "./utils/types";
 
 const Delivery = () => {
     const {
@@ -21,12 +18,16 @@ const Delivery = () => {
     } = useContext(AppContext);
 
     const { t } = useTranslation();
+    const { mutate: updateOrder } = useUpdateOrder();
 
     const { register, handleSubmit, formState: { errors }, control } = useForm<SummaryFormInputs>({
         resolver: yupResolver(SUMMARY_SCHEMA)
     });
 
-    const onSubmit: SubmitHandler<SummaryFormInputs> = (data) => setStepper(1);
+    const onSubmit: SubmitHandler<SummaryFormInputs> = (data) => {
+        updateOrder({ summary: data, date: Date.now() });
+        setStepper(1);
+    }
 
     return (
         <div className={styles.deliveryContainer}>

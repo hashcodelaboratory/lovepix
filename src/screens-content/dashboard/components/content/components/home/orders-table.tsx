@@ -27,7 +27,7 @@ const OrdersTable = () => {
     const data = orders.map(({ id, image}) => (
         {
             id: id,
-            name: image?.name ?? '',
+            orderID: image?.name ?? '',
             status: image?.status,
             url: image?.url ?? ''
         }

@@ -3,8 +3,8 @@ import styles from "../../../../../dashboard.module.scss";
 
 export const ORDERS_COLUMNS: GridColDef[] = [
     {
-        field: 'name',
-        headerName: 'Name',
+        field: 'orderID',
+        headerName: 'Order ID',
         width: 150,
         editable: false,
     },

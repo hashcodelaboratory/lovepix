@@ -7,20 +7,12 @@ import {messages} from "../../../../../../messages/messages";
 import {useTranslation} from "next-i18next";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {FORM_SCHEMA} from "./utils/schema";
-
-type FormInputs = {
-    firstName: string;
-    lastName: string;
-    company: string;
-    address: string;
-    city: string;
-    postalCode: string;
-    phone: string;
-    email: string;
-};
+import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
+import { FormInputs } from "./utils/types";
 
 const Form = (): JSX.Element => {
     const { stateAction: { setStepper } } = useContext(AppContext);
+    const { mutate: updateOrder } = useUpdateOrder();
 
     const { t } = useTranslation();
 
@@ -28,7 +20,10 @@ const Form = (): JSX.Element => {
         resolver: yupResolver(FORM_SCHEMA)
     });
 
-    const onSubmit: SubmitHandler<FormInputs> = (data) => setStepper(2);
+    const onSubmit: SubmitHandler<FormInputs> = (data) => {
+        updateOrder({ form: data, date: Date.now() });
+        setStepper(2);
+    }
 
     return(
         <div className={styles.formContainer}>

@@ -4,7 +4,7 @@ import {messages} from "../../../../messages/messages";
 import Table from "./components/home/table";
 import {useContext} from "react";
 import DashboardContext from "../../context/dashboard-context";
-import OrdersTable from "./components/home/ordersTable";
+import OrdersTable from "./components/home/orders-table";
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import FolderCopyIcon from '@mui/icons-material/FolderCopy';

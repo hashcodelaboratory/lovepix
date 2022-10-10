@@ -17,7 +17,7 @@ import AppContext from "../../../../../app-context/app-context";
 import {ImageStatus} from "../../../../../app-context/imageStatus";
 import Image from "next/image";
 import { Typography } from "@mui/material";
-import {useCreateOrder} from "../../../api/order";
+import {useCreateOrder} from "../../../api/order/useCreateOrder";
 
 const DropzoneContainer = () => {
 
@@ -55,7 +55,7 @@ const DropzoneContainer = () => {
                 name: name
             }
             setImage(data);
-            createOrder({ image: data });
+            createOrder({image: data});
         }
     }
 
