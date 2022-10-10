@@ -85,13 +85,13 @@ const DropzoneContainer = () => {
           className={styles.dropzoneGroupFaked}
         >
           <Image
+            priority
             src={url || ""}
             alt="Processing image"
             objectFit="cover"
             height={150}
             width={300}
             className={styles.imagePreview}
-            priority
           />
           <Typography>{String(t(processingOrder))}</Typography>
           <Typography>{String(t(doYouWant))}</Typography>

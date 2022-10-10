@@ -3,13 +3,15 @@ import {database} from "../../../../../utils/firebase/config";
 import {doc, getDoc} from "@firebase/firestore";
 import {Collections} from "../../../../../utils/firebase/enums";
 import {ORDER_KEY} from "./utils/keys";
+import {ORDER_ID_KEY} from "../../../../../utils/sessionStorage/utils/keys";
 
-const getOrder = async (id: string): Promise<any> => {
-    const docRef = doc(database, Collections.ORDERS, id);
-    const {data, exists} = await getDoc(docRef);
+const getOrder = async (): Promise<any> => {
+    const orderID = sessionStorage.getItem(ORDER_ID_KEY) ?? '';
+    const docRef = doc(database, Collections.ORDERS, orderID);
+    const _doc = await getDoc(docRef);
 
-    return exists() ? data() : {};
+    return _doc.exists() ? _doc.data() : {};
 }
 
-export const useOrder = (id: string): UseQueryResult<any> =>
-    useQuery([ORDER_KEY, () => getOrder(id)]);
+export const useOrder = (): UseQueryResult<any> =>
+    useQuery([ORDER_KEY], () => getOrder());

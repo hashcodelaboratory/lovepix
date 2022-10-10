@@ -9,12 +9,16 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {FORM_SCHEMA} from "./utils/schema";
 import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
 import { FormInputs } from "./utils/types";
+import {useSession} from "../../../../../../../utils/sessionStorage/useSessionStorage";
+import {ImageStatus} from "../../../../../../app-context/imageStatus";
 
 const Form = (): JSX.Element => {
-    const { stateAction: { setStepper } } = useContext(AppContext);
+    const { stateAction: { setStepper, setImage } } = useContext(AppContext);
     const { mutate: updateOrder } = useUpdateOrder();
 
     const { t } = useTranslation();
+
+    const { clearOrderID } = useSession();
 
     const { register, formState: { errors }, handleSubmit, control } = useForm<FormInputs>({
         resolver: yupResolver(FORM_SCHEMA)
@@ -22,6 +26,13 @@ const Form = (): JSX.Element => {
 
     const onSubmit: SubmitHandler<FormInputs> = (data) => {
         updateOrder({ form: data, date: Date.now() });
+        clearOrderID();
+        setImage({
+            url: undefined,
+            status: ImageStatus.DEFAULT,
+            size: 0,
+            name: undefined
+        });
         setStepper(2);
     }
 
