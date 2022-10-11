@@ -1,5 +1,6 @@
 export enum Collections {
-    TRANSLATIONS = 'translations'
+    TRANSLATIONS = 'translations',
+    ORDERS = 'orders'
 }
 
 export enum Languages {

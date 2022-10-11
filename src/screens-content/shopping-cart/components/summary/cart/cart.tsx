@@ -9,7 +9,7 @@ import {useTranslation} from "next-i18next";
 import {messages} from "../../../../../messages/messages";
 import Form from "../components/form/form";
 import {useRouter} from "next/router";
-import {ImageStatus} from "../../../../../app-context/imageStatus";
+import {INITIAL_IMAGE} from "../../../../../app-context/consts";
 
 const Cart = () => {
     const { state: { image: { url, size, name }, stepper }, stateAction: { setImage, setStepper } } = useContext(AppContext);
@@ -19,12 +19,7 @@ const Cart = () => {
     const router = useRouter();
 
     const removeImage = () => {
-        setImage({
-            url: undefined,
-            status: ImageStatus.DEFAULT,
-            size: 0,
-            name: undefined
-        });
+        setImage(INITIAL_IMAGE);
     }
 
     const items =

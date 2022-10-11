@@ -14,11 +14,16 @@ import {messages} from "../../../../../messages/messages";
 import {useTranslation} from "next-i18next";
 import {useContext} from "react";
 import AppContext from "../../../../../app-context/app-context";
-import {ImageStatus} from "../../../../../app-context/imageStatus";
+import {ImageStatus} from "../../../../../app-context/enums";
 import Image from "next/image";
 import { Typography } from "@mui/material";
+import {useCreateOrder} from "../../../api/order/useCreateOrder";
+import {useUpdateOrder} from "../../../api/order/useUpdateOrder";
+import {INITIAL_IMAGE} from "../../../../../app-context/consts";
 
 const DropzoneContainer = () => {
+
+    const { mutate: createOrder } = useCreateOrder();
 
     const { t } = useTranslation();
 
@@ -33,39 +38,45 @@ const DropzoneContainer = () => {
 
     const { enqueueSnackbar } = useSnackbar();
 
-    const { state: { image: { url } }, stateAction: { setImage } } = useContext(AppContext);
+    const { state: { image }, stateAction: { setImage } } = useContext(AppContext);
 
-    const onDrop = (files: File[]) => {
+    const { mutate: updateOrder } = useUpdateOrder();
+
+    const onDrop = async (files: File[]) => {
         const file = files[0];
         const uploadURL = `${UPLOAD_IMAGES}/${Date.now()}`;
 
         const storageRef = ref(storage, uploadURL);
 
-        uploadBytes(storageRef, file).then(snapshot => {
+        const { metadata : { name } } = await uploadBytes(storageRef, file);
+        if (name) {
             enqueueSnackbar(String(t(messages.fileUploaded)), SNACKBAR_OPTIONS_SUCCESS);
-
-            getDownloadURL(ref(storage, `${UPLOAD_IMAGES}/${snapshot.metadata.name}`)).then(url => {
-                setImage({
-                    url: url,
-                    status: ImageStatus.CONFIGURED, // TODO: change to UPLOADED when cropper will be developed
-                    size: 1,
-                    name: snapshot.metadata.name
-                });
-            });
-        });
+            const url = await getDownloadURL(ref(storage, `${UPLOAD_IMAGES}/${name}`));
+            const data = {
+                url: url,
+                status: ImageStatus.CONFIGURED, // TODO: change to UPLOADED when cropper will be developed
+                size: 1,
+                name: name
+            }
+            setImage(data);
+            createOrder({image: data});
+        }
     }
 
     const onReject = (files: FileRejection[]) => {
         enqueueSnackbar(String(t(messages.fileRejected)), SNACKBAR_OPTIONS_ERROR);
     }
 
-    const handleCleanImage = () => {
-        setImage({
-            url: undefined,
-            status: ImageStatus.DEFAULT,
-            size: 0,
-            name: undefined
+    const handleCleanImage = async () => {
+        await updateOrder({
+            image: {
+                url: undefined,
+                status: ImageStatus.DEFAULT,
+                size: 0,
+                name: undefined
+            }
         });
+        setImage(INITIAL_IMAGE);
     };
 
     const handleContineConfiguration = () => {
@@ -74,20 +85,20 @@ const DropzoneContainer = () => {
 
   return (
     <>
-      {url ? (
+      {image?.url ? (
         <Group
           position="center"
           spacing="xs"
           className={styles.dropzoneGroupFaked}
         >
           <Image
-            src={url || ""}
+            priority
+            src={image?.url || ""}
             alt="Processing image"
             objectFit="cover"
             height={150}
             width={300}
             className={styles.imagePreview}
-            priority
           />
           <Typography>{String(t(processingOrder))}</Typography>
           <Typography>{String(t(doYouWant))}</Typography>

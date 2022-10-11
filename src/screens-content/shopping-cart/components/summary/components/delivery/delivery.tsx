@@ -1,5 +1,5 @@
 import styles from "../../../../shopping-cart.module.scss";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import AppContext from "../../../../../../app-context/app-context";
 import {useTranslation} from "next-i18next";
 import {messages} from "../../../../../../messages/messages";
@@ -8,25 +8,31 @@ import MenuItem from "@mui/material/MenuItem";
 import {useForm, Controller, SubmitHandler} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {SUMMARY_SCHEMA} from "./utils/schema";
-
-type SummaryFormInputs = {
-    delivery: string;
-    payment: string;
-};
+import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
+import {SummaryFormInputs} from "./utils/types";
 
 const Delivery = () => {
     const {
-        state: { image: { size } },
+        state: { image: { size }, summary, stepper },
         stateAction: { setStepper }
     } = useContext(AppContext);
 
     const { t } = useTranslation();
+    const { mutate: updateOrder } = useUpdateOrder();
 
-    const { register, handleSubmit, formState: { errors }, control } = useForm<SummaryFormInputs>({
-        resolver: yupResolver(SUMMARY_SCHEMA)
+    const { register, handleSubmit, formState: { errors }, control, reset } = useForm<SummaryFormInputs>({
+        resolver: yupResolver(SUMMARY_SCHEMA),
+        defaultValues: { ...summary }
     });
 
-    const onSubmit: SubmitHandler<SummaryFormInputs> = (data) => setStepper(1);
+    useEffect(() => {
+        stepper === 3 && reset();
+    }, [stepper]);
+
+    const onSubmit: SubmitHandler<SummaryFormInputs> = (data) => {
+        updateOrder({ summary: data });
+        setStepper(1);
+    }
 
     return (
         <div className={styles.deliveryContainer}>

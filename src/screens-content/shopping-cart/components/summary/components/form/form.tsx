@@ -7,28 +7,33 @@ import {messages} from "../../../../../../messages/messages";
 import {useTranslation} from "next-i18next";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {FORM_SCHEMA} from "./utils/schema";
-
-type FormInputs = {
-    firstName: string;
-    lastName: string;
-    company: string;
-    address: string;
-    city: string;
-    postalCode: string;
-    phone: string;
-    email: string;
-};
+import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
+import { FormInputs } from "./utils/types";
+import {useSession} from "../../../../../../../utils/sessionStorage/useSessionStorage";
+import {INITIAL_IMAGE} from "../../../../../../app-context/consts";
 
 const Form = (): JSX.Element => {
-    const { stateAction: { setStepper } } = useContext(AppContext);
+    const { state: { form }, stateAction: { setStepper, setImage, setForm, setSummary } } = useContext(AppContext);
+    const { mutate: updateOrder } = useUpdateOrder();
 
     const { t } = useTranslation();
 
-    const { register, formState: { errors }, handleSubmit, control } = useForm<FormInputs>({
-        resolver: yupResolver(FORM_SCHEMA)
+    const { clearOrderID } = useSession();
+
+    const { register, formState: { errors }, handleSubmit, control, reset } = useForm<FormInputs>({
+        resolver: yupResolver(FORM_SCHEMA),
+        defaultValues: { ...form }
     });
 
-    const onSubmit: SubmitHandler<FormInputs> = (data) => setStepper(2);
+    const onSubmit: SubmitHandler<FormInputs> = (data) => {
+        updateOrder({ form: data, date: Date.now() });
+        clearOrderID();
+        setImage(INITIAL_IMAGE);
+        setForm(undefined);
+        setSummary(undefined);
+        reset();
+        setStepper(2);
+    }
 
     return(
         <div className={styles.formContainer}>

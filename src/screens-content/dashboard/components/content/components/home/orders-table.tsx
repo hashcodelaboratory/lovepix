@@ -3,17 +3,17 @@ import {DataGrid, GridCallbackDetails, GridSelectionModel} from '@mui/x-data-gri
 import styles from '../../../../dashboard.module.scss'
 import {useContext, useState} from "react";
 import DashboardContext from "../../../../context/dashboard-context";
-import {UPLOADED_IMAGES_COLUMNS} from "./utils/columns";
 import {messages} from "../../../../../../messages/messages";
 import {SNACKBAR_OPTIONS_ERROR, SNACKBAR_OPTIONS_SUCCESS} from "../../../../../../snackbar/config";
 import {useSnackbar} from "notistack";
 import {useTranslation} from "next-i18next";
 import {useQueryClient} from "react-query";
 import DeleteIcon from '@mui/icons-material/Delete';
-import {removeUploadedImages} from "./utils/removeUploadedImages";
+import {ORDERS_COLUMNS} from "./utils/ordersColumns";
+import {removeOrders} from "./utils/removeOrders";
 
-const Table = () => {
-    const { state: { uploadedImages } } = useContext(DashboardContext);
+const OrdersTable = () => {
+    const { state: { orders } } = useContext(DashboardContext);
 
     const { enqueueSnackbar } = useSnackbar();
 
@@ -24,12 +24,12 @@ const Table = () => {
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
     const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
 
-    const data = uploadedImages.map(({ bucket, name, fullPath }, index) => (
+    const data = orders.map(({ id, image}) => (
         {
-            id: index + 1,
-            bucket: bucket,
-            name: name,
-            fullPath: fullPath
+            id: id,
+            orderID: image?.name ?? '',
+            status: image?.status,
+            url: image?.url ?? ''
         }
     ));
 
@@ -39,7 +39,7 @@ const Table = () => {
     }
 
     const removeData = () => {
-        const result = removeUploadedImages(selectedRows, queryClient);
+        const result = removeOrders(selectedRows, queryClient);
         if (result === "") {
             enqueueSnackbar(String(t(messages.filesRemoved)), SNACKBAR_OPTIONS_SUCCESS);
             reset();
@@ -50,19 +50,19 @@ const Table = () => {
 
     const selectionChanged = (selectionModel: GridSelectionModel, details: GridCallbackDetails) => {
         setSelectionModel(selectionModel);
-        setSelectedRows(selectionModel.map((item, index) => data[index].fullPath));
+        setSelectedRows(selectionModel.map((item, index) => data[index].id));
     }
 
     const buttonText = `(${selectedRows.length}) ${String(t(messages.removeAll))}`;
 
     return (
         <>
-            <h1>{String(t(messages.storage))}</h1>
-            <Box sx={{height: 400, width: '100%'}}>
+            <h1>{String(t(messages.orders))}</h1>
+            <Box sx={{height: 400, width: '100%', marginBottom: 12 }}>
                 <DataGrid
                     className={styles.contentTable}
-                    rows={data}
-                    columns={UPLOADED_IMAGES_COLUMNS}
+                    rows={data ?? []}
+                    columns={ORDERS_COLUMNS}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
                     checkboxSelection
@@ -70,7 +70,7 @@ const Table = () => {
                     selectionModel={selectionModel}
                     onSelectionModelChange={selectionChanged}
                 />
-                <button className={styles.removeButton} onClick={removeData} disabled={selectedRows.length === 0}>
+                <button className={styles.removeButton} onClick={removeData} disabled={!selectedRows.length}>
                     {buttonText}
                     <DeleteIcon sx={{marginLeft: 1}}/>
                 </button>
@@ -79,4 +79,4 @@ const Table = () => {
     )
 }
 
-export default Table
+export default OrdersTable
