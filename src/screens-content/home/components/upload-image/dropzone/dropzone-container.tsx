@@ -12,12 +12,13 @@ import {useSnackbar} from "notistack";
 import {SNACKBAR_OPTIONS_ERROR, SNACKBAR_OPTIONS_SUCCESS} from "../../../../../snackbar/config";
 import {messages} from "../../../../../messages/messages";
 import {useTranslation} from "next-i18next";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import AppContext from "../../../../../app-context/app-context";
-import {ImageStatus} from "../../../../../app-context/imageStatus";
+import {ImageStatus} from "../../../../../app-context/enums";
 import Image from "next/image";
 import { Typography } from "@mui/material";
 import {useCreateOrder} from "../../../api/order/useCreateOrder";
+import {useUpdateOrder} from "../../../api/order/useUpdateOrder";
 
 const DropzoneContainer = () => {
 
@@ -36,7 +37,9 @@ const DropzoneContainer = () => {
 
     const { enqueueSnackbar } = useSnackbar();
 
-    const { state: { image: { url } }, stateAction: { setImage } } = useContext(AppContext);
+    const { state: { image }, stateAction: { setImage } } = useContext(AppContext);
+
+    const { mutate: updateOrder } = useUpdateOrder();
 
     const onDrop = async (files: File[]) => {
         const file = files[0];
@@ -63,7 +66,15 @@ const DropzoneContainer = () => {
         enqueueSnackbar(String(t(messages.fileRejected)), SNACKBAR_OPTIONS_ERROR);
     }
 
-    const handleCleanImage = () => {
+    const handleCleanImage = async () => {
+        await updateOrder({
+            image: {
+                url: undefined,
+                status: ImageStatus.DEFAULT,
+                size: 0,
+                name: undefined
+            }
+        });
         setImage({
             url: undefined,
             status: ImageStatus.DEFAULT,
@@ -78,7 +89,7 @@ const DropzoneContainer = () => {
 
   return (
     <>
-      {url ? (
+      {image?.url ? (
         <Group
           position="center"
           spacing="xs"
@@ -86,7 +97,7 @@ const DropzoneContainer = () => {
         >
           <Image
             priority
-            src={url || ""}
+            src={image?.url || ""}
             alt="Processing image"
             objectFit="cover"
             height={150}

@@ -10,7 +10,7 @@ import {FORM_SCHEMA} from "./utils/schema";
 import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
 import { FormInputs } from "./utils/types";
 import {useSession} from "../../../../../../../utils/sessionStorage/useSessionStorage";
-import {ImageStatus} from "../../../../../../app-context/imageStatus";
+import {ImageStatus} from "../../../../../../app-context/enums";
 
 const Form = (): JSX.Element => {
     const { state: { form }, stateAction: { setStepper, setImage, setForm, setSummary } } = useContext(AppContext);

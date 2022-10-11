@@ -20,7 +20,7 @@ const updateOrder = async (data: UpdateOrderRequest) => {
 
     if (docID) {
         const docRef = doc(database, Collections.ORDERS, docID);
-        batch.update(docRef, {
+        await batch.update(docRef, {
             ...data
         });
 

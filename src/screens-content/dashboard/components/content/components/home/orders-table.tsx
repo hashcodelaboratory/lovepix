@@ -70,7 +70,7 @@ const OrdersTable = () => {
                     selectionModel={selectionModel}
                     onSelectionModelChange={selectionChanged}
                 />
-                <button className={styles.removeButton} onClick={removeData} disabled={selectedRows.length === 0}>
+                <button className={styles.removeButton} onClick={removeData} disabled={!selectedRows.length}>
                     {buttonText}
                     <DeleteIcon sx={{marginLeft: 1}}/>
                 </button>

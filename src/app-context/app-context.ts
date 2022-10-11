@@ -1,5 +1,5 @@
 import {createContext, Dispatch, SetStateAction} from "react";
-import {ImageStatus} from "./imageStatus";
+import {ImageStatus} from "./enums";
 import {SummaryFormInputs} from "../screens-content/shopping-cart/components/summary/components/delivery/utils/types";
 import {FormInputs} from "../screens-content/shopping-cart/components/summary/components/form/utils/types";
 

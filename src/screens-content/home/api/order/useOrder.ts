@@ -6,11 +6,14 @@ import {ORDER_KEY} from "./utils/keys";
 import {ORDER_ID_KEY} from "../../../../../utils/sessionStorage/utils/keys";
 
 const getOrder = async (): Promise<any> => {
-    const orderID = sessionStorage.getItem(ORDER_ID_KEY) ?? '';
-    const docRef = doc(database, Collections.ORDERS, orderID);
-    const _doc = await getDoc(docRef);
+    const orderID = sessionStorage.getItem(ORDER_ID_KEY);
+    if (orderID) {
+        const docRef = doc(database, Collections.ORDERS, orderID);
+        const _doc = await getDoc(docRef);
 
-    return _doc.exists() ? _doc.data() : {};
+        return _doc.exists() ? _doc.data() : {};
+    }
+    return {};
 }
 
 export const useOrder = (): UseQueryResult<any> =>
