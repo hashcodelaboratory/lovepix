@@ -16,8 +16,8 @@ const ThanksForOrder = () => {
     const { push } = useRouter();
 
     const navigate = () => {
-        setStepper(0);
         push("/");
+        setStepper(0);
     }
 
     return(
