@@ -30,7 +30,7 @@ const Delivery = () => {
     }, [stepper]);
 
     const onSubmit: SubmitHandler<SummaryFormInputs> = (data) => {
-        updateOrder({ summary: data, date: Date.now() });
+        updateOrder({ summary: data });
         setStepper(1);
     }
 

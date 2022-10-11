@@ -12,13 +12,14 @@ import {useSnackbar} from "notistack";
 import {SNACKBAR_OPTIONS_ERROR, SNACKBAR_OPTIONS_SUCCESS} from "../../../../../snackbar/config";
 import {messages} from "../../../../../messages/messages";
 import {useTranslation} from "next-i18next";
-import {useContext, useEffect} from "react";
+import {useContext} from "react";
 import AppContext from "../../../../../app-context/app-context";
 import {ImageStatus} from "../../../../../app-context/enums";
 import Image from "next/image";
 import { Typography } from "@mui/material";
 import {useCreateOrder} from "../../../api/order/useCreateOrder";
 import {useUpdateOrder} from "../../../api/order/useUpdateOrder";
+import {INITIAL_IMAGE} from "../../../../../app-context/consts";
 
 const DropzoneContainer = () => {
 
@@ -75,12 +76,7 @@ const DropzoneContainer = () => {
                 name: undefined
             }
         });
-        setImage({
-            url: undefined,
-            status: ImageStatus.DEFAULT,
-            size: 0,
-            name: undefined
-        });
+        setImage(INITIAL_IMAGE);
     };
 
     const handleContineConfiguration = () => {

@@ -10,7 +10,7 @@ import {FORM_SCHEMA} from "./utils/schema";
 import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
 import { FormInputs } from "./utils/types";
 import {useSession} from "../../../../../../../utils/sessionStorage/useSessionStorage";
-import {ImageStatus} from "../../../../../../app-context/enums";
+import {INITIAL_IMAGE} from "../../../../../../app-context/consts";
 
 const Form = (): JSX.Element => {
     const { state: { form }, stateAction: { setStepper, setImage, setForm, setSummary } } = useContext(AppContext);
@@ -28,12 +28,7 @@ const Form = (): JSX.Element => {
     const onSubmit: SubmitHandler<FormInputs> = (data) => {
         updateOrder({ form: data, date: Date.now() });
         clearOrderID();
-        setImage({
-            url: undefined,
-            status: ImageStatus.DEFAULT,
-            size: 0,
-            name: undefined
-        });
+        setImage(INITIAL_IMAGE);
         setForm(undefined);
         setSummary(undefined);
         reset();

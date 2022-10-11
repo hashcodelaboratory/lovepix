@@ -5,16 +5,12 @@ import {SummaryFormInputs} from "../screens-content/shopping-cart/components/sum
 import {ContextProviderProps} from "./types";
 import {useOrder} from "../screens-content/home/api/order/useOrder";
 import {ImageStatus} from "./enums";
+import {INITIAL_IMAGE} from "./consts";
 
 const AppContextProvider = ({ children }: ContextProviderProps) => {
     const { data: order, isFetching } = useOrder();
 
-    const [image, setImage] = useState<UploadedImage>({
-        url: undefined,
-        status: ImageStatus.DEFAULT,
-        size: 0,
-        name: undefined
-    });
+    const [image, setImage] = useState<UploadedImage>(INITIAL_IMAGE);
     const [stepper, setStepper] = useState(0);
     const [form, setForm] = useState<FormInputs>();
     const [summary, setSummary] = useState<SummaryFormInputs>();
