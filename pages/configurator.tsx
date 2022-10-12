@@ -2,6 +2,7 @@ import type {NextPage} from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
+import ImageConfiguratorLayout from "../src/screens-content/image-configurator/image-configurator-layout";
 
 const Configurator: NextPage = () => {
   return (
@@ -17,6 +18,7 @@ const Configurator: NextPage = () => {
       </header>
 
       <main className={styles.main}>
+          <ImageConfiguratorLayout />
       </main>
 
       <footer className={styles.footer}>
