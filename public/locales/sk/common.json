@@ -84,5 +84,8 @@
   "chooseMaterial": "Vyberte si materiál",
   "price": "Cena",
   "toCart": "Do košíka",
-  "removeImage": "Vymazať obrázok"
+  "removeImage": "Vymazať obrázok",
+  "byWidth": "Na šírku",
+  "byHeight": "Na výšku",
+  "square": "Štvorcové"
 }

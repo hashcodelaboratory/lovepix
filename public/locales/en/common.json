@@ -84,5 +84,8 @@
   "chooseMaterial": "Choose material",
   "price": "Price",
   "toCart": "Shopping cart",
-  "removeImage": "Remove image"
+  "removeImage": "Remove image",
+  "byWidth": "By width",
+  "byHeight": "By height",
+  "square": "Square"
 }
