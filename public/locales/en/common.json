@@ -83,5 +83,6 @@
   "chooseDimension": "Choose dimension",
   "chooseMaterial": "Choose material",
   "price": "Price",
-  "toCart": "Shopping cart"
+  "toCart": "Shopping cart",
+  "removeImage": "Remove image"
 }

@@ -16,7 +16,7 @@ const Preview = () => {
               <p>title.png</p>
               <button className={styles.previewRemove}>
                   <Close sx={{ mr: 1 }} />
-                  Vymazat obrazek
+                  {String(t(messages.removeImage))}
               </button>
           </div>
       </div>

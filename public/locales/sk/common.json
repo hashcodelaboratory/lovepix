@@ -83,5 +83,6 @@
   "chooseDimension": "Vyberte si svoj rozmer",
   "chooseMaterial": "Vyberte si materiál",
   "price": "Cena",
-  "toCart": "Do košíka"
+  "toCart": "Do košíka",
+  "removeImage": "Vymazať obrázok"
 }

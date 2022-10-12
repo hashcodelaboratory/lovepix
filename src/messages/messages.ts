@@ -82,5 +82,6 @@ export const messages = {
   chooseDimension: "chooseDimension",
   chooseMaterial: "chooseMaterial",
   price: "price",
-  toCart: "toCart"
+  toCart: "toCart",
+  removeImage: "removeImage"
 }
