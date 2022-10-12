@@ -11,7 +11,7 @@ const Button = () => {
         <div className={styles.containerPadding}>
             <button className={styles.button}>
                 <ShoppingCart />
-                <p className={styles.buttonTitle}>{String(t(messages.order))}</p>
+                <p className={styles.buttonTitle}>{String(t(messages.toCart))}</p>
             </button>
         </div>
     )

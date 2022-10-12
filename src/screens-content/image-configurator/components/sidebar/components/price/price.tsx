@@ -4,7 +4,7 @@ const Price = () => {
   return(
       <div className={styles.containerPadding}>
         <div className={styles.price}>
-          <b>Cena</b> 20 bez DPH <b>22 Eur</b>
+          <h3><b>Cena</b></h3> 20 bez DPH <h3><b>22 Eur</b></h3>
         </div>
         <hr />
       </div>
