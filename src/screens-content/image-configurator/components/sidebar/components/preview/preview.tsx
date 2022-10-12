@@ -1,6 +1,6 @@
 import styles from '../../../../image-configurator-layout.module.scss';
 import Header from "../header/header";
-import {Filter1} from "@mui/icons-material";
+import {Close, Filter1} from "@mui/icons-material";
 import {useTranslation} from "next-i18next";
 import {messages} from "../../../../../../messages/messages";
 
@@ -11,6 +11,14 @@ const Preview = () => {
   return (
       <div className={styles.preview}>
         <Header icon={<Filter1 />} title={String(t(messages.yourPhoto))} />
+          <div className={styles.imagePlaceholder}>
+              <div style={{ width: 50, height: 80, backgroundColor: "gray", marginRight: 20 }} />
+              <p>title.png</p>
+              <button className={styles.previewRemove}>
+                  <Close sx={{ mr: 1 }} />
+                  Vymazat obrazek
+              </button>
+          </div>
       </div>
   )
 }

@@ -32,6 +32,32 @@
   padding-left: 1rem;
 }
 
+.imagePlaceholder {
+  background-color: white;
+  padding: 1rem;
+  display: flex;
+  position: relative;
+}
+
+.previewRemove {
+  border: none;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  bottom: 1rem;
+  right: 1rem;
+  color: #d20e0e;
+  background-color: white;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.previewRemove:hover {
+  cursor: pointer;
+  outline: 1px solid #d20e0e;
+}
+
 .dimension {
   width: 100%;
   height: 300px;
