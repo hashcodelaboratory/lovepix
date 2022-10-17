@@ -2,11 +2,9 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
-import useLoggeduser from "custom-hooks/use-logged-user";
+import AccountDetail from "../src/screens-content/account-detail/account-detail";
 
 const Account: NextPage = () => {
-  const { user } = useLoggeduser();
-
   return (
     <div className={styles.container}>
       <Head>
@@ -18,13 +16,7 @@ const Account: NextPage = () => {
       <header>
         <ResponsiveAppBar />
       </header>
-      {user && (
-        <>
-          <div>{user?.displayName}</div>
-          <div>{user?.email}</div>
-          <img src={user?.photoURL || ""} alt='user-image' />
-        </>
-      )}
+      <AccountDetail />
 
       <main className={styles.main}></main>
 

@@ -21,7 +21,7 @@ import * as PagesUrls from "../constants/pages/urls";
 import { Badge } from "@mui/material";
 import AppContext from "../app-context/app-context";
 import { logIn, logOut } from "auth";
-import useLoggeduser from "custom-hooks/use-logged-user";
+import useLoggedUser from "custom-hooks/use-logged-user";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] =
@@ -52,7 +52,7 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(null);
   };
 
-  const { user } = useLoggeduser();
+  const { user } = useLoggedUser();
 
   return (
     <AppBar position='static'>

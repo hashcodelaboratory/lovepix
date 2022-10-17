@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { auth } from "../../utils/firebase/config";
 import { User } from "firebase/auth";
 
-const useLoggeduser = () => {
+const useLoggedUser = () => {
   const [user, setUser] = useState<User | null>(null);
   const [fetching, setFetching] = useState(true);
 
@@ -23,4 +23,4 @@ const useLoggeduser = () => {
   return { user, fetching };
 };
 
-export default useLoggeduser;
+export default useLoggedUser;
