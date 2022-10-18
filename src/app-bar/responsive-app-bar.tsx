@@ -22,6 +22,7 @@ import { Badge } from "@mui/material";
 import AppContext from "../app-context/app-context";
 import { logIn, logOut } from "auth";
 import useLoggedUser from "custom-hooks/use-logged-user";
+import { useRouter } from "next/router";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] =
@@ -30,6 +31,8 @@ const ResponsiveAppBar = () => {
     React.useState<null | HTMLElement>(null);
 
   const { t } = useTranslation();
+
+  const router = useRouter();
 
   const {
     state: {
@@ -53,6 +56,12 @@ const ResponsiveAppBar = () => {
   };
 
   const { user } = useLoggedUser();
+
+  const handleLogout = () => {
+    logOut();
+    router.push(`/`);
+    handleCloseUserMenu();
+  };
 
   return (
     <AppBar position='static'>
@@ -185,10 +194,7 @@ const ResponsiveAppBar = () => {
                   const menuItem = (
                     <MenuItem
                       key={setting.title}
-                      onClick={() => {
-                        setting.callBack && logOut();
-                        handleCloseUserMenu();
-                      }}
+                      onClick={() => setting.callBack && handleLogout()}
                     >
                       <Typography textAlign='center'>
                         {setting.title}
