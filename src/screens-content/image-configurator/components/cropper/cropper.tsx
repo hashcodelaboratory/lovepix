@@ -19,12 +19,9 @@ const CropperComponent = () => {
 
   console.log(image.url);
 
-  if (!image?.url) {
-    return null;
-  }
   return (
     <Cropper
-      src={image?.url}
+      src='https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg'
       style={{ height: 400, width: "100%" }}
       // Cropper.js options
       initialAspectRatio={16 / 9}
