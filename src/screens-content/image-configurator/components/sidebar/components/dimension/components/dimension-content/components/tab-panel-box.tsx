@@ -1,18 +1,27 @@
+import { CSSProperties } from "react";
 import styles from "../../../../../../../image-configurator-layout.module.scss";
-import Image from "next/image";
 
 type Props = {
-  url: string;
   x: number;
   y: number;
   onClick?: () => void;
+  selected?: boolean;
+  style?: CSSProperties;
 };
 
-const TabPanelBox = ({ url, x, y, onClick }: Props) => {
+const TabPanelBox = ({ x, y, onClick, selected, style = {} }: Props) => {
   return (
-    <div className={styles.tabPanelBox} onClick={onClick}>
-      <Image src={url} width={50} height={50} objectFit='cover' />
-      <p>
+    <div
+      className={styles.tabPanelBox}
+      style={{
+        borderColor: selected ? "#1976d2" : "inherit",
+        boxShadow: selected ? "4px 4px 4px #1976d2" : "4px 4px 4px silver",
+
+        ...style,
+      }}
+      onClick={onClick}
+    >
+      <p style={{ fontSize: 12 }}>
         {x} x {y} cm
       </p>
     </div>
