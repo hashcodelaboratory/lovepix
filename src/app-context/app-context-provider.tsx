@@ -39,7 +39,7 @@ const AppContextProvider = ({ children }: ContextProviderProps) => {
         delivery: order.summary?.delivery,
       });
     }
-  }, [isFetching]);
+  }, [isFetching, order]);
 
   const CONTEXT_VALUE: AppContextProps = {
     state: {

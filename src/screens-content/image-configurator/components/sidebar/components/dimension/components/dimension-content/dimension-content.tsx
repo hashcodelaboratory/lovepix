@@ -47,6 +47,7 @@ const DimensionContent = () => {
             x={dim.width}
             y={dim.height}
             onClick={() => setDimensionId(dim.id)}
+            key={dim.id}
           />
         ))}
       </TabPanel>
@@ -58,6 +59,7 @@ const DimensionContent = () => {
             y={dim.height}
             onClick={() => setDimensionId(dim.id)}
             style={{ width: 50, height: 80 }}
+            key={dim.id}
           />
         ))}
       </TabPanel>
@@ -69,6 +71,7 @@ const DimensionContent = () => {
             y={dim.height}
             onClick={() => setDimensionId(dim.id)}
             style={{ width: 60 }}
+            key={dim.id}
           />
         ))}
       </TabPanel>
