@@ -1,21 +1,22 @@
 import styles from "../../image-configurator-layout.module.scss";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
-import { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import AppContext from "app-context/app-context";
 import {
   dimensionsByHeight,
   dimensionsBySquare,
   dimensionsByWidth,
 } from "screens-content/home/utils/dimension";
+import DropzoneContainer from "screens-content/home/components/upload-image/dropzone/dropzone-container";
 
 const CropperComponent = () => {
-  const cropperRef = useRef<HTMLImageElement>(null);
+  const cropperRef = useRef<any>(null);
 
   const onCrop = () => {
     const imageElement: any = cropperRef?.current;
     const cropper: any = imageElement?.cropper;
-    /*   console.log(cropper.getCroppedCanvas().toDataURL()); */
+    console.log(cropper.getCroppedCanvas().toDataURL());
   };
 
   const {
@@ -33,12 +34,18 @@ const CropperComponent = () => {
   const aspectRatio =
     selectedDimension && selectedDimension?.width / selectedDimension?.height;
 
-  return (
+  useEffect(() => {
+    cropperRef?.current?.cropper?.setAspectRatio(aspectRatio);
+  }, [dimensionId]);
+
+  return !image?.url ? (
+    <DropzoneContainer />
+  ) : (
     <Cropper
       src={image?.url}
       style={{ height: 400, width: "100%" }}
       // Cropper.js options
-      aspectRatio={aspectRatio}
+      initialAspectRatio={16 / 9}
       guides={false}
       crop={onCrop}
       ref={cropperRef}
