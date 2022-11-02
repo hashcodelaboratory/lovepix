@@ -5,6 +5,7 @@ import { useTranslation } from "next-i18next";
 import { messages } from "../../../../../../messages/messages";
 import { useContext } from "react";
 import AppContext from "../../../../../../app-context/app-context";
+import { INITIAL_IMAGE } from "app-context/consts";
 
 const Preview = () => {
   const { t } = useTranslation();
@@ -29,7 +30,7 @@ const Preview = () => {
         <p>{image?.name}</p>
         <button
           className={styles.previewRemove}
-          onClick={() => setImage(undefined)}
+          onClick={() => setImage(INITIAL_IMAGE)}
         >
           <Delete sx={{ mr: 1 }} />
           {String(t(messages.removeImage))}
