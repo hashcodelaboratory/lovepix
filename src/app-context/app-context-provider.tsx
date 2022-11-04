@@ -12,6 +12,7 @@ const AppContextProvider = ({ children }: ContextProviderProps) => {
 
   const [image, setImage] = useState<UploadedImage>(INITIAL_IMAGE);
   const [dimensionId, setDimensionId] = useState<string | undefined>(undefined);
+  const [materialId, setMaterialId] = useState<string | undefined>(undefined);
   const [stepper, setStepper] = useState(0);
   const [form, setForm] = useState<FormInputs>();
   const [summary, setSummary] = useState<SummaryFormInputs>();
@@ -48,6 +49,7 @@ const AppContextProvider = ({ children }: ContextProviderProps) => {
       form: form,
       summary: summary,
       dimensionId: dimensionId,
+      materialId: materialId,
     },
     stateAction: {
       setImage: setImage,
@@ -55,6 +57,7 @@ const AppContextProvider = ({ children }: ContextProviderProps) => {
       setForm: setForm,
       setSummary: setSummary,
       setDimensionId: setDimensionId,
+      setMaterialId: setMaterialId,
     },
   };
 

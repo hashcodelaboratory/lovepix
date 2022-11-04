@@ -17,6 +17,7 @@ export type AppContextProps = {
         form?: FormInputs;
         summary?: SummaryFormInputs;
         dimensionId?: string
+        materialId?: string
     },
     stateAction: {
         setImage: Dispatch<SetStateAction<UploadedImage>>;
@@ -24,6 +25,7 @@ export type AppContextProps = {
         setForm: Dispatch<SetStateAction<FormInputs | undefined>>;
         setSummary: Dispatch<SetStateAction<SummaryFormInputs | undefined>>;
         setDimensionId: Dispatch<SetStateAction<string | undefined>>;
+        setMaterialId: Dispatch<SetStateAction<string | undefined>>;
     }
 }
 
