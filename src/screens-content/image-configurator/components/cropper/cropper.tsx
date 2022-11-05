@@ -7,7 +7,7 @@ import {
   dimensionsByHeight,
   dimensionsBySquare,
   dimensionsByWidth,
-} from "screens-content/home/utils/dimension";
+} from "screens-content/home/utils/configuration";
 import DropzoneContainer from "screens-content/home/components/upload-image/dropzone/dropzone-container";
 
 const CropperComponent = () => {

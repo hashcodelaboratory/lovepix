@@ -11,7 +11,7 @@ import {
   dimensionsByHeight,
   dimensionsBySquare,
   dimensionsByWidth,
-} from "screens-content/home/utils/dimension";
+} from "screens-content/home/utils/configuration";
 
 const DimensionContent = () => {
   const { t } = useTranslation();
