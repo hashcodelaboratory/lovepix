@@ -31,6 +31,7 @@ const Material = () => {
       >
         {materials.map((material) => (
           <div
+            key={material.id}
             style={{
               display: "flex",
               flexDirection: "column",
