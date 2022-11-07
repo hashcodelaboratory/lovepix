@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 const Button = () => {
   const { t } = useTranslation();
 
-  const { mutate: updateOrder, isSuccess } = useUpdateOrder();
+  const { mutate: updateOrder } = useUpdateOrder();
 
   const router = useRouter();
 
@@ -41,9 +41,7 @@ const Button = () => {
 
     updateOrder(payload);
 
-    if (isSuccess) {
-      router.push(`/en/shopping-cart`);
-    }
+    router.push(`/en/shopping-cart`);
   };
 
   return (
