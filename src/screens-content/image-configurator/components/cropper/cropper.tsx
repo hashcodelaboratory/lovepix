@@ -44,7 +44,6 @@ const CropperComponent = () => {
     <Cropper
       src={image?.url}
       style={{ height: 400, width: "100%" }}
-      // Cropper.js options
       initialAspectRatio={16 / 9}
       guides={false}
       crop={onCrop}

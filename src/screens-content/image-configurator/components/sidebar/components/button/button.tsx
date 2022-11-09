@@ -12,6 +12,8 @@ import {
   dimensionsByWidth,
 } from "screens-content/home/utils/configuration";
 import { useRouter } from "next/router";
+import { ImageStatus } from "app-context/enums";
+import { SHOPPING_CART } from "constants/pages/urls";
 
 const Button = () => {
   const { t } = useTranslation();
@@ -37,11 +39,12 @@ const Button = () => {
       width: dim?.width,
       height: dim?.height,
       material: materials.find((mat) => mat.id === materialId)?.name,
+      status: ImageStatus.CONFIGURED,
     };
 
     updateOrder(payload);
 
-    router.push(`/en/shopping-cart`);
+    router.push(`/en/${SHOPPING_CART}`);
   };
 
   return (

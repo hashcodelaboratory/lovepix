@@ -11,8 +11,8 @@ const AppContextProvider = ({ children }: ContextProviderProps) => {
   const { data: order, isFetching } = useOrder();
 
   const [image, setImage] = useState<UploadedImage>(INITIAL_IMAGE);
-  const [dimensionId, setDimensionId] = useState<string | undefined>(undefined);
-  const [materialId, setMaterialId] = useState<string | undefined>(undefined);
+  const [dimensionId, setDimensionId] = useState<string>();
+  const [materialId, setMaterialId] = useState<string>();
   const [stepper, setStepper] = useState(0);
   const [form, setForm] = useState<FormInputs>();
   const [summary, setSummary] = useState<SummaryFormInputs>();

@@ -21,8 +21,6 @@ const updateOrder = async (data: UpdateOrderRequest) => {
     const docID = sessionStorage.getItem(ORDER_ID_KEY);
     const batch = writeBatch(database);
 
-
-
     if (docID) {
         const docRef = doc(database, Collections.ORDERS, docID);
         await batch.update(docRef, {

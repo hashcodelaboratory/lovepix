@@ -69,7 +69,7 @@ const DropzoneContainer = () => {
       );
       const data = {
         url: url,
-        status: ImageStatus.CONFIGURED, // TODO: change to UPLOADED when cropper will be developed
+        status: ImageStatus.UPLOADED,
         size: 1,
         name: name,
       };
@@ -84,12 +84,7 @@ const DropzoneContainer = () => {
 
   const handleCleanImage = async () => {
     await updateOrder({
-      image: {
-        url: undefined,
-        status: ImageStatus.DEFAULT,
-        size: 0,
-        name: undefined,
-      },
+      image: INITIAL_IMAGE,
     });
     setImage(INITIAL_IMAGE);
   };

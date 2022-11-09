@@ -6,7 +6,7 @@ type Props = {
   y: number;
   onClick?: () => void;
   selected?: boolean;
-  style?: CSSProperties;
+  style: CSSProperties;
 };
 
 const TabPanelBox = ({ x, y, onClick, selected, style = {} }: Props) => {

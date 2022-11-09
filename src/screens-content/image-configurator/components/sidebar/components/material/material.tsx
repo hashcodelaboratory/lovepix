@@ -17,6 +17,37 @@ const Material = () => {
     stateAction: { setMaterialId },
   } = useContext(AppContext);
 
+  const materialItems = materials.map((material) => (
+    <div
+      key={material.id}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+    >
+      <p style={{ fontSize: 14, textAlign: "center" }}>{material.name}</p>
+      <div
+        className={material.id === materialId ? styles.imageWrapper : undefined}
+      >
+        <Image
+          onClick={() => setMaterialId(material.id)}
+          alt={material.id}
+          key={uuidv4()}
+          src={material?.image ?? ""}
+          height={100}
+          width={100}
+          layout={ImageLayout.FIXED}
+          objectFit='cover'
+          style={{
+            borderRadius: 5,
+            cursor: "pointer",
+          }}
+        />
+      </div>
+    </div>
+  ));
+
   return (
     <div className={styles.containerPadding}>
       <div className={styles.material}>
@@ -29,38 +60,7 @@ const Material = () => {
           marginBottom: 50,
         }}
       >
-        {materials.map((material) => (
-          <div
-            key={material.id}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-          >
-            <p style={{ fontSize: 14, textAlign: "center" }}>{material.name}</p>
-            <div
-              className={
-                material.id === materialId ? styles.imageWrapper : undefined
-              }
-            >
-              <Image
-                onClick={() => setMaterialId(material.id)}
-                alt={material.id}
-                key={uuidv4()}
-                src={material?.image ?? ""}
-                height={100}
-                width={100}
-                layout={ImageLayout.FIXED}
-                objectFit='cover'
-                style={{
-                  borderRadius: 5,
-                  cursor: "pointer",
-                }}
-              />
-            </div>
-          </div>
-        ))}
+        {materialItems}
       </div>
 
       <hr />

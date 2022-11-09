@@ -15,6 +15,10 @@ const Preview = () => {
     stateAction: { setImage },
   } = useContext(AppContext);
 
+  const handleRemoveImage = () => {
+    setImage(INITIAL_IMAGE);
+  };
+
   return (
     <div className={styles.preview}>
       <Header icon={<Filter1 />} title={String(t(messages.yourPhoto))} />
@@ -28,10 +32,7 @@ const Preview = () => {
           }}
         />
         <p>{image?.name}</p>
-        <button
-          className={styles.previewRemove}
-          onClick={() => setImage(INITIAL_IMAGE)}
-        >
+        <button className={styles.previewRemove} onClick={handleRemoveImage}>
           <Delete sx={{ mr: 1 }} />
           {String(t(messages.removeImage))}
         </button>
