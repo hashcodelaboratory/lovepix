@@ -44,7 +44,7 @@ const Button = () => {
 
     updateOrder(payload);
 
-    router.push(`/en/${SHOPPING_CART}`);
+    router.push(`/en${SHOPPING_CART}`);
   };
 
   return (

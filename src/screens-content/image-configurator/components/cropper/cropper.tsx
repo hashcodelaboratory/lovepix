@@ -16,6 +16,7 @@ const CropperComponent = () => {
   const onCrop = () => {
     const imageElement: any = cropperRef?.current;
     const cropper: any = imageElement?.cropper;
+    // TO DO how to save cropped image
     console.log(cropper.getCroppedCanvas().toDataURL());
   };
 

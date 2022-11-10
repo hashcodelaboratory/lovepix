@@ -24,6 +24,7 @@ import { useCreateOrder } from "../../../api/order/useCreateOrder";
 import { useUpdateOrder } from "../../../api/order/useUpdateOrder";
 import { INITIAL_IMAGE } from "../../../../../app-context/consts";
 import { useRouter } from "next/router";
+import { CONFIGURATOR } from "constants/pages/urls";
 
 const DropzoneContainer = () => {
   const { mutate: createOrder } = useCreateOrder();
@@ -90,7 +91,7 @@ const DropzoneContainer = () => {
   };
 
   const handleContineConfiguration = () => {
-    router.push(`/en/configurator`);
+    router.push(`/en${CONFIGURATOR}`);
   };
 
   return (
