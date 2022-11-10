@@ -36,7 +36,7 @@ const CropperComponent = () => {
 
   useEffect(() => {
     cropperRef?.current?.cropper?.setAspectRatio(aspectRatio);
-  }, [dimensionId, cropperRef]);
+  }, [cropperRef, aspectRatio]);
 
   return !image?.url ? (
     <DropzoneContainer />
