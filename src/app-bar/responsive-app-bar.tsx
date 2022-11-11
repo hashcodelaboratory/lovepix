@@ -35,10 +35,10 @@ const ResponsiveAppBar = () => {
   const router = useRouter();
 
   const {
-    state: {
-      image: { size },
-    },
+    state: { image },
   } = useContext(AppContext);
+
+  const size = image?.size;
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);

@@ -77,5 +77,14 @@ export const messages = {
   thanks: "thanks",
   forOrder: "forOrder",
   orderInfo: "orderInfo",
-  thanksContact: "thanksContact"
+  thanksContact: "thanksContact",
+  yourPhoto: "yourPhoto",
+  chooseDimension: "chooseDimension",
+  chooseMaterial: "chooseMaterial",
+  price: "price",
+  toCart: "toCart",
+  removeImage: "removeImage",
+  byWidth: "byWidth",
+  byHeight: "byHeight",
+  square: "square"
 }

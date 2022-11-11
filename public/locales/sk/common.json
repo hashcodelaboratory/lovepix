@@ -78,5 +78,14 @@
   "thanks": "Ďakujeme",
   "forOrder": "Za vašu objednávku",
   "orderInfo": "Vaša objednávka sa momentálne spracuváva.\n O zmenách Vás budeme informovať prostredníctvom e-mailu.\n Buďte trpezlivý a prajeme Vám pekný deň !",
-  "thanksContact": "Zabudli ste na niečo ? Napíšte nám alebo zavolajte +421 912 345 678"
+  "thanksContact": "Zabudli ste na niečo ? Napíšte nám alebo zavolajte +421 912 345 678",
+  "yourPhoto": "Vaša fotka",
+  "chooseDimension": "Vyberte si svoj rozmer",
+  "chooseMaterial": "Vyberte si materiál",
+  "price": "Cena",
+  "toCart": "Do košíka",
+  "removeImage": "Vymazať obrázok",
+  "byWidth": "Na šírku",
+  "byHeight": "Na výšku",
+  "square": "Štvorcové"
 }

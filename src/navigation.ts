@@ -4,7 +4,7 @@ import * as SettingsTitles from "./constants/settings/titles";
 import * as SettingsUrls from "./constants/settings/urls";
 
 const pages = [
-  // {title: 'Configurator', link: '/configurator'},
+  { title: PagesTitles.CONFIGURATOR, link: PagesUrls.CONFIGURATOR },
   { title: PagesTitles.GALLERY, link: PagesUrls.GALLERY },
   { title: PagesTitles.MATERIALS, link: PagesUrls.MATERIALS },
   { title: PagesTitles.FOR_PARTNERS, link: PagesUrls.FOR_PARTNERS },

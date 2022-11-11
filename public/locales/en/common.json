@@ -78,5 +78,14 @@
   "thanks": "Thank you",
   "forOrder": "For your order",
   "orderInfo": "Our system is processing your order. \n We will send you an e-mail with details.\n Be patient & have a nice day !",
-  "thanksContact": "Anything amiss ? E-mail us or call us at +421 912 345 678"
+  "thanksContact": "Anything amiss ? E-mail us or call us at +421 912 345 678",
+  "yourPhoto": "Your photo",
+  "chooseDimension": "Choose dimension",
+  "chooseMaterial": "Choose material",
+  "price": "Price",
+  "toCart": "Shopping cart",
+  "removeImage": "Remove image",
+  "byWidth": "By width",
+  "byHeight": "By height",
+  "square": "Square"
 }
