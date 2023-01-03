@@ -7,7 +7,7 @@ import ThanksForOrder from "./components/thanks-for-order/thanks-for-order";
 const CustomShoppingCart = () => {
     const { state: { stepper, shoppingCart } } = useContext(AppContext);
 
-    if (shoppingCart?.images?.length === 0 && stepper !== 2) return <EmptyCart />;
+    if (!shoppingCart?.images && stepper !== 2) return <EmptyCart />;
 
     if (stepper === 2) return <ThanksForOrder />;
 

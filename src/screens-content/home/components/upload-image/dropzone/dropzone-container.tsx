@@ -25,6 +25,7 @@ import { useUpdateOrder } from "../../../api/order/useUpdateOrder";
 import { INITIAL_IMAGE } from "../../../../../app-context/consts";
 import { useRouter } from "next/router";
 import { CONFIGURATOR } from "constants/pages/urls";
+import {useOrder} from "../../../api/order/useOrder";
 
 const DropzoneContainer = () => {
   const { mutate: createOrder } = useCreateOrder();
@@ -48,6 +49,7 @@ const DropzoneContainer = () => {
   } = useContext(AppContext);
 
   const { mutate: updateOrder } = useUpdateOrder();
+  const { data: order } = useOrder();
 
   const router = useRouter();
 
@@ -75,7 +77,8 @@ const DropzoneContainer = () => {
         name: name
       };
       setImage(data);
-      createOrder({ image: data });
+
+      order ? updateOrder({ image: data }) : createOrder({ image: data });
     }
   };
 
@@ -85,7 +88,7 @@ const DropzoneContainer = () => {
 
   const handleCleanImage = async () => {
     await updateOrder({
-      image: INITIAL_IMAGE,
+      image: null,
     });
     setImage(INITIAL_IMAGE);
   };

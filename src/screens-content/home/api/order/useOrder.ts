@@ -13,7 +13,7 @@ const getOrder = async (): Promise<any> => {
 
         return _doc.exists() ? _doc.data() : {};
     }
-    return {};
+    return null;
 }
 
 export const useOrder = (): UseQueryResult<any> =>
