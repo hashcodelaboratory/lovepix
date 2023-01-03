@@ -29,7 +29,7 @@ const Cart = () => {
                 images: filtered
             }
         });
-        setShoppingCart(undefined);
+        filtered.length === 0 && setShoppingCart(undefined);
     }
 
     const items =

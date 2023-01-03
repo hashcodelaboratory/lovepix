@@ -40,6 +40,7 @@ const Button = () => {
     const dim = dimensions.find((dim) => dim.id === dimensionId);
 
     const payload = {
+      image: null,
       shoppingCart: {
         images: [...shoppingCart?.images ?? [], {
           name: image?.name ?? '',
@@ -51,7 +52,6 @@ const Button = () => {
           material: materials.find((mat) => mat.id === materialId)?.name ?? '',
         }]
       },
-      image: null
     };
 
     updateOrder(payload);

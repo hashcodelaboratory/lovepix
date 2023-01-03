@@ -8,17 +8,27 @@ import AppContext from "../../../../../../app-context/app-context";
 import { INITIAL_IMAGE } from "app-context/consts";
 import {ImageLayout} from "../../../../../home/enums/enums";
 import Image from "next/image";
+import ImageConfiguratorContext from "../../../../image-configurator-context/image-configurator-context";
+import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
 
 const Preview = () => {
   const { t } = useTranslation();
+
+  const { mutate: updateOrder } = useUpdateOrder();
 
   const {
     state: { image },
     stateAction: { setImage },
   } = useContext(AppContext);
 
+  const { stateAction: { setImage: setCropped } } = useContext(ImageConfiguratorContext);
+
   const handleRemoveImage = () => {
+    updateOrder({
+      image: null
+    })
     setImage(INITIAL_IMAGE);
+    setCropped(undefined);
   };
 
   return (

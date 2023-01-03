@@ -11,9 +11,12 @@ import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
 import { FormInputs } from "./utils/types";
 import {useSession} from "../../../../../../../utils/sessionStorage/useSessionStorage";
 import {INITIAL_IMAGE} from "../../../../../../app-context/consts";
+import ImageConfiguratorContext
+    from "../../../../../image-configurator/image-configurator-context/image-configurator-context";
 
 const Form = (): JSX.Element => {
     const { state: { form }, stateAction: { setStepper, setImage, setForm, setSummary } } = useContext(AppContext);
+    const { stateAction: { setImage: setCropped } } = useContext(ImageConfiguratorContext);
     const { mutate: updateOrder } = useUpdateOrder();
 
     const { t } = useTranslation();
@@ -29,6 +32,7 @@ const Form = (): JSX.Element => {
         updateOrder({ form: data, date: Date.now() });
         clearOrderID();
         setImage(INITIAL_IMAGE);
+        setCropped(undefined);
         setForm(undefined);
         setSummary(undefined);
         reset();
