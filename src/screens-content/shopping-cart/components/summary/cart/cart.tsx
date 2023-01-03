@@ -1,6 +1,6 @@
 import styles from "../../../shopping-cart.module.scss";
 import {useContext} from "react";
-import AppContext, {UploadedImage} from "../../../../../app-context/app-context";
+import AppContext, {ShoppingCartImage} from "../../../../../app-context/app-context";
 import Button from "@mui/material/Button";
 import Image from "next/image";
 import {TextField} from "@mui/material";
@@ -9,13 +9,12 @@ import {useTranslation} from "next-i18next";
 import {messages} from "../../../../../messages/messages";
 import Form from "../components/form/form";
 import {useRouter} from "next/router";
-import {INITIAL_IMAGE} from "../../../../../app-context/consts";
 import {useUpdateOrder} from "../../../../home/api/order/useUpdateOrder";
 
 const Cart = () => {
-    const { state: { shoppingCart, stepper }, stateAction: { setImage, setStepper } } = useContext(AppContext);
+    const { state: { shoppingCart, stepper }, stateAction: { setStepper, setShoppingCart } } = useContext(AppContext);
 
-    const image = shoppingCart?.images ? shoppingCart?.images[0] : {} as UploadedImage & { qty: string };
+    const images = shoppingCart?.images ?? [{} as ShoppingCartImage];
 
     const { t } = useTranslation();
 
@@ -23,15 +22,18 @@ const Cart = () => {
 
     const { mutate: updateOrder } = useUpdateOrder();
 
-    const removeImage = () => {
+    const removeImage = (title?: string) => {
+        const filtered = images.filter(image => image.name !== title);
         updateOrder({
-            shoppingCart: null
-        })
-        setImage(INITIAL_IMAGE);
+            shoppingCart: filtered.length === 0 ? null : {
+                images: filtered
+            }
+        });
+        setShoppingCart(undefined);
     }
 
     const items =
-        image && <>
+        images && images.map((image) => <>
             <div className={styles.cartRow}>
                 <Image alt={image?.url} src={image?.url ?? ''} width={80} height={80} layout="fixed" />
                 <div>{image?.name}</div>
@@ -41,10 +43,11 @@ const Cart = () => {
                     <Button>+</Button>
                 </div>
                 <div>€ 17.99</div>
-                <Button onClick={removeImage}><CloseIcon color="error" /></Button>
+                <Button onClick={() => removeImage(image?.name)}><CloseIcon color="error" /></Button>
             </div>
             <hr/>
         </>
+        )
 
     const isDefault = stepper === 0;
 
@@ -67,7 +70,7 @@ const Cart = () => {
                     {String(t(messages.personalDataTitle))}
                 </h1>
             </div>
-            <p className={styles.itemsSize}>{image?.qty} {String(t(messages.items))}</p>
+            <p className={styles.itemsSize}>{images?.length} {String(t(messages.items))}</p>
             <hr />
             {content}
             <button onClick={redirect} className={styles.backButton}>{String(t(backButtonTitle))}</button>

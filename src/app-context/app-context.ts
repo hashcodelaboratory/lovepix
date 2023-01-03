@@ -10,16 +10,18 @@ export type UploadedImage = {
     name?: string;
 }
 
+export type ShoppingCartImage = {
+    name: string;
+    url: string;
+    qty: number;
+    origin: string;
+    width: number;
+    height: number;
+    material: string;
+}
+
 export type ShoppingCart = {
-    images: {
-        name: string;
-        url: string;
-        qty: number;
-        origin: string;
-        width: number;
-        height: number;
-        material: string;
-    }[];
+    images: ShoppingCartImage[];
 }
 
 export type AppContextProps = {

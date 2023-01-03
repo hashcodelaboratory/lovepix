@@ -24,7 +24,7 @@ const Button = () => {
   const router = useRouter();
 
   const {
-    state: { dimensionId, materialId, image },
+    state: { dimensionId, materialId, image, shoppingCart },
     stateAction: { setImage }
   } = useContext(AppContext);
 
@@ -41,7 +41,7 @@ const Button = () => {
 
     const payload = {
       shoppingCart: {
-        images: [{
+        images: [...shoppingCart?.images ?? [], {
           name: image?.name ?? '',
           url: cropped ?? '',
           qty: 1,
