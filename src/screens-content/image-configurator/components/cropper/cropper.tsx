@@ -1,7 +1,6 @@
-import styles from "../../image-configurator-layout.module.scss";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
-import React, { useContext, useEffect, useRef } from "react";
+import React, {useCallback, useContext, useEffect, useRef, useState} from "react";
 import AppContext from "app-context/app-context";
 import {
   dimensionsByHeight,
@@ -9,20 +8,20 @@ import {
   dimensionsByWidth,
 } from "screens-content/home/utils/configuration";
 import DropzoneContainer from "screens-content/home/components/upload-image/dropzone/dropzone-container";
+import ImageConfiguratorContext from "../../image-configurator-context/image-configurator-context";
 
 const CropperComponent = () => {
+  const { state: { image, dimensionId } } = useContext(AppContext);
+  const { stateAction: { setImage } } = useContext(ImageConfiguratorContext);
+
   const cropperRef = useRef<any>(null);
 
-  const onCrop = () => {
+  const onCrop = useCallback(() => {
     const imageElement: any = cropperRef?.current;
     const cropper: any = imageElement?.cropper;
-    // TO DO how to save cropped image
-    console.log(cropper.getCroppedCanvas().toDataURL());
-  };
 
-  const {
-    state: { image, dimensionId },
-  } = useContext(AppContext);
+    setImage(cropper.getCroppedCanvas().toDataURL());
+  }, [setImage]);
 
   const allDimensions = [
     ...dimensionsByWidth,

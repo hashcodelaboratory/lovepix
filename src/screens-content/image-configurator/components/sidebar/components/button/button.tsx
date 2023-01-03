@@ -12,8 +12,9 @@ import {
   dimensionsByWidth,
 } from "screens-content/home/utils/configuration";
 import { useRouter } from "next/router";
-import { ImageStatus } from "app-context/enums";
 import { SHOPPING_CART } from "constants/pages/urls";
+import ImageConfiguratorContext from "../../../../image-configurator-context/image-configurator-context";
+import {INITIAL_IMAGE} from "../../../../../../app-context/consts";
 
 const Button = () => {
   const { t } = useTranslation();
@@ -23,8 +24,11 @@ const Button = () => {
   const router = useRouter();
 
   const {
-    state: { dimensionId, materialId },
+    state: { dimensionId, materialId, image },
+    stateAction: { setImage }
   } = useContext(AppContext);
+
+  const { state: { image: cropped }, stateAction: { setImage: setCropped } } = useContext(ImageConfiguratorContext);
 
   const handleUpdateOrder = () => {
     const dimensions = [
@@ -36,15 +40,26 @@ const Button = () => {
     const dim = dimensions.find((dim) => dim.id === dimensionId);
 
     const payload = {
-      width: dim?.width,
-      height: dim?.height,
-      material: materials.find((mat) => mat.id === materialId)?.name,
-      status: ImageStatus.CONFIGURED,
+      shoppingCart: {
+        images: [{
+          name: image?.name ?? '',
+          url: cropped ?? '',
+          qty: 1,
+          origin: image?.url ?? '',
+          width: dim?.width ?? 0,
+          height: dim?.height ?? 0,
+          material: materials.find((mat) => mat.id === materialId)?.name ?? '',
+        }]
+      },
+      image: null
     };
 
     updateOrder(payload);
 
-    router.push(`/en${SHOPPING_CART}`);
+    setCropped(undefined);
+    setImage(INITIAL_IMAGE);
+
+    router.push(`${SHOPPING_CART}`);
   };
 
   return (

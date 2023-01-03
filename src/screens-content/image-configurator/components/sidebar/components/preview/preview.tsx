@@ -6,6 +6,8 @@ import { messages } from "../../../../../../messages/messages";
 import { useContext } from "react";
 import AppContext from "../../../../../../app-context/app-context";
 import { INITIAL_IMAGE } from "app-context/consts";
+import {ImageLayout} from "../../../../../home/enums/enums";
+import Image from "next/image";
 
 const Preview = () => {
   const { t } = useTranslation();
@@ -23,15 +25,14 @@ const Preview = () => {
     <div className={styles.preview}>
       <Header icon={<Filter1 />} title={String(t(messages.yourPhoto))} />
       <div className={styles.imagePlaceholder}>
-        <div
-          style={{
-            width: 50,
-            height: 80,
-            backgroundColor: "gray",
-            marginRight: 20,
-          }}
-        />
-        <p>{image?.name}</p>
+        <Image
+              alt="preview"
+              src={image?.url ?? ""}
+              width={50}
+              height={80}
+              layout={ImageLayout.FIXED}
+          />
+        <p style={{ textAlign: "center", width: "100%" }} >{image?.name}</p>
         <button className={styles.previewRemove} onClick={handleRemoveImage}>
           <Delete sx={{ mr: 1 }} />
           {String(t(messages.removeImage))}

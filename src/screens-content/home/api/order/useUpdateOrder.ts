@@ -2,19 +2,17 @@ import { MutationOptions, useMutation, UseMutationResult } from "react-query";
 import { database } from "../../../../../utils/firebase/config";
 import { doc, writeBatch } from "@firebase/firestore";
 import { Collections } from "../../../../../utils/firebase/enums";
-import { UploadedImage } from "../../../../app-context/app-context";
+import {ShoppingCart, UploadedImage} from "../../../../app-context/app-context";
 import { ORDER_ID_KEY } from "../../../../../utils/sessionStorage/utils/keys";
 import { FormInputs } from "../../../shopping-cart/components/summary/components/form/utils/types";
 import { SummaryFormInputs } from "../../../shopping-cart/components/summary/components/delivery/utils/types";
 
 export type UpdateOrderRequest = {
-    image?: UploadedImage;
+    image?: UploadedImage | null;
     date?: number;
     form?: FormInputs;
     summary?: SummaryFormInputs;
-    width?: number;
-    height?: number;
-    material?: string
+    shoppingCart?: ShoppingCart | null;
 }
 
 const updateOrder = async (data: UpdateOrderRequest) => {

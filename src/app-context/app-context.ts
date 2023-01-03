@@ -10,14 +10,27 @@ export type UploadedImage = {
     name?: string;
 }
 
+export type ShoppingCart = {
+    images: {
+        name: string;
+        url: string;
+        qty: number;
+        origin: string;
+        width: number;
+        height: number;
+        material: string;
+    }[];
+}
+
 export type AppContextProps = {
     state: {
         image: UploadedImage;
         stepper: number;
         form?: FormInputs;
         summary?: SummaryFormInputs;
-        dimensionId?: string
-        materialId?: string
+        dimensionId?: string;
+        materialId?: string;
+        shoppingCart?: ShoppingCart;
     },
     stateAction: {
         setImage: Dispatch<SetStateAction<UploadedImage>>;
@@ -26,6 +39,7 @@ export type AppContextProps = {
         setSummary: Dispatch<SetStateAction<SummaryFormInputs | undefined>>;
         setDimensionId: Dispatch<SetStateAction<string | undefined>>;
         setMaterialId: Dispatch<SetStateAction<string | undefined>>;
+        setShoppingCart: Dispatch<SetStateAction<ShoppingCart | undefined>>;
     }
 }
 

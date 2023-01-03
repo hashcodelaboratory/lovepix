@@ -1,4 +1,4 @@
-import AppContext, { AppContextProps, UploadedImage } from "./app-context";
+import AppContext, {AppContextProps, ShoppingCart, UploadedImage} from "./app-context";
 import { useEffect, useState } from "react";
 import { FormInputs } from "../screens-content/shopping-cart/components/summary/components/form/utils/types";
 import { SummaryFormInputs } from "../screens-content/shopping-cart/components/summary/components/delivery/utils/types";
@@ -16,6 +16,7 @@ const AppContextProvider = ({ children }: ContextProviderProps) => {
   const [stepper, setStepper] = useState(0);
   const [form, setForm] = useState<FormInputs>();
   const [summary, setSummary] = useState<SummaryFormInputs>();
+  const [shoppingCart, setShoppingCart] = useState<ShoppingCart>();
 
   useEffect(() => {
     if (order) {
@@ -39,25 +40,30 @@ const AppContextProvider = ({ children }: ContextProviderProps) => {
         payment: order.summary?.payment,
         delivery: order.summary?.delivery,
       });
+      setShoppingCart({
+        images: order.shoppingCart?.images,
+      })
     }
   }, [isFetching, order]);
 
   const CONTEXT_VALUE: AppContextProps = {
     state: {
-      image: image,
-      stepper: stepper,
-      form: form,
-      summary: summary,
-      dimensionId: dimensionId,
-      materialId: materialId,
+      image,
+      stepper,
+      form,
+      summary,
+      dimensionId,
+      materialId,
+      shoppingCart
     },
     stateAction: {
-      setImage: setImage,
-      setStepper: setStepper,
-      setForm: setForm,
-      setSummary: setSummary,
-      setDimensionId: setDimensionId,
-      setMaterialId: setMaterialId,
+      setImage,
+      setStepper,
+      setForm,
+      setSummary,
+      setDimensionId,
+      setMaterialId,
+      setShoppingCart
     },
   };
 

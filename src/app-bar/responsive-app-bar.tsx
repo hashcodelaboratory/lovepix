@@ -35,10 +35,8 @@ const ResponsiveAppBar = () => {
   const router = useRouter();
 
   const {
-    state: { image },
+    state: { image, shoppingCart },
   } = useContext(AppContext);
-
-  const size = image?.size;
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -156,7 +154,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0, display: "flex" }}>
             <Link href={PagesUrls.SHOPPING_CART}>
               <Badge
-                badgeContent={size}
+                badgeContent={shoppingCart?.images?.length}
                 color='error'
                 sx={{ my: 2, marginRight: 2 }}
               >

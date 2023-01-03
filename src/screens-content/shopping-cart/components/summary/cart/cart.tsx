@@ -10,6 +10,7 @@ import {messages} from "../../../../../messages/messages";
 import Form from "../components/form/form";
 import {useRouter} from "next/router";
 import {INITIAL_IMAGE} from "../../../../../app-context/consts";
+import {useUpdateOrder} from "../../../../home/api/order/useUpdateOrder";
 
 const Cart = () => {
     const { state: { image: { url, size, name }, stepper }, stateAction: { setImage, setStepper } } = useContext(AppContext);
@@ -18,7 +19,12 @@ const Cart = () => {
 
     const router = useRouter();
 
+    const { mutate: updateOrder } = useUpdateOrder();
+
     const removeImage = () => {
+        updateOrder({
+            shoppingCart: null
+        })
         setImage(INITIAL_IMAGE);
     }
 

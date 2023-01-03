@@ -72,7 +72,7 @@ const DropzoneContainer = () => {
         url: url,
         status: ImageStatus.UPLOADED,
         size: 1,
-        name: name,
+        name: name
       };
       setImage(data);
       createOrder({ image: data });
