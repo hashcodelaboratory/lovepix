@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import { Tabs, Tab } from "@mui/material";
-import { CSSProperties, SyntheticEvent, useContext, useState } from "react";
+import { SyntheticEvent, useContext, useState } from "react";
 import { a11yProps } from "./utils/utils";
 import TabPanel from "./components/tab-panel";
 import { useTranslation } from "next-i18next";
@@ -34,6 +34,7 @@ const DimensionContent = () => {
           value={value}
           onChange={handleChange}
           aria-label='basic tabs example'
+          variant="fullWidth"
         >
           <Tab label={String(t(messages.byWidth))} {...a11yProps(0)} />
           <Tab label={String(t(messages.byHeight))} {...a11yProps(1)} />
@@ -58,7 +59,7 @@ const DimensionContent = () => {
             x={dim.width}
             y={dim.height}
             onClick={() => setDimensionId(dim.id)}
-            style={{ width: 50, height: 80 }}
+            style={{ width: 60, height: 80, marginRight: 10 }}
             key={dim.id}
           />
         ))}
@@ -70,7 +71,7 @@ const DimensionContent = () => {
             x={dim.width}
             y={dim.height}
             onClick={() => setDimensionId(dim.id)}
-            style={{ width: 60 }}
+            style={{ width: 70, height: 70, padding: 5 }}
             key={dim.id}
           />
         ))}

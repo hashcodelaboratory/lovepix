@@ -50,9 +50,7 @@ const Material = () => {
 
   return (
     <div className={styles.containerPadding}>
-      <div className={styles.material}>
-        <Header icon={<Filter3 />} title={String(t(messages.chooseMaterial))} />
-      </div>
+      <Header icon={<Filter3 />} title={String(t(messages.chooseMaterial))} />
       <div
         style={{
           display: "flex",
