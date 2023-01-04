@@ -10,6 +10,7 @@ import {ImageLayout} from "../../../../../home/enums/enums";
 import Image from "next/image";
 import ImageConfiguratorContext from "../../../../image-configurator-context/image-configurator-context";
 import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
+import ImageIcon from '@mui/icons-material/Image';
 
 const Preview = () => {
   const { t } = useTranslation();
@@ -31,22 +32,28 @@ const Preview = () => {
     setCropped(undefined);
   };
 
-  return (
-    <div className={styles.preview}>
-      <Header icon={<Filter1 />} title={String(t(messages.yourPhoto))} />
-      <div className={styles.imagePlaceholder}>
+  const layout = image?.url ?
+      <>
         <Image
-              alt="preview"
-              src={image?.url ?? ""}
-              width={50}
-              height={80}
-              layout={ImageLayout.FIXED}
-          />
+            alt="preview"
+            src={image?.url ?? ""}
+            width={50}
+            height={80}
+            layout={ImageLayout.FIXED}
+        />
         <p style={{ textAlign: "center", width: "100%" }} >{image?.name}</p>
         <button className={styles.previewRemove} onClick={handleRemoveImage}>
           <Delete sx={{ mr: 1 }} />
           {String(t(messages.removeImage))}
         </button>
+      </> :
+      <ImageIcon color="disabled" style={{ width: 80, height: 80, margin: "auto" }} />;
+
+  return (
+    <div className={styles.preview}>
+      <Header icon={<Filter1 />} title={String(t(messages.yourPhoto))} />
+      <div className={styles.imagePlaceholder}>
+        {layout}
       </div>
     </div>
   );

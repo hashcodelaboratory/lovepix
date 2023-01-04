@@ -26,8 +26,6 @@ import { INITIAL_IMAGE } from "../../../../../app-context/consts";
 import { useRouter } from "next/router";
 import { CONFIGURATOR } from "constants/pages/urls";
 import {useOrder} from "../../../api/order/useOrder";
-import ImageConfiguratorContext
-  from "../../../../image-configurator/image-configurator-context/image-configurator-context";
 
 const DropzoneContainer = () => {
   const { mutate: createOrder } = useCreateOrder();
@@ -49,8 +47,6 @@ const DropzoneContainer = () => {
     state: { image },
     stateAction: { setImage },
   } = useContext(AppContext);
-
-  const { stateAction: { setImage: setCropped } } = useContext(ImageConfiguratorContext);
 
   const { mutate: updateOrder } = useUpdateOrder();
   const { data: order } = useOrder();
@@ -95,7 +91,7 @@ const DropzoneContainer = () => {
       image: null,
     });
     setImage(INITIAL_IMAGE);
-    setCropped(undefined);
+    // setCropped(undefined);
   };
 
   const handleContineConfiguration = () => {
