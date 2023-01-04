@@ -11,13 +11,23 @@ import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
 import { FormInputs } from "./utils/types";
 import {useSession} from "../../../../../../../utils/sessionStorage/useSessionStorage";
 import {INITIAL_IMAGE} from "../../../../../../app-context/consts";
-import ImageConfiguratorContext
-    from "../../../../../image-configurator/image-configurator-context/image-configurator-context";
+import {useQueryClient} from "react-query";
+import {ORDER_KEY} from "../../../../../home/api/order/utils/keys";
 
 const Form = (): JSX.Element => {
+    const queryClient = useQueryClient();
     const { state: { form }, stateAction: { setStepper, setImage, setForm, setSummary } } = useContext(AppContext);
-    const { stateAction: { setImage: setCropped } } = useContext(ImageConfiguratorContext);
-    const { mutate: updateOrder } = useUpdateOrder();
+    const { mutate: updateOrder } = useUpdateOrder({
+        onSuccess: () => {
+            reset();
+            setImage(INITIAL_IMAGE);
+            setForm(undefined);
+            setSummary(undefined);
+            setStepper(2);
+            clearOrderID();
+            queryClient.invalidateQueries(ORDER_KEY);
+        }
+    });
 
     const { t } = useTranslation();
 
@@ -28,15 +38,8 @@ const Form = (): JSX.Element => {
         defaultValues: { ...form }
     });
 
-    const onSubmit: SubmitHandler<FormInputs> = (data) => {
+    const onSubmit: SubmitHandler<FormInputs> = async (data) => {
         updateOrder({ form: data, date: Date.now() });
-        clearOrderID();
-        setImage(INITIAL_IMAGE);
-        setCropped(undefined);
-        setForm(undefined);
-        setSummary(undefined);
-        reset();
-        setStepper(2);
     }
 
     return(

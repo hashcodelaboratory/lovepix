@@ -20,9 +20,9 @@ import { SummaryFormInputs } from "./utils/types";
 const Delivery = () => {
   const {
     state: {
-      image: { size },
       summary,
       stepper,
+      shoppingCart
     },
     stateAction: { setStepper },
   } = useContext(AppContext);
@@ -57,7 +57,7 @@ const Delivery = () => {
         <hr />
         <div className={styles.totalContainer}>
           <p>
-            {size} {String(t(messages.items))}
+            {shoppingCart?.images?.length} {String(t(messages.items))}
           </p>
           <p>€ 17.99</p>
         </div>
@@ -124,7 +124,7 @@ const Delivery = () => {
         <Link className={styles.text} style={{ cursor: "pointer" }}>
           <b>{String(t(messages.privacy))}</b>
         </Link>
-        <button type='submit' className={styles.checkoutButton}>
+        <button type='submit' className={styles.checkoutButton} disabled={stepper === 1}>
           {String(t(messages.checkout))}
         </button>
       </form>

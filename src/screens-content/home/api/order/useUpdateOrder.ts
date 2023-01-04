@@ -16,11 +16,11 @@ export type UpdateOrderRequest = {
 }
 
 const updateOrder = async (data: UpdateOrderRequest) => {
-    const docID = sessionStorage.getItem(ORDER_ID_KEY);
+    const orderID = sessionStorage.getItem(ORDER_ID_KEY);
     const batch = writeBatch(database);
 
-    if (docID) {
-        const docRef = doc(database, Collections.ORDERS, docID);
+    if (orderID) {
+        const docRef = doc(database, Collections.ORDERS, orderID);
         await batch.update(docRef, {
             ...data
         });
