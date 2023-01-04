@@ -10,9 +10,11 @@ import {messages} from "../../../../../messages/messages";
 import Form from "../components/form/form";
 import {useRouter} from "next/router";
 import {useUpdateOrder} from "../../../../home/api/order/useUpdateOrder";
+import {ORDER_KEY} from "../../../../home/api/order/utils/keys";
+import {useQueryClient} from "react-query";
 
 const Cart = () => {
-    const { state: { shoppingCart, stepper }, stateAction: { setStepper, setShoppingCart } } = useContext(AppContext);
+    const { state: { shoppingCart, stepper }, stateAction: { setStepper } } = useContext(AppContext);
 
     const images = shoppingCart?.images ?? [{} as ShoppingCartImage];
 
@@ -20,16 +22,18 @@ const Cart = () => {
 
     const router = useRouter();
 
+    const queryClient = useQueryClient();
+
     const { mutate: updateOrder } = useUpdateOrder();
 
-    const removeImage = (title?: string) => {
+    const removeImage = async (title?: string) => {
         const filtered = images.filter(image => image.name !== title);
-        updateOrder({
+        await updateOrder({
             shoppingCart: filtered.length === 0 ? null : {
                 images: filtered
             }
         });
-        filtered.length === 0 && setShoppingCart(undefined);
+        await queryClient.invalidateQueries(ORDER_KEY);
     }
 
     const items =

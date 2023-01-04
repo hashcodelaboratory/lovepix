@@ -16,12 +16,12 @@ const CropperComponent = () => {
 
   const cropperRef = useRef<any>(null);
 
-  const onCrop = useCallback(() => {
+  const onCrop = () => {
     const imageElement: any = cropperRef?.current;
     const cropper: any = imageElement?.cropper;
 
-    setImage(cropper.getCroppedCanvas().toDataURL());
-  }, [setImage]);
+    setImage(cropper.getCroppedCanvas()?.toDataURL());
+  };
 
   const allDimensions = [
     ...dimensionsByWidth,

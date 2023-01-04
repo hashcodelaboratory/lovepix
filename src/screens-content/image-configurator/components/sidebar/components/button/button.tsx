@@ -19,6 +19,8 @@ import {UPLOAD_IMAGES} from "../../../../../home/components/upload-image/dropzon
 import {getDownloadURL, ref, uploadBytes} from "@firebase/storage";
 import {storage} from "../../../../../../../utils/firebase/config";
 import {useOrder} from "../../../../../home/api/order/useOrder";
+import {useQueryClient} from "react-query";
+import {ORDER_KEY} from "../../../../../home/api/order/utils/keys";
 
 const Button = () => {
   const { t } = useTranslation();
@@ -28,6 +30,8 @@ const Button = () => {
   const { data: order } = useOrder();
 
   const router = useRouter();
+
+  const queryClient = useQueryClient();
 
   const {
     state: { dimensionId, materialId, image, shoppingCart },
@@ -81,11 +85,9 @@ const Button = () => {
       setCropped(undefined);
       setImage(INITIAL_IMAGE);
 
+      await queryClient.invalidateQueries(ORDER_KEY);
       router.push(`${SHOPPING_CART}`);
     }
-
-
-
   };
 
   return (
