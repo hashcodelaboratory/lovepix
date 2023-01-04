@@ -6,7 +6,6 @@ import { messages } from "../../../../../../messages/messages";
 import { useContext } from "react";
 import AppContext from "../../../../../../app-context/app-context";
 import { INITIAL_IMAGE } from "app-context/consts";
-import {ImageLayout} from "../../../../../home/enums/enums";
 import Image from "next/image";
 import ImageConfiguratorContext from "../../../../image-configurator-context/image-configurator-context";
 import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
@@ -37,11 +36,8 @@ const Preview = () => {
         <Image
             alt="preview"
             src={image?.url ?? ""}
-            width={50}
-            height={80}
-            layout={ImageLayout.FIXED}
+            layout={"fill"}
         />
-        <p style={{ textAlign: "center", width: "100%" }} >{image?.name}</p>
         <button className={styles.previewRemove} onClick={handleRemoveImage}>
           <Delete sx={{ mr: 1 }} />
           {String(t(messages.removeImage))}
