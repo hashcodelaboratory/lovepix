@@ -15,7 +15,7 @@ const TabPanelBox = ({ x, y, onClick, selected, style = {} }: Props) => {
       className={styles.tabPanelBox}
       style={{
         borderColor: selected ? "#f1f1f1" : "#e0e0e0",
-        boxShadow: selected ? "4px 3px 8px silver" : "none",
+        boxShadow: selected ? "4px 3px 8px #1976d2" : "none",
         ...style,
       }}
       onClick={onClick}

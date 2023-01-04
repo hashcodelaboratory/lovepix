@@ -9,6 +9,7 @@ import { ImageLayout } from "screens-content/home/enums/enums";
 import { useContext } from "react";
 import AppContext from "../../../../../../app-context/app-context";
 import { materials } from "screens-content/home/utils/configuration";
+
 const Material = () => {
   const { t } = useTranslation();
 
@@ -26,9 +27,9 @@ const Material = () => {
         justifyContent: "center",
       }}
     >
-      <p style={{ fontSize: 14, textAlign: "center" }}>{material.name}</p>
+
       <div
-        className={material.id === materialId ? styles.imageWrapper : undefined}
+        className={material.id === materialId ? styles.imageWrapper : styles.relativeContainer}
       >
         <Image
           onClick={() => setMaterialId(material.id)}
@@ -41,9 +42,10 @@ const Material = () => {
           objectFit='cover'
           style={{
             borderRadius: 5,
-            cursor: "pointer",
+            cursor: "pointer"
           }}
         />
+        <p className={styles.materialCardTitle}>{material.name}</p>
       </div>
     </div>
   ));
