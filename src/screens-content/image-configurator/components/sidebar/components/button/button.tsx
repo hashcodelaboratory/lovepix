@@ -15,11 +15,17 @@ import { useRouter } from "next/router";
 import { SHOPPING_CART } from "constants/pages/urls";
 import ImageConfiguratorContext from "../../../../image-configurator-context/image-configurator-context";
 import {INITIAL_IMAGE} from "../../../../../../app-context/consts";
+import {UPLOAD_IMAGES} from "../../../../../home/components/upload-image/dropzone/utils";
+import {getDownloadURL, ref, uploadBytes} from "@firebase/storage";
+import {storage} from "../../../../../../../utils/firebase/config";
+import {useOrder} from "../../../../../home/api/order/useOrder";
 
 const Button = () => {
   const { t } = useTranslation();
 
   const { mutate: updateOrder } = useUpdateOrder();
+
+  const { data: order } = useOrder();
 
   const router = useRouter();
 
@@ -30,7 +36,7 @@ const Button = () => {
 
   const { state: { image: cropped }, stateAction: { setImage: setCropped } } = useContext(ImageConfiguratorContext);
 
-  const handleUpdateOrder = () => {
+  const handleUpdateOrder = async () => {
     const dimensions = [
       ...dimensionsByWidth,
       ...dimensionsByHeight,
@@ -39,27 +45,47 @@ const Button = () => {
 
     const dim = dimensions.find((dim) => dim.id === dimensionId);
 
-    const payload = {
-      image: null,
-      shoppingCart: {
-        images: [...shoppingCart?.images ?? [], {
-          name: image?.name ?? '',
-          url: cropped ?? '',
-          qty: 1,
-          origin: image?.url ?? '',
-          width: dim?.width ?? 0,
-          height: dim?.height ?? 0,
-          material: materials.find((mat) => mat.id === materialId)?.name ?? '',
-        }]
-      },
-    };
+    // UPLOADING TO STORAGE
+    const res = await fetch(cropped ?? '');
+    const file = await res.blob();
 
-    updateOrder(payload);
+    const uploadURL = `${UPLOAD_IMAGES}/${order?.id}/EDITED-${Date.now()}`;
 
-    setCropped(undefined);
-    setImage(INITIAL_IMAGE);
+    const storageRef = ref(storage, uploadURL);
 
-    router.push(`${SHOPPING_CART}`);
+    const {
+      metadata: { name },
+    } = await uploadBytes(storageRef, file);
+    if (name) {
+      const url = await getDownloadURL(
+          ref(storage, `${UPLOAD_IMAGES}/${order?.id}/${name}`)
+      );
+
+      const payload = {
+        image: null,
+        shoppingCart: {
+          images: [...shoppingCart?.images ?? [], {
+            name: image?.name ?? '',
+            url: url ?? '',
+            qty: 1,
+            origin: image?.url ?? '',
+            width: dim?.width ?? 0,
+            height: dim?.height ?? 0,
+            material: materials.find((mat) => mat.id === materialId)?.name ?? '',
+          }]
+        },
+      };
+
+      updateOrder(payload);
+
+      setCropped(undefined);
+      setImage(INITIAL_IMAGE);
+
+      router.push(`${SHOPPING_CART}`);
+    }
+
+
+
   };
 
   return (

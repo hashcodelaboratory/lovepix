@@ -55,7 +55,7 @@ const DropzoneContainer = () => {
 
   const onDrop = async (files: File[]) => {
     const file = files[0];
-    const uploadURL = `${UPLOAD_IMAGES}/${Date.now()}`;
+    const uploadURL = `${UPLOAD_IMAGES}/${order?.id}/ORIGIN-${Date.now()}`;
 
     const storageRef = ref(storage, uploadURL);
 
@@ -68,7 +68,7 @@ const DropzoneContainer = () => {
         SNACKBAR_OPTIONS_SUCCESS
       );
       const url = await getDownloadURL(
-        ref(storage, `${UPLOAD_IMAGES}/${name}`)
+        ref(storage, `${UPLOAD_IMAGES}/${order?.id}/${name}`)
       );
       const data = {
         url: url,

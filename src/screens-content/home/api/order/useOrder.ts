@@ -11,7 +11,7 @@ const getOrder = async (): Promise<any> => {
         const docRef = doc(database, Collections.ORDERS, orderID);
         const _doc = await getDoc(docRef);
 
-        return _doc.exists() ? _doc.data() : {};
+        return _doc.exists() ? {..._doc.data(), id: orderID } : {};
     }
     return null;
 }
