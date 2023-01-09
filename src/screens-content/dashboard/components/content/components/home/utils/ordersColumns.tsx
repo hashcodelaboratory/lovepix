@@ -37,8 +37,8 @@ export const ORDERS_COLUMNS: GridColDef[] = [
         headerName: 'Origin',
         editable: false,
         renderCell: ({ value }) =>
-            <a target="_blank" href={`https:${value}`} rel="noopener noreferrer">
-                <Image style={{ borderRadius: 6, cursor: "pointer" }} src={`https:${value}`} width={40} height={40} layout={ImageLayout.FIXED} />
+            value && <a target="_blank" href={`https:${value}`} rel="noopener noreferrer">
+                <Image alt="origin" style={{ borderRadius: 6, cursor: "pointer" }} src={`https:${value}`} width={40} height={40} layout={ImageLayout.FIXED} />
             </a>
     },
     {
@@ -46,8 +46,8 @@ export const ORDERS_COLUMNS: GridColDef[] = [
         headerName: 'Edited',
         editable: false,
         renderCell: ({ value }) =>
-            <a target="_blank" href={`https:${value}`} rel="noopener noreferrer">
-                <Image style={{ borderRadius: 6, cursor: "pointer" }} src={`https:${value}`} width={40} height={40} layout={ImageLayout.FIXED} />
+            value && <a target="_blank" href={`https:${value}`} rel="noopener noreferrer">
+                <Image alt="edited" style={{ borderRadius: 6, cursor: "pointer" }} src={`https:${value}`} width={40} height={40} layout={ImageLayout.FIXED} />
             </a>
     },
 ];
