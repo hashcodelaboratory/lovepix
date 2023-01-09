@@ -3,23 +3,31 @@ import styles from "../../../../../dashboard.module.scss";
 
 export const ORDERS_COLUMNS: GridColDef[] = [
     {
-        field: 'orderID',
-        headerName: 'Order ID',
+        field: 'id',
+        headerName: 'ID',
         width: 150,
         editable: false,
+        filterable: true
     },
     {
-        field: 'status',
-        headerName: 'Status',
+        field: 'date',
+        headerName: 'Date',
         width: 150,
         editable: false,
         renderCell: ({ value }) => <div className={styles.status}>{value}</div>
     },
     {
-        field: 'url',
-        headerName: 'URL',
+        field: 'delivery',
+        headerName: 'Delivery',
         type: 'string',
-        width: 300,
+        width: 200,
+        editable: false,
+    },
+    {
+        field: 'payment',
+        headerName: 'Payment',
+        type: 'string',
+        width: 200,
         editable: false,
     },
 ];

@@ -16,6 +16,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SUMMARY_SCHEMA } from "./utils/schema";
 import { useUpdateOrder } from "../../../../../home/api/order/useUpdateOrder";
 import { SummaryFormInputs } from "./utils/types";
+import {Delivery as DeliveryOptions, Payment} from "../../../../../../common/enums/summary"
 
 const Delivery = () => {
   const {
@@ -70,13 +71,13 @@ const Delivery = () => {
           render={({ field }) => (
             <FormControl fullWidth error={!!errors.delivery?.message}>
               <Select {...field} {...register("delivery", { required: true })}>
-                <MenuItem value={"courier"}>
+                <MenuItem value={DeliveryOptions.COURIER}>
                   {String(t(messages.courier))}
                 </MenuItem>
-                <MenuItem value={"personalCollect"}>
+                <MenuItem value={DeliveryOptions.PERSONAL_COLLECT}>
                   {String(t(messages.personalCollect))}
                 </MenuItem>
-                <MenuItem value={"pickup"}>
+                <MenuItem value={DeliveryOptions.PICKUP}>
                   {String(t(messages.pickup))}
                 </MenuItem>
               </Select>
@@ -99,10 +100,10 @@ const Delivery = () => {
           render={({ field }) => (
             <FormControl fullWidth error={!!errors.payment?.message}>
               <Select {...field} {...register("payment", { required: true })}>
-                <MenuItem value={"online"}>
+                <MenuItem value={Payment.ONLINE}>
                   {String(t(messages.online))}
                 </MenuItem>
-                <MenuItem value={"personalDelivery"}>
+                <MenuItem value={Payment.PERSONAL_DELIVERY}>
                   {String(t(messages.personalDelivery))}
                 </MenuItem>
               </Select>

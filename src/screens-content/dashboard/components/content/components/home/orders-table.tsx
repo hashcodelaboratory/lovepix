@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import {DataGrid, GridCallbackDetails, GridSelectionModel} from '@mui/x-data-grid';
+import {DataGrid, GridCallbackDetails, GridSelectionModel, GridToolbar} from '@mui/x-data-grid';
 import styles from '../../../../dashboard.module.scss'
 import {useContext, useState} from "react";
 import DashboardContext from "../../../../context/dashboard-context";
@@ -24,12 +24,12 @@ const OrdersTable = () => {
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
     const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
 
-    const data = orders.map(({ id, image}) => (
+    const data = orders.map(({ id, date, summary }) => (
         {
             id: id,
-            orderID: image?.name ?? '',
-            status: image?.status,
-            url: image?.url ?? ''
+            date: new Date(date).toLocaleDateString() ?? '',
+            delivery: t(summary?.delivery),
+            payment: t(summary?.payment) ?? ''
         }
     ));
 
@@ -69,6 +69,7 @@ const OrdersTable = () => {
                     disableSelectionOnClick
                     selectionModel={selectionModel}
                     onSelectionModelChange={selectionChanged}
+                    components={{ Toolbar: GridToolbar }}
                 />
                 <button className={styles.removeButton} onClick={removeData} disabled={!selectedRows.length}>
                     {buttonText}
