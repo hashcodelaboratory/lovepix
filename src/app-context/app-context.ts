@@ -1,7 +1,7 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 import { ImageStatus } from "./enums";
-import { SummaryFormInputs } from "../screens-content/shopping-cart/components/summary/components/delivery/utils/types";
-import { FormInputs } from "../screens-content/shopping-cart/components/summary/components/form/utils/types";
+import {FormInputs} from "../common/types/form";
+import {Summary} from "../common/types/summary";
 
 export type UploadedImage = {
     url?: string;
@@ -29,7 +29,7 @@ export type AppContextProps = {
         image: UploadedImage;
         stepper: number;
         form?: FormInputs;
-        summary?: SummaryFormInputs;
+        summary?: Summary;
         dimensionId?: string;
         materialId?: string;
         shoppingCart?: ShoppingCart;
@@ -38,7 +38,7 @@ export type AppContextProps = {
         setImage: Dispatch<SetStateAction<UploadedImage>>;
         setStepper: Dispatch<SetStateAction<number>>;
         setForm: Dispatch<SetStateAction<FormInputs | undefined>>;
-        setSummary: Dispatch<SetStateAction<SummaryFormInputs | undefined>>;
+        setSummary: Dispatch<SetStateAction<Summary | undefined>>;
         setDimensionId: Dispatch<SetStateAction<string | undefined>>;
         setMaterialId: Dispatch<SetStateAction<string | undefined>>;
         setShoppingCart: Dispatch<SetStateAction<ShoppingCart | undefined>>;

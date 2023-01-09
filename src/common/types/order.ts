@@ -1,4 +1,6 @@
 import {Delivery, Payment} from "../enums/summary";
+import {FormInputs} from "./form";
+import {Summary} from "./summary";
 
 type Image = {
     name: string;
@@ -14,22 +16,10 @@ type Image = {
 export type Order = {
     id: string;
     date: Date;
-    form: {
-        address: string;
-        city: string;
-        company: string;
-        email: string;
-        firstName: string;
-        lastName: string;
-        phone: string;
-        postalCode: string;
-    };
+    form: FormInputs;
     shoppingCart: {
         images: Image[];
     };
-    summary: {
-        delivery: Delivery;
-        payment: Payment;
-    }
+    summary: Summary;
     image: Image;
 }

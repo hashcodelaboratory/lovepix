@@ -4,14 +4,14 @@ import { doc, writeBatch } from "@firebase/firestore";
 import { Collections } from "../../../../../utils/firebase/enums";
 import {ShoppingCart, UploadedImage} from "../../../../app-context/app-context";
 import { ORDER_ID_KEY } from "../../../../../utils/sessionStorage/utils/keys";
-import { FormInputs } from "../../../shopping-cart/components/summary/components/form/utils/types";
-import { SummaryFormInputs } from "../../../shopping-cart/components/summary/components/delivery/utils/types";
+import {FormInputs} from "../../../../common/types/form";
+import {Summary} from "../../../../common/types/summary";
 
 export type UpdateOrderRequest = {
     image?: UploadedImage | null;
     date?: number;
     form?: FormInputs;
-    summary?: SummaryFormInputs;
+    summary?: Summary;
     shoppingCart?: ShoppingCart | null;
 }
 

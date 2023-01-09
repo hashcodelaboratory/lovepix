@@ -1,11 +1,11 @@
 import AppContext, {AppContextProps, ShoppingCart, UploadedImage} from "./app-context";
 import { useEffect, useState } from "react";
-import { FormInputs } from "../screens-content/shopping-cart/components/summary/components/form/utils/types";
-import { SummaryFormInputs } from "../screens-content/shopping-cart/components/summary/components/delivery/utils/types";
 import { ContextProviderProps } from "./types";
 import { useOrder } from "../screens-content/home/api/order/useOrder";
 import { ImageStatus } from "./enums";
 import { INITIAL_IMAGE } from "./consts";
+import {FormInputs} from "../common/types/form";
+import {Summary} from "../common/types/summary";
 
 const AppContextProvider = ({ children }: ContextProviderProps) => {
   const { data: order, isFetching } = useOrder();
@@ -15,7 +15,7 @@ const AppContextProvider = ({ children }: ContextProviderProps) => {
   const [materialId, setMaterialId] = useState<string>();
   const [stepper, setStepper] = useState(0);
   const [form, setForm] = useState<FormInputs>();
-  const [summary, setSummary] = useState<SummaryFormInputs>();
+  const [summary, setSummary] = useState<Summary>();
   const [shoppingCart, setShoppingCart] = useState<ShoppingCart>();
 
   useEffect(() => {
