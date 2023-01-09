@@ -55,7 +55,8 @@ const DropzoneContainer = () => {
 
   const onDrop = async (files: File[]) => {
     const file = files[0];
-    const uploadURL = `${UPLOAD_IMAGES}/${order?.id}/ORIGIN-${Date.now()}`;
+    const date = Date.now();
+    const uploadURL = `${UPLOAD_IMAGES}/${order?.id}/ORIGIN-${date}`;
 
     const storageRef = ref(storage, uploadURL);
 
@@ -78,7 +79,7 @@ const DropzoneContainer = () => {
       };
       setImage(data);
 
-      order ? updateOrder({ image: data }) : createOrder({ image: data });
+      order ? updateOrder({ image: data }) : createOrder({ image: data, date });
     }
   };
 

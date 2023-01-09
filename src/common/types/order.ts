@@ -1,4 +1,3 @@
-import {Delivery, Payment} from "../enums/summary";
 import {FormInputs} from "./form";
 import {Summary} from "./summary";
 

@@ -7,10 +7,11 @@ import {ORDER_ID_KEY} from "../../../../../utils/sessionStorage/utils/keys";
 
 export type CreateOrderRequest = {
     image: UploadedImage;
+    date: number;
 }
 
 const createOrder = async (data: CreateOrderRequest) => {
-    const docID = Date.now().toString();
+    const docID = data.date.toString();
     await setDoc(doc(database, Collections.ORDERS, docID), {
         ...data
     });
