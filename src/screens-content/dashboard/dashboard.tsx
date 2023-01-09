@@ -8,7 +8,7 @@ import {useOrders} from "./api/orders/useOrders";
 const CustomDashboard = () => {
     const { data: uploadedImages = [], isFetching } = useUploadedImages();
     const { data: orders = [], isFetching: isFetchingOrders } = useOrders();
-    console.log(uploadedImages)
+
     return (
         <DashboardContext.Provider value={{
             state: {

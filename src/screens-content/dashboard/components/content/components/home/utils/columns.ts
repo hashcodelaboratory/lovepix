@@ -8,15 +8,8 @@ export const UPLOADED_IMAGES_COLUMNS: GridColDef[] = [
         editable: false,
     },
     {
-        field: 'fullPath',
-        headerName: 'Full path',
-        type: 'string',
-        width: 300,
-        editable: false,
-    },
-    {
-        field: 'name',
-        headerName: 'Name',
+        field: 'order',
+        headerName: 'Order',
         width: 150,
         editable: false,
     }

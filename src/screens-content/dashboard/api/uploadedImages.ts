@@ -8,9 +8,9 @@ export const UPLOADED_IMAGES_KEY = 'UPLOADED_IMAGES';
 const getUploadedImages = async (): Promise<StorageReference[]> => {
     const uploadedImagesRef = ref(storage, UPLOAD_IMAGES);
 
-    const { items } = await listAll(uploadedImagesRef);
+    const { prefixes } = await listAll(uploadedImagesRef);
 
-    return items;
+    return prefixes;
 }
 
 export const useUploadedImages = (): UseQueryResult<StorageReference[]> =>

@@ -28,8 +28,7 @@ const Table = () => {
         {
             id: index + 1,
             bucket: bucket,
-            name: name,
-            fullPath: fullPath
+            order: name,
         }
     ));
 
@@ -50,7 +49,7 @@ const Table = () => {
 
     const selectionChanged = (selectionModel: GridSelectionModel, details: GridCallbackDetails) => {
         setSelectionModel(selectionModel);
-        setSelectedRows(selectionModel.map((item, index) => data[index].fullPath));
+        setSelectedRows(selectionModel.map((item, index) => data[index].order));
     }
 
     const buttonText = `(${selectedRows.length}) ${String(t(messages.removeAll))}`;
