@@ -32,9 +32,9 @@ const getAkrylPrice = (width: number, height: number) => {
     if (width > height) {
         return AKRYL_PRICES_BY_WIDTH.find(item => item.width === width && item.height === height)?.price ?? '-';
     } else if (width === height) {
-        return AKRYL_PRICES_BY_HEIGHT.find(item => item.width === width && item.height === height)?.price ?? '-';
-    } else {
         return AKRYL_PRICES_SQUARE.find(item => item.width === width && item.height === height)?.price ?? '-';
+    } else {
+        return AKRYL_PRICES_BY_HEIGHT.find(item => item.width === width && item.height === height)?.price ?? '-';
     }
 }
 
@@ -42,9 +42,9 @@ const getCanvasPrice = (width: number, height: number) => {
     if (width > height) {
         return CANVAS_PRICES_BY_WIDTH.find(item => item.width === width && item.height === height)?.price ?? '-';
     } else if (width === height) {
-        return CANVAS_PRICES_BY_HEIGHT.find(item => item.width === width && item.height === height)?.price ?? '-';
-    } else {
         return CANVAS_PRICES_SQUARE.find(item => item.width === width && item.height === height)?.price ?? '-';
+    } else {
+        return CANVAS_PRICES_BY_HEIGHT.find(item => item.width === width && item.height === height)?.price ?? '-';
     }
 }
 
@@ -52,8 +52,8 @@ const getDibondPrice = (width: number, height: number) => {
     if (width > height) {
         return DIBOND_PRICES_BY_WIDTH.find(item => item.width === width && item.height === height)?.price ?? '-';
     } else if (width === height) {
-        return DIBOND_PRICES_BY_HEIGHT.find(item => item.width === width && item.height === height)?.price ?? '-';
-    } else {
         return DIBOND_PRICES_SQUARE.find(item => item.width === width && item.height === height)?.price ?? '-';
+    } else {
+        return DIBOND_PRICES_BY_HEIGHT.find(item => item.width === width && item.height === height)?.price ?? '-';
     }
 }
