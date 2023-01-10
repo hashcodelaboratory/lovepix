@@ -8,11 +8,11 @@ import {useTranslation} from "next-i18next";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {FORM_SCHEMA} from "./utils/schema";
 import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
-import { FormInputs } from "./utils/types";
 import {useSession} from "../../../../../../../utils/sessionStorage/useSessionStorage";
 import {INITIAL_IMAGE} from "../../../../../../app-context/consts";
 import {useQueryClient} from "react-query";
 import {ORDER_KEY} from "../../../../../home/api/order/utils/keys";
+import {FormInputs} from "../../../../../../common/types/form";
 
 const Form = (): JSX.Element => {
     const queryClient = useQueryClient();
