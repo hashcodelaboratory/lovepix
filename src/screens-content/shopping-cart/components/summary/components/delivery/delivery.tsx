@@ -15,8 +15,8 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SUMMARY_SCHEMA } from "./utils/schema";
 import { useUpdateOrder } from "../../../../../home/api/order/useUpdateOrder";
-import { SummaryFormInputs } from "./utils/types";
 import {Delivery as DeliveryOptions, Payment} from "../../../../../../common/enums/summary"
+import {Summary} from "../../../../../../common/types/summary";
 
 const Delivery = () => {
   const {
@@ -37,7 +37,7 @@ const Delivery = () => {
     formState: { errors },
     control,
     reset,
-  } = useForm<SummaryFormInputs>({
+  } = useForm<Summary>({
     resolver: yupResolver(SUMMARY_SCHEMA),
     defaultValues: { ...summary },
   });
@@ -46,7 +46,7 @@ const Delivery = () => {
     stepper === 3 && reset();
   }, [stepper, reset]);
 
-  const onSubmit: SubmitHandler<SummaryFormInputs> = (data) => {
+  const onSubmit: SubmitHandler<Summary> = (data) => {
     updateOrder({ summary: data });
     setStepper(1);
   };
