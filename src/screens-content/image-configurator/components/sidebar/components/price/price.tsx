@@ -26,8 +26,8 @@ const Price = () => {
       <div className={styles.containerPadding}>
         <div className={styles.price}>
           <h3><b>Cena</b></h3>
-          <p className={styles.priceNoTax}>{price !== '-' && price * 0.8} € bez DPH</p>
-          <h3><b>{price} € </b></h3>
+          <p className={styles.priceNoTax}>{price !== '-' && Number(price * 0.8).toFixed(2)} € bez DPH</p>
+          <h3><b>{Number(price).toFixed(2)} € </b></h3>
         </div>
         <hr />
       </div>
