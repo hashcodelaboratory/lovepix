@@ -20,12 +20,14 @@ const Price = () => {
 
     const { width, height } = dimensions.find((dim) => dim.id === dimensionId) ?? { width: 0, height: 0 };
 
+    const price = width > 0 && height > 0 ? getPrice(width, height, materials.find(material => material.id === materialId)?.name) : '-';
+
     return(
       <div className={styles.containerPadding}>
         <div className={styles.price}>
           <h3><b>Cena</b></h3>
-          <p className={styles.priceNoTax}>- € bez DPH</p>
-          <h3><b>{width > 0 && height > 0 ? getPrice(width, height, materials.find(material => material.id === materialId)?.name) : '-'} € </b></h3>
+          <p className={styles.priceNoTax}>{price !== '-' && price * 0.8} € bez DPH</p>
+          <h3><b>{price} € </b></h3>
         </div>
         <hr />
       </div>

@@ -7,6 +7,8 @@ export const dimensionsByWidth = [
     { width: 45, height: 30, id: "w4" },
     { width: 105, height: 70, id: "w5" },
     { width: 120, height: 80, id: "w6" },
+    { width: 75, height: 50, id: "w7" },
+    { width: 150, height: 100, id: "w8" },
 ];
 
 export const dimensionsByHeight = [
@@ -17,12 +19,14 @@ export const dimensionsByHeight = [
     { width: 60, height: 90, id: "h5" },
     { width: 80, height: 120, id: "h6" },
     { width: 70, height: 105, id: "h7" },
+    { width: 100, height: 150, id: "h8" },
 ];
 
 export const dimensionsBySquare = [
     { width: 50, height: 50, id: "s1" },
     { width: 80, height: 80, id: "s2" },
     { width: 100, height: 100, id: "s3" },
+    { width: 20, height: 20, id: "s4" },
 ];
 
 export const materials = [

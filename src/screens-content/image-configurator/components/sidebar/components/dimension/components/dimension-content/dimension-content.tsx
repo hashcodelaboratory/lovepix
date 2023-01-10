@@ -34,7 +34,8 @@ const DimensionContent = () => {
           value={value}
           onChange={handleChange}
           aria-label='basic tabs example'
-          variant="fullWidth"
+          variant="scrollable"
+          visibleScrollbar
         >
           <Tab label={String(t(messages.byWidth))} {...a11yProps(0)} />
           <Tab label={String(t(messages.byHeight))} {...a11yProps(1)} />
