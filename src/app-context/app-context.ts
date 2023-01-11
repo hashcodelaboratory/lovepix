@@ -18,6 +18,7 @@ export type ShoppingCartImage = {
     width: number;
     height: number;
     material: string;
+    price: number;
 }
 
 export type ShoppingCart = {
@@ -33,6 +34,7 @@ export type AppContextProps = {
         dimensionId?: string;
         materialId?: string;
         shoppingCart?: ShoppingCart;
+        totalPrice?: number;
     },
     stateAction: {
         setImage: Dispatch<SetStateAction<UploadedImage>>;
@@ -42,6 +44,7 @@ export type AppContextProps = {
         setDimensionId: Dispatch<SetStateAction<string | undefined>>;
         setMaterialId: Dispatch<SetStateAction<string | undefined>>;
         setShoppingCart: Dispatch<SetStateAction<ShoppingCart | undefined>>;
+        setTotalPrice: Dispatch<SetStateAction<number | undefined>>;
     }
 }
 

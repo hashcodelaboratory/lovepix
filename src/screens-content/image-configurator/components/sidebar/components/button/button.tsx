@@ -5,12 +5,7 @@ import { messages } from "../../../../../../messages/messages";
 import { useUpdateOrder } from "../../../../../home/api/order/useUpdateOrder";
 import { useContext } from "react";
 import AppContext from "../../../../../../app-context/app-context";
-import {
-  materials,
-  dimensionsByHeight,
-  dimensionsBySquare,
-  dimensionsByWidth,
-} from "screens-content/home/utils/configuration";
+import {materials} from "screens-content/home/utils/configuration";
 import { useRouter } from "next/router";
 import { SHOPPING_CART } from "constants/pages/urls";
 import ImageConfiguratorContext from "../../../../image-configurator-context/image-configurator-context";
@@ -21,6 +16,8 @@ import {storage} from "../../../../../../../utils/firebase/config";
 import {useOrder} from "../../../../../home/api/order/useOrder";
 import {useQueryClient} from "react-query";
 import {ORDER_KEY} from "../../../../../home/api/order/utils/keys";
+import {getPrice} from "../price/utils/generator";
+import {DIMENSIONS} from "../../../../../../common/configuration/dimensions/dimensions";
 
 const Button = () => {
   const { t } = useTranslation();
@@ -41,13 +38,8 @@ const Button = () => {
   const { state: { image: cropped }, stateAction: { setImage: setCropped } } = useContext(ImageConfiguratorContext);
 
   const handleUpdateOrder = async () => {
-    const dimensions = [
-      ...dimensionsByWidth,
-      ...dimensionsByHeight,
-      ...dimensionsBySquare,
-    ];
 
-    const dim = dimensions.find((dim) => dim.id === dimensionId);
+    const dim = DIMENSIONS.find((dim) => dim.id === dimensionId) ?? { width: 0, height: 0 };
 
     // UPLOADING TO STORAGE
     const res = await fetch(cropped ?? '');
@@ -65,6 +57,14 @@ const Button = () => {
           ref(storage, `${UPLOAD_IMAGES}/${order?.id}/${name}`)
       );
 
+      const price = dim.width > 0 && dim.height > 0 ? getPrice(dim.width, dim.height, materials.find(material => material.id === materialId)?.name) : 0;
+
+      let totalPrice: number = 0;
+      shoppingCart?.images?.forEach((image) => {
+        totalPrice += image.price * image.qty;
+      });
+      totalPrice += Number(Number(price).toFixed(2));
+
       const payload = {
         image: null,
         shoppingCart: {
@@ -73,11 +73,13 @@ const Button = () => {
             url: url ?? '',
             qty: 1,
             origin: image?.url ?? '',
-            width: dim?.width ?? 0,
-            height: dim?.height ?? 0,
+            width: dim.width ?? 0,
+            height: dim.height ?? 0,
             material: materials.find((mat) => mat.id === materialId)?.name ?? '',
+            price: Number(Number(price).toFixed(2))
           }]
         },
+        totalPrice: totalPrice,
       };
 
       updateOrder(payload);

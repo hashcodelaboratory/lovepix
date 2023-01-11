@@ -17,6 +17,7 @@ const AppContextProvider = ({ children }: ContextProviderProps) => {
   const [form, setForm] = useState<FormInputs>();
   const [summary, setSummary] = useState<Summary>();
   const [shoppingCart, setShoppingCart] = useState<ShoppingCart>();
+  const [totalPrice, setTotalPrice] = useState<number>();
 
   useEffect(() => {
     if (order) {
@@ -42,7 +43,8 @@ const AppContextProvider = ({ children }: ContextProviderProps) => {
       });
       setShoppingCart({
         images: order.shoppingCart?.images,
-      })
+      });
+      setTotalPrice(order.totalPrice);
     }
   }, [isFetching, order]);
 
@@ -63,7 +65,8 @@ const AppContextProvider = ({ children }: ContextProviderProps) => {
       setSummary,
       setDimensionId,
       setMaterialId,
-      setShoppingCart
+      setShoppingCart,
+      setTotalPrice
     },
   };
 

@@ -13,6 +13,7 @@ export type UpdateOrderRequest = {
     form?: FormInputs;
     summary?: Summary;
     shoppingCart?: ShoppingCart | null;
+    totalPrice?: number;
 }
 
 const updateOrder = async (data: UpdateOrderRequest) => {
