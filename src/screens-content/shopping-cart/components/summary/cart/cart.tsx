@@ -46,7 +46,7 @@ const Cart = () => {
                     <TextField className={styles.qtyField} value={image?.qty} />
                     <Button>+</Button>
                 </div>
-                <div>€ 17.99</div>
+                <div>{Number(image?.price).toFixed(2)} €</div>
                 <Button onClick={() => removeImage(image?.name)}><CloseIcon color="error" /></Button>
             </div>
             <hr/>

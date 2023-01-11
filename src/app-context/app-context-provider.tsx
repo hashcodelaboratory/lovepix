@@ -56,7 +56,8 @@ const AppContextProvider = ({ children }: ContextProviderProps) => {
       summary,
       dimensionId,
       materialId,
-      shoppingCart
+      shoppingCart,
+      totalPrice
     },
     stateAction: {
       setImage,

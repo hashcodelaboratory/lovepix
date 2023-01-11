@@ -23,7 +23,8 @@ const Delivery = () => {
     state: {
       summary,
       stepper,
-      shoppingCart
+      shoppingCart,
+      totalPrice
     },
     stateAction: { setStepper },
   } = useContext(AppContext);
@@ -60,7 +61,7 @@ const Delivery = () => {
           <p>
             {shoppingCart?.images?.length} {String(t(messages.items))}
           </p>
-          <p>€ 17.99</p>
+          <p>{Number(totalPrice).toFixed(2)} €</p>
         </div>
         <p className={styles.summarySectionTitle}>
           {String(t(messages.delivery))}
@@ -119,7 +120,7 @@ const Delivery = () => {
           <p className={styles.summarySectionTitle}>
             {String(t(messages.total))}
           </p>
-          <p className={styles.price}>€ 18.99</p>
+          <p className={styles.price}>{Number(totalPrice).toFixed(2)} €</p>
         </div>
         <p className={styles.text}>{String(t(messages.personalData))}</p>
         <Link className={styles.text} style={{ cursor: "pointer" }}>
