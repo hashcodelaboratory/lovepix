@@ -24,10 +24,11 @@ const OrdersTable = () => {
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
     const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
 
-    const data = orders.map(({ id, date, summary, shoppingCart }) => (
+    const data = orders.map(({ id, date, summary, shoppingCart, totalPrice }) => (
         {
             id: id,
             date: new Date(date).toLocaleDateString() ?? '',
+            totalPrice: totalPrice ?? '',
             delivery: t(summary?.delivery),
             payment: t(summary?.payment) ?? '',
             origin: t(shoppingCart?.images.map(({ origin }) => origin)),

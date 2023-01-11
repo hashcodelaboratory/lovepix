@@ -12,7 +12,7 @@ import {useQueryClient} from "react-query";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {removeUploadedImages} from "./utils/removeUploadedImages";
 
-const Table = () => {
+const StorageTable = () => {
     const { state: { uploadedImages } } = useContext(DashboardContext);
 
     const { enqueueSnackbar } = useSnackbar();
@@ -78,4 +78,4 @@ const Table = () => {
     )
 }
 
-export default Table
+export default StorageTable

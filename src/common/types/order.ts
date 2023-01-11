@@ -9,6 +9,7 @@ type Image = {
     qty: number;
     origin: string;
     material: string;
+    price: number;
 }
 
 
@@ -21,4 +22,5 @@ export type Order = {
     };
     summary: Summary;
     image: Image;
+    totalPrice: number;
 }

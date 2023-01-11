@@ -19,6 +19,14 @@ export const ORDERS_COLUMNS: GridColDef[] = [
         renderCell: ({ value }) => <div className={styles.status}>{value}</div>
     },
     {
+        field: 'totalPrice',
+        headerName: 'Total price',
+        type: 'number',
+        width: 100,
+        editable: false,
+        renderCell: ({ value }) => <div>{Number(value).toFixed(2)} €</div>
+    },
+    {
         field: 'delivery',
         headerName: 'Delivery',
         type: 'string',
