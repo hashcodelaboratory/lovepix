@@ -69,7 +69,10 @@ export const ORDERS_COLUMNS: GridColDef[] = [
         renderCell: ({ value }) => {
             const url = value[0].image.url;
             const pdf = value[0].pdf;
-            return pdf ? <PictureAsPdfIcon color="error" /> : <Button variant="contained" onClick={() => generatePdf(value[0].image, value[0].id)}>{url?.toString().substring(url?.toString().length - 12, url?.toString().length + 1)}</Button>
+            return pdf ?
+                <a target="_blank" href={pdf} rel="noopener noreferrer">
+                    <PictureAsPdfIcon color="error" />
+                </a> : <Button variant="contained" onClick={() => generatePdf(value[0].image, value[0].id)}>{url?.toString().substring(url?.toString().length - 12, url?.toString().length + 1)}</Button>
         }
     },
 ];
