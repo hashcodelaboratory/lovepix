@@ -92,9 +92,11 @@ const Button = () => {
     }
   };
 
+  console.log(cropped)
+
   return (
     <div className={styles.containerPadding}>
-      <button className={styles.button} onClick={handleUpdateOrder}>
+      <button className={styles.button} onClick={handleUpdateOrder} disabled={!cropped}>
         <ShoppingCart />
         <p className={styles.buttonTitle}>{String(t(messages.toCart))}</p>
       </button>

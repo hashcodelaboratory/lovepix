@@ -126,6 +126,11 @@
   background-color: #808080;
 }
 
+.button:disabled {
+  cursor: default;
+  background-color: #9b9b9b;
+}
+
 .buttonTitle {
   margin: 0;
   padding-left: 0.5rem;
