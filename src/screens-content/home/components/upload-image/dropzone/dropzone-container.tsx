@@ -56,7 +56,7 @@ const DropzoneContainer = () => {
   const onDrop = async (files: File[]) => {
     const file = files[0];
     const date = Date.now();
-    const orderID = order.id ?? date;
+    const orderID = order?.id ?? date;
     const uploadURL = `${UPLOAD_IMAGES}/${orderID}/ORIGIN-${date}`;
 
     const storageRef = ref(storage, uploadURL);
