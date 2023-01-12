@@ -92,8 +92,6 @@ const Button = () => {
     }
   };
 
-  console.log(cropped)
-
   return (
     <div className={styles.containerPadding}>
       <button className={styles.button} onClick={handleUpdateOrder} disabled={!cropped}>
