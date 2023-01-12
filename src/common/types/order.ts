@@ -1,18 +1,17 @@
 import {FormInputs} from "./form";
 import {Summary} from "./summary";
+import {Material} from "../enums/material";
 
-type Image = {
+export type Image = {
     name: string;
     url: string;
     width: number;
     height: number;
     qty: number;
     origin: string;
-    material: string;
+    material: Material;
     price: number;
-    pdf: string;
 }
-
 
 export type Order = {
     id: string;
@@ -24,4 +23,5 @@ export type Order = {
     summary: Summary;
     image: Image;
     totalPrice: number;
+    pdf: string;
 }

@@ -14,6 +14,7 @@ export type UpdateOrderRequest = {
     summary?: Summary;
     shoppingCart?: ShoppingCart | null;
     totalPrice?: number;
+    pdf?: string;
 }
 
 const updateOrder = async (data: UpdateOrderRequest) => {

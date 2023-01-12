@@ -4,6 +4,7 @@ import Image from "next/image";
 import {ImageLayout} from "../../../../../../home/enums/enums";
 import Button from "@mui/material/Button";
 import {generatePdf} from "./post-processing/generatePdf";
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
 export const ORDERS_COLUMNS: GridColDef[] = [
     {
@@ -65,6 +66,10 @@ export const ORDERS_COLUMNS: GridColDef[] = [
         headerName: 'Post-processing PDF',
         width: 300,
         editable: false,
-        renderCell: ({ value }) => <Button variant="contained" onClick={() => generatePdf(value)}>{value.toString().substring(value.toString().length - 12, value.toString().length + 1)}</Button>,
+        renderCell: ({ value }) => {
+            const url = value[0].image.url;
+            const pdf = value[0].pdf;
+            return pdf ? <PictureAsPdfIcon color="error" /> : <Button variant="contained" onClick={() => generatePdf(value[0].image, value[0].id)}>{url?.toString().substring(url?.toString().length - 12, url?.toString().length + 1)}</Button>
+        }
     },
 ];
