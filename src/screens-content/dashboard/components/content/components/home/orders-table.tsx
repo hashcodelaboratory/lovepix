@@ -33,6 +33,7 @@ const OrdersTable = () => {
             payment: t(summary?.payment) ?? '',
             origin: t(shoppingCart?.images.map(({ origin }) => origin)),
             edited: t(shoppingCart?.images.map(({ url }) => url)),
+            pdf: shoppingCart?.images.map(({ pdf, url }) => pdf ?? url)
         }
     ));
 

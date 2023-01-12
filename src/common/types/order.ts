@@ -10,6 +10,7 @@ type Image = {
     origin: string;
     material: string;
     price: number;
+    pdf: string;
 }
 
 

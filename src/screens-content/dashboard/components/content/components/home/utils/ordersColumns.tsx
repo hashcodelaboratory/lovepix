@@ -2,6 +2,8 @@ import {GridColDef} from "@mui/x-data-grid";
 import styles from "../../../../../dashboard.module.scss";
 import Image from "next/image";
 import {ImageLayout} from "../../../../../../home/enums/enums";
+import Button from "@mui/material/Button";
+import {generatePdf} from "./post-processing/generatePdf";
 
 export const ORDERS_COLUMNS: GridColDef[] = [
     {
@@ -57,5 +59,12 @@ export const ORDERS_COLUMNS: GridColDef[] = [
             value && <a target="_blank" href={`https:${value}`} rel="noopener noreferrer">
                 <Image alt="edited" style={{ borderRadius: 6, cursor: "pointer" }} src={`https:${value}`} width={40} height={40} layout={ImageLayout.FIXED} />
             </a>
+    },
+    {
+        field: 'pdf',
+        headerName: 'Post-processing PDF',
+        width: 300,
+        editable: false,
+        renderCell: ({ value }) => <Button variant="contained" onClick={() => generatePdf(value)}>{value.toString().substring(value.toString().length - 12, value.toString().length + 1)}</Button>,
     },
 ];
