@@ -11,7 +11,7 @@ import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
 import {useSession} from "../../../../../../../utils/sessionStorage/useSessionStorage";
 import {INITIAL_IMAGE} from "../../../../../../app-context/consts";
 import {useQueryClient} from "react-query";
-import {ORDER_KEY} from "../../../../../home/api/order/utils/keys";
+import {ORDER_KEY} from "../../../../../../common/indexed-db/hooks/keys";
 import {FormInputs} from "../../../../../../common/types/form";
 
 const Form = (): JSX.Element => {
@@ -39,6 +39,7 @@ const Form = (): JSX.Element => {
     });
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+        // TODO: createOrder
         updateOrder({ form: data, date: Date.now() });
     }
 

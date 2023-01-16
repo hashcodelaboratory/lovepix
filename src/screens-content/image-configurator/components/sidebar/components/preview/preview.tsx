@@ -3,39 +3,28 @@ import Header from "../header/header";
 import { Delete, Filter1 } from "@mui/icons-material";
 import { useTranslation } from "next-i18next";
 import { messages } from "../../../../../../messages/messages";
-import { useContext } from "react";
-import AppContext from "../../../../../../app-context/app-context";
-import { INITIAL_IMAGE } from "app-context/consts";
 import Image from "next/image";
-import ImageConfiguratorContext from "../../../../image-configurator-context/image-configurator-context";
-import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
 import ImageIcon from '@mui/icons-material/Image';
+import {useLiveQuery} from "dexie-react-hooks";
+import {configurationsTable} from "../../../../../../../database.config";
 
 const Preview = () => {
+    const data = useLiveQuery(
+        () => configurationsTable.get('conf'),
+        []
+    );
+
   const { t } = useTranslation();
 
-  const { mutate: updateOrder } = useUpdateOrder();
-
-  const {
-    state: { image },
-    stateAction: { setImage },
-  } = useContext(AppContext);
-
-  const { stateAction: { setImage: setCropped } } = useContext(ImageConfiguratorContext);
-
   const handleRemoveImage = () => {
-    updateOrder({
-      image: null
-    })
-    setImage(INITIAL_IMAGE);
-    setCropped(undefined);
+    // TODO: clean db
   };
 
-  const layout = image?.url ?
+  const layout = data?.image ?
       <>
         <Image
             alt="preview"
-            src={image?.url ?? ""}
+            src={data?.image ?? ""}
             layout={"fill"}
         />
         <button className={styles.previewRemove} onClick={handleRemoveImage}>

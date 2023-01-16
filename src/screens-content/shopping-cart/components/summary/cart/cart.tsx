@@ -10,7 +10,7 @@ import {messages} from "../../../../../messages/messages";
 import Form from "../components/form/form";
 import {useRouter} from "next/router";
 import {useUpdateOrder} from "../../../../home/api/order/useUpdateOrder";
-import {ORDER_KEY} from "../../../../home/api/order/utils/keys";
+import {ORDER_KEY} from "../../../../../common/indexed-db/hooks/keys";
 import {useQueryClient} from "react-query";
 
 const Cart = () => {
@@ -28,12 +28,6 @@ const Cart = () => {
 
     const removeImage = async (title?: string) => {
         const filtered = images.filter(image => image.name !== title);
-        await updateOrder({
-            shoppingCart: filtered.length === 0 ? null : {
-                images: filtered
-            }
-        });
-        await queryClient.invalidateQueries(ORDER_KEY);
     }
 
     const items =

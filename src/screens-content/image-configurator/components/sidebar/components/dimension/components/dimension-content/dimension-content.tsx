@@ -1,19 +1,25 @@
 import Box from "@mui/material/Box";
 import { Tabs, Tab } from "@mui/material";
-import { SyntheticEvent, useContext, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { a11yProps } from "./utils/utils";
 import TabPanel from "./components/tab-panel";
 import { useTranslation } from "next-i18next";
 import { messages } from "../../../../../../../../messages/messages";
 import TabPanelBox from "./components/tab-panel-box";
-import AppContext from "../../../../../../../../app-context/app-context";
 import {
   dimensionsByHeight,
   dimensionsBySquare,
   dimensionsByWidth,
 } from "screens-content/home/utils/configuration";
+import {configurationsTable} from "../../../../../../../../../database.config";
+import {useLiveQuery} from "dexie-react-hooks";
 
 const DimensionContent = () => {
+    const data = useLiveQuery(
+        () => configurationsTable.get('conf'),
+        []
+    );
+
   const { t } = useTranslation();
 
   const [value, setValue] = useState(0);
@@ -22,10 +28,11 @@ const DimensionContent = () => {
     setValue(newValue);
   };
 
-  const {
-    state: { dimensionId },
-    stateAction: { setDimensionId },
-  } = useContext(AppContext);
+  const changeDimension = (id: string) => {
+      configurationsTable.update('conf', {
+          dimensionId: id
+      });
+  }
 
   return (
     <div>
@@ -45,10 +52,10 @@ const DimensionContent = () => {
       <TabPanel value={value} index={0}>
         {dimensionsByWidth.map((dim) => (
           <TabPanelBox
-            selected={dim.id === dimensionId}
+            selected={dim.id === data?.dimensionId}
             x={dim.width}
             y={dim.height}
-            onClick={() => setDimensionId(dim.id)}
+            onClick={() => changeDimension(dim.id)}
             key={dim.id}
           />
         ))}
@@ -56,10 +63,10 @@ const DimensionContent = () => {
       <TabPanel value={value} index={1}>
         {dimensionsByHeight.map((dim) => (
           <TabPanelBox
-            selected={dim.id === dimensionId}
+            selected={dim.id === data?.dimensionId}
             x={dim.width}
             y={dim.height}
-            onClick={() => setDimensionId(dim.id)}
+            onClick={() => changeDimension(dim.id)}
             style={{ width: 60, height: 80, marginRight: 10 }}
             key={dim.id}
           />
@@ -68,10 +75,10 @@ const DimensionContent = () => {
       <TabPanel value={value} index={2}>
         {dimensionsBySquare.map((dim) => (
           <TabPanelBox
-            selected={dim.id === dimensionId}
+            selected={dim.id === data?.dimensionId}
             x={dim.width}
             y={dim.height}
-            onClick={() => setDimensionId(dim.id)}
+            onClick={() => changeDimension(dim.id)}
             style={{ width: 70, height: 70, padding: 5 }}
             key={dim.id}
           />

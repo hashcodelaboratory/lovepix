@@ -67,6 +67,7 @@ export const ORDERS_COLUMNS: GridColDef[] = [
         width: 300,
         editable: false,
         renderCell: ({ value }) => {
+            console.log(value)
             const url = value[0].image.url;
             const pdf = value[0].pdf;
             return pdf ?

@@ -1,16 +1,19 @@
 import styles from '../../../../image-configurator-layout.module.scss';
 import {getPrice} from "./utils/generator";
-import {useContext} from "react";
-import AppContext from "../../../../../../app-context/app-context";
 import {materials} from "../../../../../home/utils/configuration";
 import {DIMENSIONS} from "../../../../../../common/configuration/dimensions/dimensions";
+import {useLiveQuery} from "dexie-react-hooks";
+import {configurationsTable} from "../../../../../../../database.config";
 
 const Price = () => {
-    const { state: { dimensionId, materialId } } = useContext(AppContext);
+    const data = useLiveQuery(
+        () => configurationsTable.get('conf'),
+        []
+    );
 
-    const { width, height } = DIMENSIONS.find((dim) => dim.id === dimensionId) ?? { width: 0, height: 0 };
+    const { width, height } = DIMENSIONS.find((dim) => dim.id === data?.dimensionId) ?? { width: 0, height: 0 };
 
-    const price = width > 0 && height > 0 ? getPrice(width, height, materials.find(material => material.id === materialId)?.name) : '-';
+    const price = width > 0 && height > 0 ? getPrice(width, height, materials.find(material => material.id === data?.material)?.name) : '-';
 
     return(
       <div className={styles.containerPadding}>
