@@ -1,13 +1,20 @@
 import EmptyCart from "./components/empty-cart/empty-cart";
-import {useContext} from "react";
-import AppContext from "../../app-context/app-context";
 import Summary from "./components/summary/summary/summary";
 import ThanksForOrder from "./components/thanks-for-order/thanks-for-order";
+import {useLiveQuery} from "dexie-react-hooks";
+import {orderTable} from "../../../database.config";
+import {useContext} from "react";
+import AppContext from "../../app-context/app-context";
 
 const CustomShoppingCart = () => {
-    const { state: { stepper, shoppingCart } } = useContext(AppContext);
+    const { state: { stepper } } = useContext(AppContext);
 
-    if (!shoppingCart?.images && stepper !== 2) return <EmptyCart />;
+    const order = useLiveQuery(
+        () => orderTable.get('order'),
+        []
+    );
+
+    if (!order?.shoppingCart?.images && stepper !== 2) return <EmptyCart />;
 
     if (stepper === 2) return <ThanksForOrder />;
 
