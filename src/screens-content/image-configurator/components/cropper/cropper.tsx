@@ -9,6 +9,9 @@ import {
 import DropzoneContainer from "screens-content/home/components/upload-image/dropzone/dropzone-container";
 import { useLiveQuery } from "dexie-react-hooks";
 import { configurationsTable } from "../../../../../database.config";
+import { WALLER_IMAGE_LIST } from "screens-content/home/utils/image-upload";
+import { useRouter } from "next/router";
+import { ImageStatus } from "app-context/enums";
 
 const CropperComponent = () => {
   const data = useLiveQuery(() => configurationsTable.get("conf"), []);
@@ -31,11 +34,10 @@ const CropperComponent = () => {
 
     const date = Date.now();
 
-    console.log(data);
+    updateOrder({ form: data, date: Date.now() });
 
-    setImage(data as any);
-    createOrder({ image: data, date });
-  }, [createOrder, galleryId, setImage]);
+    console.log(data);
+  }, [galleryId]);
 
   const onCrop = () => {
     const imageElement: any = cropperRef?.current;
