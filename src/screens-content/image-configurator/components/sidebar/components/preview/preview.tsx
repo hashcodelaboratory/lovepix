@@ -20,11 +20,11 @@ const Preview = () => {
     // TODO: clean db
   };
 
-  const layout = data?.image ?
+  const layout = data?.origin ?
       <>
         <Image
             alt="preview"
-            src={data?.image ?? ""}
+            src={data?.origin ?? ""}
             layout={"fill"}
         />
         <button className={styles.previewRemove} onClick={handleRemoveImage}>
