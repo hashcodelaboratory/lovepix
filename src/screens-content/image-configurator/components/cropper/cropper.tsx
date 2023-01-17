@@ -1,28 +1,17 @@
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
-import React, { useContext, useEffect, useRef } from "react";
-import AppContext from "app-context/app-context";
+import React, { useEffect, useRef } from "react";
 import {
   dimensionsByHeight,
   dimensionsBySquare,
   dimensionsByWidth,
 } from "screens-content/home/utils/configuration";
 import DropzoneContainer from "screens-content/home/components/upload-image/dropzone/dropzone-container";
-import ImageConfiguratorContext from "../../image-configurator-context/image-configurator-context";
-import { useRouter } from "next/router";
-import { WALLER_IMAGE_LIST } from "screens-content/home/utils/image-upload";
-import { ImageStatus } from "app-context/enums";
-import { useCreateOrder } from "screens-content/home/api/order/useCreateOrder";
+import { useLiveQuery } from "dexie-react-hooks";
+import { configurationsTable } from "../../../../../database.config";
 
 const CropperComponent = () => {
-  const {
-    state: { image, dimensionId },
-  } = useContext(AppContext);
-  const {
-    stateAction: { setImage },
-  } = useContext(ImageConfiguratorContext);
-
-  const { mutate: createOrder } = useCreateOrder();
+  const data = useLiveQuery(() => configurationsTable.get("conf"), []);
 
   const cropperRef = useRef<any>(null);
 
@@ -52,7 +41,9 @@ const CropperComponent = () => {
     const imageElement: any = cropperRef?.current;
     const cropper: any = imageElement?.cropper;
 
-    setImage(cropper.getCroppedCanvas()?.toDataURL());
+    configurationsTable.update("conf", {
+      image: cropper.getCroppedCanvas()?.toDataURL(),
+    });
   };
 
   const allDimensions = [
@@ -61,7 +52,9 @@ const CropperComponent = () => {
     ...dimensionsBySquare,
   ];
 
-  const selectedDimension = allDimensions.find((dim) => dim.id === dimensionId);
+  const selectedDimension = allDimensions.find(
+    (dim) => dim.id === data?.dimensionId
+  );
 
   const aspectRatio =
     selectedDimension && selectedDimension?.width / selectedDimension?.height;
@@ -70,11 +63,11 @@ const CropperComponent = () => {
     cropperRef?.current?.cropper?.setAspectRatio(aspectRatio);
   }, [cropperRef, aspectRatio]);
 
-  return !image?.url ? (
+  return !data?.origin ? (
     <DropzoneContainer />
   ) : (
     <Cropper
-      src={image?.url}
+      src={data?.origin ?? ""}
       style={{ height: 400, width: "100%" }}
       initialAspectRatio={16 / 9}
       guides={false}

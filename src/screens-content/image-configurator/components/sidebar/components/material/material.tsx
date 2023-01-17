@@ -6,17 +6,23 @@ import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
 import { ImageLayout } from "screens-content/home/enums/enums";
-import { useContext } from "react";
-import AppContext from "../../../../../../app-context/app-context";
 import { materials } from "screens-content/home/utils/configuration";
+import {useLiveQuery} from "dexie-react-hooks";
+import {configurationsTable} from "../../../../../../../database.config";
 
 const Material = () => {
+    const data = useLiveQuery(
+        () => configurationsTable.get('conf'),
+        []
+    );
+
   const { t } = useTranslation();
 
-  const {
-    state: { materialId },
-    stateAction: { setMaterialId },
-  } = useContext(AppContext);
+  const changeMaterial = (id: string) => {
+      configurationsTable.update('conf', {
+          material: id
+      });
+    }
 
   const materialItems = materials.map((material) => (
     <div
@@ -29,10 +35,10 @@ const Material = () => {
     >
 
       <div
-        className={material.id === materialId ? styles.imageWrapper : styles.relativeContainer}
+        className={material.id === data?.material ? styles.imageWrapper : styles.relativeContainer}
       >
         <Image
-          onClick={() => setMaterialId(material.id)}
+          onClick={() => changeMaterial(material.id)}
           alt={material.id}
           key={uuidv4()}
           src={material?.image ?? ""}

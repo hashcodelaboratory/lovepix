@@ -18,6 +18,8 @@
     "@mui/material": "^5.10.2",
     "@mui/styled-engine-sc": "^5.10.1",
     "@mui/x-data-grid": "^5.16.0",
+    "dexie": "^3.2.2",
+    "dexie-react-hooks": "^1.1.1",
     "jspdf": "^2.5.1",
     "next": "12.2.3",
     "notistack": "^2.0.5",

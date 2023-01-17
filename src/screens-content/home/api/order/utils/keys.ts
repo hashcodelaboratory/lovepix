@@ -1,1 +1,0 @@
-export const ORDER_KEY = 'ORDER_KEY';

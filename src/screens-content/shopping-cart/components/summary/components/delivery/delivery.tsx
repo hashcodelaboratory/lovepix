@@ -48,7 +48,6 @@ const Delivery = () => {
   }, [stepper, reset]);
 
   const onSubmit: SubmitHandler<Summary> = (data) => {
-    updateOrder({ summary: data });
     setStepper(1);
   };
 
