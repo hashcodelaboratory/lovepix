@@ -30,7 +30,6 @@ const DropzoneContainer = () => {
   const {
     printPhoto,
     processingOrder,
-    doYouWant,
     or,
     uploadNewPicture,
     continueInConfiguration,
@@ -63,7 +62,7 @@ const DropzoneContainer = () => {
   };
 
   const handleCleanImage = async () => {
-    // TODO: clean db
+    configurationsTable.delete('conf');
   };
 
   const handleContinueConfiguration = () => {
@@ -79,7 +78,7 @@ const DropzoneContainer = () => {
           className={styles.dropzoneGroupFaked}
         >
           <Image
-              unoptimized
+            unoptimized
             priority
             src={data?.origin ?? ""}
             alt='Processing image'
@@ -89,7 +88,6 @@ const DropzoneContainer = () => {
             className={styles.imagePreview}
           />
           <Typography>{String(t(processingOrder))}</Typography>
-          <Typography>{String(t(doYouWant))}</Typography>
           <button
             className={styles.uploadButton}
             onClick={handleContinueConfiguration}

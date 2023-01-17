@@ -17,7 +17,7 @@ const Preview = () => {
   const { t } = useTranslation();
 
   const handleRemoveImage = () => {
-    // TODO: clean db
+    configurationsTable.delete('conf');
   };
 
   const layout = data?.origin ?
