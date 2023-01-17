@@ -8,10 +8,9 @@ import {
 } from "screens-content/home/utils/configuration";
 import DropzoneContainer from "screens-content/home/components/upload-image/dropzone/dropzone-container";
 import { useLiveQuery } from "dexie-react-hooks";
-import { configurationsTable } from "../../../../../database.config";
 import { WALLER_IMAGE_LIST } from "screens-content/home/utils/image-upload";
 import { useRouter } from "next/router";
-import { ImageStatus } from "app-context/enums";
+import { configurationsTable } from "../../../../../database.config";
 
 const CropperComponent = () => {
   const data = useLiveQuery(() => configurationsTable.get("conf"), []);
@@ -22,21 +21,33 @@ const CropperComponent = () => {
 
   const galleryId = router?.query?.gallery as unknown as string;
 
-  useEffect(() => {
+  const handleImageFromGallery = async () => {
     const source = WALLER_IMAGE_LIST.find((item) => item.id === galleryId);
 
-    const data = {
-      url: source?.sourceUrl,
-      status: ImageStatus.UPLOADED,
-      size: 1,
-      name: source?.title,
+    const res = await fetch(source?.sourceUrl ?? "");
+
+    const file = await res.blob();
+
+    const fr = new FileReader();
+
+    fr.readAsDataURL(file);
+
+    fr.onload = () => {
+      const data = {
+        origin: fr.result as string,
+        image: undefined,
+        dimensionId: undefined,
+        material: undefined,
+      };
+
+      configurationsTable.add(data, "conf");
     };
+  };
 
-    const date = Date.now();
-
-    updateOrder({ form: data, date: Date.now() });
-
-    console.log(data);
+  useEffect(() => {
+    if (galleryId) {
+      handleImageFromGallery();
+    }
   }, [galleryId]);
 
   const onCrop = () => {
