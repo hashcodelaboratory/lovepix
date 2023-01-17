@@ -62,7 +62,7 @@ const DropzoneContainer = () => {
   };
 
   const handleCleanImage = async () => {
-    configurationsTable.delete('conf');
+    configurationsTable.clear();
   };
 
   const handleContinueConfiguration = () => {
