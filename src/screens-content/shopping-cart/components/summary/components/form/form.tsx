@@ -7,31 +7,22 @@ import {messages} from "../../../../../../messages/messages";
 import {useTranslation} from "next-i18next";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {FORM_SCHEMA} from "./utils/schema";
-import {useUpdateOrder} from "../../../../../home/api/order/useUpdateOrder";
-import {useSession} from "../../../../../../../utils/sessionStorage/useSessionStorage";
-import {INITIAL_IMAGE} from "../../../../../../app-context/consts";
-import {useQueryClient} from "react-query";
-import {ORDER_KEY} from "../../../../../../common/indexed-db/hooks/keys";
 import {FormInputs} from "../../../../../../common/types/form";
+import {useCreateOrder} from "../../../../../../common/firestore/createOrder";
+import {useLiveQuery} from "dexie-react-hooks";
+import {orderTable} from "../../../../../../../database.config";
 
 const Form = (): JSX.Element => {
-    const queryClient = useQueryClient();
-    const { state: { form }, stateAction: { setStepper, setImage, setForm, setSummary } } = useContext(AppContext);
-    const { mutate: updateOrder } = useUpdateOrder({
-        onSuccess: () => {
-            reset();
-            setImage(INITIAL_IMAGE);
-            setForm(undefined);
-            setSummary(undefined);
-            setStepper(2);
-            clearOrderID();
-            queryClient.invalidateQueries(ORDER_KEY);
-        }
-    });
+    const { state: { form }, stateAction: { setStepper } } = useContext(AppContext);
+
+    const { mutate: createOrder } = useCreateOrder();
+
+    const order = useLiveQuery(
+        () => orderTable.get('order'),
+        []
+    );
 
     const { t } = useTranslation();
-
-    const { clearOrderID } = useSession();
 
     const { register, formState: { errors }, handleSubmit, control, reset } = useForm<FormInputs>({
         resolver: yupResolver(FORM_SCHEMA),
@@ -39,8 +30,18 @@ const Form = (): JSX.Element => {
     });
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-        // TODO: createOrder
-        updateOrder({ form: data, date: Date.now() });
+        await createOrder({
+            form: data,
+            date: Date.now(),
+            shoppingCart: order?.shoppingCart,
+            totalPrice: order?.totalPrice,
+            delivery: order?.delivery,
+            payment: order?.payment
+        });
+        reset();
+        orderTable.clear();
+        setStepper(2);
+
     }
 
     return(

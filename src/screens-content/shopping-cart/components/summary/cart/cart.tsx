@@ -9,39 +9,43 @@ import {useTranslation} from "next-i18next";
 import {messages} from "../../../../../messages/messages";
 import Form from "../components/form/form";
 import {useRouter} from "next/router";
-import {useUpdateOrder} from "../../../../home/api/order/useUpdateOrder";
-import {ORDER_KEY} from "../../../../../common/indexed-db/hooks/keys";
-import {useQueryClient} from "react-query";
+import {useLiveQuery} from "dexie-react-hooks";
+import {orderTable} from "../../../../../../database.config";
 
 const Cart = () => {
-    const { state: { shoppingCart, stepper }, stateAction: { setStepper } } = useContext(AppContext);
+    const { state: { stepper }, stateAction: { setStepper } } = useContext(AppContext);
 
-    const images = shoppingCart?.images ?? [{} as ShoppingCartImage];
+    const order = useLiveQuery(
+        () => orderTable.get('order'),
+        []
+    );
+
+    const images = order?.shoppingCart?.images ?? [{} as ShoppingCartImage];
 
     const { t } = useTranslation();
 
     const router = useRouter();
 
-    const queryClient = useQueryClient();
-
-    const { mutate: updateOrder } = useUpdateOrder();
-
-    const removeImage = async (title?: string) => {
-        const filtered = images.filter(image => image.name !== title);
+    const removeImage = async (url?: string) => {
+        orderTable.update('order', {
+            shoppingCart: {
+                images: order?.shoppingCart?.images.filter((image: any) => image.url !== url)
+            }
+        })
     }
 
     const items =
-        images && images.map((image) => <>
+        images && images.map((image: any) => <>
             <div className={styles.cartRow}>
-                <Image alt={image?.url} src={image?.url ?? ''} width={80} height={80} layout="fixed" />
-                <div>{image?.name}</div>
+                <Image alt={image?.image} src={image?.url ?? ''} width={80} height={80} layout="fixed" />
+                <div>{`${image?.material} (${image?.width} x ${image?.height})`}</div>
                 <div className={styles.qtyContainer}>
                     <Button>-</Button>
                     <TextField className={styles.qtyField} value={image?.qty} />
                     <Button>+</Button>
                 </div>
                 <div>{Number(image?.price).toFixed(2)} €</div>
-                <Button onClick={() => removeImage(image?.name)}><CloseIcon color="error" /></Button>
+                <Button onClick={() => removeImage(image?.url)}><CloseIcon color="error" /></Button>
             </div>
             <hr/>
         </>

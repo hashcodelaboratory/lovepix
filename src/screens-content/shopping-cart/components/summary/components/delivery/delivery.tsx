@@ -14,23 +14,20 @@ import MenuItem from "@mui/material/MenuItem";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SUMMARY_SCHEMA } from "./utils/schema";
-import { useUpdateOrder } from "../../../../../home/api/order/useUpdateOrder";
 import {Delivery as DeliveryOptions, Payment} from "../../../../../../common/enums/summary"
 import {Summary} from "../../../../../../common/types/summary";
+import {useLiveQuery} from "dexie-react-hooks";
+import {orderTable} from "../../../../../../../database.config";
 
 const Delivery = () => {
-  const {
-    state: {
-      summary,
-      stepper,
-      shoppingCart,
-      totalPrice
-    },
-    stateAction: { setStepper },
-  } = useContext(AppContext);
+  const order = useLiveQuery(
+      () => orderTable.get('order'),
+      []
+  );
+
+  const { state: { stepper }, stateAction: { setStepper } } = useContext(AppContext);
 
   const { t } = useTranslation();
-  const { mutate: updateOrder } = useUpdateOrder();
 
   const {
     register,
@@ -40,7 +37,7 @@ const Delivery = () => {
     reset,
   } = useForm<Summary>({
     resolver: yupResolver(SUMMARY_SCHEMA),
-    defaultValues: { ...summary },
+    defaultValues: { ...order?.summary },
   });
 
   useEffect(() => {
@@ -48,6 +45,10 @@ const Delivery = () => {
   }, [stepper, reset]);
 
   const onSubmit: SubmitHandler<Summary> = (data) => {
+    orderTable.update('order', {
+      delivery: data?.delivery,
+      payment: data?.payment
+    })
     setStepper(1);
   };
 
@@ -58,9 +59,9 @@ const Delivery = () => {
         <hr />
         <div className={styles.totalContainer}>
           <p>
-            {shoppingCart?.images?.length} {String(t(messages.items))}
+            {order?.shoppingCart?.images?.length} {String(t(messages.items))}
           </p>
-          <p>{Number(totalPrice).toFixed(2)} €</p>
+          <p>{Number(order?.totalPrice).toFixed(2)} €</p>
         </div>
         <p className={styles.summarySectionTitle}>
           {String(t(messages.delivery))}
@@ -119,7 +120,7 @@ const Delivery = () => {
           <p className={styles.summarySectionTitle}>
             {String(t(messages.total))}
           </p>
-          <p className={styles.price}>{Number(totalPrice).toFixed(2)} €</p>
+          <p className={styles.price}>{Number(order?.totalPrice).toFixed(2)} €</p>
         </div>
         <p className={styles.text}>{String(t(messages.personalData))}</p>
         <Link className={styles.text} style={{ cursor: "pointer" }}>
