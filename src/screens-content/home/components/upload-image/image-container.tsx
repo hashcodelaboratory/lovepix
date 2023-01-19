@@ -7,15 +7,40 @@ import DropzoneContainer from "./dropzone/dropzone-container";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
 import { CONFIGURATOR } from "constants/pages/urls";
+import { configurationsTable } from "../../../../../database.config";
+import { useLiveQuery } from "dexie-react-hooks";
 
 const ImageContainer = () => {
   const router = useRouter();
 
-  const handleConfiguration = (id: string) =>
+  const data = useLiveQuery(() => configurationsTable.get("conf"), []);
+
+  const handleConfiguration = async (sourceUrl: string) => {
+    const res = await fetch(sourceUrl ?? "");
+
+    const file = await res.blob();
+
+    const fr = new FileReader();
+
+    fr.readAsDataURL(file);
+
+    fr.onload = () => {
+      const dataPayload = {
+        origin: fr.result as string,
+        image: undefined,
+        dimensionId: undefined,
+        material: undefined,
+      };
+
+      data
+        ? configurationsTable.update("conf", dataPayload)
+        : configurationsTable.add(dataPayload, "conf");
+    };
+
     router.push({
-      pathname: `/en${CONFIGURATOR}`,
-      query: { gallery: id },
+      pathname: CONFIGURATOR,
     });
+  };
 
   return (
     <Grid sm={12} textAlign={TextAlign.RIGHT} style={{ marginTop: "64px" }}>
@@ -26,7 +51,7 @@ const ImageContainer = () => {
             <div
               style={{ cursor: "pointer" }}
               key={uuidv4()}
-              onClick={() => handleConfiguration(id)}
+              onClick={() => handleConfiguration(sourceUrl)}
             >
               <ImageCard sourceUrl={sourceUrl} title={title} />
             </div>
