@@ -14,7 +14,7 @@ const CustomShoppingCart = () => {
     [],
   );
 
-  if (order?.shoppingCart?.images.length === 0 && stepper !== 2) return <EmptyCart />;
+  if (!order?.shoppingCart?.images && stepper !== 2) return <EmptyCart />;
 
   if (stepper === 2) return <ThanksForOrder />;
 
