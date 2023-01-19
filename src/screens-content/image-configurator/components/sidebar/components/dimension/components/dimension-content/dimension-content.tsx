@@ -13,10 +13,11 @@ import {
 } from "screens-content/home/utils/configuration";
 import { configurationsTable } from "../../../../../../../../../database.config";
 import { useLiveQuery } from "dexie-react-hooks";
+import { CONFIGURATION_TABLE_KEY } from "../../../../../../../../common/indexed-db/hooks/keys";
 
 const DimensionContent = () => {
   const configuration = useLiveQuery(
-    () => configurationsTable.get("conf"),
+    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
     [],
   );
 

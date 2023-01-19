@@ -9,10 +9,11 @@ import {
 import DropzoneContainer from "screens-content/home/components/upload-image/dropzone/dropzone-container";
 import { useLiveQuery } from "dexie-react-hooks";
 import { configurationsTable } from "../../../../../database.config";
+import { CONFIGURATION_TABLE_KEY } from "../../../../common/indexed-db/hooks/keys";
 
 const CropperComponent = () => {
   const configuration = useLiveQuery(
-    () => configurationsTable.get("conf"),
+    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
     [],
   );
 

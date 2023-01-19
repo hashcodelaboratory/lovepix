@@ -23,6 +23,7 @@ import useLoggedUser from "custom-hooks/use-logged-user";
 import { useRouter } from "next/router";
 import { useLiveQuery } from "dexie-react-hooks";
 import { orderTable } from "../../database.config";
+import { ORDER_TABLE_KEY } from "../common/indexed-db/hooks/keys";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] =
@@ -35,7 +36,7 @@ const ResponsiveAppBar = () => {
   const router = useRouter();
 
   const order = useLiveQuery(
-    () => orderTable.get("order"),
+    () => orderTable.get(ORDER_TABLE_KEY),
     [],
   );
 

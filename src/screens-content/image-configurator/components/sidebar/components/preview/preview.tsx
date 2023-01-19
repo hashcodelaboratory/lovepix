@@ -7,10 +7,11 @@ import Image from "next/image";
 import ImageIcon from "@mui/icons-material/Image";
 import { useLiveQuery } from "dexie-react-hooks";
 import { configurationsTable } from "../../../../../../../database.config";
+import { CONFIGURATION_TABLE_KEY } from "../../../../../../common/indexed-db/hooks/keys";
 
 const Preview = () => {
   const configuration = useLiveQuery(
-    () => configurationsTable.get("conf"),
+    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
     [],
   );
 

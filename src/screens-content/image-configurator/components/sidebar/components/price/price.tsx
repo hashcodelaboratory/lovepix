@@ -4,10 +4,11 @@ import { materials } from "../../../../../home/utils/configuration";
 import { DIMENSIONS } from "../../../../../../common/configuration/dimensions/dimensions";
 import { useLiveQuery } from "dexie-react-hooks";
 import { configurationsTable } from "../../../../../../../database.config";
+import { CONFIGURATION_TABLE_KEY } from "../../../../../../common/indexed-db/hooks/keys";
 
 const Price = () => {
   const configuration = useLiveQuery(
-    () => configurationsTable.get("conf"),
+    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
     [],
   );
 

@@ -5,12 +5,13 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { orderTable } from "../../../database.config";
 import { useContext } from "react";
 import AppContext from "../../app-context/app-context";
+import { ORDER_TABLE_KEY } from "../../common/indexed-db/hooks/keys";
 
 const CustomShoppingCart = () => {
   const { state: { stepper } } = useContext(AppContext);
 
   const order = useLiveQuery(
-    () => orderTable.get("order"),
+    () => orderTable.get(ORDER_TABLE_KEY),
     [],
   );
 

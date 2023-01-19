@@ -9,10 +9,11 @@ import { ImageLayout } from "screens-content/home/enums/enums";
 import { materials } from "screens-content/home/utils/configuration";
 import { useLiveQuery } from "dexie-react-hooks";
 import { configurationsTable } from "../../../../../../../database.config";
+import { CONFIGURATION_TABLE_KEY } from "../../../../../../common/indexed-db/hooks/keys";
 
 const Material = () => {
   const configuration = useLiveQuery(
-    () => configurationsTable.get("conf"),
+    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
     [],
   );
 

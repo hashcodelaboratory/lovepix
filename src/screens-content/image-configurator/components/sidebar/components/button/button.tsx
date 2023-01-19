@@ -9,6 +9,7 @@ import { configurationsTable, orderTable } from "../../../../../../../database.c
 import { DIMENSIONS } from "../../../../../../common/configuration/dimensions/dimensions";
 import { getPrice } from "../price/utils/generator";
 import { materials } from "../../../../../home/utils/configuration";
+import { CONFIGURATION_TABLE_KEY, ORDER_TABLE_KEY } from "../../../../../../common/indexed-db/hooks/keys";
 
 const Button = () => {
   const { t } = useTranslation();
@@ -16,12 +17,12 @@ const Button = () => {
   const router = useRouter();
 
   const configuration = useLiveQuery(
-    () => configurationsTable.get("conf"),
+    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
     [],
   );
 
   const order = useLiveQuery(
-    () => orderTable.get("order"),
+    () => orderTable.get(ORDER_TABLE_KEY),
     [],
   );
 

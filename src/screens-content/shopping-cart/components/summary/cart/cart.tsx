@@ -11,12 +11,13 @@ import Form from "../components/form/form";
 import { useRouter } from "next/router";
 import { useLiveQuery } from "dexie-react-hooks";
 import { orderTable } from "../../../../../../database.config";
+import { ORDER_TABLE_KEY } from "../../../../../common/indexed-db/hooks/keys";
 
 const Cart = () => {
   const { state: { stepper }, stateAction: { setStepper } } = useContext(AppContext);
 
   const order = useLiveQuery(
-    () => orderTable.get("order"),
+    () => orderTable.get(ORDER_TABLE_KEY),
     [],
   );
 
