@@ -15,7 +15,7 @@ const ImageContainer = () => {
 
   const data = useLiveQuery(() => configurationsTable.get("conf"), []);
 
-  const handleConfiguration = async (sourceUrl: string) => {
+  const handleConfiguration = async (sourceUrl: string) => () => {
     const res = await fetch(sourceUrl ?? "");
 
     const file = await res.blob();
