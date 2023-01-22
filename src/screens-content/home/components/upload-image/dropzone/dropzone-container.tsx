@@ -16,13 +16,14 @@ import Image from "next/image";
 import { Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { CONFIGURATOR } from "constants/pages/urls";
-import {useLiveQuery} from "dexie-react-hooks";
-import {configurationsTable} from "../../../../../../database.config";
+import { useLiveQuery } from "dexie-react-hooks";
+import { configurationsTable } from "../../../../../../database.config";
+import { CONFIGURATION_TABLE_KEY } from "../../../../../common/indexed-db/hooks/keys";
 
 const DropzoneContainer = () => {
-  const data = useLiveQuery(
-      () => configurationsTable.get('conf'),
-      []
+  const configuration = useLiveQuery(
+    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
+    [],
   );
 
   const { t } = useTranslation();
@@ -50,11 +51,11 @@ const DropzoneContainer = () => {
         origin: fr.result as string,
         image: undefined,
         dimensionId: undefined,
-        material: undefined
+        material: undefined,
       };
 
-      configurationsTable.add(data, 'conf');
-    }
+      configurationsTable.add(data, "conf");
+    };
   };
 
   const onReject = (files: FileRejection[]) => {
@@ -71,18 +72,18 @@ const DropzoneContainer = () => {
 
   return (
     <>
-      {data?.origin ? (
+      {configuration?.origin ? (
         <Group
-          position='center'
-          spacing='xs'
+          position="center"
+          spacing="xs"
           className={styles.dropzoneGroupFaked}
         >
           <Image
             unoptimized
             priority
-            src={data?.origin ?? ""}
-            alt='Processing image'
-            objectFit='cover'
+            src={configuration?.origin ?? ""}
+            alt="Processing image"
+            objectFit="cover"
             height={150}
             width={300}
             className={styles.imagePreview}
@@ -108,8 +109,8 @@ const DropzoneContainer = () => {
           multiple={false}
         >
           <Group
-            position='center'
-            spacing='xl'
+            position="center"
+            spacing="xl"
             className={styles.dropzoneGroup}
           >
             <h1 className={styles.title}>{String(t(printPhoto))}</h1>

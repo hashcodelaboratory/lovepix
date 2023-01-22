@@ -9,9 +9,13 @@ import {
 import DropzoneContainer from "screens-content/home/components/upload-image/dropzone/dropzone-container";
 import { useLiveQuery } from "dexie-react-hooks";
 import { configurationsTable } from "../../../../../database.config";
+import { CONFIGURATION_TABLE_KEY } from "../../../../common/indexed-db/hooks/keys";
 
 const CropperComponent = () => {
-  const data = useLiveQuery(() => configurationsTable.get("conf"), []);
+  const configuration = useLiveQuery(
+    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
+    []
+  );
 
   const cropperRef = useRef<any>(null);
 
@@ -31,7 +35,7 @@ const CropperComponent = () => {
   ];
 
   const selectedDimension = allDimensions.find(
-    (dim) => dim.id === data?.dimensionId
+    (dim) => dim.id === configuration?.dimensionId
   );
 
   const aspectRatio =
@@ -41,11 +45,11 @@ const CropperComponent = () => {
     cropperRef?.current?.cropper?.setAspectRatio(aspectRatio);
   }, [cropperRef, aspectRatio]);
 
-  return !data?.origin ? (
+  return !configuration?.origin ? (
     <DropzoneContainer />
   ) : (
     <Cropper
-      src={data?.origin ?? ""}
+      src={configuration?.origin ?? ""}
       style={{ height: 400, width: "100%" }}
       initialAspectRatio={16 / 9}
       guides={false}

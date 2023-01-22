@@ -7,22 +7,23 @@ import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
 import { ImageLayout } from "screens-content/home/enums/enums";
 import { materials } from "screens-content/home/utils/configuration";
-import {useLiveQuery} from "dexie-react-hooks";
-import {configurationsTable} from "../../../../../../../database.config";
+import { useLiveQuery } from "dexie-react-hooks";
+import { configurationsTable } from "../../../../../../../database.config";
+import { CONFIGURATION_TABLE_KEY } from "../../../../../../common/indexed-db/hooks/keys";
 
 const Material = () => {
-    const data = useLiveQuery(
-        () => configurationsTable.get('conf'),
-        []
-    );
+  const configuration = useLiveQuery(
+    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
+    [],
+  );
 
   const { t } = useTranslation();
 
   const changeMaterial = (id: string) => {
-      configurationsTable.update('conf', {
-          material: id
-      });
-    }
+    configurationsTable.update("conf", {
+      material: id,
+    });
+  };
 
   const materialItems = materials.map((material) => (
     <div
@@ -35,7 +36,7 @@ const Material = () => {
     >
 
       <div
-        className={material.id === data?.material ? styles.imageWrapper : styles.relativeContainer}
+        className={material.id === configuration?.material ? styles.imageWrapper : styles.relativeContainer}
       >
         <Image
           onClick={() => changeMaterial(material.id)}
@@ -45,10 +46,10 @@ const Material = () => {
           height={100}
           width={100}
           layout={ImageLayout.FIXED}
-          objectFit='cover'
+          objectFit="cover"
           style={{
             borderRadius: 5,
-            cursor: "pointer"
+            cursor: "pointer",
           }}
         />
         <p className={styles.materialCardTitle}>{material.name}</p>
