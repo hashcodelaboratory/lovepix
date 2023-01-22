@@ -51,7 +51,7 @@ const ImageContainer = () => {
             <div
               style={{ cursor: "pointer" }}
               key={uuidv4()}
-              onClick={() => handleConfiguration(sourceUrl)}
+              onClick={handleConfiguration(sourceUrl)}
             >
               <ImageCard sourceUrl={sourceUrl} title={title} />
             </div>
