@@ -31,9 +31,9 @@ const OrdersTable = () => {
       totalPrice: totalPrice ?? "",
       delivery: t(delivery),
       payment: t(payment) ?? "",
-      origin: t(shoppingCart?.images.map(({ origin }) => origin)),
-      edited: t(shoppingCart?.images.map(({ url }) => url)),
-      pdf: shoppingCart?.images.map((image) => ({ image, id, pdf })),
+      origin: shoppingCart?.images?.map(({ origin }) => origin) ?? '-',
+      edited: shoppingCart?.images?.map(({ url }) => url) ?? '-',
+      pdf: shoppingCart?.images?.map((image) => ({ image, id, pdf })),
     }
   ));
 
