@@ -14,7 +14,7 @@ import { CONFIGURATION_TABLE_KEY } from "../../../../../../common/indexed-db/hoo
 const Material = () => {
   const configuration = useLiveQuery(
     () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
-    [],
+    []
   );
 
   const { t } = useTranslation();
@@ -34,9 +34,12 @@ const Material = () => {
         justifyContent: "center",
       }}
     >
-
       <div
-        className={material.id === configuration?.material ? styles.imageWrapper : styles.relativeContainer}
+        className={
+          material.id === configuration?.material
+            ? styles.imageWrapper
+            : styles.relativeContainer
+        }
       >
         <Image
           onClick={() => changeMaterial(material.id)}
@@ -46,7 +49,7 @@ const Material = () => {
           height={100}
           width={100}
           layout={ImageLayout.FIXED}
-          objectFit="cover"
+          objectFit='cover'
           style={{
             borderRadius: 5,
             cursor: "pointer",

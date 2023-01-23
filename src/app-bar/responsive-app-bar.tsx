@@ -26,19 +26,18 @@ import { orderTable } from "../../database.config";
 import { ORDER_TABLE_KEY } from "../common/indexed-db/hooks/keys";
 
 const ResponsiveAppBar = () => {
-  const [anchorElNav, setAnchorElNav] =
-    React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] =
-    React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
 
   const { t } = useTranslation();
 
   const router = useRouter();
 
-  const order = useLiveQuery(
-    () => orderTable.get(ORDER_TABLE_KEY),
-    [],
-  );
+  const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), []);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -64,14 +63,14 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="lg">
+    <AppBar position='static'>
+      <Container maxWidth='lg'>
         <Toolbar disableGutters>
           <Typography
-            variant="h6"
+            variant='h6'
             noWrap
-            component="a"
-            href="/"
+            component='a'
+            href='/'
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -87,17 +86,17 @@ const ResponsiveAppBar = () => {
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
+              size='large'
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color='inherit'
             >
               <MenuIcon />
             </IconButton>
             <Menu
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: "bottom",
@@ -116,7 +115,7 @@ const ResponsiveAppBar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={uuidv4()} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
+                  <Typography textAlign='center'>
                     <Link href={page.link}>{page.title}</Link>
                   </Typography>
                 </MenuItem>
@@ -124,10 +123,10 @@ const ResponsiveAppBar = () => {
             </Menu>
           </Box>
           <Typography
-            variant="h5"
+            variant='h5'
             noWrap
-            component="a"
-            href=""
+            component='a'
+            href=''
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -157,7 +156,7 @@ const ResponsiveAppBar = () => {
             <Link href={PagesUrls.SHOPPING_CART}>
               <Badge
                 badgeContent={order?.shoppingCart?.images?.length}
-                color="error"
+                color='error'
                 sx={{ my: 2, marginRight: 2 }}
               >
                 <ShoppingCartIcon
@@ -165,17 +164,17 @@ const ResponsiveAppBar = () => {
                 />
               </Badge>
             </Link>
-            <Tooltip title="Open settings">
+            <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   alt={!!user ? user.displayName || "" : undefined}
-                  src="/static/images/avatar/2.jpg"
+                  src='/static/images/avatar/2.jpg'
                 />
               </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: "45px" }}
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: "top",
@@ -196,7 +195,7 @@ const ResponsiveAppBar = () => {
                       key={setting.title}
                       onClick={() => setting.callBack && handleLogout()}
                     >
-                      <Typography textAlign="center">
+                      <Typography textAlign='center'>
                         {setting.title}
                       </Typography>
                     </MenuItem>
@@ -214,7 +213,7 @@ const ResponsiveAppBar = () => {
                 })
               ) : (
                 <MenuItem onClick={logIn}>
-                  <Typography textAlign="center">Login</Typography>
+                  <Typography textAlign='center'>Login</Typography>
                 </MenuItem>
               )}
             </Menu>

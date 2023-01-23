@@ -86,5 +86,5 @@ export const messages = {
   removeImage: "removeImage",
   byWidth: "byWidth",
   byHeight: "byHeight",
-  square: "square"
-}
+  square: "square",
+};

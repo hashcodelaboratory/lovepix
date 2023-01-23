@@ -1,21 +1,21 @@
 export enum ImageLayout {
-    FIXED = "fixed"
+  FIXED = "fixed",
 }
 
 export enum FlexWrap {
-    WRAP = "wrap",
-    NO_WRAP = "nowrap"
+  WRAP = "wrap",
+  NO_WRAP = "nowrap",
 }
 
 export enum AlignItems {
-    CENTER = "center",
+  CENTER = "center",
 }
 
 export enum TextAlign {
-    RIGHT = "right"
+  RIGHT = "right",
 }
 
 export enum ObjectFit {
-    CONTAIN = "contain",
-    COVER = "cover"
+  CONTAIN = "contain",
+  COVER = "cover",
 }

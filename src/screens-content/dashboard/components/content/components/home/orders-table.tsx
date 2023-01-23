@@ -1,10 +1,18 @@
 import Box from "@mui/material/Box";
-import { DataGrid, GridCallbackDetails, GridSelectionModel, GridToolbar } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridCallbackDetails,
+  GridSelectionModel,
+  GridToolbar,
+} from "@mui/x-data-grid";
 import styles from "../../../../dashboard.module.scss";
 import { useContext, useState } from "react";
 import DashboardContext from "../../../../context/dashboard-context";
 import { messages } from "../../../../../../messages/messages";
-import { SNACKBAR_OPTIONS_ERROR, SNACKBAR_OPTIONS_SUCCESS } from "../../../../../../snackbar/config";
+import {
+  SNACKBAR_OPTIONS_ERROR,
+  SNACKBAR_OPTIONS_SUCCESS,
+} from "../../../../../../snackbar/config";
 import { useSnackbar } from "notistack";
 import { useTranslation } from "next-i18next";
 import { useQueryClient } from "react-query";
@@ -13,7 +21,9 @@ import { ORDERS_COLUMNS } from "./utils/ordersColumns";
 import { removeOrders } from "./utils/removeOrders";
 
 const OrdersTable = () => {
-  const { state: { orders } } = useContext(DashboardContext);
+  const {
+    state: { orders },
+  } = useContext(DashboardContext);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -24,8 +34,8 @@ const OrdersTable = () => {
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
 
-  const data = orders.map(({ id, date, delivery, payment, shoppingCart, totalPrice, pdf }) => (
-    {
+  const data = orders.map(
+    ({ id, date, delivery, payment, shoppingCart, totalPrice, pdf }) => ({
       id: id,
       date: new Date(date).toLocaleDateString() ?? "",
       totalPrice: totalPrice ?? "",
@@ -34,8 +44,8 @@ const OrdersTable = () => {
       origin: t(shoppingCart?.images.map(({ origin }) => origin)),
       edited: t(shoppingCart?.images.map(({ url }) => url)),
       pdf: shoppingCart?.images.map((image) => ({ image, id, pdf })),
-    }
-  ));
+    })
+  );
 
   const reset = () => {
     setSelectionModel([]);
@@ -45,19 +55,27 @@ const OrdersTable = () => {
   const removeData = () => {
     const result = removeOrders(selectedRows, queryClient);
     if (result === "") {
-      enqueueSnackbar(String(t(messages.filesRemoved)), SNACKBAR_OPTIONS_SUCCESS);
+      enqueueSnackbar(
+        String(t(messages.filesRemoved)),
+        SNACKBAR_OPTIONS_SUCCESS
+      );
       reset();
     } else {
       enqueueSnackbar(result, SNACKBAR_OPTIONS_ERROR);
     }
   };
 
-  const selectionChanged = (selectionModel: GridSelectionModel, details: GridCallbackDetails) => {
+  const selectionChanged = (
+    selectionModel: GridSelectionModel,
+    details: GridCallbackDetails
+  ) => {
     setSelectionModel(selectionModel);
     setSelectedRows(selectionModel.map((item, index) => data[index].id));
   };
 
-  const buttonText = `(${selectedRows.length}) ${String(t(messages.removeAll))}`;
+  const buttonText = `(${selectedRows.length}) ${String(
+    t(messages.removeAll)
+  )}`;
 
   return (
     <>
@@ -75,7 +93,11 @@ const OrdersTable = () => {
           onSelectionModelChange={selectionChanged}
           components={{ Toolbar: GridToolbar }}
         />
-        <button className={styles.removeButton} onClick={removeData} disabled={!selectedRows.length}>
+        <button
+          className={styles.removeButton}
+          onClick={removeData}
+          disabled={!selectedRows.length}
+        >
           {buttonText}
           <DeleteIcon sx={{ marginLeft: 1 }} />
         </button>

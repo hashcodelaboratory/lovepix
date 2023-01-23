@@ -1,6 +1,6 @@
-import {Delivery, Payment} from "../enums/summary";
+import { Delivery, Payment } from "../enums/summary";
 
 export type Summary = {
-    delivery: Delivery;
-    payment: Payment;
+  delivery: Delivery;
+  payment: Payment;
 };

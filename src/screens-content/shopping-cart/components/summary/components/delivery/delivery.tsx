@@ -14,18 +14,21 @@ import MenuItem from "@mui/material/MenuItem";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SUMMARY_SCHEMA } from "./utils/schema";
-import {Delivery as DeliveryOptions, Payment} from "../../../../../../common/enums/summary"
-import {Summary} from "../../../../../../common/types/summary";
-import {useLiveQuery} from "dexie-react-hooks";
-import {orderTable} from "../../../../../../../database.config";
+import {
+  Delivery as DeliveryOptions,
+  Payment,
+} from "../../../../../../common/enums/summary";
+import { Summary } from "../../../../../../common/types/summary";
+import { useLiveQuery } from "dexie-react-hooks";
+import { orderTable } from "../../../../../../../database.config";
 
 const Delivery = () => {
-  const order = useLiveQuery(
-      () => orderTable.get('order'),
-      []
-  );
+  const order = useLiveQuery(() => orderTable.get("order"), []);
 
-  const { state: { stepper }, stateAction: { setStepper } } = useContext(AppContext);
+  const {
+    state: { stepper },
+    stateAction: { setStepper },
+  } = useContext(AppContext);
 
   const { t } = useTranslation();
 
@@ -45,10 +48,10 @@ const Delivery = () => {
   }, [stepper, reset]);
 
   const onSubmit: SubmitHandler<Summary> = (data) => {
-    orderTable.update('order', {
+    orderTable.update("order", {
       delivery: data?.delivery,
-      payment: data?.payment
-    })
+      payment: data?.payment,
+    });
     setStepper(1);
   };
 
@@ -120,13 +123,19 @@ const Delivery = () => {
           <p className={styles.summarySectionTitle}>
             {String(t(messages.total))}
           </p>
-          <p className={styles.price}>{Number(order?.totalPrice).toFixed(2)} €</p>
+          <p className={styles.price}>
+            {Number(order?.totalPrice).toFixed(2)} €
+          </p>
         </div>
         <p className={styles.text}>{String(t(messages.personalData))}</p>
         <Link className={styles.text} style={{ cursor: "pointer" }}>
           <b>{String(t(messages.privacy))}</b>
         </Link>
-        <button type='submit' className={styles.checkoutButton} disabled={stepper === 1}>
+        <button
+          type='submit'
+          className={styles.checkoutButton}
+          disabled={stepper === 1}
+        >
           {String(t(messages.checkout))}
         </button>
       </form>

@@ -1,4 +1,4 @@
-import styles from '../../image-configurator-layout.module.scss';
+import styles from "../../image-configurator-layout.module.scss";
 import Preview from "./components/preview/preview";
 import Dimension from "./components/dimension/dimension";
 import Material from "./components/material/material";
@@ -7,14 +7,14 @@ import Button from "./components/button/button";
 
 const Sidebar = () => {
   return (
-      <div className={styles.sidebar}>
-          <Preview />
-          <Dimension />
-          <Material />
-          <Price />
-          <Button />
-      </div>
-  )
-}
+    <div className={styles.sidebar}>
+      <Preview />
+      <Dimension />
+      <Material />
+      <Price />
+      <Button />
+    </div>
+  );
+};
 
 export default Sidebar;

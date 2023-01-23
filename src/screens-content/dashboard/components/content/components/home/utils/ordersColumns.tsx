@@ -48,20 +48,36 @@ export const ORDERS_COLUMNS: GridColDef[] = [
     headerName: "Origin",
     editable: false,
     renderCell: ({ value }) =>
-      value && <a target="_blank" href={`${value}`} rel="noopener noreferrer">
-        <Image alt="origin" style={{ borderRadius: 6, cursor: "pointer" }} src={`${value}`} width={40} height={40}
-               layout={ImageLayout.FIXED} />
-      </a>,
+      value && (
+        <a target='_blank' href={`${value}`} rel='noopener noreferrer'>
+          <Image
+            alt='origin'
+            style={{ borderRadius: 6, cursor: "pointer" }}
+            src={`${value}`}
+            width={40}
+            height={40}
+            layout={ImageLayout.FIXED}
+          />
+        </a>
+      ),
   },
   {
     field: "edited",
     headerName: "Edited",
     editable: false,
     renderCell: ({ value }) =>
-      value && <a target="_blank" href={`${value}`} rel="noopener noreferrer">
-        <Image alt="edited" style={{ borderRadius: 6, cursor: "pointer" }} src={`${value}`} width={40} height={40}
-               layout={ImageLayout.FIXED} />
-      </a>,
+      value && (
+        <a target='_blank' href={`${value}`} rel='noopener noreferrer'>
+          <Image
+            alt='edited'
+            style={{ borderRadius: 6, cursor: "pointer" }}
+            src={`${value}`}
+            width={40}
+            height={40}
+            layout={ImageLayout.FIXED}
+          />
+        </a>
+      ),
   },
   {
     field: "pdf",
@@ -71,11 +87,20 @@ export const ORDERS_COLUMNS: GridColDef[] = [
     renderCell: ({ value }) => {
       const url = value[0].image.url;
       const pdf = value[0].pdf;
-      return pdf ?
-        <a target="_blank" href={pdf} rel="noopener noreferrer">
-          <PictureAsPdfIcon color="error" />
-        </a> : <Button variant="contained"
-                       onClick={() => generatePdf(value[0].image, value[0].id)}>{url?.toString().substring(url?.toString().length - 12, url?.toString().length + 1)}</Button>;
+      return pdf ? (
+        <a target='_blank' href={pdf} rel='noopener noreferrer'>
+          <PictureAsPdfIcon color='error' />
+        </a>
+      ) : (
+        <Button
+          variant='contained'
+          onClick={() => generatePdf(value[0].image, value[0].id)}
+        >
+          {url
+            ?.toString()
+            .substring(url?.toString().length - 12, url?.toString().length + 1)}
+        </Button>
+      );
     },
   },
 ];
