@@ -1,24 +1,23 @@
 import { MutationOptions, useMutation, UseMutationResult } from "react-query";
-import { database } from "../../../../../utils/firebase/config";
+import { database } from "../config";
 import { doc, writeBatch } from "@firebase/firestore";
-import { Collections } from "../../../../../utils/firebase/enums";
-import {ShoppingCart, UploadedImage} from "../../../../app-context/app-context";
-import { ORDER_ID_KEY } from "../../../../../utils/sessionStorage/utils/keys";
-import {FormInputs} from "../../../../common/types/form";
-import {Summary} from "../../../../common/types/summary";
+import { Collections } from "../enums";
+import {FormInputs} from "../../types/form";
+import {Summary} from "../../types/summary";
 
 export type UpdateOrderRequest = {
-    image?: UploadedImage | null;
+    image?: any;
     date?: number;
     form?: FormInputs;
     summary?: Summary;
-    shoppingCart?: ShoppingCart | null;
+    shoppingCart?: any;
     totalPrice?: number;
     pdf?: string;
 }
 
 const updateOrder = async (data: UpdateOrderRequest) => {
-    const orderID = sessionStorage.getItem(ORDER_ID_KEY);
+    //TODO: handle orderId
+    const orderID = '';
     const batch = writeBatch(database);
 
     if (orderID) {

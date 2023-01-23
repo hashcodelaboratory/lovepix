@@ -1,8 +1,8 @@
-import {database} from "../../../../../../../../utils/firebase/config";
+import {database} from "../../../../../../../common/firebase/config";
 import {QueryClient} from "react-query";
 import {ORDERS_KEY} from "../../../../../api/orders/utils/keys";
 import {deleteDoc, doc} from "@firebase/firestore";
-import {Collections} from "../../../../../../../../utils/firebase/enums";
+import {Collections} from "../../../../../../../common/firebase/enums";
 
 export const removeOrders = (selectedRows: string[], queryClient: QueryClient): string => {
     selectedRows.forEach(row => {

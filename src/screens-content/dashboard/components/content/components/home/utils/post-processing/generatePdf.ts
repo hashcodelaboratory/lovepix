@@ -3,9 +3,9 @@ import {Image as ImageType} from "../../../../../../../../common/types/order";
 import {Material} from "../../../../../../../../common/enums/material";
 import {UPLOAD_IMAGES} from "../../../../../../../home/components/upload-image/dropzone/utils";
 import {getDownloadURL, ref, uploadBytes} from "@firebase/storage";
-import {database, storage} from "../../../../../../../../../utils/firebase/config";
+import {database, storage} from "../../../../../../../../common/firebase/config";
 import {doc as document, writeBatch} from "@firebase/firestore";
-import {Collections} from "../../../../../../../../../utils/firebase/enums";
+import {Collections} from "../../../../../../../../common/firebase/enums";
 
 const getX = (material: Material) => {
     switch (material) {
