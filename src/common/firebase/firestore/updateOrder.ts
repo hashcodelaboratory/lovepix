@@ -4,13 +4,16 @@ import { doc, writeBatch } from "@firebase/firestore";
 import { Collections } from "../enums";
 import {FormInputs} from "../../types/form";
 import {Summary} from "../../types/summary";
+import { Image } from "../../types/order";
 
 export type UpdateOrderRequest = {
-    image?: any;
+    image?: Image;
     date?: number;
     form?: FormInputs;
     summary?: Summary;
-    shoppingCart?: any;
+    shoppingCart?: {
+        images: Image[];
+    };
     totalPrice?: number;
     pdf?: string;
 }

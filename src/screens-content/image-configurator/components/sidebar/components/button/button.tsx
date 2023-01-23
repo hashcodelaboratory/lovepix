@@ -10,6 +10,7 @@ import { DIMENSIONS } from "../../../../../../common/configuration/dimensions/di
 import { getPrice } from "../price/utils/generator";
 import { materials } from "../../../../../home/utils/configuration";
 import { CONFIGURATION_TABLE_KEY, ORDER_TABLE_KEY } from "../../../../../../common/indexed-db/hooks/keys";
+import { Image } from "../../../../../../common/types/order";
 
 const Button = () => {
   const { t } = useTranslation();
@@ -34,7 +35,7 @@ const Button = () => {
     const price = dim.width > 0 && dim.height > 0 ? getPrice(dim.width, dim.height, material) : 0;
 
     let totalPrice: number = 0;
-    order?.shoppingCart?.images?.forEach((image: any) => {
+    order?.shoppingCart?.images?.forEach((image: Image) => {
       totalPrice += image.price * image.qty;
     });
     totalPrice += Number(price);
