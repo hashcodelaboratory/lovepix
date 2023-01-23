@@ -1,11 +1,11 @@
 import jsPDF from "jspdf";
 import {Image as ImageType} from "../../../../../../../../common/types/order";
 import {Material} from "../../../../../../../../common/enums/material";
-import {UPLOAD_IMAGES} from "../../../../../../../home/components/upload-image/dropzone/utils";
 import {getDownloadURL, ref, uploadBytes} from "@firebase/storage";
 import {database, storage} from "../../../../../../../../common/firebase/config";
 import {doc as document, writeBatch} from "@firebase/firestore";
 import {Collections} from "../../../../../../../../common/firebase/enums";
+import { StorageFolder } from "../../../../../../../../common/firebase/storage/enums";
 
 const getX = (material: Material) => {
     switch (material) {
@@ -91,7 +91,7 @@ export const generatePdf = async (upload: ImageType, id: string) => {
     const pdfURL = doc.output("bloburl");
     window.open(pdfURL as any, "_blank");
 
-    const uploadURL = `${UPLOAD_IMAGES}/${id}/${id}_${width}x${height}_${upload.qty}`;
+    const uploadURL = `${StorageFolder.ORDERS}/${id}/${id}_${width}x${height}_${upload.qty}`;
 
     const res = await fetch(pdfURL ?? '');
     const file = await res.blob();
@@ -103,7 +103,7 @@ export const generatePdf = async (upload: ImageType, id: string) => {
     } = await uploadBytes(storageRef, file);
     if (name) {
         const url = await getDownloadURL(
-            ref(storage, `${UPLOAD_IMAGES}/${id}/${name}`)
+            ref(storage, `${StorageFolder.ORDERS}/${id}/${name}`)
         );
         const batch = writeBatch(database);
         const docRef = document(database, Collections.ORDERS, id);
