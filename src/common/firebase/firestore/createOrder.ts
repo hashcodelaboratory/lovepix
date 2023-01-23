@@ -17,7 +17,8 @@ type CreateOrderRequest = {
 }
 
 const uploadToStorage = async (orderId: string, images: any[]) => {
-  const result = images.map(async (image: any) => {
+  const payload: any[] = [];
+  images.map(async (image: any, index) => {
       const uploadURL = `${StorageFolder.ORDERS}/${orderId}/images/`;
 
       const urlRef = await ref(storage, `${uploadURL}/updated/`);
@@ -46,35 +47,26 @@ const uploadToStorage = async (orderId: string, images: any[]) => {
           ref(storage, `${StorageFolder.ORDERS}/${orderId}/images/${originName}`),
         );
 
-        return {
+        payload.push({
           ...image,
           url: url,
           origin: origin,
-        };
+        });
+
+        if (index === payload.length - 1) {
+          const batch = writeBatch(database);
+          const docRef = document(database, Collections.ORDERS, orderId);
+          await batch.update(docRef, {
+            shoppingCart: {
+              images: payload,
+            },
+          });
+
+          await batch.commit();
+        }
       }
     },
   );
-
-  const payload = result.map((promise) => {
-    promise.then(data => data);
-  });
-
-  if (payload) {
-    await updateOrder(orderId, payload);
-  }
-};
-
-const updateOrder = async (orderId: string, payload: any[]) => {
-  console.log(payload, orderId);
-  const batch = writeBatch(database);
-  const docRef = document(database, Collections.ORDERS, orderId);
-  await batch.update(docRef, {
-    shoppingCart: {
-      images: payload,
-    },
-  });
-
-  await batch.commit();
 };
 
 const createOrder = async (data: CreateOrderRequest) => {
