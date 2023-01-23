@@ -6,19 +6,22 @@ import { Delivery, Payment } from "../../enums/summary";
 import { FormInputs } from "../../types/form";
 import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
 import { StorageFolder } from "../storage/enums";
+import { Image } from "../../types/order";
 
 type CreateOrderRequest = {
   form: FormInputs;
   date: number;
-  shoppingCart: any;
+  shoppingCart: {
+    images: Image[];
+  };
   totalPrice: number;
   delivery: Delivery;
   payment: Payment,
 }
 
-const uploadToStorage = async (orderId: string, images: any[]) => {
-  const payload: any[] = [];
-  images.map(async (image: any, index) => {
+const uploadToStorage = async (orderId: string, images: Image[]) => {
+  const payload: Image[] = [];
+  images.map(async (image: Image, index) => {
       const uploadURL = `${StorageFolder.ORDERS}/${orderId}/images/`;
 
       const urlRef = await ref(storage, `${uploadURL}/updated/`);
