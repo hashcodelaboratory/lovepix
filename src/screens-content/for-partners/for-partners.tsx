@@ -3,7 +3,7 @@ import Image from "next/image";
 import {Container} from "@mui/material";
 import {useTranslation} from "next-i18next";
 import {ImageLayout} from "../home/enums/enums";
-import {useTranslations} from "../../../utils/translations/useTranslations";
+import {useTranslations} from "../../common/translations/useTranslations";
 
 const CustomForPartners = () => {
 

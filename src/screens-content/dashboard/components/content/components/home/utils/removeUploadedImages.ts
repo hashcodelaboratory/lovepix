@@ -1,5 +1,5 @@
 import {ref, deleteObject, listAll} from "@firebase/storage";
-import {storage} from "../../../../../../../../utils/firebase/config";
+import {storage} from "../../../../../../../common/firebase/config";
 import {UPLOADED_IMAGES_KEY} from "../../../../../api/uploadedImages";
 import {QueryClient} from "react-query";
 
