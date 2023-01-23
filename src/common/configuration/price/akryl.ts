@@ -1,3 +1,4 @@
+// TODO: move this configuration to BE
 export const AKRYL_PRICES_BY_WIDTH = [
     { width: 30, height: 20, price: 25 },
     { width: 45, height: 30, price: 29 },
