@@ -40,6 +40,8 @@ const ResponsiveAppBar = () => {
     [],
   );
 
+  const BADGE_NUMBER = order?.shoppingCart?.images?.length;
+
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -156,7 +158,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0, display: "flex" }}>
             <Link href={PagesUrls.SHOPPING_CART}>
               <Badge
-                badgeContent={order?.shoppingCart?.images?.length}
+                badgeContent={BADGE_NUMBER}
                 color="error"
                 sx={{ my: 2, marginRight: 2 }}
               >
