@@ -1,4 +1,4 @@
 export enum Payment {
-    ONLINE = 'online',
-    PERSONAL_DELIVERY = 'personalDelivery'
+    ONLINE = 'ONLINE',
+    PERSONAL_DELIVERY = 'PERSONAL_DELIVERY'
 }

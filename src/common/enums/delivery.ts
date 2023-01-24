@@ -1,5 +1,5 @@
 export enum Delivery {
-    COURIER = 'courier',
-    PERSONAL_COLLECT = 'personalCollect',
-    PICKUP = 'pickup'
+    COURIER = 'COURIER',
+    PERSONAL_COLLECT = 'PERSONAL_COLLECT',
+    PICKUP = 'PICKUP'
 }
