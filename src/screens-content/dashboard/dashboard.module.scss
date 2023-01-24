@@ -148,9 +148,9 @@
 .contentTable {
   box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem, rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
   border: none;
-  border-radius: 1rem;
-  background-color: white;
-  margin: 2rem 0 1rem 1rem;
+  border-radius: 1rem 0 0 1rem;
+  margin: 0 0 1rem 1rem;
+  background-color: #505050;
 }
 
 .removeButton {
@@ -178,4 +178,13 @@
   border-radius: 0.75rem;
   padding: 0.2rem 0.5rem;
   color: silver;
+}
+
+.tableHeader {
+  color: white;
+  font-weight: bold;
+}
+
+.tableCell {
+  color: white;
 }

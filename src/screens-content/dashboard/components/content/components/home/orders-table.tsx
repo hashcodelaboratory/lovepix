@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { DataGrid, GridCallbackDetails, GridSelectionModel, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid, GridCellParams } from "@mui/x-data-grid";
 import styles from "../../../../dashboard.module.scss";
 import { useContext, useState } from "react";
 import DashboardContext from "../../../../context/dashboard-context";
@@ -13,6 +13,8 @@ import { ORDERS_COLUMNS } from "./utils/ordersColumns";
 import { removeOrders } from "./utils/removeOrders";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import OrderDetail from "./detail/order-detail";
+import { Order } from "../../../../../../common/types/order";
 
 const OrdersTable = () => {
   const { state: { orders } } = useContext(DashboardContext);
@@ -23,43 +25,36 @@ const OrdersTable = () => {
 
   const queryClient = useQueryClient();
 
-  const [selectedRows, setSelectedRows] = useState<string[]>([]);
-  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
+  const [order, setOrder] = useState<Order>();
 
-  const data = orders.map(({ id, date, delivery, payment, shoppingCart, totalPrice, pdf }) => (
+  const data = orders.map(({ id, date, form, delivery, payment, shoppingCart, totalPrice, pdf }) => (
     {
       id: id,
       date: new Date(date).toLocaleDateString() ?? "",
-      totalPrice: totalPrice ?? "",
-      delivery: t(delivery),
-      payment: t(payment) ?? "",
-      origin: shoppingCart?.images?.map(({ origin }) => origin) ?? "-",
-      edited: shoppingCart?.images?.map(({ url }) => url) ?? "-",
-      pdf: shoppingCart?.images?.map((image) => ({ image, id, pdf })),
+      name: `${form?.firstName} ${form?.lastName}`,
+      // totalPrice: totalPrice ?? "",
+      // delivery: t(delivery),
+      // payment: t(payment) ?? "",
+      // origin: shoppingCart?.images?.map(({ origin }) => origin) ?? "-",
+      // edited: shoppingCart?.images?.map(({ url }) => url) ?? "-",
+      // pdf: shoppingCart?.images?.map((image) => ({ image, id, pdf })),
     }
   ));
 
-  const reset = () => {
-    setSelectionModel([]);
-    setSelectedRows([]);
-  };
-
   const removeData = () => {
-    const result = removeOrders(selectedRows, queryClient);
+    const result = removeOrders(orders.map(({ id }) => id), queryClient);
     if (result === "") {
       enqueueSnackbar(String(t(messages.filesRemoved)), SNACKBAR_OPTIONS_SUCCESS);
-      reset();
     } else {
       enqueueSnackbar(result, SNACKBAR_OPTIONS_ERROR);
     }
   };
 
-  const selectionChanged = (selectionModel: GridSelectionModel, details: GridCallbackDetails) => {
-    setSelectionModel(selectionModel);
-    setSelectedRows(selectionModel.map((item, index) => data[index].id));
+  const changeOrderId = (e: GridCellParams) => {
+    setOrder(orders.find(({ id }) => id === e.id.toString()));
   };
 
-  const buttonText = `(${selectedRows.length}) ${String(t(messages.removeAll))}`;
+  const buttonText = String(t(messages.removeAll));
 
   return (
     <Accordion>
@@ -71,25 +66,28 @@ const OrdersTable = () => {
         <h1>{String(t(messages.orders))}</h1>
       </AccordionSummary>
       <AccordionDetails>
-        <Box sx={{ height: 400, width: "100%", marginBottom: 12 }}>
-          <DataGrid
-            className={styles.contentTable}
-            rows={data ?? []}
-            columns={ORDERS_COLUMNS}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-            disableSelectionOnClick
-            selectionModel={selectionModel}
-            onSelectionModelChange={selectionChanged}
-            components={{ Toolbar: GridToolbar }}
-            autoHeight
-          />
-          <button className={styles.removeButton} onClick={removeData} disabled={!selectedRows.length}>
-            {buttonText}
-            <DeleteIcon sx={{ marginLeft: 1 }} />
-          </button>
-        </Box>
+        <div style={{ display: "flex" }}>
+          <Box sx={{ marginBottom: 12, width: 470, height: 500 }}>
+            <DataGrid
+              className={styles.contentTable}
+              rows={data ?? []}
+              columns={ORDERS_COLUMNS}
+              autoPageSize
+              onCellClick={changeOrderId}
+            />
+            <button className={styles.removeButton} onClick={removeData}>
+              {buttonText}
+              <DeleteIcon sx={{ marginLeft: 1 }} />
+            </button>
+          </Box>
+          <Box sx={{
+            marginBottom: 12,
+            width: 1100,
+            height: 500,
+          }}>
+            <OrderDetail order={order} />
+          </Box>
+        </div>
       </AccordionDetails>
     </Accordion>
   );
