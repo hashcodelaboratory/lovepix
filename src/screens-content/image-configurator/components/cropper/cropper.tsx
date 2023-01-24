@@ -14,7 +14,7 @@ import { CONFIGURATION_TABLE_KEY } from "../../../../common/indexed-db/hooks/key
 const CropperComponent = () => {
   const configuration = useLiveQuery(
     () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
-    [],
+    []
   );
 
   const cropperRef = useRef<any>(null);
@@ -34,7 +34,9 @@ const CropperComponent = () => {
     ...dimensionsBySquare,
   ];
 
-  const selectedDimension = allDimensions.find((dim) => dim.id === configuration?.dimensionId);
+  const selectedDimension = allDimensions.find(
+    (dim) => dim.id === configuration?.dimensionId
+  );
 
   const aspectRatio =
     selectedDimension && selectedDimension?.width / selectedDimension?.height;
