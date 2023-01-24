@@ -2,11 +2,12 @@ import { MutationOptions, useMutation, UseMutationResult } from "react-query";
 import { collection, doc as document, doc, setDoc, writeBatch } from "@firebase/firestore";
 import { database, storage } from "../config";
 import { Collections } from "../enums";
-import { Delivery, Payment } from "../../enums/summary";
+import { Delivery } from "../../enums/delivery";
 import { FormInputs } from "../../types/form";
 import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
 import { StorageFolder } from "../storage/enums";
 import { Image } from "../../types/order";
+import { Payment } from "../../enums/payment";
 
 type CreateOrderRequest = {
   form: FormInputs;

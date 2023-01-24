@@ -14,15 +14,16 @@ import MenuItem from "@mui/material/MenuItem";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SUMMARY_SCHEMA } from "./utils/schema";
-import {Delivery as DeliveryOptions, Payment} from "../../../../../../common/enums/summary"
-import {Summary} from "../../../../../../common/types/summary";
-import {useLiveQuery} from "dexie-react-hooks";
-import {orderTable} from "../../../../../../../database.config";
+import { Delivery as DeliveryOptions } from "../../../../../../common/enums/delivery";
+import { Summary } from "../../../../../../common/types/summary";
+import { useLiveQuery } from "dexie-react-hooks";
+import { orderTable } from "../../../../../../../database.config";
+import { Payment } from "../../../../../../common/enums/payment";
 
 const Delivery = () => {
   const order = useLiveQuery(
-      () => orderTable.get('order'),
-      []
+    () => orderTable.get("order"),
+    [],
   );
 
   const { state: { stepper }, stateAction: { setStepper } } = useContext(AppContext);
@@ -45,10 +46,10 @@ const Delivery = () => {
   }, [stepper, reset]);
 
   const onSubmit: SubmitHandler<Summary> = (data) => {
-    orderTable.update('order', {
+    orderTable.update("order", {
       delivery: data?.delivery,
-      payment: data?.payment
-    })
+      payment: data?.payment,
+    });
     setStepper(1);
   };
 
@@ -67,7 +68,7 @@ const Delivery = () => {
           {String(t(messages.delivery))}
         </p>
         <Controller
-          name='delivery'
+          name="delivery"
           control={control}
           render={({ field }) => (
             <FormControl fullWidth error={!!errors.delivery?.message}>
@@ -91,12 +92,12 @@ const Delivery = () => {
           )}
         />
         <p className={styles.summarySectionTitle}>{String(t(messages.code))}</p>
-        <TextField className={styles.codeField} placeholder='WALLER22' />
+        <TextField className={styles.codeField} placeholder="WALLER22" />
         <p className={styles.summarySectionTitle}>
           {String(t(messages.payment))}
         </p>
         <Controller
-          name='payment'
+          name="payment"
           control={control}
           render={({ field }) => (
             <FormControl fullWidth error={!!errors.payment?.message}>
@@ -126,7 +127,7 @@ const Delivery = () => {
         <Link className={styles.text} style={{ cursor: "pointer" }}>
           <b>{String(t(messages.privacy))}</b>
         </Link>
-        <button type='submit' className={styles.checkoutButton} disabled={stepper === 1}>
+        <button type="submit" className={styles.checkoutButton} disabled={stepper === 1}>
           {String(t(messages.checkout))}
         </button>
       </form>
