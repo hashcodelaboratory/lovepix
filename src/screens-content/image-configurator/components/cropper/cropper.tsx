@@ -1,28 +1,32 @@
-import styles from "../../image-configurator-layout.module.scss";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
-import React, { useContext, useEffect, useRef } from "react";
-import AppContext from "app-context/app-context";
+import React, { useEffect, useRef } from "react";
 import {
   dimensionsByHeight,
   dimensionsBySquare,
   dimensionsByWidth,
 } from "screens-content/home/utils/configuration";
 import DropzoneContainer from "screens-content/home/components/upload-image/dropzone/dropzone-container";
+import { useLiveQuery } from "dexie-react-hooks";
+import { configurationsTable } from "../../../../../database.config";
+import { CONFIGURATION_TABLE_KEY } from "../../../../common/indexed-db/hooks/keys";
 
 const CropperComponent = () => {
+  const configuration = useLiveQuery(
+    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
+    []
+  );
+
   const cropperRef = useRef<any>(null);
 
   const onCrop = () => {
     const imageElement: any = cropperRef?.current;
     const cropper: any = imageElement?.cropper;
-    // TO DO how to save cropped image
-    console.log(cropper.getCroppedCanvas().toDataURL());
-  };
 
-  const {
-    state: { image, dimensionId },
-  } = useContext(AppContext);
+    configurationsTable.update("conf", {
+      image: cropper.getCroppedCanvas()?.toDataURL(),
+    });
+  };
 
   const allDimensions = [
     ...dimensionsByWidth,
@@ -30,7 +34,9 @@ const CropperComponent = () => {
     ...dimensionsBySquare,
   ];
 
-  const selectedDimension = allDimensions.find((dim) => dim.id === dimensionId);
+  const selectedDimension = allDimensions.find(
+    (dim) => dim.id === configuration?.dimensionId
+  );
 
   const aspectRatio =
     selectedDimension && selectedDimension?.width / selectedDimension?.height;
@@ -39,11 +45,11 @@ const CropperComponent = () => {
     cropperRef?.current?.cropper?.setAspectRatio(aspectRatio);
   }, [cropperRef, aspectRatio]);
 
-  return !image?.url ? (
+  return !configuration?.origin ? (
     <DropzoneContainer />
   ) : (
     <Cropper
-      src={image?.url}
+      src={configuration?.origin ?? ""}
       style={{ height: 400, width: "100%" }}
       initialAspectRatio={16 / 9}
       guides={false}

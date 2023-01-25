@@ -1,4 +1,4 @@
-import useLoggedUser from "custom-hooks/use-logged-user";
+import useLoggedUser from "common/custom-hooks/use-logged-user";
 import Image from "next/image";
 import { Container } from "@mui/material";
 import classNames from "./account-detail.module.scss";

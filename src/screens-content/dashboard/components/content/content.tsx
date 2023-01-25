@@ -1,7 +1,7 @@
 import Card from "./components/home/card";
 import styles from '../../dashboard.module.scss'
 import {messages} from "../../../../messages/messages";
-import Table from "./components/home/table";
+import StorageTable from "./components/home/storage-table";
 import {useContext} from "react";
 import DashboardContext from "../../context/dashboard-context";
 import OrdersTable from "./components/home/orders-table";
@@ -54,7 +54,7 @@ const Content = ({ isFetching }: Props) => {
                 />
             </div>
             <OrdersTable />
-            <Table/>
+            <StorageTable/>
         </div>
     )
 }

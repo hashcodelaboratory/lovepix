@@ -2,54 +2,69 @@ import styles from "../../../../image-configurator-layout.module.scss";
 import { ShoppingCart } from "@mui/icons-material";
 import { useTranslation } from "next-i18next";
 import { messages } from "../../../../../../messages/messages";
-import { useUpdateOrder } from "../../../../../home/api/order/useUpdateOrder";
-import { useContext } from "react";
-import AppContext from "../../../../../../app-context/app-context";
-import {
-  materials,
-  dimensionsByHeight,
-  dimensionsBySquare,
-  dimensionsByWidth,
-} from "screens-content/home/utils/configuration";
 import { useRouter } from "next/router";
-import { ImageStatus } from "app-context/enums";
 import { SHOPPING_CART } from "constants/pages/urls";
+import { useLiveQuery } from "dexie-react-hooks";
+import { configurationsTable, orderTable } from "../../../../../../../database.config";
+import { DIMENSIONS } from "../../../../../../common/configuration/dimensions/dimensions";
+import { getPrice } from "../price/utils/generator";
+import { materials } from "../../../../../home/utils/configuration";
+import { CONFIGURATION_TABLE_KEY, ORDER_TABLE_KEY } from "../../../../../../common/indexed-db/hooks/keys";
+import { Image } from "../../../../../../common/types/order";
 
 const Button = () => {
   const { t } = useTranslation();
 
-  const { mutate: updateOrder } = useUpdateOrder();
-
   const router = useRouter();
 
-  const {
-    state: { dimensionId, materialId },
-  } = useContext(AppContext);
+  const configuration = useLiveQuery(
+    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
+    [],
+  );
 
-  const handleUpdateOrder = () => {
-    const dimensions = [
-      ...dimensionsByWidth,
-      ...dimensionsByHeight,
-      ...dimensionsBySquare,
-    ];
+  const order = useLiveQuery(
+    () => orderTable.get(ORDER_TABLE_KEY),
+    [],
+  );
 
-    const dim = dimensions.find((dim) => dim.id === dimensionId);
+  const handleUpdateOrder = async () => {
+    const dim = DIMENSIONS.find((dim) => dim.id === configuration?.dimensionId) ?? { width: 0, height: 0 };
+
+    const material = materials.find(material => material.id === configuration?.material)?.name;
+
+    const price = dim.width > 0 && dim.height > 0 ? getPrice(dim.width, dim.height, material) : 0;
+
+    let totalPrice: number = 0;
+    order?.shoppingCart?.images?.forEach((image: Image) => {
+      totalPrice += image.price * image.qty;
+    });
+    totalPrice += Number(price);
 
     const payload = {
-      width: dim?.width,
-      height: dim?.height,
-      material: materials.find((mat) => mat.id === materialId)?.name,
-      status: ImageStatus.CONFIGURED,
+      shoppingCart: {
+        images: [...order?.shoppingCart?.images ?? [], {
+          url: configuration?.image,
+          qty: 1,
+          origin: configuration?.origin,
+          width: dim.width,
+          height: dim.height,
+          material,
+          price: Number(Number(price).toFixed(2)),
+        }],
+      },
+      totalPrice: totalPrice.toFixed(2),
     };
 
-    updateOrder(payload);
+    order?.shoppingCart ? orderTable.update("order", payload) : orderTable.add(payload, "order");
 
-    router.push(`/en${SHOPPING_CART}`);
+    configurationsTable.clear();
+
+    await router.push(`${SHOPPING_CART}`);
   };
 
   return (
     <div className={styles.containerPadding}>
-      <button className={styles.button} onClick={handleUpdateOrder}>
+      <button className={styles.button} onClick={handleUpdateOrder} disabled={!configuration?.image}>
         <ShoppingCart />
         <p className={styles.buttonTitle}>{String(t(messages.toCart))}</p>
       </button>

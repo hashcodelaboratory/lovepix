@@ -75,7 +75,7 @@
   position: absolute;
   bottom: 1rem;
   right: 2rem;
-  background-color: gray;
+  background-color: #1976D2;
   border: none;
   text-transform: uppercase;
   color: white;
@@ -85,7 +85,7 @@
 }
 
 .orderButton:hover {
-  background-color: #606060;
+  background-color: #13569b;
   text-decoration: underline;
 }
 
@@ -130,8 +130,13 @@
   text-transform: uppercase;
 }
 
-.checkoutButton:hover {
+.checkoutButton:hover:not([disabled]) {
   background-color: #606060;
+}
+
+.checkoutButton:disabled {
+  cursor: default;
+  background-color: #b2b2b2;
 }
 
 .codeField {

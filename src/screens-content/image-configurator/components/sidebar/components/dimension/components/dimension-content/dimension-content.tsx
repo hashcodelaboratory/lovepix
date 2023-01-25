@@ -1,31 +1,51 @@
 import Box from "@mui/material/Box";
 import { Tabs, Tab } from "@mui/material";
-import { CSSProperties, SyntheticEvent, useContext, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { a11yProps } from "./utils/utils";
 import TabPanel from "./components/tab-panel";
 import { useTranslation } from "next-i18next";
 import { messages } from "../../../../../../../../messages/messages";
 import TabPanelBox from "./components/tab-panel-box";
-import AppContext from "../../../../../../../../app-context/app-context";
 import {
   dimensionsByHeight,
   dimensionsBySquare,
   dimensionsByWidth,
 } from "screens-content/home/utils/configuration";
+import { configurationsTable } from "../../../../../../../../../database.config";
+import { useLiveQuery } from "dexie-react-hooks";
+import { CONFIGURATION_TABLE_KEY } from "../../../../../../../../common/indexed-db/hooks/keys";
 
 const DimensionContent = () => {
+  const configuration = useLiveQuery(
+    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
+    [],
+  );
+
   const { t } = useTranslation();
 
   const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    if (dimensionsBySquare.find(dim => dim.id === configuration?.dimensionId)) {
+      setValue(2);
+    }
+    if (dimensionsByWidth.find(dim => dim.id === configuration?.dimensionId)) {
+      setValue(0);
+    }
+    if (dimensionsByHeight.find(dim => dim.id === configuration?.dimensionId)) {
+      setValue(1);
+    }
+  }, [configuration?.dimensionId]);
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
-  const {
-    state: { dimensionId },
-    stateAction: { setDimensionId },
-  } = useContext(AppContext);
+  const changeDimension = (id: string) => {
+    configurationsTable.update("conf", {
+      dimensionId: id,
+    });
+  };
 
   return (
     <div>
@@ -33,7 +53,9 @@ const DimensionContent = () => {
         <Tabs
           value={value}
           onChange={handleChange}
-          aria-label='basic tabs example'
+          aria-label="basic tabs example"
+          variant="fullWidth"
+          visibleScrollbar
         >
           <Tab label={String(t(messages.byWidth))} {...a11yProps(0)} />
           <Tab label={String(t(messages.byHeight))} {...a11yProps(1)} />
@@ -43,10 +65,10 @@ const DimensionContent = () => {
       <TabPanel value={value} index={0}>
         {dimensionsByWidth.map((dim) => (
           <TabPanelBox
-            selected={dim.id === dimensionId}
+            selected={dim.id === configuration?.dimensionId}
             x={dim.width}
             y={dim.height}
-            onClick={() => setDimensionId(dim.id)}
+            onClick={() => changeDimension(dim.id)}
             key={dim.id}
           />
         ))}
@@ -54,11 +76,11 @@ const DimensionContent = () => {
       <TabPanel value={value} index={1}>
         {dimensionsByHeight.map((dim) => (
           <TabPanelBox
-            selected={dim.id === dimensionId}
+            selected={dim.id === configuration?.dimensionId}
             x={dim.width}
             y={dim.height}
-            onClick={() => setDimensionId(dim.id)}
-            style={{ width: 50, height: 80 }}
+            onClick={() => changeDimension(dim.id)}
+            style={{ width: 60, height: 80, marginRight: 10 }}
             key={dim.id}
           />
         ))}
@@ -66,11 +88,11 @@ const DimensionContent = () => {
       <TabPanel value={value} index={2}>
         {dimensionsBySquare.map((dim) => (
           <TabPanelBox
-            selected={dim.id === dimensionId}
+            selected={dim.id === configuration?.dimensionId}
             x={dim.width}
             y={dim.height}
-            onClick={() => setDimensionId(dim.id)}
-            style={{ width: 60 }}
+            onClick={() => changeDimension(dim.id)}
+            style={{ width: 70, height: 70, padding: 5 }}
             key={dim.id}
           />
         ))}

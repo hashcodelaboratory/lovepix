@@ -14,21 +14,21 @@ import MenuItem from "@mui/material/MenuItem";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SUMMARY_SCHEMA } from "./utils/schema";
-import { useUpdateOrder } from "../../../../../home/api/order/useUpdateOrder";
-import { SummaryFormInputs } from "./utils/types";
+import { Delivery as DeliveryOptions } from "../../../../../../common/enums/delivery";
+import { Summary } from "../../../../../../common/types/summary";
+import { useLiveQuery } from "dexie-react-hooks";
+import { orderTable } from "../../../../../../../database.config";
+import { Payment } from "../../../../../../common/enums/payment";
 
 const Delivery = () => {
-  const {
-    state: {
-      image: { size },
-      summary,
-      stepper,
-    },
-    stateAction: { setStepper },
-  } = useContext(AppContext);
+  const order = useLiveQuery(
+    () => orderTable.get("order"),
+    [],
+  );
+
+  const { state: { stepper }, stateAction: { setStepper } } = useContext(AppContext);
 
   const { t } = useTranslation();
-  const { mutate: updateOrder } = useUpdateOrder();
 
   const {
     register,
@@ -36,17 +36,20 @@ const Delivery = () => {
     formState: { errors },
     control,
     reset,
-  } = useForm<SummaryFormInputs>({
+  } = useForm<Summary>({
     resolver: yupResolver(SUMMARY_SCHEMA),
-    defaultValues: { ...summary },
+    defaultValues: { ...order?.summary },
   });
 
   useEffect(() => {
     stepper === 3 && reset();
   }, [stepper, reset]);
 
-  const onSubmit: SubmitHandler<SummaryFormInputs> = (data) => {
-    updateOrder({ summary: data });
+  const onSubmit: SubmitHandler<Summary> = (data) => {
+    orderTable.update("order", {
+      delivery: data?.delivery,
+      payment: data?.payment,
+    });
     setStepper(1);
   };
 
@@ -57,26 +60,26 @@ const Delivery = () => {
         <hr />
         <div className={styles.totalContainer}>
           <p>
-            {size} {String(t(messages.items))}
+            {order?.shoppingCart?.images?.length} {String(t(messages.items))}
           </p>
-          <p>€ 17.99</p>
+          <p>{Number(order?.totalPrice).toFixed(2)} €</p>
         </div>
         <p className={styles.summarySectionTitle}>
           {String(t(messages.delivery))}
         </p>
         <Controller
-          name='delivery'
+          name="delivery"
           control={control}
           render={({ field }) => (
             <FormControl fullWidth error={!!errors.delivery?.message}>
               <Select {...field} {...register("delivery", { required: true })}>
-                <MenuItem value={"courier"}>
+                <MenuItem value={DeliveryOptions.COURIER}>
                   {String(t(messages.courier))}
                 </MenuItem>
-                <MenuItem value={"personalCollect"}>
+                <MenuItem value={DeliveryOptions.PERSONAL_COLLECT}>
                   {String(t(messages.personalCollect))}
                 </MenuItem>
-                <MenuItem value={"pickup"}>
+                <MenuItem value={DeliveryOptions.PICKUP}>
                   {String(t(messages.pickup))}
                 </MenuItem>
               </Select>
@@ -89,20 +92,20 @@ const Delivery = () => {
           )}
         />
         <p className={styles.summarySectionTitle}>{String(t(messages.code))}</p>
-        <TextField className={styles.codeField} placeholder='WALLER22' />
+        <TextField className={styles.codeField} placeholder="WALLER22" />
         <p className={styles.summarySectionTitle}>
           {String(t(messages.payment))}
         </p>
         <Controller
-          name='payment'
+          name="payment"
           control={control}
           render={({ field }) => (
             <FormControl fullWidth error={!!errors.payment?.message}>
               <Select {...field} {...register("payment", { required: true })}>
-                <MenuItem value={"online"}>
+                <MenuItem value={Payment.ONLINE}>
                   {String(t(messages.online))}
                 </MenuItem>
-                <MenuItem value={"personalDelivery"}>
+                <MenuItem value={Payment.PERSONAL_DELIVERY}>
                   {String(t(messages.personalDelivery))}
                 </MenuItem>
               </Select>
@@ -118,13 +121,13 @@ const Delivery = () => {
           <p className={styles.summarySectionTitle}>
             {String(t(messages.total))}
           </p>
-          <p className={styles.price}>€ 18.99</p>
+          <p className={styles.price}>{Number(order?.totalPrice).toFixed(2)} €</p>
         </div>
         <p className={styles.text}>{String(t(messages.personalData))}</p>
         <Link className={styles.text} style={{ cursor: "pointer" }}>
           <b>{String(t(messages.privacy))}</b>
         </Link>
-        <button type='submit' className={styles.checkoutButton}>
+        <button type="submit" className={styles.checkoutButton} disabled={stepper === 1}>
           {String(t(messages.checkout))}
         </button>
       </form>

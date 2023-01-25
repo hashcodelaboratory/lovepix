@@ -36,6 +36,7 @@
   padding: 1rem;
   display: flex;
   position: relative;
+  height: 112px;
 }
 
 .previewRemove {
@@ -59,7 +60,7 @@
 
 .dimension {
   width: 100%;
-  height: 300px;
+  max-height: 350px;
 }
 
 .containerPadding {
@@ -67,8 +68,29 @@
 }
 
 .imageWrapper {
-  box-shadow: 4px 4px 4px #1976d2 !important;
+  box-shadow: 4px 3px 8px #1976d2 !important;
   border-radius: 5px;
+  position: relative;
+}
+
+.relativeContainer {
+  position: relative;
+}
+
+.materialCardTitle {
+  font-size: 14px;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  background-color: #505050;
+  opacity: 0.6;
+  width: 100%;
+  margin: 0;
+  padding: 0.5rem;
+  color: white;
+  font-weight: 500;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .material {
@@ -102,6 +124,11 @@
 .button:hover {
   cursor: pointer;
   background-color: #808080;
+}
+
+.button:disabled {
+  cursor: default;
+  background-color: #9b9b9b;
 }
 
 .buttonTitle {

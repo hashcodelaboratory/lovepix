@@ -14,13 +14,13 @@ const TabPanelBox = ({ x, y, onClick, selected, style = {} }: Props) => {
     <div
       className={styles.tabPanelBox}
       style={{
-        borderColor: selected ? "#1976d2" : "inherit",
-        boxShadow: selected ? "4px 4px 4px #1976d2" : "4px 4px 4px silver",
+        borderColor: selected ? "#f1f1f1" : "#e0e0e0",
+        boxShadow: selected ? "4px 3px 8px #1976d2" : "none",
         ...style,
       }}
       onClick={onClick}
     >
-      <p style={{ fontSize: 12 }}>
+      <p style={{ fontSize: 12, color: "gray" }}>
         {x} x {y} cm
       </p>
     </div>

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -19,10 +18,12 @@ import { v4 as uuidv4 } from "uuid";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import * as PagesUrls from "../constants/pages/urls";
 import { Badge } from "@mui/material";
-import AppContext from "../app-context/app-context";
 import { logIn, logOut } from "auth";
-import useLoggedUser from "custom-hooks/use-logged-user";
+import useLoggedUser from "common/custom-hooks/use-logged-user";
 import { useRouter } from "next/router";
+import { useLiveQuery } from "dexie-react-hooks";
+import { orderTable } from "../../database.config";
+import { ORDER_TABLE_KEY } from "../common/indexed-db/hooks/keys";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] =
@@ -34,11 +35,12 @@ const ResponsiveAppBar = () => {
 
   const router = useRouter();
 
-  const {
-    state: { image },
-  } = useContext(AppContext);
+  const order = useLiveQuery(
+    () => orderTable.get(ORDER_TABLE_KEY),
+    [],
+  );
 
-  const size = image?.size;
+  const BADGE_NUMBER = order?.shoppingCart?.images?.length;
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -64,14 +66,14 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position='static'>
-      <Container maxWidth='lg'>
+    <AppBar position="static">
+      <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Typography
-            variant='h6'
+            variant="h6"
             noWrap
-            component='a'
-            href='/'
+            component="a"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -87,17 +89,17 @@ const ResponsiveAppBar = () => {
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
-              size='large'
-              aria-label='account of current user'
-              aria-controls='menu-appbar'
-              aria-haspopup='true'
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color='inherit'
+              color="inherit"
             >
               <MenuIcon />
             </IconButton>
             <Menu
-              id='menu-appbar'
+              id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: "bottom",
@@ -116,7 +118,7 @@ const ResponsiveAppBar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={uuidv4()} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center'>
+                  <Typography textAlign="center">
                     <Link href={page.link}>{page.title}</Link>
                   </Typography>
                 </MenuItem>
@@ -124,10 +126,10 @@ const ResponsiveAppBar = () => {
             </Menu>
           </Box>
           <Typography
-            variant='h5'
+            variant="h5"
             noWrap
-            component='a'
-            href=''
+            component="a"
+            href=""
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -156,8 +158,8 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0, display: "flex" }}>
             <Link href={PagesUrls.SHOPPING_CART}>
               <Badge
-                badgeContent={size}
-                color='error'
+                badgeContent={BADGE_NUMBER}
+                color="error"
                 sx={{ my: 2, marginRight: 2 }}
               >
                 <ShoppingCartIcon
@@ -165,17 +167,17 @@ const ResponsiveAppBar = () => {
                 />
               </Badge>
             </Link>
-            <Tooltip title='Open settings'>
+            <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   alt={!!user ? user.displayName || "" : undefined}
-                  src='/static/images/avatar/2.jpg'
+                  src="/static/images/avatar/2.jpg"
                 />
               </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: "45px" }}
-              id='menu-appbar'
+              id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: "top",
@@ -196,7 +198,7 @@ const ResponsiveAppBar = () => {
                       key={setting.title}
                       onClick={() => setting.callBack && handleLogout()}
                     >
-                      <Typography textAlign='center'>
+                      <Typography textAlign="center">
                         {setting.title}
                       </Typography>
                     </MenuItem>
@@ -214,7 +216,7 @@ const ResponsiveAppBar = () => {
                 })
               ) : (
                 <MenuItem onClick={logIn}>
-                  <Typography textAlign='center'>Login</Typography>
+                  <Typography textAlign="center">Login</Typography>
                 </MenuItem>
               )}
             </Menu>

@@ -9,7 +9,7 @@ const DropzoneIdle = () => {
     const { uploadPhoto, uploadPhotoSubcontent } = messages;
 
     return(
-        <div>
+        <div style={{ textAlign: "center" }}>
             <button className={styles.uploadButton} >
                 {String(t(uploadPhoto))}
             </button>
