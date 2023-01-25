@@ -12,6 +12,7 @@ export type Image = {
   origin: string;
   material: Material;
   price: number;
+  pdf?: string;
 }
 
 export type Order = {

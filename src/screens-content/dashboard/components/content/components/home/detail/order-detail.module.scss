@@ -1,7 +1,7 @@
 .container {
   padding: 1rem;
   border-radius: 0 1rem 1rem 0;
-  height: 500px;
+  height: 700px;
   background-color: #f6f6f6;
 }
 
@@ -11,5 +11,21 @@
   border-radius: 1rem;
   background-color: white;
   margin: 0.5rem;
-  padding: 0.5rem;
+  padding: 1rem;
+
+  h4 {
+    margin-top: 0;
+  }
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
 }

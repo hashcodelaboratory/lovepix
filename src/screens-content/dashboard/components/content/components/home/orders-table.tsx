@@ -27,17 +27,11 @@ const OrdersTable = () => {
 
   const [order, setOrder] = useState<Order>();
 
-  const data = orders.map(({ id, date, form, delivery, payment, shoppingCart, totalPrice, pdf }) => (
+  const data = orders.map(({ id, date, form}) => (
     {
       id: id,
       date: new Date(date).toLocaleDateString() ?? "",
       name: `${form?.firstName} ${form?.lastName}`,
-      // totalPrice: totalPrice ?? "",
-      // delivery: t(delivery),
-      // payment: t(payment) ?? "",
-      // origin: shoppingCart?.images?.map(({ origin }) => origin) ?? "-",
-      // edited: shoppingCart?.images?.map(({ url }) => url) ?? "-",
-      // pdf: shoppingCart?.images?.map((image) => ({ image, id, pdf })),
     }
   ));
 
@@ -67,7 +61,7 @@ const OrdersTable = () => {
       </AccordionSummary>
       <AccordionDetails>
         <div style={{ display: "flex" }}>
-          <Box sx={{ marginBottom: 12, width: 470, height: 500 }}>
+          <Box sx={{ marginBottom: 12, width: 470, height: 700 }}>
             <DataGrid
               className={styles.contentTable}
               rows={data ?? []}
