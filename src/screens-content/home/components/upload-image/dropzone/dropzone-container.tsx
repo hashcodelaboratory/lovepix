@@ -7,9 +7,7 @@ import { FileRejection } from "react-dropzone";
 import Icon from "@icons/icon";
 import { IconType } from "@icons/enums";
 import { useSnackbar } from "notistack";
-import {
-  SNACKBAR_OPTIONS_ERROR,
-} from "../../../../../snackbar/config";
+import { SNACKBAR_OPTIONS_ERROR } from "../../../../../snackbar/config";
 import { messages } from "../../../../../messages/messages";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
@@ -23,7 +21,7 @@ import { CONFIGURATION_TABLE_KEY } from "../../../../../common/indexed-db/hooks/
 const DropzoneContainer = () => {
   const configuration = useLiveQuery(
     () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
-    [],
+    []
   );
 
   const { t } = useTranslation();
@@ -74,16 +72,16 @@ const DropzoneContainer = () => {
     <>
       {configuration?.origin ? (
         <Group
-          position="center"
-          spacing="xs"
+          position='center'
+          spacing='xs'
           className={styles.dropzoneGroupFaked}
         >
           <Image
             unoptimized
             priority
             src={configuration?.origin ?? ""}
-            alt="Processing image"
-            objectFit="cover"
+            alt='Processing image'
+            objectFit='cover'
             height={150}
             width={300}
             className={styles.imagePreview}
@@ -109,8 +107,8 @@ const DropzoneContainer = () => {
           multiple={false}
         >
           <Group
-            position="center"
-            spacing="xl"
+            position='center'
+            spacing='xl'
             className={styles.dropzoneGroup}
           >
             <h1 className={styles.title}>{String(t(printPhoto))}</h1>

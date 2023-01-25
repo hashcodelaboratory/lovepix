@@ -1,5 +1,11 @@
 import { MutationOptions, useMutation, UseMutationResult } from "react-query";
-import { collection, doc as document, doc, setDoc, writeBatch } from "@firebase/firestore";
+import {
+  collection,
+  doc as document,
+  doc,
+  setDoc,
+  writeBatch,
+} from "@firebase/firestore";
 import { database, storage } from "../config";
 import { Collections } from "../enums";
 import { Delivery } from "../../enums/delivery";
@@ -17,60 +23,59 @@ type CreateOrderRequest = {
   };
   totalPrice: number;
   delivery: Delivery;
-  payment: Payment,
-}
+  payment: Payment;
+};
 
 const uploadToStorage = async (orderId: string, images: Image[]) => {
   const payload: Image[] = [];
   images.map(async (image: Image, index) => {
-      const uploadURL = `${StorageFolder.ORDERS}/${orderId}/images/`;
+    const uploadURL = `${StorageFolder.ORDERS}/${orderId}/images/`;
 
-      const urlRef = await ref(storage, `${uploadURL}/updated/`);
-      const originRef = await ref(storage, `${uploadURL}/origin/`);
+    const urlRef = await ref(storage, `${uploadURL}/updated/`);
+    const originRef = await ref(storage, `${uploadURL}/origin/`);
 
-      const urlRes = await fetch(image.url);
-      const originRes = await fetch(image.origin);
+    const urlRes = await fetch(image.url);
+    const originRes = await fetch(image.origin);
 
-      const urlFile = await urlRes.blob();
-      const originFile = await originRes.blob();
+    const urlFile = await urlRes.blob();
+    const originFile = await originRes.blob();
 
-      const {
-        metadata: { name: urlName },
-      } = await uploadBytes(urlRef, urlFile);
+    const {
+      metadata: { name: urlName },
+    } = await uploadBytes(urlRef, urlFile);
 
-      const {
-        metadata: { name: originName },
-      } = await uploadBytes(originRef, originFile);
+    const {
+      metadata: { name: originName },
+    } = await uploadBytes(originRef, originFile);
 
-      if (urlName && originName) {
-        const url = await getDownloadURL(
-          ref(storage, `${StorageFolder.ORDERS}/${orderId}/images/${urlName}`),
-        );
+    if (urlName && originName) {
+      const url = await getDownloadURL(
+        ref(storage, `${StorageFolder.ORDERS}/${orderId}/images/${urlName}`)
+      );
 
-        const origin = await getDownloadURL(
-          ref(storage, `${StorageFolder.ORDERS}/${orderId}/images/${originName}`),
-        );
+      const origin = await getDownloadURL(
+        ref(storage, `${StorageFolder.ORDERS}/${orderId}/images/${originName}`)
+      );
 
-        payload.push({
-          ...image,
-          url: url,
-          origin: origin,
+      payload.push({
+        ...image,
+        url: url,
+        origin: origin,
+      });
+
+      if (index === payload.length - 1) {
+        const batch = writeBatch(database);
+        const docRef = document(database, Collections.ORDERS, orderId);
+        await batch.update(docRef, {
+          shoppingCart: {
+            images: payload,
+          },
         });
 
-        if (index === payload.length - 1) {
-          const batch = writeBatch(database);
-          const docRef = document(database, Collections.ORDERS, orderId);
-          await batch.update(docRef, {
-            shoppingCart: {
-              images: payload,
-            },
-          });
-
-          await batch.commit();
-        }
+        await batch.commit();
       }
-    },
-  );
+    }
+  });
 };
 
 const createOrder = async (data: CreateOrderRequest) => {
@@ -81,5 +86,7 @@ const createOrder = async (data: CreateOrderRequest) => {
   await uploadToStorage(newOrderRef.id, data.shoppingCart.images);
 };
 
-export const useCreateOrder = (options?: MutationOptions<any, any, CreateOrderRequest>)
-  : UseMutationResult<any, any, CreateOrderRequest> => useMutation(createOrder, options);
+export const useCreateOrder = (
+  options?: MutationOptions<any, any, CreateOrderRequest>
+): UseMutationResult<any, any, CreateOrderRequest> =>
+  useMutation(createOrder, options);

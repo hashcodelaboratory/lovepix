@@ -18,7 +18,7 @@ import { CONFIGURATION_TABLE_KEY } from "../../../../../../../../common/indexed-
 const DimensionContent = () => {
   const configuration = useLiveQuery(
     () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
-    [],
+    []
   );
 
   const { t } = useTranslation();
@@ -26,13 +26,19 @@ const DimensionContent = () => {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    if (dimensionsBySquare.find(dim => dim.id === configuration?.dimensionId)) {
+    if (
+      dimensionsBySquare.find((dim) => dim.id === configuration?.dimensionId)
+    ) {
       setValue(2);
     }
-    if (dimensionsByWidth.find(dim => dim.id === configuration?.dimensionId)) {
+    if (
+      dimensionsByWidth.find((dim) => dim.id === configuration?.dimensionId)
+    ) {
       setValue(0);
     }
-    if (dimensionsByHeight.find(dim => dim.id === configuration?.dimensionId)) {
+    if (
+      dimensionsByHeight.find((dim) => dim.id === configuration?.dimensionId)
+    ) {
       setValue(1);
     }
   }, [configuration?.dimensionId]);
@@ -53,8 +59,8 @@ const DimensionContent = () => {
         <Tabs
           value={value}
           onChange={handleChange}
-          aria-label="basic tabs example"
-          variant="fullWidth"
+          aria-label='basic tabs example'
+          variant='fullWidth'
           visibleScrollbar
         >
           <Tab label={String(t(messages.byWidth))} {...a11yProps(0)} />

@@ -12,7 +12,7 @@ import { CONFIGURATION_TABLE_KEY } from "../../../../../../common/indexed-db/hoo
 const Preview = () => {
   const configuration = useLiveQuery(
     () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
-    [],
+    []
   );
 
   const { t } = useTranslation();
@@ -21,26 +21,25 @@ const Preview = () => {
     configurationsTable.clear();
   };
 
-  const layout = configuration?.origin ?
+  const layout = configuration?.origin ? (
     <>
-      <Image
-        alt="preview"
-        src={configuration?.origin ?? ""}
-        layout={"fill"}
-      />
+      <Image alt='preview' src={configuration?.origin ?? ""} layout={"fill"} />
       <button className={styles.previewRemove} onClick={handleRemoveImage}>
         <Delete sx={{ mr: 1 }} />
         {String(t(messages.removeImage))}
       </button>
-    </> :
-    <ImageIcon color="disabled" style={{ width: 80, height: 80, margin: "auto" }} />;
+    </>
+  ) : (
+    <ImageIcon
+      color='disabled'
+      style={{ width: 80, height: 80, margin: "auto" }}
+    />
+  );
 
   return (
     <div className={styles.preview}>
       <Header icon={<Filter1 />} title={String(t(messages.yourPhoto))} />
-      <div className={styles.imagePlaceholder}>
-        {layout}
-      </div>
+      <div className={styles.imagePlaceholder}>{layout}</div>
     </div>
   );
 };

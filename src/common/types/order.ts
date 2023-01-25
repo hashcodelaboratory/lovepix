@@ -12,7 +12,7 @@ export type Image = {
   origin: string;
   material: Material;
   price: number;
-}
+};
 
 export type Order = {
   id: string;
@@ -25,4 +25,4 @@ export type Order = {
   payment: Payment;
   totalPrice: number;
   pdf: string;
-}
+};

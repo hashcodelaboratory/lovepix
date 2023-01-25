@@ -1,6 +1,7 @@
 import * as yup from "yup";
 
-export const FORM_SCHEMA = yup.object({
+export const FORM_SCHEMA = yup
+  .object({
     firstName: yup.string().required("firstNameValidation"),
     lastName: yup.string().required("lastNameValidation"),
     address: yup.string().required("addressValidation"),
@@ -8,4 +9,5 @@ export const FORM_SCHEMA = yup.object({
     postalCode: yup.string().required("postalCodeValidation"),
     phone: yup.string().required("phoneValidation"),
     email: yup.string().email().required(),
-}).required();
+  })
+  .required();

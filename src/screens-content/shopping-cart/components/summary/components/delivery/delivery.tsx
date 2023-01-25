@@ -21,12 +21,12 @@ import { orderTable } from "../../../../../../../database.config";
 import { Payment } from "../../../../../../common/enums/payment";
 
 const Delivery = () => {
-  const order = useLiveQuery(
-    () => orderTable.get("order"),
-    [],
-  );
+  const order = useLiveQuery(() => orderTable.get("order"), []);
 
-  const { state: { stepper }, stateAction: { setStepper } } = useContext(AppContext);
+  const {
+    state: { stepper },
+    stateAction: { setStepper },
+  } = useContext(AppContext);
 
   const { t } = useTranslation();
 
@@ -68,7 +68,7 @@ const Delivery = () => {
           {String(t(messages.delivery))}
         </p>
         <Controller
-          name="delivery"
+          name='delivery'
           control={control}
           render={({ field }) => (
             <FormControl fullWidth error={!!errors.delivery?.message}>
@@ -92,12 +92,12 @@ const Delivery = () => {
           )}
         />
         <p className={styles.summarySectionTitle}>{String(t(messages.code))}</p>
-        <TextField className={styles.codeField} placeholder="WALLER22" />
+        <TextField className={styles.codeField} placeholder='WALLER22' />
         <p className={styles.summarySectionTitle}>
           {String(t(messages.payment))}
         </p>
         <Controller
-          name="payment"
+          name='payment'
           control={control}
           render={({ field }) => (
             <FormControl fullWidth error={!!errors.payment?.message}>
@@ -121,13 +121,19 @@ const Delivery = () => {
           <p className={styles.summarySectionTitle}>
             {String(t(messages.total))}
           </p>
-          <p className={styles.price}>{Number(order?.totalPrice).toFixed(2)} €</p>
+          <p className={styles.price}>
+            {Number(order?.totalPrice).toFixed(2)} €
+          </p>
         </div>
         <p className={styles.text}>{String(t(messages.personalData))}</p>
         <Link className={styles.text} style={{ cursor: "pointer" }}>
           <b>{String(t(messages.privacy))}</b>
         </Link>
-        <button type="submit" className={styles.checkoutButton} disabled={stepper === 1}>
+        <button
+          type='submit'
+          className={styles.checkoutButton}
+          disabled={stepper === 1}
+        >
           {String(t(messages.checkout))}
         </button>
       </form>

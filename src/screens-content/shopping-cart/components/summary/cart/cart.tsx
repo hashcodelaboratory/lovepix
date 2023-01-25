@@ -14,12 +14,12 @@ import { orderTable } from "../../../../../../database.config";
 import { ORDER_TABLE_KEY } from "../../../../../common/indexed-db/hooks/keys";
 
 const Cart = () => {
-  const { state: { stepper }, stateAction: { setStepper } } = useContext(AppContext);
+  const {
+    state: { stepper },
+    stateAction: { setStepper },
+  } = useContext(AppContext);
 
-  const order = useLiveQuery(
-    () => orderTable.get(ORDER_TABLE_KEY),
-    [],
-  );
+  const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), []);
 
   const images = order?.shoppingCart?.images ?? [{} as any];
 
@@ -33,16 +33,26 @@ const Cart = () => {
     } else {
       orderTable.update("order", {
         shoppingCart: {
-          images: order?.shoppingCart?.images.filter((image: any) => image.url !== url),
+          images: order?.shoppingCart?.images.filter(
+            (image: any) => image.url !== url
+          ),
         },
       });
     }
   };
 
   const items =
-    images && images.map((image: any) => <>
+    images &&
+    images.map((image: any) => (
+      <>
         <div className={styles.cartRow}>
-          <Image alt={image?.image} src={image?.url ?? ""} width={80} height={80} layout="fixed" />
+          <Image
+            alt={image?.image}
+            src={image?.url ?? ""}
+            width={80}
+            height={80}
+            layout='fixed'
+          />
           <div>{`${image?.material} (${image?.width} x ${image?.height})`}</div>
           <div className={styles.qtyContainer}>
             <Button>-</Button>
@@ -50,11 +60,13 @@ const Cart = () => {
             <Button>+</Button>
           </div>
           <div>{Number(image?.price).toFixed(2)} €</div>
-          <Button onClick={() => removeImage(image?.url)}><CloseIcon color="error" /></Button>
+          <Button onClick={() => removeImage(image?.url)}>
+            <CloseIcon color='error' />
+          </Button>
         </div>
         <hr />
-      </>,
-    );
+      </>
+    ));
 
   const isDefault = stepper === 0;
 
@@ -64,7 +76,9 @@ const Cart = () => {
     isDefault ? router.push("/") : setStepper(0);
   };
 
-  const backButtonTitle = isDefault ? messages.backToShop : messages.shoppingCart;
+  const backButtonTitle = isDefault
+    ? messages.backToShop
+    : messages.shoppingCart;
 
   return (
     <div className={styles.cartContainer}>
@@ -77,10 +91,14 @@ const Cart = () => {
           {String(t(messages.personalDataTitle))}
         </h1>
       </div>
-      <p className={styles.itemsSize}>{images?.length} {String(t(messages.items))}</p>
+      <p className={styles.itemsSize}>
+        {images?.length} {String(t(messages.items))}
+      </p>
       <hr />
       {content}
-      <button onClick={redirect} className={styles.backButton}>{String(t(backButtonTitle))}</button>
+      <button onClick={redirect} className={styles.backButton}>
+        {String(t(backButtonTitle))}
+      </button>
     </div>
   );
 };

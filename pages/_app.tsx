@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import { appWithTranslation } from "next-i18next";
 import { SnackbarProvider } from "notistack";
 import { QueryClient, QueryClientProvider } from "react-query";
-import {useState} from "react";
+import { useState } from "react";
 import { ReactQueryDevtools } from "react-query/devtools";
 import AppContextProvider from "../src/app-context/app-context-provider";
 
