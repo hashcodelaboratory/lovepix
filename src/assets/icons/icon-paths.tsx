@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 // tslint:disable: max-line-length
 const IconPaths = {
   chooseMaterial: (
@@ -12,7 +12,7 @@ const IconPaths = {
       <defs>
         <style>
           {
-            ".first-rectangle{fill:#e2e2e2}.second-rectangle{fill:#fff}.third-rectangle{fill:none;stroke:#4d4d4d;stroke-width:1.5px}"
+            '.first-rectangle{fill:#e2e2e2}.second-rectangle{fill:#fff}.third-rectangle{fill:none;stroke:#4d4d4d;stroke-width:1.5px}'
           }
         </style>
       </defs>
@@ -47,7 +47,7 @@ const IconPaths = {
       <defs>
         <style>
           {
-            ".prefix__cls-1{fill:none;stroke:#4d4d4d;stroke-width:1.5px}.prefix__cls-2{fill:#4d4d4d}.prefix__cls-3{fill:#fff}"
+            '.prefix__cls-1{fill:none;stroke:#4d4d4d;stroke-width:1.5px}.prefix__cls-2{fill:#4d4d4d}.prefix__cls-3{fill:#fff}'
           }
         </style>
       </defs>
@@ -164,6 +164,6 @@ const IconPaths = {
       fill='#4d4d4d'
     />
   ),
-};
+}
 // tslint:enable: max-line-length
-export default IconPaths;
+export default IconPaths

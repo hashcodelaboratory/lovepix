@@ -1,17 +1,17 @@
-import { Grid } from "@mui/material";
-import styles from "../materials.module.scss";
-import Image from "next/image";
-import { v4 as uuidv4 } from "uuid";
+import { Grid } from '@mui/material'
+import styles from '../materials.module.scss'
+import Image from 'next/image'
+import { v4 as uuidv4 } from 'uuid'
 
 export type Material = {
-  title?: string;
-  subtitle?: string;
-  description?: string;
-  illustration?: string;
-};
+  title?: string
+  subtitle?: string
+  description?: string
+  illustration?: string
+}
 
 export const materialSection = (material: Material, index: number) => {
-  const direction = index % 2 ? "row-reverse" : "row";
+  const direction = index % 2 ? 'row-reverse' : 'row'
 
   return (
     <Grid
@@ -28,7 +28,7 @@ export const materialSection = (material: Material, index: number) => {
           alt={material.title}
           style={{ borderRadius: 10 }}
           key={uuidv4()}
-          src={material?.illustration ?? ""}
+          src={material?.illustration ?? ''}
           height={200}
           width={200}
           layout='responsive'
@@ -41,5 +41,5 @@ export const materialSection = (material: Material, index: number) => {
         <p className={styles.text}>{material.description}</p>
       </Grid>
     </Grid>
-  );
-};
+  )
+}

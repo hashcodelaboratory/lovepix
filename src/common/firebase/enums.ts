@@ -1,9 +1,9 @@
 export enum Collections {
-  TRANSLATIONS = "translations",
-  ORDERS = "orders",
+  TRANSLATIONS = 'translations',
+  ORDERS = 'orders',
 }
 
 export enum Languages {
-  EN = "en",
-  SK = "sk",
+  EN = 'en',
+  SK = 'sk',
 }

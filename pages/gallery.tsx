@@ -1,10 +1,10 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
-import { Container } from "@mui/material";
-import MasonryImageList from "../src/masonry-image-list/masonry-image-list";
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import Image from 'next/image'
+import styles from '../styles/Home.module.css'
+import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
+import { Container } from '@mui/material'
+import MasonryImageList from '../src/masonry-image-list/masonry-image-list'
 
 const Gallery: NextPage = () => {
   return (
@@ -27,7 +27,7 @@ const Gallery: NextPage = () => {
 
       <footer className={styles.footer}>Powered by Hashlab s.r.o</footer>
     </div>
-  );
-};
+  )
+}
 
-export default Gallery;
+export default Gallery

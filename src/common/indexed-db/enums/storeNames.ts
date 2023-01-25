@@ -1,6 +1,6 @@
 export enum StoreNames {
-  CONFIGURATIONS = "configurations",
-  ORDER = "order",
+  CONFIGURATIONS = 'configurations',
+  ORDER = 'order',
 }
 
-export const CONF = "conf";
+export const CONF = 'conf'

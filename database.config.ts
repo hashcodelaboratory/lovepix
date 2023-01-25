@@ -1,13 +1,13 @@
-import Dexie from "dexie";
-import { StoreNames } from "./src/common/indexed-db/enums/storeNames";
+import Dexie from 'dexie'
+import { StoreNames } from './src/common/indexed-db/enums/storeNames'
 
-const database = new Dexie("waller");
+const database = new Dexie('waller')
 database.version(1).stores({
-  configurations: "",
-  order: "",
-});
+  configurations: '',
+  order: '',
+})
 
-export const configurationsTable = database.table(StoreNames.CONFIGURATIONS);
-export const orderTable = database.table(StoreNames.ORDER);
+export const configurationsTable = database.table(StoreNames.CONFIGURATIONS)
+export const orderTable = database.table(StoreNames.ORDER)
 
-export default database;
+export default database

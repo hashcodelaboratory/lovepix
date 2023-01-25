@@ -1,34 +1,34 @@
-import styles from "../../../../shopping-cart.module.scss";
-import { useContext, useEffect } from "react";
-import AppContext from "../../../../../../app-context/app-context";
-import { useTranslation } from "next-i18next";
-import { messages } from "../../../../../../messages/messages";
+import styles from '../../../../shopping-cart.module.scss'
+import { useContext, useEffect } from 'react'
+import AppContext from '../../../../../../app-context/app-context'
+import { useTranslation } from 'next-i18next'
+import { messages } from '../../../../../../messages/messages'
 import {
   FormControl,
   FormHelperText,
   Link,
   Select,
   TextField,
-} from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { SUMMARY_SCHEMA } from "./utils/schema";
-import { Delivery as DeliveryOptions } from "../../../../../../common/enums/delivery";
-import { Summary } from "../../../../../../common/types/summary";
-import { useLiveQuery } from "dexie-react-hooks";
-import { orderTable } from "../../../../../../../database.config";
-import { Payment } from "../../../../../../common/enums/payment";
+} from '@mui/material'
+import MenuItem from '@mui/material/MenuItem'
+import { useForm, Controller, SubmitHandler } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { SUMMARY_SCHEMA } from './utils/schema'
+import { Delivery as DeliveryOptions } from '../../../../../../common/enums/delivery'
+import { Summary } from '../../../../../../common/types/summary'
+import { useLiveQuery } from 'dexie-react-hooks'
+import { orderTable } from '../../../../../../../database.config'
+import { Payment } from '../../../../../../common/enums/payment'
 
 const Delivery = () => {
-  const order = useLiveQuery(() => orderTable.get("order"), []);
+  const order = useLiveQuery(() => orderTable.get('order'), [])
 
   const {
     state: { stepper },
     stateAction: { setStepper },
-  } = useContext(AppContext);
+  } = useContext(AppContext)
 
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   const {
     register,
@@ -39,19 +39,19 @@ const Delivery = () => {
   } = useForm<Summary>({
     resolver: yupResolver(SUMMARY_SCHEMA),
     defaultValues: { ...order?.summary },
-  });
+  })
 
   useEffect(() => {
-    stepper === 3 && reset();
-  }, [stepper, reset]);
+    stepper === 3 && reset()
+  }, [stepper, reset])
 
   const onSubmit: SubmitHandler<Summary> = (data) => {
-    orderTable.update("order", {
+    orderTable.update('order', {
       delivery: data?.delivery,
       payment: data?.payment,
-    });
-    setStepper(1);
-  };
+    })
+    setStepper(1)
+  }
 
   return (
     <div className={styles.deliveryContainer}>
@@ -72,7 +72,7 @@ const Delivery = () => {
           control={control}
           render={({ field }) => (
             <FormControl fullWidth error={!!errors.delivery?.message}>
-              <Select {...field} {...register("delivery", { required: true })}>
+              <Select {...field} {...register('delivery', { required: true })}>
                 <MenuItem value={DeliveryOptions.COURIER}>
                   {String(t(messages.courier))}
                 </MenuItem>
@@ -101,7 +101,7 @@ const Delivery = () => {
           control={control}
           render={({ field }) => (
             <FormControl fullWidth error={!!errors.payment?.message}>
-              <Select {...field} {...register("payment", { required: true })}>
+              <Select {...field} {...register('payment', { required: true })}>
                 <MenuItem value={Payment.ONLINE}>
                   {String(t(messages.online))}
                 </MenuItem>
@@ -126,7 +126,7 @@ const Delivery = () => {
           </p>
         </div>
         <p className={styles.text}>{String(t(messages.personalData))}</p>
-        <Link className={styles.text} style={{ cursor: "pointer" }}>
+        <Link className={styles.text} style={{ cursor: 'pointer' }}>
           <b>{String(t(messages.privacy))}</b>
         </Link>
         <button
@@ -138,7 +138,7 @@ const Delivery = () => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Delivery;
+export default Delivery

@@ -1,10 +1,10 @@
-import { messages } from "../../../messages/messages";
-import Icon from "@icons/icon";
-import { IconType } from "@icons/enums";
+import { messages } from '../../../messages/messages'
+import Icon from '@icons/icon'
+import { IconType } from '@icons/enums'
 
 export const STEPS: {
-  title: string;
-  icon: JSX.Element;
+  title: string
+  icon: JSX.Element
 }[] = [
   {
     title: messages.uploadPhotoStepOne,
@@ -22,14 +22,14 @@ export const STEPS: {
     title: messages.uploadPhotoStepFour,
     icon: <Icon icon={IconType.CHOOSE_MATERIAL} />,
   },
-];
+]
 
 export const STEPS_GRID_STYLE = {
   justifyContent: {
-    xs: "center",
-    sm: "space-between",
-    md: "space-between",
-    lg: "space-between",
-    xl: "space-between",
+    xs: 'center',
+    sm: 'space-between',
+    md: 'space-between',
+    lg: 'space-between',
+    xl: 'space-between',
   },
-};
+}

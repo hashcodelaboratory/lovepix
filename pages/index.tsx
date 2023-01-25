@@ -1,9 +1,9 @@
-import type { GetStaticProps, NextPage } from "next";
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import HomeLayout from "../src/screens-content/home/home";
+import type { GetStaticProps, NextPage } from 'next'
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
+import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import HomeLayout from '../src/screens-content/home/home'
 
 const Home: NextPage = () => {
   return (
@@ -24,15 +24,15 @@ const Home: NextPage = () => {
 
       <footer className={styles.footer}>Powered by Hashlab s.r.o</footer>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? "sk", ["common"])),
+      ...(await serverSideTranslations(locale ?? 'sk', ['common'])),
     },
-  };
-};
+  }
+}

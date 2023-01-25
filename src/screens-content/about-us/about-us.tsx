@@ -1,10 +1,10 @@
-import { Container } from "@mui/material";
-import styles from "./about-us.module.scss";
-import { useTranslation } from "next-i18next";
-import { messages } from "../../messages/messages";
+import { Container } from '@mui/material'
+import styles from './about-us.module.scss'
+import { useTranslation } from 'next-i18next'
+import { messages } from '../../messages/messages'
 
 const CustomAboutUs = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <Container className={styles.container}>
@@ -21,7 +21,7 @@ const CustomAboutUs = () => {
         <h1 className={styles.title}>{String(t(messages.aboutUsProud))}</h1>
       </div>
     </Container>
-  );
-};
+  )
+}
 
-export default CustomAboutUs;
+export default CustomAboutUs

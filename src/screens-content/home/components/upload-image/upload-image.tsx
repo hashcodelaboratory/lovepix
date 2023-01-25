@@ -1,5 +1,5 @@
-import ImageContainer from "./image-container";
+import ImageContainer from './image-container'
 
-const UploadImage = () => <ImageContainer />;
+const UploadImage = () => <ImageContainer />
 
-export default UploadImage;
+export default UploadImage

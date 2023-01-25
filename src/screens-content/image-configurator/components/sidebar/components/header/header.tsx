@@ -1,9 +1,9 @@
-import styles from "../../../../image-configurator-layout.module.scss";
+import styles from '../../../../image-configurator-layout.module.scss'
 
 type Props = {
-  icon: JSX.Element;
-  title: string;
-};
+  icon: JSX.Element
+  title: string
+}
 
 const Header = ({ icon, title }: Props) => {
   return (
@@ -11,7 +11,7 @@ const Header = ({ icon, title }: Props) => {
       {icon}
       <h3 className={styles.headerTitle}>{title}</h3>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

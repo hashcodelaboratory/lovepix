@@ -1,12 +1,12 @@
-import Header from "../header/header";
-import { Filter2 } from "@mui/icons-material";
-import styles from "../../../../image-configurator-layout.module.scss";
-import { messages } from "../../../../../../messages/messages";
-import { useTranslation } from "next-i18next";
-import DimensionContent from "./components/dimension-content/dimension-content";
+import Header from '../header/header'
+import { Filter2 } from '@mui/icons-material'
+import styles from '../../../../image-configurator-layout.module.scss'
+import { messages } from '../../../../../../messages/messages'
+import { useTranslation } from 'next-i18next'
+import DimensionContent from './components/dimension-content/dimension-content'
 
 const Dimension = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <div className={styles.containerPadding}>
@@ -19,7 +19,7 @@ const Dimension = () => {
       </div>
       <hr />
     </div>
-  );
-};
+  )
+}
 
-export default Dimension;
+export default Dimension

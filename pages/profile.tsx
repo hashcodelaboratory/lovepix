@@ -1,7 +1,7 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
+import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
 
 const Profile: NextPage = () => {
   return (
@@ -20,7 +20,7 @@ const Profile: NextPage = () => {
 
       <footer className={styles.footer}>Powered by Hashlab s.r.o</footer>
     </div>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

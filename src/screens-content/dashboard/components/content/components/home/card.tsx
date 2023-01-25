@@ -1,20 +1,20 @@
-import styles from "../../../../dashboard.module.scss";
-import { useTranslation } from "next-i18next";
+import styles from '../../../../dashboard.module.scss'
+import { useTranslation } from 'next-i18next'
 
 type CardProps = {
   header: {
-    title: string;
-    count: string;
-    icon: JSX.Element;
-  };
+    title: string
+    count: string
+    icon: JSX.Element
+  }
   footer: {
-    value: string;
-    text: string;
-  };
-};
+    value: string
+    text: string
+  }
+}
 
 const Card = ({ header, footer }: CardProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <div className={styles.cardContainer}>
@@ -29,7 +29,7 @@ const Card = ({ header, footer }: CardProps) => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card

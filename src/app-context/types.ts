@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react'
 
 export type ContextProviderProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}

@@ -1,1 +1,1 @@
-export const ORDERS_KEY = "ORDERS";
+export const ORDERS_KEY = 'ORDERS'

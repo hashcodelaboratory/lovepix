@@ -1,11 +1,11 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
-import { Container } from "@mui/material";
-import CustomMaterials from "../src/screens-content/materials/materials";
-import { GetStaticProps } from "next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
+import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
+import { Container } from '@mui/material'
+import CustomMaterials from '../src/screens-content/materials/materials'
+import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const Materials: NextPage = () => {
   return (
@@ -28,15 +28,15 @@ const Materials: NextPage = () => {
 
       <footer className={styles.footer}>Powered by Hashlab s.r.o</footer>
     </div>
-  );
-};
+  )
+}
 
-export default Materials;
+export default Materials
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? "sk", ["common"])),
+      ...(await serverSideTranslations(locale ?? 'sk', ['common'])),
     },
-  };
-};
+  }
+}

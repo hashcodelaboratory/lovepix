@@ -1,10 +1,10 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
-import { GetStaticProps } from "next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import CustomShoppingCart from "../src/screens-content/shopping-cart/shopping-cart";
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
+import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
+import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import CustomShoppingCart from '../src/screens-content/shopping-cart/shopping-cart'
 
 const ShoppingCart: NextPage = () => {
   return (
@@ -25,15 +25,15 @@ const ShoppingCart: NextPage = () => {
 
       <footer className={styles.footer}>Powered by Hashlab s.r.o</footer>
     </div>
-  );
-};
+  )
+}
 
-export default ShoppingCart;
+export default ShoppingCart
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? "sk", ["common"])),
+      ...(await serverSideTranslations(locale ?? 'sk', ['common'])),
     },
-  };
-};
+  }
+}

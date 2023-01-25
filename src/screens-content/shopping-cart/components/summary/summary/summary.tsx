@@ -1,7 +1,7 @@
-import styles from "../../../shopping-cart.module.scss";
-import { Container } from "@mui/system";
-import Cart from "../cart/cart";
-import Delivery from "../components/delivery/delivery";
+import styles from '../../../shopping-cart.module.scss'
+import { Container } from '@mui/system'
+import Cart from '../cart/cart'
+import Delivery from '../components/delivery/delivery'
 
 const Summary = () => {
   return (
@@ -11,7 +11,7 @@ const Summary = () => {
         <Delivery />
       </div>
     </Container>
-  );
-};
+  )
+}
 
-export default Summary;
+export default Summary

@@ -1,12 +1,12 @@
 export enum ImageLayout {
-  FIXED = "fixed",
+  FIXED = 'fixed',
 }
 
 export enum TextAlign {
-  RIGHT = "right",
+  RIGHT = 'right',
 }
 
 export enum ObjectFit {
-  CONTAIN = "contain",
-  COVER = "cover",
+  CONTAIN = 'contain',
+  COVER = 'cover',
 }

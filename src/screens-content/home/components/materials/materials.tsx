@@ -1,13 +1,13 @@
-import styles from "../../home.module.scss";
-import { MATERIALS, MATERIALS_GRID_STYLE } from "../../utils/materials";
-import Image from "next/image";
-import { useTranslation } from "next-i18next";
-import { Grid } from "@mui/material";
-import { ObjectFit } from "../../enums/enums";
-import { v4 as uuidv4 } from "uuid";
+import styles from '../../home.module.scss'
+import { MATERIALS, MATERIALS_GRID_STYLE } from '../../utils/materials'
+import Image from 'next/image'
+import { useTranslation } from 'next-i18next'
+import { Grid } from '@mui/material'
+import { ObjectFit } from '../../enums/enums'
+import { v4 as uuidv4 } from 'uuid'
 
 const Materials = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   const columns = MATERIALS.map(({ img, title, text }) => (
     <Grid item key={uuidv4()}>
@@ -22,7 +22,7 @@ const Materials = () => {
       <div className={styles.materialsTitle}>{String(t(title))}</div>
       <div className={styles.materialsText}>{String(t(text))}</div>
     </Grid>
-  ));
+  ))
 
   return (
     <Grid
@@ -33,7 +33,7 @@ const Materials = () => {
     >
       {columns}
     </Grid>
-  );
-};
+  )
+}
 
-export default Materials;
+export default Materials

@@ -1,10 +1,10 @@
-import styles from "../../dashboard.module.scss";
-import { SIDEBAR_MENU_LIST } from "./utils/menu";
-import { useTranslation } from "next-i18next";
-import { v4 as uuidv4 } from "uuid";
+import styles from '../../dashboard.module.scss'
+import { SIDEBAR_MENU_LIST } from './utils/menu'
+import { useTranslation } from 'next-i18next'
+import { v4 as uuidv4 } from 'uuid'
 
 const SidebarContent = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <div className={styles.sidebarContent}>
@@ -14,7 +14,7 @@ const SidebarContent = () => {
         </p>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default SidebarContent;
+export default SidebarContent

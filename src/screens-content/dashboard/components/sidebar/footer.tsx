@@ -1,11 +1,11 @@
-import styles from "../../dashboard.module.scss";
-import Link from "next/link";
-import * as PagesUrls from "../../../../constants/pages/urls";
-import { useTranslation } from "next-i18next";
-import { messages } from "../../../../messages/messages";
+import styles from '../../dashboard.module.scss'
+import Link from 'next/link'
+import * as PagesUrls from '../../../../constants/pages/urls'
+import { useTranslation } from 'next-i18next'
+import { messages } from '../../../../messages/messages'
 
 const SidebarFooter = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <div className={styles.sidebarFooter}>
@@ -15,7 +15,7 @@ const SidebarFooter = () => {
         </button>
       </Link>
     </div>
-  );
-};
+  )
+}
 
-export default SidebarFooter;
+export default SidebarFooter

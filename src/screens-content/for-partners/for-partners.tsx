@@ -1,13 +1,13 @@
-import styles from "./for-partners.module.scss";
-import Image from "next/image";
-import { Container } from "@mui/material";
-import { useTranslation } from "next-i18next";
-import { ImageLayout } from "../home/enums/enums";
-import { useTranslations } from "../../common/translations/useTranslations";
+import styles from './for-partners.module.scss'
+import Image from 'next/image'
+import { Container } from '@mui/material'
+import { useTranslation } from 'next-i18next'
+import { ImageLayout } from '../home/enums/enums'
+import { useTranslations } from '../../common/translations/useTranslations'
 
 const CustomForPartners = () => {
-  const { i18n } = useTranslation();
-  const { data: translations } = useTranslations(i18n.language);
+  const { i18n } = useTranslation()
+  const { data: translations } = useTranslations(i18n.language)
 
   return (
     <Container>
@@ -45,7 +45,7 @@ const CustomForPartners = () => {
         <p className={styles.text}>{translations?.partnersForm}</p>
       </div>
     </Container>
-  );
-};
+  )
+}
 
-export default CustomForPartners;
+export default CustomForPartners
