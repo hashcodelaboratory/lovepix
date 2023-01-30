@@ -1,4 +1,4 @@
 export enum StorageFolder {
   ORDERS = 'orders',
-  UPLOAD = 'upload'
+  UPLOAD = 'upload',
 }

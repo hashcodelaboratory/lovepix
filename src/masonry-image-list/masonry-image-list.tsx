@@ -1,8 +1,8 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import { v4 as uuidv4 } from 'uuid';
+import * as React from 'react'
+import Box from '@mui/material/Box'
+import ImageList from '@mui/material/ImageList'
+import ImageListItem from '@mui/material/ImageListItem'
+import { v4 as uuidv4 } from 'uuid'
 
 const itemData = [
   {
@@ -53,12 +53,12 @@ const itemData = [
     img: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4',
     title: 'Coffee table',
   },
-];
+]
 
 const MasonryImageList = () => {
   return (
     <Box>
-      <ImageList variant="masonry" cols={3} gap={8}>
+      <ImageList variant='masonry' cols={3} gap={8}>
         {itemData.map((item) => (
           <ImageListItem key={uuidv4()}>
             <img
@@ -66,13 +66,13 @@ const MasonryImageList = () => {
               src={`${item.img}?w=248&fit=crop&auto=format`}
               srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
               alt={item.title}
-              loading="lazy"
+              loading='lazy'
             />
           </ImageListItem>
         ))}
       </ImageList>
     </Box>
-  );
+  )
 }
 
 export default MasonryImageList

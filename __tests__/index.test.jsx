@@ -3,13 +3,13 @@ import Home from '../pages/index'
 import '@testing-library/jest-dom'
 
 describe('Home page', () => {
-    it('renders a Gallery link on Home page', () => {
-        render(<Home />)
+  it('renders a Gallery link on Home page', () => {
+    render(<Home />)
 
-        const heading = screen.getByRole('link', {
-            name: /Gallery/i,
-        })
-
-        expect(heading).toBeInTheDocument()
+    const heading = screen.getByRole('link', {
+      name: /Gallery/i,
     })
+
+    expect(heading).toBeInTheDocument()
+  })
 })

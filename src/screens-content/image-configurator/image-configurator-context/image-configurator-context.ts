@@ -1,14 +1,16 @@
-import {createContext, Dispatch, SetStateAction} from "react";
+import { createContext, Dispatch, SetStateAction } from 'react'
 
 export type ImageConfiguratorContextProps = {
-    state: {
-        image?: string
-    },
-    stateAction: {
-        setImage: Dispatch<SetStateAction<string | undefined>>;
-    }
+  state: {
+    image?: string
+  }
+  stateAction: {
+    setImage: Dispatch<SetStateAction<string | undefined>>
+  }
 }
 
-const ImageConfiguratorContext = createContext<ImageConfiguratorContextProps>({} as ImageConfiguratorContextProps)
+const ImageConfiguratorContext = createContext<ImageConfiguratorContextProps>(
+  {} as ImageConfiguratorContextProps
+)
 
-export default ImageConfiguratorContext;
+export default ImageConfiguratorContext
