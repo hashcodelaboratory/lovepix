@@ -26,3 +26,9 @@ export type Order = {
   totalPrice: number
   pdf: string
 }
+
+export type GalleryItem = {
+  sourceUrl: string
+  id: string
+  title?: string
+}

@@ -1,6 +1,7 @@
 export enum Collections {
   TRANSLATIONS = 'translations',
   ORDERS = 'orders',
+  GALLERY = 'gallery',
 }
 
 export enum Languages {
