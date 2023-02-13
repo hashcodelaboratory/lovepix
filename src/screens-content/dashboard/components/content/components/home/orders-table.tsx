@@ -27,7 +27,7 @@ const OrdersTable = () => {
 
   const [order, setOrder] = useState<Order>();
 
-  const data = orders.map(({ id, date, form}) => (
+  const data = orders.map(({ id, date, form }) => (
     {
       id: id,
       date: new Date(date).toLocaleDateString() ?? "",
@@ -59,30 +59,25 @@ const OrdersTable = () => {
       >
         <h1>{String(t(messages.orders))}</h1>
       </AccordionSummary>
-      <AccordionDetails>
-        <div style={{ display: "flex" }}>
-          <Box sx={{ marginBottom: 12, width: 470, height: 700 }}>
-            <DataGrid
-              className={styles.contentTable}
-              rows={data ?? []}
-              columns={ORDERS_COLUMNS}
-              autoPageSize
-              onCellClick={changeOrderId}
-            />
-            <button className={styles.removeButton} onClick={removeData}>
-              {buttonText}
-              <DeleteIcon sx={{ marginLeft: 1 }} />
-            </button>
-          </Box>
-          <Box sx={{
-            marginBottom: 12,
-            width: 1100,
-            height: 500,
-          }}>
-            <OrderDetail order={order} />
-          </Box>
-        </div>
+      <AccordionDetails sx={{ display: "flex" }}>
+        <Box className={styles.ordersTableSidepanel}>
+          <DataGrid
+            className={styles.contentTable}
+            rows={data ?? []}
+            columns={ORDERS_COLUMNS}
+            autoPageSize
+            onCellClick={changeOrderId}
+          />
+
+        </Box>
+        <Box className={styles.ordersTableMainpanel}>
+          <OrderDetail order={order} />
+        </Box>
       </AccordionDetails>
+      <button className={styles.removeButton} onClick={removeData}>
+        {buttonText}
+        <DeleteIcon sx={{ marginLeft: 1 }} />
+      </button>
     </Accordion>
   );
 };
