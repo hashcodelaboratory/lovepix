@@ -90,5 +90,6 @@
   "date": "Dátum",
   "singleOrder": "Objednávka",
   "orderHistory": "História objednávky",
-  "customerDetails": "Detail zákazníka"
+  "customerDetails": "Detail zákazníka",
+  "orderCreated": "Objednávka vytvorená"
 }

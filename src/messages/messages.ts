@@ -89,5 +89,6 @@ export const messages = {
   square: "square",
   singleOrder: "singleOrder",
   orderHistory: "orderHistory",
-  customerDetails: "customerDetails"
+  customerDetails: "customerDetails",
+  orderCreated: "orderCreated"
 }

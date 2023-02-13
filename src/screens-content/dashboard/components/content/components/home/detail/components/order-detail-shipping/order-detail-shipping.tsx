@@ -11,10 +11,12 @@ type Props = {
 const OrderDetailShipping = ({ order }: Props): JSX.Element => {
   const { t } = useTranslation();
 
-  return <Box className={styles.box} style={{ width: 400 }}>
-    <h4>{t(messages.shipping)}</h4>
-    <div>{order?.form?.address} {order?.form?.city} {order?.form?.postalCode}</div>
-  </Box>;
+  return (
+    <Box className={styles.box} style={{ width: 400 }}>
+      <h4>{t(messages.shipping)}</h4>
+      <div style={{ fontSize: 12 }}>{order?.form?.address} {order?.form?.city} {order?.form?.postalCode}</div>
+    </Box>
+  );
 };
 
 export default OrderDetailShipping;

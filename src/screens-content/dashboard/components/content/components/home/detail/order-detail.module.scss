@@ -32,3 +32,35 @@
   padding: 0.5rem 1rem;
   border-bottom: 1px solid #efefef;
 }
+
+.detailIcon {
+  margin-right: 1rem;
+  color: gray;
+  font-size: 16px;
+}
+
+.detailRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 12px;
+}
+
+.shippingIcon {
+  color: cornflowerblue;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid cornflowerblue;
+  border-radius: 50%;
+  font-size: 40px;
+}
+
+.checkRow {
+  display: flex;
+  align-items: center;
+}
+
+.checkCircleIcon {
+  color: #33de33;
+  margin-left: 0.5rem;
+}
