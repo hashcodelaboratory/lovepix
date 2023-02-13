@@ -17,7 +17,7 @@ const OrderDetail = ({ order }: OrderDetailProps): JSX.Element => {
 
   return (
     <div className={styles.container}>
-      <p><b>{t(messages.orders)}</b> {order?.id}</p>
+      <p><b>{t(messages.singleOrder)}</b> {order?.id}</p>
       <div className={styles.flex} style={{ height: 400 }}>
         <Box className={styles.box} style={{ width: "100%" }}>
           <h4>{t(messages.shoppingCart)}</h4>
@@ -40,13 +40,13 @@ const OrderDetail = ({ order }: OrderDetailProps): JSX.Element => {
           ))}
         </Box>
         <Box className={styles.box} style={{ width: 400 }}>
-          <h4>{t("Order history")}</h4>
+          <h4>{t(messages.orderHistory)}</h4>
           <div>{new Date(order?.date ?? "").toLocaleDateString()}</div>
         </Box>
       </div>
       <div className={styles.flex}>
         <Box className={styles.box} style={{ width: "100%", height: 200 }}>
-          <h4>{t("Customer details")}</h4>
+          <h4>{t(messages.customerDetails)}</h4>
           <div>{order?.form?.firstName} {order?.form?.lastName}</div>
           <div>{order?.form?.email}</div>
           <div>{order?.form?.phone}</div>

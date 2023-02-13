@@ -9,7 +9,7 @@ import { useSnackbar } from "notistack";
 import { useTranslation } from "next-i18next";
 import { useQueryClient } from "react-query";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { ORDERS_COLUMNS } from "./utils/ordersColumns";
+import { getOrdersColumns } from "./utils/ordersColumns";
 import { removeOrders } from "./utils/removeOrders";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -64,7 +64,7 @@ const OrdersTable = () => {
           <DataGrid
             className={styles.contentTable}
             rows={data ?? []}
-            columns={ORDERS_COLUMNS}
+            columns={getOrdersColumns(t)}
             autoPageSize
             onCellClick={changeOrderId}
           />

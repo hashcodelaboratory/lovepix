@@ -86,5 +86,9 @@
   "removeImage": "Vymazať obrázok",
   "byWidth": "Na šírku",
   "byHeight": "Na výšku",
-  "square": "Štvorcové"
+  "square": "Štvorcové",
+  "date": "Dátum",
+  "singleOrder": "Objednávka",
+  "orderHistory": "História objednávky",
+  "customerDetails": "Detail zákazníka"
 }

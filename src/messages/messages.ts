@@ -86,5 +86,8 @@ export const messages = {
   removeImage: "removeImage",
   byWidth: "byWidth",
   byHeight: "byHeight",
-  square: "square"
+  square: "square",
+  singleOrder: "singleOrder",
+  orderHistory: "orderHistory",
+  customerDetails: "customerDetails"
 }

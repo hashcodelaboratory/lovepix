@@ -1,7 +1,8 @@
 import { GridColDef } from "@mui/x-data-grid";
 import styles from "../../../../../dashboard.module.scss";
 
-export const ORDERS_COLUMNS: GridColDef[] = [
+// Note: any used for translation type
+export const getOrdersColumns = (t: any): GridColDef[] => [
   {
     field: "id",
     headerName: "ID",
@@ -18,7 +19,7 @@ export const ORDERS_COLUMNS: GridColDef[] = [
     width: 100,
     editable: false,
     renderHeader: ({ field }) => (
-      <div className={styles.tableHeader}>{field}</div>
+      <div className={styles.tableHeader}>{t(field)}</div>
     ),
     renderCell: ({ value }) => <div className={styles.status}>{value}</div>,
   },
@@ -28,7 +29,7 @@ export const ORDERS_COLUMNS: GridColDef[] = [
     width: 150,
     editable: false,
     renderHeader: ({ field }) => (
-      <div className={styles.tableHeader}>{field}</div>
+      <div className={styles.tableHeader}>{t(field)}</div>
     ),
     renderCell: ({ value }) => <div className={styles.tableCell}>{value}</div>,
   },
