@@ -13,7 +13,10 @@ const OrderDetailShoppingCart = ({ order }: Props): JSX.Element => {
   const { t } = useTranslation();
 
   return <Box className={styles.box} style={{ width: "100%" }}>
-    <h4>{t(messages.shoppingCart)}</h4>
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <h4>{t(messages.shoppingCart)}</h4>
+      <h4>{Number(order?.totalPrice).toFixed(2)} €</h4>
+    </div>
     {order?.shoppingCart?.images?.map((image, index) => (
       <OrderDetailRow key={index} index={index} image={image} order={order} />
     ))}
