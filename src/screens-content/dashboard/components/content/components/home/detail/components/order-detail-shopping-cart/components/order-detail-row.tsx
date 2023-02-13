@@ -1,10 +1,10 @@
-import styles from "../order-detail.module.scss";
-import { ImageLayout } from "../../../../../../../home/enums/enums";
+import styles from "../../../order-detail.module.scss";
+import { ImageLayout } from "../../../../../../../../../home/enums/enums";
 import Image from "next/image";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { Button } from "@mui/material";
-import { generatePdf } from "../../utils/post-processing/generatePdf";
-import { Image as ImageType, Order } from "../../../../../../../../common/types/order";
+import { generatePdf } from "../../../../utils/post-processing/generatePdf";
+import { Image as ImageType, Order } from "../../../../../../../../../../common/types/order";
 
 type Props = {
   image: ImageType;
