@@ -1,14 +1,14 @@
-import useLoggedUser from "common/custom-hooks/use-logged-user";
-import Image from "next/image";
-import { Container } from "@mui/material";
-import classNames from "./account-detail.module.scss";
+import useLoggedUser from 'common/custom-hooks/use-logged-user'
+import Image from 'next/image'
+import { Container } from '@mui/material'
+import classNames from './account-detail.module.scss'
 
 const AccountDetail = () => {
-  const { user } = useLoggedUser();
+  const { user } = useLoggedUser()
 
   const styles = {
     image: { borderRadius: 50 },
-  };
+  }
 
   return (
     user && (
@@ -16,7 +16,7 @@ const AccountDetail = () => {
         <div>{user?.displayName}</div>
         <div className={classNames.email}>{user?.email}</div>
         <Image
-          src={user?.photoURL || ""}
+          src={user?.photoURL || ''}
           alt='user-image'
           layout='fixed'
           style={styles.image}
@@ -25,7 +25,7 @@ const AccountDetail = () => {
         />
       </Container>
     )
-  );
-};
+  )
+}
 
-export default AccountDetail;
+export default AccountDetail

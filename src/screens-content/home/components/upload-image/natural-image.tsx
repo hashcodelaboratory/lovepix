@@ -1,8 +1,8 @@
-import Image, { ImageProps } from "next/image";
-import { useState } from "react";
+import Image, { ImageProps } from 'next/image'
+import { useState } from 'react'
 
 const NaturalImage = (props: ImageProps) => {
-  const [ratio, setRatio] = useState(16 / 9); // default to 16:9
+  const [ratio, setRatio] = useState(16 / 9) // default to 16:9
 
   return (
     <Image
@@ -17,7 +17,7 @@ const NaturalImage = (props: ImageProps) => {
         setRatio(naturalWidth / naturalHeight)
       }
     />
-  );
-};
+  )
+}
 
-export default NaturalImage;
+export default NaturalImage

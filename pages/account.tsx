@@ -1,8 +1,8 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
-import AccountDetail from "../src/screens-content/account-detail/account-detail";
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
+import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
+import AccountDetail from '../src/screens-content/account-detail/account-detail'
 
 const Account: NextPage = () => {
   return (
@@ -22,7 +22,7 @@ const Account: NextPage = () => {
 
       <footer className={styles.footer}>Powered by Hashlab s.r.o</footer>
     </div>
-  );
-};
+  )
+}
 
-export default Account;
+export default Account
