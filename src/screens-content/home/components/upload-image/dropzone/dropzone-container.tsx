@@ -1,5 +1,5 @@
 import { Group } from '@mantine/core'
-import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone'
+import { Dropzone } from '@mantine/dropzone'
 import styles from '../../../home.module.scss'
 import { DROPZONE_STYLE } from './utils'
 import DropzoneIdle from './dropzone-idle'
@@ -57,7 +57,7 @@ const DropzoneContainer = () => {
   }
 
   const onReject = (files: FileRejection[]) => {
-    enqueueSnackbar(String(t(messages.fileRejected)), SNACKBAR_OPTIONS_ERROR)
+    enqueueSnackbar(`${String(t(messages.fileRejected))} - ${files[0].errors[0].message}`, SNACKBAR_OPTIONS_ERROR)
   }
 
   const handleCleanImage = async () => {
@@ -102,9 +102,12 @@ const DropzoneContainer = () => {
         <Dropzone
           onDrop={(files) => onDrop(files)}
           onReject={(files) => onReject(files)}
-          accept={IMAGE_MIME_TYPE}
+          accept={{
+            'image/*': []
+          }}
           sx={DROPZONE_STYLE}
           multiple={false}
+          maxSize={10000000}
         >
           <Group
             position='center'
