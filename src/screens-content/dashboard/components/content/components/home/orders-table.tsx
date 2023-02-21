@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import { DataGrid, GridCellParams } from "@mui/x-data-grid";
 import styles from "../../../../dashboard.module.scss";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DashboardContext from "../../../../context/dashboard-context";
 import { messages } from "../../../../../../messages/messages";
 import { SNACKBAR_OPTIONS_ERROR, SNACKBAR_OPTIONS_SUCCESS } from "../../../../../../snackbar/config";
@@ -25,8 +25,6 @@ const OrdersTable = () => {
 
   const queryClient = useQueryClient();
 
-  const [order, setOrder] = useState<Order>();
-
   const data = orders.map(({ id, date, form }) => (
     {
       id: id,
@@ -34,6 +32,13 @@ const OrdersTable = () => {
       name: `${form?.firstName} ${form?.lastName}`,
     }
   ));
+
+  const [order, setOrder] = useState<Order>();
+
+  // Note: Initially set first order as default
+  useEffect(() => {
+    setOrder(orders[0]);
+  }, [orders]);
 
   const removeData = () => {
     const result = removeOrders(orders.map(({ id }) => id), queryClient);
