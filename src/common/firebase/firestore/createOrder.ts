@@ -81,7 +81,18 @@ const uploadToStorage = async (orderId: string, images: Image[]) => {
 const createOrder = async (data: CreateOrderRequest) => {
   const newOrderRef = doc(collection(database, Collections.ORDERS));
 
-  await setDoc(newOrderRef, data);
+  // Note: clearing base64 image format due to payload limit 11 MB
+  const cart = {
+    shoppingCart: {
+      images: data.shoppingCart.images.map(image => ({
+        ...image,
+        origin: "",
+        url: "",
+      })),
+    },
+  };
+
+  await setDoc(newOrderRef, ({ ...data, shoppingCart: cart }));
 
   await uploadToStorage(newOrderRef.id, data.shoppingCart.images);
 };
