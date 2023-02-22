@@ -1,30 +1,33 @@
-import { Group } from '@mantine/core'
-import { Dropzone } from '@mantine/dropzone'
-import styles from '../../../home.module.scss'
-import { DROPZONE_STYLE } from './utils'
-import DropzoneIdle from './dropzone-idle'
-import { FileRejection } from 'react-dropzone'
-import Icon from '@icons/icon'
-import { IconType } from '@icons/enums'
-import { useSnackbar } from 'notistack'
-import { SNACKBAR_OPTIONS_ERROR } from '../../../../../snackbar/config'
-import { messages } from '../../../../../messages/messages'
-import { useTranslation } from 'next-i18next'
-import Image from 'next/image'
-import { Typography } from '@mui/material'
-import { useRouter } from 'next/router'
-import { CONFIGURATOR } from 'constants/pages/urls'
-import { useLiveQuery } from 'dexie-react-hooks'
-import { configurationsTable } from '../../../../../../database.config'
-import { CONFIGURATION_TABLE_KEY } from '../../../../../common/indexed-db/hooks/keys'
+import { Group } from "@mantine/core";
+import { Dropzone } from "@mantine/dropzone";
+import styles from "../../../home.module.scss";
+import { DROPZONE_STYLE } from "./utils";
+import DropzoneIdle from "./dropzone-idle";
+import { FileRejection } from "react-dropzone";
+import Icon from "@icons/icon";
+import { IconType } from "@icons/enums";
+import { useSnackbar } from "notistack";
+import { SNACKBAR_OPTIONS_ERROR } from "../../../../../snackbar/config";
+import { messages } from "../../../../../messages/messages";
+import { useTranslation } from "next-i18next";
+import Image from "next/image";
+import { Typography } from "@mui/material";
+import { useRouter } from "next/router";
+import { CONFIGURATOR } from "constants/pages/urls";
+import { useLiveQuery } from "dexie-react-hooks";
+import { configurationsTable } from "../../../../../../database.config";
+import { CONFIGURATION_TABLE_KEY } from "../../../../../common/indexed-db/hooks/keys";
+import { useState } from "react";
 
 const DropzoneContainer = () => {
   const configuration = useLiveQuery(
     () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
-    []
-  )
+    [],
+  );
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+
+  const [loading, setLoading] = useState(false);
 
   const {
     printPhoto,
@@ -32,17 +35,19 @@ const DropzoneContainer = () => {
     or,
     uploadNewPicture,
     continueInConfiguration,
-  } = messages
+  } = messages;
 
-  const { enqueueSnackbar } = useSnackbar()
+  const { enqueueSnackbar } = useSnackbar();
 
-  const router = useRouter()
+  const router = useRouter();
 
   const onDrop = async (files: File[]) => {
-    const file = files[0]
+    setLoading(true);
 
-    const fr = new FileReader()
-    fr.readAsDataURL(file)
+    const file = files[0];
+
+    const fr = new FileReader();
+    fr.readAsDataURL(file);
 
     fr.onload = () => {
       const data = {
@@ -50,38 +55,40 @@ const DropzoneContainer = () => {
         image: undefined,
         dimensionId: undefined,
         material: undefined,
-      }
+      };
 
-      configurationsTable.add(data, 'conf')
-    }
-  }
+      configurationsTable.add(data, "conf");
+    };
+
+    setLoading(false);
+  };
 
   const onReject = (files: FileRejection[]) => {
-    enqueueSnackbar(`${String(t(messages.fileRejected))} - ${files[0].errors[0].message}`, SNACKBAR_OPTIONS_ERROR)
-  }
+    enqueueSnackbar(`${String(t(messages.fileRejected))} - ${files[0].errors[0].message}`, SNACKBAR_OPTIONS_ERROR);
+  };
 
   const handleCleanImage = async () => {
-    configurationsTable.clear()
-  }
+    configurationsTable.clear();
+  };
 
   const handleContinueConfiguration = () => {
-    router.push(CONFIGURATOR)
-  }
+    router.push(CONFIGURATOR);
+  };
 
   return (
     <>
       {configuration?.origin ? (
         <Group
-          position='center'
-          spacing='xs'
+          position="center"
+          spacing="xs"
           className={styles.dropzoneGroupFaked}
         >
           <Image
             unoptimized
             priority
-            src={configuration?.origin ?? ''}
-            alt='Processing image'
-            objectFit='cover'
+            src={configuration?.origin ?? ""}
+            alt="Processing image"
+            objectFit="cover"
             height={150}
             width={300}
             className={styles.imagePreview}
@@ -103,15 +110,16 @@ const DropzoneContainer = () => {
           onDrop={(files) => onDrop(files)}
           onReject={(files) => onReject(files)}
           accept={{
-            'image/*': []
+            "image/*": [],
           }}
           sx={DROPZONE_STYLE}
           multiple={false}
           maxSize={10000000}
+          loading={loading}
         >
           <Group
-            position='center'
-            spacing='xl'
+            position="center"
+            spacing="xl"
             className={styles.dropzoneGroup}
           >
             <h1 className={styles.title}>{String(t(printPhoto))}</h1>
@@ -127,7 +135,7 @@ const DropzoneContainer = () => {
         </Dropzone>
       )}
     </>
-  )
-}
+  );
+};
 
-export default DropzoneContainer
+export default DropzoneContainer;
