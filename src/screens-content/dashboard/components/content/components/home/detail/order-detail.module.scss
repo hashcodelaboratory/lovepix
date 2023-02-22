@@ -1,0 +1,66 @@
+.container {
+  padding: 1rem;
+  border-radius: 0 1rem 1rem 0;
+  height: 700px;
+  background-color: #f6f6f6;
+}
+
+.box {
+  box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem, rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
+  border: none;
+  border-radius: 1rem;
+  background-color: white;
+  margin: 0.5rem;
+  padding: 1rem;
+
+  h4 {
+    margin-top: 0;
+  }
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
+  font-size: 12px;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #efefef;
+}
+
+.detailIcon {
+  margin-right: 1rem;
+  color: gray;
+  font-size: 16px;
+}
+
+.detailRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 12px;
+}
+
+.shippingIcon {
+  color: cornflowerblue;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid cornflowerblue;
+  border-radius: 50%;
+  font-size: 40px;
+}
+
+.checkRow {
+  display: flex;
+  align-items: center;
+}
+
+.checkCircleIcon {
+  color: #33de33;
+  margin-left: 0.5rem;
+}
