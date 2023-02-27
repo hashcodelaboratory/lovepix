@@ -1,27 +1,29 @@
-import { TextField, Box } from '@mui/material'
-import styles from '../../../../shopping-cart.module.scss'
-import { SubmitHandler, useForm, Controller } from 'react-hook-form'
-import { useContext } from 'react'
-import AppContext from '../../../../../../app-context/app-context'
-import { messages } from '../../../../../../messages/messages'
-import { useTranslation } from 'next-i18next'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { FORM_SCHEMA } from './utils/schema'
-import { FormInputs } from '../../../../../../common/types/form'
-import { useCreateOrder } from '../../../../../../common/firebase/firestore/createOrder'
-import { useLiveQuery } from 'dexie-react-hooks'
-import { orderTable } from '../../../../../../../database.config'
+import { TextField, Box, CircularProgress } from "@mui/material";
+import styles from "../../../../shopping-cart.module.scss";
+import { SubmitHandler, useForm, Controller } from "react-hook-form";
+import { useContext, useState } from "react";
+import AppContext from "../../../../../../app-context/app-context";
+import { messages } from "../../../../../../messages/messages";
+import { useTranslation } from "next-i18next";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FORM_SCHEMA } from "./utils/schema";
+import { FormInputs } from "../../../../../../common/types/form";
+import { useCreateOrder } from "../../../../../../common/firebase/firestore/createOrder";
+import { useLiveQuery } from "dexie-react-hooks";
+import { orderTable } from "../../../../../../../database.config";
 
 const Form = (): JSX.Element => {
   const {
     stateAction: { setStepper },
-  } = useContext(AppContext)
+  } = useContext(AppContext);
 
-  const { mutate: createOrder } = useCreateOrder()
+  const { mutate: createOrder } = useCreateOrder();
 
-  const order = useLiveQuery(() => orderTable.get('order'), [])
+  const order = useLiveQuery(() => orderTable.get("order"), []);
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -31,9 +33,10 @@ const Form = (): JSX.Element => {
     reset,
   } = useForm<FormInputs>({
     resolver: yupResolver(FORM_SCHEMA),
-  })
+  });
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+    setLoading(true);
     await createOrder({
       form: data,
       date: Date.now(),
@@ -41,51 +44,53 @@ const Form = (): JSX.Element => {
       totalPrice: order?.totalPrice,
       delivery: order?.delivery,
       payment: order?.payment,
-    })
-    reset()
-    orderTable.clear()
-    setStepper(2)
-  }
+    });
+
+    reset();
+    orderTable.clear();
+    setStepper(2);
+    setLoading(false);
+  };
 
   return (
     <div className={styles.formContainer}>
       <Box
-        component='form'
+        component="form"
         sx={{
-          '& > :not(style)': { m: 1 },
+          "& > :not(style)": { m: 1 },
         }}
         onSubmit={handleSubmit(onSubmit)}
       >
         <Controller
-          name='firstName'
+          name="firstName"
           control={control}
           render={({ field }) => (
             <TextField
               label={String(t(messages.name))}
               placeholder={String(t(messages.name))}
               {...field}
-              {...register('firstName', { required: true })}
+              {...register("firstName", { required: true })}
               error={!!errors.firstName?.message}
-              helperText={String(t(errors.firstName?.message ?? ''))}
+              helperText={String(t(errors.firstName?.message ?? ""))}
             />
           )}
         />
         <Controller
-          name='lastName'
+          name="lastName"
           control={control}
           render={({ field }) => (
             <TextField
               label={String(t(messages.surname))}
               placeholder={String(t(messages.surname))}
               {...field}
-              {...register('lastName', { required: true })}
+              {...register("lastName", { required: true })}
               error={!!errors.lastName?.message}
-              helperText={String(t(errors.lastName?.message ?? ''))}
+              helperText={String(t(errors.lastName?.message ?? ""))}
             />
           )}
         />
         <Controller
-          name='company'
+          name="company"
           control={control}
           render={({ field }) => (
             <TextField
@@ -93,12 +98,12 @@ const Form = (): JSX.Element => {
               placeholder={String(t(messages.company))}
               fullWidth
               {...field}
-              {...register('company')}
+              {...register("company")}
             />
           )}
         />
         <Controller
-          name='address'
+          name="address"
           control={control}
           render={({ field }) => (
             <TextField
@@ -106,14 +111,14 @@ const Form = (): JSX.Element => {
               placeholder={String(t(messages.address))}
               fullWidth
               {...field}
-              {...register('address', { required: true })}
+              {...register("address", { required: true })}
               error={!!errors.address?.message}
-              helperText={String(t(errors.address?.message ?? ''))}
+              helperText={String(t(errors.address?.message ?? ""))}
             />
           )}
         />
         <Controller
-          name='city'
+          name="city"
           control={control}
           render={({ field }) => (
             <TextField
@@ -121,42 +126,42 @@ const Form = (): JSX.Element => {
               placeholder={String(t(messages.city))}
               fullWidth
               {...field}
-              {...register('city', { required: true })}
+              {...register("city", { required: true })}
               error={!!errors.city?.message}
-              helperText={String(t(errors.city?.message ?? ''))}
+              helperText={String(t(errors.city?.message ?? ""))}
             />
           )}
         />
         <Controller
-          name='postalCode'
+          name="postalCode"
           control={control}
           render={({ field }) => (
             <TextField
               label={String(t(messages.postalCode))}
               placeholder={String(t(messages.postalCode))}
               {...field}
-              {...register('postalCode', { required: true })}
+              {...register("postalCode", { required: true })}
               error={!!errors.postalCode?.message}
-              helperText={String(t(errors.postalCode?.message ?? ''))}
+              helperText={String(t(errors.postalCode?.message ?? ""))}
             />
           )}
         />
         <Controller
-          name='phone'
+          name="phone"
           control={control}
           render={({ field }) => (
             <TextField
               label={String(t(messages.phone))}
               placeholder={String(t(messages.phone))}
               {...field}
-              {...register('phone', { required: true })}
+              {...register("phone", { required: true })}
               error={!!errors.phone?.message}
-              helperText={String(t(errors.phone?.message ?? ''))}
+              helperText={String(t(errors.phone?.message ?? ""))}
             />
           )}
         />
         <Controller
-          name='email'
+          name="email"
           control={control}
           render={({ field }) => (
             <TextField
@@ -164,18 +169,18 @@ const Form = (): JSX.Element => {
               placeholder={String(t(messages.email))}
               fullWidth
               {...field}
-              {...register('email', { required: true })}
+              {...register("email", { required: true })}
               error={!!errors.email?.message}
               helperText={errors.email?.message}
             />
           )}
         />
-        <button type='submit' className={styles.orderButton}>
-          {String(t(messages.order))}
+        <button type="submit" className={styles.orderButton}>
+          {String(t(messages.order))}{loading && <CircularProgress />}
         </button>
       </Box>
     </div>
-  )
-}
+  );
+};
 
-export default Form
+export default Form;
