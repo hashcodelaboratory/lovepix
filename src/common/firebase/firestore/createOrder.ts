@@ -1,10 +1,9 @@
 import { MutationOptions, useMutation, UseMutationResult } from "react-query";
 import {
   collection,
-  doc as document,
   doc,
+  getDoc,
   setDoc,
-  writeBatch,
 } from "@firebase/firestore";
 import { database, storage } from "../config";
 import { Collections } from "../enums";
@@ -26,8 +25,10 @@ type CreateOrderRequest = {
   payment: Payment
 }
 
-const uploadToStorage = async (orderId: string, images: Image[]) => {
+const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
   const payload: Image[] = [];
+  const images = data.shoppingCart.images;
+
   images.map(async (image: Image, index) => {
     const uploadURL = `${StorageFolder.ORDERS}/${orderId}/images/`;
 
@@ -64,26 +65,27 @@ const uploadToStorage = async (orderId: string, images: Image[]) => {
       });
 
       if (index === payload.length - 1) {
-        const batch = writeBatch(database);
-        const docRef = document(database, Collections.ORDERS, orderId);
-        await batch.update(docRef, {
-          shoppingCart: {
-            images: payload,
-          },
-        });
+        const cart = {
+          images: payload,
+        };
 
-        await batch.commit();
+        const newOrderRef = doc(database, Collections.ORDERS, orderId);
+
+        await setDoc(newOrderRef, ({ ...data, shoppingCart: cart }));
       }
     }
   });
 };
 
+// Note: orderId template: PIC{year}{000orderNumber}
 const createOrder = async (data: CreateOrderRequest) => {
-  const newOrderRef = doc(collection(database, Collections.ORDERS));
+  const ordersRef = doc(collection(database, Collections.ORDERS));
+  const docSnap = await getDoc(ordersRef);
+  const year = new Date(Date.now()).getFullYear();
+  const orderNumber = String(docSnap.exists() ? docSnap.data().length + 1 : 1).padStart(4, "0");
+  const orderId = `PIC${year}${orderNumber}`;
 
-  await setDoc(newOrderRef, data);
-
-  await uploadToStorage(newOrderRef.id, data.shoppingCart.images);
+  await uploadToStorage(orderId, data);
 };
 
 export const useCreateOrder = (
