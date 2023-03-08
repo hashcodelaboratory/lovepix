@@ -15,7 +15,6 @@ import { Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { CONFIGURATOR } from "constants/pages/urls";
 import { configurationsTable } from "../../../../../../database.config";
-import { useState } from "react";
 import { Configuration } from "../../../../../common/types/configuration";
 import { CONFIGURATION_TABLE_KEY } from "../../../../../common/indexed-db/hooks/keys";
 
@@ -25,8 +24,6 @@ type DropzoneContainerProps = {
 
 const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
   const { t } = useTranslation();
-
-  const [loading, setLoading] = useState(false);
 
   const {
     printPhoto,
@@ -41,8 +38,6 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
   const router = useRouter();
 
   const onDrop = async (files: File[]) => {
-    setLoading(true);
-
     const file = files[0];
 
     const fr = new FileReader();
@@ -58,8 +53,6 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
 
       configurationsTable.add(data, CONFIGURATION_TABLE_KEY);
     };
-
-    setLoading(false);
   };
 
   const onReject = (files: FileRejection[]) => {
@@ -114,7 +107,6 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
           sx={DROPZONE_STYLE}
           multiple={false}
           maxSize={10000000}
-          loading={loading}
         >
           <Group
             position="center"
