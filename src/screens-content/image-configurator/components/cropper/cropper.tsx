@@ -41,7 +41,7 @@ const CropperComponent = ({ configuration }: CropperComponentProps) => {
     cropperRef?.current?.cropper?.setAspectRatio(aspectRatio);
   }, [cropperRef, aspectRatio]);
 
-  if (!configuration?.origin) return <DropzoneContainer />;
+  if (!configuration?.origin) return <DropzoneContainer configuration={configuration} />;
 
   if (loading) return <>Loading</>;
 

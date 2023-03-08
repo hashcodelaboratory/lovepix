@@ -5,16 +5,15 @@ import { useTranslation } from "next-i18next";
 import { messages } from "../../../../../../messages/messages";
 import Image from "next/image";
 import ImageIcon from "@mui/icons-material/Image";
-import { useLiveQuery } from "dexie-react-hooks";
 import { configurationsTable } from "../../../../../../../database.config";
-import { CONFIGURATION_TABLE_KEY } from "../../../../../../common/indexed-db/hooks/keys";
 import { ImageLayout } from "../../../../../home/enums/enums";
+import { Configuration } from "../../../../../../common/types/configuration";
 
-const Preview = () => {
-  const configuration = useLiveQuery(
-    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
-    [],
-  );
+type PreviewProps = {
+  configuration: Configuration;
+}
+
+const Preview = ({ configuration }: PreviewProps) => {
 
   const { t } = useTranslation();
 

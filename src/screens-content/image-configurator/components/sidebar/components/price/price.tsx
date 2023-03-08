@@ -2,16 +2,13 @@ import styles from "../../../../image-configurator-layout.module.scss";
 import { getPrice } from "./utils/generator";
 import { materials } from "../../../../../home/utils/configuration";
 import { DIMENSIONS } from "../../../../../../common/configuration/dimensions/dimensions";
-import { useLiveQuery } from "dexie-react-hooks";
-import { configurationsTable } from "../../../../../../../database.config";
-import { CONFIGURATION_TABLE_KEY } from "../../../../../../common/indexed-db/hooks/keys";
+import { Configuration } from "../../../../../../common/types/configuration";
 
-const Price = () => {
-  const configuration = useLiveQuery(
-    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
-    [],
-  );
+type PriceProps = {
+  configuration: Configuration;
+}
 
+const Price = ({ configuration }: PriceProps) => {
   const { width, height } = DIMENSIONS.find(
     (dim) => dim.id === configuration?.dimensionId,
   ) ?? { width: 0, height: 0 };

@@ -6,10 +6,10 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import HomeLayout from '../src/screens-content/home/home'
 import { useLiveQuery } from "dexie-react-hooks";
 import { configurationsTable } from "../database.config";
-import { CONF } from "../src/common/indexed-db/enums/storeNames";
+import { CONFIGURATION_TABLE_KEY } from "../src/common/indexed-db/hooks/keys";
 
 const Home: NextPage = () => {
-  const configuration = useLiveQuery(() => configurationsTable.get(CONF), []);
+  const configuration = useLiveQuery(() => configurationsTable.get(CONFIGURATION_TABLE_KEY), []);
 
   return (
     <div className={styles.container}>

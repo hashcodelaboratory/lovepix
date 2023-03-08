@@ -7,10 +7,8 @@ import DropzoneContainer from "./dropzone/dropzone-container";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
 import { configurationsTable } from "../../../../../database.config";
-import { useLiveQuery } from "dexie-react-hooks";
 import { handleDB } from "./utils";
 import { Configuration } from "../../../../common/types/configuration";
-import { CONFIGURATION_TABLE_KEY } from "../../../../common/indexed-db/hooks/keys";
 
 type ImageContainerProps = {
   configuration: Configuration;
@@ -18,8 +16,6 @@ type ImageContainerProps = {
 
 const ImageContainer = ({ configuration }: ImageContainerProps) => {
   const router = useRouter();
-
-  const data = useLiveQuery(() => configurationsTable.get(CONFIGURATION_TABLE_KEY), []);
 
   return (
     <Grid sm={12} textAlign={TextAlign.RIGHT} style={{ marginTop: "64px" }}>
@@ -30,7 +26,7 @@ const ImageContainer = ({ configuration }: ImageContainerProps) => {
             <div
               style={{ cursor: "pointer" }}
               key={uuidv4()}
-              onClick={handleDB(sourceUrl, data, configurationsTable, router)}
+              onClick={handleDB(sourceUrl, configuration, configurationsTable, router)}
             >
               <ImageCard sourceUrl={sourceUrl} title={title} />
             </div>
