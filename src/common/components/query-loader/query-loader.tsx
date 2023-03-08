@@ -12,6 +12,7 @@ type Props = {
   children?: JSX.Element;
 }
 
+// Note: PoC of Loading state for future usage
 const QueryLoader = ({ isLoading, type, children }: Props): JSX.Element => {
 
   const getLoader = () => {

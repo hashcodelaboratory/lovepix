@@ -1,6 +1,6 @@
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { dimensionsByHeight, dimensionsBySquare, dimensionsByWidth } from "screens-content/home/utils/configuration";
 import DropzoneContainer from "screens-content/home/components/upload-image/dropzone/dropzone-container";
 import { configurationsTable } from "../../../../../database.config";
@@ -12,8 +12,6 @@ type CropperComponentProps = {
 
 const CropperComponent = ({ configuration }: CropperComponentProps) => {
   const cropperRef = useRef<any>(null);
-
-  const [loading, setLoading] = useState(false);
 
   const onCrop = () => {
     const imageElement: any = cropperRef?.current;
@@ -43,8 +41,6 @@ const CropperComponent = ({ configuration }: CropperComponentProps) => {
 
   if (!configuration?.origin) return <DropzoneContainer configuration={configuration} />;
 
-  if (loading) return <>Loading</>;
-
   return (
     <Cropper
       src={configuration?.origin ?? ""}
@@ -54,13 +50,6 @@ const CropperComponent = ({ configuration }: CropperComponentProps) => {
       crop={onCrop}
       ref={cropperRef}
       cropBoxResizable={true}
-      ready={(e) => {
-        if (e.type === "ready") {
-          setLoading(false);
-        } else {
-          setLoading(true);
-        }
-      }}
     />
   );
 };
