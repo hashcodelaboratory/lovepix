@@ -14,17 +14,16 @@ import Image from "next/image";
 import { Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { CONFIGURATOR } from "constants/pages/urls";
-import { useLiveQuery } from "dexie-react-hooks";
 import { configurationsTable } from "../../../../../../database.config";
-import { CONFIGURATION_TABLE_KEY } from "../../../../../common/indexed-db/hooks/keys";
 import { useState } from "react";
+import { Configuration } from "../../../../../common/types/configuration";
+import { CONFIGURATION_TABLE_KEY } from "../../../../../common/indexed-db/hooks/keys";
 
-const DropzoneContainer = () => {
-  const configuration = useLiveQuery(
-    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
-    [],
-  );
+type DropzoneContainerProps = {
+  configuration: Configuration;
+}
 
+const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
   const { t } = useTranslation();
 
   const [loading, setLoading] = useState(false);
@@ -57,7 +56,7 @@ const DropzoneContainer = () => {
         material: undefined,
       };
 
-      configurationsTable.add(data, "conf");
+      configurationsTable.add(data, CONFIGURATION_TABLE_KEY);
     };
 
     setLoading(false);

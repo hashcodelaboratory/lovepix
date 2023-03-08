@@ -4,8 +4,13 @@ import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import HomeLayout from '../src/screens-content/home/home'
+import { useLiveQuery } from "dexie-react-hooks";
+import { configurationsTable } from "../database.config";
+import { CONF } from "../src/common/indexed-db/enums/storeNames";
 
 const Home: NextPage = () => {
+  const configuration = useLiveQuery(() => configurationsTable.get(CONF), []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -19,7 +24,7 @@ const Home: NextPage = () => {
       </header>
 
       <main className={styles.main}>
-        <HomeLayout />
+        <HomeLayout configuration={configuration} />
       </main>
 
       <footer className={styles.footer}>Powered by Hashlab s.r.o</footer>

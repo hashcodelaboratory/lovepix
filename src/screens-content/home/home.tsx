@@ -1,9 +1,14 @@
-import UploadImage from './components/upload-image/upload-image'
 import { Container } from '@mui/material'
+import { Configuration } from "../../common/types/configuration";
+import ImageContainer from "./components/upload-image/image-container";
 
-const HomeLayout = () => (
+type HomeLayoutProps = {
+  configuration: Configuration;
+}
+
+const HomeLayout = ({ configuration }: HomeLayoutProps) => (
   <Container>
-    <UploadImage />
+    <ImageContainer configuration={configuration} />
   </Container>
 )
 

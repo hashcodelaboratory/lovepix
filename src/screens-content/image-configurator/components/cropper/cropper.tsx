@@ -3,16 +3,14 @@ import "cropperjs/dist/cropper.css";
 import React, { useEffect, useRef, useState } from "react";
 import { dimensionsByHeight, dimensionsBySquare, dimensionsByWidth } from "screens-content/home/utils/configuration";
 import DropzoneContainer from "screens-content/home/components/upload-image/dropzone/dropzone-container";
-import { useLiveQuery } from "dexie-react-hooks";
 import { configurationsTable } from "../../../../../database.config";
-import { CONFIGURATION_TABLE_KEY } from "../../../../common/indexed-db/hooks/keys";
+import { Configuration } from "../../../../common/types/configuration";
 
-const CropperComponent = () => {
-  const configuration = useLiveQuery(
-    () => configurationsTable.get(CONFIGURATION_TABLE_KEY) ?? null,
-    [],
-  );
+type CropperComponentProps = {
+  configuration: Configuration;
+}
 
+const CropperComponent = ({ configuration }: CropperComponentProps) => {
   const cropperRef = useRef<any>(null);
 
   const [loading, setLoading] = useState(false);
@@ -45,19 +43,25 @@ const CropperComponent = () => {
 
   if (!configuration?.origin) return <DropzoneContainer />;
 
+  if (loading) return <>Loading</>;
+
   return (
-      <Cropper
-        src={configuration?.origin ?? ""}
-        style={{ height: 400, width: "100%" }}
-        initialAspectRatio={16 / 9}
-        guides={false}
-        crop={onCrop}
-        ref={cropperRef}
-        cropBoxResizable={true}
-        ready={(e) => {
-          setLoading(e.type === "ready");
-        }}
-      />
+    <Cropper
+      src={configuration?.origin ?? ""}
+      style={{ height: 400, width: "100%" }}
+      initialAspectRatio={16 / 9}
+      guides={false}
+      crop={onCrop}
+      ref={cropperRef}
+      cropBoxResizable={true}
+      ready={(e) => {
+        if (e.type === "ready") {
+          setLoading(false);
+        } else {
+          setLoading(true);
+        }
+      }}
+    />
   );
 };
 

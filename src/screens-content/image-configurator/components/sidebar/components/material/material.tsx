@@ -20,7 +20,7 @@ const Material = () => {
   const { t } = useTranslation()
 
   const changeMaterial = (id: string) => {
-    configurationsTable.update('conf', {
+    configurationsTable.update(CONFIGURATION_TABLE_KEY, {
       material: id,
     })
   }

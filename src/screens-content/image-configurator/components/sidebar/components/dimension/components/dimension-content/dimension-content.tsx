@@ -48,7 +48,7 @@ const DimensionContent = () => {
   }
 
   const changeDimension = (id: string) => {
-    configurationsTable.update('conf', {
+    configurationsTable.update(CONFIGURATION_TABLE_KEY, {
       dimensionId: id,
     })
   }
