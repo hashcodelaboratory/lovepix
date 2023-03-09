@@ -1,7 +1,7 @@
-import { CONF } from 'common/indexed-db/enums/storeNames'
 import { CONFIGURATOR } from 'constants/pages/urls'
 import { IndexableType, Table } from 'dexie'
 import { NextRouter } from 'next/router'
+import { CONFIGURATION_TABLE_KEY } from "../../../../common/indexed-db/hooks/keys";
 
 const imageSource = (sourceUrl: string) =>
   `${sourceUrl}?w=248&fit=crop&auto=format`
@@ -34,8 +34,8 @@ const handleDB =
       }
 
       data
-        ? configurationsTable.update(CONF, dataPayload)
-        : configurationsTable.add(dataPayload, CONF)
+        ? configurationsTable.update(CONFIGURATION_TABLE_KEY, dataPayload)
+        : configurationsTable.add(dataPayload, CONFIGURATION_TABLE_KEY)
     }
 
     router.push({
