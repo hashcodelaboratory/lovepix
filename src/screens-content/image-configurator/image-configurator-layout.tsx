@@ -1,15 +1,20 @@
-import Cropper from './components/cropper/cropper'
-import Sidebar from './components/sidebar/sidebar'
-import styles from './image-configurator-layout.module.scss'
-import { Container } from '@mui/system'
+import { Container } from "@mui/system";
+import styles from "./image-configurator-layout.module.scss";
+import Sidebar from "./components/sidebar/sidebar";
+import CropperComponent from "./components/cropper/cropper";
+import { Configuration } from "../../common/types/configuration";
 
-const ImageConfiguratorLayout = () => (
+type ImageConfiguratorLayoutProps = {
+  configuration: Configuration;
+}
+
+const ImageConfiguratorLayout = ({ configuration }: ImageConfiguratorLayoutProps) => (
   <Container>
     <div className={styles.container}>
-      <Cropper />
-      <Sidebar />
+      <CropperComponent configuration={configuration} />
+      <Sidebar configuration={configuration} />
     </div>
   </Container>
-)
+);
 
-export default ImageConfiguratorLayout
+export default ImageConfiguratorLayout;

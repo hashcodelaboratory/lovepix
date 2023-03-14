@@ -1,5 +1,6 @@
 export enum ImageLayout {
   FIXED = 'fixed',
+  FILL = 'fill'
 }
 
 export enum TextAlign {

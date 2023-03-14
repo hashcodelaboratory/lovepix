@@ -1,7 +1,7 @@
-import { TextField, Box, CircularProgress } from "@mui/material";
+import { TextField, Box } from "@mui/material";
 import styles from "../../../../shopping-cart.module.scss";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import AppContext from "../../../../../../app-context/app-context";
 import { messages } from "../../../../../../messages/messages";
 import { useTranslation } from "next-i18next";
@@ -9,21 +9,21 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FORM_SCHEMA } from "./utils/schema";
 import { FormInputs } from "../../../../../../common/types/form";
 import { useCreateOrder } from "../../../../../../common/firebase/firestore/createOrder";
-import { useLiveQuery } from "dexie-react-hooks";
 import { orderTable } from "../../../../../../../database.config";
+import { Order } from "../../../../../../common/types/order";
 
-const Form = (): JSX.Element => {
+type FormProps = {
+  order: Order;
+}
+
+const Form = ({ order }: FormProps): JSX.Element => {
   const {
     stateAction: { setStepper },
   } = useContext(AppContext);
 
   const { mutate: createOrder } = useCreateOrder();
 
-  const order = useLiveQuery(() => orderTable.get("order"), []);
-
   const { t } = useTranslation();
-
-  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -36,7 +36,6 @@ const Form = (): JSX.Element => {
   });
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    setLoading(true);
     await createOrder({
       form: data,
       date: Date.now(),
@@ -45,11 +44,9 @@ const Form = (): JSX.Element => {
       delivery: order?.delivery,
       payment: order?.payment,
     });
-
     reset();
     orderTable.clear();
     setStepper(2);
-    setLoading(false);
   };
 
   return (
@@ -176,7 +173,7 @@ const Form = (): JSX.Element => {
           )}
         />
         <button type="submit" className={styles.orderButton}>
-          {String(t(messages.order))}{loading && <CircularProgress />}
+          {String(t(messages.order))}
         </button>
       </Box>
     </div>

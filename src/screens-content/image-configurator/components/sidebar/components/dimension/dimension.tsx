@@ -1,12 +1,17 @@
-import Header from '../header/header'
-import { Filter2 } from '@mui/icons-material'
-import styles from '../../../../image-configurator-layout.module.scss'
-import { messages } from '../../../../../../messages/messages'
-import { useTranslation } from 'next-i18next'
-import DimensionContent from './components/dimension-content/dimension-content'
+import Header from "../header/header";
+import { Filter2 } from "@mui/icons-material";
+import styles from "../../../../image-configurator-layout.module.scss";
+import { messages } from "../../../../../../messages/messages";
+import { useTranslation } from "next-i18next";
+import DimensionContent from "./components/dimension-content/dimension-content";
+import { Configuration } from "../../../../../../common/types/configuration";
 
-const Dimension = () => {
-  const { t } = useTranslation()
+type DimensionProps = {
+  configuration: Configuration;
+}
+
+const Dimension = ({ configuration }: DimensionProps) => {
+  const { t } = useTranslation();
 
   return (
     <div className={styles.containerPadding}>
@@ -15,11 +20,11 @@ const Dimension = () => {
           icon={<Filter2 />}
           title={String(t(messages.chooseDimension))}
         />
-        <DimensionContent />
+        <DimensionContent configuration={configuration} />
       </div>
       <hr />
     </div>
-  )
-}
+  );
+};
 
-export default Dimension
+export default Dimension;
