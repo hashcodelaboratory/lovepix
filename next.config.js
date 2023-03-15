@@ -16,6 +16,7 @@ const nextConfig = {
     ],
   },
   i18n,
+  output: 'standalone',
 }
 
 module.exports = nextConfig
