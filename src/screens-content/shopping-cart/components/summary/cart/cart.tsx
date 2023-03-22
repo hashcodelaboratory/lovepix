@@ -2,7 +2,7 @@ import styles from "../../../shopping-cart.module.scss";
 import { useContext } from "react";
 import AppContext from "../../../../../app-context/app-context";
 import Button from "@mui/material/Button";
-import Image from "next/image";
+import { default as ImageComponent } from "next/image";
 import { TextField } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "next-i18next";
@@ -10,8 +10,9 @@ import { messages } from "../../../../../messages/messages";
 import Form from "../components/form/form";
 import { useRouter } from "next/router";
 import { orderTable } from "../../../../../../database.config";
-import { Order } from "../../../../../common/types/order";
+import { Image, Order } from "../../../../../common/types/order";
 import { ORDER_TABLE_KEY } from "../../../../../common/indexed-db/hooks/keys";
+import { ImageLayout } from "../../../../home/enums/enums";
 
 type CartProps = {
   order: Order;
@@ -44,15 +45,15 @@ const Cart = ({ order }: CartProps) => {
   };
 
   const items = images &&
-    images.map((image: any) =>
+    images.map((image: Image) =>
       <>
         <div className={styles.cartRow}>
-          <Image
-            alt={image?.image}
+          <ImageComponent
+            alt={image?.url}
             src={image?.url ?? ""}
             width={80}
             height={80}
-            layout="fixed"
+            layout={ImageLayout.FIXED}
           />
           <div>{`${image?.material} (${image?.width} x ${image?.height})`}</div>
           <div className={styles.qtyContainer}>
@@ -92,9 +93,9 @@ const Cart = ({ order }: CartProps) => {
           {String(t(messages.personalDataTitle))}
         </h3>
       </div>
-      <p className={styles.itemsSize}>
-        {images?.length} {String(t(messages.items))}
-      </p>
+      {/*<p className={styles.itemsSize}>*/}
+      {/*  {images?.length} {String(t(messages.items))}*/}
+      {/*</p>*/}
       <hr />
       {content}
       <button onClick={redirect} className={styles.backButton}>

@@ -55,6 +55,7 @@ const Form = ({ order }: FormProps): JSX.Element => {
         component="form"
         sx={{
           "& > :not(style)": { m: 1 },
+          marginBottom: 5
         }}
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -169,6 +170,7 @@ const Form = ({ order }: FormProps): JSX.Element => {
               {...register("email", { required: true })}
               error={!!errors.email?.message}
               helperText={errors.email?.message}
+              style={{ marginBottom: "60px" }}
             />
           )}
         />
