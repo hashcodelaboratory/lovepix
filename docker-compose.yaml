@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  server-frontend:
+    container_name: server-frontend
+    image: waller-fe
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    networks:
+      - app
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    #env_file:
+    #  - .env
+networks:
+  app:
+    driver: bridge
+
+    
