@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { configurationsTable } from "../../../../../database.config";
 import { handleDB } from "./utils";
 import { Configuration } from "../../../../common/types/configuration";
-import styles from '../../home.module.scss'
+import styles from "../../home.module.scss";
 
 type ImageContainerProps = {
   configuration: Configuration;

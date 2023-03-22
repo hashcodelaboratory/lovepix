@@ -1,4 +1,4 @@
-import { Container } from '@mui/material'
+import { Container } from "@mui/material";
 import { Configuration } from "../../common/types/configuration";
 import ImageContainer from "./components/upload-image/image-container";
 
@@ -10,6 +10,6 @@ const HomeLayout = ({ configuration }: HomeLayoutProps) => (
   <Container>
     <ImageContainer configuration={configuration} />
   </Container>
-)
+);
 
-export default HomeLayout
+export default HomeLayout;
