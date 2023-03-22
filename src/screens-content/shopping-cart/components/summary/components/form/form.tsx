@@ -170,7 +170,6 @@ const Form = ({ order }: FormProps): JSX.Element => {
               {...register("email", { required: true })}
               error={!!errors.email?.message}
               helperText={errors.email?.message}
-              style={{ marginBottom: "60px" }}
             />
           )}
         />
