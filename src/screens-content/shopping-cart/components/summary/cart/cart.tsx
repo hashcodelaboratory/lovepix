@@ -3,18 +3,19 @@ import { useTranslation } from "next-i18next";
 import { messages } from "../../../../../messages/messages";
 import Form from "../components/form/form";
 import { useRouter } from "next/router";
-import {  Order } from "../../../../../common/types/order";
+import { FormInputs } from "../../../../../common/types/form";
+import { Control, FieldErrors } from "react-hook-form";
 
 type CartProps = {
-  order: Order;
+  register: any;
+  errors:  FieldErrors<FormInputs>;
+  control: Control<FormInputs>;
 }
 
-const Cart = ({ order }: CartProps) => {
+const Cart = ({ register, errors, control }: CartProps) => {
   const { t } = useTranslation();
 
   const router = useRouter();
-
-  const content = <Form order={order} />;
 
   const redirect = () => {
     router.push("/");
@@ -28,7 +29,7 @@ const Cart = ({ order }: CartProps) => {
         <h3 className={styles.cartDisabledTitle}>{String(t(messages.personalDataTitle))}</h3>
       </div>
       <hr />
-      {content}
+      <Form register={register} errors={errors} control={control} />
       <button onClick={redirect} className={styles.backButton}>
         {String(t("back"))}
       </button>

@@ -7,11 +7,8 @@ import {
   Link, Radio, RadioGroup,
   TextField,
 } from "@mui/material";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { SUMMARY_SCHEMA } from "./utils/schema";
+import { Controller, FieldErrors, Control } from "react-hook-form";
 import { Delivery as DeliveryOptions } from "../../../../../../common/enums/delivery";
-import { Summary } from "../../../../../../common/types/summary";
 import { orderTable } from "../../../../../../../database.config";
 import { Payment } from "../../../../../../common/enums/payment";
 import { Image, Order } from "../../../../../../common/types/order";
@@ -19,30 +16,17 @@ import { default as ImageComponent } from "next/image";
 import { ImageLayout } from "../../../../../home/enums/enums";
 import { AddCircle, Close, RemoveCircle } from "@mui/icons-material";
 import { ORDER_TABLE_KEY } from "../../../../../../common/indexed-db/hooks/keys";
+import { FormInputs } from "../../../../../../common/types/form";
 
 type DeliveryProps = {
   order: Order;
+  register: any;
+  errors:  FieldErrors<FormInputs>;
+  control: Control<FormInputs>;
 }
 
-const Delivery = ({ order }: DeliveryProps) => {
+const Delivery = ({ order, control, errors }: DeliveryProps) => {
   const { t } = useTranslation();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    control,
-  } = useForm<Summary>({
-    resolver: yupResolver(SUMMARY_SCHEMA),
-    defaultValues: { ...order },
-  });
-
-  const onSubmit: SubmitHandler<Summary> = (data) => {
-    orderTable.update("order", {
-      delivery: data?.delivery,
-      payment: data?.payment,
-    });
-  };
 
   const { images } = order?.shoppingCart;
 
@@ -85,88 +69,86 @@ const Delivery = ({ order }: DeliveryProps) => {
 
   return (
     <div className={styles.deliveryContainer}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <h3>{String(t(messages.summary))}</h3>
-        <hr />
-        <div className={styles.totalContainer}>
-          {items}
-        </div>
+      <h3>{String(t(messages.summary))}</h3>
+      <hr />
+      <div className={styles.totalContainer}>
+        {items}
+      </div>
+      <p className={styles.summarySectionTitle}>
+        {String(t(messages.delivery))}
+      </p>
+      <Controller
+        name="delivery"
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (
+          <FormControl fullWidth error={!!errors.delivery?.message}>
+            <RadioGroup
+              {...field}
+              onChange={field.onChange}
+              value={field.value}
+            >
+              <FormControlLabel value={DeliveryOptions.COURIER} control={<Radio />}
+                                label={String(t(messages.courier))} />
+              <FormControlLabel value={DeliveryOptions.PERSONAL_COLLECT} control={<Radio />}
+                                label={String(t(messages.personalCollect))} />
+            </RadioGroup>
+            {errors.delivery?.message && (
+              <FormHelperText error>
+                {String(t(errors.delivery?.message))}
+              </FormHelperText>
+            )}
+          </FormControl>
+        )}
+      />
+      <p className={styles.summarySectionTitle}>{String(t(messages.code))}</p>
+      <TextField className={styles.codeField} placeholder="WALLER22" />
+      <p className={styles.summarySectionTitle}>
+        {String(t(messages.payment))}
+      </p>
+      <Controller
+        name="payment"
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (
+          <FormControl fullWidth error={!!errors.payment?.message}>
+            <RadioGroup
+              {...field}
+              onChange={field.onChange}
+            >
+              <FormControlLabel value={Payment.ONLINE} control={<Radio />} label={String(t(messages.online))} />
+              <FormControlLabel value={Payment.PERSONAL_DELIVERY} control={<Radio />}
+                                label={String(t(messages.personalDelivery))}
+              />
+              <FormControlLabel value={Payment.TRANSACTION} control={<Radio />}
+                                label={String(t(messages.transaction))} />
+            </RadioGroup>
+            {errors.payment?.message && (
+              <FormHelperText error>
+                {String(t(errors.payment?.message))}
+              </FormHelperText>
+            )}
+          </FormControl>
+        )}
+      />
+      <div className={styles.totalContainer}>
         <p className={styles.summarySectionTitle}>
-          {String(t(messages.delivery))}
+          {String(t(messages.total))}
         </p>
-        <Controller
-          name="delivery"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <FormControl fullWidth error={!!errors.delivery?.message}>
-              <RadioGroup
-                {...field} {...register("delivery")}
-                onChange={field.onChange}
-              >
-                <FormControlLabel value={DeliveryOptions.COURIER} control={<Radio />}
-                                  label={String(t(messages.courier))} />
-                <FormControlLabel value={DeliveryOptions.PERSONAL_COLLECT} control={<Radio />}
-                                  label={String(t(messages.personalCollect))} />
-              </RadioGroup>
-              {errors.delivery?.message && (
-                <FormHelperText error>
-                  {String(t(errors.delivery?.message))}
-                </FormHelperText>
-              )}
-            </FormControl>
-          )}
-        />
-        <p className={styles.summarySectionTitle}>{String(t(messages.code))}</p>
-        <TextField className={styles.codeField} placeholder="WALLER22" />
-        <p className={styles.summarySectionTitle}>
-          {String(t(messages.payment))}
+        <p className={styles.price}>
+          {Number(order?.totalPrice).toFixed(2)} €
         </p>
-        <Controller
-          name="payment"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <FormControl fullWidth error={!!errors.payment?.message}>
-              <RadioGroup
-                {...register("payment")}
-                onChange={field.onChange}
-              >
-                <FormControlLabel value={Payment.ONLINE} control={<Radio />} label={String(t(messages.online))} />
-                <FormControlLabel value={Payment.PERSONAL_DELIVERY} control={<Radio />}
-                                  label={String(t(messages.personalDelivery))}
-                />
-                <FormControlLabel value={Payment.TRANSACTION} control={<Radio />}
-                                  label={String(t(messages.transaction))} />
-              </RadioGroup>
-              {errors.payment?.message && (
-                <FormHelperText error>
-                  {String(t(errors.payment?.message))}
-                </FormHelperText>
-              )}
-            </FormControl>
-          )}
-        />
-        <div className={styles.totalContainer}>
-          <p className={styles.summarySectionTitle}>
-            {String(t(messages.total))}
-          </p>
-          <p className={styles.price}>
-            {Number(order?.totalPrice).toFixed(2)} €
-          </p>
-        </div>
-        <p className={styles.text}>{String(t(messages.personalData))}</p>
-        <Link className={styles.text} style={{ cursor: "pointer" }}>
-          <b>{String(t(messages.privacy))}</b>
-        </Link>
-        <button
-          type="submit"
-          className={styles.checkoutButton}
-          //disabled={stepper === 1}
-        >
-          {String(t(messages.checkout))}
-        </button>
-      </form>
+      </div>
+      <p className={styles.text}>{String(t(messages.personalData))}</p>
+      <Link className={styles.text} style={{ cursor: "pointer" }}>
+        <b>{String(t(messages.privacy))}</b>
+      </Link>
+      <button
+        type="submit"
+        className={styles.checkoutButton}
+      >
+        {String(t(messages.checkout))}
+      </button>
     </div>
   );
 };

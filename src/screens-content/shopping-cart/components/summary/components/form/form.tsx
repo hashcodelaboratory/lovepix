@@ -1,56 +1,26 @@
 import { TextField, Box } from "@mui/material";
 import styles from "../../../../shopping-cart.module.scss";
-import { SubmitHandler, useForm, Controller } from "react-hook-form";
+import { Controller, FieldErrors, Control } from "react-hook-form";
 import { messages } from "../../../../../../messages/messages";
 import { useTranslation } from "next-i18next";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { FORM_SCHEMA } from "./utils/schema";
 import { FormInputs } from "../../../../../../common/types/form";
-import { useCreateOrder } from "../../../../../../common/firebase/firestore/createOrder";
-import { orderTable } from "../../../../../../../database.config";
-import { Order } from "../../../../../../common/types/order";
 
 type FormProps = {
-  order: Order;
+  register: any;
+  errors:  FieldErrors<FormInputs>;
+  control: Control<FormInputs>;
 }
 
-const Form = ({ order }: FormProps): JSX.Element => {
-  const { mutate: createOrder } = useCreateOrder();
-
+const Form = ({ register, errors, control }: FormProps): JSX.Element => {
   const { t } = useTranslation();
-
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    control,
-    reset,
-  } = useForm<FormInputs>({
-    resolver: yupResolver(FORM_SCHEMA),
-  });
-
-  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    await createOrder({
-      form: data,
-      date: Date.now(),
-      shoppingCart: order?.shoppingCart,
-      totalPrice: order?.totalPrice,
-      delivery: order?.delivery,
-      payment: order?.payment,
-    });
-    reset();
-    orderTable.clear();
-  };
 
   return (
     <div className={styles.formContainer}>
       <Box
-        component="form"
         sx={{
           "& > :not(style)": { m: 1 },
-          marginBottom: 5
+          marginBottom: 5,
         }}
-        onSubmit={handleSubmit(onSubmit)}
       >
         <Controller
           name="firstName"
@@ -166,9 +136,6 @@ const Form = ({ order }: FormProps): JSX.Element => {
             />
           )}
         />
-        <button type="submit" className={styles.orderButton}>
-          {String(t(messages.order))}
-        </button>
       </Box>
     </div>
   );
