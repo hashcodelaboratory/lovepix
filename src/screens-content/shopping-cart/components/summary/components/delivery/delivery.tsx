@@ -18,7 +18,11 @@ import { Delivery as DeliveryOptions } from "../../../../../../common/enums/deli
 import { Summary } from "../../../../../../common/types/summary";
 import { orderTable } from "../../../../../../../database.config";
 import { Payment } from "../../../../../../common/enums/payment";
-import { Order } from "../../../../../../common/types/order";
+import { Image, Order } from "../../../../../../common/types/order";
+import { default as ImageComponent } from "next/image";
+import { ImageLayout } from "../../../../../home/enums/enums";
+import { AddCircle, Close, RemoveCircle } from "@mui/icons-material";
+import { ORDER_TABLE_KEY } from "../../../../../../common/indexed-db/hooks/keys";
 
 type DeliveryProps = {
   order: Order;
@@ -40,7 +44,7 @@ const Delivery = ({ order }: DeliveryProps) => {
     reset,
   } = useForm<Summary>({
     resolver: yupResolver(SUMMARY_SCHEMA),
-    defaultValues: { ...order }
+    defaultValues: { ...order },
   });
 
   useEffect(() => {
@@ -55,16 +59,52 @@ const Delivery = ({ order }: DeliveryProps) => {
     setStepper(1);
   };
 
+  const { images } = order?.shoppingCart;
+
+  const removeImage = async (url?: string) => {
+    if (order?.shoppingCart?.images.length === 1) {
+      orderTable.clear();
+    } else {
+      orderTable.update(ORDER_TABLE_KEY, {
+        shoppingCart: {
+          images: order?.shoppingCart?.images.filter(
+            (image: any) => image.url !== url,
+          ),
+        },
+      });
+    }
+  };
+
+  const items = images &&
+    images.map((image: Image) =>
+      <div className={styles.cartRow} key={image.origin}>
+        <div>
+          <ImageComponent
+            alt={image?.url}
+            src={image?.url ?? ""}
+            width={30}
+            height={30}
+            layout={ImageLayout.FIXED}
+          />
+          <p className={styles.cartRowDescription}>{`${image?.material} (${image?.width} x ${image?.height})`}</p>
+        </div>
+        <div className={styles.qtyContainer}>
+          <RemoveCircle sx={{ width: 16 }} />
+          <p className={styles.qtyField}>{image?.qty} </p>
+          <AddCircle sx={{ width: 16 }} />
+        </div>
+        <div>{Number(image?.price).toFixed(2)} €</div>
+        <Close color="error" onClick={() => removeImage(image?.url)} />
+      </div>
+    );
+
   return (
     <div className={styles.deliveryContainer}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h3>{String(t(messages.summary))}</h3>
         <hr />
         <div className={styles.totalContainer}>
-          <p>
-            {order?.shoppingCart?.images?.length} {String(t(messages.items))}
-          </p>
-          <p>{Number(order?.totalPrice).toFixed(2)} €</p>
+          {items}
         </div>
         <p className={styles.summarySectionTitle}>
           {String(t(messages.delivery))}
