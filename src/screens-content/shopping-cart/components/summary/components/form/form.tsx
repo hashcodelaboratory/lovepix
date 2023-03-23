@@ -1,8 +1,6 @@
 import { TextField, Box } from "@mui/material";
 import styles from "../../../../shopping-cart.module.scss";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
-import { useContext } from "react";
-import AppContext from "../../../../../../app-context/app-context";
 import { messages } from "../../../../../../messages/messages";
 import { useTranslation } from "next-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,10 +15,6 @@ type FormProps = {
 }
 
 const Form = ({ order }: FormProps): JSX.Element => {
-  const {
-    stateAction: { setStepper },
-  } = useContext(AppContext);
-
   const { mutate: createOrder } = useCreateOrder();
 
   const { t } = useTranslation();
@@ -46,7 +40,6 @@ const Form = ({ order }: FormProps): JSX.Element => {
     });
     reset();
     orderTable.clear();
-    setStepper(2);
   };
 
   return (

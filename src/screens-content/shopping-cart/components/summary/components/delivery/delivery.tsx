@@ -1,16 +1,12 @@
 import styles from "../../../../shopping-cart.module.scss";
-import { useContext, useEffect } from "react";
-import AppContext from "../../../../../../app-context/app-context";
 import { useTranslation } from "next-i18next";
 import { messages } from "../../../../../../messages/messages";
 import {
-  FormControl,
+  FormControl, FormControlLabel,
   FormHelperText,
-  Link,
-  Select,
+  Link, Radio, RadioGroup,
   TextField,
 } from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SUMMARY_SCHEMA } from "./utils/schema";
@@ -29,11 +25,6 @@ type DeliveryProps = {
 }
 
 const Delivery = ({ order }: DeliveryProps) => {
-  const {
-    state: { stepper },
-    stateAction: { setStepper },
-  } = useContext(AppContext);
-
   const { t } = useTranslation();
 
   const {
@@ -41,22 +32,16 @@ const Delivery = ({ order }: DeliveryProps) => {
     handleSubmit,
     formState: { errors },
     control,
-    reset,
   } = useForm<Summary>({
     resolver: yupResolver(SUMMARY_SCHEMA),
     defaultValues: { ...order },
   });
-
-  useEffect(() => {
-    stepper === 3 && reset();
-  }, [stepper, reset]);
 
   const onSubmit: SubmitHandler<Summary> = (data) => {
     orderTable.update("order", {
       delivery: data?.delivery,
       payment: data?.payment,
     });
-    setStepper(1);
   };
 
   const { images } = order?.shoppingCart;
@@ -95,7 +80,7 @@ const Delivery = ({ order }: DeliveryProps) => {
         </div>
         <div>{Number(image?.price).toFixed(2)} €</div>
         <Close color="error" onClick={() => removeImage(image?.url)} />
-      </div>
+      </div>,
     );
 
   return (
@@ -112,19 +97,18 @@ const Delivery = ({ order }: DeliveryProps) => {
         <Controller
           name="delivery"
           control={control}
+          rules={{ required: true }}
           render={({ field }) => (
             <FormControl fullWidth error={!!errors.delivery?.message}>
-              <Select {...field} {...register("delivery", { required: true })}>
-                <MenuItem value={DeliveryOptions.COURIER}>
-                  {String(t(messages.courier))}
-                </MenuItem>
-                <MenuItem value={DeliveryOptions.PERSONAL_COLLECT}>
-                  {String(t(messages.personalCollect))}
-                </MenuItem>
-                <MenuItem value={DeliveryOptions.PICKUP}>
-                  {String(t(messages.pickup))}
-                </MenuItem>
-              </Select>
+              <RadioGroup
+                {...field} {...register("delivery")}
+                onChange={field.onChange}
+              >
+                <FormControlLabel value={DeliveryOptions.COURIER} control={<Radio />}
+                                  label={String(t(messages.courier))} />
+                <FormControlLabel value={DeliveryOptions.PERSONAL_COLLECT} control={<Radio />}
+                                  label={String(t(messages.personalCollect))} />
+              </RadioGroup>
               {errors.delivery?.message && (
                 <FormHelperText error>
                   {String(t(errors.delivery?.message))}
@@ -141,16 +125,20 @@ const Delivery = ({ order }: DeliveryProps) => {
         <Controller
           name="payment"
           control={control}
+          rules={{ required: true }}
           render={({ field }) => (
             <FormControl fullWidth error={!!errors.payment?.message}>
-              <Select {...field} {...register("payment", { required: true })}>
-                <MenuItem value={Payment.ONLINE}>
-                  {String(t(messages.online))}
-                </MenuItem>
-                <MenuItem value={Payment.PERSONAL_DELIVERY}>
-                  {String(t(messages.personalDelivery))}
-                </MenuItem>
-              </Select>
+              <RadioGroup
+                {...register("payment")}
+                onChange={field.onChange}
+              >
+                <FormControlLabel value={Payment.ONLINE} control={<Radio />} label={String(t(messages.online))} />
+                <FormControlLabel value={Payment.PERSONAL_DELIVERY} control={<Radio />}
+                                  label={String(t(messages.personalDelivery))}
+                />
+                <FormControlLabel value={Payment.TRANSACTION} control={<Radio />}
+                                  label={String(t(messages.transaction))} />
+              </RadioGroup>
               {errors.payment?.message && (
                 <FormHelperText error>
                   {String(t(errors.payment?.message))}
@@ -174,7 +162,7 @@ const Delivery = ({ order }: DeliveryProps) => {
         <button
           type="submit"
           className={styles.checkoutButton}
-          disabled={stepper === 1}
+          //disabled={stepper === 1}
         >
           {String(t(messages.checkout))}
         </button>
