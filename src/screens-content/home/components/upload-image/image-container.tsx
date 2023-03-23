@@ -1,4 +1,3 @@
-import { WALLER_IMAGE_LIST } from "../../utils/image-upload";
 import { TextAlign } from "../../enums/enums";
 import { Grid } from "@mui/material";
 import ImageCard from "./image-card";
@@ -10,21 +9,26 @@ import { configurationsTable } from "../../../../../database.config";
 import { handleDB } from "./utils";
 import { Configuration } from "../../../../common/types/configuration";
 import styles from "../../home.module.scss";
+import { GalleryItem } from "../../../../common/types/gallery";
 
 type ImageContainerProps = {
   configuration: Configuration;
+  galleryData?: GalleryItem[];
 }
 
-const ImageContainer = ({ configuration }: ImageContainerProps) => {
+const ImageContainer = ({ configuration, galleryData }: ImageContainerProps) => {
   const router = useRouter();
 
-  const IMAGE_LIST = WALLER_IMAGE_LIST.map(({ sourceUrl, title }) => (
+  const IMAGE_LIST = galleryData?.map(({ sourceUrl, title }, index) => (
       <div
         style={{ cursor: "pointer" }}
         key={uuidv4()}
         onClick={handleDB(sourceUrl, configuration, configurationsTable, router)}
       >
-        <ImageCard sourceUrl={sourceUrl} title={title} />
+        <ImageCard
+          sourceUrl={sourceUrl}
+          title={title || (index + 1).toString()}
+        />
       </div>
     ),
   );

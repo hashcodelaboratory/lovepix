@@ -7,9 +7,12 @@ import HomeLayout from '../src/screens-content/home/home'
 import { useLiveQuery } from "dexie-react-hooks";
 import { configurationsTable } from "../database.config";
 import { CONFIGURATION_TABLE_KEY } from "../src/common/indexed-db/hooks/keys";
+import { useGallery } from "../src/common/custom-hooks/use-gallery";
 
 const Home: NextPage = () => {
   const configuration = useLiveQuery(() => configurationsTable.get(CONFIGURATION_TABLE_KEY), []);
+
+  const { data: galleryData } = useGallery();
 
   return (
     <div className={styles.container}>
@@ -24,7 +27,7 @@ const Home: NextPage = () => {
       </header>
 
       <main className={styles.main}>
-        <HomeLayout configuration={configuration} />
+        <HomeLayout configuration={configuration} galleryData={galleryData} />
       </main>
 
       <footer className={styles.footer}>Powered by Hashlab s.r.o</footer>
