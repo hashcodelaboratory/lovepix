@@ -113,7 +113,7 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
             spacing="xl"
             className={styles.dropzoneGroup}
           >
-            <h1 className={styles.title}>{String(t(printPhoto))}</h1>
+            <h1 className={styles.containerTitle}>{String(t(printPhoto))}</h1>
             <Dropzone.Accept>
               <Icon icon={IconType.UPLOAD_PHOTO} />
             </Dropzone.Accept>

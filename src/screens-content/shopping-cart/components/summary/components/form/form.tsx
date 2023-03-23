@@ -55,6 +55,7 @@ const Form = ({ order }: FormProps): JSX.Element => {
         component="form"
         sx={{
           "& > :not(style)": { m: 1 },
+          marginBottom: 5
         }}
         onSubmit={handleSubmit(onSubmit)}
       >
