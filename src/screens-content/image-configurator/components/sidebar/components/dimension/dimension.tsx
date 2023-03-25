@@ -1,5 +1,5 @@
 import Header from "../header/header";
-import { Filter2 } from "@mui/icons-material";
+import { CheckCircle, Filter2 } from "@mui/icons-material";
 import styles from "../../../../image-configurator-layout.module.scss";
 import { messages } from "../../../../../../messages/messages";
 import { useTranslation } from "next-i18next";
@@ -13,12 +13,15 @@ type DimensionProps = {
 const Dimension = ({ configuration }: DimensionProps) => {
   const { t } = useTranslation();
 
+  const icon = configuration?.dimensionId ? <CheckCircle color='success' /> : <Filter2 />
+
   return (
     <div className={styles.containerPadding}>
       <div className={styles.dimension}>
         <Header
-          icon={<Filter2 />}
+          icon={icon}
           title={String(t(messages.chooseDimension))}
+          success={!!configuration?.dimensionId}
         />
         <DimensionContent configuration={configuration} />
       </div>

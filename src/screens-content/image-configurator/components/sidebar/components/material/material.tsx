@@ -1,6 +1,6 @@
 import styles from "../../../../image-configurator-layout.module.scss";
 import Header from "../header/header";
-import { Filter3 } from "@mui/icons-material";
+import { CheckCircle, Filter3 } from "@mui/icons-material";
 import { messages } from "../../../../../../messages/messages";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
@@ -59,9 +59,11 @@ const Material = ({ configuration }: MaterialProps) => {
     </div>
   ));
 
+  const icon = configuration?.material ? <CheckCircle color="success" /> : <Filter3 />;
+
   return (
     <div className={styles.containerPadding}>
-      <Header icon={<Filter3 />} title={String(t(messages.chooseMaterial))} />
+      <Header icon={icon} title={String(t(messages.chooseMaterial))} success={!!configuration?.material} />
       <div
         style={{
           display: "flex",

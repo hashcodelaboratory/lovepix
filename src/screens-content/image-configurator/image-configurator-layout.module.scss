@@ -48,16 +48,15 @@
 
 .previewRemove {
   border: none;
-  position: absolute;
   display: flex;
-  align-items: center;
-  bottom: 1rem;
-  right: 1rem;
+  justify-content: center;
+  flex-direction: column;
   color: #d20e0e;
   background-color: white;
   font-weight: 600;
   padding: 0.25rem 0.5rem;
   border-radius: 0.5rem;
+  margin: auto;
 }
 
 .previewRemove:hover {

@@ -1,12 +1,9 @@
 import styles from "../../../../image-configurator-layout.module.scss";
 import Header from "../header/header";
-import { Delete, Filter1 } from "@mui/icons-material";
+import { CheckCircle, Delete, Filter1, Image } from "@mui/icons-material";
 import { useTranslation } from "next-i18next";
 import { messages } from "../../../../../../messages/messages";
-import Image from "next/image";
-import ImageIcon from "@mui/icons-material/Image";
 import { configurationsTable } from "../../../../../../../database.config";
-import { ImageLayout } from "../../../../../home/enums/enums";
 import { Configuration } from "../../../../../../common/types/configuration";
 
 type PreviewProps = {
@@ -23,22 +20,26 @@ const Preview = ({ configuration }: PreviewProps) => {
 
   const layout = configuration?.origin ? (
     <>
-      <Image alt="preview" src={configuration?.origin ?? ""} layout={ImageLayout.FILL} />
       <button className={styles.previewRemove} onClick={handleRemoveImage}>
-        <Delete sx={{ mr: 1 }} />
+        <Delete style={{ width: 60, height: 60, margin: "auto" }} />
         {String(t(messages.removeImage))}
       </button>
     </>
   ) : (
-    <ImageIcon
+    <Image
       color="disabled"
       style={{ width: 80, height: 80, margin: "auto" }}
     />
   );
 
+  const icon = configuration?.origin ? <CheckCircle color='success' /> : <Filter1 />
+
   return (
     <div className={styles.preview}>
-      <Header icon={<Filter1 />} title={String(t(messages.yourPhoto))} />
+      <Header
+        icon={icon}
+        title={String(t(messages.yourPhoto))} success={!!configuration?.origin}
+      />
       <div className={styles.imagePlaceholder}>{layout}</div>
     </div>
   );
