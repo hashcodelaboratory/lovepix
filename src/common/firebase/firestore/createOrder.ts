@@ -2,7 +2,7 @@ import { MutationOptions, useMutation, UseMutationResult } from "react-query";
 import {
   collection,
   doc,
-  getDoc,
+  getCountFromServer,
   setDoc,
 } from "@firebase/firestore";
 import { database, storage } from "../config";
@@ -13,6 +13,7 @@ import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
 import { StorageFolder } from "../storage/enums";
 import { Image } from "../../types/order";
 import { Payment } from "../../enums/payment";
+import { orderTable } from "../../../../database.config";
 
 type CreateOrderRequest = {
   form: FormInputs
@@ -72,6 +73,8 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
         const newOrderRef = doc(database, Collections.ORDERS, orderId);
 
         await setDoc(newOrderRef, ({ ...data, shoppingCart: cart }));
+
+        orderTable.clear();
       }
     }
   });
@@ -79,13 +82,17 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
 
 // Note: orderId template: PIC{year}{000orderNumber}
 const createOrder = async (data: CreateOrderRequest) => {
-  const ordersRef = doc(collection(database, Collections.ORDERS));
-  const docSnap = await getDoc(ordersRef);
-  const year = new Date(Date.now()).getFullYear();
-  const orderNumber = String(docSnap.exists() ? docSnap.data().length + 1 : 1).padStart(4, "0");
-  const orderId = `PIC${year}${orderNumber}`;
+  const ordersRef = await collection(database, Collections.ORDERS);
+  if (ordersRef) {
+    const docSnap = await getCountFromServer(ordersRef);
+    if (docSnap) {
+      const year = new Date(Date.now()).getFullYear();
+      const orderNumber = String(docSnap ? docSnap.data().count + 1 : 1).padStart(4, "0");
+      const orderId = `PIC${year}${orderNumber}`;
 
-  await uploadToStorage(orderId, data);
+      await uploadToStorage(orderId, data);
+    }
+  }
 };
 
 export const useCreateOrder = (
