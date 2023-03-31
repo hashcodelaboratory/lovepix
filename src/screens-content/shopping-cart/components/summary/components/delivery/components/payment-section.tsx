@@ -29,12 +29,21 @@ const PaymentSection = ({ control, message }: PaymentSectionProps): JSX.Element 
               {...field}
               onChange={field.onChange}
             >
-              <FormControlLabel value={Payment.ONLINE} control={<Radio />} label={String(t(messages.online))} />
+              <FormControlLabel value={Payment.ONLINE} control={<Radio />} label={
+                <div className={styles.radioGroupLabel}>
+                  {String(t(messages.online))}:
+                  <p className={styles.priceBox}>{String(t(messages.free))}</p>
+                </div>
+              } />
               <FormControlLabel value={Payment.PERSONAL_DELIVERY} control={<Radio />}
-                                label={String(t(messages.personalDelivery))}
-              />
+                                label={
+                <div className={styles.radioGroupLabel}>
+                  {String(t(messages.personalDelivery))}:
+                  <p className={styles.priceBox}>2.00 €</p>
+                </div>
+              } />
               <FormControlLabel value={Payment.TRANSACTION} control={<Radio />}
-                                label={String(t(messages.transaction))} />
+                                label={<div className={styles.radioGroupLabel}>{String(t(messages.transaction))}</div>} />
             </RadioGroup>
             {message && (
               <FormHelperText error>

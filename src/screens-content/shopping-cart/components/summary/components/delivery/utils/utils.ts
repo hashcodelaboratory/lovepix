@@ -8,15 +8,23 @@ export enum UpdateQuantityWay {
 }
 
 export const removeImage = (url?: string, images?: Image[]) => {
+  let total = 0;
+  const filtered = images?.filter(
+    (image: Image) => image.url !== url,
+  );
+
+  filtered?.forEach(({ qty, price }) => {
+    total += qty * price;
+  });
+
   if (images?.length === 1) {
     orderTable.clear();
   } else {
     orderTable.update(ORDER_TABLE_KEY, {
       shoppingCart: {
-        images: images?.filter(
-          (image: Image) => image.url !== url,
-        ),
+        images: filtered,
       },
+      totalPrice: total.toFixed(2),
     });
   }
 };

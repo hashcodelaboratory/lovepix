@@ -91,5 +91,6 @@ export const messages = {
   orderHistory: "orderHistory",
   customerDetails: "customerDetails",
   orderCreated: "orderCreated",
-  transaction: "transaction"
+  transaction: "transaction",
+  free: "free"
 }
