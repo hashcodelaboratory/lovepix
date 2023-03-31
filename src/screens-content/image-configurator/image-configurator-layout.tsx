@@ -9,9 +9,11 @@ type ImageConfiguratorLayoutProps = {
 }
 
 const ImageConfiguratorLayout = ({ configuration }: ImageConfiguratorLayoutProps) => (
-  <Container className={styles.container}>
+  <Container >
+    <div className={styles.container}>
       <CropperComponent configuration={configuration} />
       <Sidebar configuration={configuration} />
+    </div>
   </Container>
 );
 
