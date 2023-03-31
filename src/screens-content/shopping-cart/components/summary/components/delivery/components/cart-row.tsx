@@ -3,7 +3,7 @@ import { default as ImageComponent } from "next/image";
 import { ImageLayout } from "../../../../../../home/enums/enums";
 import { AddCircle, Close, RemoveCircle } from "@mui/icons-material";
 import { Image, Order } from "../../../../../../../common/types/order";
-import { removeImage } from "../utils/utils";
+import { removeImage, updateQuantity, UpdateQuantityWay } from "../utils/utils";
 
 type CartRowProps = {
   order: Order;
@@ -24,11 +24,11 @@ const CartRow = ({ image, order }: CartRowProps): JSX.Element => {
         <p className={styles.cartRowDescription}>{`${image?.material} (${image?.width} x ${image?.height})`}</p>
       </div>
       <div className={styles.qtyContainer}>
-        <RemoveCircle sx={{ width: 16 }} />
+        <RemoveCircle sx={{ width: 16 }} className={styles.cartRowButton} onClick={() => updateQuantity(UpdateQuantityWay.DECREASE, order, image)} />
         <p className={styles.qtyField}>{image?.qty} </p>
-        <AddCircle sx={{ width: 16 }} />
+        <AddCircle sx={{ width: 16 }} className={styles.cartRowButton} onClick={() => updateQuantity(UpdateQuantityWay.INCREASE, order, image)} />
       </div>
-      <div>{Number(image?.price).toFixed(2)} €</div>
+      <div>{Number(image?.qty * image?.price).toFixed(2)} €</div>
       <Close color="error" onClick={() => removeImage(image?.url, order.shoppingCart?.images)} />
     </div>
   );
