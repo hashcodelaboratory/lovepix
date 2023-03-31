@@ -7,12 +7,48 @@ import { FormInputs } from "../../../../../../common/types/form";
 
 type FormProps = {
   register: any;
-  errors:  FieldErrors<FormInputs>;
+  errors: FieldErrors<FormInputs>;
   control: Control<FormInputs>;
+}
+
+type ControllerFieldType = {
+  name: "firstName" | "lastName" | "company" | "address" | "city" | "postalCode" | "phone" | "email" | "delivery" | "payment";
+  message: string;
+  error?: string;
+  fullWidth?: boolean;
 }
 
 const Form = ({ register, errors, control }: FormProps): JSX.Element => {
   const { t } = useTranslation();
+
+  const FIELDS: ControllerFieldType[] = [
+    { name: "firstName", message: messages.name, error: errors.firstName?.message },
+    { name: "lastName", message: messages.surname, error: errors.lastName?.message },
+    { name: "company", message: messages.company, fullWidth: true },
+    { name: "address", message: messages.address, error: errors.address?.message, fullWidth: true },
+    { name: "city", message: messages.city, error: errors.city?.message, fullWidth: true },
+    { name: "postalCode", message: messages.postalCode, error: errors.postalCode?.message },
+    { name: "phone", message: messages.phone, error: errors.phone?.message },
+    { name: "email", message: messages.email, error: errors.email?.message, fullWidth: true },
+  ];
+
+  const fields = FIELDS.map(({ name, message, error, fullWidth }) =>
+    <Controller
+      key={name}
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <TextField
+          label={String(t(message))}
+          placeholder={String(t(message))}
+          fullWidth={fullWidth}
+          {...field}
+          {...register(name, { required: true })}
+          error={!!error}
+          helperText={String(t(error ?? ""))}
+        />
+      )}
+    />);
 
   return (
     <div className={styles.formContainer}>
@@ -22,120 +58,7 @@ const Form = ({ register, errors, control }: FormProps): JSX.Element => {
           marginBottom: 5,
         }}
       >
-        <Controller
-          name="firstName"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              label={String(t(messages.name))}
-              placeholder={String(t(messages.name))}
-              {...field}
-              {...register("firstName", { required: true })}
-              error={!!errors.firstName?.message}
-              helperText={String(t(errors.firstName?.message ?? ""))}
-            />
-          )}
-        />
-        <Controller
-          name="lastName"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              label={String(t(messages.surname))}
-              placeholder={String(t(messages.surname))}
-              {...field}
-              {...register("lastName", { required: true })}
-              error={!!errors.lastName?.message}
-              helperText={String(t(errors.lastName?.message ?? ""))}
-            />
-          )}
-        />
-        <Controller
-          name="company"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              label={String(t(messages.company))}
-              placeholder={String(t(messages.company))}
-              fullWidth
-              {...field}
-              {...register("company")}
-            />
-          )}
-        />
-        <Controller
-          name="address"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              label={String(t(messages.address))}
-              placeholder={String(t(messages.address))}
-              fullWidth
-              {...field}
-              {...register("address", { required: true })}
-              error={!!errors.address?.message}
-              helperText={String(t(errors.address?.message ?? ""))}
-            />
-          )}
-        />
-        <Controller
-          name="city"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              label={String(t(messages.city))}
-              placeholder={String(t(messages.city))}
-              fullWidth
-              {...field}
-              {...register("city", { required: true })}
-              error={!!errors.city?.message}
-              helperText={String(t(errors.city?.message ?? ""))}
-            />
-          )}
-        />
-        <Controller
-          name="postalCode"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              label={String(t(messages.postalCode))}
-              placeholder={String(t(messages.postalCode))}
-              {...field}
-              {...register("postalCode", { required: true })}
-              error={!!errors.postalCode?.message}
-              helperText={String(t(errors.postalCode?.message ?? ""))}
-            />
-          )}
-        />
-        <Controller
-          name="phone"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              label={String(t(messages.phone))}
-              placeholder={String(t(messages.phone))}
-              {...field}
-              {...register("phone", { required: true })}
-              error={!!errors.phone?.message}
-              helperText={String(t(errors.phone?.message ?? ""))}
-            />
-          )}
-        />
-        <Controller
-          name="email"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              label={String(t(messages.email))}
-              placeholder={String(t(messages.email))}
-              fullWidth
-              {...field}
-              {...register("email", { required: true })}
-              error={!!errors.email?.message}
-              helperText={errors.email?.message}
-            />
-          )}
-        />
+        {fields}
       </Box>
     </div>
   );
