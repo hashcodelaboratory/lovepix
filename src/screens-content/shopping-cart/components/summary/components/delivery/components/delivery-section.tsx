@@ -31,9 +31,19 @@ const DeliverySection = ({ control, message }: DeliverySectionProps): JSX.Elemen
               value={field.value}
             >
               <FormControlLabel value={DeliveryOptions.COURIER} control={<Radio />}
-                                label={String(t(messages.courier))} />
+                                label={
+                <div className={styles.radioGroupLabel}>
+                  {String(t(messages.courier))}
+                  <p className={styles.priceBox}>5.00 €</p>
+                </div>
+              }  />
               <FormControlLabel value={DeliveryOptions.PERSONAL_COLLECT} control={<Radio />}
-                                label={String(t(messages.personalCollect))} />
+                                label={
+                <div className={styles.radioGroupLabel}>
+                  {String(t(messages.personalCollect))}:
+                  <p className={styles.priceBox}>{String(t(messages.free))}</p>
+                </div>
+              } />
             </RadioGroup>
             {message && (
               <FormHelperText error>

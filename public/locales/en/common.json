@@ -51,7 +51,7 @@
   "code": "Get code",
   "payment": "Payment",
   "total": "Total",
-  "courier": "Kuriér na adresu: 5.00 €",
+  "courier": "Kuriér na adresu:",
   "personalCollect": "Osobný odber - Spišská Nová Ves",
   "pickup": "Zásielkovňa: 2.20 €",
   "online": "Online",
@@ -89,5 +89,6 @@
   "byWidth": "By width",
   "byHeight": "By height",
   "square": "Square",
-  "transaction": "Transaction"
+  "transaction": "Transaction",
+  "free": "Zadarmo"
 }

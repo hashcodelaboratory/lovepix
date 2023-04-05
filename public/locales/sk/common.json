@@ -50,7 +50,7 @@
   "code": "Zľavový kupón",
   "payment": "Platba",
   "total": "Spolu",
-  "courier": "Kuriér na adresu: 5.00 €",
+  "courier": "Kuriér na adresu:",
   "personalCollect": "Osobný odber - Spišská Nová Ves",
   "pickup": "Zásielkovňa: 2.20 €",
   "online": "Online",
@@ -93,5 +93,6 @@
   "orderHistory": "História objednávky",
   "customerDetails": "Detail zákazníka",
   "orderCreated": "Objednávka vytvorená",
-  "transaction": "Prevodom"
+  "transaction": "Prevodom",
+  "free": "Zadarmo"
 }

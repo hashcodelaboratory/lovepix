@@ -230,3 +230,14 @@
 .cartRowButton:hover {
   cursor: pointer;
 }
+
+.radioGroupLabel {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.priceBox {
+  color: #009100;
+  margin: 0 0.3rem;
+}
