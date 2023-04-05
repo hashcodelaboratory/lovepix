@@ -8,14 +8,14 @@ export enum UpdateQuantityWay {
 }
 
 export const removeImage = (url?: string, images?: Image[]) => {
-  let total = 0;
   const filtered = images?.filter(
     (image: Image) => image.url !== url,
   );
 
-  filtered?.forEach(({ qty, price }) => {
-    total += qty * price;
-  });
+  const total = filtered?.reduce(
+    (accumulator, { qty, price }) => accumulator + qty * price,
+    0
+  );
 
   if (images?.length === 1) {
     orderTable.clear();
@@ -24,7 +24,7 @@ export const removeImage = (url?: string, images?: Image[]) => {
       shoppingCart: {
         images: filtered,
       },
-      totalPrice: total.toFixed(2),
+      totalPrice: total?.toFixed(2),
     });
   }
 };
