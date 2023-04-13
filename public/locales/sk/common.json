@@ -96,5 +96,7 @@
   "transaction": "Prevodom",
   "free": "Zadarmo",
   "orderWithPayment": "Dokončiť objednávku",
-  "saveChanges": "Uložiť zmeny"
+  "saveChanges": "Uložiť zmeny",
+  "change": "Zmeniť",
+  "chooseCrop": "Vyberte výrez"
 }
