@@ -30,7 +30,7 @@ const Delivery = ({ order, control, errors }: DeliveryProps) => {
     <div className={styles.deliveryContainer}>
       <h3>{String(t(messages.singleOrder))}</h3>
       <hr />
-      <div className={styles.totalContainer}>
+      <div className={styles.cartItemsContainer}>
         {items}
       </div>
       <DeliverySection control={control} message={errors.delivery?.message} />
@@ -41,7 +41,7 @@ const Delivery = ({ order, control, errors }: DeliveryProps) => {
         type="submit"
         className={styles.checkoutButton}
       >
-        {String(t(messages.checkout))}
+        {String(t(messages.orderWithPayment))}
       </button>
     </div>
   );

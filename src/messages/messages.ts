@@ -44,6 +44,7 @@ export const messages = {
   shipping: "shipping",
   delivery: "delivery",
   checkout: "checkout",
+  orderWithPayment: "orderWithPayment",
   summary: "summary",
   code: "code",
   payment: "payment",

@@ -109,9 +109,15 @@
   margin: 0 0.5rem;
 }
 
-.totalContainer {
-  height: 130px;
+.cartItemsContainer {
+  max-height: 130px;
   overflow-y: scroll;
+}
+
+.totalContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .summarySectionTitle {
