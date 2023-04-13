@@ -65,7 +65,7 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed" sx={{ backgroundColor: "white" }}>
       <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Typography
@@ -79,7 +79,7 @@ const ResponsiveAppBar = () => {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "black",
               textDecoration: "none",
             }}
           >
@@ -93,7 +93,7 @@ const ResponsiveAppBar = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              sx={{ color: "black" }}
             >
               <MenuIcon />
             </IconButton>
@@ -141,7 +141,7 @@ const ResponsiveAppBar = () => {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "black",
               textDecoration: "none",
             }}
           >
@@ -151,7 +151,7 @@ const ResponsiveAppBar = () => {
             <Button
               key={uuidv4()}
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
+              sx={{ my: 2, mx: 1, color: "black", display: "block", fontFamily: "monospace" }}
             >
               <Link href={PagesUrls.CONFIGURATOR}>
                 <Badge
@@ -166,7 +166,7 @@ const ResponsiveAppBar = () => {
               <Button
                 key={uuidv4()}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, mx: 1, color: "black", display: "block", fontFamily: "monospace" }}
               >
                 <Link href={page.link}>{String(t(page.title))}</Link>
               </Button>
@@ -181,7 +181,7 @@ const ResponsiveAppBar = () => {
                 sx={{ my: 2, marginRight: 2 }}
               >
                 <ShoppingCartIcon
-                  sx={{ color: "white", display: "block", cursor: "pointer" }}
+                  sx={{ color: "black", display: "block", cursor: "pointer" }}
                 />
               </Badge>
             </Link>

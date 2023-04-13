@@ -31,6 +31,7 @@ const handleDB =
         image: undefined,
         dimensionId: undefined,
         material: undefined,
+        saved: false,
       }
 
       data

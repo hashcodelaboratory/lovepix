@@ -94,5 +94,7 @@
   "customerDetails": "Detail zákazníka",
   "orderCreated": "Objednávka vytvorená",
   "transaction": "Prevodom",
-  "free": "Zadarmo"
+  "free": "Zadarmo",
+  "orderWithPayment": "Dokončiť objednávku",
+  "saveChanges": "Uložiť zmeny"
 }

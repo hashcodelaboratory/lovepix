@@ -5,4 +5,5 @@ export type Configuration = {
   image: string;
   material: Material;
   origin: string;
+  saved: boolean;
 }

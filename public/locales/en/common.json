@@ -90,5 +90,7 @@
   "byHeight": "By height",
   "square": "Square",
   "transaction": "Transaction",
-  "free": "Zadarmo"
+  "free": "Free",
+  "orderWithPayment": "Finish order",
+  "saveChanges": "Save changes"
 }
