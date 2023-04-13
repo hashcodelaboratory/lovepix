@@ -31,12 +31,6 @@ const CropperComponent = ({ configuration }: CropperComponentProps) => {
     });
   };
 
-  const onEdit = () => {
-    configurationsTable.update(CONFIGURATION_TABLE_KEY, {
-      saved: false,
-    });
-  };
-
   const allDimensions = [
     ...dimensionsByWidth,
     ...dimensionsByHeight,
@@ -59,9 +53,10 @@ const CropperComponent = ({ configuration }: CropperComponentProps) => {
       <DropzoneContainer configuration={configuration} />
     </div>;
 
+
   return (
     <div className={styles.dropzoneBox}>
-      {!confirmed ?
+      {(!confirmed && configuration?.dimensionId) ?
         <>
           <Cropper
             src={configuration?.origin ?? ""}
@@ -81,8 +76,9 @@ const CropperComponent = ({ configuration }: CropperComponentProps) => {
           </button>
         </> :
         <div className={styles.croppedContainer}>
-          <Image className={styles.cropped} src={configuration?.origin ?? ""} width={600} height={400}
-                 layout={ImageLayout.INTRINSIC} onClick={onEdit} />
+          <Image className={styles.cropped} src={confirmed ? configuration?.image : configuration?.origin ?? ""}
+                 width={600} height={400}
+                 layout={ImageLayout.INTRINSIC} />
         </div>
       }
     </div>

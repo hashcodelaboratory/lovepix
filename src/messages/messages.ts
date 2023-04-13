@@ -94,5 +94,7 @@ export const messages = {
   orderCreated: "orderCreated",
   transaction: "transaction",
   free: "free",
-  saveChanges: "saveChanges"
+  saveChanges: "saveChanges",
+  change: "change",
+  chooseCrop: "chooseCrop"
 }

@@ -92,5 +92,7 @@
   "transaction": "Transaction",
   "free": "Free",
   "orderWithPayment": "Finish order",
-  "saveChanges": "Save changes"
+  "saveChanges": "Save changes",
+  "change": "Change",
+  "chooseCrop": "Choose crop"
 }
