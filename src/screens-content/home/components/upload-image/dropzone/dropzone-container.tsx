@@ -41,6 +41,7 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
         image: undefined,
         dimensionId: undefined,
         material: undefined,
+        saved: false,
       };
 
       configurationsTable.add(data, CONFIGURATION_TABLE_KEY);

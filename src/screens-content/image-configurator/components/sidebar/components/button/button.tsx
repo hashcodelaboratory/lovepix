@@ -77,12 +77,14 @@ const Button = () => {
     await router.push(`${SHOPPING_CART}`);
   };
 
+  const disabled = !configuration?.image || !configuration?.saved || !configuration.dimensionId || !configuration.material;
+
   return (
     <div className={styles.containerPadding}>
       <button
         className={styles.button}
         onClick={handleUpdateOrder}
-        disabled={!configuration?.image}
+        disabled={disabled}
       >
         <ShoppingCart />
         <p className={styles.buttonTitle}>{String(t(messages.toCart))}</p>

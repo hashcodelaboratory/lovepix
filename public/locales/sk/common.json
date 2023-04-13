@@ -95,5 +95,6 @@
   "orderCreated": "Objednávka vytvorená",
   "transaction": "Prevodom",
   "free": "Zadarmo",
-  "orderWithPayment": "Dokončiť objednávku"
+  "orderWithPayment": "Dokončiť objednávku",
+  "saveChanges": "Uložiť zmeny"
 }

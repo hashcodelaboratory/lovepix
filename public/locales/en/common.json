@@ -91,5 +91,6 @@
   "square": "Square",
   "transaction": "Transaction",
   "free": "Free",
-  "orderWithPayment": "Finish order"
+  "orderWithPayment": "Finish order",
+  "saveChanges": "Save changes"
 }
