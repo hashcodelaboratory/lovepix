@@ -62,6 +62,7 @@ const CropperComponent = ({ configuration }: CropperComponentProps) => {
             src={configuration?.origin ?? ""}
             style={{ height: 400, width: "100%" }}
             initialAspectRatio={16 / 9}
+            aspectRatio={aspectRatio}
             guides={true}
             ref={cropperRef}
             cropBoxResizable={true}
@@ -78,7 +79,7 @@ const CropperComponent = ({ configuration }: CropperComponentProps) => {
         <div className={styles.croppedContainer}>
           <Image className={styles.cropped} src={confirmed ? configuration?.image : configuration?.origin ?? ""}
                  width={600} height={400}
-                 layout={ImageLayout.INTRINSIC} />
+                 layout={ImageLayout.INTRINSIC} objectFit="contain" />
         </div>
       }
     </div>
