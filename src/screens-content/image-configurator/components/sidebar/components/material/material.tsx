@@ -1,6 +1,6 @@
 import styles from "../../../../image-configurator-layout.module.scss";
 import Header from "../header/header";
-import { CheckCircle, Filter4 } from "@mui/icons-material";
+import { CheckCircle, Filter3 } from "@mui/icons-material";
 import { messages } from "../../../../../../messages/messages";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
@@ -59,11 +59,7 @@ const Material = ({ configuration }: MaterialProps) => {
     </div>
   ));
 
-  const icon = configuration?.material ? <CheckCircle color="success" /> : <Filter4 />;
-
-  const material = materials.find(
-    (material) => material.id === configuration?.material,
-  )?.name;
+  const icon = configuration?.material ? <CheckCircle color="success" /> : <Filter3 />;
 
   return (
     <div className={styles.containerPadding}>
@@ -71,9 +67,8 @@ const Material = ({ configuration }: MaterialProps) => {
         icon={icon}
         title={String(t(messages.chooseMaterial))}
         success={!!configuration?.material}
-        value={<div>{material}</div>}
       />
-      {!configuration?.material && <div
+      <div
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -81,8 +76,7 @@ const Material = ({ configuration }: MaterialProps) => {
         }}
       >
         {materialItems}
-      </div>}
-
+      </div>
       <hr />
     </div>
   );

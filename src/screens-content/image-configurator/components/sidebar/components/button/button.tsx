@@ -17,6 +17,8 @@ import {
   ORDER_TABLE_KEY,
 } from "../../../../../../common/indexed-db/hooks/keys";
 import { Image } from "../../../../../../common/types/order";
+import { useContext } from "react";
+import ImageConfiguratorContext from "../../../../image-configurator-context/image-configurator-context";
 
 const Button = () => {
   const { t } = useTranslation();
@@ -29,6 +31,8 @@ const Button = () => {
   );
 
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), []);
+
+  const { state } = useContext(ImageConfiguratorContext);
 
   const handleUpdateOrder = async () => {
     const dim = DIMENSIONS.find(
@@ -55,7 +59,7 @@ const Button = () => {
         images: [
           ...(order?.shoppingCart?.images ?? []),
           {
-            url: configuration?.image,
+            url: state.cropper?.current?.cropper.getCroppedCanvas()?.toDataURL(),
             qty: 1,
             origin: configuration?.origin,
             width: dim.width,
@@ -77,7 +81,7 @@ const Button = () => {
     await router.push(`${SHOPPING_CART}`);
   };
 
-  const disabled = !configuration?.image || !configuration?.saved || !configuration.dimensionId || !configuration.material;
+  const disabled = !state.cropper || !configuration?.dimensionId || !configuration?.material;
 
   return (
     <div className={styles.containerPadding}>

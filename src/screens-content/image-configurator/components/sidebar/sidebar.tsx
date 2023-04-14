@@ -5,7 +5,6 @@ import Material from "./components/material/material";
 import Price from "./components/price/price";
 import Button from "./components/button/button";
 import { Configuration } from "../../../../common/types/configuration";
-import Canvas from "./components/canvas/canvas";
 
 type SidebarProps = {
   configuration: Configuration;
@@ -16,7 +15,6 @@ const Sidebar = ({ configuration }: SidebarProps) => {
     <div className={styles.sidebar}>
       <Preview configuration={configuration} />
       <Dimension configuration={configuration} />
-      <Canvas configuration={configuration} />
       <Material configuration={configuration} />
       <Price configuration={configuration} />
       <Button />
