@@ -1,6 +1,7 @@
 .container {
-  padding: 0 0rem;
-  margin-top: 5rem;
+  padding: 0;
+  margin-top: 4.5rem;
+  background-color: #f6f6f6;
 }
 
 .main {
@@ -8,6 +9,7 @@
   padding: 0 1rem 4rem 1rem;
   display: flex;
   flex-direction: column;
+
 }
 
 .footer {
