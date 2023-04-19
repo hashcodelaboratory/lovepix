@@ -9,10 +9,15 @@ const Voucher = () => {
   return (
     <div className={styles.cartContainer}>
       <div className={styles.cartTitleContainer}>
-        <h3>{String(t(messages.code))}</h3>
+        <h3 className={styles.cartTitleText}>{String(t(messages.code))}</h3>
       </div>
-      <TextField className={styles.formField} label={String(t(messages.code))} placeholder="WALLER22" InputLabelProps={{ shrink: true }}
-                 size="small" />
+      <TextField
+        className={styles.formField}
+        label={String(t(messages.code))}
+        placeholder="WALLER22"
+        InputLabelProps={{ shrink: true }}
+        size="small"
+      />
     </div>
   );
 };

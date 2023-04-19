@@ -21,21 +21,33 @@
   margin-bottom: 4rem;
 }
 
+.summaryContainer {
+  padding: 0;
+}
+
 .summary {
-  padding: 2rem 0;
+  padding: 1rem 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: start;
-  align-content: stretch;
+  justify-content: center;
+}
+
+.summaryTotalContainer {
+  width: 100%;
+  float: left
+}
+
+.summaryColumn {
+  max-width: 450px;
 }
 
 .cartContainer {
-  max-width: 600px;
+  max-width: 708px;
   position: relative;
   padding: 1rem;
-  margin: 0.5rem 1rem;
-  border-radius: 1rem;
+  margin: 0.5rem;
+  border-radius: 0.5rem;
   box-shadow: rgb(0 0 0 / 10%) 0rem 0.25rem 0.375rem -0.0625rem,
     rgb(0 0 0 / 6%) 0rem 0.125rem 0.25rem -0.0625rem;
   background-color: white;
@@ -113,11 +125,13 @@
 }
 
 .cartItemsContainer {
-  max-height: 130px;
+  min-height: 100px;
+  max-height: 300px;
   overflow-y: scroll;
 }
 
 .totalContainer {
+  max-height: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -126,7 +140,6 @@
 .summarySectionTitle {
   font-weight: 200;
   text-transform: uppercase;
-  margin-top: 2rem;
 }
 
 .checkoutButton {
@@ -162,12 +175,15 @@
 .price {
   font-weight: 500;
   font-size: 1.2rem;
-  margin-top: 2rem;
 }
 
 .cartTitleContainer {
   display: flex;
   align-items: center;
+}
+
+.cartTitleText {
+  margin-top: 0;
 }
 
 .cartDisabledTitle {
@@ -240,7 +256,8 @@
 }
 
 .radioGroupLabel {
-  width: 320px;
+  max-width: 320px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -257,13 +274,13 @@
 .paymentBox {
   margin: 0 0.3rem;
   font-weight: bold;
-  width: 250px;
+  width: 180px;
 }
 
 .deliveryLightText {
   font-weight: 100;
   text-align: left;
-  width: 100%;
+  width: 50%;
 }
 
 .formField {

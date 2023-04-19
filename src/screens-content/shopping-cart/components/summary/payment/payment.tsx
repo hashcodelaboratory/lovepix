@@ -17,7 +17,7 @@ const Payment = ({ control, message }: DeliverySectionProps) => {
   return (
     <div className={styles.cartContainer}>
       <div className={styles.cartTitleContainer}>
-        <h3>{String(t(messages.payment))}</h3>
+        <h3 className={styles.cartTitleText}>{String(t(messages.payment))}</h3>
       </div>
       <Controller
         name="payment"

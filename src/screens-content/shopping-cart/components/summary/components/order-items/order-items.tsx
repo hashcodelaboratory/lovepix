@@ -25,7 +25,7 @@ const OrderItems = ({ order }: DeliveryProps) => {
   return (
     <div className={styles.cartContainer}>
       <div className={styles.cartTitleContainer}>
-        <h3>{String(t(messages.singleOrder))}</h3>
+        <h3 className={styles.cartTitleText}>{String(t(messages.singleOrder))}</h3>
       </div>
       <div className={styles.cartItemsContainer}>
         {items}

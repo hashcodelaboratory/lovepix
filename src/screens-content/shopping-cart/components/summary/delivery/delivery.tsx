@@ -19,7 +19,7 @@ const Delivery = ({ control, message }: DeliverySectionProps) => {
   return (
     <div className={styles.cartContainer}>
       <div className={styles.cartTitleContainer}>
-        <h3>{String(t(messages.delivery))}</h3>
+        <h3 className={styles.cartTitleText}>{String(t(messages.delivery))}</h3>
       </div>
       <Controller
         name="delivery"

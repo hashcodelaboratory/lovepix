@@ -13,7 +13,7 @@ const TotalSection = ({ price }: TotalSectionProps): JSX.Element => {
   return (
     <div className={styles.cartContainer}>
       <div className={styles.cartTitleContainer}>
-        <h3>{String(t(messages.summary))}</h3>
+        <h3 className={styles.cartTitleText}>{String(t(messages.summary))}</h3>
       </div>
       <div className={styles.totalContainer}>
         <p className={styles.summarySectionTitle}>

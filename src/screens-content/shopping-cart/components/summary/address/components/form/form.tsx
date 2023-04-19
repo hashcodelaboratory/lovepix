@@ -1,9 +1,9 @@
 import { TextField, Box } from "@mui/material";
-import styles from "../../../../shopping-cart.module.scss";
+import styles from "../../../../../shopping-cart.module.scss";
 import { Controller, FieldErrors, Control } from "react-hook-form";
-import { messages } from "../../../../../../messages/messages";
+import { messages } from "../../../../../../../messages/messages";
 import { useTranslation } from "next-i18next";
-import { FormInputs } from "../../../../../../common/types/form";
+import { FormInputs } from "../../../../../../../common/types/form";
 
 type FormProps = {
   register: any;
