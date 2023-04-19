@@ -1,9 +1,9 @@
 import { TextField, Box } from "@mui/material";
-import styles from "../../../../shopping-cart.module.scss";
+import styles from "../../../../../shopping-cart.module.scss";
 import { Controller, FieldErrors, Control } from "react-hook-form";
-import { messages } from "../../../../../../messages/messages";
+import { messages } from "../../../../../../../messages/messages";
 import { useTranslation } from "next-i18next";
-import { FormInputs } from "../../../../../../common/types/form";
+import { FormInputs } from "../../../../../../../common/types/form";
 
 type FormProps = {
   register: any;
@@ -24,12 +24,12 @@ const Form = ({ register, errors, control }: FormProps): JSX.Element => {
   const FIELDS: ControllerFieldType[] = [
     { name: "firstName", message: messages.name, error: errors.firstName?.message },
     { name: "lastName", message: messages.surname, error: errors.lastName?.message },
+    { name: "email", message: messages.email, error: errors.email?.message, fullWidth: true },
     { name: "company", message: messages.company, fullWidth: true },
     { name: "address", message: messages.address, error: errors.address?.message, fullWidth: true },
     { name: "city", message: messages.city, error: errors.city?.message, fullWidth: true },
     { name: "postalCode", message: messages.postalCode, error: errors.postalCode?.message },
     { name: "phone", message: messages.phone, error: errors.phone?.message },
-    { name: "email", message: messages.email, error: errors.email?.message, fullWidth: true },
   ];
 
   const fields = FIELDS.map(({ name, message, error, fullWidth }) =>
@@ -46,6 +46,9 @@ const Form = ({ register, errors, control }: FormProps): JSX.Element => {
           {...register(name, { required: true })}
           error={!!error}
           helperText={String(t(error ?? ""))}
+          InputLabelProps={{ shrink: true }}
+          size="small"
+          className={styles.formField}
         />
       )}
     />);

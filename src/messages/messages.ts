@@ -96,5 +96,6 @@ export const messages = {
   free: "free",
   saveChanges: "saveChanges",
   change: "change",
-  chooseCrop: "chooseCrop"
+  chooseCrop: "chooseCrop",
+  invoiceAddress: "invoiceAddress"
 }

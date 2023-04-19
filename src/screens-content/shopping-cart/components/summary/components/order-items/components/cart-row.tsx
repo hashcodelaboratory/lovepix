@@ -17,18 +17,23 @@ const CartRow = ({ image, order }: CartRowProps): JSX.Element => {
         <ImageComponent
           alt={image?.url}
           src={image?.url ?? ""}
-          width={30}
-          height={30}
+          width={60}
+          height={60}
           layout={ImageLayout.FIXED}
         />
-        <p className={styles.cartRowDescription}>{`${image?.material} (${image?.width} x ${image?.height})`}</p>
       </div>
-      <div className={styles.qtyContainer}>
-        <RemoveCircle sx={{ width: 16 }} className={styles.cartRowButton} onClick={() => updateQuantity(UpdateQuantityWay.DECREASE, order, image)} />
-        <p className={styles.qtyField}>{image?.qty} </p>
-        <AddCircle sx={{ width: 16 }} className={styles.cartRowButton} onClick={() => updateQuantity(UpdateQuantityWay.INCREASE, order, image)} />
+      <div>
+        <p className={styles.cartRowDescription}>
+          <div>{image?.material}</div>
+          <div>{`${image?.width} x ${image?.height}`}</div>
+        </p>
+        <div className={styles.qtyContainer}>
+          <RemoveCircle sx={{ width: 16 }} className={styles.cartRowButton} onClick={() => updateQuantity(UpdateQuantityWay.DECREASE, order, image)} />
+          <p className={styles.qtyField}>{image?.qty} </p>
+          <AddCircle sx={{ width: 16 }} className={styles.cartRowButton} onClick={() => updateQuantity(UpdateQuantityWay.INCREASE, order, image)} />
+        </div>
       </div>
-      <div>{Number(image?.qty * image?.price).toFixed(2)} €</div>
+      <div className={styles.cartRowPrice}>{Number(image?.qty * image?.price).toFixed(2)} €</div>
       <Close color="error" onClick={() => removeImage(image?.url, order.shoppingCart?.images)} />
     </div>
   );

@@ -94,5 +94,6 @@
   "orderWithPayment": "Finish order",
   "saveChanges": "Save changes",
   "change": "Change",
-  "chooseCrop": "Choose crop"
+  "chooseCrop": "Choose crop",
+  "invoiceAddress": "Invoice address"
 }

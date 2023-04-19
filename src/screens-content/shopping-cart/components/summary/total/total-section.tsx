@@ -1,5 +1,5 @@
-import styles from "../../../../../shopping-cart.module.scss";
-import { messages } from "../../../../../../../messages/messages";
+import styles from "../../../shopping-cart.module.scss";
+import { messages } from "../../../../../messages/messages";
 import { Link } from "@mui/material";
 import { useTranslation } from "next-i18next";
 
@@ -11,7 +11,10 @@ const TotalSection = ({ price }: TotalSectionProps): JSX.Element => {
   const { t } = useTranslation();
 
   return (
-    <>
+    <div className={styles.cartContainer}>
+      <div className={styles.cartTitleContainer}>
+        <h3 className={styles.cartTitleText}>{String(t(messages.summary))}</h3>
+      </div>
       <div className={styles.totalContainer}>
         <p className={styles.summarySectionTitle}>
           {String(t(messages.total))}
@@ -24,7 +27,13 @@ const TotalSection = ({ price }: TotalSectionProps): JSX.Element => {
       <Link className={styles.text} style={{ cursor: "pointer" }}>
         <b>{String(t(messages.privacy))}</b>
       </Link>
-    </>
+      <button
+        type="submit"
+        className={styles.checkoutButton}
+      >
+        {String(t(messages.orderWithPayment))}
+      </button>
+    </div>
   );
 };
 

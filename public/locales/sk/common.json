@@ -50,7 +50,7 @@
   "code": "Zľavový kupón",
   "payment": "Platba",
   "total": "Spolu",
-  "courier": "Kuriér na adresu:",
+  "courier": "Kuriér na adresu",
   "personalCollect": "Osobný odber - Spišská Nová Ves",
   "pickup": "Zásielkovňa: 2.20 €",
   "online": "Online",
@@ -98,5 +98,6 @@
   "orderWithPayment": "Dokončiť objednávku",
   "saveChanges": "Uložiť zmeny",
   "change": "Zmeniť",
-  "chooseCrop": "Vyberte výrez"
+  "chooseCrop": "Vyberte výrez",
+  "invoiceAddress": "Fakturačná adresa"
 }
