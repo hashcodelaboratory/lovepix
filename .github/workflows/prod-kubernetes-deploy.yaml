@@ -53,5 +53,6 @@ jobs:
            cd docker-nginx-letsencrypt-https-ec2
            kubectl get pods -n staging
            docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
+           kubectl delete deployments waller -n staging
            kubectl apply -f k8s/stage.yaml
 
