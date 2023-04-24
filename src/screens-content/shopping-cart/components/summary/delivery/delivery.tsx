@@ -42,7 +42,8 @@ const Delivery = ({ control, message }: DeliverySectionProps) => {
                     <LocalShippingIcon className={styles.deliveryIcon} />
                   </div>
                 }
-                className={styles.deliveryField} />
+                className={styles.deliveryField}
+              />
               <FormControlLabel
                 value={DeliveryOptions.PERSONAL_COLLECT}
                 control={<Radio />}
@@ -53,7 +54,8 @@ const Delivery = ({ control, message }: DeliverySectionProps) => {
                     <HailIcon className={styles.deliveryIcon} />
                   </div>
                 }
-                className={styles.deliveryField} />
+                className={styles.deliveryField}
+              />
             </RadioGroup>
             {message && (
               <FormHelperText error>
