@@ -56,7 +56,7 @@ const Payment = ({ control, message }: DeliverySectionProps) => {
                 control={<Radio />}
                 label={
                   <div className={styles.radioGroupLabel}>
-                    <b>{String(t(messages.transaction))}</b>
+                    <p className={styles.paymentBox}>{String(t(messages.transaction))}</p>
                   </div>
                 }
                 className={styles.deliveryField}

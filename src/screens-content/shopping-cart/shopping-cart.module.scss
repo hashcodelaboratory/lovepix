@@ -43,7 +43,7 @@
 }
 
 .cartContainer {
-  max-width: 719px;
+  max-width: 780px;
   position: relative;
   padding: 1rem;
   margin: 0.5rem;
@@ -106,22 +106,28 @@
 }
 
 .cartRow {
+  position: relative;
   width: 100%;
-  padding: 1rem;
+  margin: 1rem 0;
+  padding-bottom: 1rem;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: end;
+  border-bottom: 1px solid #e3e3e3;
 }
 
 .qtyContainer {
   display: flex;
   align-items: center;
-  margin: 0 0.5rem;
+  margin: 0 0.7rem;
 }
 
 .qtyField {
-  margin: 0 0.5rem;
+  margin: 0;
+  padding: 0.2rem 0.5rem 0 0.5rem;
+  font-weight: 200;
+  font-size: 0.9rem;
 }
 
 .cartItemsContainer {
@@ -246,7 +252,7 @@
 }
 
 .cartRowDescription {
-  margin: 0 0.5rem;
+  margin: 0 0.7rem;
   font-size: 0.8rem;
   font-weight: 200;
 }
@@ -255,8 +261,26 @@
   cursor: pointer;
 }
 
+.cartRowThumbnailContainer {
+  display: flex;
+  align-items: flex-end;
+}
+
+.cartRowRemove {
+  margin-top: 0.3rem;
+  border: 1px solid silver;
+  border-radius: 4px;
+  padding: 0.05rem 0.5rem 0.2rem 0.5rem;
+  font-weight: 200;
+  font-size: 0.9rem;
+}
+
+.cartRowRemove:hover {
+  cursor: pointer;
+}
+
 .radioGroupLabel {
-  max-width: 320px;
+  max-width: 400px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -268,7 +292,7 @@
 .priceBox {
   margin: 0 0.3rem;
   font-weight: bold;
-  width: 90px;
+  width: 70px;
 }
 
 .paymentBox {
@@ -280,7 +304,6 @@
 .deliveryLightText {
   font-weight: 100;
   text-align: left;
-  width: 50%;
 }
 
 .formField {
@@ -288,9 +311,10 @@
 }
 
 .deliveryField {
+  width: 100%;
   border: 1px solid silver;
   border-radius: 0.5rem;
-  margin: 0.5rem;
+  margin: 0.5rem 0;
 }
 
 .deliveryField:hover {
@@ -299,12 +323,20 @@
 }
 
 .deliveryIcon {
+  width: 30px;
   color: #6595df;
 }
 
 .cartRowPrice {
   margin-left: 1rem;
-  margin-right: 0.5rem;
+  margin-right: 2rem;
   margin-bottom: 2px;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.cartRowClose {
+  position: absolute;
+  top: 0;
+  right: 0;
 }

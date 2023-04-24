@@ -5,8 +5,6 @@ import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from
 import { Delivery as DeliveryOptions } from "../../../../../common/enums/delivery";
 import { Control, Controller } from "react-hook-form";
 import { FormInputs } from "../../../../../common/types/form";
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import HailIcon from '@mui/icons-material/Hail';
 
 type DeliverySectionProps = {
   message?: string;
@@ -39,10 +37,10 @@ const Delivery = ({ control, message }: DeliverySectionProps) => {
                   <div className={styles.radioGroupLabel}>
                     <p className={styles.priceBox}>5.00 €</p>
                     <div className={styles.deliveryLightText}>{String(t(messages.courier))}</div>
-                    <LocalShippingIcon className={styles.deliveryIcon} />
                   </div>
                 }
-                className={styles.deliveryField} />
+                className={styles.deliveryField}
+              />
               <FormControlLabel
                 value={DeliveryOptions.PERSONAL_COLLECT}
                 control={<Radio />}
@@ -50,10 +48,10 @@ const Delivery = ({ control, message }: DeliverySectionProps) => {
                   <div className={styles.radioGroupLabel}>
                     <p className={styles.priceBox}>{String(t(messages.free))}</p>
                     <div className={styles.deliveryLightText}>{String(t(messages.personalCollect))}</div>
-                    <HailIcon className={styles.deliveryIcon} />
                   </div>
                 }
-                className={styles.deliveryField} />
+                className={styles.deliveryField}
+              />
             </RadioGroup>
             {message && (
               <FormHelperText error>
