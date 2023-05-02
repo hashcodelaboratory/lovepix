@@ -22,7 +22,7 @@
 }
 
 .summaryContainer {
-  padding: 0;
+  padding: 1vw 0 0 0;
 }
 
 .summary {
@@ -203,10 +203,6 @@
   color: gray;
 }
 
-.formContainer {
-  margin-right: 2rem;
-}
-
 .thanksContainer {
   text-align: center;
   padding: 4rem 0;
@@ -303,6 +299,7 @@
 .deliveryLightText {
   font-weight: 100;
   text-align: left;
+  margin-right: 1rem;
 }
 
 .formField {
@@ -342,4 +339,10 @@
 
 .cartRowClose:hover {
   cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .formField {
+    width: 100%;
+  }
 }
