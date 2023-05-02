@@ -1,4 +1,4 @@
-$delivery-container-width: 380px;
+$delivery-container-width: 370px;
 
 .emptyCartContainer {
   padding: 2rem 0;
@@ -36,7 +36,7 @@ $delivery-container-width: 380px;
 }
 
 .summary :nth-child(1) {
-  max-width: 776px;
+  max-width: 756px;
 }
 
 .summary :nth-child(2) {
@@ -65,7 +65,7 @@ $delivery-container-width: 380px;
 }
 
 .cartContainer {
-  max-width: 740px;
+  max-width: 756px;
   position: relative;
   padding: 1rem;
   margin: 0.5rem;
