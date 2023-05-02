@@ -1,3 +1,5 @@
+$delivery-container-width: 380px;
+
 .emptyCartContainer {
   padding: 2rem 0;
   position: relative;
@@ -26,20 +28,40 @@
 }
 
 .summary {
+  width: 100%;
   padding: 1rem 0;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: start;
 }
 
-.summaryTotalContainer {
-  width: 100%;
-  float: left
+.summary :nth-child(1) {
+  max-width: 776px;
+}
+
+.summary :nth-child(2) {
+  max-width: $delivery-container-width;
+}
+
+.summary :nth-child(3) {
+  max-width: $delivery-container-width;
+}
+
+.summary :nth-child(4) {
+  max-width: $delivery-container-width;
+}
+
+.summary :nth-child(5) {
+  max-width: $delivery-container-width;
 }
 
 .summaryColumn {
-  max-width: 450px;
+  max-width: 420px;
+}
+
+.orderContainer {
+  display: flex;
+  flex-direction: column;
 }
 
 .cartContainer {
@@ -131,7 +153,7 @@
 }
 
 .cartItemsContainer {
-  min-height: 100px;
+  min-height: 230px;
   max-height: 300px;
   overflow-y: scroll;
 }
@@ -341,8 +363,52 @@
   cursor: pointer;
 }
 
+.voucherContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.voucherTextField {
+  margin: 1rem 0rem 0.5rem 0 !important;
+  width: 304px;
+}
+
 @media only screen and (max-width: 600px) {
   .formField {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1205px) {
+  .cartContainer {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1205px) {
+  .summary :nth-child(1) {
+    order: 1;
+  }
+
+  .summary :nth-child(2) {
+    order: 5;
+  }
+
+  .summary :nth-child(3) {
+    order: 3;
+    width: 100%;
+  }
+
+  .summary :nth-child(4) {
+    order: 4;
+  }
+
+  .summary :nth-child(5) {
+    order: 2;
+    width: 100%;
+  }
+
+  .orderContainer {
     width: 100%;
   }
 }

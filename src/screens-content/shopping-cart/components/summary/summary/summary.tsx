@@ -66,18 +66,14 @@ const Summary = ({ order }: SummaryProps) => {
   return (
     <Container className={styles.summaryContainer}>
       <form className={styles.summary} onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <Address register={register} errors={errors} control={control} />
-          <Voucher />
-        </div>
-        <div className={styles.summaryColumn}>
+        <Address register={register} errors={errors} control={control} />
+        <div className={styles.orderContainer}>
           <OrderItems order={order} register={register} errors={errors} control={control} />
-          <Delivery control={control} message={errors.delivery?.message} />
-          <Payment control={control} message={errors.payment?.message} />
-        </div>
-        <div className={styles.summaryTotalContainer}>
           <TotalSection price={order?.totalPrice} />
         </div>
+        <Voucher />
+        <Delivery control={control} message={errors.delivery?.message} />
+        <Payment control={control} message={errors.payment?.message} />
       </form>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
