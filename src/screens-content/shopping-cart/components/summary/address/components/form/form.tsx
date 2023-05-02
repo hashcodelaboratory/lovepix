@@ -49,16 +49,16 @@ const Form = ({ register, errors, control }: FormProps): JSX.Element => {
           InputLabelProps={{ shrink: true }}
           size="small"
           className={styles.formField}
+          sx={{ width: fullWidth ? "100%" : "47%" }}
         />
       )}
     />);
 
   return (
-    <div className={styles.formContainer}>
+    <div>
       <Box
         sx={{
           "& > :not(style)": { m: 1 },
-          marginBottom: 5,
         }}
       >
         {fields}
