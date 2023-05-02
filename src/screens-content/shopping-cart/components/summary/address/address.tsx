@@ -15,7 +15,7 @@ const Address = ({ register, errors, control }: CartProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className={styles.cartContainer}>
+    <div className={styles.cartContainer} >
       <div className={styles.cartTitleContainer}>
         <h3 className={styles.cartTitleText}>{String(t(messages.invoiceAddress))}</h3>
       </div>

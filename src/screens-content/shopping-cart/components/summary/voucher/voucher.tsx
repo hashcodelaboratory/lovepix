@@ -12,7 +12,7 @@ const Voucher = () => {
         <h3 className={styles.cartTitleText}>{String(t(messages.code))}</h3>
       </div>
       <TextField
-        className={styles.formField}
+        className={styles.voucherTextField}
         label={String(t(messages.code))}
         placeholder="WALLER22"
         InputLabelProps={{ shrink: true }}
