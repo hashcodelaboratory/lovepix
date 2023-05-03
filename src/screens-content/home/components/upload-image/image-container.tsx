@@ -2,7 +2,6 @@ import { TextAlign } from "../../enums/enums";
 import { Grid } from "@mui/material";
 import ImageCard from "./image-card";
 import { Masonry } from "@mui/lab";
-import DropzoneContainer from "./dropzone/dropzone-container";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
 import { configurationsTable } from "../../../../../database.config";
@@ -35,7 +34,6 @@ const ImageContainer = ({ configuration, galleryData }: ImageContainerProps) => 
 
   return (
     <div className={styles.home}>
-      <DropzoneContainer configuration={configuration} />
       <Grid sm={12} textAlign={TextAlign.RIGHT} style={{ marginTop: "64px" }}>
         <Masonry columns={3} spacing={2}>
           {IMAGE_LIST}
