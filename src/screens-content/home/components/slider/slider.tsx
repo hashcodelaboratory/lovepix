@@ -14,25 +14,26 @@ const SliderComponent = (): JSX.Element => {
     autoplay: true,
     pauseOnHover: true,
     nextArrow: <></>,
-    prevArrow: <></>
+    prevArrow: <></>,
+    focusOnSelect: true,
   };
 
   return (
     <Slider {...settings} className={styles.slider}>
       <div >
-        <h3 className={styles.sliderImage}>1</h3>
+        <h3 className={styles.sliderImage} />
       </div>
       <div >
-        <h3 className={styles.sliderImage}>2</h3>
+        <h3 className={styles.sliderImage} />
       </div>
       <div >
-        <h3 className={styles.sliderImage}>3</h3>
+        <h3 className={styles.sliderImage} />
       </div>
       <div >
-        <h3 className={styles.sliderImage}>4</h3>
+        <h3 className={styles.sliderImage} />
       </div>
       <div >
-        <h3 className={styles.sliderImage}>5</h3>
+        <h3 className={styles.sliderImage} />
       </div>
     </Slider>
   );
