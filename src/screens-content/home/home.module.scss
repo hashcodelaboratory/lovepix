@@ -218,6 +218,30 @@
 .previewRow {
   padding: 1rem;
 }
+.previewTitleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+}
+
+.previewTitleRowButton {
+  margin: 0;
+  background-color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.previewTitleRowButtonText {
+  letter-spacing: 1px;
+  font-weight: 300;
+  font-size: 0.75rem;
+  margin-right: 0.5rem;
+}
 
 .previewImageRow {
   margin-top: 1rem;
