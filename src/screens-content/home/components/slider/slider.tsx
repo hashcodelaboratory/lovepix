@@ -2,38 +2,53 @@ import styles from "../../home.module.scss";
 import Slider from "react-slick";
 
 const SliderComponent = (): JSX.Element => {
-  const settings = {
-    dots: true,
-    className: "center",
-    centerMode: true,
-    infinite: true,
-    slidesToShow: 2,
-    speed: 2000,
-    autoplaySpeed: 5000,
-    swipeToSlide: true,
-    autoplay: true,
-    pauseOnHover: true,
-    nextArrow: <></>,
-    prevArrow: <></>,
-    focusOnSelect: true,
-  };
-
   return (
-    <Slider {...settings} className={styles.slider}>
-      <div >
-        <h3 className={styles.sliderImage} />
+    <Slider
+      dots={true}
+      slidesToShow={1}
+      speed={2000}
+      autoplaySpeed={5000}
+      swipeToSlide={true}
+      autoplay={false}
+      pauseOnHover={true}
+      arrows={false}
+      focusOnSelect={true}
+      className={styles.slider}
+      centerMode={true}
+      responsive={[
+        {
+          breakpoint: 3000,
+          settings: {
+            centerPadding: "30%",
+          }
+        },
+        {
+          breakpoint: 2500,
+          settings: {
+            centerPadding: "25%",
+          }
+        },
+        {
+          breakpoint: 1920,
+          settings: {
+            centerPadding: "15%",
+          },
+        }]}
+    >
+      <div>
+        <div className={styles.sliderImage} />
       </div>
-      <div >
-        <h3 className={styles.sliderImage} />
+      <div>
+        <div className={styles.sliderImage} />
       </div>
-      <div >
-        <h3 className={styles.sliderImage} />
+      <div>
+        <div className={styles.sliderImage} />
       </div>
-      <div >
-        <h3 className={styles.sliderImage} />
+      <div>
+        <div className={styles.sliderImage} />
       </div>
-      <div >
-        <h3 className={styles.sliderImage} />
+      <div>
+        <div className={styles.sliderImage} />
       </div>
     </Slider>
   );

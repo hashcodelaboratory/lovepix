@@ -15,6 +15,10 @@ a {
   box-sizing: border-box;
 }
 
+.slick-slide:not(.slick-center) {
+  opacity: 0.5;
+}
+
 /*TODO: remove if this dark mode example won't be needed*/
 /*@media (prefers-color-scheme: dark) {*/
 /*  html {*/
