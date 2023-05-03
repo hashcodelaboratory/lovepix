@@ -184,10 +184,10 @@
 }
 
 .carouselContainer {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
 }
 
 .carouselTitle {
@@ -289,7 +289,6 @@
   height: 30vw;
   max-height: 600px;
   background-color: silver;
-  background-image: url("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg");
 }
 
 @media only screen and (max-width: 1800px) {
