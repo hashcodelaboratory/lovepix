@@ -214,3 +214,41 @@
   font-size: 0.75rem;
   cursor: pointer;
 }
+
+.previewRow {
+  padding: 1rem;
+}
+
+.previewImageRow {
+  margin-top: 1rem;
+  display: flex;
+}
+
+.previewCard {
+  flex: 1;
+  margin-right: 0.5rem;
+}
+
+.previewCard:nth-child(3) {
+  margin-right: 0;
+}
+
+.previewImage {
+  height: 20vw;
+  background-color: white;
+}
+
+.previewImageDescription {
+  margin-top: 1rem;
+}
+
+.previewTitle {
+  margin: 0.2rem 0;
+}
+
+.previewPrice {
+  font-size: 12px;
+  font-weight: 100;
+  margin: 0;
+}
+
