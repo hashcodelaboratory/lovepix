@@ -181,6 +181,7 @@
   height: 50vh;
   background-color: black;
   color: white;
+  margin-bottom: 2rem;
 }
 
 .carouselContainer {
@@ -281,43 +282,18 @@
   width: 100%;
   background-color: white;
   margin: 4rem 0;
-  padding: 0;
+  padding: 1rem 0;
 }
 
 .sliderImage {
-  width: 47vw;
-  height: 30vw;
+  max-width: 1200px;
+  height: 40vw;
   max-height: 600px;
-  background-color: silver;
+  background-image: url("https://wallpaperaccess.com/full/138728.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  margin-right: 1rem;
 }
 
-@media only screen and (max-width: 1800px) {
-  .sliderImage {
-    width: 46vw;
-  }
-}
-
-@media only screen and (max-width: 1350px) {
-  .sliderImage {
-    width: 44vw;
-  }
-}
-
-@media only screen and (max-width: 900px) {
-  .sliderImage {
-    width: 42vw;
-  }
-}
-
-@media only screen and (max-width: 660px) {
-  .sliderImage {
-    width: 40vw;
-  }
-}
-
-@media only screen and (max-width: 400px) {
-  .sliderImage {
-    width: 36vw;
-  }
-}
 
