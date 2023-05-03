@@ -31,7 +31,7 @@ const SliderComponent = (): JSX.Element => {
         {
           breakpoint: 1920,
           settings: {
-            centerPadding: "15%",
+            centerPadding: "20%",
           },
         }]}
     >
