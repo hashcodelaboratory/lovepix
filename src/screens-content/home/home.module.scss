@@ -175,3 +175,42 @@
 .containerTitle {
   text-align: center;
 }
+
+.carousel {
+  width: 100%;
+  height: 50vh;
+  background-color: black;
+  color: white;
+}
+
+.carouselContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.carouselTitle {
+  margin: 0;
+  padding: 1rem;
+}
+
+.carouselSubTitle {
+  font-size: 1.25rem;
+  font-weight: 200;
+  padding: 1rem;
+  margin: 0;
+}
+
+.carouselButton {
+  background-color: white;
+  color: black;
+  max-width: 300px;
+  border: none;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0 0 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
