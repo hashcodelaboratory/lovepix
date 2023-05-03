@@ -277,3 +277,48 @@
   margin: 0;
 }
 
+.slider {
+  width: 100%;
+  background-color: white;
+  margin: 4rem 0;
+  padding: 0;
+}
+
+.sliderImage {
+  width: 47vw;
+  height: 30vw;
+  max-height: 600px;
+  background-color: silver;
+  background-image: url("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg");
+}
+
+@media only screen and (max-width: 1800px) {
+  .sliderImage {
+    width: 46vw;
+  }
+}
+
+@media only screen and (max-width: 1350px) {
+  .sliderImage {
+    width: 44vw;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .sliderImage {
+    width: 42vw;
+  }
+}
+
+@media only screen and (max-width: 660px) {
+  .sliderImage {
+    width: 40vw;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .sliderImage {
+    width: 36vw;
+  }
+}
+
