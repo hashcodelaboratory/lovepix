@@ -8,6 +8,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useLiveQuery } from "dexie-react-hooks";
 import { configurationsTable } from "../database.config";
 import { CONFIGURATION_TABLE_KEY } from "../src/common/indexed-db/hooks/keys";
+import FooterLayout from "../src/screens-content/footer/footer";
 
 const Configurator: NextPage = () => {
 
@@ -31,7 +32,9 @@ const Configurator: NextPage = () => {
         <ImageConfiguratorLayout configuration={configuration} />
       </main>
 
-      <footer className={styles.footer}>Powered by Hashlab s.r.o</footer>
+      <footer>
+        <FooterLayout />
+      </footer>
     </div>
   );
 };

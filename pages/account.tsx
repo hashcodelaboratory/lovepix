@@ -3,6 +3,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
 import AccountDetail from '../src/screens-content/account-detail/account-detail'
+import FooterLayout from "../src/screens-content/footer/footer";
 
 const Account: NextPage = () => {
   return (
@@ -20,7 +21,9 @@ const Account: NextPage = () => {
 
       <main className={styles.main}></main>
 
-      <footer className={styles.footer}>Powered by Hashlab s.r.o</footer>
+      <footer>
+        <FooterLayout />
+      </footer>
     </div>
   )
 }

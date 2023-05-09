@@ -5,6 +5,7 @@ import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
 import CustomAboutUs from '../src/screens-content/about-us/about-us'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import FooterLayout from "../src/screens-content/footer/footer";
 
 const AboutUs: NextPage = () => {
   return (
@@ -23,7 +24,9 @@ const AboutUs: NextPage = () => {
         <CustomAboutUs />
       </main>
 
-      <footer className={styles.footer}>Powered by Hashlab s.r.o</footer>
+      <footer>
+        <FooterLayout />
+      </footer>
     </div>
   )
 }
