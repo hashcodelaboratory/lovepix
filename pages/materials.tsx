@@ -6,6 +6,7 @@ import { Container } from '@mui/material'
 import CustomMaterials from '../src/screens-content/materials/materials'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import FooterLayout from "../src/screens-content/footer/footer";
 
 const Materials: NextPage = () => {
   return (
@@ -26,7 +27,9 @@ const Materials: NextPage = () => {
         </Container>
       </main>
 
-      <footer className={styles.footer}>Powered by Hashlab s.r.o</footer>
+      <footer>
+        <FooterLayout />
+      </footer>
     </div>
   )
 }

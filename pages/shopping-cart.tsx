@@ -8,6 +8,7 @@ import CustomShoppingCart from "../src/screens-content/shopping-cart/shopping-ca
 import { useLiveQuery } from "dexie-react-hooks";
 import { orderTable } from "../database.config";
 import { ORDER_TABLE_KEY } from "../src/common/indexed-db/hooks/keys";
+import FooterLayout from "../src/screens-content/footer/footer";
 
 
 const ShoppingCart: NextPage = () => {
@@ -30,7 +31,9 @@ const ShoppingCart: NextPage = () => {
         <CustomShoppingCart order={order} />
       </main>
 
-      <footer className={styles.footer}>Powered by Hashlab s.r.o</footer>
+      <footer>
+        <FooterLayout />
+      </footer>
     </div>
   );
 };

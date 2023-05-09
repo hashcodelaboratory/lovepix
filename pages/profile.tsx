@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
+import FooterLayout from "../src/screens-content/footer/footer";
 
 const Profile: NextPage = () => {
   return (
@@ -18,7 +19,9 @@ const Profile: NextPage = () => {
 
       <main className={styles.main}></main>
 
-      <footer className={styles.footer}>Powered by Hashlab s.r.o</footer>
+      <footer>
+        <FooterLayout />
+      </footer>
     </div>
   )
 }

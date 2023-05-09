@@ -6,6 +6,7 @@ import { Container } from "@mui/material";
 import MasonryImageList from "../src/masonry-image-list/masonry-image-list";
 import { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import FooterLayout from "../src/screens-content/footer/footer";
 
 const Gallery: NextPage = () => {
   return (
@@ -26,7 +27,9 @@ const Gallery: NextPage = () => {
         </Container>
       </main>
 
-      <footer className={styles.footer}>Powered by Hashlab s.r.o</footer>
+      <footer>
+        <FooterLayout />
+      </footer>
     </div>
   );
 };
