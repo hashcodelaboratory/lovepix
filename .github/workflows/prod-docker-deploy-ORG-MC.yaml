@@ -1,11 +1,11 @@
 name: WALLER DockerHub Deployment on ORGANIZATION PROD environment - FRONTEND
 #on: [push] # - only for testing
-on:
-  workflow_dispatch:
+# on:
+#   workflow_dispatch:
 
-  push:
-    branches:
-      - main
+#   push:
+#     branches:
+#       - main
 
 env:
   DOCKER_HUB_USER: ${{secrets.DOCKER_HUB_USERNAME}}
