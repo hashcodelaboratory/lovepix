@@ -38,7 +38,7 @@ jobs:
   deploy:
     name: Deploy on EC2 and Worker Node Kubernetes
     #env:
-    # needs: push-waller-image-on-dockerhub
+    needs: push-waller-image-on-dockerhub
     runs-on: ubuntu-latest
     steps:
     - name: deploying on ec2 and rebuild kubernetes pods
