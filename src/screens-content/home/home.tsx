@@ -13,7 +13,7 @@ const HomeLayout = ({ galleryData }: HomeLayoutProps) => (
   <div>
     <Carousel />
     <PreviewSection galleryData={galleryData} />
-    <SliderComponent />
+    <SliderComponent data={galleryData} />
   </div>
 );
 
