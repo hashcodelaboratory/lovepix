@@ -1,11 +1,16 @@
 import Container from "@mui/material/Container";
 import PreviewRow from "./components/preview-row/preview-row";
+import { GalleryItem } from "../../../../common/types/gallery";
 
-const PreviewSection = (): JSX.Element => {
+type PreviewSectionProps = {
+  galleryData?: GalleryItem[];
+}
+
+const PreviewSection = ({ galleryData }: PreviewSectionProps): JSX.Element => {
   return (
     <Container>
-      <PreviewRow />
-      <PreviewRow />
+      <PreviewRow galleryData={galleryData} />
+      <PreviewRow galleryData={galleryData?.slice(3, galleryData?.length - 1)} />
     </Container>
   )
 }

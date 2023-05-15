@@ -1,9 +1,25 @@
 import styles from "../../../../../../home.module.scss";
+import { GalleryItem } from "../../../../../../../../common/types/gallery";
+import Image from "next/image";
+import { ImageLayout } from "../../../../../../enums/enums";
 
-const PreviewCard = (): JSX.Element => {
+type PreviewCardProps = {
+  item?: GalleryItem;
+}
+
+const PreviewCard = ({ item }: PreviewCardProps): JSX.Element => {
   return (
     <div className={styles.previewCard}>
-      <div className={styles.previewImage} />
+      {item ?
+        <Image
+          alt={item?.title}
+          src={item?.sourceUrl ?? ''}
+          layout={ImageLayout.INTRINSIC}
+          width={400}
+          height={400}
+        /> :
+        <div className={styles.previewImage} />
+      }
       <div className={styles.previewImageDescription}>
         <p className={styles.previewTitle}>Image name</p>
         <p className={styles.previewPrice}>Cena od 19.99 €</p>
