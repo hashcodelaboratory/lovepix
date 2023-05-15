@@ -9,11 +9,11 @@ type HomeLayoutProps = {
   galleryData?: GalleryItem[];
 }
 
-const HomeLayout = ({ }: HomeLayoutProps) => (
+const HomeLayout = ({ galleryData }: HomeLayoutProps) => (
   <div>
     <Carousel />
-    <PreviewSection />
-    <SliderComponent />
+    <PreviewSection galleryData={galleryData} />
+    <SliderComponent data={galleryData} />
   </div>
 );
 

@@ -10,7 +10,6 @@ import { orderTable } from "../database.config";
 import { ORDER_TABLE_KEY } from "../src/common/indexed-db/hooks/keys";
 import FooterLayout from "../src/screens-content/footer/footer";
 
-
 const ShoppingCart: NextPage = () => {
 
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), []);

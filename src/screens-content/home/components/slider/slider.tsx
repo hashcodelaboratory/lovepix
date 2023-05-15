@@ -1,7 +1,12 @@
 import styles from "../../home.module.scss";
 import Slider from "react-slick";
+import { GalleryItem } from "../../../../common/types/gallery";
 
-const SliderComponent = (): JSX.Element => {
+type SliderComponentProps = {
+  data?: GalleryItem[];
+}
+
+const SliderComponent = ({ data }: SliderComponentProps): JSX.Element => {
   return (
     <Slider
       dots={true}
@@ -20,13 +25,13 @@ const SliderComponent = (): JSX.Element => {
           breakpoint: 3000,
           settings: {
             centerPadding: "30%",
-          }
+          },
         },
         {
           breakpoint: 2500,
           settings: {
             centerPadding: "25%",
-          }
+          },
         },
         {
           breakpoint: 1920,
@@ -35,21 +40,19 @@ const SliderComponent = (): JSX.Element => {
           },
         }]}
     >
-      <div>
-        <div className={styles.sliderImage} />
-      </div>
-      <div>
-        <div className={styles.sliderImage} />
-      </div>
-      <div>
-        <div className={styles.sliderImage} />
-      </div>
-      <div>
-        <div className={styles.sliderImage} />
-      </div>
-      <div>
-        <div className={styles.sliderImage} />
-      </div>
+      {
+        data?.map((item) => (
+          <div key={item.id}>
+            <div
+              className={styles.sliderImage}
+              style={{ backgroundImage: `url("${item?.sourceUrl}")`, filter: "none" }}
+            />
+          </div>
+        )) ??
+        <div>
+          <div className={styles.sliderImage} />
+        </div>
+      }
     </Slider>
   );
 };

@@ -1,8 +1,24 @@
 import styles from "../../../../home.module.scss";
 import PreviewCard from "./components/preview-card/preview-card";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { GalleryItem } from "../../../../../../common/types/gallery";
 
-const PreviewRow = (): JSX.Element => {
+type PreviewRowProps = {
+  galleryData?: GalleryItem[];
+}
+
+const PreviewRow = ({ galleryData }: PreviewRowProps): JSX.Element => {
+  const cards = galleryData?.map((item) => (
+    <PreviewCard key={item.id} item={item} />
+  )).slice(0, 3);
+
+  const dummy =
+    <>
+      <PreviewCard />
+      <PreviewCard />
+      <PreviewCard />
+    </>
+
   return (
     <div className={styles.previewRow}>
       <div className={styles.previewTitleRow}>
@@ -14,9 +30,7 @@ const PreviewRow = (): JSX.Element => {
       </div>
       <hr />
       <div className={styles.previewImageRow}>
-        <PreviewCard />
-        <PreviewCard />
-        <PreviewCard />
+        {cards ?? dummy}
       </div>
     </div>
   );

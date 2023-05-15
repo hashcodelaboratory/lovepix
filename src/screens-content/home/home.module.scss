@@ -262,6 +262,11 @@
   height: 25vw;
   max-height: 368px;
   background-color: white;
+  background-image: url("https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: blur(6px);
 }
 
 .previewImageDescription {
@@ -289,11 +294,12 @@
   max-width: 1200px;
   height: 40vw;
   max-height: 600px;
-  background-image: url("https://wallpaperaccess.com/full/138728.jpg");
+  background-image: url("https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=");
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-size: contain;
   background-position: center;
   margin-right: 1rem;
+  filter: blur(6px);
 }
 
 
