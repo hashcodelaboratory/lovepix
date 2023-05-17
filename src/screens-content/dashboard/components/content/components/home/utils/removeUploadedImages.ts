@@ -1,6 +1,6 @@
 import { ref, deleteObject, listAll } from '@firebase/storage'
 import { storage } from '../../../../../../../common/firebase/config'
-import { UPLOADED_IMAGES_KEY } from '../../../../../api/uploadedImages'
+import { UPLOADED_IMAGES_KEY } from '../../../../../api/gallery/useUploadedImages'
 import { QueryClient } from 'react-query'
 import { StorageFolder } from '../../../../../../../common/firebase/storage/enums'
 
