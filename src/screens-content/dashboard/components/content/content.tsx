@@ -1,10 +1,10 @@
-import Card from "./components/home/card";
+import Card from "./components/card/card";
 import styles from "../../dashboard.module.scss";
 import { messages } from "../../../../messages/messages";
-import UploadImagesTable from "./components/home/upload-images-table";
+import UploadImagesTable from "./components/gallery/upload-images-table";
 import { useContext } from "react";
 import DashboardContext from "../../context/dashboard-context";
-import OrdersTable from "./components/home/orders-table";
+import OrdersTable from "./components/orders/orders-table";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import FolderCopyIcon from "@mui/icons-material/FolderCopy";

@@ -1,8 +1,8 @@
-import { database } from '../../../../../../../common/firebase/config'
+import { database } from '../../../../common/firebase/config'
 import { QueryClient } from 'react-query'
-import { ORDERS_KEY } from '../../../../../api/orders/utils/keys'
+import { ORDERS_KEY } from './utils/keys'
 import { deleteDoc, doc } from '@firebase/firestore'
-import { Collections } from '../../../../../../../common/firebase/enums'
+import { Collections } from '../../../../common/firebase/enums'
 
 export const removeOrders = (
   selectedRows: string[],

@@ -6,6 +6,8 @@ import { doc, setDoc } from "@firebase/firestore";
 import { StorageFolder } from "../../../../../../../common/firebase/storage/enums";
 import { Collections } from "../../../../../../../common/firebase/enums";
 import { useState } from "react";
+import { UPLOADED_IMAGES_KEY } from "../../../../../api/gallery/useUploadedImages";
+import { useQueryClient } from "react-query";
 
 type UploadImageType = {
   bucket: string;
@@ -33,6 +35,8 @@ const uploaderOptions = {
 };
 
 const UploaderComponent = (): JSX.Element => {
+  const queryClient = useQueryClient();
+
   const [uploader, setUploader] = useState(Uploader({ apiKey: "free" }));
 
   const onComplete = async (files: any) => {
@@ -53,6 +57,7 @@ const UploaderComponent = (): JSX.Element => {
         url: url,
       }) as UploadImageType);
     setUploader(Uploader({ apiKey: "free" }));
+    queryClient.invalidateQueries(UPLOADED_IMAGES_KEY);
   };
 
   const uploadToStorage = async (file: File) => {

@@ -1,10 +1,10 @@
 import { ref, deleteObject } from "@firebase/storage";
-import { database, storage } from "../../../../../../../common/firebase/config";
-import { UPLOADED_IMAGES_KEY } from "../../../../../api/gallery/useUploadedImages";
+import { database, storage } from "../../../../common/firebase/config";
+import { UPLOADED_IMAGES_KEY } from "./useUploadedImages";
 import { QueryClient } from "react-query";
-import { StorageFolder } from "../../../../../../../common/firebase/storage/enums";
+import { StorageFolder } from "../../../../common/firebase/storage/enums";
 import { collection, deleteDoc, doc, getDocs, query, where } from "@firebase/firestore";
-import { Collections } from "../../../../../../../common/firebase/enums";
+import { Collections } from "../../../../common/firebase/enums";
 
 export const removeUploadedImages = (
   selectedRows: string[],

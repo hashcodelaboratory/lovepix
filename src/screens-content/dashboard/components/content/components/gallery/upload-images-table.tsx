@@ -6,7 +6,7 @@ import {
 import styles from "../../../../dashboard.module.scss";
 import { useContext, useState } from "react";
 import DashboardContext from "../../../../context/dashboard-context";
-import { getUploadImagesColumns } from "./utils/uploadImagesColumns";
+import { getUploadImagesColumns } from "../utils/columns/uploadImagesColumns";
 import { messages } from "../../../../../../messages/messages";
 import {
   SNACKBAR_OPTIONS_ERROR,
@@ -16,14 +16,14 @@ import { useSnackbar } from "notistack";
 import { useTranslation } from "next-i18next";
 import { useQueryClient } from "react-query";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { removeUploadedImages } from "./utils/removeUploadedImages";
+import { removeUploadedImages } from "../../../../api/gallery/removeUploadedImages";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Uploader from "./uploader/uploader";
 
 const UploadImagesTable = () => {
   const {
-    state: { uploadImages },
+    state: { galleryImages },
   } = useContext(DashboardContext);
 
   const { enqueueSnackbar } = useSnackbar();
@@ -35,9 +35,12 @@ const UploadImagesTable = () => {
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
 
-  const data = uploadImages?.map(({ bucket, name, fullPath }, index) => ({
+  const data = galleryImages?.map(({ name, url , size, timeCreated}, index) => ({
     id: index,
     name: name,
+    url: url,
+    size: size,
+    timeCreated: timeCreated
   })) ?? [];
 
   const reset = () => {
