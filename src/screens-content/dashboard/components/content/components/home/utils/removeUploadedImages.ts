@@ -1,27 +1,24 @@
-import { ref, deleteObject, listAll } from '@firebase/storage'
-import { storage } from '../../../../../../../common/firebase/config'
-import { UPLOADED_IMAGES_KEY } from '../../../../../api/gallery/useUploadedImages'
-import { QueryClient } from 'react-query'
-import { StorageFolder } from '../../../../../../../common/firebase/storage/enums'
+import { ref, deleteObject } from "@firebase/storage";
+import { database, storage } from "../../../../../../../common/firebase/config";
+import { UPLOADED_IMAGES_KEY } from "../../../../../api/gallery/useUploadedImages";
+import { QueryClient } from "react-query";
+import { StorageFolder } from "../../../../../../../common/firebase/storage/enums";
+import { collection, deleteDoc, doc, getDocs, query, where } from "@firebase/firestore";
+import { Collections } from "../../../../../../../common/firebase/enums";
 
 export const removeUploadedImages = (
   selectedRows: string[],
-  queryClient: QueryClient
+  queryClient: QueryClient,
 ): string => {
-  selectedRows.forEach((row) => {
-    const desertRef = ref(storage, `${StorageFolder.ORDERS}/${row}`)
+  selectedRows.forEach(async (row) => {
+    await deleteObject(ref(storage, `${StorageFolder.GALLERY}/${row}`));
+    const q = query(collection(database, Collections.GALLERY), where("fullPath", "==", `${StorageFolder.GALLERY}/${row}`));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach(async (_doc) => {
+      await deleteDoc(doc(database, Collections.GALLERY, _doc.id ));
+    });
 
-    listAll(desertRef).then((promise) => {
-      promise.items.forEach((item) => {
-        deleteObject(ref(storage, item.fullPath))
-          .then(() => {
-            queryClient.invalidateQueries(UPLOADED_IMAGES_KEY)
-          })
-          .catch((err) => {
-            return err
-          })
-      })
-    })
-  })
-  return ''
-}
+    queryClient.invalidateQueries(UPLOADED_IMAGES_KEY);
+  });
+  return "";
+};

@@ -19,6 +19,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { removeUploadedImages } from "./utils/removeUploadedImages";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Uploader from "./uploader/uploader";
 
 const UploadImagesTable = () => {
   const {
@@ -35,9 +36,9 @@ const UploadImagesTable = () => {
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
 
   const data = uploadImages?.map(({ bucket, name, fullPath }, index) => ({
-      id: index,
-      name: name,
-    })) ?? [];
+    id: index,
+    name: name,
+  })) ?? [];
 
   const reset = () => {
     setSelectionModel([]);
@@ -62,7 +63,8 @@ const UploadImagesTable = () => {
     details: GridCallbackDetails,
   ) => {
     setSelectionModel(selectionModel);
-    setSelectedRows(selectionModel.map((item, index) => data[index].name));
+    setSelectedRows(selectionModel.map((item, index) =>
+      (data[index].name)));
   };
 
   const buttonText = `(${selectedRows.length}) ${String(t(messages.removeAll))}`;
@@ -77,18 +79,21 @@ const UploadImagesTable = () => {
         <h1>{String(t(messages.uploadedImages))}</h1>
       </AccordionSummary>
       <AccordionDetails>
-        <DataGrid
-          className={styles.contentTable}
-          rows={data}
-          columns={getUploadImagesColumns()}
-          pageSize={10}
-          rowsPerPageOptions={[5]}
-          checkboxSelection
-          disableSelectionOnClick
-          selectionModel={selectionModel}
-          onSelectionModelChange={selectionChanged}
-          autoHeight
-        />
+        <div className={styles.rowContainer}>
+          <DataGrid
+            className={styles.contentTable}
+            rows={data}
+            columns={getUploadImagesColumns()}
+            pageSize={10}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+            disableSelectionOnClick
+            selectionModel={selectionModel}
+            onSelectionModelChange={selectionChanged}
+            autoHeight
+          />
+          <Uploader />
+        </div>
         <button
           className={styles.removeButton}
           onClick={removeData}
