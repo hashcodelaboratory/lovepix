@@ -1,11 +1,11 @@
 import jsPDF from "jspdf";
-import { Image as ImageType } from "../../../../../../../../common/types/order";
-import { Material } from "../../../../../../../../common/enums/material";
+import { Image as ImageType } from "../../../../../../../common/types/order";
+import { Material } from "../../../../../../../common/enums/material";
 import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
-import { database, storage } from "../../../../../../../../common/firebase/config";
+import { database, storage } from "../../../../../../../common/firebase/config";
 import { doc as document, writeBatch } from "@firebase/firestore";
-import { Collections } from "../../../../../../../../common/firebase/enums";
-import { StorageFolder } from "../../../../../../../../common/firebase/storage/enums";
+import { Collections } from "../../../../../../../common/firebase/enums";
+import { StorageFolder } from "../../../../../../../common/firebase/storage/enums";
 
 const getX = (material: Material) => {
   switch (material) {
