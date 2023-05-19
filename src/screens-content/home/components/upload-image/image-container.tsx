@@ -18,15 +18,15 @@ type ImageContainerProps = {
 const ImageContainer = ({ configuration, galleryData }: ImageContainerProps) => {
   const router = useRouter();
 
-  const IMAGE_LIST = galleryData?.map(({ sourceUrl, title }, index) => (
+  const IMAGE_LIST = galleryData?.map(({ url, name }, index) => (
       <div
         style={{ cursor: "pointer" }}
         key={uuidv4()}
-        onClick={handleDB(sourceUrl, configuration, configurationsTable, router)}
+        onClick={handleDB(url, configuration, configurationsTable, router)}
       >
         <ImageCard
-          sourceUrl={sourceUrl}
-          title={title || (index + 1).toString()}
+          sourceUrl={url}
+          title={name || (index + 1).toString()}
         />
       </div>
     ),
