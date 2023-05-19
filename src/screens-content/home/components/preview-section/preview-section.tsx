@@ -10,7 +10,7 @@ const PreviewSection = ({ galleryData }: PreviewSectionProps): JSX.Element => {
   return (
     <Container>
       <PreviewRow galleryData={galleryData} />
-      <PreviewRow galleryData={galleryData?.slice(3, galleryData?.length - 1)} />
+      <PreviewRow galleryData={galleryData} />
     </Container>
   )
 }
