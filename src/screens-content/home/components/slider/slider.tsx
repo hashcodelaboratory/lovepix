@@ -45,7 +45,7 @@ const SliderComponent = ({ data }: SliderComponentProps): JSX.Element => {
           <div key={item.id}>
             <div
               className={styles.sliderImage}
-              style={{ backgroundImage: `url("${item?.sourceUrl}")`, filter: "none" }}
+              style={{ backgroundImage: `url("${item?.url}")`, filter: "none" }}
             />
           </div>
         )) ??
