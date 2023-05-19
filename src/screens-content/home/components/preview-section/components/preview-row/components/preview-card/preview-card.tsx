@@ -12,8 +12,8 @@ const PreviewCard = ({ item }: PreviewCardProps): JSX.Element => {
     <div className={styles.previewCard}>
       {item ?
         <Image
-          alt={item?.title}
-          src={item?.sourceUrl ?? ''}
+          alt={item?.name}
+          src={item?.url ?? ''}
           layout={ImageLayout.INTRINSIC}
           width={400}
           height={400}
