@@ -77,7 +77,8 @@ const UploaderComponent = (): JSX.Element => {
       onUpdate={files => console.log(files.map(x => x.fileUrl).join("\n"))}
       onComplete={onComplete}
       width="600px"
-      height="375px" />
+      height="250px"
+    />
   );
 };
 

@@ -1,6 +1,6 @@
 import {
   DataGrid,
-  GridCallbackDetails,
+  GridCallbackDetails, GridRowParams,
   GridSelectionModel,
 } from "@mui/x-data-grid";
 import styles from "../../../../dashboard.module.scss";
@@ -20,6 +20,7 @@ import { removeUploadedImages } from "../../../../api/gallery/removeUploadedImag
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Uploader from "./uploader/uploader";
+import GalleryDetail from "./detail/gallery-detail";
 
 const UploadImagesTable = () => {
   const {
@@ -34,6 +35,7 @@ const UploadImagesTable = () => {
 
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
+  const [detailRow, setDetailRow] = useState<GridRowParams>();
 
   const data = galleryImages?.map(({ name, url , size, timeCreated, contentType }, index) => ({
     id: index,
@@ -73,6 +75,10 @@ const UploadImagesTable = () => {
 
   const buttonText = `(${selectedRows.length}) ${String(t(messages.removeAll))}`;
 
+  const onRowClick = (details: GridRowParams) => {
+    setDetailRow(details);
+  }
+
   return (
     <Accordion>
       <AccordionSummary
@@ -94,9 +100,13 @@ const UploadImagesTable = () => {
             disableSelectionOnClick
             selectionModel={selectionModel}
             onSelectionModelChange={selectionChanged}
+            onRowClick={onRowClick}
             autoHeight
           />
-          <Uploader />
+          <div>
+            <GalleryDetail row={detailRow?.row} />
+            <Uploader />
+          </div>
         </div>
         <button
           className={styles.removeButton}
