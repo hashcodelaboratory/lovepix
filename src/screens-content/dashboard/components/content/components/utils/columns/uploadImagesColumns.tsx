@@ -29,15 +29,24 @@ export const getUploadImagesColumns = (): GridColDef[] => [
     )),
   },
   {
+    field: "contentType",
+    headerName: "Content Type",
+    width: 120,
+    editable: false,
+    renderCell: (({ value }) => (
+      <div className={styles.gallerySecondaryText}>{value}</div>
+    )),
+  },
+  {
     field: "timeCreated",
     headerName: "Time created",
-    width: 150,
+    width: 120,
     editable: false,
     renderCell: (({ value }) => {
       const date = new Date(value);
-      const result = date.toDateString();
+      const result = date.toLocaleDateString();
       return (
-        <div className={styles.gallerySecondaryText}>{result}</div>
+        <div className={styles.galleryDate}>{result}</div>
       )
     }),
   },

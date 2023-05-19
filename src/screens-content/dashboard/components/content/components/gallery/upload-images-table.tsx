@@ -35,12 +35,13 @@ const UploadImagesTable = () => {
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
 
-  const data = galleryImages?.map(({ name, url , size, timeCreated}, index) => ({
+  const data = galleryImages?.map(({ name, url , size, timeCreated, contentType }, index) => ({
     id: index,
     name: name,
     url: url,
     size: size,
-    timeCreated: timeCreated
+    timeCreated: timeCreated,
+    contentType: contentType
   })) ?? [];
 
   const reset = () => {
