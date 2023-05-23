@@ -7,7 +7,7 @@ import HomeLayout from "../src/screens-content/home/home";
 import { useLiveQuery } from "dexie-react-hooks";
 import { configurationsTable } from "../database.config";
 import { CONFIGURATION_TABLE_KEY } from "../src/common/indexed-db/hooks/keys";
-import { useGallery } from "../src/common/hooks/use-gallery";
+import { useGallery } from "../src/common/api/use-gallery";
 import FooterLayout from "../src/screens-content/footer/footer";
 
 const Home: NextPage = () => {

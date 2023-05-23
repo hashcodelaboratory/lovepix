@@ -19,7 +19,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import * as PagesUrls from "../constants/pages/urls";
 import { Badge } from "@mui/material";
 import { logIn, logOut } from "auth";
-import useLoggedUser from "common/hooks/use-logged-user";
+import useLoggedUser from "common/api/use-logged-user";
 import { useRouter } from "next/router";
 import { useLiveQuery } from "dexie-react-hooks";
 import { configurationsTable, orderTable } from "../../database.config";

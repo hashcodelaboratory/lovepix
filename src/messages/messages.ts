@@ -97,5 +97,6 @@ export const messages = {
   saveChanges: "saveChanges",
   change: "change",
   chooseCrop: "chooseCrop",
-  invoiceAddress: "invoiceAddress"
+  invoiceAddress: "invoiceAddress",
+  dimensions: "dimensions"
 }

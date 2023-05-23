@@ -95,5 +95,6 @@
   "saveChanges": "Save changes",
   "change": "Change",
   "chooseCrop": "Choose crop",
-  "invoiceAddress": "Invoice address"
+  "invoiceAddress": "Invoice address",
+  "dimensions": "Dimensions"
 }
