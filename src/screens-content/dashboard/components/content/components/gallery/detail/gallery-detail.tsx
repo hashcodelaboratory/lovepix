@@ -5,6 +5,8 @@ import { Chip, Stack, TextField } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import { messages } from "../../../../../../../messages/messages";
 import Button from "@mui/material/Button";
+import { useContext } from "react";
+import DashboardContext from "../../../../../context/dashboard-context";
 
 type Row = {
   id: string;
@@ -21,6 +23,10 @@ type GalleryDetailProps = {
 
 const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
   const { t } = useTranslation();
+
+  const {
+    state: { dimensions },
+  } = useContext(DashboardContext);
 
   return (
     <>
@@ -50,10 +56,9 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
         </div>
         <div className={styles.galleryDetailContainer}>
           <Stack direction="row" spacing={1}>
-            <Chip label="category" color="primary" clickable />
-            <Chip label="category" color="primary" variant="outlined" clickable />
-            <Chip label="category" color="primary" variant="outlined" clickable />
-            <Chip label="category" color="primary" variant="outlined" clickable />
+            {dimensions?.map(({ id, name }) =>
+              <Chip key={id} label={name} color="primary" clickable />
+            )}
           </Stack>
         </div>
         <div className={styles.galleryDetailContainer}>
