@@ -13,7 +13,7 @@ export const SIDEBAR_MENU_LIST: {
     link: '',
   },
   {
-    title: messages.products,
+    title: messages.dimensions,
     link: '',
   },
   {

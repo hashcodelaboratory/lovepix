@@ -99,5 +99,6 @@
   "saveChanges": "Uložiť zmeny",
   "change": "Zmeniť",
   "chooseCrop": "Vyberte výrez",
-  "invoiceAddress": "Fakturačná adresa"
+  "invoiceAddress": "Fakturačná adresa",
+  "dimensions": "Rozmery"
 }
