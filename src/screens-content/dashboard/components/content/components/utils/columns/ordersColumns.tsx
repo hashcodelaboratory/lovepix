@@ -6,7 +6,7 @@ export const getOrdersColumns = (t: any): GridColDef[] => [
   {
     field: "id",
     headerName: "ID",
-    width: 200,
+    width: 120,
     editable: false,
     renderHeader: ({ field }) => (
       <div className={styles.tableHeader}>{field}</div>

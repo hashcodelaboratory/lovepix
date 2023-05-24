@@ -96,5 +96,6 @@
   "change": "Change",
   "chooseCrop": "Choose crop",
   "invoiceAddress": "Invoice address",
-  "dimensions": "Dimensions"
+  "dimensions": "Dimensions",
+  "categories": "Categories"
 }
