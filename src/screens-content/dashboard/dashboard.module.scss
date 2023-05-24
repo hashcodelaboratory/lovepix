@@ -154,11 +154,11 @@
 }
 
 .contentTable {
-  width: 300px;
-  border: 6px solid #f6f6f6;
-  border-radius: 1rem 0 0 1rem;
-  margin: 0 0 1rem 1rem;
+  width: 400px;
+  box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem, rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
+  border-radius: 1rem;
   background-color: white;
+  margin-bottom: 1rem;
 }
 
 .removeButton {
@@ -200,7 +200,7 @@
 
 .ordersTableSidepanel {
   margin-bottom: 12px;
-  width: 470px;
+  width: 400px;
   height: 700px;
 }
 
