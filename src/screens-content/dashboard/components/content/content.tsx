@@ -9,6 +9,7 @@ import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import FolderCopyIcon from "@mui/icons-material/FolderCopy";
 import Dimensions from "./components/dimensions/dimensions";
+import Categories from "./components/categories/categories";
 
 type Props = {
   isFetching: boolean
@@ -16,7 +17,7 @@ type Props = {
 
 const Content = ({ isFetching }: Props) => {
   const {
-    state: { uploadImages, orders, dimensions },
+    state: { uploadImages, orders, dimensions, categories },
   } = useContext(DashboardContext);
 
   return (
@@ -46,6 +47,17 @@ const Content = ({ isFetching }: Props) => {
         />
         <Card
           header={{
+            title: messages.categories,
+            count: isFetching ? "-" : String(categories?.length),
+            icon: <InventoryIcon />,
+          }}
+          footer={{
+            value: "+ 15 %",
+            text: messages.thanLastWeek,
+          }}
+        />
+        <Card
+          header={{
             title: messages.uploadedImages,
             count: isFetching ? "-" : uploadImages?.length.toString(),
             icon: <FolderCopyIcon />,
@@ -59,6 +71,7 @@ const Content = ({ isFetching }: Props) => {
       <OrdersTable />
       <UploadImagesTable />
       <Dimensions />
+      <Categories />
     </div>
   );
 };

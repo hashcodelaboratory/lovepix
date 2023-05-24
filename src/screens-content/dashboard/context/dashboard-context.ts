@@ -3,6 +3,7 @@ import { StorageReference } from "@firebase/storage";
 import { Order } from "../../../common/types/order";
 import { GalleryItem } from "../../../common/types/gallery";
 import { DimensionType } from "../../../common/api/use-dimensions";
+import { CategoryType } from "../../../common/api/use-categories";
 
 type DashboardContextProps = {
   state: {
@@ -10,6 +11,7 @@ type DashboardContextProps = {
     orders: Order[]
     galleryImages: GalleryItem[]
     dimensions: DimensionType[]
+    categories: CategoryType[]
   }
 }
 

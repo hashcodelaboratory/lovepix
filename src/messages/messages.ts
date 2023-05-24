@@ -98,5 +98,6 @@ export const messages = {
   change: "change",
   chooseCrop: "chooseCrop",
   invoiceAddress: "invoiceAddress",
-  dimensions: "dimensions"
+  dimensions: "dimensions",
+  categories: "categories"
 }

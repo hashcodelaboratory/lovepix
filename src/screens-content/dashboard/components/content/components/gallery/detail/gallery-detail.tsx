@@ -25,7 +25,7 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
   const { t } = useTranslation();
 
   const {
-    state: { dimensions },
+    state: { dimensions, categories },
   } = useContext(DashboardContext);
 
   return (
@@ -57,16 +57,15 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
         <div className={styles.galleryDetailContainer}>
           <Stack direction="row" spacing={1}>
             {dimensions?.map(({ id, name }) =>
-              <Chip key={id} label={name} color="primary" clickable />
+              <Chip key={id} label={name} color="primary" variant="outlined" clickable />
             )}
           </Stack>
         </div>
         <div className={styles.galleryDetailContainer}>
           <Stack direction="row" spacing={1}>
-            <Chip label="20 x 20" color="secondary" clickable />
-            <Chip label="20 x 20" color="secondary" variant="outlined" clickable />
-            <Chip label="20 x 20" color="secondary" variant="outlined" clickable />
-            <Chip label="20 x 20" color="secondary" variant="outlined" clickable />
+            {categories.map(({ id, name }) => (
+              <Chip key={id} label={name} color="secondary" variant="outlined" clickable />
+            ))}
           </Stack>
         </div>
         <Button
