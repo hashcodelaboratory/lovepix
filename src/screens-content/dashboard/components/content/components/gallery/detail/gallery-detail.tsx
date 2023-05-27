@@ -3,14 +3,15 @@ import Image from "next/image";
 import { ImageLayout } from "../../../../../../home/enums/enums";
 import { Chip, Stack, TextField } from "@mui/material";
 import { useTranslation } from "next-i18next";
-import { messages } from "../../../../../../../messages/messages";
 import Button from "@mui/material/Button";
-import { useContext } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import DashboardContext from "../../../../../context/dashboard-context";
-import { CategoryType } from "../../../../../../../common/api/use-categories";
-import { DimensionType } from "../../../../../../../common/api/use-dimensions";
+import { doc, updateDoc } from "@firebase/firestore";
+import { database } from "../../../../../../../common/firebase/config";
+import { Collections } from "../../../../../../../common/firebase/enums";
 
 type Row = {
+  docId: string;
   id: string;
   contentType: string;
   name: string;
@@ -18,8 +19,8 @@ type Row = {
   timeCreated: string;
   url: string;
   price: number;
-  categories: CategoryType[];
-  dimensions: DimensionType[];
+  categories: string[];
+  dimensions: string[];
 }
 
 type GalleryDetailProps = {
@@ -33,7 +34,48 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
     state: { dimensions, categories },
   } = useContext(DashboardContext);
 
-  console.log(row?.categories);
+  const [price, setPrice] = useState<number>();
+  const [editedDimensions, setEditedDimensions] = useState<string[]>();
+  const [editedCategories, setEditedCategories] = useState<string[]>();
+
+  const onChangePrice = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setPrice(Number(e.target.value));
+  }
+
+  const save = async () => {
+    const docData = {
+      price: price ?? row?.price,
+      dimensions: editedDimensions,
+      categories: editedCategories
+    };
+    await updateDoc(doc(database, Collections.GALLERY, row?.docId ?? ''), docData);
+  }
+
+  const onClickDimension = (name: string) => {
+    const variant = getDimensionVariant(name);
+    if (variant === "filled") {
+      setEditedDimensions((editedDimensions ?? row?.dimensions)?.filter((dimension) => dimension !== name));
+    } else {
+      setEditedDimensions([...(editedDimensions ?? row?.dimensions) ?? [], name]);
+    }
+  }
+
+  const getDimensionVariant = (name: string) => {
+    return (editedDimensions ?? row?.dimensions)?.includes(name) ? "filled" : "outlined";
+  }
+
+  const onClickCategory = (name: string) => {
+    const variant = getCategoryVariant(name);
+    if (variant === "filled") {
+      setEditedCategories((editedCategories ?? row?.categories)?.filter((category) => category !== name));
+    } else {
+      setEditedCategories([...(editedCategories ?? row?.categories) ?? [], name]);
+    }
+  }
+
+  const getCategoryVariant = (name: string) => {
+    return (editedCategories ?? row?.categories)?.includes(name) ? "filled" : "outlined";
+  }
 
   return (
     <>
@@ -57,12 +99,12 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
               <div className={styles.galleryDetailDate}>
                 {row?.size && row.size / 1000} KB
               </div>
+              <div className={styles.galleryDetailTextFieldTitle}>Cena: </div>
               <TextField
                 className={styles.galleryDetailTextField}
                 size="small"
-                label={t(messages.price)}
-                defaultValue={"-"}
-                value={row?.price}
+                value={price ?? row?.price}
+                onChange={onChangePrice}
               />
             </div>
           </div>
@@ -70,14 +112,28 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
         <div className={styles.galleryDetailContainer}>
           <Stack direction="row" spacing={1}>
             {dimensions?.map(({ id, name }) =>
-              <Chip key={id} label={name} color="primary" variant={"outlined"} clickable />
+              <Chip
+                key={id}
+                label={name}
+                color="primary"
+                variant={getDimensionVariant(name)}
+                clickable
+                onClick={() => onClickDimension(name)}
+              />
             )}
           </Stack>
         </div>
         <div className={styles.galleryDetailContainer}>
           <Stack direction="row" spacing={1}>
             {categories.map(({ id, name }) => (
-              <Chip key={id} label={name} color="secondary" variant="outlined" clickable />
+              <Chip
+                key={id}
+                label={name}
+                color="secondary"
+                variant={getCategoryVariant(name)}
+                clickable
+                onClick={() => onClickCategory(name)}
+              />
             ))}
           </Stack>
         </div>
@@ -91,6 +147,7 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
           }}
           variant="outlined"
           color="success"
+          onClick={save}
         >
           Save
         </Button>

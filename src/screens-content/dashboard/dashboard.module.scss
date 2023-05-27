@@ -274,7 +274,15 @@
 }
 
 .galleryDetailTextField {
-  margin-top: 2.5rem;
+  width: 80px;
+}
+
+.galleryDetailTextFieldTitle {
+  margin-top: 0.5rem;
+  padding-bottom: 0.2rem;
+  text-align: right;
+  font-size: 0.8rem;
+  font-weight: 200;
 }
 
 .galleryDetailSave {
