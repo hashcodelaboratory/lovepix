@@ -19,8 +19,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { removeUploadedImages } from "../../../../api/gallery/removeUploadedImages";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Uploader from "./uploader/uploader";
 import GalleryDetail from "./detail/gallery-detail";
+import { UPLOADED_IMAGES_KEY } from "../../../../api/gallery/useUploadedImages";
+import { GALLERY_KEY } from "../../../../../../common/api/use-gallery";
+import UploaderLayout from "./uploader/uploader";
 
 const UploadImagesTable = () => {
   const {
@@ -51,9 +53,11 @@ const UploadImagesTable = () => {
     setSelectedRows([]);
   };
 
-  const removeData = () => {
-    const result = removeUploadedImages(selectedRows, queryClient);
+  const removeData = async () => {
+    const result = removeUploadedImages(selectedRows);
     if (result === "") {
+      await queryClient.invalidateQueries(UPLOADED_IMAGES_KEY);
+      await queryClient.invalidateQueries(GALLERY_KEY);
       enqueueSnackbar(
         String(t(messages.filesRemoved)),
         SNACKBAR_OPTIONS_SUCCESS,
@@ -105,7 +109,7 @@ const UploadImagesTable = () => {
           />
           <div>
             <GalleryDetail row={detailRow?.row} />
-            <Uploader />
+            <UploaderLayout />
           </div>
         </div>
         <button

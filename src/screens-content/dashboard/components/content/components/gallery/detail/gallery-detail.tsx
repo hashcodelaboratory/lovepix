@@ -7,6 +7,8 @@ import { messages } from "../../../../../../../messages/messages";
 import Button from "@mui/material/Button";
 import { useContext } from "react";
 import DashboardContext from "../../../../../context/dashboard-context";
+import { CategoryType } from "../../../../../../../common/api/use-categories";
+import { DimensionType } from "../../../../../../../common/api/use-dimensions";
 
 type Row = {
   id: string;
@@ -15,6 +17,9 @@ type Row = {
   size: number;
   timeCreated: string;
   url: string;
+  price: number;
+  categories: CategoryType[];
+  dimensions: DimensionType[];
 }
 
 type GalleryDetailProps = {
@@ -27,6 +32,8 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
   const {
     state: { dimensions, categories },
   } = useContext(DashboardContext);
+
+  console.log(row?.categories);
 
   return (
     <>
@@ -50,14 +57,20 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
               <div className={styles.galleryDetailDate}>
                 {row?.size && row.size / 1000} KB
               </div>
-              <TextField className={styles.galleryDetailTextField} size="small" label={t(messages.price)} defaultValue={"-"} />
+              <TextField
+                className={styles.galleryDetailTextField}
+                size="small"
+                label={t(messages.price)}
+                defaultValue={"-"}
+                value={row?.price}
+              />
             </div>
           </div>
         </div>
         <div className={styles.galleryDetailContainer}>
           <Stack direction="row" spacing={1}>
             {dimensions?.map(({ id, name }) =>
-              <Chip key={id} label={name} color="primary" variant="outlined" clickable />
+              <Chip key={id} label={name} color="primary" variant={"outlined"} clickable />
             )}
           </Stack>
         </div>
