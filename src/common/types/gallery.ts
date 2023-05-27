@@ -8,4 +8,7 @@ export type GalleryItem = {
   timeCreated: string;
   updated: string;
   url: string;
+  price: number;
+  dimensions: string[];
+  categories: string[];
 }

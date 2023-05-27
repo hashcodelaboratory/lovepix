@@ -1,85 +1,45 @@
-import { Uploader } from "uploader";
-import { UploadDropzone } from "react-uploader";
-import { FullMetadata, getDownloadURL, ref, uploadBytes } from "@firebase/storage";
-import { database, storage } from "../../../../../../../common/firebase/config";
-import { doc, setDoc } from "@firebase/firestore";
-import { StorageFolder } from "../../../../../../../common/firebase/storage/enums";
-import { Collections } from "../../../../../../../common/firebase/enums";
-import { useState } from "react";
+import { ChangeEvent, useContext } from "react";
 import { UPLOADED_IMAGES_KEY } from "../../../../../api/gallery/useUploadedImages";
 import { useQueryClient } from "react-query";
+import { uploadToFirestore, uploadToStorage } from "../../../../../api/gallery/addUploadedImage";
+import { FullMetadata } from "@firebase/storage";
+import DashboardContext from "../../../../../context/dashboard-context";
+import styles from "../../../../../dashboard.module.scss";
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 
-type UploadImageType = {
-  bucket: string;
-  contentType: string;
-  fullPath: string;
-  name: string;
-  size: number;
-  timeCreated: string;
-  updated: string;
-  url: string;
-}
+const UploaderLayout = (): JSX.Element => {
+  const {
+    state: { dimensions, categories },
+  } = useContext(DashboardContext);
 
-const uploaderOptions = {
-  multi: false,
+  const dim = dimensions.map(({ name }) => name);
+  const cat = categories.map(({ name }) => name);
 
-  // Comment out this line & use 'onUpdate' instead of
-  // 'onComplete' to have the dropzone close after upload.
-  showFinishButton: true,
-
-  styles: {
-    colors: {
-      primary: "#377dff",
-    },
-  },
-};
-
-const UploaderComponent = (): JSX.Element => {
   const queryClient = useQueryClient();
 
-  const [uploader, setUploader] = useState(Uploader({ apiKey: "free" }));
-
-  const onComplete = async (files: any) => {
-    await uploadToStorage(files[0].originalFile.file);
-  };
-
-  const uploadToFirestore = async (metadata: FullMetadata, url: string) => {
-    const { bucket, contentType, fullPath, name, size, timeCreated, updated } = metadata;
-    await setDoc(doc(database, Collections.GALLERY, `IMG-${metadata.updated}`),
-      ({
-        bucket: bucket,
-        contentType: contentType,
-        fullPath: fullPath,
-        name: name,
-        size: size,
-        timeCreated: timeCreated,
-        updated: updated,
-        url: url,
-      }) as UploadImageType);
-    setUploader(Uploader({ apiKey: "free" }));
-    queryClient.invalidateQueries(UPLOADED_IMAGES_KEY);
-  };
-
-  const uploadToStorage = async (file: File) => {
-    const _name = `${StorageFolder.GALLERY}/${file.name}`;
-    const imageRef = ref(storage, _name);
-    const { metadata } = await uploadBytes(imageRef, file);
-    if (metadata) {
-      const url = await getDownloadURL(ref(storage, _name));
-      await uploadToFirestore(metadata, url);
+  const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.item(0);
+    if (file) {
+      const res = await uploadToStorage(file);
+      await uploadToFirestore(res?.metadata ?? {} as FullMetadata, res?.url ?? "", [...dim], [...cat]);
+      await queryClient.invalidateQueries(UPLOADED_IMAGES_KEY);
+      e.target.value = "";
     }
   };
 
   return (
-    <UploadDropzone
-      uploader={uploader}
-      options={uploaderOptions}
-      onUpdate={files => console.log(files.map(x => x.fileUrl).join("\n"))}
-      onComplete={onComplete}
-      width="600px"
-      height="250px"
-    />
+    <div className={styles.galleryDetailDropzoneContainer}>
+      <input
+        type="file"
+        id="avatar"
+        name="avatar"
+        accept="image/png, image/jpeg"
+        onChange={onChange}
+        className={styles.galleryDetailDropzone}
+      />
+      <InsertDriveFileIcon className={styles.galleryDetailDropzoneIcon} />
+    </div>
   );
 };
 
-export default UploaderComponent;
+export default UploaderLayout;

@@ -4,7 +4,7 @@ import { collection, getDocs } from "@firebase/firestore";
 import { database } from "../firebase/config";
 import { Collections } from "../firebase/enums";
 
-const GALLERY_KEY = "GALLERY";
+export const GALLERY_KEY = "GALLERY";
 
 const getGallery = async (): Promise<GalleryItem[]> => {
   const querySnapshot = await getDocs(collection(database, Collections.GALLERY));
