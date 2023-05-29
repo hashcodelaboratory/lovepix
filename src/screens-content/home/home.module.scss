@@ -269,6 +269,35 @@
   filter: blur(3px);
 }
 
+.previewImageContainer {
+  position: relative;
+}
+
+.previewImageLink {
+  display: none;
+}
+
+.previewImageContainer:hover {
+  .previewImageFromUrl {
+    filter: brightness(50%);
+  }
+
+  .previewImageLink {
+    display: block;
+    position: absolute;
+    top: 40%;
+    left: 25%;
+    padding: 1rem;
+    border: 4px solid white;
+    background: transparent;
+    color: white;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
 .previewImageDescription {
   margin-top: 1rem;
 }
