@@ -16,7 +16,7 @@ const PreviewSection = ({ galleryData }: PreviewSectionProps): JSX.Element => {
   const { data: categories } = useCategories();
 
   const filtered = categories?.filter(({ name }) =>
-    name === CategoriesUsed.NATURE || name === CategoriesUsed.SPACE
+    (name === CategoriesUsed.NATURE) || (name === CategoriesUsed.SPACE)
   );
 
   return (
