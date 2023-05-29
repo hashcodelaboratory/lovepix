@@ -5,11 +5,13 @@ import { GalleryItem } from "../../../../../../common/types/gallery";
 
 type PreviewRowProps = {
   galleryData?: GalleryItem[];
-  title: string
+  title: string;
 }
 
 const PreviewRow = ({ galleryData, title }: PreviewRowProps): JSX.Element => {
-  const cards = galleryData?.map((item) => item.categories.includes(title) && (
+  const included = galleryData?.filter(data => data.categories.includes(title));
+
+  const cards = included?.map((item) => (
     <PreviewCard key={item.id} item={item} />
   )).slice(0, 3);
 
