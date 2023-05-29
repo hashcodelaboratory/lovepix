@@ -292,7 +292,7 @@
     background: transparent;
     color: white;
     text-transform: uppercase;
-    font-size: 1.5rem;
+    font-size: 1.5vw;
     font-weight: bold;
     cursor: pointer;
   }
@@ -331,4 +331,27 @@
   filter: blur(3px);
 }
 
+@media only screen and (max-width: 700px) {
+  .previewImageLink {
+    font-size: 12px !important;
+    padding: 0.5rem !important;
+    left: 10vw !important;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .previewImageLink {
+    font-size: 12px !important;
+    padding: 0.5rem !important;
+    left: 7vw !important;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .previewImageLink {
+    font-size: 12px !important;
+    padding: 0.5rem !important;
+    left: 5vw !important;
+  }
+}
 
