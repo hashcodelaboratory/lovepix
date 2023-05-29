@@ -2,11 +2,10 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import ResponsiveAppBar from "../src/app-bar/responsive-app-bar";
-import { Container } from "@mui/material";
-import MasonryImageList from "../src/masonry-image-list/masonry-image-list";
 import { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import FooterLayout from "../src/screens-content/footer/footer";
+import GalleryLayout from "../src/screens-content/gallery/gallery";
 
 const Gallery: NextPage = () => {
   return (
@@ -22,9 +21,7 @@ const Gallery: NextPage = () => {
       </header>
 
       <main className={styles.main}>
-        <Container>
-          <MasonryImageList />
-        </Container>
+        <GalleryLayout />
       </main>
 
       <footer>

@@ -278,6 +278,8 @@
 }
 
 .previewImageContainer:hover {
+  cursor: pointer;
+
   .previewImageFromUrl {
     filter: brightness(50%);
   }
