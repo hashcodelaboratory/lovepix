@@ -5,10 +5,11 @@ import { GalleryItem } from "../../../../../../common/types/gallery";
 
 type PreviewRowProps = {
   galleryData?: GalleryItem[];
+  title: string
 }
 
-const PreviewRow = ({ galleryData }: PreviewRowProps): JSX.Element => {
-  const cards = galleryData?.map((item) => (
+const PreviewRow = ({ galleryData, title }: PreviewRowProps): JSX.Element => {
+  const cards = galleryData?.map((item) => item.categories.includes(title) && (
     <PreviewCard key={item.id} item={item} />
   )).slice(0, 3);
 
@@ -22,7 +23,7 @@ const PreviewRow = ({ galleryData }: PreviewRowProps): JSX.Element => {
   return (
     <div className={styles.previewRow}>
       <div className={styles.previewTitleRow}>
-        <h3>Category title</h3>
+        <h3>{title}</h3>
         <button className={styles.previewTitleRowButton}>
           <p className={styles.previewTitleRowButtonText}>Zobrazit viac</p>
           <ArrowForwardIcon sx={{ width: 16 }} />
