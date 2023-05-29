@@ -4,7 +4,7 @@ import { ImageLayout } from "../../../../../../home/enums/enums";
 import { Chip, Stack, TextField } from "@mui/material";
 import { useTranslation } from "next-i18next";
 import Button from "@mui/material/Button";
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import DashboardContext from "../../../../../context/dashboard-context";
 import { doc, updateDoc } from "@firebase/firestore";
 import { database } from "../../../../../../../common/firebase/config";
@@ -37,6 +37,11 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
   const [price, setPrice] = useState<number>();
   const [editedDimensions, setEditedDimensions] = useState<string[]>();
   const [editedCategories, setEditedCategories] = useState<string[]>();
+
+  useEffect(() => {
+    setEditedCategories(row?.dimensions);
+    setEditedCategories(row?.categories);
+  }, [row]);
 
   const onChangePrice = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setPrice(Number(e.target.value));
@@ -105,6 +110,10 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
                 size="small"
                 value={price ?? row?.price}
                 onChange={onChangePrice}
+                type="number"
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
             </div>
           </div>

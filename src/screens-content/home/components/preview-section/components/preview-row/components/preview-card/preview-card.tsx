@@ -21,8 +21,8 @@ const PreviewCard = ({ item }: PreviewCardProps): JSX.Element => {
         <div className={styles.previewImage} />
       }
       <div className={styles.previewImageDescription}>
-        <p className={styles.previewTitle}>Image name</p>
-        <p className={styles.previewPrice}>Cena od 19.99 €</p>
+        <p className={styles.previewTitle}>{item?.name}</p>
+        <p className={styles.previewPrice}>Cena od {item?.price} €</p>
       </div>
     </div>
   );
