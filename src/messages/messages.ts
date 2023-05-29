@@ -99,5 +99,6 @@ export const messages = {
   chooseCrop: "chooseCrop",
   invoiceAddress: "invoiceAddress",
   dimensions: "dimensions",
-  categories: "categories"
+  categories: "categories",
+  add: "add"
 }
