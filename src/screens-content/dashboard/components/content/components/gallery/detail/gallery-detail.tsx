@@ -9,6 +9,7 @@ import DashboardContext from "../../../../../context/dashboard-context";
 import { doc, updateDoc } from "@firebase/firestore";
 import { database } from "../../../../../../../common/firebase/config";
 import { Collections } from "../../../../../../../common/firebase/enums";
+import { messages } from "../../../../../../../messages/messages";
 
 type Row = {
   docId: string;
@@ -35,23 +36,31 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
   } = useContext(DashboardContext);
 
   const [price, setPrice] = useState<number>();
+  const [name, setName] = useState<string>();
   const [editedDimensions, setEditedDimensions] = useState<string[]>();
   const [editedCategories, setEditedCategories] = useState<string[]>();
 
   useEffect(() => {
     setEditedCategories(row?.dimensions);
     setEditedCategories(row?.categories);
+    setPrice(row?.price);
+    setName(row?.name);
   }, [row]);
 
   const onChangePrice = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setPrice(Number(e.target.value));
   }
 
+  const onChangeName = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setName(e.target.value);
+  }
+
   const save = async () => {
     const docData = {
       price: price ?? row?.price,
       dimensions: editedDimensions,
-      categories: editedCategories
+      categories: editedCategories,
+      name: name
     };
     await updateDoc(doc(database, Collections.GALLERY, row?.docId ?? ''), docData);
   }
@@ -94,7 +103,16 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
             height={200}
           />
           <div className={styles.galleryDetailContainer}>
-            <div className={styles.galleryDetailTitle}>{row?.name}</div>
+            <div className={styles.galleryDetailTextFieldTitle}>{t(messages.name)}: </div>
+            <TextField
+              className={styles.galleryDetailTitle}
+              size="small"
+              defaultValue={row?.name}
+              value={name}
+              onChange={onChangeName}
+              type="text"
+              fullWidth
+            />
             <div className={styles.galleryDetailColumn}>
               <div className={styles.galleryDetailDate}>
                 {new Date(row?.timeCreated ?? "").toLocaleDateString()}
@@ -108,11 +126,12 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
               <TextField
                 className={styles.galleryDetailTextField}
                 size="small"
-                value={price ?? row?.price}
+                placeholder={row?.price.toString()}
+                value={price}
                 onChange={onChangePrice}
                 type="number"
-                InputLabelProps={{
-                  shrink: true,
+                inputProps={{
+                  shrink: true
                 }}
               />
             </div>
@@ -157,6 +176,7 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
           variant="outlined"
           color="success"
           onClick={save}
+          disabled={!price || !name}
         >
           Save
         </Button>

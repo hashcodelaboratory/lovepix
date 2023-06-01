@@ -10,7 +10,7 @@ export type CategoryType = {
   name: string;
 }
 
-const getDimensions = async (): Promise<CategoryType[]> => {
+const getCategories = async (): Promise<CategoryType[]> => {
   const querySnapshot = await getDocs(collection(database, Collections.CATEGORIES));
   return querySnapshot.docs.map(
     (doc) => ({ id: doc.id, ...doc.data() } as CategoryType),
@@ -18,4 +18,4 @@ const getDimensions = async (): Promise<CategoryType[]> => {
 };
 
 export const useCategories = (): UseQueryResult<CategoryType[]> =>
-  useQuery([CATEGORIES_KEY], () => getDimensions());
+  useQuery([CATEGORIES_KEY], () => getCategories());
