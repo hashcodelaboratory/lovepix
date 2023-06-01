@@ -50,4 +50,13 @@ export const getUploadImagesColumns = (): GridColDef[] => [
       )
     }),
   },
+  {
+    field: "price",
+    headerName: "Price",
+    width: 80,
+    editable: false,
+    renderCell: (({ value }) => (
+      <div className={styles.gallerySecondaryText}>{value} €</div>
+    )),
+  },
 ];
