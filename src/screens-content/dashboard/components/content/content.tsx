@@ -10,6 +10,7 @@ import InventoryIcon from "@mui/icons-material/Inventory";
 import FolderCopyIcon from "@mui/icons-material/FolderCopy";
 import Dimensions from "./components/dimensions/dimensions";
 import Categories from "./components/categories/categories";
+import ProductsTable from "./components/products/products-table";
 
 type Props = {
   isFetching: boolean
@@ -30,7 +31,18 @@ const Content = ({ isFetching }: Props) => {
             icon: <LibraryBooksIcon />,
           }}
           footer={{
-            value: "+ 55 %",
+            value: "+ 15 %",
+            text: messages.thanLastWeek,
+          }}
+        />
+        <Card
+          header={{
+            title: messages.products,
+            count: isFetching ? "-" : orders?.length.toString(),
+            icon: <LibraryBooksIcon />,
+          }}
+          footer={{
+            value: "+ 25 %",
             text: messages.thanLastWeek,
           }}
         />
@@ -52,7 +64,7 @@ const Content = ({ isFetching }: Props) => {
             icon: <InventoryIcon />,
           }}
           footer={{
-            value: "+ 15 %",
+            value: "+ 35 %",
             text: messages.thanLastWeek,
           }}
         />
@@ -63,12 +75,13 @@ const Content = ({ isFetching }: Props) => {
             icon: <FolderCopyIcon />,
           }}
           footer={{
-            value: "+ 15 %",
+            value: "+ 45 %",
             text: messages.thanLastWeek,
           }}
         />
       </div>
       <OrdersTable />
+      <ProductsTable />
       <UploadImagesTable />
       <Dimensions />
       <Categories />
