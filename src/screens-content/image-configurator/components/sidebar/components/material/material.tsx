@@ -45,17 +45,16 @@ const Material = ({ configuration }: MaterialProps) => {
           alt={material.id}
           key={uuidv4()}
           src={material?.image ?? ""}
-          height={100}
-          width={100}
-          layout={ImageLayout.FIXED}
+          height={112}
+          width={112}
+          layout={ImageLayout.INTRINSIC}
           objectFit="cover"
           style={{
-            borderRadius: 5,
             cursor: "pointer",
           }}
         />
-        <p className={styles.materialCardTitle}>{material.name}</p>
       </div>
+      <p className={styles.materialCardTitle}>{material.name}</p>
     </div>
   ));
 
@@ -72,7 +71,7 @@ const Material = ({ configuration }: MaterialProps) => {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          marginBottom: 50,
+          marginBottom: 20,
         }}
       >
         {materialItems}
