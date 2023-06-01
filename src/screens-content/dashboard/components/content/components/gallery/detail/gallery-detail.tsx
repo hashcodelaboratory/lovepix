@@ -10,6 +10,8 @@ import { doc, updateDoc } from "@firebase/firestore";
 import { database } from "../../../../../../../common/firebase/config";
 import { Collections } from "../../../../../../../common/firebase/enums";
 import { messages } from "../../../../../../../messages/messages";
+import { useQueryClient } from "react-query";
+import { GALLERY_KEY } from "../../../../../../../common/api/use-gallery";
 
 type Row = {
   docId: string;
@@ -30,6 +32,7 @@ type GalleryDetailProps = {
 
 const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
 
   const {
     state: { dimensions, categories },
@@ -41,7 +44,7 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
   const [editedCategories, setEditedCategories] = useState<string[]>();
 
   useEffect(() => {
-    setEditedCategories(row?.dimensions);
+    setEditedDimensions(row?.dimensions);
     setEditedCategories(row?.categories);
     setPrice(row?.price);
     setName(row?.name);
@@ -63,6 +66,7 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
       name: name
     };
     await updateDoc(doc(database, Collections.GALLERY, row?.docId ?? ''), docData);
+    await queryClient.invalidateQueries(GALLERY_KEY);
   }
 
   const onClickDimension = (name: string) => {
