@@ -100,5 +100,6 @@ export const messages = {
   invoiceAddress: "invoiceAddress",
   dimensions: "dimensions",
   categories: "categories",
-  add: "add"
+  add: "add",
+  showMore: "showMore"
 }

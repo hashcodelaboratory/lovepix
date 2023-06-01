@@ -98,5 +98,6 @@
   "invoiceAddress": "Invoice address",
   "dimensions": "Dimensions",
   "categories": "Categories",
-  "add": "Add"
+  "add": "Add",
+  "showMore": "Show more"
 }
