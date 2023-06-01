@@ -99,5 +99,22 @@
   "dimensions": "Dimensions",
   "categories": "Categories",
   "add": "Add",
-  "showMore": "Show more"
+  "showMore": "Show more",
+  "service": "Service",
+  "ourContacts": "Our contacts",
+  "satisfaction": "Satisfaction",
+  "possibilities": "Possibilities",
+  "creatingTime": "Creating time",
+  "complaint": "complaint",
+  "fromPhoto": "Paints from your photos",
+  "canvasPhoto": "Photo on canvas",
+  "acrylPhoto": "Photo on acryl",
+  "dibondPhoto": "Photo on dibond",
+  "gallery": "Gallery",
+  "materials": "Materials",
+  "story": "Story",
+  "download": "Download",
+  "blog": "Blog",
+  "partners": "Partners",
+  "changeLanguage": "Change language"
 }

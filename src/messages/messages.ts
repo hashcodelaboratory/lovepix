@@ -101,5 +101,22 @@ export const messages = {
   dimensions: "dimensions",
   categories: "categories",
   add: "add",
-  showMore: "showMore"
+  showMore: "showMore",
+  service: "service",
+  ourContacts: "ourContacts",
+  satisfaction: "satisfaction",
+  possibilities: "possibilities",
+  creatingTime: "creatingTime",
+  complaint: "complaint",
+  fromPhoto: "fromPhoto",
+  canvasPhoto: "canvasPhoto",
+  acrylPhoto: "acrylPhoto",
+  dibondPhoto: "dibondPhoto",
+  gallery: "gallery",
+  materials: "materials",
+  story: "story",
+  download: "download",
+  blog: "blog",
+  partners: "partners",
+  changeLanguage: "changeLanguage"
 }
