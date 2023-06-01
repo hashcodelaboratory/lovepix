@@ -237,6 +237,10 @@
   align-items: center;
 }
 
+.previewTitleRowButton:hover {
+  outline: 1px solid gray;
+}
+
 .previewTitleRowButtonText {
   letter-spacing: 1px;
   font-weight: 300;

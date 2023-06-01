@@ -102,5 +102,6 @@
   "invoiceAddress": "Fakturačná adresa",
   "dimensions": "Rozmery",
   "categories": "Kategórie",
-  "add": "Pridať"
+  "add": "Pridať",
+  "showMore": "Zobraziť viac"
 }
