@@ -21,7 +21,7 @@ const PreviewCard = ({ item }: PreviewCardProps): JSX.Element => {
             src={item?.url ?? ""}
             layout={ImageLayout.INTRINSIC}
             width={400}
-            height={400}
+            height={300}
             className={styles.previewImageFromUrl}
           />
           <button className={styles.previewImageLink}>{t(messages.add)}</button>
