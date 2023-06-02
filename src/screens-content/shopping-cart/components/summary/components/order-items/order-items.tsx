@@ -18,17 +18,15 @@ const OrderItems = ({ order }: DeliveryProps) => {
 
   const { images } = order?.shoppingCart;
 
-  const items = images?.map((image: Image) =>
-    <CartRow key={image.url} image={image} order={order} />,
-  );
-
   return (
     <div className={styles.cartContainer}>
       <div className={styles.cartTitleContainer}>
         <h3 className={styles.cartTitleText}>{String(t(messages.singleOrder))}</h3>
       </div>
       <div className={styles.cartItemsContainer}>
-        {items}
+        {images?.map((image: Image) =>
+          <CartRow key={image.url} image={image} order={order} />,
+        )}
       </div>
     </div>
   );
