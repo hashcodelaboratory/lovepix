@@ -38,19 +38,28 @@ const Form = ({ register, errors, control }: FormProps): JSX.Element => {
       name={name}
       control={control}
       render={({ field }) => (
-        <TextField
-          label={String(t(message))}
-          placeholder={String(t(message))}
-          fullWidth={fullWidth}
-          {...field}
-          {...register(name, { required: true })}
-          error={!!error}
-          helperText={String(t(error ?? ""))}
-          InputLabelProps={{ shrink: true }}
-          size="small"
-          className={styles.formField}
-          sx={{ width: fullWidth ? "100%" : "47%" }}
-        />
+        <div>
+          <p className={styles.formFieldTitle}>{String(t(message))}</p>
+          <TextField
+            placeholder={String(t(message))}
+            fullWidth={fullWidth}
+            {...field}
+            {...register(name, { required: true })}
+            error={!!error}
+            helperText={String(t(error ?? ""))}
+            variant="standard"
+            size="small"
+            className={styles.formField}
+            sx={{
+              width: fullWidth ? "100%" : "47%",
+              '& .MuiInput-root': {
+                '&:before, :after, :hover:not(.Mui-disabled):before': {
+                  borderBottom: 0,
+                },
+              },
+            }}
+          />
+        </div>
       )}
     />);
 
