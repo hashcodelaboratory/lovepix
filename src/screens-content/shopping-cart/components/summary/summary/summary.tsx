@@ -1,31 +1,32 @@
-import styles from "../../../shopping-cart.module.scss";
-import { Container } from "@mui/system";
-import Address from "../address/address";
-import { Order } from "../../../../../common/types/order";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { FormInputs } from "../../../../../common/types/form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { FORM_SCHEMA } from "../address/components/form/utils/schema";
-import { useCreateOrder } from "../../../../../common/firebase/firestore/createOrder";
-import { useEffect, useState } from "react";
-import { Backdrop, CircularProgress } from "@mui/material";
-import Voucher from "../voucher/voucher";
-import Delivery from "../delivery/delivery";
-import Payment from "../payment/payment";
-import OrderItems from "../components/order-items/order-items";
-import TotalSection from "../total/total-section";
+import styles from '../../../shopping-cart.module.scss'
+import { Container } from '@mui/system'
+import Address from '../address/address'
+import { Order } from '../../../../../common/types/order'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { FormInputs } from '../../../../../common/types/form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { FORM_SCHEMA } from '../address/components/form/utils/schema'
+import { useCreateOrder } from '../../../../../common/firebase/firestore/createOrder'
+import { useEffect, useState } from 'react'
+import { Backdrop, CircularProgress } from '@mui/material'
+import Voucher from '../voucher/voucher'
+import Delivery from '../delivery/delivery'
+import Payment from '../payment/payment'
+import OrderItems from '../components/order-items/order-items'
+import TotalSection from '../total/total-section'
 
 type SummaryProps = {
-  order: Order;
+  order: Order
 }
 
 const Summary = ({ order }: SummaryProps) => {
-  const { mutate: createOrder } = useCreateOrder();
+  const { mutate: createOrder } = useCreateOrder()
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const {
     register,
+    watch,
     formState: { errors },
     handleSubmit,
     control,
@@ -33,10 +34,11 @@ const Summary = ({ order }: SummaryProps) => {
   } = useForm<FormInputs>({
     resolver: yupResolver(FORM_SCHEMA),
     defaultValues: { ...order },
-  });
+  })
+  const formData = watch()
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    setIsLoading(true);
+    setIsLoading(true)
     await createOrder({
       form: {
         firstName: data?.firstName,
@@ -53,36 +55,41 @@ const Summary = ({ order }: SummaryProps) => {
       totalPrice: order?.totalPrice,
       delivery: data.delivery!,
       payment: data.payment!,
-    });
-    reset();
-  };
+    })
+    reset()
+  }
 
   useEffect(() => {
     if (!order?.shoppingCart?.images) {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  }, [order]);
+  }, [order])
 
   return (
     <Container className={styles.summaryContainer}>
       <form className={styles.summary} onSubmit={handleSubmit(onSubmit)}>
         <Address register={register} errors={errors} control={control} />
         <div className={styles.orderContainer}>
-          <OrderItems order={order} register={register} errors={errors} control={control} />
-          <TotalSection price={order?.totalPrice} />
+          <OrderItems
+            order={order}
+            register={register}
+            errors={errors}
+            control={control}
+          />
+          <TotalSection price={order?.totalPrice} formData={formData} />
         </div>
         <Voucher />
         <Delivery control={control} message={errors.delivery?.message} />
         <Payment control={control} message={errors.payment?.message} />
       </form>
       <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={isLoading}
       >
-        <CircularProgress color="inherit" />
+        <CircularProgress color='inherit' />
       </Backdrop>
     </Container>
-  );
-};
+  )
+}
 
-export default Summary;
+export default Summary

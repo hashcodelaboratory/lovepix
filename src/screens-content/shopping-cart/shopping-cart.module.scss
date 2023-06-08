@@ -167,6 +167,7 @@ $delivery-container-width: 370px;
 
 .summarySectionTitle {
   font-weight: 200;
+  font-size: 0.75rem;
   text-transform: uppercase;
 }
 
@@ -201,8 +202,9 @@ $delivery-container-width: 370px;
 }
 
 .price {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1.2rem;
+  color: #D32F2F;
 }
 
 .cartTitleContainer {
