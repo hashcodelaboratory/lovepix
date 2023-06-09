@@ -14,6 +14,7 @@ import Delivery from '../delivery/delivery'
 import Payment from '../payment/payment'
 import OrderItems from '../components/order-items/order-items'
 import TotalSection from '../total/total-section'
+import { getPriceForDelivery, getPriceForPayment } from "../total/utils";
 
 type SummaryProps = {
   order: Order
@@ -35,7 +36,8 @@ const Summary = ({ order }: SummaryProps) => {
     resolver: yupResolver(FORM_SCHEMA),
     defaultValues: { ...order },
   })
-  const formData = watch()
+  const { delivery, payment } = watch();
+  const finalPrice =  Number(order?.totalPrice) + getPriceForDelivery(delivery) + getPriceForPayment(payment);
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setIsLoading(true)
@@ -76,7 +78,11 @@ const Summary = ({ order }: SummaryProps) => {
             errors={errors}
             control={control}
           />
-          <TotalSection price={order?.totalPrice} formData={formData} />
+          <TotalSection
+            control={control}
+            price={order?.totalPrice}
+            finalPrice={finalPrice}
+          />
         </div>
         <Voucher />
         <Delivery control={control} message={errors.delivery?.message} />

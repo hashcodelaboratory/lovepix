@@ -1,44 +1,41 @@
-import { FormInputs } from 'common/types/form'
 import { messages } from 'messages/messages'
 import { Delivery as DeliveryOptions } from '../../../../../common/enums/delivery'
 import { Payment as PaymentEnum } from '../../../../../common/enums/payment'
 
-export const getDelivery = (formData: FormInputs) => {
-  switch (formData.delivery) {
+export const getDeliveryMessage = (param?: DeliveryOptions) => {
+  switch (param) {
     case DeliveryOptions.COURIER:
       return messages.courier
-    case DeliveryOptions.PERSONAL_COLLECT:
+    default:
       return messages.personalCollect
   }
 }
 
-export const getPayment = (formData: FormInputs) => {
-  switch (formData.payment) {
+export const getPaymentMessage = (param?: PaymentEnum) => {
+  switch (param) {
     case PaymentEnum.ONLINE:
       return messages.online
     case PaymentEnum.PERSONAL_DELIVERY:
       return messages.personalDelivery
-    case PaymentEnum.TRANSACTION:
+    default:
       return messages.transaction
   }
 }
 
-export const getDeliveryPrice = (formData: FormInputs): number | undefined => {
-  switch (formData.delivery) {
+export const getPriceForDelivery = (param?: DeliveryOptions) => {
+  switch (param) {
     case DeliveryOptions.COURIER:
       return 5
-    case DeliveryOptions.PERSONAL_COLLECT:
+    default:
       return 0
   }
 }
 
-export const getPaymentPrice = (formData: FormInputs): number | undefined => {
-  switch (formData.payment) {
-    case PaymentEnum.ONLINE:
-      return 0
+export const getPriceForPayment = (param?: PaymentEnum) => {
+  switch (param) {
     case PaymentEnum.PERSONAL_DELIVERY:
       return 2
-    case PaymentEnum.TRANSACTION:
+    default:
       return 0
   }
 }
