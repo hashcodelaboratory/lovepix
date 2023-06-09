@@ -2,9 +2,13 @@ import styles from '../../../shopping-cart.module.scss'
 import { messages } from '../../../../../messages/messages'
 import { Link, Typography } from '@mui/material'
 import { useTranslation } from 'next-i18next'
-import { Delivery as DeliveryOptions } from '../../../../../common/enums/delivery'
-import { Payment as PaymentEnum } from '../../../../../common/enums/payment'
 import { FormInputs } from 'common/types/form'
+import {
+  getDelivery,
+  getDeliveryPrice,
+  getPayment,
+  getPaymentPrice,
+} from './utils'
 
 type TotalSectionProps = {
   price?: number
@@ -14,54 +18,8 @@ type TotalSectionProps = {
 const TotalSection = ({ price, formData }: TotalSectionProps): JSX.Element => {
   const { t } = useTranslation()
 
-  const getDelivery = () => {
-    switch (formData.delivery) {
-      case DeliveryOptions.COURIER:
-        return `/ ${t(messages.courier)}`
-      case DeliveryOptions.PERSONAL_COLLECT:
-        return `/ ${t(messages.personalCollect)}`
-      default:
-        ''
-    }
-  }
-
-  const getDeliveryPrice = (): number | undefined => {
-    switch (formData.delivery) {
-      case DeliveryOptions.COURIER:
-        return 5
-      case DeliveryOptions.PERSONAL_COLLECT:
-        return 0
-    }
-  }
-
-  const getPayment = () => {
-    switch (formData.payment) {
-      case PaymentEnum.ONLINE:
-        return `/ ${t(messages.online)}`
-      case PaymentEnum.PERSONAL_DELIVERY:
-        return `/ ${t(messages.personalDelivery)}`
-      case PaymentEnum.TRANSACTION:
-        return `/ ${t(messages.transaction)}`
-      default:
-        ''
-    }
-  }
-
-  const getPaymentPrice = (): number | undefined => {
-    switch (formData.payment) {
-      case PaymentEnum.ONLINE:
-        return 0
-      case PaymentEnum.PERSONAL_DELIVERY:
-        return 2
-      case PaymentEnum.TRANSACTION:
-        return 0
-      default:
-        0
-    }
-  }
-
-  const deliveryPrice = getDeliveryPrice() ?? 0
-  const paymentPrice = getPaymentPrice() ?? 0
+  const deliveryPrice = getDeliveryPrice(formData) ?? 0
+  const paymentPrice = getPaymentPrice(formData) ?? 0
   const finalPrice = Number(price!) + deliveryPrice + paymentPrice
 
   return (
@@ -71,15 +29,15 @@ const TotalSection = ({ price, formData }: TotalSectionProps): JSX.Element => {
       </div>
       <div className={styles.totalContainer}>
         <Typography className={styles.summarySectionTitle}>
-          Platba {getPayment()}
+          Platba - {t(String(getPayment(formData)))}
         </Typography>
-        <Typography>{getPaymentPrice()} €</Typography>
+        <Typography>{getPaymentPrice(formData)} €</Typography>
       </div>
       <div className={styles.totalContainer}>
         <Typography className={styles.summarySectionTitle}>
-          Doprava {getDelivery()}
+          Doprava - {t(String(getDelivery(formData)))}
         </Typography>
-        <Typography>{getDeliveryPrice()} €</Typography>
+        <Typography>{getDeliveryPrice(formData)} €</Typography>
       </div>
       <hr />
       <div className={styles.totalContainer}>
