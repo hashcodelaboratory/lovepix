@@ -9,8 +9,6 @@ export const getDelivery = (formData: FormInputs) => {
       return messages.courier
     case DeliveryOptions.PERSONAL_COLLECT:
       return messages.personalCollect
-    default:
-      ''
   }
 }
 
@@ -22,8 +20,6 @@ export const getPayment = (formData: FormInputs) => {
       return messages.personalDelivery
     case PaymentEnum.TRANSACTION:
       return messages.transaction
-    default:
-      ''
   }
 }
 
@@ -44,7 +40,5 @@ export const getPaymentPrice = (formData: FormInputs): number | undefined => {
       return 2
     case PaymentEnum.TRANSACTION:
       return 0
-    default:
-      0
   }
 }
