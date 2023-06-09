@@ -29,13 +29,13 @@ const TotalSection = ({ price, formData }: TotalSectionProps): JSX.Element => {
       </div>
       <div className={styles.totalContainer}>
         <Typography className={styles.summarySectionTitle}>
-          Platba - {t(String(getPayment(formData)))}
+          Platba - {t(String(getPayment(formData) ?? ''))}
         </Typography>
         <Typography>{getPaymentPrice(formData)} €</Typography>
       </div>
       <div className={styles.totalContainer}>
         <Typography className={styles.summarySectionTitle}>
-          Doprava - {t(String(getDelivery(formData)))}
+          Doprava - {t(String(getDelivery(formData) ?? ''))}
         </Typography>
         <Typography>{getDeliveryPrice(formData)} €</Typography>
       </div>
