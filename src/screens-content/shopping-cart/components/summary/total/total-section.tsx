@@ -31,13 +31,17 @@ const TotalSection = ({ price, formData }: TotalSectionProps): JSX.Element => {
       </div>
       {getPayment(formData) && (
         <div className={styles.totalContainer}>
-          <span>Platba - {t(String(getPayment(formData)))}</span>
+          <span>
+            {t('payment')} - {t(String(getPayment(formData)))}
+          </span>
           <span>{getPaymentPrice(formData)} €</span>
         </div>
       )}
       {getDelivery(formData) && (
         <div className={styles.totalContainer}>
-          <span>Doprava - {t(String(getDelivery(formData)))}</span>
+          <span>
+            {t('delivery')} - {t(String(getDelivery(formData)))}
+          </span>
           <span>{getDeliveryPrice(formData)} €</span>
         </div>
       )}
