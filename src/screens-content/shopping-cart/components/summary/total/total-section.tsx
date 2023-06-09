@@ -21,39 +21,37 @@ const TotalSection = ({ price, formData }: TotalSectionProps): JSX.Element => {
   const deliveryPrice = getDeliveryPrice(formData) ?? 0
   const paymentPrice = getPaymentPrice(formData) ?? 0
   const finalPrice = Number(price!) + deliveryPrice + paymentPrice
+  const priceWithoutTax = price ? Number(price * 0.8).toFixed(2) : '-'
+  const taxFromPrice = price ? Number(price * 0.2).toFixed(2) : '-'
 
   return (
     <div className={styles.cartContainer}>
       <div className={styles.cartTitleContainer}>
         <h3 className={styles.cartTitleText}>{String(t(messages.summary))}</h3>
       </div>
-      <div className={styles.totalContainer}>
-        <span className={styles.summarySectionTitle}>
-          Platba - {t(String(getPayment(formData) ?? ''))}
-        </span>
-        <span>{getPaymentPrice(formData)} €</span>
-      </div>
-      <div className={styles.totalContainer}>
-        <span className={styles.summarySectionTitle}>
-          Doprava - {t(String(getDelivery(formData) ?? ''))}
-        </span>
-        <span>{getDeliveryPrice(formData)} €</span>
-      </div>
+      {getPayment(formData) && (
+        <div className={styles.totalContainer}>
+          <span>Platba - {t(String(getPayment(formData)))}</span>
+          <span>{getPaymentPrice(formData)} €</span>
+        </div>
+      )}
+      {getDelivery(formData) && (
+        <div className={styles.totalContainer}>
+          <span>Doprava - {t(String(getDelivery(formData)))}</span>
+          <span>{getDeliveryPrice(formData)} €</span>
+        </div>
+      )}
       <hr />
       <div className={styles.totalContainer}>
-        <span className={styles.summarySectionTitle}>
-          {String(t(messages.totalWithoutTax))}
-        </span>
-        <span>{price ? Number(price * 0.8).toFixed(2) : '-'} €</span>
+        <span>{String(t(messages.totalWithoutTax))}</span>
+        <span>{priceWithoutTax} €</span>
       </div>
       <div className={styles.totalContainer}>
-        <span className={styles.summarySectionTitle}>
-          {String(t(messages.tax))}
-        </span>
-        <span>{price ? Number(price * 0.2).toFixed(2) : '-'} €</span>
+        <span>{String(t(messages.tax))}</span>
+        <span>{taxFromPrice} €</span>
       </div>
       <div className={styles.totalContainer}>
-        <span className={styles.summarySectionTitle}>
+        <span className={styles.summarySectionTitleFinalPrice}>
           {String(t(messages.total))}
         </span>
         <span className={styles.price}>{Number(finalPrice).toFixed(2)} €</span>
