@@ -1,6 +1,6 @@
 import styles from '../../../shopping-cart.module.scss'
 import { messages } from '../../../../../messages/messages'
-import { Link, Typography } from '@mui/material'
+import { Link } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import { FormInputs } from 'common/types/form'
 import {
@@ -28,41 +28,35 @@ const TotalSection = ({ price, formData }: TotalSectionProps): JSX.Element => {
         <h3 className={styles.cartTitleText}>{String(t(messages.summary))}</h3>
       </div>
       <div className={styles.totalContainer}>
-        <Typography className={styles.summarySectionTitle}>
+        <span className={styles.summarySectionTitle}>
           Platba - {t(String(getPayment(formData) ?? ''))}
-        </Typography>
-        <Typography>{getPaymentPrice(formData)} €</Typography>
+        </span>
+        <span>{getPaymentPrice(formData)} €</span>
       </div>
       <div className={styles.totalContainer}>
-        <Typography className={styles.summarySectionTitle}>
+        <span className={styles.summarySectionTitle}>
           Doprava - {t(String(getDelivery(formData) ?? ''))}
-        </Typography>
-        <Typography>{getDeliveryPrice(formData)} €</Typography>
+        </span>
+        <span>{getDeliveryPrice(formData)} €</span>
       </div>
       <hr />
       <div className={styles.totalContainer}>
-        <Typography className={styles.summarySectionTitle}>
+        <span className={styles.summarySectionTitle}>
           {String(t(messages.totalWithoutTax))}
-        </Typography>
-        <Typography>
-          {price ? Number(price * 0.8).toFixed(2) : '-'} €
-        </Typography>
+        </span>
+        <span>{price ? Number(price * 0.8).toFixed(2) : '-'} €</span>
       </div>
       <div className={styles.totalContainer}>
-        <Typography className={styles.summarySectionTitle}>
+        <span className={styles.summarySectionTitle}>
           {String(t(messages.tax))}
-        </Typography>
-        <Typography>
-          {price ? Number(price * 0.2).toFixed(2) : '-'} €
-        </Typography>
+        </span>
+        <span>{price ? Number(price * 0.2).toFixed(2) : '-'} €</span>
       </div>
       <div className={styles.totalContainer}>
-        <Typography className={styles.summarySectionTitle}>
+        <span className={styles.summarySectionTitle}>
           {String(t(messages.total))}
-        </Typography>
-        <Typography className={styles.price}>
-          {Number(finalPrice).toFixed(2)} €
-        </Typography>
+        </span>
+        <span className={styles.price}>{Number(finalPrice).toFixed(2)} €</span>
       </div>
       <p className={styles.text}>{String(t(messages.personalData))}</p>
       <Link className={styles.text} style={{ cursor: 'pointer' }}>
