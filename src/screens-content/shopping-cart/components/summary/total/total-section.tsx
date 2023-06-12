@@ -1,29 +1,39 @@
-import styles from "../../../shopping-cart.module.scss";
-import { messages } from "../../../../../messages/messages";
-import { Link } from "@mui/material";
-import { useTranslation } from "next-i18next";
+import styles from '../../../shopping-cart.module.scss'
+import { messages } from '../../../../../messages/messages'
+import { Link } from '@mui/material'
+import { useTranslation } from 'next-i18next'
 import {
   getDeliveryMessage,
   getPaymentMessage,
   getPriceForDelivery,
   getPriceForPayment,
-} from "./utils";
-import { Delivery } from "../../../../../common/enums/delivery";
-import { Payment } from "../../../../../common/enums/payment";
+} from './utils'
+import { Delivery } from '../../../../../common/enums/delivery'
+import { Payment } from '../../../../../common/enums/payment'
 
 type TotalSectionProps = {
-  delivery?: Delivery;
-  payment?: Payment;
+  delivery?: Delivery
+  payment?: Payment
   price?: number
   finalPrice: number
 }
 
-const TotalSection = ({ delivery, payment, price, finalPrice }: TotalSectionProps): JSX.Element => {
-  const { t } = useTranslation();
+const TotalSection = ({
+  delivery,
+  payment,
+  price,
+  finalPrice,
+}: TotalSectionProps): JSX.Element => {
+  const { t } = useTranslation()
 
-  const priceWithoutTax = price ? Number(finalPrice * 0.8).toFixed(2) : "-";
-  const taxFromPrice = price ? Number(finalPrice * 0.2).toFixed(2) : "-";
-  const finalPriceWithTax = (finalPrice).toFixed(2);
+  const priceWithoutTax = price ? Number(finalPrice * 0.8).toFixed(2) : '-'
+  const taxFromPrice = price ? Number(finalPrice * 0.2).toFixed(2) : '-'
+  const finalPriceWithTax = finalPrice.toFixed(2)
+
+  const paymentPrice = payment ? getPriceForPayment(payment) : '-'
+  const deliveryPrice = delivery ? getPriceForDelivery(delivery) : '-'
+  const paymentOption = t(String(getPaymentMessage(payment)))
+  const deliveryOption = t(String(getDeliveryMessage(delivery)))
 
   return (
     <div className={styles.cartContainer}>
@@ -32,15 +42,15 @@ const TotalSection = ({ delivery, payment, price, finalPrice }: TotalSectionProp
       </div>
       <div className={styles.totalContainer}>
         <span>
-          {t(messages.payment)} {!payment && <>- {getPaymentMessage(payment)}</>}
+          {t(messages.payment)} {payment && <>- {paymentOption}</>}
         </span>
-        <span>{payment ? getPriceForPayment(payment) : '-'} €</span>
+        <span>{paymentPrice} €</span>
       </div>
       <div className={styles.totalContainer}>
         <span>
-          {t(messages.delivery)} - {t(String(getDeliveryMessage(delivery)))}
+          {t(messages.delivery)} {delivery && <>- {deliveryOption}</>}
         </span>
-        <span>{delivery ? getPriceForDelivery(delivery) : '-'} €</span>
+        <span>{deliveryPrice} €</span>
       </div>
       <hr />
       <div className={styles.totalContainer}>
@@ -58,14 +68,14 @@ const TotalSection = ({ delivery, payment, price, finalPrice }: TotalSectionProp
         <span className={styles.price}>{finalPriceWithTax} €</span>
       </div>
       <p className={styles.text}>{String(t(messages.personalData))}</p>
-      <Link className={styles.text} style={{ cursor: "pointer" }}>
+      <Link className={styles.text} style={{ cursor: 'pointer' }}>
         <b>{String(t(messages.privacy))}</b>
       </Link>
-      <button type="submit" className={styles.checkoutButton}>
+      <button type='submit' className={styles.checkoutButton}>
         {String(t(messages.orderWithPayment))}
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default TotalSection;
+export default TotalSection
