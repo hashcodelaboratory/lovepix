@@ -37,7 +37,7 @@ const Summary = ({ order }: SummaryProps) => {
     defaultValues: { ...order },
   })
   const { delivery, payment } = watch();
-  const finalPrice =  Number(order?.totalPrice) + getPriceForDelivery(delivery) + getPriceForPayment(payment);
+  const finalPrice = Number(order?.totalPrice) + getPriceForDelivery(delivery) + getPriceForPayment(payment);
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setIsLoading(true)
@@ -79,7 +79,8 @@ const Summary = ({ order }: SummaryProps) => {
             control={control}
           />
           <TotalSection
-            control={control}
+            delivery={delivery}
+            payment={payment}
             price={order?.totalPrice}
             finalPrice={finalPrice}
           />
