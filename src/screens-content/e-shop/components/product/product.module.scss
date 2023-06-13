@@ -1,0 +1,30 @@
+.productCart {
+  min-width: 200px;
+  padding: 20px;
+  background-color: white;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.image {
+  cursor: pointer;
+}
+
+.title {
+  margin-top: 20px;
+  color: #424c56;
+  font-size: 14px;
+}
+
+.price {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #c31702
+}
+
+.addToCart {
+  margin-top: 20px !important;
+}
