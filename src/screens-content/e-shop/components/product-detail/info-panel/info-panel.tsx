@@ -28,7 +28,7 @@ const InfoPanel = () => {
   ]
 
   const tableInfo = shopInfo.map((item) => (
-    <div style={{ display: 'flex' }} key={item.title}>
+    <div style={{ display: 'flex', alignItems: 'center' }} key={item.title}>
       <div>{item.img}</div>
       <div className={styles.textInfo}>
         <p className={styles.title}>{item.title}</p>
