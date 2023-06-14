@@ -121,4 +121,12 @@ export const messages = {
   blog: 'blog',
   partners: 'partners',
   changeLanguage: 'changeLanguage',
+  newsletterLogin: 'newsletterLogin',
+  newsletterGet: "newsletterGet",
+  yourMail: "yourMail",
+  login: "login",
+  newsletter: "newsletter",
+  here: "here",
+  putMail: "putMail",
+  logout: "logout"
 }
