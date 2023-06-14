@@ -1,3 +1,46 @@
 .productDetailContainer {
-    margin-top: 2rem !important;
+    margin-top: 4rem !important;
+}
+
+.detailLayout { 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(335px, 1fr));
+    row-gap: 0;
+    column-gap: 0px;
+
+}
+
+.productInfo {
+    padding: 0px 20px
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #444c57
+}
+
+.price {
+    font-size: 25px;
+    color: #c31702;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.count {
+    color: #4c9f70;
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+
+.withTax {
+    color: gray;
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.button {
+    margin-top: 20px;
 }

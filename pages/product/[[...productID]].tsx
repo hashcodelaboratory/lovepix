@@ -16,17 +16,6 @@ const ProductID: NextPage = () => {
   const router = useRouter()
   const id = router.query.productID as string[]
 
-  console.log(id[0])
-
-  const getData = async () => {
-    const snap = await getDoc(doc(database, Collections.PRODUCTS, id[0]))
-    console.log(snap.data())
-
-    return snap.data()
-  }
-
-  console.log('✅', getData())
-
   return (
     <div className={styles.container}>
       <Head>
@@ -38,7 +27,7 @@ const ProductID: NextPage = () => {
         <ResponsiveAppBar />
       </header>
       <main className={styles.main}>
-        <ProductDetail />
+        <ProductDetail id={id[0]} />
       </main>
       <footer>
         <FooterLayout />
