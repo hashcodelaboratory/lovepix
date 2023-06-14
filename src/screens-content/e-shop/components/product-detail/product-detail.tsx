@@ -12,14 +12,14 @@ type ProductID = {
 
 const ProductDetail = ({ id }: ProductID) => {
   const { data: product, isLoading } = useProduct(id)
-  const { image, title, price, count } = product ?? {}
+  const { image, title, price, count, description } = product ?? {}
   const [quantity, setQuantity] = useState(1)
 
   const counterContent = (
     <div className={styles.counterContainer}>
       <div className={styles.counter}>
         <div className={styles.minus}>-</div>
-        <div>{quantity} ks</div>
+        <div>{quantity}</div>
         <div className={styles.plus}>+</div>
       </div>
     </div>
@@ -31,7 +31,7 @@ const ProductDetail = ({ id }: ProductID) => {
         <Image
           src={image ?? ''}
           layout={ImageLayout.INTRINSIC}
-          width={500}
+          width={600}
           height={500}
           alt='image'
           className={styles.image}
@@ -40,6 +40,7 @@ const ProductDetail = ({ id }: ProductID) => {
         <hr />
         <div className={styles.productInfo}>
           <span className={styles.title}>{title}</span>
+          <div className={styles.description}>{description}</div>
           <div className={styles.price}>
             {price?.toFixed(2)} € <span className={styles.withTax}>s DPH</span>
           </div>

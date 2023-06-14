@@ -41,6 +41,13 @@
   margin-left: 5px;
 }
 
+.description {
+  color: gray;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
 .button {
   margin: 20px 0px !important;
 }
@@ -52,7 +59,7 @@
 
 .counter {
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 400;
   display: flex;
   align-items: center;
   border: 1.5px solid #e6e6e6;
