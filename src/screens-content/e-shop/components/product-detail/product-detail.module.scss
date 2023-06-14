@@ -1,12 +1,14 @@
 .productDetailContainer {
     margin-top: 4rem !important;
+    background-color: white;
+    padding: 10px 10px;
 }
 
 .detailLayout { 
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(335px, 1fr));
     row-gap: 0;
-    column-gap: 0px;
+    column-gap: 0px;    
 }
 
 .productInfo {
