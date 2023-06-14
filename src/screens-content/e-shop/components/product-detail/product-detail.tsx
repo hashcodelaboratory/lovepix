@@ -1,10 +1,13 @@
-import { Button, Container } from '@mui/material'
+import { Button, Container, Skeleton } from '@mui/material'
 import { useProduct } from 'common/api/use-product'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { ImageLayout } from 'screens-content/home/enums/enums'
 import InfoPanel from './info-panel/info-panel'
 import styles from './product-detail.module.scss'
+import { useLiveQuery } from 'dexie-react-hooks'
+import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
+import { configurationsTable, orderTable } from '../../../../../database.config'
 
 type ProductID = {
   id: string
@@ -25,19 +28,53 @@ const ProductDetail = ({ id }: ProductID) => {
     </div>
   )
 
+  const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
+
+  const addToBasket = () => {
+    console.log('here')
+
+    const payload = {
+      shoppingCart: {
+        images: order.shoppingCart.images,
+        products: [
+          ...(order?.shoppingCart?.products ?? []),
+          {
+            id: id,
+            url: image,
+            qty: 1,
+            title: title,
+            price: price,
+          },
+        ],
+      },
+      totalPrice: order.totalPrice,
+    }
+
+    order?.shoppingCart
+      ? orderTable.update(ORDER_TABLE_KEY, payload)
+      : orderTable.add(payload, ORDER_TABLE_KEY)
+
+    configurationsTable.clear()
+  }
+
+  console.log(order)
+
   return (
     <Container className={styles.productDetailContainer}>
       <div className={styles.detailLayout}>
-        <Image
-          src={image ?? ''}
-          layout={ImageLayout.INTRINSIC}
-          width={600}
-          height={500}
-          alt='image'
-          className={styles.image}
-          loading='lazy'
-        />
-        <hr />
+        {!isLoading ? (
+          <Image
+            src={image ?? ''}
+            layout={ImageLayout.INTRINSIC}
+            width={600}
+            height={500}
+            alt='image'
+            className={styles.image}
+            loading='lazy'
+          />
+        ) : (
+          <Skeleton animation='wave' width='100%' height={'400px'} />
+        )}
         <div className={styles.productInfo}>
           <span className={styles.title}>{title}</span>
           <div className={styles.description}>{description}</div>
@@ -46,11 +83,15 @@ const ProductDetail = ({ id }: ProductID) => {
           </div>
           {counterContent}
           <div className={styles.count}>Na sklade {count} ks</div>
-          <Button variant='outlined' fullWidth className={styles.button}>
+          <Button
+            variant='outlined'
+            fullWidth
+            className={styles.button}
+            onClick={addToBasket}
+          >
             Pridať do košíka
           </Button>
         </div>
-
         <div>
           <InfoPanel />
         </div>
