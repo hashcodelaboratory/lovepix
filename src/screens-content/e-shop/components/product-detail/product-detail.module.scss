@@ -18,6 +18,7 @@
 .image {
     object-fit: contain;
     background-color: white;
+    padding-bottom: 20px;
 }
 
 .title {
@@ -48,5 +49,5 @@
 }
 
 .button {
-    margin: 20px 0px;
+    margin: 20px 0px !important;
 }
