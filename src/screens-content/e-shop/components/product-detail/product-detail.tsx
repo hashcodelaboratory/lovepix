@@ -20,8 +20,8 @@ const ProductDetail = ({ id }: ProductID) => {
         <Image
           src={image ?? ''}
           layout={ImageLayout.INTRINSIC}
-          width={400}
-          height={400}
+          width={500}
+          height={500}
           alt='image'
           className={styles.image}
           loading='lazy'
