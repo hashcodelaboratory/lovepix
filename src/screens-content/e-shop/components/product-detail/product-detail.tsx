@@ -24,6 +24,7 @@ const ProductDetail = ({ id }: ProductID) => {
           height={400}
           alt='image'
           className={styles.image}
+          loading='lazy'
         />
         <div className={styles.productInfo}>
           <span className={styles.title}>{title}</span>
