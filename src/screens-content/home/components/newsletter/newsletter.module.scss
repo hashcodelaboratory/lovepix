@@ -1,0 +1,87 @@
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem,
+    rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
+  padding: 0.5rem;
+}
+
+.border {
+  border: 1px solid #f1f1f1;
+  padding: 1rem;
+  position: relative;
+}
+
+.title {
+  font-weight: bold;
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  color: #175ba1;
+}
+
+.subtitle {
+  font-weight: 300;
+  margin: 0;
+  letter-spacing: 1px;
+  margin-bottom: 3rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.textFieldText {
+  margin: 0;
+  font-size: 0.8rem;
+  padding-bottom: 0.7rem;
+  padding-right: 6px;
+  font-weight: 300;
+}
+
+.textFieldTextSecondary {
+  font-weight: 300;
+  margin: 0;
+  font-size: 0.7rem;
+  color: silver;
+  padding-bottom: 0.7rem;
+}
+
+.button {
+  position: absolute;
+  background-color: #175ba1;
+  padding: 1rem 2rem;
+  border: none;
+  color: white;
+  margin: 1rem 0;
+  right: 2rem;
+  bottom: 5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.button:hover {
+  background-color: #0d3157;
+  cursor: pointer;
+}
+
+.note {
+  font-weight: 300;
+  margin-top: 5rem;
+  font-size: 0.7rem;
+  color: silver;
+}
+
+.noteLink {
+  font-weight: bold;
+  font-size: 0.7rem;
+  color: #175ba1;
+  margin: 0;
+  padding: 0;
+}
+
+.noteLink:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
