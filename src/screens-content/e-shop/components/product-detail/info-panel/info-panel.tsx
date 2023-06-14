@@ -4,6 +4,7 @@ import Delivery from '@icons/icon-delivery'
 import Experience from '@icons/icon-experience'
 import Access from '@icons/icon-access'
 import styles from './info-panel.module.scss'
+import { messages } from 'messages/messages'
 
 const InfoPanel = () => {
   const { t } = useTranslation()
@@ -11,18 +12,18 @@ const InfoPanel = () => {
   const shopInfo = [
     {
       img: <Delivery width={60} height={60} />,
-      title: t('fast-delivery'),
-      description: t('fast-delivery-description'),
+      title: t(messages.fastDelivery),
+      description: t(messages.fastDeliveryDescription),
     },
     {
       img: <Experience width={60} height={60} />,
-      title: t('long-term-experience'),
-      description: t('long-term-experience-description'),
+      title: t(messages.longTermExperience),
+      description: t(messages.longTermExperienceDescription),
     },
     {
       img: <Access width={60} height={60} />,
-      title: t('special-approach'),
-      description: t('special-approach-description'),
+      title: t(messages.specialApproach),
+      description: t(messages.specialApproachDescription),
     },
   ]
 

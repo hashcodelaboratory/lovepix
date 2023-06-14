@@ -7,11 +7,14 @@
     grid-template-columns: repeat(auto-fill, minmax(335px, 1fr));
     row-gap: 0;
     column-gap: 0px;
-
 }
 
 .productInfo {
     padding: 0px 20px
+}
+
+.image {
+    object-fit: contain;
 }
 
 .title {
