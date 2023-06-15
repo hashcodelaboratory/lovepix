@@ -19,12 +19,13 @@ const Product = ({ product }: ProductContent) => {
     <div className={styles.productCart}>
       <Image
         src={image}
-        layout={ImageLayout.INTRINSIC}
         width={200}
         height={300}
         alt='image'
         className={styles.image}
         onClick={goTo}
+        blurDataURL='URL'
+        placeholder='blur'
       />
       <span className={styles.title}>{title}</span>
       <span className={styles.description}>{description}</span>
