@@ -45,7 +45,11 @@ const ResponsiveAppBar = () => {
     []
   )
 
-  const BADGE_NUMBER = order?.shoppingCart?.images?.length
+  const productsLength = order?.shoppingCart?.products?.length
+  const imagesLength = order?.shoppingCart?.images?.length
+  const totalLength = imagesLength + productsLength
+
+  const BADGE_NUMBER = totalLength || 0
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
