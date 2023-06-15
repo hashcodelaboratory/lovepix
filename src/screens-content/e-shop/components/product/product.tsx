@@ -1,4 +1,3 @@
-import { Button } from '@mui/material'
 import { ProductsType } from 'common/api/use-products'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -12,7 +11,7 @@ type ProductContent = {
 
 const Product = ({ product }: ProductContent) => {
   const router = useRouter()
-  const { id, title, price, image } = product
+  const { id, title, price, image, description } = product
 
   const goTo = () => router.push(`/product/${id}`)
 
@@ -22,16 +21,14 @@ const Product = ({ product }: ProductContent) => {
         src={image}
         layout={ImageLayout.INTRINSIC}
         width={200}
-        height={200}
+        height={300}
         alt='image'
         className={styles.image}
         onClick={goTo}
       />
       <span className={styles.title}>{title}</span>
+      <span className={styles.description}>{description}</span>
       <span className={styles.price}>{price.toFixed(2)} €</span>
-      <Button variant='outlined' className={styles.addToCart}>
-        Pridať do košíka
-      </Button>
     </div>
   )
 }
