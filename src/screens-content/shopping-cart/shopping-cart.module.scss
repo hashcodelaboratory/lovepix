@@ -163,10 +163,20 @@ $delivery-container-width: 370px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 5px;
+  font-weight: 200;
+  font-size: 0.75rem !important;
 }
 
 .summarySectionTitle {
   font-weight: 200;
+  font-size: 0.75rem !important;
+  text-transform: uppercase;
+}
+
+.summarySectionTitleFinalPrice {
+  font-weight: 600;
+  font-size: 0.75rem !important;
   text-transform: uppercase;
 }
 
@@ -201,8 +211,8 @@ $delivery-container-width: 370px;
 }
 
 .price {
-  font-weight: 500;
-  font-size: 1.2rem;
+  font-weight: 600;
+  color: #D32F2F;
 }
 
 .cartTitleContainer {

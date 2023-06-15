@@ -116,5 +116,13 @@
   "download": "Download",
   "blog": "Blog",
   "partners": "Partners",
-  "changeLanguage": "Change language"
+  "changeLanguage": "Change language",
+  "newsletterLogin": "Login",
+  "newsletterGet": "Get",
+  "yourMail": "Your e-mail",
+  "login": "Login",
+  "newsletter": "newsletter",
+  "here": "here",
+  "putMail": "putMail",
+  "logout": "logout"
 }
