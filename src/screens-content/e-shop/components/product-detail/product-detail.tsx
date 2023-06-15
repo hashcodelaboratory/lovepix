@@ -37,7 +37,9 @@ const ProductDetail = ({ id }: ProductID) => {
     })
     totalPrice += Number(price)
 
-    const finalPrice = Number(order?.totalPrice) + totalPrice
+    const finalPrice = order?.totalPrice
+      ? Number(order?.totalPrice) + price!
+      : price
 
     const payload = {
       shoppingCart: {
