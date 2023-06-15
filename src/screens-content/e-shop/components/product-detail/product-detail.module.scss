@@ -1,0 +1,77 @@
+.productDetailContainer {
+  margin-top: 4rem !important;
+  background-color: white;
+  padding: 20px;
+}
+
+.detailLayout {
+  display: flex;
+  flex-direction: column;
+}
+
+.image {
+  object-fit: contain;
+  background-color: white;
+  padding-bottom: 20px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #444c57;
+}
+
+.price {
+  font-size: 25px;
+  color: #c31702;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.count {
+  color: #4c9f70;
+  margin-top: 5px;
+  font-size: 15px;
+}
+
+.withTax {
+  color: gray;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 5px;
+}
+
+.description {
+  color: gray;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+.button {
+  margin: 20px 0px !important;
+}
+
+.counterContainer {
+  width: fit-content;
+  padding: 20px 0px;
+}
+
+.counter {
+  font-size: 17px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #e6e6e6;
+  border-radius: 3px;
+}
+
+.minus {
+  cursor: pointer;
+  padding: 10px;
+}
+
+.plus {
+  cursor: pointer;
+  padding: 10px;
+}

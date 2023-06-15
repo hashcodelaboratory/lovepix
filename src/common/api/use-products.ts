@@ -4,7 +4,7 @@ import { collection, getDocs } from '@firebase/firestore'
 import { database } from '../firebase/config'
 import { Collections } from '../firebase/enums'
 
-export const PRODUCT_KEY = 'PRODUCT'
+export const PRODUCT_KEY = 'PRODUCTS'
 
 export type ProductsType = {
   id: string
@@ -12,6 +12,7 @@ export type ProductsType = {
   image: string
   price: number
   description: string
+  count: number
 }
 
 const getProducts = async (): Promise<ProductsType[]> => {
