@@ -8,6 +8,7 @@ import styles from './product-detail.module.scss'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 import { configurationsTable, orderTable } from '../../../../../database.config'
+import { ProductsType } from 'common/api/use-products'
 
 type ProductID = {
   id: string
@@ -17,6 +18,7 @@ const ProductDetail = ({ id }: ProductID) => {
   const { data: product, isLoading } = useProduct(id)
   const { image, title, price, count, description } = product ?? {}
   const [quantity, setQuantity] = useState(1)
+  const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
 
   const counterContent = (
     <div className={styles.counterContainer}>
@@ -28,14 +30,18 @@ const ProductDetail = ({ id }: ProductID) => {
     </div>
   )
 
-  const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
-
   const addToBasket = () => {
-    console.log('here')
+    let totalPrice: number = 0
+    order?.shoppingCart?.products?.forEach((product: ProductsType) => {
+      totalPrice += product.price
+    })
+    totalPrice += Number(price)
+
+    const finalPrice = Number(order?.totalPrice) + totalPrice
 
     const payload = {
       shoppingCart: {
-        images: order.shoppingCart.images,
+        images: order?.shoppingCart.images ?? [],
         products: [
           ...(order?.shoppingCart?.products ?? []),
           {
@@ -47,9 +53,8 @@ const ProductDetail = ({ id }: ProductID) => {
           },
         ],
       },
-      totalPrice: order.totalPrice,
+      totalPrice: finalPrice,
     }
-
     order?.shoppingCart
       ? orderTable.update(ORDER_TABLE_KEY, payload)
       : orderTable.add(payload, ORDER_TABLE_KEY)
@@ -57,7 +62,7 @@ const ProductDetail = ({ id }: ProductID) => {
     configurationsTable.clear()
   }
 
-  console.log(order)
+  console.log('🥶', order)
 
   return (
     <Container className={styles.productDetailContainer}>
@@ -67,7 +72,7 @@ const ProductDetail = ({ id }: ProductID) => {
             src={image ?? ''}
             layout={ImageLayout.INTRINSIC}
             width={600}
-            height={500}
+            height={400}
             alt='image'
             className={styles.image}
             loading='lazy'
