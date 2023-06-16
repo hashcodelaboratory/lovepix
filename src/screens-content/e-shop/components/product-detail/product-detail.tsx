@@ -7,8 +7,13 @@ import InfoPanel from './info-panel/info-panel'
 import styles from './product-detail.module.scss'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
-import { configurationsTable, orderTable } from '../../../../../database.config'
-import { ProductsType } from 'common/api/use-products'
+import { orderTable } from '../../../../../database.config'
+import { shoppingCartPrice } from './utils'
+import { useSnackbar } from 'notistack'
+import {
+  SNACKBAR_OPTIONS_ERROR,
+  SNACKBAR_OPTIONS_SUCCESS,
+} from 'snackbar/config'
 
 type ProductID = {
   id: string
@@ -19,6 +24,8 @@ const ProductDetail = ({ id }: ProductID) => {
   const { image, title, price, count, description } = product ?? {}
   const [quantity, setQuantity] = useState(1)
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
+
+  const { enqueueSnackbar } = useSnackbar()
 
   const counterContent = (
     <div className={styles.counterContainer}>
@@ -33,17 +40,6 @@ const ProductDetail = ({ id }: ProductID) => {
   const payloadAddtoCart = () => {
     const { products } = order?.shoppingCart || []
 
-    let totalPrice: number = 0
-    order?.shoppingCart?.products?.forEach((product: ProductsType) => {
-      totalPrice += product.price
-    })
-
-    totalPrice += Number(price)
-
-    const finalPrice = order?.totalPrice
-      ? Number(order?.totalPrice) + price!
-      : price
-
     const foundIndex: number = products?.findIndex(
       (item: any) => item.id === id
     )
@@ -55,7 +51,7 @@ const ProductDetail = ({ id }: ProductID) => {
           images: order?.shoppingCart.images ?? [],
           products: [...array],
         },
-        totalPrice: finalPrice,
+        totalPrice: shoppingCartPrice(order, price!),
       }
       return payload
     } else {
@@ -73,19 +69,29 @@ const ProductDetail = ({ id }: ProductID) => {
             },
           ],
         },
-        totalPrice: finalPrice,
+        totalPrice: shoppingCartPrice(order, price!),
       }
       return payload
     }
   }
 
   const addToBasket = () => {
+    const { products } = order?.shoppingCart || []
+    const product = products?.find((item: any) => item.id === id)
+
+    if (product?.qty === count) {
+      enqueueSnackbar(
+        'Viac kusov tohto produktu už nie su na sklade',
+        SNACKBAR_OPTIONS_ERROR
+      )
+      return
+    }
+
     order?.shoppingCart
       ? orderTable.update(ORDER_TABLE_KEY, payloadAddtoCart())
       : orderTable.add(payloadAddtoCart(), ORDER_TABLE_KEY)
+    enqueueSnackbar('Produkt bol pridaný do košíka', SNACKBAR_OPTIONS_SUCCESS)
   }
-
-  console.log('🥶', order)
 
   return (
     <Container className={styles.productDetailContainer}>
