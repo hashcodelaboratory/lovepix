@@ -16,13 +16,21 @@ export type Image = {
   pdf?: string
 }
 
+export type Product = {
+  id: string
+  price: number
+  qty: number
+  title: string
+  url: string
+}
+
 export type Order = {
   id: string
   date: Date
   form: FormInputs
   shoppingCart: {
     images: Image[]
-    products: ProductsType[]
+    products: Product[]
   }
   delivery: Delivery
   payment: Payment

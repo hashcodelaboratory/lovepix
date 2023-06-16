@@ -30,38 +30,59 @@ const ProductDetail = ({ id }: ProductID) => {
     </div>
   )
 
-  const addToBasket = () => {
+  const payloadAddtoCart = () => {
+    const { products } = order?.shoppingCart || []
+
     let totalPrice: number = 0
     order?.shoppingCart?.products?.forEach((product: ProductsType) => {
       totalPrice += product.price
     })
+
     totalPrice += Number(price)
 
     const finalPrice = order?.totalPrice
       ? Number(order?.totalPrice) + price!
       : price
 
-    const payload = {
-      shoppingCart: {
-        images: order?.shoppingCart.images ?? [],
-        products: [
-          ...(order?.shoppingCart?.products ?? []),
-          {
-            id: id,
-            url: image,
-            qty: 1,
-            title: title,
-            price: price,
-          },
-        ],
-      },
-      totalPrice: finalPrice,
+    const foundIndex: number = products?.findIndex(
+      (item: any) => item.id === id
+    )
+    if (products && foundIndex !== -1) {
+      const array = products
+      array[foundIndex].qty++
+      const payload = {
+        shoppingCart: {
+          images: order?.shoppingCart.images ?? [],
+          products: [...array],
+        },
+        totalPrice: finalPrice,
+      }
+      return payload
+    } else {
+      const payload = {
+        shoppingCart: {
+          images: order?.shoppingCart.images ?? [],
+          products: [
+            ...(order?.shoppingCart?.products ?? []),
+            {
+              id: id,
+              url: image,
+              qty: 1,
+              title: title,
+              price: price,
+            },
+          ],
+        },
+        totalPrice: finalPrice,
+      }
+      return payload
     }
-    order?.shoppingCart
-      ? orderTable.update(ORDER_TABLE_KEY, payload)
-      : orderTable.add(payload, ORDER_TABLE_KEY)
+  }
 
-    configurationsTable.clear()
+  const addToBasket = () => {
+    order?.shoppingCart
+      ? orderTable.update(ORDER_TABLE_KEY, payloadAddtoCart())
+      : orderTable.add(payloadAddtoCart(), ORDER_TABLE_KEY)
   }
 
   console.log('🥶', order)
