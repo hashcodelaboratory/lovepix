@@ -12,8 +12,13 @@ const ProductList = () => {
   ))
 
   return (
-    <div className={styles.productsContainer}>
-      {isLoading ? <ProductSkeleton /> : <>{productList}</>}
+    <div className={styles.eshopContainer}>
+      <div className={styles.categoriesContainer}>Kategorie</div>
+      <div className={styles.rightContainer}>
+        <div className={styles.productsContainer}>
+          {isLoading ? <ProductSkeleton /> : <>{productList}</>}
+        </div>
+      </div>
     </div>
   )
 }
