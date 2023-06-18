@@ -3,6 +3,7 @@ import { default as ImageComponent } from 'next/image'
 import { ImageLayout } from '../../../../../../home/enums/enums'
 import { Close } from '@mui/icons-material'
 import { Order, Product } from '../../../../../../../common/types/order'
+import { removeProduct } from '../utils/utils'
 
 type CartRowProps = {
   order: Order
@@ -10,6 +11,8 @@ type CartRowProps = {
 }
 
 const CartRowProduct = ({ product, order }: CartRowProps): JSX.Element => {
+  console.log(product.id)
+
   return (
     <div className={styles.cartRow} key={product.title}>
       <div className={styles.cartRowThumbnailContainer}>
@@ -33,7 +36,7 @@ const CartRowProduct = ({ product, order }: CartRowProps): JSX.Element => {
       <Close
         className={styles.cartRowClose}
         color='error'
-        //onClick={() => removeImage(image?.url, order.shoppingCart?.images)}
+        onClick={() => removeProduct(product.id, order.shoppingCart?.products)}
       />
     </div>
   )
