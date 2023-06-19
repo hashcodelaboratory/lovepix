@@ -6,7 +6,7 @@ export const SIDEBAR_MENU_LIST: {
 }[] = [
   {
     title: messages.home,
-    link: '',
+    link: '/dashboard',
   },
   {
     title: messages.orders,
@@ -14,7 +14,7 @@ export const SIDEBAR_MENU_LIST: {
   },
   {
     title: messages.products,
-    link: '',
+    link: '/dashboard/product',
   },
   {
     title: messages.dimensions,
