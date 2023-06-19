@@ -137,5 +137,6 @@
   "logout": "(z newslettera sa odhlásite kedy budete chcieť)",
   "onStock": "Na sklade",
   "addToBasket": "Pridať do košíka",
-  "withTax": "s DPH"
+  "withTax": "s DPH",
+  "productAddedToBsket": "Produkt bol pridaný do košíka"
 }
