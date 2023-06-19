@@ -29,7 +29,7 @@ const Product = ({ product }: ProductContent) => {
       />
       <span className={styles.title}>{title}</span>
       <span className={styles.description}>{description}</span>
-      <span className={styles.price}>{price.toFixed(2)} €</span>
+      <span className={styles.price}>{price?.toFixed(2) ?? '-'} €</span>
     </div>
   )
 }

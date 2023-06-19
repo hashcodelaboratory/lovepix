@@ -2,16 +2,18 @@ import { DataGrid } from '@mui/x-data-grid'
 import { useProducts } from 'common/api/use-products'
 import React from 'react'
 import { useQueryClient } from 'react-query'
+import AddProduct from './add-product/add-product'
 import styles from './manage-products.module.scss'
 import { getProductsColumns } from './utils'
 
 const ManageProducts = () => {
   const queryClient = useQueryClient()
-  const { data, isLoading } = useProducts()
+  const { data } = useProducts()
 
   return (
     <div className={styles.manageProductsContainer}>
       <h3>Produkty</h3>
+      <AddProduct />
       <div>
         <DataGrid
           className={styles.contentTable}
