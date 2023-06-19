@@ -25,19 +25,8 @@ const ProductDetail = ({ id }: ProductID) => {
   const { t } = useTranslation()
   const { data: product, isLoading } = useProduct(id)
   const { image, title, price, count, description } = product ?? {}
-  const [quantity, setQuantity] = useState(1)
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
   const { enqueueSnackbar } = useSnackbar()
-
-  const counterContent = (
-    <div className={styles.counterContainer}>
-      <div className={styles.counter}>
-        <div className={styles.minus}>-</div>
-        <div>{quantity}</div>
-        <div className={styles.plus}>+</div>
-      </div>
-    </div>
-  )
 
   const payloadAddtoCart = () => {
     const { products } = order?.shoppingCart || []
@@ -123,7 +112,6 @@ const ProductDetail = ({ id }: ProductID) => {
               {String(t(messages.withTax))}
             </span>
           </div>
-          {counterContent}
           <div className={styles.count}>
             {String(t(messages.onStock))} {count} ks
           </div>
