@@ -135,4 +135,7 @@ export const messages = {
   here: 'here',
   putMail: 'putMail',
   logout: 'logout',
+  onStock: 'onStock',
+  addToBasket: 'addToBasket',
+  withTax: 'withTax',
 }

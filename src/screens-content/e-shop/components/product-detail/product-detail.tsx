@@ -14,6 +14,7 @@ import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
 } from 'snackbar/config'
+import { messages } from 'messages/messages'
 
 type ProductID = {
   id: string
@@ -113,17 +114,20 @@ const ProductDetail = ({ id }: ProductID) => {
           <span className={styles.title}>{title}</span>
           <div className={styles.description}>{description}</div>
           <div className={styles.price}>
-            {price?.toFixed(2)} € <span className={styles.withTax}>s DPH</span>
+            {price?.toFixed(2)} €
+            <span className={styles.withTax}>(t{messages.withTax})</span>
           </div>
           {counterContent}
-          <div className={styles.count}>Na sklade {count} ks</div>
+          <div className={styles.count}>
+            (t{messages.onStock}) {count} ks
+          </div>
           <Button
             variant='outlined'
             fullWidth
             className={styles.button}
             onClick={addToBasket}
           >
-            Pridať do košíka
+            (t{messages.addToBasket})
           </Button>
         </div>
         <div>
