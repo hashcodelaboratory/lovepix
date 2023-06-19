@@ -139,4 +139,5 @@ export const messages = {
   addToBasket: 'addToBasket',
   withTax: 'withTax',
   productAddedToBsket: 'productAddedToBsket',
+  noMoreProdutsOnStock: 'noMoreProdutsOnStock',
 }

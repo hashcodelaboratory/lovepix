@@ -15,17 +15,18 @@ import {
   SNACKBAR_OPTIONS_SUCCESS,
 } from 'snackbar/config'
 import { messages } from 'messages/messages'
+import { useTranslation } from 'next-i18next'
 
 type ProductID = {
   id: string
 }
 
 const ProductDetail = ({ id }: ProductID) => {
+  const { t } = useTranslation()
   const { data: product, isLoading } = useProduct(id)
   const { image, title, price, count, description } = product ?? {}
   const [quantity, setQuantity] = useState(1)
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
-
   const { enqueueSnackbar } = useSnackbar()
 
   const counterContent = (
@@ -82,7 +83,7 @@ const ProductDetail = ({ id }: ProductID) => {
 
     if (product?.qty === count) {
       enqueueSnackbar(
-        'Viac kusov tohto produktu už nie su na sklade',
+        String(t(messages.noMoreProdutsOnStock)),
         SNACKBAR_OPTIONS_ERROR
       )
       return
@@ -91,7 +92,10 @@ const ProductDetail = ({ id }: ProductID) => {
     order?.shoppingCart
       ? orderTable.update(ORDER_TABLE_KEY, payloadAddtoCart())
       : orderTable.add(payloadAddtoCart(), ORDER_TABLE_KEY)
-    enqueueSnackbar('Produkt bol pridaný do košíka', SNACKBAR_OPTIONS_SUCCESS)
+    enqueueSnackbar(
+      String(t(messages.productAddedToBsket)),
+      SNACKBAR_OPTIONS_SUCCESS
+    )
   }
 
   return (
@@ -115,11 +119,13 @@ const ProductDetail = ({ id }: ProductID) => {
           <div className={styles.description}>{description}</div>
           <div className={styles.price}>
             {price?.toFixed(2)} €
-            <span className={styles.withTax}>(t{messages.withTax})</span>
+            <span className={styles.withTax}>
+              {String(t(messages.withTax))}
+            </span>
           </div>
           {counterContent}
           <div className={styles.count}>
-            (t{messages.onStock}) {count} ks
+            {String(t(messages.onStock))} {count} ks
           </div>
           <Button
             variant='outlined'
@@ -127,7 +133,7 @@ const ProductDetail = ({ id }: ProductID) => {
             className={styles.button}
             onClick={addToBasket}
           >
-            (t{messages.addToBasket})
+            {String(t(messages.addToBasket))}
           </Button>
         </div>
         <div>
