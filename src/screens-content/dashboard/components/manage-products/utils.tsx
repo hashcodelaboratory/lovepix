@@ -11,14 +11,9 @@ import styles from './manage-products.module.scss'
 import { StorageFolder } from 'common/firebase/storage/enums'
 import { ref, deleteObject } from '@firebase/storage'
 
-const removeProduct = (id: string, queryClient: QueryClient): string => {
-  deleteDoc(doc(database, Collections.PRODUCTS, id))
-    .then(() => {
-      queryClient.invalidateQueries(PRODUCT_KEY)
-    })
-    .catch((err) => {
-      return err
-    })
+const removeProduct = async (id: string, queryClient: QueryClient) => {
+  await deleteDoc(doc(database, Collections.PRODUCTS, id))
+  queryClient.invalidateQueries(PRODUCT_KEY)
   return ''
 }
 
@@ -29,12 +24,7 @@ const removeUploadedProductImage = async (
 ) => {
   const path = `${StorageFolder.PRODUCTS}/${name}`
   await deleteObject(ref(storage, path))
-    .then(() => {
-      removeProduct(id, queryClient)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  removeProduct(id, queryClient)
 }
 
 export const getProductsColumns = (queryClient: QueryClient): GridColDef[] => [
