@@ -1,28 +1,8 @@
 import { FormInputs } from './form'
-import { Material } from '../enums/material'
 import { Delivery } from '../enums/delivery'
 import { Payment } from '../enums/payment'
-import { ProductsType } from 'common/api/use-products'
-
-export type Image = {
-  name: string
-  url: string
-  width: number
-  height: number
-  qty: number
-  origin: string
-  material: Material
-  price: number
-  pdf?: string
-}
-
-export type Product = {
-  id: string
-  price: number
-  qty: number
-  title: string
-  url: string
-}
+import { Product } from './product'
+import { Image } from './image'
 
 export type Order = {
   id: string
