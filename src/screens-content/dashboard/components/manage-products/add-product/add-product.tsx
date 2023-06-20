@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, TextField } from '@mui/material'
 import { useTranslation } from 'next-i18next'
-import React, { ChangeEvent, useRef, useState } from 'react'
+import React, { ChangeEvent, RefObject, useRef, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import styles from './add-product.module.scss'
 import { addPhoto, FORM_SCHEMA } from './utils'
@@ -24,7 +24,7 @@ type ControllerFieldType = {
 const AddProduct = () => {
   const { t } = useTranslation()
   const queryClient = useQueryClient()
-  const refImage = useRef<any>()
+  const refImage = useRef<HTMLInputElement>(null)
   const {
     register,
     formState: { errors },
@@ -99,7 +99,9 @@ const AddProduct = () => {
 
   const removeImage = () => {
     setImage(undefined)
-    refImage.current.value = ''
+    if (refImage.current) {
+      refImage.current.value = ''
+    }
   }
 
   const onSubmit: SubmitHandler<FormAddProduct> = async (data) => {
