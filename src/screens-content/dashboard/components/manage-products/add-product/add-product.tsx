@@ -8,13 +8,7 @@ import { addPhoto, FORM_SCHEMA } from './utils'
 import { useQueryClient } from 'react-query'
 import { messages } from 'messages/messages'
 import Image from 'next/image'
-
-export type FormAddProduct = {
-  title: string
-  price: number | undefined
-  count: number | undefined
-  description: string
-}
+import { FormAddProduct } from 'common/types/form-add-product'
 
 type ControllerFieldType = {
   name: 'title' | 'price' | 'count' | 'description'
