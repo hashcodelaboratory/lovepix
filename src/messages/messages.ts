@@ -135,4 +135,8 @@ export const messages = {
   here: 'here',
   putMail: 'putMail',
   logout: 'logout',
+  title: 'title',
+  count: 'count',
+  description: 'description',
+  addNewProduct: 'addNewProduct',
 }

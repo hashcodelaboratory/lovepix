@@ -9,9 +9,15 @@
   border-radius: 1rem;
   background-color: white;
   margin-bottom: 1rem;
+  min-width: 300px;
 }
 
 .deleteProduct {
   color: red;
   cursor: pointer;
+}
+
+.addProductContainer {
+  display: flex;
+  flex-wrap: wrap;
 }

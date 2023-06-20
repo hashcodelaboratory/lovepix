@@ -13,8 +13,7 @@ const ManageProducts = () => {
   return (
     <div className={styles.manageProductsContainer}>
       <h3>Produkty</h3>
-      <AddProduct />
-      <div>
+      <div className={styles.addProductContainer}>
         <DataGrid
           className={styles.contentTable}
           rows={data ?? []}
@@ -25,6 +24,7 @@ const ManageProducts = () => {
           disableSelectionOnClick
           autoHeight
         />
+        <AddProduct />
       </div>
     </div>
   )

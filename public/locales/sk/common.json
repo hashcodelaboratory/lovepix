@@ -134,5 +134,9 @@
   "newsletter": "Kliknutím na PRIHLÁSIŤ súhlasite so zaradením Vašej e-mailovej adresy do databázy prevádzkovateľa týchto stránok, a so zasielaním informácií a jej produktoch a službách. Bližšie informácie o spracovaní a ochrane osobných údajov a právach dotknutej osoby,",
   "here": "sú uvedené tu.",
   "putMail": "Zadajte svoj e-mail",
-  "logout": "(z newslettera sa odhlásite kedy budete chcieť)"
+  "logout": "(z newslettera sa odhlásite kedy budete chcieť)",
+  "title": "Názov",
+  "count": "Počet",
+  "description": "Popis",
+  "addNewProduct": "Pridať nový produkt"
 }
