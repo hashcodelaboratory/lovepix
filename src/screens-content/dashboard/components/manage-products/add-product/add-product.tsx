@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next'
 import React, { ChangeEvent, useRef, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import styles from './add-product.module.scss'
-import { addPhoto, FORM_SCHEMA } from './utils'
+import { addPhoto, addProductValues, FORM_SCHEMA } from './utils'
 import { useQueryClient } from 'react-query'
 import { messages } from 'messages/messages'
 import Image from 'next/image'
@@ -27,12 +27,7 @@ const AddProduct = () => {
     reset,
   } = useForm<FormAddProduct>({
     resolver: yupResolver(FORM_SCHEMA),
-    defaultValues: {
-      title: '',
-      price: undefined,
-      count: undefined,
-      description: '',
-    },
+    defaultValues: addProductValues,
   })
   const [image, setImage] = useState<File | undefined>()
 

@@ -2,7 +2,7 @@ import { PRODUCT_KEY } from 'common/api/use-products'
 import { StorageFolder } from 'common/firebase/storage/enums'
 import { QueryClient } from 'react-query'
 import * as yup from 'yup'
-import { FormAddProduct } from './add-product'
+
 import {
   FullMetadata,
   getDownloadURL,
@@ -12,6 +12,14 @@ import {
 import { database, storage } from 'common/firebase/config'
 import { doc, setDoc } from 'firebase/firestore'
 import { Collections } from 'common/firebase/enums'
+import { FormAddProduct } from 'common/types/form-add-product'
+
+export const addProductValues = {
+  title: '',
+  price: undefined,
+  count: undefined,
+  description: '',
+}
 
 export const FORM_SCHEMA = yup
   .object({
