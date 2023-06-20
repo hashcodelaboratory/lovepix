@@ -121,7 +121,7 @@
   "blog": "Blog",
   "partners": "Partneri",
   "changeLanguage": "Zmeniť jazyk",
-  "fastDelivery": "Rýchle doručenie",
+  "fastDelivery": "Možnosť doručenia zajtra",
   "fastDeliveryDescription": "Tovar objednávaný v pondelok , utorok , streda , štvrtok do 16:45 hod. mame u nás k prevzatiu na druhy deň ak je skladom.",
   "longTermExperience": "Dlhoročné skúsenosti",
   "longTermExperienceDescription": "Firma Waller, s.r.o. ma dlhodobé skúsenosti v pôsobení zaoberajúcim sa servisom a predajom výpočtovej techniky a registračných pokladní.",
@@ -134,5 +134,6 @@
   "newsletter": "Kliknutím na PRIHLÁSIŤ súhlasite so zaradením Vašej e-mailovej adresy do databázy prevádzkovateľa týchto stránok, a so zasielaním informácií a jej produktoch a službách. Bližšie informácie o spracovaní a ochrane osobných údajov a právach dotknutej osoby,",
   "here": "sú uvedené tu.",
   "putMail": "Zadajte svoj e-mail",
-  "logout": "(z newslettera sa odhlásite kedy budete chcieť)"
+  "logout": "(z newslettera sa odhlásite kedy budete chcieť)",
+  "pickUpInfo": "Osobné vzydvihnutie možné aj DNES Duklianská 38, Spišská Nová Ves"
 }

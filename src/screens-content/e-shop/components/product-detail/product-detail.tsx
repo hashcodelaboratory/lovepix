@@ -17,18 +17,7 @@ type ProductID = {
 const ProductDetail = ({ id }: ProductID) => {
   const { data: product, isLoading } = useProduct(id)
   const { image, title, price, count, description } = product ?? {}
-  const [quantity, setQuantity] = useState(1)
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
-
-  const counterContent = (
-    <div className={styles.counterContainer}>
-      <div className={styles.counter}>
-        <div className={styles.minus}>-</div>
-        <div>{quantity}</div>
-        <div className={styles.plus}>+</div>
-      </div>
-    </div>
-  )
 
   const addToBasket = () => {
     let totalPrice: number = 0
@@ -64,8 +53,6 @@ const ProductDetail = ({ id }: ProductID) => {
     configurationsTable.clear()
   }
 
-  console.log('🥶', order)
-
   return (
     <Container className={styles.productDetailContainer}>
       <div className={styles.detailLayout}>
@@ -88,18 +75,14 @@ const ProductDetail = ({ id }: ProductID) => {
           <div className={styles.price}>
             {price?.toFixed(2)} € <span className={styles.withTax}>s DPH</span>
           </div>
-          {counterContent}
           <div className={styles.count}>Na sklade {count} ks</div>
           <Button
             variant='outlined'
-            fullWidth
             className={styles.button}
             onClick={addToBasket}
           >
             Pridať do košíka
           </Button>
-        </div>
-        <div>
           <InfoPanel />
         </div>
       </div>
