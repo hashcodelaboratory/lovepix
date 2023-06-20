@@ -1,26 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, TextField } from '@mui/material'
-import { StorageFolder } from 'common/firebase/storage/enums'
 import { useTranslation } from 'next-i18next'
 import React, { ChangeEvent, useRef, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import styles from './add-product.module.scss'
-import { FORM_SCHEMA } from './utils'
-import {
-  FullMetadata,
-  getDownloadURL,
-  ref,
-  uploadBytes,
-} from '@firebase/storage'
-import { database, storage } from 'common/firebase/config'
-import { doc, setDoc } from 'firebase/firestore'
-import { Collections } from 'common/firebase/enums'
+import { addPhoto, FORM_SCHEMA } from './utils'
 import { useQueryClient } from 'react-query'
-import { PRODUCT_KEY } from 'common/api/use-products'
 import { messages } from 'messages/messages'
 import Image from 'next/image'
 
-type FormAddProduct = {
+export type FormAddProduct = {
   title: string
   price: number | undefined
   count: number | undefined
@@ -101,25 +90,6 @@ const AddProduct = () => {
     </div>
   ))
 
-  const onSubmit: SubmitHandler<FormAddProduct> = async (data) => {
-    if (data) {
-      addPhotoOnStorage(data)
-    }
-  }
-
-  const uploadToStorage = async (file: File) => {
-    const _name = `${StorageFolder.PRODUCTS}/${file.name}`
-    const imageRef = ref(storage, _name)
-    const { metadata } = await uploadBytes(imageRef, file)
-    if (metadata) {
-      const url = await getDownloadURL(ref(storage, _name))
-      return {
-        url: url,
-        metadata: metadata,
-      }
-    }
-  }
-
   const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.item(0)
     if (file) {
@@ -132,36 +102,13 @@ const AddProduct = () => {
     refImage.current.value = ''
   }
 
-  const addPhotoOnStorage = async (data: FormAddProduct) => {
-    if (image) {
-      const res = await uploadToStorage(image)
-      await uploadToFirestore(
-        res?.metadata ?? ({} as FullMetadata),
-        data,
-        res?.url ?? ''
-      ).then(() => {
+  const onSubmit: SubmitHandler<FormAddProduct> = async (data) => {
+    if (data) {
+      addPhoto(data, image, queryClient).then(() => {
         removeImage()
         reset()
       })
-      await queryClient.invalidateQueries(PRODUCT_KEY)
     }
-  }
-
-  const uploadToFirestore = async (
-    metadata: FullMetadata,
-    data: FormAddProduct,
-    url: string
-  ) => {
-    const { name } = metadata
-    const docData = {
-      title: data.title,
-      price: data.price,
-      description: data.description,
-      count: data.count,
-      image: url,
-      path: name,
-    }
-    await setDoc(doc(database, Collections.PRODUCTS, `P${Date.now()}`), docData)
   }
 
   return (
