@@ -61,7 +61,7 @@ const ProductDetail = ({ id }: ProductID) => {
             },
           ],
         },
-        totalPrice: shoppingCartPrice(order, price!),
+        totalPrice: shoppingCartPrice(order, price ?? 0),
       }
       return payload
     }
