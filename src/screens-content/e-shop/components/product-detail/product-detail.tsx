@@ -1,7 +1,7 @@
 import { Button, Container, Skeleton } from '@mui/material'
 import { useProduct } from 'common/api/use-product'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React from 'react'
 import { ImageLayout } from 'screens-content/home/enums/enums'
 import InfoPanel from './info-panel/info-panel'
 import styles from './product-detail.module.scss'
@@ -16,6 +16,7 @@ import {
 } from 'snackbar/config'
 import { messages } from 'messages/messages'
 import { useTranslation } from 'next-i18next'
+import { Product } from 'common/types/product'
 
 type ProductID = {
   id: string
@@ -32,7 +33,7 @@ const ProductDetail = ({ id }: ProductID) => {
     const { products } = order?.shoppingCart || []
 
     const foundIndex: number = products?.findIndex(
-      (item: any) => item.id === id
+      (item: Product) => item.id === id
     )
     if (products && foundIndex !== -1) {
       const array = products
