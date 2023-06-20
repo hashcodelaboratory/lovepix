@@ -95,10 +95,9 @@ const AddProduct = () => {
 
   const onSubmit: SubmitHandler<FormAddProduct> = async (data) => {
     if (data) {
-      addPhoto(data, image, queryClient).then(() => {
-        removeImage()
-        reset()
-      })
+      await addPhoto(data, image, queryClient)
+      removeImage()
+      reset()
     }
   }
 
