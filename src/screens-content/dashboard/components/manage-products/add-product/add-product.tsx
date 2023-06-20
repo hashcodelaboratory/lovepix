@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, TextField } from '@mui/material'
 import { useTranslation } from 'next-i18next'
-import React, { ChangeEvent, RefObject, useRef, useState } from 'react'
+import React, { ChangeEvent, useRef, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import styles from './add-product.module.scss'
 import { addPhoto, FORM_SCHEMA } from './utils'
@@ -137,7 +137,7 @@ const AddProduct = () => {
             />
           </div>
           <Button variant='outlined' onClick={removeImage}>
-            Remove image
+            {t(messages.removeImage)}
           </Button>
         </>
       )}
