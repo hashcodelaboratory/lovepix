@@ -67,7 +67,7 @@ const ProductDetail = ({ id }: ProductID) => {
     }
   }
 
-  const addToBasket = () => {
+  const addToCart = () => {
     const { products } = order?.shoppingCart || []
     const product = products?.find((item: any) => item.id === id)
 
@@ -120,7 +120,7 @@ const ProductDetail = ({ id }: ProductID) => {
             variant='outlined'
             fullWidth
             className={styles.button}
-            onClick={addToBasket}
+            onClick={addToCart}
           >
             {String(t(messages.addToBasket))}
           </Button>
