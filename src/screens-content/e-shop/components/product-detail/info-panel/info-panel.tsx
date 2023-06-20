@@ -7,12 +7,16 @@ import styles from './info-panel.module.scss'
 import { messages } from 'messages/messages'
 import Money from '@icons/icon-money'
 
-const InfoPanel = () => {
+type Info = {
+  quantity: number | undefined
+}
+
+const InfoPanel = ({ quantity }: Info) => {
   const { t } = useTranslation()
 
   const shopInfo = [
     {
-      img: <Experience width={60} height={60} />,
+      img: <Experience width={50} height={50} />,
       title: t(messages.pickUpInfo),
     },
     {
@@ -21,11 +25,11 @@ const InfoPanel = () => {
     },
     {
       img: <Access width={50} height={50} />,
-      title: t(messages.specialApproach),
+      title: `Skladom ${quantity ?? '?'} ks`,
     },
     {
       img: <Money width={50} height={50} />,
-      title: t(messages.specialApproach),
+      title: t(messages.moneyBackGuarantee),
     },
   ]
 

@@ -70,12 +70,11 @@ const ProductDetail = ({ id }: ProductID) => {
           <Skeleton animation='wave' width='100%' height={'400px'} />
         )}
         <div className={styles.productInfo}>
+          <div className={styles.category}>Obrazy</div>
           <span className={styles.title}>{title}</span>
-          <div className={styles.description}>{description}</div>
           <div className={styles.price}>
             {price?.toFixed(2)} € <span className={styles.withTax}>s DPH</span>
           </div>
-          <div className={styles.count}>Na sklade {count} ks</div>
           <Button
             variant='outlined'
             className={styles.button}
@@ -83,9 +82,13 @@ const ProductDetail = ({ id }: ProductID) => {
           >
             Pridať do košíka
           </Button>
-          <InfoPanel />
+          <hr />
+          <InfoPanel quantity={count} />
         </div>
       </div>
+      <div>About</div>
+      <hr />
+      <div className={styles.description}>{description}</div>
     </Container>
   )
 }

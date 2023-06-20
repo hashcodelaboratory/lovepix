@@ -136,4 +136,5 @@ export const messages = {
   putMail: 'putMail',
   logout: 'logout',
   pickUpInfo: 'pickUpInfo',
+  moneyBackGuarantee: 'moneyBackGuarantee',
 }
