@@ -1,7 +1,7 @@
 import { Button, Container, Skeleton } from '@mui/material'
 import { useProduct } from 'common/api/use-product'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React from 'react'
 import { ImageLayout } from 'screens-content/home/enums/enums'
 import InfoPanel from './info-panel/info-panel'
 import styles from './product-detail.module.scss'
@@ -10,12 +10,15 @@ import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 import { configurationsTable, orderTable } from '../../../../../database.config'
 import { ProductsType, useProducts } from 'common/api/use-products'
 import Product from '../product/product'
+import { messages } from 'messages/messages'
+import { useTranslation } from 'next-i18next'
 
 type ProductID = {
   id: string
 }
 
 const ProductDetail = ({ id }: ProductID) => {
+  const { t } = useTranslation()
   const { data: product, isLoading } = useProduct(id)
   const { image, title, price, count, description } = product ?? {}
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
@@ -86,16 +89,16 @@ const ProductDetail = ({ id }: ProductID) => {
             className={styles.button}
             onClick={addToBasket}
           >
-            Pridať do košíka
+            {t(messages.addToCart)}
           </Button>
           <hr />
           <InfoPanel quantity={count} />
         </div>
       </div>
-      <div className={styles.title}>Popis</div>
+      <div className={styles.title}>{t(messages.description)}</div>
       <hr />
       <div className={styles.description}>{description}</div>
-      <div className={styles.title}>Podobne produkty</div>
+      <div className={styles.title}>{t(messages.simmilarProducts)}</div>
       <div style={{ display: 'flex', overflow: 'auto', marginTop: 30 }}>
         {productList}
       </div>

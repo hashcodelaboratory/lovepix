@@ -136,5 +136,8 @@
   "putMail": "Zadajte svoj e-mail",
   "logout": "(z newslettera sa odhlásite kedy budete chcieť)",
   "pickUpInfo": "Osobné vyzdvihnutie možné aj DNES",
-  "moneyBackGuarantee": "Garancia vrátenia peňazí"
+  "moneyBackGuarantee": "Garancia vrátenia peňazí",
+  "simmilarProducts": "Podobné produkty",
+  "description": "Popis",
+  "addToCart": "Pridať do košíka"
 }

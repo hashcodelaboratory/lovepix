@@ -137,4 +137,7 @@ export const messages = {
   logout: 'logout',
   pickUpInfo: 'pickUpInfo',
   moneyBackGuarantee: 'moneyBackGuarantee',
+  simmilarProducts: 'simmilarProducts',
+  description: 'description',
+  addToCart: 'addToCart',
 }

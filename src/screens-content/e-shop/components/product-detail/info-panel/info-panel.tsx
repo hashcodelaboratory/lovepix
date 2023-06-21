@@ -42,7 +42,7 @@ const InfoPanel = ({ quantity }: Info) => {
       <div>{item.img}</div>
       <div className={styles.textInfo}>
         <span className={styles.title}>{item.title}</span>
-        <span className={styles.title}>{item.description}</span>
+        <div className={styles.title}>{item.description}</div>
       </div>
     </div>
   ))
