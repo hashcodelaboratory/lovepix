@@ -86,7 +86,7 @@ const ProductDetail = ({ id }: ProductID) => {
           <InfoPanel quantity={count} />
         </div>
       </div>
-      <div>About</div>
+      <div>Popis</div>
       <hr />
       <div className={styles.description}>{description}</div>
     </Container>
