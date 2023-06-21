@@ -18,18 +18,22 @@ const InfoPanel = ({ quantity }: Info) => {
     {
       img: <Experience width={50} height={50} />,
       title: t(messages.pickUpInfo),
+      description: 'Duklianská 38, Spišská Nová Ves',
     },
     {
       img: <Delivery width={50} height={50} />,
       title: t(messages.fastDelivery),
+      description: '',
     },
     {
       img: <Access width={50} height={50} />,
       title: `Skladom ${quantity ?? '?'} ks`,
+      description: '',
     },
     {
       img: <Money width={50} height={50} />,
       title: t(messages.moneyBackGuarantee),
+      description: '',
     },
   ]
 
@@ -37,7 +41,8 @@ const InfoPanel = ({ quantity }: Info) => {
     <div style={{ display: 'flex', alignItems: 'center' }} key={index}>
       <div>{item.img}</div>
       <div className={styles.textInfo}>
-        <p className={styles.title}>{item.title}</p>
+        <span className={styles.title}>{item.title}</span>
+        <span className={styles.title}>{item.description}</span>
       </div>
     </div>
   ))

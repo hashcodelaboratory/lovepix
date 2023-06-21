@@ -6,7 +6,7 @@ type IIcon = {
   color?: string
 }
 
-const Access = ({ width, height, color }: IIcon) => {
+const Access = ({ width, height }: IIcon) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'

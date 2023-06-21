@@ -8,7 +8,8 @@ import styles from './product-detail.module.scss'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 import { configurationsTable, orderTable } from '../../../../../database.config'
-import { ProductsType } from 'common/api/use-products'
+import { ProductsType, useProducts } from 'common/api/use-products'
+import Product from '../product/product'
 
 type ProductID = {
   id: string
@@ -18,6 +19,11 @@ const ProductDetail = ({ id }: ProductID) => {
   const { data: product, isLoading } = useProduct(id)
   const { image, title, price, count, description } = product ?? {}
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
+  const { data: products } = useProducts()
+
+  const productList = products?.map((products: ProductsType) => (
+    <Product key={products.id} product={{ ...products }} />
+  ))
 
   const addToBasket = () => {
     let totalPrice: number = 0
@@ -67,7 +73,7 @@ const ProductDetail = ({ id }: ProductID) => {
             loading='lazy'
           />
         ) : (
-          <Skeleton animation='wave' width='100%' height={'400px'} />
+          <Skeleton animation='wave' width='100%' />
         )}
         <div className={styles.productInfo}>
           <div className={styles.category}>Obrazy</div>
@@ -86,9 +92,13 @@ const ProductDetail = ({ id }: ProductID) => {
           <InfoPanel quantity={count} />
         </div>
       </div>
-      <div>Popis</div>
+      <div className={styles.title}>Popis</div>
       <hr />
       <div className={styles.description}>{description}</div>
+      <div className={styles.title}>Podobne produkty</div>
+      <div style={{ display: 'flex', overflow: 'auto', marginTop: 30 }}>
+        {productList}
+      </div>
     </Container>
   )
 }

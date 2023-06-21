@@ -1,5 +1,4 @@
 import { useQuery, UseQueryResult } from 'react-query'
-import { GalleryItem } from '../types/gallery'
 import { collection, getDocs } from '@firebase/firestore'
 import { database } from '../firebase/config'
 import { Collections } from '../firebase/enums'
