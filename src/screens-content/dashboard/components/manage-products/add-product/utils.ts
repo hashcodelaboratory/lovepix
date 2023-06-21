@@ -1,18 +1,10 @@
 import { PRODUCT_KEY } from 'common/api/use-products'
-import { StorageFolder } from 'common/firebase/storage/enums'
 import { QueryClient } from 'react-query'
 import * as yup from 'yup'
-
-import {
-  FullMetadata,
-  getDownloadURL,
-  ref,
-  uploadBytes,
-} from '@firebase/storage'
-import { database, storage } from 'common/firebase/config'
-import { doc, setDoc } from 'firebase/firestore'
-import { Collections } from 'common/firebase/enums'
+import { FullMetadata } from '@firebase/storage'
 import { FormAddProduct } from 'common/types/form-add-product'
+import { addProduct } from 'common/api/add-product'
+import { uploadToStorage } from 'common/api/add-product-photo'
 
 export const addProductValues = {
   title: '',
@@ -38,34 +30,18 @@ export const FORM_SCHEMA = yup
   })
   .required()
 
-const uploadToStorage = async (file: File) => {
-  const _name = `${StorageFolder.PRODUCTS}/${file.name}`
-  const imageRef = ref(storage, _name)
-  const { metadata } = await uploadBytes(imageRef, file)
-  if (metadata) {
-    const url = await getDownloadURL(ref(storage, _name))
-    return {
-      url: url,
-      metadata: metadata,
-    }
-  }
-}
-
 const uploadToFirestore = async (
   metadata: FullMetadata,
   data: FormAddProduct,
   url: string
 ) => {
   const { name } = metadata
-  const docData = {
-    title: data.title,
-    price: data.price,
-    description: data.description,
-    count: data.count,
-    image: url,
-    path: name,
+  const params = {
+    data: data,
+    url: url,
+    name: name,
   }
-  await setDoc(doc(database, Collections.PRODUCTS, `P${Date.now()}`), docData)
+  addProduct(params)
 }
 
 export const addPhoto = async (
