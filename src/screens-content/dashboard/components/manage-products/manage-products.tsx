@@ -4,7 +4,7 @@ import React from 'react'
 import { useQueryClient } from 'react-query'
 import AddProduct from './add-product/add-product'
 import styles from './manage-products.module.scss'
-import { getProductsColumns } from './utils'
+import { getProductsColumns } from './table-columns'
 
 const ManageProducts = () => {
   const queryClient = useQueryClient()
