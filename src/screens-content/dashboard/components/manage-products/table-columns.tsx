@@ -4,7 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import styles from './manage-products.module.scss'
 import Image from 'next/image'
 import { ImageLayout } from 'screens-content/home/enums/enums'
-import { removeUploadedProductImage } from './utils'
+import { removeUploadedProductImage } from 'common/api/remove-product'
 
 export const getProductsColumns = (queryClient: QueryClient): GridColDef[] => [
   {
