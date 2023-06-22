@@ -2,10 +2,11 @@ import styles from '../../../../shopping-cart.module.scss'
 import { useTranslation } from 'next-i18next'
 import { messages } from '../../../../../../messages/messages'
 import { FieldErrors, Control } from 'react-hook-form'
-import { Image, Order } from '../../../../../../common/types/order'
+import { Image, Order, Product } from '../../../../../../common/types/order'
 import { FormInputs } from '../../../../../../common/types/form'
 import CartRow from './components/cart-row'
 import { ProductsType } from 'common/api/use-products'
+import CartRowProduct from './components/cart-row-product'
 
 type DeliveryProps = {
   order: Order
@@ -29,6 +30,9 @@ const OrderItems = ({ order }: DeliveryProps) => {
       <div className={styles.cartItemsContainer}>
         {images?.map((image: Image) => (
           <CartRow key={image.url} image={image} order={order} />
+        ))}
+        {products?.map((product: Product) => (
+          <CartRowProduct key={product.id} product={product} order={order} />
         ))}
       </div>
     </div>

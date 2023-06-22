@@ -139,4 +139,9 @@ export const messages = {
   count: 'count',
   description: 'description',
   addNewProduct: 'addNewProduct',
+  onStock: 'onStock',
+  addToBasket: 'addToBasket',
+  withTax: 'withTax',
+  productAddedToBsket: 'productAddedToBsket',
+  noMoreProdutsOnStock: 'noMoreProdutsOnStock',
 }

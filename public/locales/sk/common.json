@@ -138,5 +138,10 @@
   "title": "Názov",
   "count": "Počet",
   "description": "Popis",
-  "addNewProduct": "Pridať nový produkt"
+  "addNewProduct": "Pridať nový produkt",
+  "onStock": "Na sklade",
+  "addToBasket": "Pridať do košíka",
+  "withTax": "s DPH",
+  "productAddedToBsket": "Produkt bol pridaný do košíka",
+  "noMoreProdutsOnStock": "Viac kusov tohto produktu už nie su na sklade"
 }
