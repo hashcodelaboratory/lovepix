@@ -2,10 +2,11 @@ import styles from '../../../../shopping-cart.module.scss'
 import { useTranslation } from 'next-i18next'
 import { messages } from '../../../../../../messages/messages'
 import { FieldErrors, Control } from 'react-hook-form'
-import { Image, Order, Product } from '../../../../../../common/types/order'
+import { Order } from '../../../../../../common/types/order'
+import { Image } from '../../../../../../common/types/image'
+import { Product } from '../../../../../../common/types/product'
 import { FormInputs } from '../../../../../../common/types/form'
 import CartRow from './components/cart-row'
-import { ProductsType } from 'common/api/use-products'
 import CartRowProduct from './components/cart-row-product'
 
 type DeliveryProps = {

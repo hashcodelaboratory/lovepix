@@ -1,7 +1,8 @@
-import { ProductsType } from 'common/api/use-products'
 import { orderTable } from '../../../../../../../../database.config'
 import { ORDER_TABLE_KEY } from '../../../../../../../common/indexed-db/hooks/keys'
-import { Image, Order, Product } from '../../../../../../../common/types/order'
+import { Order } from '../../../../../../../common/types/order'
+import { Image } from '../../../../../../../common/types/image'
+import { Product } from '../../../../../../../common/types/product'
 
 export enum UpdateQuantityWay {
   INCREASE = 'INCREASE',
