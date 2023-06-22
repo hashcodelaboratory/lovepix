@@ -124,5 +124,9 @@
   "newsletter": "newsletter",
   "here": "here",
   "putMail": "putMail",
-  "logout": "logout"
+  "logout": "logout",
+  "title": "Title",
+  "count": "Quantity",
+  "description": "Description",
+  "addNewProduct": "Add new product"
 }

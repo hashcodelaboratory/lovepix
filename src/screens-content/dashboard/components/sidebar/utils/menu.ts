@@ -1,3 +1,4 @@
+import { Route } from 'common/enums/routes'
 import { messages } from '../../../../../messages/messages'
 
 export const SIDEBAR_MENU_LIST: {
@@ -6,7 +7,7 @@ export const SIDEBAR_MENU_LIST: {
 }[] = [
   {
     title: messages.home,
-    link: '',
+    link: Route.DASHBOARD,
   },
   {
     title: messages.orders,
@@ -14,7 +15,7 @@ export const SIDEBAR_MENU_LIST: {
   },
   {
     title: messages.products,
-    link: '',
+    link: Route.DASHBOARD_PRODUCTS,
   },
   {
     title: messages.dimensions,

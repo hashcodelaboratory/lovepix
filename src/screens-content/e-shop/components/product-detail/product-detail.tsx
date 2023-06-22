@@ -7,7 +7,7 @@ import InfoPanel from './info-panel/info-panel'
 import styles from './product-detail.module.scss'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
-import { configurationsTable, orderTable } from '../../../../../database.config'
+import { orderTable } from '../../../../../database.config'
 import { ProductsType, useProducts } from 'common/api/use-products'
 import Product from '../product/product'
 import { messages } from 'messages/messages'
@@ -16,6 +16,12 @@ import { useRouter } from 'next/router'
 import { doc, getDoc } from 'firebase/firestore'
 import { database } from 'common/firebase/config'
 import { Collections } from 'common/firebase/enums'
+import { shoppingCartPrice } from './utils'
+import { useSnackbar } from 'notistack'
+import {
+  SNACKBAR_OPTIONS_ERROR,
+  SNACKBAR_OPTIONS_SUCCESS,
+} from 'snackbar/config'
 
 const ProductDetail = () => {
   const router = useRouter()
@@ -26,6 +32,7 @@ const ProductDetail = () => {
   const { image, title, price, count, description } = productData ?? {}
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
   const { data: products } = useProducts()
+  const { enqueueSnackbar } = useSnackbar()
 
   useEffect(() => {
     const getContent = async () => {
@@ -47,38 +54,63 @@ const ProductDetail = () => {
     </div>
   ))
 
-  const addToBasket = () => {
-    let totalPrice: number = 0
-    order?.shoppingCart?.products?.forEach((product: ProductsType) => {
-      totalPrice += product.price
-    })
-    totalPrice += Number(price)
+  const payloadAddtoCart = () => {
+    const { products } = order?.shoppingCart || []
 
-    const finalPrice = order?.totalPrice
-      ? Number(order?.totalPrice) + price!
-      : price
-
-    const payload = {
-      shoppingCart: {
-        images: order?.shoppingCart.images ?? [],
-        products: [
-          ...(order?.shoppingCart?.products ?? []),
-          {
-            id: id,
-            url: image,
-            qty: 1,
-            title: title,
-            price: price,
-          },
-        ],
-      },
-      totalPrice: finalPrice,
+    const foundIndex: number = products?.findIndex(
+      (item: any) => item.id === id
+    )
+    if (products && foundIndex !== -1) {
+      const array = products
+      array[foundIndex].qty++
+      const payload = {
+        shoppingCart: {
+          images: order?.shoppingCart.images ?? [],
+          products: [...array],
+        },
+        totalPrice: shoppingCartPrice(order, price!),
+      }
+      return payload
+    } else {
+      const payload = {
+        shoppingCart: {
+          images: order?.shoppingCart.images ?? [],
+          products: [
+            ...(order?.shoppingCart?.products ?? []),
+            {
+              id: id,
+              url: image,
+              qty: 1,
+              title: title,
+              price: price,
+            },
+          ],
+        },
+        totalPrice: shoppingCartPrice(order, price ?? 0),
+      }
+      return payload
     }
-    order?.shoppingCart
-      ? orderTable.update(ORDER_TABLE_KEY, payload)
-      : orderTable.add(payload, ORDER_TABLE_KEY)
+  }
 
-    configurationsTable.clear()
+  const addToCart = () => {
+    const { products } = order?.shoppingCart || []
+    const product = products?.find((item: any) => item.id === id)
+
+    if (product?.qty === count) {
+      enqueueSnackbar(
+        String(t(messages.noMoreProdutsOnStock)),
+        SNACKBAR_OPTIONS_ERROR
+      )
+      return
+    }
+
+    order?.shoppingCart
+      ? orderTable.update(ORDER_TABLE_KEY, payloadAddtoCart())
+      : orderTable.add(payloadAddtoCart(), ORDER_TABLE_KEY)
+    enqueueSnackbar(
+      String(t(messages.productAddedToBsket)),
+      SNACKBAR_OPTIONS_SUCCESS
+    )
   }
 
   return (
@@ -110,7 +142,7 @@ const ProductDetail = () => {
             <Button
               variant='outlined'
               className={styles.button}
-              onClick={addToBasket}
+              onClick={addToCart}
             >
               {t(messages.addToCart)}
             </Button>

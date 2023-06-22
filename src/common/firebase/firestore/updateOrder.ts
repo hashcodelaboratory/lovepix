@@ -4,7 +4,7 @@ import { doc, writeBatch } from '@firebase/firestore'
 import { Collections } from '../enums'
 import { FormInputs } from '../../types/form'
 import { Summary } from '../../types/summary'
-import { Image } from '../../types/order'
+import { Image } from 'common/types/image'
 
 export type UpdateOrderRequest = {
   image?: Image

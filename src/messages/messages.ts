@@ -140,4 +140,12 @@ export const messages = {
   simmilarProducts: 'simmilarProducts',
   description: 'description',
   addToCart: 'addToCart',
+  title: 'title',
+  count: 'count',
+  addNewProduct: 'addNewProduct',
+  onStock: 'onStock',
+  addToBasket: 'addToBasket',
+  withTax: 'withTax',
+  productAddedToBsket: 'productAddedToBsket',
+  noMoreProdutsOnStock: 'noMoreProdutsOnStock',
 }
