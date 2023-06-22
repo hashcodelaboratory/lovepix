@@ -3,46 +3,77 @@ import { ORDER_TABLE_KEY } from '../../../../../../../common/indexed-db/hooks/ke
 import { Order } from '../../../../../../../common/types/order'
 import { Image } from '../../../../../../../common/types/image'
 import { Product } from '../../../../../../../common/types/product'
+import { ShoppingCart } from 'common/types/shopping-cart'
 
 export enum UpdateQuantityWay {
   INCREASE = 'INCREASE',
   DECREASE = 'DECREASE',
 }
 
-export const removeImage = (url?: string, images?: Image[]) => {
-  const filtered = images?.filter((image: Image) => image.url !== url)
+export const removeImage = (url?: string, shoppingCart?: ShoppingCart) => {
+  const filtered = shoppingCart?.images?.filter(
+    (image: Image) => image.url !== url
+  )
 
-  const total = filtered?.reduce(
+  const totalPriceImages = filtered?.reduce(
     (accumulator, { qty, price }) => accumulator + qty * price,
     0
   )
 
-  if (images?.length === 1) {
+  const totalPriceProducts = shoppingCart?.products?.reduce(
+    (accumulator, { qty, price }) => accumulator + qty * price,
+    0
+  )
+
+  const total = Number(totalPriceImages) + Number(totalPriceProducts)
+
+  if (
+    shoppingCart?.images?.length === 1 &&
+    shoppingCart?.products?.length === 0
+  ) {
     orderTable.clear()
   } else {
     orderTable.update(ORDER_TABLE_KEY, {
       shoppingCart: {
         images: filtered,
+        products: shoppingCart?.products ?? [],
       },
       totalPrice: total?.toFixed(2),
     })
   }
 }
 
-export const removeProduct = (id?: string, products?: Product[]) => {
-  const filtered = products?.filter((product: Product) => product.id !== id)
+export const removeProduct = (id?: string, shoppingCart?: ShoppingCart) => {
+  const filtered = shoppingCart?.products?.filter(
+    (product: Product) => product.id !== id
+  )
 
-  const total = filtered?.reduce(
+  const totalPriceProducts = filtered?.reduce(
     (accumulator, { qty, price }) => accumulator + qty * price,
     0
   )
 
-  orderTable.update(ORDER_TABLE_KEY, {
-    shoppingCart: {
-      products: filtered,
-    },
-    totalPrice: total?.toFixed(2),
-  })
+  const totalPriceImages = shoppingCart?.images?.reduce(
+    (accumulator, { qty, price }) => accumulator + qty * price,
+    0
+  )
+
+  const total = Number(totalPriceImages) + Number(totalPriceProducts)
+
+  if (
+    shoppingCart?.products?.length === 1 &&
+    shoppingCart?.images?.length === 0
+  ) {
+    orderTable.clear()
+  } else {
+    orderTable.update(ORDER_TABLE_KEY, {
+      shoppingCart: {
+        images: shoppingCart?.images ?? [],
+        products: filtered,
+      },
+      totalPrice: total?.toFixed(2),
+    })
+  }
 }
 
 export const updateQuantity = async (

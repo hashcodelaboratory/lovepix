@@ -12,8 +12,6 @@ type CartRowProps = {
 }
 
 const CartRowProduct = ({ product, order }: CartRowProps): JSX.Element => {
-  console.log(product.id)
-
   return (
     <div className={styles.cartRow} key={product.title}>
       <div className={styles.cartRowThumbnailContainer}>
@@ -37,7 +35,7 @@ const CartRowProduct = ({ product, order }: CartRowProps): JSX.Element => {
       <Close
         className={styles.cartRowClose}
         color='error'
-        onClick={() => removeProduct(product.id, order.shoppingCart?.products)}
+        onClick={() => removeProduct(product.id, order.shoppingCart)}
       />
     </div>
   )
