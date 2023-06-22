@@ -29,16 +29,24 @@ const ProductID: NextPage = () => {
   )
 }
 
-export const getStaticPaths: GetStaticPaths<{
-  travelIds: string
-}> = async () => {
-  return {
-    paths: [], //indicates that no page needs be created at build time
-    fallback: 'blocking', //indicates the type of fallback
-  }
-}
+// export const getStaticPaths: GetStaticPaths<{
+//   travelIds: string
+// }> = async () => {
+//   return {
+//     paths: [], //indicates that no page needs be created at build time
+//     fallback: 'blocking', //indicates the type of fallback
+//   }
+// }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+// export const getStaticProps: GetStaticProps = async ({ locale }) => {
+//   return {
+//     props: {
+//       ...(await serverSideTranslations(locale ?? 'sk', ['common'])),
+//     },
+//   }
+// }
+
+export const getServerSideProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'sk', ['common'])),
