@@ -1,17 +1,21 @@
-import EmptyCart from "./components/empty-cart/empty-cart";
-import Summary from "./components/summary/summary/summary";
-import { Order } from "../../common/types/order";
+import EmptyCart from './components/empty-cart/empty-cart'
+import Summary from './components/summary/summary/summary'
+import { Order } from '../../common/types/order'
 
 type CustomShoppingCartProps = {
-  order: Order;
+  order: Order
 }
 
 const CustomShoppingCart = ({ order }: CustomShoppingCartProps) => {
-  if (!order?.shoppingCart?.images) return <EmptyCart />;
+  if (
+    !order?.shoppingCart?.images?.length &&
+    !order?.shoppingCart?.products?.length
+  )
+    return <EmptyCart />
 
   //if (stepper === 2) return <ThanksForOrder />;
 
-  return <Summary order={order} />;
-};
+  return <Summary order={order} />
+}
 
-export default CustomShoppingCart;
+export default CustomShoppingCart
