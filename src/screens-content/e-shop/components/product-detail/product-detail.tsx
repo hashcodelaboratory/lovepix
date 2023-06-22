@@ -1,4 +1,4 @@
-import { Button, Container, Skeleton } from '@mui/material'
+import { Button, Container, Grid, Skeleton } from '@mui/material'
 import { useProduct } from 'common/api/use-product'
 import Image from 'next/image'
 import React from 'react'
@@ -12,20 +12,21 @@ import { ProductsType, useProducts } from 'common/api/use-products'
 import Product from '../product/product'
 import { messages } from 'messages/messages'
 import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 
-type ProductID = {
-  id: string
-}
-
-const ProductDetail = ({ id }: ProductID) => {
+const ProductDetail = () => {
+  const router = useRouter()
+  const id = router.query.productID as string[]
   const { t } = useTranslation()
-  const { data: product, isLoading } = useProduct(id)
+  const { data: product, isLoading } = useProduct(id[0])
   const { image, title, price, count, description } = product ?? {}
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
   const { data: products } = useProducts()
 
   const productList = products?.map((products: ProductsType) => (
-    <Product key={products.id} product={{ ...products }} />
+    <div key={products.id}>
+      <Product product={{ ...products }} />
+    </div>
   ))
 
   const addToBasket = () => {
@@ -64,42 +65,47 @@ const ProductDetail = ({ id }: ProductID) => {
 
   return (
     <Container className={styles.productDetailContainer}>
-      <div className={styles.detailLayout}>
-        {!isLoading ? (
-          <Image
-            src={image ?? ''}
-            layout={ImageLayout.INTRINSIC}
-            width={600}
-            height={400}
-            alt='image'
-            className={styles.image}
-            loading='lazy'
-          />
-        ) : (
-          <Skeleton animation='wave' width='100%' />
-        )}
-        <div className={styles.productInfo}>
-          <div className={styles.category}>Obrazy</div>
-          <span className={styles.title}>{title}</span>
-          <div className={styles.price}>
-            {price?.toFixed(2)} € <span className={styles.withTax}>s DPH</span>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={8} style={{ textAlign: 'center' }}>
+          {!isLoading ? (
+            <Image
+              src={image ?? ''}
+              layout={ImageLayout.INTRINSIC}
+              width={600}
+              height={400}
+              alt='image'
+              className={styles.image}
+              loading='lazy'
+            />
+          ) : (
+            <Skeleton animation='wave' width='100%' height='100%' />
+          )}
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <div className={styles.productInfo}>
+            <div className={styles.category}>Obrazy</div>
+            <span className={styles.title}>{title}</span>
+            <div className={styles.price}>
+              {price?.toFixed(2)} €{' '}
+              <span className={styles.withTax}>s DPH</span>
+            </div>
+            <Button
+              variant='outlined'
+              className={styles.button}
+              onClick={addToBasket}
+            >
+              {t(messages.addToCart)}
+            </Button>
+            <hr />
+            <InfoPanel quantity={count} />
           </div>
-          <Button
-            variant='outlined'
-            className={styles.button}
-            onClick={addToBasket}
-          >
-            {t(messages.addToCart)}
-          </Button>
-          <hr />
-          <InfoPanel quantity={count} />
-        </div>
-      </div>
+        </Grid>
+      </Grid>
       <div className={styles.title}>{t(messages.description)}</div>
       <hr />
       <div className={styles.description}>{description}</div>
       <div className={styles.title}>{t(messages.simmilarProducts)}</div>
-      <div style={{ display: 'flex', overflow: 'auto', marginTop: 30 }}>
+      <div style={{ display: 'flex', overflow: 'auto', marginTop: 20 }}>
         {productList}
       </div>
     </Container>

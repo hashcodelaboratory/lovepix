@@ -1,12 +1,10 @@
 .productDetailContainer {
   margin-top: 4rem !important;
   background-color: white;
-  padding: 20px;
+  padding: 40px;
 }
 
 .detailLayout {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
 }
 
 .productInfo {
@@ -35,6 +33,7 @@
   font-size: 22px;
   font-weight: 600;
   color: #444c57;
+  margin-top: 20px;
 }
 
 .price {
@@ -58,10 +57,9 @@
 }
 
 .description {
-  color: gray;
   font-size: 14px;
   font-weight: 500;
-  margin-top: 5px;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
