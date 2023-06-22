@@ -54,7 +54,7 @@ const CartRow = ({ image, order }: CartRowProps): JSX.Element => {
       <Close
         className={styles.cartRowClose}
         color='error'
-        onClick={() => removeImage(image?.url, order.shoppingCart?.images)}
+        onClick={() => removeImage(image?.url, order.shoppingCart)}
       />
     </div>
   )
