@@ -108,7 +108,7 @@ const ProductDetail = () => {
       ? orderTable.update(ORDER_TABLE_KEY, payloadAddtoCart())
       : orderTable.add(payloadAddtoCart(), ORDER_TABLE_KEY)
     enqueueSnackbar(
-      String(t(messages.productAddedToBsket)),
+      String(t(messages.productAddedToCart)),
       SNACKBAR_OPTIONS_SUCCESS
     )
   }
