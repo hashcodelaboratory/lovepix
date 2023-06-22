@@ -1,7 +1,7 @@
 import { Button, Container, Grid, Skeleton } from '@mui/material'
 import { useProduct } from 'common/api/use-product'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { ImageLayout } from 'screens-content/home/enums/enums'
 import InfoPanel from './info-panel/info-panel'
 import styles from './product-detail.module.scss'
@@ -13,9 +13,6 @@ import Product from '../product/product'
 import { messages } from 'messages/messages'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import { doc, getDoc } from 'firebase/firestore'
-import { database } from 'common/firebase/config'
-import { Collections } from 'common/firebase/enums'
 import { shoppingCartPrice } from './utils'
 import { useSnackbar } from 'notistack'
 import {
@@ -23,30 +20,19 @@ import {
   SNACKBAR_OPTIONS_SUCCESS,
 } from 'snackbar/config'
 
-const ProductDetail = () => {
+const ProductDetailLayout = () => {
   const router = useRouter()
-  const id = router.query.productID as string[]
+  const id = router.query.productID as string;
   const { t } = useTranslation()
-  const { data: product, isLoading } = useProduct(id[0])
-  const [productData, setNewProductData] = useState(product)
-  const { image, title, price, count, description } = productData ?? {}
+  const { data, isLoading, refetch } = useProduct(id)
+  const { image, title, price, count, description } = data ?? {}
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
   const { data: products } = useProducts()
   const { enqueueSnackbar } = useSnackbar()
 
   useEffect(() => {
-    const getContent = async () => {
-      const querySnapshot = await getDoc(
-        doc(database, Collections.PRODUCTS, id[0])
-      )
-      const res = querySnapshot.data()
-      if (res) {
-        setNewProductData(res as ProductsType)
-      }
-    }
-    getContent()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.query])
+    refetch();
+  }, [id])
 
   const productList = products?.map((product: ProductsType) => (
     <div key={product.id}>
@@ -162,4 +148,4 @@ const ProductDetail = () => {
   )
 }
 
-export default ProductDetail
+export default ProductDetailLayout

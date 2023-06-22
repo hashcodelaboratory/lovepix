@@ -3,12 +3,12 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from 'next/head'
 import React from 'react'
-import ProductDetail from 'screens-content/e-shop/components/product-detail/product-detail'
+import ProductDetailLayout from 'screens-content/e-shop/components/product-detail/product-detail'
 import FooterLayout from 'screens-content/footer/footer'
 
 import styles from '../../styles/Home.module.css'
 
-const ProductID: NextPage = () => {
+const ProductDetail: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -20,7 +20,7 @@ const ProductID: NextPage = () => {
         <ResponsiveAppBar />
       </header>
       <main className={styles.main}>
-        <ProductDetail />
+        <ProductDetailLayout />
       </main>
       <footer>
         <FooterLayout />
@@ -46,4 +46,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   }
 }
 
-export default ProductID
+export default ProductDetail
