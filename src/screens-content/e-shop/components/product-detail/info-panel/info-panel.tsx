@@ -5,34 +5,44 @@ import Experience from '@icons/icon-experience'
 import Access from '@icons/icon-access'
 import styles from './info-panel.module.scss'
 import { messages } from 'messages/messages'
+import Money from '@icons/icon-money'
 
-const InfoPanel = () => {
+type Info = {
+  quantity: number | undefined
+}
+
+const InfoPanel = ({ quantity }: Info) => {
   const { t } = useTranslation()
 
   const shopInfo = [
     {
-      img: <Delivery width={60} height={60} />,
+      img: <Experience width={50} height={50} />,
+      title: t(messages.pickUpInfo),
+      description: 'Duklianská 38, Spišská Nová Ves',
+    },
+    {
+      img: <Delivery width={50} height={50} />,
       title: t(messages.fastDelivery),
-      description: t(messages.fastDeliveryDescription),
+      description: '',
     },
     {
-      img: <Experience width={60} height={60} />,
-      title: t(messages.longTermExperience),
-      description: t(messages.longTermExperienceDescription),
+      img: <Access width={50} height={50} />,
+      title: `Skladom ${quantity ?? '?'} ks`,
+      description: '',
     },
     {
-      img: <Access width={60} height={60} />,
-      title: t(messages.specialApproach),
-      description: t(messages.specialApproachDescription),
+      img: <Money width={50} height={50} />,
+      title: t(messages.moneyBackGuarantee),
+      description: '',
     },
   ]
 
-  const tableInfo = shopInfo.map((item) => (
-    <div style={{ display: 'flex', alignItems: 'center' }} key={item.title}>
+  const tableInfo = shopInfo.map((item, index) => (
+    <div style={{ display: 'flex', alignItems: 'center' }} key={index}>
       <div>{item.img}</div>
       <div className={styles.textInfo}>
-        <p className={styles.title}>{item.title}</p>
-        <p className={styles.description}>{item.description}</p>
+        <span className={styles.title}>{item.title}</span>
+        <div className={styles.title}>{item.description}</div>
       </div>
     </div>
   ))

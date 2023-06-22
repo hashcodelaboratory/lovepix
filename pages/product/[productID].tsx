@@ -1,21 +1,14 @@
 import ResponsiveAppBar from 'app-bar/responsive-app-bar'
-import { database } from 'common/firebase/config'
-import { Collections } from 'common/firebase/enums'
-import { doc, getDoc } from 'firebase/firestore'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import React from 'react'
-import ProductDetail from 'screens-content/e-shop/components/product-detail/product-detail'
+import ProductDetailLayout from 'screens-content/e-shop/components/product-detail/product-detail'
 import FooterLayout from 'screens-content/footer/footer'
 
 import styles from '../../styles/Home.module.css'
 
-const ProductID: NextPage = () => {
-  const router = useRouter()
-  const id = router.query.productID as string[]
-
+const ProductDetail: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -27,7 +20,7 @@ const ProductID: NextPage = () => {
         <ResponsiveAppBar />
       </header>
       <main className={styles.main}>
-        <ProductDetail id={id[0]} />
+        <ProductDetailLayout />
       </main>
       <footer>
         <FooterLayout />
@@ -53,4 +46,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   }
 }
 
-export default ProductID
+export default ProductDetail

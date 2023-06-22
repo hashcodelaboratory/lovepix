@@ -1,12 +1,19 @@
 .productDetailContainer {
   margin-top: 4rem !important;
   background-color: white;
-  padding: 20px;
+  padding: 40px;
 }
 
 .detailLayout {
-  display: flex;
-  flex-direction: column;
+}
+
+.productInfo {
+  padding: 20px;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem,
+    rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
+  border-radius: 1rem;
+  margin: 5px;
 }
 
 .image {
@@ -15,17 +22,25 @@
   padding-bottom: 20px;
 }
 
+.category {
+  padding-bottom: 10px;
+  color: gray;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
 .title {
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 600;
   color: #444c57;
+  margin-top: 20px;
 }
 
 .price {
-  font-size: 25px;
-  color: #c31702;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 600;
   margin-top: 20px;
+  color: #444c57;
 }
 
 .count {
@@ -42,14 +57,19 @@
 }
 
 .description {
-  color: gray;
   font-size: 14px;
   font-weight: 500;
-  margin-top: 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .button {
-  margin: 20px 0px !important;
+  margin: 40px 0px !important;
+  background-color: #0071dc;
+  color: white;
+  border-radius: 20px;
+  text-transform: none;
+  font-weight: 600;
 }
 
 .counterContainer {

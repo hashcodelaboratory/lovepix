@@ -1,39 +1,50 @@
-import { Button, Container, Skeleton } from '@mui/material'
+import { Button, Container, Grid, Skeleton } from '@mui/material'
 import { useProduct } from 'common/api/use-product'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ImageLayout } from 'screens-content/home/enums/enums'
 import InfoPanel from './info-panel/info-panel'
 import styles from './product-detail.module.scss'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 import { orderTable } from '../../../../../database.config'
+import { ProductsType, useProducts } from 'common/api/use-products'
+import Product from '../product/product'
+import { messages } from 'messages/messages'
+import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 import { shoppingCartPrice } from './utils'
 import { useSnackbar } from 'notistack'
 import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
 } from 'snackbar/config'
-import { messages } from 'messages/messages'
-import { useTranslation } from 'next-i18next'
-import { Product } from 'common/types/product'
 
-type ProductID = {
-  id: string
-}
-
-const ProductDetail = ({ id }: ProductID) => {
+const ProductDetailLayout = () => {
+  const router = useRouter()
+  const id = router.query.productID as string;
   const { t } = useTranslation()
-  const { data: product, isLoading } = useProduct(id)
-  const { image, title, price, count, description } = product ?? {}
+  const { data, isLoading, refetch } = useProduct(id)
+  const { image, title, price, count, description } = data ?? {}
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
+  const { data: products } = useProducts()
   const { enqueueSnackbar } = useSnackbar()
+
+  useEffect(() => {
+    refetch();
+  }, [id])
+
+  const productList = products?.map((product: ProductsType) => (
+    <div key={product.id}>
+      <Product product={{ ...product }} />
+    </div>
+  ))
 
   const payloadAddtoCart = () => {
     const { products } = order?.shoppingCart || []
 
     const foundIndex: number = products?.findIndex(
-      (item: Product) => item.id === id
+      (item: any) => item.id === id
     )
     if (products && foundIndex !== -1) {
       const array = products
@@ -83,54 +94,58 @@ const ProductDetail = ({ id }: ProductID) => {
       ? orderTable.update(ORDER_TABLE_KEY, payloadAddtoCart())
       : orderTable.add(payloadAddtoCart(), ORDER_TABLE_KEY)
     enqueueSnackbar(
-      String(t(messages.productAddedToBsket)),
+      String(t(messages.productAddedToCart)),
       SNACKBAR_OPTIONS_SUCCESS
     )
   }
 
   return (
     <Container className={styles.productDetailContainer}>
-      <div className={styles.detailLayout}>
-        {!isLoading ? (
-          <Image
-            src={image ?? ''}
-            layout={ImageLayout.INTRINSIC}
-            width={600}
-            height={400}
-            alt='image'
-            className={styles.image}
-            loading='lazy'
-          />
-        ) : (
-          <Skeleton animation='wave' width='100%' height={'400px'} />
-        )}
-        <div className={styles.productInfo}>
-          <span className={styles.title}>{title}</span>
-          <div className={styles.description}>{description}</div>
-          <div className={styles.price}>
-            {price?.toFixed(2)} €
-            <span className={styles.withTax}>
-              {String(t(messages.withTax))}
-            </span>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={8} style={{ textAlign: 'center' }}>
+          {!isLoading ? (
+            <Image
+              src={image ?? ''}
+              layout={ImageLayout.INTRINSIC}
+              width={600}
+              height={400}
+              alt='image'
+              className={styles.image}
+              loading='lazy'
+            />
+          ) : (
+            <Skeleton animation='wave' width='100%' height='100%' />
+          )}
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <div className={styles.productInfo}>
+            <div className={styles.category}>Obrazy</div>
+            <span className={styles.title}>{title}</span>
+            <div className={styles.price}>
+              {price?.toFixed(2)} €{' '}
+              <span className={styles.withTax}>s DPH</span>
+            </div>
+            <Button
+              variant='outlined'
+              className={styles.button}
+              onClick={addToCart}
+            >
+              {t(messages.addToCart)}
+            </Button>
+            <hr />
+            <InfoPanel quantity={count} />
           </div>
-          <div className={styles.count}>
-            {String(t(messages.onStock))} {count} ks
-          </div>
-          <Button
-            variant='outlined'
-            fullWidth
-            className={styles.button}
-            onClick={addToCart}
-          >
-            {String(t(messages.addToBasket))}
-          </Button>
-        </div>
-        <div>
-          <InfoPanel />
-        </div>
+        </Grid>
+      </Grid>
+      <div className={styles.title}>{t(messages.description)}</div>
+      <hr />
+      <div className={styles.description}>{description}</div>
+      <div className={styles.title}>{t(messages.simmilarProducts)}</div>
+      <div style={{ display: 'flex', overflow: 'auto', marginTop: 20 }}>
+        {productList}
       </div>
     </Container>
   )
 }
 
-export default ProductDetail
+export default ProductDetailLayout
