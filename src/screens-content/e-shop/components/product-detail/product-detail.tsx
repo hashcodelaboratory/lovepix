@@ -41,9 +41,9 @@ const ProductDetail = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query])
 
-  const productList = products?.map((products: ProductsType) => (
-    <div key={products.id}>
-      <Product product={{ ...products }} />
+  const productList = products?.map((product: ProductsType) => (
+    <div key={product.id}>
+      <Product product={{ ...product }} />
     </div>
   ))
 
