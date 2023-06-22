@@ -2,7 +2,8 @@ import styles from '../../../../../shopping-cart.module.scss'
 import { default as ImageComponent } from 'next/image'
 import { ImageLayout } from '../../../../../../home/enums/enums'
 import { Close } from '@mui/icons-material'
-import { Order, Product } from '../../../../../../../common/types/order'
+import { Order } from '../../../../../../../common/types/order'
+import { Product } from '../../../../../../../common/types/product'
 import { removeProduct } from '../utils/utils'
 
 type CartRowProps = {
