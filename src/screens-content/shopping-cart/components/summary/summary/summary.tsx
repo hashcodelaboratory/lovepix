@@ -14,7 +14,9 @@ import Delivery from '../delivery/delivery'
 import Payment from '../payment/payment'
 import OrderItems from '../components/order-items/order-items'
 import TotalSection from '../total/total-section'
-import { getPriceForDelivery, getPriceForPayment } from "../total/utils";
+import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
+import { createInvoice } from 'common/api/superfaktura'
+import { createInvoiceAXIOS } from 'common/api/superfaktura-axios'
 
 type SummaryProps = {
   order: Order
@@ -36,8 +38,11 @@ const Summary = ({ order }: SummaryProps) => {
     resolver: yupResolver(FORM_SCHEMA),
     defaultValues: { ...order },
   })
-  const { delivery, payment } = watch();
-  const finalPrice = Number(order?.totalPrice) + getPriceForDelivery(delivery) + getPriceForPayment(payment);
+  const { delivery, payment } = watch()
+  const finalPrice =
+    Number(order?.totalPrice) +
+    getPriceForDelivery(delivery) +
+    getPriceForPayment(payment)
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setIsLoading(true)
@@ -69,6 +74,7 @@ const Summary = ({ order }: SummaryProps) => {
 
   return (
     <Container className={styles.summaryContainer}>
+      <div onClick={createInvoice}>TEST</div>
       <form className={styles.summary} onSubmit={handleSubmit(onSubmit)}>
         <Address register={register} errors={errors} control={control} />
         <div className={styles.orderContainer}>
