@@ -3,9 +3,18 @@ import { useTranslation } from "react-i18next";
 import { messages } from "../../../../messages/messages";
 import Container from "@mui/material/Container";
 import { TextField } from "@mui/material";
+import { useState } from "react";
+import { addContactToNewsletter } from "../../../../common/api/add-contact-newsletter";
 
 const Newsletter = (): JSX.Element => {
   const { t } = useTranslation();
+
+  const [email, setEmail] = useState<string>('');
+
+  const handleNewsletter = async () => {
+    const res = await addContactToNewsletter(email);
+    console.log(res);
+  }
 
   return (
     <div className={styles.layout}>
@@ -36,8 +45,10 @@ const Newsletter = (): JSX.Element => {
                     },
                   },
                 }}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              <button className={styles.button}>
+              <button className={styles.button} onClick={handleNewsletter}>
                 {String(t(messages.login))}
               </button>
             </div>
