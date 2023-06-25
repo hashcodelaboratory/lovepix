@@ -2,7 +2,7 @@ version: "3.8"
 services:
   server-frontend:
     container_name: server-frontend
-    image: waller_fe
+    image: waller-fe
     build:
       context: .
       dockerfile: ./Dockerfile
