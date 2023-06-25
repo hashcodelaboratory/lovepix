@@ -5,15 +5,23 @@ import Container from "@mui/material/Container";
 import { TextField } from "@mui/material";
 import { useState } from "react";
 import { addContactToNewsletter } from "../../../../common/api/add-contact-newsletter";
+import { useSnackbar } from "notistack";
+import { SNACKBAR_OPTIONS_SUCCESS } from "../../../../snackbar/config";
 
 const Newsletter = (): JSX.Element => {
   const { t } = useTranslation();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [email, setEmail] = useState<string>('');
 
   const handleNewsletter = async () => {
     const res = await addContactToNewsletter(email);
-    console.log(res);
+    if (res) {
+      enqueueSnackbar(
+        String(t(messages.newsletterSuccessAdd)),
+        SNACKBAR_OPTIONS_SUCCESS,
+      )
+    }
   }
 
   return (
