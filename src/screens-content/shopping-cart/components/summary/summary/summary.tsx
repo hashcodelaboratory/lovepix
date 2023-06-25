@@ -15,7 +15,7 @@ import Payment from "../payment/payment";
 import OrderItems from "../components/order-items/order-items";
 import TotalSection from "../total/total-section";
 import { getPriceForDelivery, getPriceForPayment } from "../total/utils";
-import { loadStripe } from "@stripe/stripe-js";
+import { useStripe } from "@stripe/react-stripe-js";
 
 type SummaryProps = {
   order: Order
@@ -23,6 +23,8 @@ type SummaryProps = {
 
 const Summary = ({ order }: SummaryProps) => {
   const { mutate: createOrder } = useCreateOrder();
+
+  const stripe = useStripe();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -41,34 +43,37 @@ const Summary = ({ order }: SummaryProps) => {
   const finalPrice = Number(order?.totalPrice) + getPriceForDelivery(delivery) + getPriceForPayment(payment);
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    const stripePromise = loadStripe(
-      "pk_live_51JjJPmGDIrGflhnMP8LKvUCr8ndtH0cgAJFCpjuneMIhFFF2eXermVildK3COUnUO4PNAGoyQ1EC8vI1LO1t3v0H00Sy1M6R9L",
-    );
-    await createOrder({
-      form: {
-        firstName: data?.firstName,
-        lastName: data?.lastName,
-        company: data?.company,
-        address: data?.address,
-        city: data?.city,
-        postalCode: data?.postalCode,
-        phone: data?.phone,
-        email: data?.email,
-      },
-      date: Date.now(),
-      shoppingCart: order?.shoppingCart,
-      totalPrice: order?.totalPrice,
-      delivery: data.delivery!,
-      payment: data.payment!,
-    })
-    reset()
-    const response = await fetch("/api/checkout_sessions", {
+
+    // await createOrder({
+    //   form: {
+    //     firstName: data?.firstName,
+    //     lastName: data?.lastName,
+    //     company: data?.company,
+    //     address: data?.address,
+    //     city: data?.city,
+    //     postalCode: data?.postalCode,
+    //     phone: data?.phone,
+    //     email: data?.email,
+    //   },
+    //   date: Date.now(),
+    //   shoppingCart: order?.shoppingCart,
+    //   totalPrice: order?.totalPrice,
+    //   delivery: data.delivery!,
+    //   payment: data.payment!,
+    // })
+    // reset()
+    const response = await fetch("api/checkout_sessions", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY}`,
       },
     });
+    const _data = await response.json();
+    await stripe?.redirectToCheckout({
+      sessionId: _data.sessionId});
   };
+
+  console.log(stripe);
 
   useEffect(() => {
     if (!order?.shoppingCart?.images) {
