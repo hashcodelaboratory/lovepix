@@ -2,6 +2,7 @@ import { Delivery } from 'common/enums/delivery'
 import { Payment } from 'common/enums/payment'
 import { FormInputs } from 'common/types/form'
 import { Order } from 'common/types/order'
+import { SFInvoice } from 'common/types/superfaktura'
 import dayjs from 'dayjs'
 
 const invoiceItems = (
@@ -47,7 +48,7 @@ export const invoice = (
   order: Order,
   delivery: Delivery | null,
   payment: Payment | null
-) => {
+): SFInvoice => {
   const createdDate = dayjs(new Date()).format('YYYY-MM-DD')
   const dueDate = dayjs().add(15, 'day').format('YYYY-MM-DD')
   return {
