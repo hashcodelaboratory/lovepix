@@ -36,6 +36,7 @@
     "sharp": "0.32.0",
     "styled-components": "5.3.5",
     "uuid": "9.0.0",
+    "vanilla-cookieconsent": "2.9.1",
     "yup": "0.32.11"
   },
   "devDependencies": {
