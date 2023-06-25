@@ -6409,6 +6409,11 @@ v8-to-istanbul@^9.0.1:
     "@types/istanbul-lib-coverage" "^2.0.1"
     convert-source-map "^1.6.0"
 
+vanilla-cookieconsent@2.9.1:
+  version "2.9.1"
+  resolved "https://registry.yarnpkg.com/vanilla-cookieconsent/-/vanilla-cookieconsent-2.9.1.tgz#db6ba5abdb6c0221ef399702b7a0c3f473791b95"
+  integrity sha512-53SFENm1+nSOvuH8nEYRVB21gsYHnoglKD7Py9q1f9RSC4nkOOY5v3IE9rXh7g1vBLFnCtzlaFmJLm8/Y94iOQ==
+
 void-elements@3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-3.1.0.tgz#614f7fbf8d801f0bb5f0661f5b2f5785750e4f09"
