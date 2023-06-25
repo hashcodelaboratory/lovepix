@@ -147,5 +147,6 @@
   "addToBasket": "Pridať do košíka",
   "withTax": "s DPH",
   "productAddedToCart": "Produkt bol pridaný do košíka",
-  "noMoreProdutsOnStock": "Viac kusov tohto produktu už nie su na sklade"
+  "noMoreProdutsOnStock": "Viac kusov tohto produktu už nie su na sklade",
+  "newsletterSuccessAdd": "Úspešne ste sa prihlásili na odber noviniek."
 }
