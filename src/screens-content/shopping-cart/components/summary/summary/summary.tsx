@@ -7,7 +7,7 @@ import { FormInputs } from '../../../../../common/types/form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FORM_SCHEMA } from '../address/components/form/utils/schema'
 import { useCreateOrder } from '../../../../../common/firebase/firestore/createOrder'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Backdrop, CircularProgress } from '@mui/material'
 import Voucher from '../voucher/voucher'
 import Delivery from '../delivery/delivery'
@@ -15,8 +15,8 @@ import Payment from '../payment/payment'
 import OrderItems from '../components/order-items/order-items'
 import TotalSection from '../total/total-section'
 import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
-import { createInvoice } from 'common/api/superfaktura'
-import { createInvoiceAXIOS } from 'common/api/superfaktura-axios'
+import { addInvoice } from 'common/api/superfaktura'
+import { invoice } from './utils'
 
 type SummaryProps = {
   order: Order
@@ -63,18 +63,19 @@ const Summary = ({ order }: SummaryProps) => {
       delivery: data.delivery!,
       payment: data.payment!,
     })
+    addInvoice(invoice(data, order, delivery ?? null, payment ?? null))
     reset()
+    setIsLoading(false)
   }
 
-  useEffect(() => {
-    if (!order?.shoppingCart?.images) {
-      setIsLoading(false)
-    }
-  }, [order])
+  // useEffect(() => {
+  //   if (!order?.shoppingCart) {
+  //     setIsLoading(false)
+  //   }
+  // }, [order])
 
   return (
     <Container className={styles.summaryContainer}>
-      <div onClick={createInvoice}>TEST</div>
       <form className={styles.summary} onSubmit={handleSubmit(onSubmit)}>
         <Address register={register} errors={errors} control={control} />
         <div className={styles.orderContainer}>

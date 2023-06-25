@@ -20,6 +20,7 @@
     "@mui/styled-engine-sc": "^5.10.1",
     "@mui/x-data-grid": "^5.16.0",
     "axios": "^1.4.0",
+    "dayjs": "^1.11.8",
     "dexie": "^3.2.2",
     "dexie-react-hooks": "^1.1.1",
     "jspdf": "^2.5.1",
