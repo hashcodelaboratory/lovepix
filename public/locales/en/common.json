@@ -128,5 +128,6 @@
   "title": "Title",
   "count": "Quantity",
   "description": "Description",
-  "addNewProduct": "Add new product"
+  "addNewProduct": "Add new product",
+  "newsletterSuccessAdd": "Úspešne ste sa prihlásili na odber noviniek."
 }
