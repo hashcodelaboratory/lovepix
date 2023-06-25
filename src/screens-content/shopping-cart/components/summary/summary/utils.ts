@@ -29,13 +29,13 @@ const invoiceItems = (
   const deliveryPrice = delivery === Delivery.COURIER ? 5 : 0
   const deliveryItem = {
     unit_price: deliveryPrice,
-    description: delivery,
+    description: `Doprava - ${delivery}`,
     quantity: 1,
     unit: 'ks',
   }
   const paymentItem = {
     unit_price: 0,
-    description: payment,
+    description: `Platba - ${payment}`,
     quantity: 1,
     unit: 'ks',
   }
