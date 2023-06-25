@@ -1,4 +1,4 @@
-import status from '../../../pages/api/smart-emailing/status'
+import status from '../../../../pages/api/smart-emailing/status'
 import {NextApiRequest, NextApiResponse} from "next";
 import {statusEndpoint} from "../utils/endpoint-composer";
 import authorizationHeaders from "../utils/authorization-headers";

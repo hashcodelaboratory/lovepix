@@ -1,10 +1,10 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
 import axios from "axios";
-import {registerEndpoint} from "../../../api/smart-emailing/utils/endpoint-composer";
-import authorizationHeaders from "../../../api/smart-emailing/utils/authorization-headers";
-import {logRequestTrigger} from "../../../api/logger/logger";
-import RegistrationStatus from "../../../api/smart-emailing/registration-status";
-import ContactListStatus from "../../../api/smart-emailing/contact-list-status";
+import {registerEndpoint} from "../../../src/api/smart-emailing/utils/endpoint-composer";
+import authorizationHeaders from "../../../src/api/smart-emailing/utils/authorization-headers";
+import {logRequestTrigger} from "../../../src/api/logger/logger";
+import RegistrationStatus from "../../../src/api/smart-emailing/registration-status";
+import ContactListStatus from "../../../src/api/smart-emailing/contact-list-status";
 
 type Response = {
   status?: RegistrationStatus,
@@ -30,7 +30,7 @@ const register = async (
       return
     }
 
-    if (!req.body || !req.body.email) {
+    if (!req.body) {
       res.status(400).json({
         error: BAD_REQUEST_ERROR_MESSAGE
       })
@@ -38,8 +38,17 @@ const register = async (
       return
     }
 
-    const email = req.body.email
+    const body = (JSON.parse(req.body)) as { email: string }
 
+    if (!body || !body.email) {
+      res.status(400).json({
+        error: BAD_REQUEST_ERROR_MESSAGE
+      })
+
+      return
+    }
+
+    const {email} = body
 
     const uri = registerEndpoint().href
     const headers = authorizationHeaders()

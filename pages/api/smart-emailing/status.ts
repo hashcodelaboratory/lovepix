@@ -1,8 +1,8 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
 import axios from "axios";
-import {statusEndpoint} from "../../../api/smart-emailing/utils/endpoint-composer";
-import authorizationHeaders from "../../../api/smart-emailing/utils/authorization-headers";
-import {logRequestTrigger} from "../../../api/logger/logger";
+import {statusEndpoint} from "../../../src/api/smart-emailing/utils/endpoint-composer";
+import authorizationHeaders from "../../../src/api/smart-emailing/utils/authorization-headers";
+import {logRequestTrigger} from "../../../src/api/logger/logger";
 
 type Response = {
   status: string

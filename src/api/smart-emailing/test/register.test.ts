@@ -1,4 +1,4 @@
-import register from "../../../pages/api/smart-emailing/register";
+import register from "../../../../pages/api/smart-emailing/register";
 import {NextApiRequest, NextApiResponse} from "next";
 import {registerEndpoint} from "../utils/endpoint-composer";
 import authorizationHeaders from "../utils/authorization-headers";
@@ -47,7 +47,7 @@ describe('pages/api/smart-emailing/register.ts', () => {
 
         await register({
           method: 'POST',
-          body: {}
+          body: "{}"
         } as NextApiRequest, {status: (statusCode) => mockedStatusInvocation(statusCode)} as NextApiResponse)
 
         expect(mockedStatusInvocation).toHaveBeenCalledTimes(1)
@@ -62,7 +62,7 @@ describe('pages/api/smart-emailing/register.ts', () => {
 
       await register({
         method: 'POST',
-        body: {email: 'secka.dominik@gmail.com'}
+        body: "{\"email\": \"secka.dominik@gmail.com\"}"
         // @ts-ignore
       } as NextApiRequest, {status: jest.fn().mockReturnValue({json: jest.fn()})} as NextApiResponse)
 
@@ -75,7 +75,7 @@ describe('pages/api/smart-emailing/register.ts', () => {
 
       await register({
         method: 'POST',
-        body: {email: 'secka.dominik@gmail.com'}
+        body: "{\"email\": \"secka.dominik@gmail.com\"}"
         // @ts-ignore
       } as NextApiRequest, {status: jest.fn().mockReturnValue({json: jest.fn()})} as NextApiResponse)
 
@@ -88,12 +88,13 @@ describe('pages/api/smart-emailing/register.ts', () => {
 
       await register({
         method: 'POST',
-        body: {email: 'secka.dominik@gmail.com'}
+        body: "{\"email\": \"secka.dominik@gmail.com\"}"
         // @ts-ignore
       } as NextApiRequest, {status: jest.fn().mockReturnValue({json: jest.fn()})} as NextApiResponse)
 
       expect(logRequestTrigger).toHaveBeenCalledTimes(1)
-      expect(logRequestTrigger).toHaveBeenCalledWith("<register_endpoint>", "POST", {email: "secka.dominik@gmail.com"})
+      expect(logRequestTrigger).toHaveBeenCalledWith("<register_endpoint>", "POST", "{\"email\": \"secka.dominik@gmail.com\"}"
+      )
     })
 
     it('should invoke `axios` `POST` method with expected configuration', async () => {
@@ -102,7 +103,7 @@ describe('pages/api/smart-emailing/register.ts', () => {
 
       await register({
         method: 'POST',
-        body: {email: 'secka.dominik@gmail.com'}
+        body: "{\"email\": \"secka.dominik@gmail.com\"}"
         // @ts-ignore
       } as NextApiRequest, {status: jest.fn().mockReturnValue({json: jest.fn()})} as NextApiResponse)
 
@@ -136,7 +137,7 @@ describe('pages/api/smart-emailing/register.ts', () => {
 
       await register({
         method: 'POST',
-        body: {email: 'secka.dominik@gmail.com'}
+        body: "{\"email\": \"secka.dominik@gmail.com\"}"
         // @ts-ignore
       } as NextApiRequest, {status: (statusCode) => mockedStatusInvocation(statusCode)} as NextApiResponse)
 
@@ -157,7 +158,7 @@ describe('pages/api/smart-emailing/register.ts', () => {
 
         await register({
           method: 'POST',
-          body: {email: 'secka.dominik@gmail.com'}
+          body: "{\"email\": \"secka.dominik@gmail.com\"}"
           // @ts-ignore
         } as NextApiRequest, {status: (statusCode) => mockedStatusInvocation(statusCode)} as NextApiResponse)
 
