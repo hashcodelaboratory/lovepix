@@ -1,29 +1,30 @@
-import styles from '../../../shopping-cart.module.scss'
-import { Container } from '@mui/system'
-import Address from '../address/address'
-import { Order } from '../../../../../common/types/order'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { FormInputs } from '../../../../../common/types/form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { FORM_SCHEMA } from '../address/components/form/utils/schema'
-import { useCreateOrder } from '../../../../../common/firebase/firestore/createOrder'
-import { useEffect, useState } from 'react'
-import { Backdrop, CircularProgress } from '@mui/material'
-import Voucher from '../voucher/voucher'
-import Delivery from '../delivery/delivery'
-import Payment from '../payment/payment'
-import OrderItems from '../components/order-items/order-items'
-import TotalSection from '../total/total-section'
+import styles from "../../../shopping-cart.module.scss";
+import { Container } from "@mui/system";
+import Address from "../address/address";
+import { Order } from "../../../../../common/types/order";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { FormInputs } from "../../../../../common/types/form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FORM_SCHEMA } from "../address/components/form/utils/schema";
+import { useCreateOrder } from "../../../../../common/firebase/firestore/createOrder";
+import { useEffect, useState } from "react";
+import { Backdrop, CircularProgress } from "@mui/material";
+import Voucher from "../voucher/voucher";
+import Delivery from "../delivery/delivery";
+import Payment from "../payment/payment";
+import OrderItems from "../components/order-items/order-items";
+import TotalSection from "../total/total-section";
 import { getPriceForDelivery, getPriceForPayment } from "../total/utils";
+import { loadStripe } from "@stripe/stripe-js";
 
 type SummaryProps = {
   order: Order
 }
 
 const Summary = ({ order }: SummaryProps) => {
-  const { mutate: createOrder } = useCreateOrder()
+  const { mutate: createOrder } = useCreateOrder();
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -35,12 +36,14 @@ const Summary = ({ order }: SummaryProps) => {
   } = useForm<FormInputs>({
     resolver: yupResolver(FORM_SCHEMA),
     defaultValues: { ...order },
-  })
+  });
   const { delivery, payment } = watch();
   const finalPrice = Number(order?.totalPrice) + getPriceForDelivery(delivery) + getPriceForPayment(payment);
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    setIsLoading(true)
+    const stripePromise = loadStripe(
+      "pk_live_51JjJPmGDIrGflhnMP8LKvUCr8ndtH0cgAJFCpjuneMIhFFF2eXermVildK3COUnUO4PNAGoyQ1EC8vI1LO1t3v0H00Sy1M6R9L",
+    );
     await createOrder({
       form: {
         firstName: data?.firstName,
@@ -59,13 +62,19 @@ const Summary = ({ order }: SummaryProps) => {
       payment: data.payment!,
     })
     reset()
-  }
+    const response = await fetch("/api/checkout_sessions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY}`,
+      },
+    });
+  };
 
   useEffect(() => {
     if (!order?.shoppingCart?.images) {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }, [order])
+  }, [order]);
 
   return (
     <Container className={styles.summaryContainer}>
@@ -90,13 +99,13 @@ const Summary = ({ order }: SummaryProps) => {
         <Payment control={control} message={errors.payment?.message} />
       </form>
       <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={isLoading}
       >
-        <CircularProgress color='inherit' />
+        <CircularProgress color="inherit" />
       </Backdrop>
     </Container>
-  )
-}
+  );
+};
 
-export default Summary
+export default Summary;
