@@ -2,7 +2,7 @@ import { Delivery } from 'common/enums/delivery'
 import { Payment } from 'common/enums/payment'
 import { FormInputs } from 'common/types/form'
 import { Order } from 'common/types/order'
-import { SFInvoice } from 'common/types/superfaktura'
+import { InvoiceItem, SFInvoice } from 'common/types/superfaktura'
 import dayjs from 'dayjs'
 
 const invoiceItems = (
@@ -10,7 +10,7 @@ const invoiceItems = (
   delivery: Delivery | null,
   payment: Payment | null
 ) => {
-  let newItems: any[] = []
+  let newItems: InvoiceItem[] = []
   const productItems = [
     ...order.shoppingCart.products,
     ...order.shoppingCart.images,

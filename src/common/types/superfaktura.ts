@@ -4,7 +4,7 @@ type Invoice = {
   due: string
 }
 
-type InvoiceItem = {
+export type InvoiceItem = {
   unit_price: number
   description: string
   quantity: number
