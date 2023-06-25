@@ -6,13 +6,15 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+      args:
+        NEXT_PUBLIC_SMART_EMAILING_HOST: ${NEXT_PUBLIC_SMART_EMAILING_HOST}
+        NEXT_PUBLIC_SMART_EMAILING_TOKEN: ${NEXT_PUBLIC_SMART_EMAILING_TOKEN}
+        NEXT_PUBLIC_SMART_EMAILING_CONTACT_LIST_ID: ${NEXT_PUBLIC_SMART_EMAILING_CONTACT_LIST_ID}
     networks:
       - app
     ports:
       - "3000:3000"
     restart: unless-stopped
-    #env_file:
-    #  - .env
 networks:
   app:
     driver: bridge
