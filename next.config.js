@@ -17,6 +17,9 @@ const nextConfig = {
   },
   i18n,
   output: 'standalone',
+  env: {
+    smartEmailingHost: '<smart-emailing-host>'
+  }
 }
 
 module.exports = nextConfig
