@@ -14,7 +14,8 @@ import Delivery from '../delivery/delivery'
 import Payment from '../payment/payment'
 import OrderItems from '../components/order-items/order-items'
 import TotalSection from '../total/total-section'
-import { getPriceForDelivery, getPriceForPayment } from "../total/utils";
+import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
+import { sendOrderMail } from 'common/api/send-mail'
 
 type SummaryProps = {
   order: Order
@@ -36,12 +37,15 @@ const Summary = ({ order }: SummaryProps) => {
     resolver: yupResolver(FORM_SCHEMA),
     defaultValues: { ...order },
   })
-  const { delivery, payment } = watch();
-  const finalPrice = Number(order?.totalPrice) + getPriceForDelivery(delivery) + getPriceForPayment(payment);
+  const { delivery, payment } = watch()
+  const finalPrice =
+    Number(order?.totalPrice) +
+    getPriceForDelivery(delivery) +
+    getPriceForPayment(payment)
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setIsLoading(true)
-    await createOrder({
+    const _order = await createOrder({
       form: {
         firstName: data?.firstName,
         lastName: data?.lastName,
@@ -59,6 +63,7 @@ const Summary = ({ order }: SummaryProps) => {
       payment: data.payment!,
     })
     reset()
+    sendOrderMail(data, order, delivery, payment)
   }
 
   useEffect(() => {
@@ -66,6 +71,8 @@ const Summary = ({ order }: SummaryProps) => {
       setIsLoading(false)
     }
   }, [order])
+
+  console.log(payment)
 
   return (
     <Container className={styles.summaryContainer}>

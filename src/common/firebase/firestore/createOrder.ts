@@ -91,7 +91,6 @@ const createOrder = async (data: CreateOrderRequest) => {
         docSnap ? docSnap.data().count + 1 : 1
       ).padStart(4, '0')
       const orderId = `PIC${year}${orderNumber}`
-
       await uploadToStorage(orderId, data)
     }
   }
