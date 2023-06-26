@@ -10,7 +10,7 @@ type CustomShoppingCartProps = {
 }
 
 const stripePromise = loadStripe(
-  "pk_live_51JjJPmGDIrGflhnMP8LKvUCr8ndtH0cgAJFCpjuneMIhFFF2eXermVildK3COUnUO4PNAGoyQ1EC8vI1LO1t3v0H00Sy1M6R9L",
+  process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY ?? '',
 );
 
 const CustomShoppingCart = ({ order }: CustomShoppingCartProps) => {
