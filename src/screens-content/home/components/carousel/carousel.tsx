@@ -1,11 +1,17 @@
 import styles from "../../home.module.scss";
 import Container from "@mui/material/Container";
-import { useTranslation } from "next-i18next";
-import { messages } from "../../../../messages/messages";
+import {useTranslation} from "next-i18next";
+import {messages} from "../../../../messages/messages";
+import useNavigation from "../../../../navigation/use-navigation";
+
+export enum CarouselTestIds {
+  navigateToConfiguratorButtonTestId = 'navigate_to_configurator_button_test_id'
+}
 
 const Carousel = (): JSX.Element => {
-  const { t } = useTranslation();
-  const { printPhoto, uploadPhotoSubcontent, uploadPhoto } = messages;
+  const {t} = useTranslation();
+  const {navigateToConfigurator} = useNavigation();
+  const {printPhoto, uploadPhotoSubcontent, uploadPhoto} = messages;
 
   return (
     <div className={styles.carousel}>
@@ -14,7 +20,8 @@ const Carousel = (): JSX.Element => {
         <p className={styles.carouselSubTitle}>
           {String(t(uploadPhotoSubcontent))}
         </p>
-        <button className={styles.carouselButton}>{String(t(uploadPhoto))}</button>
+        <button data-testid={CarouselTestIds.navigateToConfiguratorButtonTestId} className={styles.carouselButton}
+                onClick={navigateToConfigurator}>{String(t(uploadPhoto))}</button>
       </Container>
     </div>
   )
