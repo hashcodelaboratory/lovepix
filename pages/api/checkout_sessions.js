@@ -1,6 +1,7 @@
 const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
+  const _body = JSON.parse(req.body);
   if (req.method === 'POST') {
     try {
       // Create Checkout Sessions from body params.
@@ -9,10 +10,10 @@ export default async function handler(req, res) {
           {
             price_data: {
               currency: 'eur',
-              product_data: { // Same as with price_data, we're creating a Product inline here, alternatively pass the ID of an existing Product using line_items.price_data.product
-                name: 'Painting 30x20'
+              product_data: {
+                name: 'Order n.123456789'
               },
-              unit_amount: 1999
+              unit_amount: (Number(_body.totalPrice) * 100)
             },
             quantity: 1,
           },

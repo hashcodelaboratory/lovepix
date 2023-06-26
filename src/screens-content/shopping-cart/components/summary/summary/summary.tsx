@@ -16,6 +16,7 @@ import OrderItems from "../components/order-items/order-items";
 import TotalSection from "../total/total-section";
 import { getPriceForDelivery, getPriceForPayment } from "../total/utils";
 import { useStripe } from "@stripe/react-stripe-js";
+import { Payment as PaymentEnum } from "../../../../../common/enums/payment";
 
 type SummaryProps = {
   order: Order
@@ -43,34 +44,41 @@ const Summary = ({ order }: SummaryProps) => {
   const finalPrice = Number(order?.totalPrice) + getPriceForDelivery(delivery) + getPriceForPayment(payment);
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+    const { payment } = data;
 
-    // await createOrder({
-    //   form: {
-    //     firstName: data?.firstName,
-    //     lastName: data?.lastName,
-    //     company: data?.company,
-    //     address: data?.address,
-    //     city: data?.city,
-    //     postalCode: data?.postalCode,
-    //     phone: data?.phone,
-    //     email: data?.email,
-    //   },
-    //   date: Date.now(),
-    //   shoppingCart: order?.shoppingCart,
-    //   totalPrice: order?.totalPrice,
-    //   delivery: data.delivery!,
-    //   payment: data.payment!,
-    // })
-    // reset()
-    const response = await fetch("api/checkout_sessions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY}`,
-      },
-    });
-    const _data = await response.json();
-    await stripe?.redirectToCheckout({
-      sessionId: _data.sessionId});
+    if (payment === PaymentEnum.ONLINE) {
+      const response = await fetch("api/checkout_sessions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY}`,
+        },
+        body: JSON.stringify({
+          totalPrice: order?.totalPrice,
+        })
+      });
+      const _data = await response.json();
+      await stripe?.redirectToCheckout({
+        sessionId: _data.sessionId});
+    } else {
+      await createOrder({
+        form: {
+          firstName: data?.firstName,
+          lastName: data?.lastName,
+          company: data?.company,
+          address: data?.address,
+          city: data?.city,
+          postalCode: data?.postalCode,
+          phone: data?.phone,
+          email: data?.email,
+        },
+        date: Date.now(),
+        shoppingCart: order?.shoppingCart,
+        totalPrice: order?.totalPrice,
+        delivery: data.delivery!,
+        payment: data.payment!,
+      });
+      reset();
+    }
   };
 
   console.log(stripe);
