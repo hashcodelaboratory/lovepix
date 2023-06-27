@@ -20,8 +20,8 @@ type CreateOrderRequest = {
   form: FormInputs
   date: number
   shoppingCart: {
-    images: Image[]
-    products: Product[]
+    images?: Image[]
+    products?: Product[]
   }
   totalPrice: number
   delivery: Delivery
@@ -29,6 +29,10 @@ type CreateOrderRequest = {
 }
 
 const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
+  if (!data.shoppingCart.images) {
+    return
+  }
+
   const payload: Image[] = []
   const images = data.shoppingCart.images
 

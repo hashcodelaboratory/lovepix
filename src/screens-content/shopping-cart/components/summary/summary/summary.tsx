@@ -16,6 +16,8 @@ import OrderItems from '../components/order-items/order-items'
 import TotalSection from '../total/total-section'
 import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
 import { sendOrderMail } from 'common/api/send-mail'
+import { createInvoice } from 'common/api/superfaktura'
+import { invoice } from './utils'
 
 type SummaryProps = {
   order: Order
@@ -61,15 +63,20 @@ const Summary = ({ order }: SummaryProps) => {
       delivery: data.delivery!,
       payment: data.payment!,
     })
+
+    const response = await createInvoice(
+      invoice(data, order, delivery ?? null, payment ?? null)
+    )
+    if (response) {
+      const res = await response.json()
+      // const id = res.data.Invoice.id
+      // const token = res.data.Invoice.token
+      // `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+    }
     await sendOrderMail(data, order, delivery, payment)
     reset()
+    setIsLoading(false)
   }
-
-  // useEffect(() => {
-  //   if (!order?.shoppingCart?.images) {
-  //     setIsLoading(false)
-  //   }
-  // }, [order])
 
   return (
     <Container className={styles.summaryContainer}>

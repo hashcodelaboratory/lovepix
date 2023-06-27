@@ -1,5 +1,5 @@
 enum ContactListStatus {
-  confirmed = 'confirmed'
+  confirmed = 'confirmed',
 }
 
 export default ContactListStatus
