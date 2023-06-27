@@ -15,7 +15,7 @@ import Payment from '../payment/payment'
 import OrderItems from '../components/order-items/order-items'
 import TotalSection from '../total/total-section'
 import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
-import { addInvoice } from 'common/api/superfaktura'
+import { addInvoice, createInvoice } from 'common/api/superfaktura'
 import { invoice } from './utils'
 
 type SummaryProps = {
@@ -63,16 +63,15 @@ const Summary = ({ order }: SummaryProps) => {
       delivery: data.delivery!,
       payment: data.payment!,
     })
-    addInvoice(invoice(data, order, delivery ?? null, payment ?? null))
-      .then((res) => res.json())
-      .then((response) => {
-        console.log(response)
-        //PDF ready for email attachment
-        // const id = response.data.Invoice.id
-        // const token = response.data.Invoice.token
-        // `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
-      })
-
+    const response = await createInvoice(
+      invoice(data, order, delivery ?? null, payment ?? null)
+    )
+    if (response) {
+      const res = await response.json()
+      // const id = res.data.Invoice.id
+      // const token = res.data.Invoice.token
+      // `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+    }
     reset()
     setIsLoading(false)
   }

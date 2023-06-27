@@ -1,6 +1,6 @@
 import { SFInvoice } from 'common/types/superfaktura'
 
-export const addInvoice = async (invoice: SFInvoice) => {
+export const createInvoice = async (invoice: SFInvoice) => {
   return await fetch('/api/superfaktura/create', {
     method: 'POST',
     body: JSON.stringify(invoice),
