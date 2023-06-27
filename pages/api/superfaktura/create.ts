@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
+import authorizationHeaders from 'api/superfaktura/utils/authorization-headers'
 
 const API_URL_CREATE = 'https://moja.superfaktura.sk/invoices/create'
 const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
@@ -32,17 +33,12 @@ const create = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
       return
     }
 
-    const config = {
-      headers: {
-        Authorization: `SFAPI email=${process.env.NEXT_PUBLIC_AUTH_EMAIL}&apikey=${process.env.NEXT_PUBLIC_AUTH_API_KEY}&company_id=${process.env.NEXT_PUBLIC_AUTH_COMPANY_ID}&module=${process.env.NEXT_PUBLIC_AUTH_MODULE}`,
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      },
-    }
+    const headers = authorizationHeaders()
 
     const result = await axios.post(
       API_URL_CREATE,
       'data=' + JSON.stringify(parsedBody),
-      config
+      { headers }
     )
 
     res.status(201).json(result.data as unknown)
