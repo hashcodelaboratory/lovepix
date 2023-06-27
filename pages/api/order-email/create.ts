@@ -45,6 +45,13 @@ const create = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
       from: 'LovePix <noreply@lovepix.sk>',
       to: _body.dest,
       subject: 'Objednávka: #' + _body.id,
+      attachments: [
+        {
+          filename: 'faktura_objednavka.pdf',
+          //contentType: 'application/pdf',
+          path: 'https://moja.superfaktura.sk/slo/invoices/pdf/25705872/token:110fef4b/signature:1/bysquare:1',
+        },
+      ],
       html: `<!DOCTYPE html>
     <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
     <head>
