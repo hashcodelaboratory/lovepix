@@ -64,15 +64,18 @@ const Summary = ({ order }: SummaryProps) => {
       payment: data.payment!,
     })
     addInvoice(invoice(data, order, delivery ?? null, payment ?? null))
+      .then((res) => res.json())
+      .then((response) => {
+        console.log(response)
+        //PDF ready for email attachment
+        // const id = response.data.Invoice.id
+        // const token = response.data.Invoice.token
+        // `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+      })
+
     reset()
     setIsLoading(false)
   }
-
-  // useEffect(() => {
-  //   if (!order?.shoppingCart) {
-  //     setIsLoading(false)
-  //   }
-  // }, [order])
 
   return (
     <Container className={styles.summaryContainer}>
