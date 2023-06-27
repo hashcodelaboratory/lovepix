@@ -14,12 +14,14 @@ import { StorageFolder } from '../storage/enums'
 import { Payment } from '../../enums/payment'
 import { orderTable } from '../../../../database.config'
 import { Image } from 'common/types/image'
+import { Product } from 'common/types/product'
 
 type CreateOrderRequest = {
   form: FormInputs
   date: number
   shoppingCart: {
     images: Image[]
+    products: Product[]
   }
   totalPrice: number
   delivery: Delivery

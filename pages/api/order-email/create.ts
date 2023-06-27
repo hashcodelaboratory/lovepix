@@ -170,19 +170,31 @@ const create = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
                                 <td style="text-align: center;padding: 10px;font-weight: 700;color: #000;">Množstvo</td>
                                 <td style="text-align: right;padding: 10px;font-weight: 700;color: #000;">Cena</td>
                             </tr>
-                            ${_body?.basket?.map(
+                            ${_body?.products?.map(
                               (item: any) =>
                                 `<tr style="border-top: 1px dotted #d3d3d3;">
                                   <td style="text-align: left;padding: 10px;color: #000;">${
                                     item.title
                                   }</td>
                                   <td style="text-align: center;padding: 10px;color: #000;">${
-                                    item.quantity
+                                    item.qty
                                   }</td>
                                   <td style="text-align: right;padding: 10px;color: #000;">${
-                                    item.price * item.quantity
+                                    item.price * item.qty
                                   } €</td>
                               </tr>`
+                            )}
+                            ${_body?.images?.map(
+                              (item: any) =>
+                                `<tr style="border-top: 1px dotted #d3d3d3;">
+                                    <td style="text-align: left;padding: 10px;color: #000;">${`${item.material} - ${item.height} x ${item.width}`}</td>
+                                    <td style="text-align: center;padding: 10px;color: #000;">${
+                                      item.qty
+                                    }</td>
+                                    <td style="text-align: right;padding: 10px;color: #000;">${
+                                      item.price * item.qty
+                                    } €</td>
+                                </tr>`
                             )}
                             <tr style="border-top: 1px dotted #d3d3d3;">
                                 <td style="text-align: left;padding: 10px;color: #000;">Doručenie</td>
@@ -249,10 +261,11 @@ const create = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
                             <td style="text-align: left;">
                             <p style="font-family: 'Montserrat', sans-serif; font-size: 12px; line-height: 14px; color: #333;font-weight: 700; text-decoration: underline;">Doručovacia adresa</p>
                             <p style="font-size: 11px;font-family: 'Montserrat', sans-serif; font-weight: 200; color: #333; float: left;">
-                            ${_body.shippingName} ${_body.shippingSurname}<br>
-                            ${_body.shippingCity}, ${_body.shippingAddress}<br>
-                            ${_body.shippingCountry} <br>
-                            ${_body.shippingZip} <br>
+                            ${_body.name} ${_body.surname} <br>
+                                ${_body.city}, ${_body.street} <br>
+                                ${_body.country} <br>
+                                ${_body.postcode} <br>
+                                ${_body.phone} <br><br>
                             </p>
                             </td>
                             </tr>

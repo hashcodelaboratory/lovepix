@@ -23,7 +23,6 @@ type SummaryProps = {
 
 const Summary = ({ order }: SummaryProps) => {
   const { mutate: createOrder } = useCreateOrder()
-
   const [isLoading, setIsLoading] = useState(false)
 
   const {
@@ -44,8 +43,8 @@ const Summary = ({ order }: SummaryProps) => {
     getPriceForPayment(payment)
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    setIsLoading(true)
-    const _order = await createOrder({
+    //setIsLoading(true)
+    await createOrder({
       form: {
         firstName: data?.firstName,
         lastName: data?.lastName,
@@ -62,17 +61,15 @@ const Summary = ({ order }: SummaryProps) => {
       delivery: data.delivery!,
       payment: data.payment!,
     })
+    await sendOrderMail(data, order, delivery, payment)
     reset()
-    sendOrderMail(data, order, delivery, payment)
   }
 
-  useEffect(() => {
-    if (!order?.shoppingCart?.images) {
-      setIsLoading(false)
-    }
-  }, [order])
-
-  console.log(payment)
+  // useEffect(() => {
+  //   if (!order?.shoppingCart?.images) {
+  //     setIsLoading(false)
+  //   }
+  // }, [order])
 
   return (
     <Container className={styles.summaryContainer}>
