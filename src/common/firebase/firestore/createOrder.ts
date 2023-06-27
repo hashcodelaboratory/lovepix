@@ -14,12 +14,14 @@ import { StorageFolder } from '../storage/enums'
 import { Payment } from '../../enums/payment'
 import { orderTable } from '../../../../database.config'
 import { Image } from 'common/types/image'
+import { Product } from 'common/types/product'
 
 type CreateOrderRequest = {
   form: FormInputs
   date: number
   shoppingCart: {
-    images: Image[]
+    images?: Image[]
+    products?: Product[]
   }
   totalPrice: number
   delivery: Delivery
@@ -27,6 +29,10 @@ type CreateOrderRequest = {
 }
 
 const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
+  if (!data.shoppingCart.images) {
+    return
+  }
+
   const payload: Image[] = []
   const images = data.shoppingCart.images
 

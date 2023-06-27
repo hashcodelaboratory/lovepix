@@ -7,14 +7,16 @@ import { FormInputs } from '../../../../../common/types/form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FORM_SCHEMA } from '../address/components/form/utils/schema'
 import { useCreateOrder } from '../../../../../common/firebase/firestore/createOrder'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Backdrop, CircularProgress } from '@mui/material'
 import Voucher from '../voucher/voucher'
 import Delivery from '../delivery/delivery'
 import Payment from '../payment/payment'
 import OrderItems from '../components/order-items/order-items'
 import TotalSection from '../total/total-section'
-import { getPriceForDelivery, getPriceForPayment } from "../total/utils";
+import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
+import { addInvoice, createInvoice } from 'common/api/superfaktura'
+import { invoice } from './utils'
 
 type SummaryProps = {
   order: Order
@@ -36,8 +38,11 @@ const Summary = ({ order }: SummaryProps) => {
     resolver: yupResolver(FORM_SCHEMA),
     defaultValues: { ...order },
   })
-  const { delivery, payment } = watch();
-  const finalPrice = Number(order?.totalPrice) + getPriceForDelivery(delivery) + getPriceForPayment(payment);
+  const { delivery, payment } = watch()
+  const finalPrice =
+    Number(order?.totalPrice) +
+    getPriceForDelivery(delivery) +
+    getPriceForPayment(payment)
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setIsLoading(true)
@@ -58,14 +63,18 @@ const Summary = ({ order }: SummaryProps) => {
       delivery: data.delivery!,
       payment: data.payment!,
     })
-    reset()
-  }
-
-  useEffect(() => {
-    if (!order?.shoppingCart?.images) {
-      setIsLoading(false)
+    const response = await createInvoice(
+      invoice(data, order, delivery ?? null, payment ?? null)
+    )
+    if (response) {
+      const res = await response.json()
+      // const id = res.data.Invoice.id
+      // const token = res.data.Invoice.token
+      // `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
     }
-  }, [order])
+    reset()
+    setIsLoading(false)
+  }
 
   return (
     <Container className={styles.summaryContainer}>
