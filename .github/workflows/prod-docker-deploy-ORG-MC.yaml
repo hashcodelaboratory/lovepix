@@ -1,0 +1,66 @@
+name: WALLER DockerHub Deployment on ORGANIZATION PROD environment - FRONTEND
+#on: [push] # - only for testing
+# on:
+#   workflow_dispatch:
+
+#   push:
+#     branches:
+#       - main
+
+env:
+  DOCKER_HUB_USER: ${{secrets.DOCKER_HUB_USERNAME}}
+  DOCKER_HUB_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
+  DOCKER_TAG_WALLER_FE: ${{secrets.DOCKER_TAG_WALLER_FE}}
+  NEXT_PUBLIC_SMART_EMAILING_HOST: ${{secrets.NEXT_PUBLIC_SMART_EMAILING_HOST}}
+  NEXT_PUBLIC_SMART_EMAILING_TOKEN: ${{secrets.NEXT_PUBLIC_SMART_EMAILING_TOKEN}}
+  NEXT_PUBLIC_SMART_EMAILING_CONTACT_LIST_ID: ${{secrets.NEXT_PUBLIC_SMART_EMAILING_CONTACT_LIST_ID}}
+
+
+jobs:
+  push-waller-image-on-dockerhub:  
+    runs-on: ubuntu-latest  
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        #env:
+      - name: Build docker WALLER frontend image
+        run: |
+          docker-compose up -d
+      - name: Docker images
+        run: docker images
+      - name: Tag the image of WALLER-fe
+        run: docker tag waller-fe:latest $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
+      - name: Docker images 
+        run: docker images
+      - name: DOCKER LOGIN
+        run: | 
+          docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD  
+      - name: Docker Push of WALLER-fe image
+        run: docker push $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
+
+  deploy:
+    name: Deploy on EC2
+    #env:
+    needs: push-waller-image-on-dockerhub
+    runs-on: ubuntu-latest
+    steps:
+    - name: deploying on ec2 and rebuild docker-compose with nginX
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        envs: DOCKER_HUB_USER, DOCKER_HUB_PASSWORD, DOCKER_TAG_WALLER_FE
+        host: ${{ secrets.ORG_AWS_WALLER_PROD_HOST }}
+        username: ec2-user
+        key: ${{ secrets.ORG_AWS_WALLER_PROD_PEM }}
+        port: 22
+        script: |
+           cd docker-nginx-letsencrypt-https-ec2
+           docker images
+           touch test.txt
+           docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
+           containerId=$( docker container ls -a | grep server-frontend | awk '{ print $1 }' )
+           docker stop $containerId
+           docker rm $containerId
+           docker rmi $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
+           docker pull $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
+           docker-compose up -d --no-deps --build nginx
+           docker-compose up -d --no-deps --build server-frontend
