@@ -5,9 +5,11 @@ export const sendOrderMail = async (
   data: FormInputs,
   order: Order,
   delivery: string | undefined,
-  payment: string | undefined
+  payment: string | undefined,
+  pdfInvoice: string
 ) => {
   const body = {
+    pdfInvoice: pdfInvoice,
     id: 'unknown',
     name: data.firstName,
     surname: data.lastName,

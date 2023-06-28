@@ -45,7 +45,7 @@ const Summary = ({ order }: SummaryProps) => {
     getPriceForPayment(payment)
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    //setIsLoading(true)
+    setIsLoading(true)
     await createOrder({
       form: {
         firstName: data?.firstName,
@@ -69,11 +69,12 @@ const Summary = ({ order }: SummaryProps) => {
     )
     if (response) {
       const res = await response.json()
-      // const id = res.data.Invoice.id
-      // const token = res.data.Invoice.token
-      // `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+      const id = res.data.Invoice.id
+      const token = res.data.Invoice.token
+      const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+      await sendOrderMail(data, order, delivery, payment, pdfInvoice)
     }
-    await sendOrderMail(data, order, delivery, payment)
+
     reset()
     setIsLoading(false)
   }

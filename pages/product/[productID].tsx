@@ -5,7 +5,6 @@ import Head from 'next/head'
 import React from 'react'
 import ProductDetailLayout from 'screens-content/e-shop/components/product-detail/product-detail'
 import FooterLayout from 'screens-content/footer/footer'
-
 import styles from '../../styles/Home.module.css'
 
 const ProductDetail: NextPage = () => {

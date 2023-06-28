@@ -49,7 +49,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
         {
           filename: 'faktura_objednavka.pdf',
           //contentType: 'application/pdf',
-          path: 'https://moja.superfaktura.sk/slo/invoices/pdf/25705872/token:110fef4b/signature:1/bysquare:1',
+          path: _body.pdfInvoice,
         },
       ],
       html: `<!DOCTYPE html>
