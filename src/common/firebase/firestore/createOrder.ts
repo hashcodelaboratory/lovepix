@@ -29,14 +29,10 @@ type CreateOrderRequest = {
 }
 
 const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
-  if (!data.shoppingCart.images) {
-    return
-  }
-
   const payload: Image[] = []
   const images = data.shoppingCart.images
 
-  images.map(async (image: Image, index) => {
+  images?.map(async (image: Image, index) => {
     const uploadURL = `${StorageFolder.ORDERS}/${orderId}/images/`
 
     const urlRef = await ref(storage, `${uploadURL}/updated/`)

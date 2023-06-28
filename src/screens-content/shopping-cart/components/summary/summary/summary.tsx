@@ -18,6 +18,7 @@ import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
 import { sendOrderMail } from 'common/api/send-mail'
 import { createInvoice } from 'common/api/superfaktura'
 import { invoice } from './utils'
+import { sendOrderMailtoAdmin } from 'common/api/send-mail-admins'
 
 type SummaryProps = {
   order: Order
@@ -67,14 +68,15 @@ const Summary = ({ order }: SummaryProps) => {
     const response = await createInvoice(
       invoice(data, order, delivery ?? null, payment ?? null)
     )
+
     if (response) {
       const res = await response.json()
       const id = res.data.Invoice.id
       const token = res.data.Invoice.token
       const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
       await sendOrderMail(data, order, delivery, payment, pdfInvoice)
+      await sendOrderMailtoAdmin()
     }
-
     reset()
     setIsLoading(false)
   }

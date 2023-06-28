@@ -38,7 +38,7 @@ const ShoppingCart: NextPage = () => {
 
 export default ShoppingCart
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'sk', ['common'])),
