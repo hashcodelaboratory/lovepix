@@ -15,7 +15,7 @@ import Payment from '../payment/payment'
 import OrderItems from '../components/order-items/order-items'
 import TotalSection from '../total/total-section'
 import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
-import { addInvoice, createInvoice } from 'common/api/superfaktura'
+import { createInvoice } from 'common/api/superfaktura'
 import { invoice } from './utils'
 
 type SummaryProps = {
