@@ -1,11 +1,11 @@
 name: LOVEPIX DockerHub Deployment on ORGANIZATION K8s PROD environment - FRONTEND
-# on: [push] # - only for test
-on:
-  workflow_dispatch:
+on: [push] # - only for test
+# on:
+#   workflow_dispatch:
 
-  push:
-    branches:
-      - main
+#   push:
+#     branches:
+#       - main
 
 env:
   DOCKER_HUB_USER: ${{secrets.DOCKER_HUB_USERNAME}}
@@ -17,7 +17,10 @@ env:
 
 jobs:
   push-lovepix-image-on-dockerhub:  
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend  
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
