@@ -1,5 +1,5 @@
 name: LOVEPIX DockerHub Deployment on ORGANIZATION K8s PROD environment - FRONTEND
-on: [push] # - only for test
+on: [push] # - only for testing
 # on:
 #   workflow_dispatch:
 
