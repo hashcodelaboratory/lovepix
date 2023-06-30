@@ -43,6 +43,11 @@
   align-items: center;
   margin-bottom: 1rem;
   font-size: 12px;
+  cursor: pointer;
+}
+
+.detailRow:hover {
+  background-color: #F3F4FA;
 }
 
 .shippingIcon {
@@ -54,6 +59,16 @@
   font-size: 40px;
 }
 
+.shippingIconDisable {
+  color: grey;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid grey;
+  border-radius: 50%;
+  font-size: 40px;
+  background-color: #F3F4FA;
+}
+
 .checkRow {
   display: flex;
   align-items: center;
@@ -63,3 +78,4 @@
   color: #33de33;
   margin-left: 0.5rem;
 }
+
