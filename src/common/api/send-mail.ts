@@ -1,5 +1,20 @@
 import { FormInputs } from 'common/types/form'
+import { Image } from 'common/types/image'
 import { Order } from 'common/types/order'
+import { Product } from 'common/types/product'
+
+export type UserMail = {
+  id: string
+  pdfInvoice: string
+  country: string
+  date: string
+  totalPrice: string
+  products: Product[]
+  images: Image[]
+  payment: string | undefined
+  shipment: string | undefined
+  formData: FormInputs
+}
 
 export const sendOrderMail = async (
   data: FormInputs,
@@ -9,24 +24,16 @@ export const sendOrderMail = async (
   pdfInvoice: string
 ) => {
   const body = {
-    pdfInvoice: pdfInvoice,
     id: 'unknown',
-    name: data.firstName,
-    surname: data.lastName,
+    pdfInvoice: pdfInvoice,
     country: 'SK',
     date: new Date().toLocaleDateString(),
-    dest: data.email,
     totalPrice: order.totalPrice,
-    payment: payment,
-    city: data.city,
-    street: data.address,
-    phone: data.phone,
-    postcode: data.postalCode,
     products: order.shoppingCart.products,
     images: order.shoppingCart.images,
+    payment: payment,
     shipment: delivery,
-    shippingName: data.firstName,
-    shippingSurname: data.lastName,
+    formData: data,
   }
   return await fetch('/api/order-email/create', {
     method: 'POST',
