@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer'
 
 const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
 
-const create = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
+const send = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
   try {
     if (req.method !== 'POST') {
       res.status(400).json({
@@ -67,4 +67,4 @@ const create = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
   }
 }
 
-export default create
+export default send

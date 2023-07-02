@@ -1,4 +1,5 @@
 import { UserMail } from 'common/api/send-mail'
+import { AdminEmail } from 'common/api/send-mail-admins'
 
 export const emailTemplateUser = (_body: UserMail) => {
   return `<!DOCTYPE html>
@@ -273,7 +274,7 @@ export const emailTemplateUser = (_body: UserMail) => {
     </html>`
 }
 
-export const emailTemplateAdmin = (_body: any) => {
+export const emailTemplateAdmin = (_body: AdminEmail) => {
   return `<!DOCTYPE html>
     <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
     <head>

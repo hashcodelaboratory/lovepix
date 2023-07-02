@@ -35,7 +35,7 @@ export const sendOrderMail = async (
     shipment: delivery,
     formData: data,
   }
-  return await fetch('/api/order-email/create', {
+  return await fetch('/api/email/send', {
     method: 'POST',
     body: JSON.stringify(body),
   })
