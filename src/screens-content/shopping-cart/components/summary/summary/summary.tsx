@@ -17,12 +17,16 @@ import TotalSection from "../total/total-section";
 import { getPriceForDelivery, getPriceForPayment } from "../total/utils";
 import { useStripe } from "@stripe/react-stripe-js";
 import { Payment as PaymentEnum } from "../../../../../common/enums/payment";
+import { stripeCreateSession } from "../../../../../common/api/stripe-create-session";
+import { useRouter } from "next/router";
 
 type SummaryProps = {
   order: Order
 }
 
 const Summary = ({ order }: SummaryProps) => {
+  const router = useRouter();
+
   const { mutate: createOrder } = useCreateOrder();
 
   const stripe = useStripe();
@@ -46,42 +50,34 @@ const Summary = ({ order }: SummaryProps) => {
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     const { payment } = data;
 
-    if (payment === PaymentEnum.ONLINE) {
-      const response = await fetch("api/checkout_sessions", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY}`,
-        },
-        body: JSON.stringify({
-          totalPrice: order?.totalPrice,
-        })
-      });
-      const _data = await response.json();
-      await stripe?.redirectToCheckout({
-        sessionId: _data.sessionId});
-    } else {
-      await createOrder({
-        form: {
-          firstName: data?.firstName,
-          lastName: data?.lastName,
-          company: data?.company,
-          address: data?.address,
-          city: data?.city,
-          postalCode: data?.postalCode,
-          phone: data?.phone,
-          email: data?.email,
-        },
-        date: Date.now(),
-        shoppingCart: order?.shoppingCart,
-        totalPrice: order?.totalPrice,
-        delivery: data.delivery!,
-        payment: data.payment!,
-      });
-      reset();
-    }
-  };
+    await createOrder({
+      form: {
+        firstName: data?.firstName,
+        lastName: data?.lastName,
+        company: data?.company,
+        address: data?.address,
+        city: data?.city,
+        postalCode: data?.postalCode,
+        phone: data?.phone,
+        email: data?.email,
+      },
+      date: Date.now(),
+      shoppingCart: order?.shoppingCart,
+      totalPrice: order?.totalPrice,
+      delivery: data.delivery!,
+      payment: data.payment!,
+    });
 
-  console.log(stripe);
+    if (payment === PaymentEnum.ONLINE) {
+      await stripeCreateSession(stripe, order?.totalPrice);
+    } else {
+      await router.push({
+        pathname: "/",
+        query: { success: "true" }
+      });
+    }
+    reset();
+  };
 
   useEffect(() => {
     if (!order?.shoppingCart?.images) {

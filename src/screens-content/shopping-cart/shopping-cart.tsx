@@ -4,7 +4,6 @@ import { Order } from "../../common/types/order";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
-
 type CustomShoppingCartProps = {
   order: Order
 }
