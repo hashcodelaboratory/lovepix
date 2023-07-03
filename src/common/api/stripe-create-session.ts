@@ -1,4 +1,5 @@
 import { Stripe } from "@stripe/stripe-js";
+import { clearIndexedDb } from "../indexed-db/utils/clear";
 
 export const stripeCreateSession = async (stripe: Stripe | null, totalPrice?: number) => {
   const response = await fetch("api/checkout_sessions", {
@@ -11,6 +12,7 @@ export const stripeCreateSession = async (stripe: Stripe | null, totalPrice?: nu
     })
   });
   const _data = await response.json();
+  await clearIndexedDb()
   await stripe?.redirectToCheckout({
     sessionId: _data.sessionId});
 }

@@ -7,7 +7,7 @@ import {FormInputs} from '../../../../../common/types/form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import {FORM_SCHEMA} from '../address/components/form/utils/schema'
 import {useCreateOrder} from '../../../../../common/firebase/firestore/createOrder'
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import {Backdrop, CircularProgress} from '@mui/material'
 import Voucher from '../voucher/voucher'
 import Delivery from '../delivery/delivery'
@@ -15,12 +15,11 @@ import Payment from '../payment/payment'
 import OrderItems from '../components/order-items/order-items'
 import TotalSection from '../total/total-section'
 import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
-import { createInvoice } from 'common/api/superfaktura'
-import { invoice } from './utils/utils'
 import { useStripe } from '@stripe/react-stripe-js'
 import { Payment as PaymentEnum } from "../../../../../common/enums/payment";
 import { stripeCreateSession } from "../../../../../common/api/stripe-create-session";
 import { useRouter } from "next/router";
+import { clearIndexedDb } from "../../../../../common/indexed-db/utils/clear";
 
 type SummaryProps = {
   order: Order
@@ -87,9 +86,8 @@ const Summary = ({order}: SummaryProps) => {
       //   // const token = res.data.Invoice.token
       //   // `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
       // }
-      // reset()
-      // setIsLoading(false)
     } else {
+      await clearIndexedDb()
       await router.push({
         pathname: "/",
         query: { success: "true" }
