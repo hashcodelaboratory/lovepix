@@ -4,7 +4,6 @@ import Carousel from "./components/carousel/carousel";
 import PreviewSection from "./components/preview-section/preview-section";
 import SliderComponent from "./components/slider/slider";
 import Newsletter from "./components/newsletter/newsletter";
-import Modal from "./components/modal/modal";
 
 type HomeLayoutProps = {
   configuration: Configuration;
@@ -17,7 +16,6 @@ const HomeLayout = ({ galleryData }: HomeLayoutProps) => (
     <PreviewSection galleryData={galleryData} />
     <SliderComponent data={galleryData} />
     <Newsletter />
-    <Modal />
   </div>
 );
 
