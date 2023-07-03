@@ -70,6 +70,7 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
       if (index === payload.length - 1) {
         const cart = {
           images: payload,
+          products: data.shoppingCart.products,
         }
 
         const newOrderRef = doc(database, Collections.ORDERS, orderId)
