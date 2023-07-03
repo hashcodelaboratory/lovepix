@@ -15,17 +15,24 @@ import Payment from '../payment/payment'
 import OrderItems from '../components/order-items/order-items'
 import TotalSection from '../total/total-section'
 import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
-import { createInvoice } from 'common/api/superfaktura'
-import { invoice } from './utils/utils'
+import { useStripe } from '@stripe/react-stripe-js'
+import { Payment as PaymentEnum } from "../../../../../common/enums/payment";
+import { stripeCreateSession } from "../../../../../common/api/stripe-create-session";
+import { useRouter } from "next/router";
+import { clearIndexedDb } from "../../../../../common/indexed-db/utils/clear";
 
 type SummaryProps = {
   order: Order
 }
 
 const Summary = ({order}: SummaryProps) => {
+  const router = useRouter();
+
   const {mutate: createOrder} = useCreateOrder()
 
-  const [isLoading, setIsLoading] = useState(false)
+  const stripe = useStripe();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -46,6 +53,9 @@ const Summary = ({order}: SummaryProps) => {
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setIsLoading(true)
+
+    const { payment } = data;
+
     await createOrder({
       form: {
         firstName: data?.firstName,
@@ -62,19 +72,30 @@ const Summary = ({order}: SummaryProps) => {
       totalPrice: order?.totalPrice,
       delivery: data.delivery!,
       payment: data.payment!,
-    })
-    const response = await createInvoice(
-      invoice(data, order, delivery ?? null, payment ?? null)
-    )
-    if (response) {
-      const res = await response.json()
-      // const id = res.data.Invoice.id
-      // const token = res.data.Invoice.token
-      // `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+    });
+
+    if (payment === PaymentEnum.ONLINE) {
+      await stripeCreateSession(stripe, order?.totalPrice);
+      // TODO: check
+      // const response = await createInvoice(
+      //   invoice(data, order, delivery ?? null, payment ?? null)
+      // )
+      // if (response) {
+      //   const res = await response.json()
+      //   // const id = res.data.Invoice.id
+      //   // const token = res.data.Invoice.token
+      //   // `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+      // }
+    } else {
+      await clearIndexedDb()
+      await router.push({
+        pathname: "/",
+        query: { success: "true" }
+      });
     }
-    reset()
+    reset();
     setIsLoading(false)
-  }
+  };
 
   return (
     <Container className={styles.summaryContainer}>
