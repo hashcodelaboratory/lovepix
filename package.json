@@ -23,7 +23,6 @@
     "dayjs": "1.11.8",
     "@stripe/react-stripe-js": "^2.1.1",
     "@stripe/stripe-js": "^1.54.1",
-    "@types/": "stripe/stripe-js",
     "@types/stripe": "^8.0.417",
     "dexie": "3.2.2",
     "dexie-react-hooks": "1.1.1",
