@@ -1,51 +1,51 @@
 import styles from '../../../shopping-cart.module.scss'
-import {Container} from '@mui/system'
+import { Container } from '@mui/system'
 import Address from '../address/address'
-import {Order} from '../../../../../common/types/order'
-import {SubmitHandler, useForm} from 'react-hook-form'
-import {FormInputs} from '../../../../../common/types/form'
-import {yupResolver} from '@hookform/resolvers/yup'
-import {FORM_SCHEMA} from '../address/components/form/utils/schema'
-import {useCreateOrder} from '../../../../../common/firebase/firestore/createOrder'
-import {useState} from 'react'
-import {Backdrop, CircularProgress} from '@mui/material'
+import { Order } from '../../../../../common/types/order'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { FormInputs } from '../../../../../common/types/form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { FORM_SCHEMA } from '../address/components/form/utils/schema'
+import { useCreateOrder } from '../../../../../common/firebase/firestore/createOrder'
+import { useState } from 'react'
+import { Backdrop, CircularProgress } from '@mui/material'
 import Voucher from '../voucher/voucher'
 import Delivery from '../delivery/delivery'
 import Payment from '../payment/payment'
 import OrderItems from '../components/order-items/order-items'
 import TotalSection from '../total/total-section'
 import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
+import { useRouter } from 'next/router'
 import { useStripe } from '@stripe/react-stripe-js'
-import { Payment as PaymentEnum } from "../../../../../common/enums/payment";
-import { stripeCreateSession } from "../../../../../common/api/stripe-create-session";
-import { useRouter } from "next/router";
-import { clearIndexedDb } from "../../../../../common/indexed-db/utils/clear";
+import { clearIndexedDb } from 'common/indexed-db/utils/clear'
+import { stripeCreateSession } from 'common/api/stripe-create-session'
+import { Payment as PaymentEnum } from '../../../../../common/enums/payment'
 
 type SummaryProps = {
   order: Order
 }
 
-const Summary = ({order}: SummaryProps) => {
-  const router = useRouter();
+const Summary = ({ order }: SummaryProps) => {
+  const router = useRouter()
 
-  const {mutate: createOrder} = useCreateOrder()
+  const { mutate: createOrder } = useCreateOrder()
 
-  const stripe = useStripe();
+  const stripe = useStripe()
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const {
     register,
     watch,
-    formState: {errors},
+    formState: { errors },
     handleSubmit,
     control,
     reset,
   } = useForm<FormInputs>({
     resolver: yupResolver(FORM_SCHEMA),
-    defaultValues: {...order},
+    //defaultValues: { ...order },
   })
-  const {delivery, payment} = watch()
+  const { delivery, payment } = watch()
   const finalPrice =
     Number(order?.totalPrice) +
     getPriceForDelivery(delivery) +
@@ -54,7 +54,7 @@ const Summary = ({order}: SummaryProps) => {
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setIsLoading(true)
 
-    const { payment } = data;
+    const { payment } = data
 
     await createOrder({
       form: {
@@ -72,35 +72,38 @@ const Summary = ({order}: SummaryProps) => {
       totalPrice: order?.totalPrice,
       delivery: data.delivery!,
       payment: data.payment!,
-    });
+    })
 
     if (payment === PaymentEnum.ONLINE) {
-      await stripeCreateSession(stripe, order?.totalPrice);
+      await stripeCreateSession(stripe, order?.totalPrice)
       // TODO: check
       // const response = await createInvoice(
       //   invoice(data, order, delivery ?? null, payment ?? null)
       // )
       // if (response) {
       //   const res = await response.json()
-      //   // const id = res.data.Invoice.id
-      //   // const token = res.data.Invoice.token
-      //   // `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+      // const invoiceData = res.data.Invoice
+      // const id = invoiceData.id
+      // const token = invoiceData.token
+      // const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+      // await sendOrderMail(data, order, delivery, payment, pdfInvoice)
+      // await sendOrderMailtoAdmin()
       // }
     } else {
       await clearIndexedDb()
       await router.push({
-        pathname: "/",
-        query: { success: "true" }
-      });
+        pathname: '/',
+        query: { success: 'true' },
+      })
     }
-    reset();
+    reset()
     setIsLoading(false)
-  };
+  }
 
   return (
     <Container className={styles.summaryContainer}>
       <form className={styles.summary} onSubmit={handleSubmit(onSubmit)}>
-        <Address register={register} errors={errors} control={control}/>
+        <Address register={register} errors={errors} control={control} />
         <div className={styles.orderContainer}>
           <OrderItems
             order={order}
@@ -115,15 +118,15 @@ const Summary = ({order}: SummaryProps) => {
             finalPrice={finalPrice}
           />
         </div>
-        <Voucher/>
-        <Delivery control={control} message={errors.delivery?.message}/>
-        <Payment control={control} message={errors.payment?.message}/>
+        <Voucher />
+        <Delivery control={control} message={errors.delivery?.message} />
+        <Payment control={control} message={errors.payment?.message} />
       </form>
       <Backdrop
-        sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={isLoading}
       >
-        <CircularProgress color='inherit'/>
+        <CircularProgress color='inherit' />
       </Backdrop>
     </Container>
   )

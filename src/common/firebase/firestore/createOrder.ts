@@ -1,10 +1,5 @@
 import { MutationOptions, useMutation, UseMutationResult } from 'react-query'
-import {
-  collection,
-  doc,
-  getDocs,
-  setDoc,
-} from "@firebase/firestore";
+import { collection, doc, getDocs, setDoc } from '@firebase/firestore'
 import { database, storage } from '../config'
 import { Collections } from '../enums'
 import { Delivery } from '../../enums/delivery'
@@ -15,9 +10,7 @@ import { Payment } from '../../enums/payment'
 import { orderTable } from '../../../../database.config'
 import { Image } from 'common/types/image'
 import { Product } from 'common/types/product'
-import {
-  generateOrderID
-} from "../../../screens-content/shopping-cart/components/summary/summary/utils/generateOrderID";
+import { generateOrderID } from '../../../screens-content/shopping-cart/components/summary/summary/utils/generateOrderID'
 
 type CreateOrderRequest = {
   form: FormInputs
@@ -31,16 +24,11 @@ type CreateOrderRequest = {
   payment: Payment
 }
 
-
 const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
-  if (!data.shoppingCart.images) {
-    return
-  }
-
   const payload: Image[] = []
   const images = data.shoppingCart.images
 
-  images.map(async (image: Image, index) => {
+  images?.map(async (image: Image, index) => {
     const uploadURL = `${StorageFolder.ORDERS}/${orderId}/images/`
 
     const urlRef = await ref(storage, `${uploadURL}/updated/`)
@@ -78,6 +66,7 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
       if (index === payload.length - 1) {
         const cart = {
           images: payload,
+          products: data.shoppingCart.products,
         }
 
         const newOrderRef = doc(database, Collections.ORDERS, orderId)
