@@ -16,7 +16,7 @@ import OrderItems from '../components/order-items/order-items'
 import TotalSection from '../total/total-section'
 import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
 import { createInvoice } from 'common/api/superfaktura'
-import { invoice } from './utils'
+import { invoice } from './utils/utils'
 
 type SummaryProps = {
   order: Order

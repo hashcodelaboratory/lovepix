@@ -2,9 +2,9 @@ import { MutationOptions, useMutation, UseMutationResult } from 'react-query'
 import {
   collection,
   doc,
-  getCountFromServer,
+  getDocs,
   setDoc,
-} from '@firebase/firestore'
+} from "@firebase/firestore";
 import { database, storage } from '../config'
 import { Collections } from '../enums'
 import { Delivery } from '../../enums/delivery'
@@ -15,6 +15,9 @@ import { Payment } from '../../enums/payment'
 import { orderTable } from '../../../../database.config'
 import { Image } from 'common/types/image'
 import { Product } from 'common/types/product'
+import {
+  generateOrderID
+} from "../../../screens-content/shopping-cart/components/summary/summary/utils/generateOrderID";
 
 type CreateOrderRequest = {
   form: FormInputs
@@ -27,6 +30,7 @@ type CreateOrderRequest = {
   delivery: Delivery
   payment: Payment
 }
+
 
 const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
   if (!data.shoppingCart.images) {
@@ -89,17 +93,12 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
 // Note: orderId template: PIC{year}{000orderNumber}
 const createOrder = async (data: CreateOrderRequest) => {
   const ordersRef = await collection(database, Collections.ORDERS)
-  if (ordersRef) {
-    const docSnap = await getCountFromServer(ordersRef)
-    if (docSnap) {
-      const year = new Date(Date.now()).getFullYear()
-      const orderNumber = String(
-        docSnap ? docSnap.data().count + 1 : 1
-      ).padStart(4, '0')
-      const orderId = `PIC${year}${orderNumber}`
+  const ordersSnap = await getDocs(ordersRef)
 
-      await uploadToStorage(orderId, data)
-    }
+  if (ordersSnap) {
+    const orderId = generateOrderID(ordersSnap)
+
+    await uploadToStorage(orderId, data)
   }
 }
 
