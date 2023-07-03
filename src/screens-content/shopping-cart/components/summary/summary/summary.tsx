@@ -15,17 +15,23 @@ import Payment from '../payment/payment'
 import OrderItems from '../components/order-items/order-items'
 import TotalSection from '../total/total-section'
 import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
-import { sendOrderMail } from 'common/api/send-mail'
-import { createInvoice } from 'common/api/superfaktura'
-import { invoice } from './utils'
-import { sendOrderMailtoAdmin } from 'common/api/send-mail-admins'
+import { useRouter } from 'next/router'
+import { useStripe } from '@stripe/react-stripe-js'
+import { clearIndexedDb } from 'common/indexed-db/utils/clear'
+import { stripeCreateSession } from 'common/api/stripe-create-session'
+import { Payment as PaymentEnum } from '../../../../../common/enums/payment'
 
 type SummaryProps = {
   order: Order
 }
 
 const Summary = ({ order }: SummaryProps) => {
+  const router = useRouter()
+
   const { mutate: createOrder } = useCreateOrder()
+
+  const stripe = useStripe()
+
   const [isLoading, setIsLoading] = useState(false)
 
   const {
@@ -47,6 +53,9 @@ const Summary = ({ order }: SummaryProps) => {
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setIsLoading(true)
+
+    const { payment } = data
+
     await createOrder({
       form: {
         firstName: data?.firstName,
@@ -65,18 +74,27 @@ const Summary = ({ order }: SummaryProps) => {
       payment: data.payment!,
     })
 
-    const response = await createInvoice(
-      invoice(data, order, delivery ?? null, payment ?? null)
-    )
-
-    if (response) {
-      const res = await response.json()
-      const invoiceData = res.data.Invoice
-      const id = invoiceData.id
-      const token = invoiceData.token
-      const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
-      await sendOrderMail(data, order, delivery, payment, pdfInvoice)
-      await sendOrderMailtoAdmin()
+    if (payment === PaymentEnum.ONLINE) {
+      await stripeCreateSession(stripe, order?.totalPrice)
+      // TODO: check
+      // const response = await createInvoice(
+      //   invoice(data, order, delivery ?? null, payment ?? null)
+      // )
+      // if (response) {
+      //   const res = await response.json()
+      // const invoiceData = res.data.Invoice
+      // const id = invoiceData.id
+      // const token = invoiceData.token
+      // const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+      // await sendOrderMail(data, order, delivery, payment, pdfInvoice)
+      // await sendOrderMailtoAdmin()
+      // }
+    } else {
+      await clearIndexedDb()
+      await router.push({
+        pathname: '/',
+        query: { success: 'true' },
+      })
     }
     reset()
     setIsLoading(false)
