@@ -1,0 +1,23 @@
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.text {
+  margin: 0;
+}
+
+.link {
+  margin: 3rem 0;
+  text-decoration: underline;
+  display: flex;
+  align-items: center;
+}
+
+.link:hover {
+  cursor: pointer;
+}

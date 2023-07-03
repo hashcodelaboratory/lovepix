@@ -11,7 +11,7 @@ export default async function handler(req, res) {
             price_data: {
               currency: 'eur',
               product_data: {
-                name: 'Order n.123456789'
+                name: 'Lovepix'
               },
               unit_amount: (Number(_body.totalPrice) * 100)
             },
@@ -19,8 +19,8 @@ export default async function handler(req, res) {
           },
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
-        cancel_url: `${req.headers.origin}/?canceled=true`,
+        success_url: `${req.headers.origin}/thanks?success=true`,
+        cancel_url: `${req.headers.origin}/thanks?canceled=true`,
       });
       res.json({ sessionId: session.id });
     } catch (err) {
