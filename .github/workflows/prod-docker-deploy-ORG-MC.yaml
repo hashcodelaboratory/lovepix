@@ -7,6 +7,10 @@ name: WALLER DockerHub Deployment on ORGANIZATION PROD environment - FRONTEND
 #     branches:
 #       - main
 
+defaults:
+  run:
+    working-directory: ./frontend  
+    
 env:
   DOCKER_HUB_USER: ${{secrets.DOCKER_HUB_USERNAME}}
   DOCKER_HUB_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
@@ -18,7 +22,7 @@ env:
 
 jobs:
   push-waller-image-on-dockerhub:  
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
