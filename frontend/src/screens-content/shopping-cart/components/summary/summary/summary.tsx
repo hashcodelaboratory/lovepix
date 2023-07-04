@@ -17,13 +17,6 @@ import TotalSection from '../total/total-section'
 import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
 import { useRouter } from 'next/router'
 import { useStripe } from '@stripe/react-stripe-js'
-import { clearIndexedDb } from 'common/indexed-db/utils/clear'
-import { stripeCreateSession } from 'common/api/stripe-create-session'
-import { Payment as PaymentEnum } from '../../../../../common/enums/payment'
-import { createInvoice } from 'common/api/superfaktura'
-import { invoice } from './utils/utils'
-import { sendOrderMail } from 'common/api/send-mail'
-import { sendOrderMailtoAdmin } from 'common/api/send-mail-admins'
 
 type SummaryProps = {
   order: Order
