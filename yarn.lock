@@ -1853,10 +1853,6 @@
   resolved "https://registry.npmjs.org/@tootallnate/once/-/once-2.0.0.tgz"
   integrity sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==
 
-"@types/@stripe/stripe-js":
-  version "1.54.1"
-  resolved "https://codeload.github.com/stripe/stripe-js/tar.gz/27bd0271dca1ab2cb76d6a38d79e25da8610bdd1"
-
 "@types/aria-query@^4.2.0":
   version "4.2.2"
   resolved "https://registry.npmjs.org/@types/aria-query/-/aria-query-4.2.2.tgz"
