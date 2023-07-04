@@ -7,6 +7,7 @@ import {SnackbarProvider} from 'notistack'
 import {QueryClient, QueryClientProvider} from 'react-query'
 import {useState} from 'react'
 import {ReactQueryDevtools} from 'react-query/devtools'
+import { Analytics } from '@vercel/analytics/react';
 
 import 'vanilla-cookieconsent';
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
@@ -30,6 +31,7 @@ function MyApp({Component, pageProps}: AppProps) {
         <ReactQueryDevtools initialIsOpen={false}/>
       </QueryClientProvider>
       <CookieConsent/>
+      <Analytics/>
     </>
   )
 }
