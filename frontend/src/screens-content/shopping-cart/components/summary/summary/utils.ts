@@ -18,7 +18,8 @@ const invoiceItems = (
 
   productItems.forEach((item: any) => {
     const items = {
-      unit_price: item.price,
+      unit_price: item.price / 1.2,
+      tax: 20,
       description:
         item.title ?? `Obraz konfigurátor ${item.height} X ${item.width}`,
       quantity: item.qty,
@@ -26,7 +27,7 @@ const invoiceItems = (
     }
     newItems.push({ ...items })
   })
-  const deliveryPrice = delivery === Delivery.COURIER ? 5 : 0
+  const deliveryPrice = delivery === Delivery.COURIER ? 5 / 1.2 : 0
   const deliveryItem = {
     unit_price: deliveryPrice,
     description: `Doprava - ${delivery}`,

@@ -1,10 +1,5 @@
 import { MutationOptions, useMutation, UseMutationResult } from 'react-query'
-import {
-  collection,
-  doc,
-  getCountFromServer,
-  setDoc,
-} from '@firebase/firestore'
+import { collection, doc, getDocs, setDoc } from '@firebase/firestore'
 import { database, storage } from '../config'
 import { Collections } from '../enums'
 import { Delivery } from '../../enums/delivery'
@@ -15,6 +10,7 @@ import { Payment } from '../../enums/payment'
 import { orderTable } from '../../../../database.config'
 import { Image } from 'common/types/image'
 import { Product } from 'common/types/product'
+import { generateOrderID } from '../../../screens-content/shopping-cart/components/summary/summary/utils/generateOrderID'
 
 type CreateOrderRequest = {
   form: FormInputs
@@ -29,14 +25,10 @@ type CreateOrderRequest = {
 }
 
 const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
-  if (!data.shoppingCart.images) {
-    return
-  }
-
   const payload: Image[] = []
   const images = data.shoppingCart.images
 
-  images.map(async (image: Image, index) => {
+  images?.map(async (image: Image, index) => {
     const uploadURL = `${StorageFolder.ORDERS}/${orderId}/images/`
 
     const urlRef = await ref(storage, `${uploadURL}/updated/`)
@@ -74,6 +66,7 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
       if (index === payload.length - 1) {
         const cart = {
           images: payload,
+          products: data.shoppingCart.products,
         }
 
         const newOrderRef = doc(database, Collections.ORDERS, orderId)
@@ -89,17 +82,12 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
 // Note: orderId template: PIC{year}{000orderNumber}
 const createOrder = async (data: CreateOrderRequest) => {
   const ordersRef = await collection(database, Collections.ORDERS)
-  if (ordersRef) {
-    const docSnap = await getCountFromServer(ordersRef)
-    if (docSnap) {
-      const year = new Date(Date.now()).getFullYear()
-      const orderNumber = String(
-        docSnap ? docSnap.data().count + 1 : 1
-      ).padStart(4, '0')
-      const orderId = `PIC${year}${orderNumber}`
+  const ordersSnap = await getDocs(ordersRef)
 
-      await uploadToStorage(orderId, data)
-    }
+  if (ordersSnap) {
+    const orderId = generateOrderID(ordersSnap)
+
+    await uploadToStorage(orderId, data)
   }
 }
 
