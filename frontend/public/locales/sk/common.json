@@ -148,5 +148,13 @@
   "withTax": "s DPH",
   "productAddedToCart": "Produkt bol pridaný do košíka",
   "noMoreProdutsOnStock": "Viac kusov tohto produktu už nie su na sklade",
-  "newsletterSuccessAdd": "Úspešne ste sa prihlásili na odber noviniek."
+  "newsletterSuccessAdd": "Úspešne ste sa prihlásili na odber noviniek.",
+  "thanksTitle": "Ďakujeme za Vašu objednávku !",
+  "thanksSubtitle": "Vaša objednávka bola úspešne odoslaná !",
+  "thanksSubtitleContact": "V prípade akýchkoľvek otázok nás môžete kontaktovať.",
+  "thanksSubtitleThx": "Ďakujeme, že ste nakupovali v našom obchode !",
+  "thanksLink": "Späť na domovskú stránku",
+  "thanksTitleError": "Vaša objednávka nebola dokončená :/",
+  "thanksSubtitleError": "Stalo sa niečo neočakávané, bohužiaľ vaša objednávka nebola úspešná.",
+  "thanksSubtitleContactError": "Vráťte sa do e-shopu a nakúpte prosím znova."
 }
