@@ -153,5 +153,8 @@
   "thanksSubtitle": "Vaša objednávka bola úspešne odoslaná !",
   "thanksSubtitleContact": "V prípade akýchkoľvek otázok nás môžete kontaktovať.",
   "thanksSubtitleThx": "Ďakujeme, že ste nakupovali v našom obchode !",
-  "thanksLink": "Späť na domovskú stránku"
+  "thanksLink": "Späť na domovskú stránku",
+  "thanksTitleError": "Vaša objednávka nebola dokončená :/",
+  "thanksSubtitleError": "Stalo sa niečo neočakávané, bohužiaľ vaša objednávka nebola úspešná.",
+  "thanksSubtitleContactError": "Vráťte sa do e-shopu a nakúpte prosím znova."
 }

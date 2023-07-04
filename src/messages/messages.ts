@@ -154,4 +154,7 @@ export const messages = {
   thanksSubtitleContact: 'thanksSubtitleContact',
   thanksSubtitleThx: 'thanksSubtitleThx',
   thanksLink: 'thanksLink',
+  thanksTitleError: 'thanksTitleError',
+  thanksSubtitleError: 'thanksSubtitleError',
+  thanksSubtitleContactError: 'thanksSubtitleContactError',
 }
