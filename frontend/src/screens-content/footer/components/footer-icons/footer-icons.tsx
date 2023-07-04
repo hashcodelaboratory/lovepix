@@ -62,17 +62,17 @@ const FooterIcons = (): JSX.Element => {
           <p className={styles.footerBottomContainerRowText} style={{ marginRight: 36 }}>
             Copyright © 2023 Lovepix. Všetky práva vyhradené.
           </p>
-          <p className={styles.footerBottomContainerRowTextLink}>
+          <a className={styles.footerBottomContainerRowTextLink} href="vseobecne-obchodne-podmienky" target="_blank">
             Všeobecné obchodné podmienky
-          </p>
+          </a>
           <p className={styles.footerDivider}>/</p>
-          <p className={styles.footerBottomContainerRowTextLink}>
+          <a className={styles.footerBottomContainerRowTextLink} href="zasady-ochrany-osobnych-udajov" target="_blank">
             Zásady ochrany osobných údajov
-          </p>
+          </a>
           <p className={styles.footerDivider}>/</p>
-          <p className={styles.footerBottomContainerRowTextLink}>
+          <a className={styles.footerBottomContainerRowTextLink} href="cookies" target="_blank">
             Cookies
-          </p>
+          </a>
         </div>
       </div>
     </Container>
