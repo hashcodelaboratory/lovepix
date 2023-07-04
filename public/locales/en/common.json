@@ -129,5 +129,10 @@
   "count": "Quantity",
   "description": "Description",
   "addNewProduct": "Add new product",
-  "newsletterSuccessAdd": "Úspešne ste sa prihlásili na odber noviniek."
+  "newsletterSuccessAdd": "Úspešne ste sa prihlásili na odber noviniek.",
+  "thanksTitle": "Ďakujeme za Vašu objednávku !",
+  "thanksSubtitle": "Vaša objednávka bola úspešne odoslaná !",
+  "thanksSubtitleContact": "V prípade akýchkoľvek otázok nás môžete kontaktovať.",
+  "thanksSubtitleThx": "Ďakujeme, že ste nakupovali v našom obchode !",
+  "thanksLink": "Späť na domovskú stránku"
 }

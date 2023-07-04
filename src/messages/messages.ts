@@ -148,5 +148,10 @@ export const messages = {
   withTax: 'withTax',
   productAddedToCart: 'productAddedToBsket',
   noMoreProdutsOnStock: 'noMoreProdutsOnStock',
-  newsletterSuccessAdd: "newsletterSuccessAdd",
+  newsletterSuccessAdd: 'newsletterSuccessAdd',
+  thanksTitle: 'thanksTitle',
+  thanksSubtitle: 'thanksSubtitle',
+  thanksSubtitleContact: 'thanksSubtitleContact',
+  thanksSubtitleThx: 'thanksSubtitleThx',
+  thanksLink: 'thanksLink',
 }
