@@ -15,6 +15,8 @@ import { sendOrderMail } from 'common/api/send-mail'
 import { sendOrderMailtoAdmin } from 'common/api/send-mail-admins'
 import { generateOrderID } from 'screens-content/shopping-cart/components/summary/summary/generateOrderID'
 import { invoice } from 'screens-content/shopping-cart/components/summary/summary/utils'
+import { stripeCreateSession } from 'common/api/stripe-create-session'
+import { Stripe } from '@stripe/stripe-js'
 
 export type CreateOrderRequest = {
   form: FormInputs
@@ -26,6 +28,7 @@ export type CreateOrderRequest = {
   totalPrice: number
   delivery: Delivery
   payment: Payment
+  stripe: Stripe | null
 }
 
 const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
@@ -101,10 +104,13 @@ const createOrder = async (data: CreateOrderRequest) => {
         const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
         await sendOrderMail(orderId, data, pdfInvoice)
       }
+      await stripeCreateSession(data.stripe, data?.totalPrice)
+      await sendOrderMailtoAdmin(orderId)
+      //TODO: check
     } else {
       await sendOrderMail(orderId, data)
+      await sendOrderMailtoAdmin(orderId)
     }
-    await sendOrderMailtoAdmin(orderId)
   }
 }
 

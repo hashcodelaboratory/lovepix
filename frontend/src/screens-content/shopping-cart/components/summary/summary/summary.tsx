@@ -69,6 +69,7 @@ const Summary = ({ order }: SummaryProps) => {
       totalPrice: order?.totalPrice,
       delivery: data.delivery!,
       payment: data.payment!,
+      stripe: stripe,
     })
     //STRIPE
     // if (payment === PaymentEnum.ONLINE) {
