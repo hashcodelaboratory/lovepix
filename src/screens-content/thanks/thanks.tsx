@@ -20,9 +20,6 @@ const Thank = (): JSX.Element => {
 
   const [status, setStatus] = useState<StateEnum>()
 
-  // TODO: implement cancel flow
-  // const stripeStatusCanceled = router.query?.canceled as string;
-
   const content = useMemo(
     () => ({
       title:
@@ -42,13 +39,6 @@ const Thank = (): JSX.Element => {
     }),
     [status]
   )
-
-  const handleClose = () => {
-    router.push({
-      pathname: '/',
-      query: null,
-    })
-  }
 
   const redirect = () => {
     router.push('/')
