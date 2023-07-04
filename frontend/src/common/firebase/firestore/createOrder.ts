@@ -10,7 +10,7 @@ import { Payment } from '../../enums/payment'
 import { orderTable } from '../../../../database.config'
 import { Image } from 'common/types/image'
 import { Product } from 'common/types/product'
-import { generateOrderID } from '../../../screens-content/shopping-cart/components/summary/summary/utils/generateOrderID'
+import {generateOrderID} from "../../../screens-content/shopping-cart/components/summary/summary/generateOrderID";
 
 type CreateOrderRequest = {
   form: FormInputs
