@@ -10,7 +10,7 @@ export const getUploadImagesColumns = (): GridColDef[] => [
     width: 80,
     editable: false,
     renderCell: (({ value }) => (
-      <Image layout={ImageLayout.FIXED} width={40} height={40} src={value} />
+      <Image layout={ImageLayout.FIXED} width={40} height={40} src={value} alt="" />
     )),
   },
   {
