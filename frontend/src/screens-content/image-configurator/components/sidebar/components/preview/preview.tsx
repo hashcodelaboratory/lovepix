@@ -1,5 +1,5 @@
 import styles from "../../../../image-configurator-layout.module.scss";
-import { CheckCircle, Delete, Filter1, Image } from "@mui/icons-material";
+import { CheckCircle, Delete, Filter1, Image as ImageIcon } from "@mui/icons-material";
 import { useTranslation } from "next-i18next";
 import { messages } from "../../../../../../messages/messages";
 import { configurationsTable } from "../../../../../../../database.config";
@@ -28,10 +28,9 @@ const Preview = ({ configuration }: PreviewProps) => {
       </button>
     </>
   ) : (
-    <Image
+    <ImageIcon
       color="disabled"
       style={{ width: IMAGE_WIDTH, height: IMAGE_WIDTH, margin: "auto" }}
-      alt=""
     />
   );
 

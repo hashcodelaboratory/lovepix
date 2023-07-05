@@ -105,6 +105,7 @@ const ProductDetail = ({ row }: GalleryDetailProps): JSX.Element => {
             layout={ImageLayout.FIXED}
             width={300}
             height={200}
+            alt=''
           />
           <div className={styles.galleryDetailContainer}>
             <div className={styles.galleryDetailTextFieldTitle}>{t(messages.name)}: </div>
