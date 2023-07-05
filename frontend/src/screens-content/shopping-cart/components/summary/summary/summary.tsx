@@ -92,7 +92,7 @@ const Summary = ({ order }: SummaryProps) => {
     } else {
       await clearIndexedDb()
       await router.push({
-        pathname: '/',
+        pathname: '/thanks',
         query: { success: 'true' },
       })
     }
