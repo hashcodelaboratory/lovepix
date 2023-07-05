@@ -19,8 +19,6 @@ const CustomShoppingCart = ({ order }: CustomShoppingCartProps) => {
   )
     return <EmptyCart />;
 
-  //if (stepper === 2) return <ThanksForOrder />;
-
   return <Elements stripe={stripePromise}><Summary order={order} /></Elements>;
 };
 

@@ -48,8 +48,8 @@ const ResponsiveAppBar = () => {
     []
   )
 
-  const productsLength = order?.shoppingCart?.products?.length
-  const imagesLength = order?.shoppingCart?.images?.length
+  const productsLength = order?.shoppingCart?.products?.length ?? 0
+  const imagesLength = order?.shoppingCart?.images?.length ?? 0
   const totalLength = imagesLength + productsLength
 
   const BADGE_NUMBER = totalLength || 0
