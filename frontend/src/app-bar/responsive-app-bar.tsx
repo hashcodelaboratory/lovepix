@@ -28,6 +28,9 @@ import {
   ORDER_TABLE_KEY,
 } from '../common/indexed-db/hooks/keys'
 import * as PagesTitles from '../constants/pages/titles'
+import logo from '../assets/logo_color.png'
+import Image from "next/image";
+import { ImageLayout } from "../screens-content/home/enums/enums";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
@@ -78,23 +81,7 @@ const ResponsiveAppBar = () => {
     <AppBar position='fixed' sx={{ backgroundColor: 'white' }}>
       <Container maxWidth='lg'>
         <Toolbar disableGutters>
-          <Typography
-            variant='h6'
-            noWrap
-            component='a'
-            href='/'
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'black',
-              textDecoration: 'none',
-            }}
-          >
-            waller
-          </Typography>
+          <Image src={logo} layout={ImageLayout.FIXED} width={50} height={50} />
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -157,7 +144,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-            waller
+            lovepix
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
