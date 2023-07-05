@@ -24,9 +24,9 @@ const FooterIcons = (): JSX.Element => {
           height={22}
         />
         <p className={styles.footerIconsText}><b>{t(messages.partners)}:</b></p>
-        <a className={styles.footerIconsText} href="//mojkalendar.sk" target="_blank">mojkalendar.sk</a>
-        <a className={styles.footerIconsText} href="//odfotma.sk" target="_blank">odfotma.sk</a>
-        <a className={styles.footerIconsText} href="//hashlab.com" target="_blank">hashlab.com</a>
+        <a className={styles.footerIconsText} href="//mojkalendar.sk" target="_blank" rel="noreferrer">mojkalendar.sk</a>
+        <a className={styles.footerIconsText} href="//odfotma.sk" target="_blank" rel="noreferrer">odfotma.sk</a>
+        <a className={styles.footerIconsText} href="//hashlab.com" target="_blank" rel="noreferrer">hashlab.com</a>
       </div>
       <hr />
       <div className={styles.footerBottomContainer}>
@@ -62,15 +62,15 @@ const FooterIcons = (): JSX.Element => {
           <p className={styles.footerBottomContainerRowText} style={{ marginRight: 36 }}>
             Copyright © 2023 Lovepix. Všetky práva vyhradené.
           </p>
-          <a className={styles.footerBottomContainerRowTextLink} href="vseobecne-obchodne-podmienky" target="_blank">
+          <a className={styles.footerBottomContainerRowTextLink} href="vseobecne-obchodne-podmienky" target="_blank" rel="noreferrer">
             Všeobecné obchodné podmienky
           </a>
           <p className={styles.footerDivider}>/</p>
-          <a className={styles.footerBottomContainerRowTextLink} href="zasady-ochrany-osobnych-udajov" target="_blank">
+          <a className={styles.footerBottomContainerRowTextLink} href="zasady-ochrany-osobnych-udajov" target="_blank" rel="noreferrer">
             Zásady ochrany osobných údajov
           </a>
           <p className={styles.footerDivider}>/</p>
-          <a className={styles.footerBottomContainerRowTextLink} href="cookies" target="_blank">
+          <a className={styles.footerBottomContainerRowTextLink} href="cookies" target="_blank" rel="noreferrer">
             Cookies
           </a>
         </div>
