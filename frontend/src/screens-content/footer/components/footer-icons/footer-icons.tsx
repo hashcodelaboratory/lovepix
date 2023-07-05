@@ -8,7 +8,6 @@ import Image from "next/image";
 import { ImageLayout } from "../../../home/enums/enums";
 import { useTranslation } from "react-i18next";
 import { messages } from "../../../../messages/messages";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const FooterIcons = (): JSX.Element => {
   const { t } = useTranslation();
@@ -22,6 +21,7 @@ const FooterIcons = (): JSX.Element => {
           layout={ImageLayout.FIXED}
           width={22}
           height={22}
+          alt=""
         />
         <p className={styles.footerIconsText}><b>{t(messages.partners)}:</b></p>
         <a className={styles.footerIconsText} href="//mojkalendar.sk" target="_blank" rel="noreferrer">mojkalendar.sk</a>
@@ -37,7 +37,7 @@ const FooterIcons = (): JSX.Element => {
               layout={ImageLayout.FIXED}
               width={22}
               height={22}
-
+              alt=""
             />
           </div>
           <div className={styles.footerBottomIcon}>
@@ -46,6 +46,7 @@ const FooterIcons = (): JSX.Element => {
               layout={ImageLayout.FIXED}
               width={22}
               height={22}
+              alt=""
             />
           </div>
           <div className={styles.footerBottomIcon}>
@@ -55,6 +56,7 @@ const FooterIcons = (): JSX.Element => {
               width={22}
               height={22}
               className={styles.footerBottomIcon}
+              alt=""
             />
           </div>
         </div>
@@ -62,15 +64,15 @@ const FooterIcons = (): JSX.Element => {
           <p className={styles.footerBottomContainerRowText} style={{ marginRight: 36 }}>
             Copyright © 2023 Lovepix. Všetky práva vyhradené.
           </p>
-          <a className={styles.footerBottomContainerRowTextLink} href="vseobecne-obchodne-podmienky" target="_blank" rel="noreferrer">
+          <a className={styles.footerBottomContainerRowTextLink} href="/vseobecne-obchodne-podmienky" target="_blank" rel="noreferrer">
             Všeobecné obchodné podmienky
           </a>
           <p className={styles.footerDivider}>/</p>
-          <a className={styles.footerBottomContainerRowTextLink} href="zasady-ochrany-osobnych-udajov" target="_blank" rel="noreferrer">
+          <a className={styles.footerBottomContainerRowTextLink} href="/zasady-ochrany-osobnych-udajov" target="_blank" rel="noreferrer">
             Zásady ochrany osobných údajov
           </a>
           <p className={styles.footerDivider}>/</p>
-          <a className={styles.footerBottomContainerRowTextLink} href="cookies" target="_blank" rel="noreferrer">
+          <a className={styles.footerBottomContainerRowTextLink} href="/cookies" target="_blank" rel="noreferrer">
             Cookies
           </a>
         </div>

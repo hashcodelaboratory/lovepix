@@ -31,6 +31,7 @@ const Preview = ({ configuration }: PreviewProps) => {
     <Image
       color="disabled"
       style={{ width: IMAGE_WIDTH, height: IMAGE_WIDTH, margin: "auto" }}
+      alt=""
     />
   );
 

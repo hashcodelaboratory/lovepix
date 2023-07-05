@@ -81,7 +81,7 @@ const ResponsiveAppBar = () => {
     <AppBar position='fixed' sx={{ backgroundColor: 'white' }}>
       <Container maxWidth='lg'>
         <Toolbar disableGutters>
-          <Image src={logo} layout={ImageLayout.FIXED} width={50} height={50} />
+          <Image src={logo} layout={ImageLayout.FIXED} width={50} height={50} alt="" />
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
