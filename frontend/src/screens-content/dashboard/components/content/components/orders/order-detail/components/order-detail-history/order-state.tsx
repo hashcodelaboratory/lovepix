@@ -44,6 +44,7 @@ const OrderState = ({
     }
     await updateDoc(doc(database, Collections.ORDERS, order?.id ?? ''), docData)
     await queryClient.invalidateQueries(ORDERS_KEY)
+    toggleModal()
   }
 
   return (
@@ -58,11 +59,25 @@ const OrderState = ({
             )}
           </div>
           <div style={{ color: 'gray' }}>
-            {dateState ? new Date(dateState.date).toLocaleDateString() : '-'}
+            <div>
+              {dateState
+                ? new Date(dateState.date).toLocaleDateString()
+                : 'date'}
+            </div>
+            <div>
+              {dateState
+                ? new Date(dateState.date).toLocaleTimeString()
+                : 'time'}
+            </div>
           </div>
         </div>
       </div>
-      <UpdateOrderState open={open} closeModal={toggleModal} save={save} />
+      <UpdateOrderState
+        open={open}
+        closeModal={toggleModal}
+        save={save}
+        title={message}
+      />
     </>
   )
 }

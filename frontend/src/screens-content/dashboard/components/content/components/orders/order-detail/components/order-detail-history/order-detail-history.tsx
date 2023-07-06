@@ -42,12 +42,12 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
       state: OrderStateEnum.PACKED,
     },
     {
-      icon: <LocalShippingIcon className={styles.shippingIconDisable} />,
+      icon: <LocalShippingIcon className={iconStyle(OrderStateEnum.PICKED)} />,
       message: 'Odoslaná',
       state: OrderStateEnum.PICKED,
     },
     {
-      icon: <RedeemIcon className={styles.shippingIconDisable} />,
+      icon: <RedeemIcon className={iconStyle(OrderStateEnum.SHIPPED)} />,
       message: 'Dokončená',
       state: OrderStateEnum.SHIPPED,
     },
