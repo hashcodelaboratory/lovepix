@@ -24,6 +24,13 @@ const Home: NextPage = () => {
       </Head>
 
       <header>
+        <meta name="description" content="Tlač na plátno, Tlač obrazov, Potlač predmetov, Hotové obrazy zo Spiša, Spišská Nová Ves, Slovensko, lovepix.sk, vaše zážitky radi zhmotníme, darčeky, darčekové predmety"/>
+        <meta name="keywords" content="plázno, tlac platno, potlac, potlac predmetov, tlac na alucobond, hlinikova doska, obazy na platne, rychle dodanie, zazitky na fotke, fotka na zelanie, obraz na zelanie"/>
+        <meta name="author" content="Hashlab s.r.o."/>
+        <meta property="og:title" content="{názov stránky / produktu}" />
+        <meta property="og:url" content="{url page}" />
+        <meta property="og:image" content="{obrázok z page, alebo dummy image doplním (P)}" />
+        <meta property="og:description" content="{product description alebo doplnim pre rôzne stránky (hlavne pre landing page)}" />
         <ResponsiveAppBar />
       </header>
 
