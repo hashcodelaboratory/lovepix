@@ -105,7 +105,6 @@ const createOrder = async (data: CreateOrderRequest) => {
       }
       await stripeCreateSession(data.stripe, data?.totalPrice)
       await sendOrderMailtoAdmin(orderId)
-      //TODO: check
     } else {
       await sendOrderMail(orderId, data)
       await sendOrderMailtoAdmin(orderId)
