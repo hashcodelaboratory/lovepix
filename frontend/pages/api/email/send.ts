@@ -42,21 +42,30 @@ const send = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
       },
     })
 
-    const mailOptions = {
+    const mailOptionsWithAttachment = {
       from: 'LovePix <noreply@lovepix.sk>',
       to: _body.formData.email,
       subject: 'Objednávka: #' + _body.id,
       attachments: [
         {
-          filename: 'faktúra_objednávka.pdf',
+          filename: `faktúra_${_body.id}.pdf`,
           path: _body.pdfInvoice,
         },
       ],
       html: emailTemplateUser(_body),
     }
 
+    const mailOptions = {
+      from: 'LovePix <noreply@lovepix.sk>',
+      to: _body.formData.email,
+      subject: 'Objednávka: #' + _body.id,
+      html: emailTemplateUser(_body),
+    }
+
+    const option = _body.pdfInvoice ? mailOptionsWithAttachment : mailOptions
+
     // returning result
-    return transporter.sendMail(mailOptions, (error: any) => {
+    return transporter.sendMail(option, (error: any) => {
       if (error) {
         return res.send(error.toString())
       }
