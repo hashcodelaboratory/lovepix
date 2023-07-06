@@ -86,7 +86,6 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
   })
 }
 
-// Note: orderId template: PIC{year}{000orderNumber}
 const createOrder = async (data: CreateOrderRequest) => {
   const ordersRef = await collection(database, Collections.ORDERS)
   const ordersSnap = await getDocs(ordersRef)

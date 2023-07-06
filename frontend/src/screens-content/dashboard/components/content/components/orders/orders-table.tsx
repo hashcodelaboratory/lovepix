@@ -9,7 +9,7 @@ import { useSnackbar } from "notistack";
 import { useTranslation } from "next-i18next";
 import { useQueryClient } from "react-query";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { getOrdersColumns } from "../utils/columns/ordersColumns";
+import { getOrdersColumns } from "../utils/columns/orders-columns";
 import { removeOrders } from "../../../../api/orders/removeOrders";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";

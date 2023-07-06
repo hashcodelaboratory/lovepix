@@ -17,6 +17,9 @@ import TotalSection from '../total/total-section'
 import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
 import { useRouter } from 'next/router'
 import { useStripe } from '@stripe/react-stripe-js'
+import { stripeCreateSession } from 'common/api/stripe-create-session'
+import { clearIndexedDb } from 'common/indexed-db/utils/clear'
+import { Payment as PaymentEnum} from "../../../../../common/enums/payment"
 
 type SummaryProps = {
   order: Order
@@ -71,18 +74,17 @@ const Summary = ({ order }: SummaryProps) => {
       payment: data.payment!,
       stripe: stripe,
     })
-    //STRIPE
-    // if (payment === PaymentEnum.ONLINE) {
-    //   await stripeCreateSession(stripe, order?.totalPrice)
-    //   //TODO: check
-    // } else {
-    //   await clearIndexedDb()
-    //   await router.push({
-    //     pathname: '/',
-    //     query: { success: 'true' },
-    //   })
-    // }
 
+    if (payment === PaymentEnum.ONLINE) {
+      await stripeCreateSession(stripe, order?.totalPrice)
+      //TODO: check
+    } else {
+      await clearIndexedDb()
+      await router.push({
+        pathname: '/',
+        query: { success: 'true' },
+      })
+    }
     reset()
     setIsLoading(false)
   }

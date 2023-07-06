@@ -56,6 +56,7 @@ const GalleryLayout = (): JSX.Element => {
               width={380}
               height={320}
               className={styles.galleryImage}
+              alt=""
             />
           </div>
         ))}
