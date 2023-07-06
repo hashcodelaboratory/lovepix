@@ -20,6 +20,7 @@ import { useStripe } from '@stripe/react-stripe-js'
 import { clearIndexedDb } from 'common/indexed-db/utils/clear'
 import { stripeCreateSession } from 'common/api/stripe-create-session'
 import { Payment as PaymentEnum } from '../../../../../common/enums/payment'
+import { OrderState } from 'common/enums/order-states'
 
 type SummaryProps = {
   order: Order
@@ -68,6 +69,7 @@ const Summary = ({ order }: SummaryProps) => {
         email: data?.email,
       },
       date: Date.now(),
+      orderState: [{state: OrderState.CREATED, date: Date.now()}],
       shoppingCart: order?.shoppingCart,
       totalPrice: order?.totalPrice,
       delivery: data.delivery!,

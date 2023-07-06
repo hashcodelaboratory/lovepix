@@ -9,9 +9,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import LocalShippingIcon from '@mui/icons-material/LocalShipping'
 import RedeemIcon from '@mui/icons-material/Redeem'
 import ArchiveIcon from '@mui/icons-material/Archive'
-import UpdateOrderState from './order-state-modal'
-import { useState } from 'react'
-import { ORDER_STATE } from 'common/enums/order-states'
+import { OrderState as OrderStateEnum } from 'common/enums/order-states'
 
 type Props = {
   order?: Order
@@ -19,8 +17,6 @@ type Props = {
 
 const OrderDetailHistory = ({ order }: Props): JSX.Element => {
   const { t } = useTranslation()
-  const [open, setOpen] = useState(false)
-  const toggleModal = () => setOpen((prevState) => !prevState)
 
   const iconStyle = (state: string) => {
     const item = order?.orderState?.find((item) => item.state === state)
@@ -29,24 +25,31 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
 
   const states = [
     {
-      icon: <InventoryIcon className={iconStyle(ORDER_STATE.CREATED)} />,
+      icon: <InventoryIcon className={iconStyle(OrderStateEnum.CREATED)} />,
       message: t(messages.orderCreated),
+      state: OrderStateEnum.CREATED,
     },
     {
-      icon: <AddShoppingCartIcon className={iconStyle(ORDER_STATE.PICKED)} />,
+      icon: (
+        <AddShoppingCartIcon className={iconStyle(OrderStateEnum.DELIVERED)} />
+      ),
       message: 'Prijatá',
+      state: OrderStateEnum.DELIVERED,
     },
     {
-      icon: <ArchiveIcon className={styles.shippingIconDisable} />,
+      icon: <ArchiveIcon className={iconStyle(OrderStateEnum.PACKED)} />,
       message: 'Spracovaná',
+      state: OrderStateEnum.PACKED,
     },
     {
       icon: <LocalShippingIcon className={styles.shippingIconDisable} />,
       message: 'Odoslaná',
+      state: OrderStateEnum.PICKED,
     },
     {
       icon: <RedeemIcon className={styles.shippingIconDisable} />,
       message: 'Dokončená',
+      state: OrderStateEnum.SHIPPED,
     },
   ]
 
@@ -56,8 +59,8 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
       order={order}
       icon={item.icon}
       message={item.message}
+      state={item.state}
       dateState={order?.orderState ? order?.orderState[index] : ''}
-      toggleModal={toggleModal}
       index={index}
     />
   ))
@@ -66,7 +69,6 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
     <Box className={styles.box} style={{ width: 400 }}>
       <h4>{t(messages.orderHistory)}</h4>
       {stateColumn}
-      <UpdateOrderState open={open} closeModal={toggleModal} />
     </Box>
   )
 }

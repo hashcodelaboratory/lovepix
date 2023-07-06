@@ -1,4 +1,4 @@
-export enum ORDER_STATE {
+export enum OrderState {
   CREATED = 'created',
   PICKED = 'picked',
   PACKED = 'packed',

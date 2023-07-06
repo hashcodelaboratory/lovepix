@@ -12,9 +12,16 @@ import { Image } from 'common/types/image'
 import { Product } from 'common/types/product'
 import {generateOrderID} from "../../../screens-content/shopping-cart/components/summary/summary/generateOrderID";
 
+
+type OrderState = {
+  state: string,
+  date: number
+}
+
 type CreateOrderRequest = {
   form: FormInputs
   date: number
+  orderState: OrderState[]
   shoppingCart: {
     images?: Image[]
     products?: Product[]

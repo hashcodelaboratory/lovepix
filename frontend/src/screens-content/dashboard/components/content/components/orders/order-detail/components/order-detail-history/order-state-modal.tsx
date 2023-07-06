@@ -4,6 +4,7 @@ import React from 'react'
 type ModalProps = {
   open: boolean
   closeModal: () => void
+  save: () => void
 }
 
 const style = {
@@ -19,7 +20,7 @@ const style = {
   p: 4,
 }
 
-const UpdateOrderState = ({ open, closeModal }: ModalProps) => {
+const UpdateOrderState = ({ open, closeModal, save }: ModalProps) => {
   return (
     <Modal
       open={open}
@@ -31,7 +32,9 @@ const UpdateOrderState = ({ open, closeModal }: ModalProps) => {
         <h3>Zmena stavu objednávky</h3>
         <div>Chystáte sa zmeniť stav objednávky z STAV na NOVY STAV</div>
         <div style={{ marginTop: 20 }}>
-          <Button variant='outlined'>Potvrdit</Button>
+          <Button variant='outlined' onClick={save}>
+            Potvrdit
+          </Button>
           <Button variant='outlined' onClick={closeModal}>
             Cancel
           </Button>
