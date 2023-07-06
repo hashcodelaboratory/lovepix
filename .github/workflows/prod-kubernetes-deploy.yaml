@@ -35,7 +35,6 @@ jobs:
       - name: Build docker LOVEPIX frontend image
         run: |
           docker-compose up -d
-        run: 
       - name: Docker images 
         run: docker images
       - name: Tag the image of WALLER-fe
