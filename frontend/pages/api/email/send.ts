@@ -33,6 +33,7 @@ const send = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
     }
 
     const transporter = nodemailer.createTransport({
+      pool: true,
       service: 'websupport',
       host: 'smtp.m1.websupport.sk',
       secure: true,
@@ -40,6 +41,10 @@ const send = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
       auth: {
         user: 'noreply@lovepix.sk',
         pass: 'Ov7<5=@dv)',
+      },
+      tls: {
+        // do not fail on invalid certs
+        rejectUnauthorized: false,
       },
     })
 

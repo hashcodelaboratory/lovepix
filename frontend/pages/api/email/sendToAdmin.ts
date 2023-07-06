@@ -36,6 +36,7 @@ const sendToAdmin = async (
     }
 
     const transporter = nodemailer.createTransport({
+      pool: true,
       service: 'websupport',
       host: 'smtp.m1.websupport.sk',
       secure: true,
@@ -43,6 +44,10 @@ const sendToAdmin = async (
       auth: {
         user: 'noreply@lovepix.sk',
         pass: 'Ov7<5=@dv)',
+      },
+      tls: {
+        // do not fail on invalid certs
+        rejectUnauthorized: false,
       },
     })
 
