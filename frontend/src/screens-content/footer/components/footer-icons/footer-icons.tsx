@@ -31,6 +31,8 @@ const FooterIcons = (): JSX.Element => {
       <hr />
       <div className={styles.footerBottomContainer}>
         <div className={styles.footerBottomContainerRow}>
+          <p className={styles.footerBottomContainerRowText}>{t(messages.changeLanguage)}</p>
+          <KeyboardArrowDownIcon sx={{ color: "gray", mr: 3 }} />
           <div className={styles.footerBottomIcon}>
             <Image
               src={facebookIcon}
