@@ -26,7 +26,7 @@ const OrderState = ({
   index,
 }: Props): JSX.Element => {
   const queryClient = useQueryClient()
-  const allowOpenModal = order && order.orderState.length
+  const allowOpenModal = order && order.orderState?.length
 
   const open = () => {
     allowOpenModal === index && toggleModal()
@@ -36,8 +36,8 @@ const OrderState = ({
     // const docData = {
     //   ...order?.orderState,
     // }
-    await updateDoc(doc(database, Collections.ORDERS, order?.id ?? ''), docData)
-    await queryClient.invalidateQueries(ORDERS_KEY)
+    // await updateDoc(doc(database, Collections.ORDERS, order?.id ?? ''), docData)
+    // await queryClient.invalidateQueries(ORDERS_KEY)
   }
 
   return (

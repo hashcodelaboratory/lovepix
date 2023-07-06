@@ -23,13 +23,13 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
   const toggleModal = () => setOpen((prevState) => !prevState)
 
   const iconStyle = (state: string) => {
-    const item = order?.orderState.find((item) => item.state === state)
+    const item = order?.orderState?.find((item) => item.state === state)
     return item ? styles.shippingIcon : styles.shippingIconDisable
   }
 
   const states = [
     {
-      icon: <InventoryIcon className={iconStyle(ORDER_STATE.PLACED)} />,
+      icon: <InventoryIcon className={iconStyle(ORDER_STATE.CREATED)} />,
       message: t(messages.orderCreated),
     },
     {
@@ -56,7 +56,7 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
       order={order}
       icon={item.icon}
       message={item.message}
-      dateState={order?.orderState[index]}
+      dateState={order?.orderState ? order?.orderState[index] : ''}
       toggleModal={toggleModal}
       index={index}
     />
