@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { DataGrid, GridCellParams } from "@mui/x-data-grid";
+import {DataGrid, GridCallbackDetails, GridCellParams, GridSelectionModel} from "@mui/x-data-grid";
 import styles from "../../../../dashboard.module.scss";
 import { useContext, useEffect, useState } from "react";
 import DashboardContext from "../../../../context/dashboard-context";
@@ -25,6 +25,9 @@ const OrdersTable = () => {
 
   const queryClient = useQueryClient();
 
+  const [selectedRows, setSelectedRows] = useState<string[]>([]);
+  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
+
   const data = orders.map(({ id, date, form }) => (
     {
       id: id,
@@ -41,7 +44,7 @@ const OrdersTable = () => {
   }, [orders]);
 
   const removeData = () => {
-    const result = removeOrders(orders.map(({ id }) => id), queryClient);
+    const result = removeOrders(selectedRows, queryClient);
     if (result === "") {
       enqueueSnackbar(String(t(messages.filesRemoved)), SNACKBAR_OPTIONS_SUCCESS);
     } else {
@@ -51,6 +54,15 @@ const OrdersTable = () => {
 
   const changeOrderId = (e: GridCellParams) => {
     setOrder(orders.find(({ id }) => id === e.id.toString()));
+  };
+
+  const selectionChanged = (
+    selectionModel: GridSelectionModel,
+    details: GridCallbackDetails,
+  ) => {
+    setSelectionModel(selectionModel);
+    setSelectedRows(selectionModel.map((item, index) =>
+        (data[index].id)));
   };
 
   const buttonText = String(t(messages.removeAll));
@@ -72,6 +84,9 @@ const OrdersTable = () => {
             columns={getOrdersColumns(t)}
             autoPageSize
             onCellClick={changeOrderId}
+            checkboxSelection
+            selectionModel={selectionModel}
+            onSelectionModelChange={selectionChanged}
           />
 
         </Box>
@@ -79,8 +94,8 @@ const OrdersTable = () => {
           <OrderDetail order={order} />
         </Box>
       </AccordionDetails>
-      <button className={styles.removeButton} onClick={removeData}>
-        {buttonText}
+      <button className={styles.removeButton} onClick={removeData} disabled={!selectedRows?.length}>
+        {selectedRows ? `(${selectedRows.length}) ` : ''}{buttonText}
         <DeleteIcon sx={{ marginLeft: 1 }} />
       </button>
     </Accordion>
