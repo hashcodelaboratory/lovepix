@@ -10,7 +10,7 @@ import { useTranslation } from "next-i18next";
 import { useQueryClient } from "react-query";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getOrdersColumns } from "../utils/columns/orders-columns";
-import { removeOrders } from "../../../../api/orders/removeOrders";
+import { removeOrders } from "../../../../api/orders/remove-orders";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OrderDetail from "./order-detail/order-detail";
@@ -43,12 +43,12 @@ const OrdersTable = () => {
     setOrder(orders[0]);
   }, [orders]);
 
-  const removeData = () => {
-    const result = removeOrders(selectedRows, queryClient);
-    if (result === "") {
+  const removeData = async () => {
+    try {
+      await removeOrders(selectedRows, queryClient);
       enqueueSnackbar(String(t(messages.filesRemoved)), SNACKBAR_OPTIONS_SUCCESS);
-    } else {
-      enqueueSnackbar(result, SNACKBAR_OPTIONS_ERROR);
+    } catch (error) {
+      enqueueSnackbar((error as Error).message, SNACKBAR_OPTIONS_ERROR);
     }
   };
 
