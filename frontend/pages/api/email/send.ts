@@ -34,7 +34,8 @@ const send = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
 
     const transporter = nodemailer.createTransport({
       service: 'websupport',
-      host: 'smtp.websupport.sk',
+      host: 'smtp.m1.websupport.sk',
+      secure: true,
       port: 465,
       auth: {
         user: 'noreply@lovepix.sk',
