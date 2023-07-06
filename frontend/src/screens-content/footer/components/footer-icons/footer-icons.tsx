@@ -24,9 +24,9 @@ const FooterIcons = (): JSX.Element => {
           alt=""
         />
         <p className={styles.footerIconsText}><b>{t(messages.partners)}:</b></p>
-        <a className={styles.footerIconsText} href="//mojkalendar.sk" target="_blank">mojkalendar.sk</a>
-        <a className={styles.footerIconsText} href="//odfotma.sk" target="_blank">odfotma.sk</a>
-        <a className={styles.footerIconsText} href="//hashlab.com" target="_blank">hashlab.com</a>
+        <a className={styles.footerIconsText} href="//mojkalendar.sk" target="_blank" rel="noreferrer">mojkalendar.sk</a>
+        <a className={styles.footerIconsText} href="//odfotma.sk" target="_blank" rel="noreferrer">odfotma.sk</a>
+        <a className={styles.footerIconsText} href="//hashlab.com" target="_blank" rel="noreferrer">hashlab.com</a>
       </div>
       <hr />
       <div className={styles.footerBottomContainer}>
