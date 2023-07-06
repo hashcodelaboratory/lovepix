@@ -24,15 +24,13 @@ const FooterIcons = (): JSX.Element => {
           alt=""
         />
         <p className={styles.footerIconsText}><b>{t(messages.partners)}:</b></p>
-        <p className={styles.footerIconsText}>mojkalendar.sk</p>
-        <p className={styles.footerIconsText}>hobbyfotograf.sk</p>
-        <p className={styles.footerIconsText}>hashlab.sk</p>
+        <a className={styles.footerIconsText} href="//mojkalendar.sk" target="_blank" rel="noreferrer">mojkalendar.sk</a>
+        <a className={styles.footerIconsText} href="//odfotma.sk" target="_blank" rel="noreferrer">odfotma.sk</a>
+        <a className={styles.footerIconsText} href="//hashlab.com" target="_blank" rel="noreferrer">hashlab.com</a>
       </div>
       <hr />
       <div className={styles.footerBottomContainer}>
         <div className={styles.footerBottomContainerRow}>
-          <p className={styles.footerBottomContainerRowText}>{t(messages.changeLanguage)}</p>
-          <KeyboardArrowDownIcon sx={{ color: "gray", mr: 3 }} />
           <div className={styles.footerBottomIcon}>
             <Image
               src={facebookIcon}
@@ -66,17 +64,17 @@ const FooterIcons = (): JSX.Element => {
           <p className={styles.footerBottomContainerRowText} style={{ marginRight: 36 }}>
             Copyright © 2023 Lovepix. Všetky práva vyhradené.
           </p>
-          <p className={styles.footerBottomContainerRowTextLink}>
+          <a className={styles.footerBottomContainerRowTextLink} href="vseobecne-obchodne-podmienky" target="_blank">
             Všeobecné obchodné podmienky
-          </p>
+          </a>
           <p className={styles.footerDivider}>/</p>
-          <p className={styles.footerBottomContainerRowTextLink}>
+          <a className={styles.footerBottomContainerRowTextLink} href="zasady-ochrany-osobnych-udajov" target="_blank">
             Zásady ochrany osobných údajov
-          </p>
+          </a>
           <p className={styles.footerDivider}>/</p>
-          <p className={styles.footerBottomContainerRowTextLink}>
+          <a className={styles.footerBottomContainerRowTextLink} href="cookies" target="_blank">
             Cookies
-          </p>
+          </a>
         </div>
       </div>
     </Container>
