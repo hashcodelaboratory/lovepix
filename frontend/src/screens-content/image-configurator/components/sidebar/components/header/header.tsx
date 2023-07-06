@@ -12,11 +12,11 @@ const Header = ({ icon, title, success, value }: Props) => {
     <div className={styles.headerComponent}>
       <div className={styles.header}>
         {icon}
-        <h3 className={styles.headerTitle}
+        <h4 className={styles.headerTitle}
             style={{ color: success ? "green" : "black" }}
         >
           {title}
-        </h3>
+        </h4>
       </div>
       {value}
     </div>

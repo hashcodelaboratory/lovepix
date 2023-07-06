@@ -10,9 +10,15 @@ import { Payment } from '../../enums/payment'
 import { orderTable } from '../../../../database.config'
 import { Image } from 'common/types/image'
 import { Product } from 'common/types/product'
-import {generateOrderID} from "../../../screens-content/shopping-cart/components/summary/summary/generateOrderID";
+import { createInvoice } from 'common/api/superfaktura'
+import { sendOrderMail } from 'common/api/send-mail'
+import { sendOrderMailtoAdmin } from 'common/api/send-mail-admins'
+import { generateOrderID } from 'screens-content/shopping-cart/components/summary/summary/generateOrderID'
+import { invoice } from 'screens-content/shopping-cart/components/summary/summary/utils'
+import { stripeCreateSession } from 'common/api/stripe-create-session'
+import { Stripe } from '@stripe/stripe-js'
 
-type CreateOrderRequest = {
+export type CreateOrderRequest = {
   form: FormInputs
   date: number
   shoppingCart: {
@@ -22,6 +28,7 @@ type CreateOrderRequest = {
   totalPrice: number
   delivery: Delivery
   payment: Payment
+  stripe: Stripe | null
 }
 
 const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
@@ -79,15 +86,29 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
   })
 }
 
-// Note: orderId template: PIC{year}{000orderNumber}
 const createOrder = async (data: CreateOrderRequest) => {
   const ordersRef = await collection(database, Collections.ORDERS)
   const ordersSnap = await getDocs(ordersRef)
 
   if (ordersSnap) {
     const orderId = generateOrderID(ordersSnap)
-
     await uploadToStorage(orderId, data)
+
+    if (data.payment === Payment.ONLINE) {
+      const response = await createInvoice(invoice(orderId, data))
+      if (response) {
+        const res = await response.json()
+        const id = res?.data?.Invoice.id
+        const token = res?.data?.Invoice.token
+        const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+        await sendOrderMail(orderId, data, pdfInvoice)
+      }
+      await stripeCreateSession(data.stripe, data?.totalPrice)
+      await sendOrderMailtoAdmin(orderId)
+    } else {
+      await sendOrderMail(orderId, data)
+      await sendOrderMailtoAdmin(orderId)
+    }
   }
 }
 

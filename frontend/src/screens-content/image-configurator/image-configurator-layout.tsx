@@ -11,7 +11,7 @@ type ImageConfiguratorLayoutProps = {
 }
 
 const ImageConfiguratorLayout = ({ configuration }: ImageConfiguratorLayoutProps) => {
-  const [cropper, setCropper] = useState<any>();
+  const [cropper, setCropper] = useState<any>()
   const value = {
     state: {
       cropper

@@ -70,7 +70,7 @@ const Button = () => {
             price: Number(Number(price).toFixed(2)),
           },
         ],
-        products: order?.shoppingCart.products ?? [],
+        products: order?.shoppingCart?.products ?? [],
       },
       totalPrice: totalPrice.toFixed(2),
     }

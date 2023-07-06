@@ -29,15 +29,15 @@ const Price = ({ configuration }: PriceProps) => {
   return (
     <div className={styles.containerPadding}>
       <div className={styles.price}>
-        <h3>
+        <h4>
           <b>Cena</b>
-        </h3>
+        </h4>
         <p className={styles.priceNoTax}>
           {noTaxPrice} € bez DPH
         </p>
-        <h3>
+        <h4>
           <b>{price} € </b>
-        </h3>
+        </h4>
       </div>
       <hr />
     </div>
