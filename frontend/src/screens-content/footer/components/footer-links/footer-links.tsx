@@ -4,6 +4,7 @@ import { messages } from "../../../../messages/messages";
 import { useTranslation } from "react-i18next";
 import { useCategories } from "../../../../common/api/use-categories";
 import { FOR_PARTNERS } from "../../../../constants/pages/titles";
+import { Link } from "@mui/material";
 
 const FooterLinks = (): JSX.Element => {
   const { data: categories } = useCategories();
@@ -43,7 +44,8 @@ const FooterColumn = ({ title, links }: FooterColumnType): JSX.Element => {
   return (
     <div className={styles.footerColumn}>
       <h3 className={styles.footerTitle}>{t(title)}</h3>
-      {links.map((link) => <p key={link} className={styles.footerText}>{t(link)}</p>)}
+      {links.map((link) =>
+        <Link href={link} key={link} className={styles.footerText}>{t(link)}</Link>)}
     </div>
   );
 };
