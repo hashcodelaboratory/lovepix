@@ -1,6 +1,6 @@
-import {emailTemplateUser} from 'api/emails/utils'
+import {emailTemplateUser} from '../../../src/api/email/utils'
 import type {NextApiRequest, NextApiResponse} from 'next'
-import {transporter} from "../../../src/api/emails/transporter";
+import {transporter} from "../../../src/api/email/transporter";
 
 const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
 
