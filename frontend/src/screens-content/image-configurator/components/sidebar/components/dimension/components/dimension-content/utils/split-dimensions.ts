@@ -1,5 +1,5 @@
 export const splitDimensions = (dimensions: string[]) => {
-  const borders = dimensions.map((dim) => ({
+  const borders = dimensions?.map((dim) => ({
     left: Number(dim.substring(0, dim.indexOf('x'))),
     right: Number(dim.substring(dim.indexOf('x') + 1)),
     dim: dim,
@@ -9,7 +9,7 @@ export const splitDimensions = (dimensions: string[]) => {
   const height: string[] = []
   const square: string[] = []
 
-  borders.forEach(({ left, right, dim }) => {
+  borders?.forEach(({ left, right, dim }) => {
     if (left < right) {
       height.push(dim)
     } else if (left > right) {

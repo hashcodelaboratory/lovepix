@@ -27,22 +27,31 @@ const DimensionContent = ({ configuration }: DimensionContentProps) => {
   const { data: galleryDetail } = useGalleryDetail(configuration?.galleryItemId)
   const galleryDimensions: string[] = galleryDetail?.dimensions
 
-  console.log(splitDimensions(galleryDimensions))
+  const { byWidth, byHeight, bySquare } = splitDimensions(galleryDimensions)
 
-  const dimensionsSquare = dimensionsBySquare
-  const dimensionsWidth = dimensionsByWidth
-  const dimensionsHeight = dimensionsByHeight
+  const dimensionsSquare =
+    configuration?.galleryItemId && bySquare.length > 0
+      ? bySquare
+      : dimensionsBySquare
+  const dimensionsWidth =
+    configuration?.galleryItemId && byWidth.length > 0
+      ? byWidth
+      : dimensionsByWidth
+  const dimensionsHeight =
+    configuration?.galleryItemId && byHeight.length > 0
+      ? byHeight
+      : dimensionsByHeight
 
   const [value, setValue] = useState(0)
 
   useEffect(() => {
-    if (dimensionsSquare.find((dim) => dim.id === configuration?.dimensionId)) {
+    if (dimensionsSquare.find((dim) => dim === configuration?.dimensionId)) {
       setValue(2)
     }
-    if (dimensionsWidth.find((dim) => dim.id === configuration?.dimensionId)) {
+    if (dimensionsWidth.find((dim) => dim === configuration?.dimensionId)) {
       setValue(0)
     }
-    if (dimensionsHeight.find((dim) => dim.id === configuration?.dimensionId)) {
+    if (dimensionsHeight.find((dim) => dim === configuration?.dimensionId)) {
       setValue(1)
     }
   }, [configuration?.dimensionId])
@@ -75,35 +84,32 @@ const DimensionContent = ({ configuration }: DimensionContentProps) => {
       <TabPanel value={value} index={0}>
         {dimensionsWidth.map((dim) => (
           <TabPanelBox
-            selected={dim.id === configuration?.dimensionId}
-            x={dim.width}
-            y={dim.height}
-            onClick={() => changeDimension(dim.id)}
-            key={dim.id}
+            selected={dim === configuration?.dimensionId}
+            x={dim}
+            onClick={() => changeDimension(dim)}
+            key={dim}
           />
         ))}
       </TabPanel>
       <TabPanel value={value} index={1}>
         {dimensionsHeight.map((dim) => (
           <TabPanelBox
-            selected={dim.id === configuration?.dimensionId}
-            x={dim.width}
-            y={dim.height}
-            onClick={() => changeDimension(dim.id)}
+            selected={dim === configuration?.dimensionId}
+            x={dim}
+            onClick={() => changeDimension(dim)}
             style={{ width: 60, height: 80, marginRight: 10 }}
-            key={dim.id}
+            key={dim}
           />
         ))}
       </TabPanel>
       <TabPanel value={value} index={2}>
         {dimensionsSquare.map((dim) => (
           <TabPanelBox
-            selected={dim.id === configuration?.dimensionId}
-            x={dim.width}
-            y={dim.height}
-            onClick={() => changeDimension(dim.id)}
+            selected={dim === configuration?.dimensionId}
+            x={dim}
+            onClick={() => changeDimension(dim)}
             style={{ width: 70, height: 70, padding: 5 }}
-            key={dim.id}
+            key={dim}
           />
         ))}
       </TabPanel>
