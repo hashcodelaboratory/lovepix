@@ -11,9 +11,12 @@ import UpdateOrderState from './order-state-modal'
 import { invoice } from 'screens-content/shopping-cart/components/summary/summary/utils'
 import { createInvoice } from 'common/api/superfaktura'
 import { OrderState as OrderStateEnum } from 'common/enums/order-states'
+import { sendOrderMail } from 'common/api/send-mail'
+import { sendMailOrderPicked } from 'common/api/send-mail-order-picked'
+import { sendMailOrderShipped } from 'common/api/send-mail-order-shipped'
 
 type Props = {
-  order?: Order
+  order: Order
   icon: any
   message: string
   dateState: any
@@ -33,8 +36,6 @@ const OrderState = ({
   const allowOpenModal = order && order.orderState?.length
   const [open, setOpen] = useState(false)
 
-  console.log(order)
-
   const openModal = () => {
     allowOpenModal === index && setOpen(true)
   }
@@ -42,19 +43,22 @@ const OrderState = ({
   const toggleModal = () => setOpen((prevState) => !prevState)
 
   const createSFInvoice = async () => {
-    console.log('here')
-
     const response = await createInvoice(
-      invoice(
-        order?.form,
-        order,
-        order?.delivery ?? null,
-        order?.payment ?? null
-      )
+      invoice(order?.id ?? 'unnknown', order)
     )
+    if (response) {
+      const res = await response.json()
+      const id = res?.data?.Invoice.id
+      const token = res?.data?.Invoice.token
+      const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+      await sendMailOrderShipped(
+        order.id,
+        order.form.email,
+        'Faktúra k vašej objednávke',
+        pdfInvoice
+      )
+    }
   }
-
-  console.log(state)
 
   const save = async () => {
     const array = order?.orderState
@@ -65,6 +69,12 @@ const OrderState = ({
     await updateDoc(doc(database, Collections.ORDERS, order?.id ?? ''), docData)
     await queryClient.invalidateQueries(ORDERS_KEY)
     state === OrderStateEnum.SHIPPED && createSFInvoice()
+    state === OrderStateEnum.PICKED &&
+      sendMailOrderPicked(
+        order.id,
+        order.form.email,
+        'Vaša objednávka bola odoslaná'
+      )
     toggleModal()
   }
 
