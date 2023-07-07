@@ -14,6 +14,11 @@ import { OrderState as OrderStateEnum } from 'common/enums/order-states'
 import { sendOrderMail } from 'common/api/send-mail'
 import { sendMailOrderPicked } from 'common/api/send-mail-order-picked'
 import { sendMailOrderShipped } from 'common/api/send-mail-order-shipped'
+import { useSnackbar } from 'notistack'
+import {
+  SNACKBAR_OPTIONS_ERROR,
+  SNACKBAR_OPTIONS_SUCCESS,
+} from 'snackbar/config'
 
 type Props = {
   order: Order
@@ -35,6 +40,7 @@ const OrderState = ({
   const queryClient = useQueryClient()
   const allowOpenModal = order && order.orderState?.length
   const [open, setOpen] = useState(false)
+  const { enqueueSnackbar } = useSnackbar()
 
   const openModal = () => {
     allowOpenModal === index && setOpen(true)
@@ -51,12 +57,20 @@ const OrderState = ({
       const id = res?.data?.Invoice.id
       const token = res?.data?.Invoice.token
       const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
-      await sendMailOrderShipped(
+      const responseMail = await sendMailOrderShipped(
         order.id,
         order.form.email,
         'Faktúra k vašej objednávke',
         pdfInvoice
       )
+      if (responseMail.ok) {
+        enqueueSnackbar(
+          'Stava objednavky bol zmeneny a zakaznik informovany mailom o stave jeho objednávky',
+          SNACKBAR_OPTIONS_SUCCESS
+        )
+      } else {
+        enqueueSnackbar('Email sa nepodarilo odoslat', SNACKBAR_OPTIONS_ERROR)
+      }
     }
   }
 
@@ -69,12 +83,20 @@ const OrderState = ({
     await updateDoc(doc(database, Collections.ORDERS, order?.id ?? ''), docData)
     await queryClient.invalidateQueries(ORDERS_KEY)
     state === OrderStateEnum.SHIPPED && createSFInvoice()
-    state === OrderStateEnum.PICKED &&
-      sendMailOrderPicked(
-        order.id,
-        order.form.email,
-        'Vaša objednávka bola odoslaná'
+    const result = await sendMailOrderPicked(
+      order.id,
+      order.form.email,
+      'Vaša objednávka bola odoslaná'
+    )
+    state === OrderStateEnum.PICKED && result
+    if (result.ok) {
+      enqueueSnackbar(
+        'Stava objednavky bol zmeneny a zakaznik informovany mailom o stave jeho objednávky',
+        SNACKBAR_OPTIONS_SUCCESS
       )
+    } else {
+      enqueueSnackbar('Email sa nepodarilo odoslat', SNACKBAR_OPTIONS_ERROR)
+    }
     toggleModal()
   }
 
