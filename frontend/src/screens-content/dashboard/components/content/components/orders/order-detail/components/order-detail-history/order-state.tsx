@@ -83,20 +83,23 @@ const OrderState = ({
     await updateDoc(doc(database, Collections.ORDERS, order?.id ?? ''), docData)
     await queryClient.invalidateQueries(ORDERS_KEY)
     state === OrderStateEnum.SHIPPED && createSFInvoice()
-    const result = await sendMailOrderPicked(
-      order.id,
-      order.form.email,
-      'Vaša objednávka bola odoslaná'
-    )
-    state === OrderStateEnum.PICKED && result
-    if (result.ok) {
-      enqueueSnackbar(
-        'Stava objednavky bol zmeneny a zakaznik informovany mailom o stave jeho objednávky',
-        SNACKBAR_OPTIONS_SUCCESS
+    if (state === OrderStateEnum.PICKED) {
+      const result = await sendMailOrderPicked(
+        order.id,
+        order.form.email,
+        'Vaša objednávka bola odoslaná'
       )
-    } else {
-      enqueueSnackbar('Email sa nepodarilo odoslat', SNACKBAR_OPTIONS_ERROR)
+
+      if (result.ok) {
+        enqueueSnackbar(
+          'Stava objednávky bol zmenený a zákaznik informovaný mailom o stave jeho objednávky',
+          SNACKBAR_OPTIONS_SUCCESS
+        )
+      } else {
+        enqueueSnackbar('Email sa nepodarilo odoslat', SNACKBAR_OPTIONS_ERROR)
+      }
     }
+
     toggleModal()
   }
 
