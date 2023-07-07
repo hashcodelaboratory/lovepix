@@ -33,30 +33,45 @@ const send = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
     }
 
     const transporter = nodemailer.createTransport({
+      pool: true,
       service: 'websupport',
-      host: 'smtp.websupport.sk',
+      host: 'smtp.m1.websupport.sk',
+      secure: true,
       port: 465,
       auth: {
         user: 'noreply@lovepix.sk',
         pass: 'Ov7<5=@dv)',
       },
+      tls: {
+        // do not fail on invalid certs
+        rejectUnauthorized: false,
+      },
     })
 
-    const mailOptions = {
+    const mailOptionsWithAttachment = {
       from: 'LovePix <noreply@lovepix.sk>',
       to: _body.formData.email,
       subject: 'Objednávka: #' + _body.id,
       attachments: [
         {
-          filename: 'faktúra_objednávka.pdf',
+          filename: `faktúra_${_body.id}.pdf`,
           path: _body.pdfInvoice,
         },
       ],
       html: emailTemplateUser(_body),
     }
 
+    const mailOptions = {
+      from: 'LovePix <noreply@lovepix.sk>',
+      to: _body.formData.email,
+      subject: 'Objednávka: #' + _body.id,
+      html: emailTemplateUser(_body),
+    }
+
+    const option = _body.pdfInvoice ? mailOptionsWithAttachment : mailOptions
+
     // returning result
-    return transporter.sendMail(mailOptions, (error: any) => {
+    return transporter.sendMail(option, (error: any) => {
       if (error) {
         return res.send(error.toString())
       }

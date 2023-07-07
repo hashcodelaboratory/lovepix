@@ -8,7 +8,6 @@ import Image from "next/image";
 import { ImageLayout } from "../../../home/enums/enums";
 import { useTranslation } from "react-i18next";
 import { messages } from "../../../../messages/messages";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const FooterIcons = (): JSX.Element => {
   const { t } = useTranslation();
@@ -22,11 +21,12 @@ const FooterIcons = (): JSX.Element => {
           layout={ImageLayout.FIXED}
           width={22}
           height={22}
+          alt=""
         />
         <p className={styles.footerIconsText}><b>{t(messages.partners)}:</b></p>
-        <a className={styles.footerIconsText} href="//mojkalendar.sk" target="_blank">mojkalendar.sk</a>
-        <a className={styles.footerIconsText} href="//odfotma.sk" target="_blank">odfotma.sk</a>
-        <a className={styles.footerIconsText} href="//hashlab.com" target="_blank">hashlab.com</a>
+        <a className={styles.footerIconsText} href="//mojkalendar.sk" target="_blank" rel="noreferrer">mojkalendar.sk</a>
+        <a className={styles.footerIconsText} href="//odfotma.sk" target="_blank" rel="noreferrer">odfotma.sk</a>
+        <a className={styles.footerIconsText} href="//hashlab.com" target="_blank" rel="noreferrer">hashlab.com</a>
       </div>
       <hr />
       <div className={styles.footerBottomContainer}>
@@ -37,7 +37,7 @@ const FooterIcons = (): JSX.Element => {
               layout={ImageLayout.FIXED}
               width={22}
               height={22}
-
+              alt=""
             />
           </div>
           <div className={styles.footerBottomIcon}>
@@ -46,6 +46,7 @@ const FooterIcons = (): JSX.Element => {
               layout={ImageLayout.FIXED}
               width={22}
               height={22}
+              alt=""
             />
           </div>
           <div className={styles.footerBottomIcon}>
@@ -55,6 +56,7 @@ const FooterIcons = (): JSX.Element => {
               width={22}
               height={22}
               className={styles.footerBottomIcon}
+              alt=""
             />
           </div>
         </div>

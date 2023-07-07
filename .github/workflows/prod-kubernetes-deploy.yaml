@@ -18,6 +18,12 @@ env:
   NEXT_PUBLIC_SMART_EMAILING_HOST: ${{secrets.NEXT_PUBLIC_SMART_EMAILING_HOST}}
   NEXT_PUBLIC_SMART_EMAILING_TOKEN: ${{secrets.NEXT_PUBLIC_SMART_EMAILING_TOKEN}}
   NEXT_PUBLIC_SMART_EMAILING_CONTACT_LIST_ID: ${{secrets.NEXT_PUBLIC_SMART_EMAILING_CONTACT_LIST_ID}}
+  NEXT_PUBLIC_SUPERFAKTURA_EMAIL: ${{secrets.NEXT_PUBLIC_SUPERFAKTURA_EMAIL}}
+  NEXT_PUBLIC_SUPERFAKTURA_API_KEY: ${{secrets.NEXT_PUBLIC_SUPERFAKTURA_API_KEY}}
+  NEXT_PUBLIC_SUPERFAKTURA_COMPANY_ID: ${{secrets.NEXT_PUBLIC_SUPERFAKTURA_COMPANY_ID}}
+  NEXT_PUBLIC_SUPERFAKTURA_MODULE: ${{secrets.NEXT_PUBLIC_SUPERFAKTURA_MODULE}}
+  NEXT_PUBLIC_STRIPE_PUBLIC_KEY: ${{secrets.NEXT_PUBLIC_STRIPE_PUBLIC_KEY}}
+  NEXT_PUBLIC_STRIPE_SECRET_KEY: ${{secrets.NEXT_PUBLIC_STRIPE_SECRET_KEY}}
 
 jobs:
   push-lovepix-image-on-dockerhub:  
@@ -25,10 +31,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        #env:
       - name: Build docker LOVEPIX frontend image
-        run: |
-          docker-compose up -d
+        run: time DOCKER_BUILDKIT=1 docker build -t waller-fe:latest --build-arg NEXT_PUBLIC_SMART_EMAILING_HOST --build-arg NEXT_PUBLIC_SMART_EMAILING_TOKEN --build-arg NEXT_PUBLIC_SMART_EMAILING_CONTACT_LIST_ID --build-arg NEXT_PUBLIC_SUPERFAKTURA_EMAIL --build-arg NEXT_PUBLIC_SUPERFAKTURA_API_KEY --build-arg NEXT_PUBLIC_SUPERFAKTURA_COMPANY_ID --build-arg NEXT_PUBLIC_SUPERFAKTURA_MODULE --build-arg NEXT_PUBLIC_STRIPE_PUBLIC_KEY --build-arg NEXT_PUBLIC_STRIPE_SECRET_KEY .
       - name: Docker images 
         run: docker images
       - name: Tag the image of WALLER-fe
@@ -43,7 +47,6 @@ jobs:
 
   deploy:
     name: Deploy on EC2 and on Workers Node Kubernetes - LOVEPIX
-    #env:
     needs: push-lovepix-image-on-dockerhub
     runs-on: ubuntu-latest
     steps:

@@ -1,22 +1,31 @@
 import { Delivery } from 'common/enums/delivery'
 import { Payment } from 'common/enums/payment'
 import { FormInputs } from 'common/types/form'
-import { Order } from 'common/types/order'
+import { Image } from 'common/types/image'
+import { Product } from 'common/types/product'
 import { InvoiceItem, SFInvoice } from 'common/types/superfaktura'
 import dayjs from 'dayjs'
 
-const invoiceItems = (
-  order: Order | undefined,
-  delivery: Delivery | null,
-  payment: Payment | null
-) => {
+type CreateOrderRequest = {
+  form: FormInputs
+  date: number
+  shoppingCart: {
+    images?: Image[]
+    products?: Product[]
+  }
+  totalPrice: number
+  delivery: Delivery
+  payment: Payment
+}
+
+const invoiceItems = (data: CreateOrderRequest) => {
   let newItems: InvoiceItem[] = []
   const productItems = [
-    ...(order?.shoppingCart?.products ?? []),
-    ...(order?.shoppingCart?.images ?? []),
+    ...(data.shoppingCart.products ?? []),
+    ...(data.shoppingCart.images ?? []),
   ]
 
-  productItems.forEach((item: any) => {
+  productItems?.forEach((item: any) => {
     const items = {
       unit_price: item.price / 1.2,
       tax: 20,
@@ -27,16 +36,16 @@ const invoiceItems = (
     }
     newItems.push({ ...items })
   })
-  const deliveryPrice = delivery === Delivery.COURIER ? 5 / 1.2 : 0
+  const deliveryPrice = data.delivery === Delivery.COURIER ? 5 / 1.2 : 0
   const deliveryItem = {
     unit_price: deliveryPrice,
-    description: `Doprava - ${delivery}`,
+    description: `Doprava - ${data.delivery}`,
     quantity: 1,
     unit: 'ks',
   }
   const paymentItem = {
     unit_price: 0,
-    description: `Platba - ${payment}`,
+    description: `Platba - ${data.payment}`,
     quantity: 1,
     unit: 'ks',
   }
@@ -45,24 +54,23 @@ const invoiceItems = (
 }
 
 export const invoice = (
-  data: FormInputs | undefined,
-  order: Order | undefined,
-  delivery: Delivery | null,
-  payment: Payment | null
+  orderId: string,
+  data: CreateOrderRequest
 ): SFInvoice => {
   const createdDate = dayjs(new Date()).format('YYYY-MM-DD')
   const dueDate = dayjs().add(15, 'day').format('YYYY-MM-DD')
   return {
     Invoice: {
+      name: orderId,
       created: createdDate,
       delivery: createdDate,
       due: dueDate,
     },
-    InvoiceItem: invoiceItems(order, delivery, payment),
+    InvoiceItem: invoiceItems(data),
     Client: {
-      name: `${data?.firstName} ${data?.lastName}`,
-      address: data?.address ?? '',
-      city: data?.city ?? '',
+      name: `${data.form.firstName} ${data.form.lastName}`,
+      address: data.form.address,
+      city: data.form.city,
     },
   }
 }
