@@ -14,6 +14,7 @@ import {
 import { configurationsTable } from '../../../../../../../../../database.config'
 import { CONFIGURATION_TABLE_KEY } from '../../../../../../../../common/indexed-db/hooks/keys'
 import { Configuration } from '../../../../../../../../common/types/configuration'
+import { useGalleryDetail } from '../../../../../../../../common/api/use-gallery-detail'
 
 type DimensionContentProps = {
   configuration: Configuration
@@ -21,6 +22,11 @@ type DimensionContentProps = {
 
 const DimensionContent = ({ configuration }: DimensionContentProps) => {
   const { t } = useTranslation()
+
+  const { data: galleryDetail } = useGalleryDetail(configuration?.galleryItemId)
+  const galleryDimensions = galleryDetail?.dimensions
+
+  console.log(galleryDimensions)
 
   const dimensionsSquare = dimensionsBySquare
   const dimensionsWidth = dimensionsByWidth
