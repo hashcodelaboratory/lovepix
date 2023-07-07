@@ -33,7 +33,7 @@ export type CreateOrderRequest = {
 
 const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
   const payload: Image[] = []
-  const images = data.shoppingCart.images
+  const images = data.shoppingCart?.images ?? []
 
   images?.map(async (image: Image, index) => {
     const uploadURL = `${StorageFolder.ORDERS}/${orderId}/images/`
@@ -78,7 +78,7 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
 
         const newOrderRef = doc(database, Collections.ORDERS, orderId)
 
-        await setDoc(newOrderRef, { ...data, shoppingCart: cart })
+        await setDoc(newOrderRef, { ...data, shoppingCart: cart, stripe: '' })
 
         orderTable.clear()
       }
@@ -103,7 +103,7 @@ const createOrder = async (data: CreateOrderRequest) => {
         const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
         await sendOrderMail(orderId, data, pdfInvoice)
       }
-      await stripeCreateSession(data.stripe, data?.totalPrice)
+      await stripeCreateSession(data?.stripe, data?.totalPrice)
       await sendOrderMailtoAdmin(orderId)
     } else {
       await sendOrderMail(orderId, data)
