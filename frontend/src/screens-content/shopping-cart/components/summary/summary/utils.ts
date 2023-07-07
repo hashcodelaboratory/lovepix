@@ -6,14 +6,14 @@ import { InvoiceItem, SFInvoice } from 'common/types/superfaktura'
 import dayjs from 'dayjs'
 
 const invoiceItems = (
-  order: Order,
+  order: Order | undefined,
   delivery: Delivery | null,
   payment: Payment | null
 ) => {
   let newItems: InvoiceItem[] = []
   const productItems = [
-    ...order.shoppingCart.products,
-    ...order.shoppingCart.images,
+    ...(order?.shoppingCart?.products ?? []),
+    ...(order?.shoppingCart?.images ?? []),
   ]
 
   productItems.forEach((item: any) => {
@@ -45,8 +45,8 @@ const invoiceItems = (
 }
 
 export const invoice = (
-  data: FormInputs,
-  order: Order,
+  data: FormInputs | undefined,
+  order: Order | undefined,
   delivery: Delivery | null,
   payment: Payment | null
 ): SFInvoice => {
@@ -60,9 +60,9 @@ export const invoice = (
     },
     InvoiceItem: invoiceItems(order, delivery, payment),
     Client: {
-      name: `${data.firstName} ${data.lastName}`,
-      address: data.address,
-      city: data.city,
+      name: `${data?.firstName} ${data?.lastName}`,
+      address: data?.address ?? '',
+      city: data?.city ?? '',
     },
   }
 }
