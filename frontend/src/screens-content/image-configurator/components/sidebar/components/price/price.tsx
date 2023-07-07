@@ -1,7 +1,6 @@
 import styles from '../../../../image-configurator-layout.module.scss'
 import { getPrice } from './utils/generator'
 import { materials } from '../../../../../home/utils/configuration'
-import { DIMENSIONS } from '../../../../../../common/configuration/dimensions/dimensions'
 import { Configuration } from '../../../../../../common/types/configuration'
 import { splitDimension } from '../../../../../../common/utils/split-dimension'
 
