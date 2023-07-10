@@ -3,7 +3,6 @@ import styles from '../../../../../../../image-configurator-layout.module.scss'
 
 type Props = {
   x: string
-  // y: number
   onClick?: () => void
   selected?: boolean
   style?: CSSProperties
