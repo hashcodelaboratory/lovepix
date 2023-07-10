@@ -8,7 +8,7 @@ import Image from "next/image";
 import { ImageLayout } from "../../../home/enums/enums";
 import { useTranslation } from "react-i18next";
 import { messages } from "../../../../messages/messages";
-import * as PagesUrls from "../../../../constants/pages/urls"
+import * as PagesUrls from "../../../../constants/pages/urls";
 
 const FooterIcons = (): JSX.Element => {
   const { t } = useTranslation();
