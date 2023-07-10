@@ -29,18 +29,15 @@ const DimensionContent = ({ configuration }: DimensionContentProps) => {
 
   const { byWidth, byHeight, bySquare } = splitDimensions(galleryDimensions)
 
-  const dimensionsSquare =
-    configuration?.galleryItemId && bySquare.length > 0
-      ? bySquare
-      : dimensionsBySquare
-  const dimensionsWidth =
-    configuration?.galleryItemId && byWidth.length > 0
-      ? byWidth
-      : dimensionsByWidth
-  const dimensionsHeight =
-    configuration?.galleryItemId && byHeight.length > 0
-      ? byHeight
-      : dimensionsByHeight
+  const dimensionsSquare = configuration?.galleryItemId
+    ? bySquare
+    : dimensionsBySquare
+  const dimensionsWidth = configuration?.galleryItemId
+    ? byWidth
+    : dimensionsByWidth
+  const dimensionsHeight = configuration?.galleryItemId
+    ? byHeight
+    : dimensionsByHeight
 
   const [value, setValue] = useState(0)
 
