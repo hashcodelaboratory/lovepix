@@ -60,7 +60,7 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
       icon={item.icon}
       message={item.message}
       state={item.state}
-      dateState={order?.orderState[index]}
+      dateState={order?.orderState && order.orderState[index]}
       index={index}
     />
   ))

@@ -169,4 +169,6 @@ export const messages = {
   orderStateSnackbar: 'orderStateSnackbar',
   emailErrorSnackbar: 'emailErrorSnackbar',
   yourOrderHasBeenSent: 'yourOrderHasBeenSent',
+  createInvoiceSuccessMessage: 'succesfullyCreatedInvocie',
+  createInvoiceErrorMessage: 'createInvoiceErrorMessage',
 }

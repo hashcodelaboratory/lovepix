@@ -1,6 +1,5 @@
 import { useSnackbar } from 'notistack'
 import { useTranslation } from 'react-i18next'
-import { messages } from 'messages/messages'
 import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
@@ -10,11 +9,15 @@ export const useSnackBarNotification = () => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
   const { t } = useTranslation()
 
-  const snackBarNotification = (response: Response) => {
+  const snackBarNotification = (
+    response: Response,
+    successMessage: string,
+    errorMessage: string
+  ) => {
     if (response.ok) {
-      enqueueSnackbar(t(messages.orderStateSnackbar), SNACKBAR_OPTIONS_SUCCESS)
+      enqueueSnackbar(t(successMessage), SNACKBAR_OPTIONS_SUCCESS)
     } else {
-      enqueueSnackbar(t(messages.emailErrorSnackbar), SNACKBAR_OPTIONS_ERROR)
+      enqueueSnackbar(t(errorMessage), SNACKBAR_OPTIONS_ERROR)
     }
     setTimeout(() => {
       closeSnackbar()

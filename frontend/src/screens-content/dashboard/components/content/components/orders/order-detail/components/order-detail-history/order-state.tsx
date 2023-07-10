@@ -57,7 +57,11 @@ const OrderState = ({
       t(messages.order),
       pdfInvoice
     )
-    snackBarNotification(response)
+    snackBarNotification(
+      response,
+      messages.orderStateSnackbar,
+      messages.emailErrorSnackbar
+    )
   }
 
   const sendMailStatePicked = async () => {
@@ -69,7 +73,11 @@ const OrderState = ({
       order.form.email,
       t(messages.yourOrderHasBeenSent)
     )
-    snackBarNotification(response)
+    snackBarNotification(
+      response,
+      messages.orderStateSnackbar,
+      messages.emailErrorSnackbar
+    )
   }
 
   const createSFInvoice = async () => {
@@ -78,10 +86,15 @@ const OrderState = ({
     }
 
     const response = await createInvoice(invoice(order.id, order))
-    if (response) {
+    snackBarNotification(
+      response,
+      messages.createInvoiceSuccessMessage,
+      messages.createInvoiceErrorMessage
+    )
+    if (response.ok) {
       const res = await response.json()
-      const id = res.data.Invoice.id
-      const token = res.data.Invoice.token
+      const id = res.data?.Invoice.id
+      const token = res.data?.Invoice.token
       const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
       sendMailStateShipped(pdfInvoice)
     }
