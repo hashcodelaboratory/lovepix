@@ -8,6 +8,7 @@ import Image from "next/image";
 import { ImageLayout } from "../../../home/enums/enums";
 import { useTranslation } from "react-i18next";
 import { messages } from "../../../../messages/messages";
+import * as PagesUrls from "../../../../constants/pages/urls"
 
 const FooterIcons = (): JSX.Element => {
   const { t } = useTranslation();
@@ -62,18 +63,18 @@ const FooterIcons = (): JSX.Element => {
         </div>
         <div className={styles.footerBottomContainerRow}>
           <p className={styles.footerBottomContainerRowText} style={{ marginRight: 36 }}>
-            Copyright © 2023 Lovepix. Všetky práva vyhradené.
+            {t(messages.copyright)}
           </p>
-          <Link className={styles.footerBottomContainerRowTextLink} href="/vseobecne-obchodne-podmienky" target="_blank">
-            Všeobecné obchodné podmienky
+          <Link className={styles.footerBottomContainerRowTextLink} href={PagesUrls.CONDITIONS} target="_blank">
+            {t(messages.conditions)}
           </Link>
           <p className={styles.footerDivider}>/</p>
-          <Link className={styles.footerBottomContainerRowTextLink} href="/zasady-ochrany-osobnych-udajov" target="_blank">
-            Zásady ochrany osobných údajov
+          <Link className={styles.footerBottomContainerRowTextLink} href={PagesUrls.PRIVACY_POLICY} target="_blank">
+            {t(messages.privacy)}
           </Link>
           <p className={styles.footerDivider}>/</p>
-          <Link className={styles.footerBottomContainerRowTextLink} href="/cookies" target="_blank">
-            Cookies
+          <Link className={styles.footerBottomContainerRowTextLink} href={PagesUrls.COOKIES} target="_blank">
+            {t(messages.cookies)}
           </Link>
         </div>
       </div>
