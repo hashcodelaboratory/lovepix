@@ -1,7 +1,8 @@
 import Headers from '../headers'
+import {SUPERFAKTURA_API_KEY, SUPERFAKTURA_COMPANY_ID, SUPERFAKTURA_EMAIL, SUPERFAKTURA_MODULE} from "../contants";
 
 const authorizationHeaders = (): Headers => ({
-  Authorization: `SFAPI email=${process.env.NEXT_PUBLIC_AUTH_EMAIL}&apikey=${process.env.NEXT_PUBLIC_AUTH_API_KEY}&company_id=${process.env.NEXT_PUBLIC_AUTH_COMPANY_ID}&module=${process.env.NEXT_PUBLIC_AUTH_MODULE}`,
+  Authorization: `SFAPI email=${SUPERFAKTURA_EMAIL}&apikey=${SUPERFAKTURA_API_KEY}&company_id=${SUPERFAKTURA_COMPANY_ID}&module=${SUPERFAKTURA_MODULE}`,
   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
 })
 
