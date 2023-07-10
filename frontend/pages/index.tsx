@@ -9,7 +9,7 @@ import { configurationsTable } from "../database.config";
 import { CONFIGURATION_TABLE_KEY } from "../src/common/indexed-db/hooks/keys";
 import { useGallery } from "../src/common/api/use-gallery";
 import FooterLayout from "../src/screens-content/footer/footer";
-
+import MetaTags from "meta-tags/meta";
 const Home: NextPage = () => {
   const configuration = useLiveQuery(() => configurationsTable.get(CONFIGURATION_TABLE_KEY), []);
 
@@ -24,13 +24,8 @@ const Home: NextPage = () => {
       </Head>
 
       <header>
-        <meta name="description" content="Tlač na plátno, Tlač obrazov, Potlač predmetov, Hotové obrazy zo Spiša, Spišská Nová Ves, Slovensko, lovepix.sk, vaše zážitky radi zhmotníme, darčeky, darčekové predmety"/>
-        <meta name="keywords" content="plázno, tlac platno, potlac, potlac predmetov, tlac na alucobond, hlinikova doska, obazy na platne, rychle dodanie, zazitky na fotke, fotka na zelanie, obraz na zelanie"/>
-        <meta name="author" content="Hashlab s.r.o."/>
-        <meta property="og:title" content="{názov stránky / produktu}" />
-        <meta property="og:url" content="{url page}" />
-        <meta property="og:image" content="{obrázok z page, alebo dummy image doplním (P)}" />
-        <meta property="og:description" content="{product description alebo doplnim pre rôzne stránky (hlavne pre landing page)}" />
+        {/* MetaTags has to be executed outside of head*/}
+        <MetaTags/>
         <ResponsiveAppBar />
       </header>
 

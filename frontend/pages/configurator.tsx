@@ -9,6 +9,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { configurationsTable } from '../database.config'
 import { CONFIGURATION_TABLE_KEY } from '../src/common/indexed-db/hooks/keys'
 import FooterLayout from '../src/screens-content/footer/footer'
+import MetaTags from 'meta-tags/meta'
 
 const Configurator: NextPage = () => {
   const configuration = useLiveQuery(
@@ -24,6 +25,8 @@ const Configurator: NextPage = () => {
         <link rel='icon' href='/favicon/favicon-16x16.png' />
       </Head>
       <header>
+        {/* MetaTags has to be executed outside of head*/}
+        <MetaTags/>
         <ResponsiveAppBar />
       </header>
       <main className={styles.main}>
