@@ -1,0 +1,5 @@
+Dockerfile
+.dockerignore
+.env
+node_modules
+backend_data/

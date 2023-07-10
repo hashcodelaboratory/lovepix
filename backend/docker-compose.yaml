@@ -13,6 +13,16 @@ services:
     volumes:
       - ./backend_data:/data/db
     restart: unless-stopped
+  mongodb-replica:
+    build: ./mongodb_rs
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: prisma
+      MONGO_REPLICA_HOST: localhost
+      MONGO_REPLICA_PORT: 27017
+    ports:
+      - '27017:27017'
   mongo-express:
     image: mongo-express
     container_name: server-mongo-express
@@ -35,6 +45,20 @@ services:
       timeout: 10s
       retries: 3
     restart: unless-stopped
+  server-backend:
+    container_name: server-backend
+    image: lovepix:1.0.0
+    # networks:
+    #   - server-network
+    #depends_on:
+    #  - nginx
+    ports:
+      - "4000:4000"
+    restart: unless-stopped
+    # environment:
+    #   MONGO_URI: mongodb
+    # env_file:
+    #   - ./.env
 
 volumes:
   backend_data:
@@ -42,3 +66,4 @@ volumes:
 networks:
   server-network:
     driver: bridge
+
