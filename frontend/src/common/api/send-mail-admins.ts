@@ -8,7 +8,7 @@ export const sendOrderMailtoAdmin = async (orderId: string) => {
     id: orderId,
     dest: ['davidbednarik07@gmail.com'],
   }
-  return await fetch('/api/email/sendToAdmin', {
+  return await fetch('/api/email/send-to-admin', {
     method: 'POST',
     body: JSON.stringify(body),
   })
