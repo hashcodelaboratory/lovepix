@@ -71,13 +71,13 @@ const Summary = ({ order }: SummaryProps) => {
       totalPrice: order?.totalPrice,
       delivery: data.delivery!,
       payment: data.payment!,
-      stripe: stripe,
+      stripe: stripe ?? null,
     })
 
     if (payment !== PaymentEnum.ONLINE) {
       await clearIndexedDb()
       await router.push({
-        pathname: '/',
+        pathname: '/thanks',
         query: { success: 'true' },
       })
     }
