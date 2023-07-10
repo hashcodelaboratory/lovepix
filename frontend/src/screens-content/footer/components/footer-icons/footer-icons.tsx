@@ -33,32 +33,38 @@ const FooterIcons = (): JSX.Element => {
       <div className={styles.footerBottomContainer}>
         <div className={styles.footerBottomContainerRow}>
           <div className={styles.footerBottomIcon}>
-            <Image
-              src={facebookIcon}
-              layout={ImageLayout.FIXED}
-              width={22}
-              height={22}
-              alt=""
-            />
+            <Link href={PagesUrls.NONE}>
+              <Image
+                src={facebookIcon}
+                layout={ImageLayout.FIXED}
+                width={22}
+                height={22}
+                alt=""
+              />
+            </Link>
           </div>
           <div className={styles.footerBottomIcon}>
-            <Image
-              src={instagramIcon}
-              layout={ImageLayout.FIXED}
-              width={22}
-              height={22}
-              alt=""
-            />
+            <Link href={PagesUrls.NONE}>
+              <Image
+                src={instagramIcon}
+                layout={ImageLayout.FIXED}
+                width={22}
+                height={22}
+                alt=""
+              />
+            </Link>
           </div>
           <div className={styles.footerBottomIcon}>
-            <Image
-              src={twitterIcon}
-              layout={ImageLayout.FIXED}
-              width={22}
-              height={22}
-              className={styles.footerBottomIcon}
-              alt=""
-            />
+            <Link href={PagesUrls.NONE}>
+              <Image
+                src={twitterIcon}
+                layout={ImageLayout.FIXED}
+                width={22}
+                height={22}
+                className={styles.footerBottomIcon}
+                alt=""
+              />
+            </Link>
           </div>
         </div>
         <div className={styles.footerBottomContainerRow}>
