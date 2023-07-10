@@ -137,5 +137,17 @@
   "thanksLink": "Späť na domovskú stránku",
   "thanksTitleError": "Vaša objednávka nebola dokončená :/",
   "thanksSubtitleError": "Stalo sa niečo neočakávané, bohužiaľ vaša objednávka nebola úspešná.",
-  "thanksSubtitleContactError": "Vráťte sa do e-shopu a nakúpte prosím znova."
+  "thanksSubtitleContactError": "Vráťte sa do e-shopu a nakúpte prosím znova.",
+  "accepted": "Prijatá",
+  "packed": "Zabalená",
+  "shipped": "Odoslaná",
+  "finished": "Dokončená",
+  "changeOrderState": "Zmena stavu objednávky",
+  "changeOrderStateSubtitle": "Chystáte sa zmeniť stav objednávky na",
+  "cancel": "Cancel",
+  "confirm": "Potvrdiť",
+  "invoiceOrder": "Faktúra k vašej objednávke",
+  "orderStateSnackbar": "Stav objednavky bol zmeneny a zákazník informovaný mailom o stave jeho objednávky.",
+  "emailErrorSnackbar": "Email sa nepodarilo odoslať",
+  "yourOrderHasBeenSent": "Vaša objednávka bola odoslaná."
 }

@@ -1,4 +1,6 @@
 import { Box, Button, Modal } from '@mui/material'
+import { messages } from 'messages/messages'
+import { useTranslation } from 'next-i18next'
 import React from 'react'
 
 type ModalProps = {
@@ -22,6 +24,7 @@ const style = {
 }
 
 const UpdateOrderState = ({ open, closeModal, save, title }: ModalProps) => {
+  const { t } = useTranslation()
   return (
     <Modal
       open={open}
@@ -30,17 +33,17 @@ const UpdateOrderState = ({ open, closeModal, save, title }: ModalProps) => {
       aria-describedby='modal-modal-description'
     >
       <Box sx={style}>
-        <h3>Zmena stavu objednávky</h3>
+        <h3>{t(messages.changeOrderState)}</h3>
         <div>
-          Chystáte sa zmeniť stav objednávky na
+          {t(messages.changeOrderStateSubtitle)}
           <p style={{ fontWeight: 700 }}>{title}</p>
         </div>
         <div style={{ marginTop: 20 }}>
           <Button variant='outlined' onClick={closeModal}>
-            Zrušiť
+            {t(messages.cancel)}
           </Button>
           <Button variant='outlined' onClick={save} style={{ marginLeft: 10 }}>
-            Potvrdit
+            {t(messages.confirm)}
           </Button>
         </div>
       </Box>

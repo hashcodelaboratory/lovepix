@@ -4,7 +4,7 @@ import { Payment } from '../enums/payment'
 import { Product } from './product'
 import { Image } from './image'
 
-type OrderStates = {
+export type OrderStates = {
   date: number
   state: string
 }

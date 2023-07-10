@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import styles from '../../order-detail.module.scss'
-import { Order } from 'common/types/order'
+import { Order, OrderStates } from 'common/types/order'
 import { Collections } from 'common/firebase/enums'
 import { doc, updateDoc } from 'firebase/firestore'
 import { database } from 'common/firebase/config'
@@ -11,20 +11,18 @@ import UpdateOrderState from './order-state-modal'
 import { invoice } from 'screens-content/shopping-cart/components/summary/summary/utils'
 import { createInvoice } from 'common/api/superfaktura'
 import { OrderState as OrderStateEnum } from 'common/enums/order-states'
-import { sendOrderMail } from 'common/api/send-mail'
 import { sendMailOrderPicked } from 'common/api/send-mail-order-picked'
 import { sendMailOrderShipped } from 'common/api/send-mail-order-shipped'
-import { useSnackbar } from 'notistack'
-import {
-  SNACKBAR_OPTIONS_ERROR,
-  SNACKBAR_OPTIONS_SUCCESS,
-} from 'snackbar/config'
+import { Payment } from 'common/enums/payment'
+import { messages } from 'messages/messages'
+import { useTranslation } from 'next-i18next'
+import { useSnackBarNotification } from './use-sanckbar-notification'
 
 type Props = {
-  order: Order
+  order?: Order
   icon: any
   message: string
-  dateState: any
+  dateState: OrderStates | undefined
   index: number
   state: string
 }
@@ -37,10 +35,11 @@ const OrderState = ({
   index,
   state,
 }: Props): JSX.Element => {
+  const { t } = useTranslation()
   const queryClient = useQueryClient()
   const allowOpenModal = order && order.orderState?.length
   const [open, setOpen] = useState(false)
-  const { enqueueSnackbar } = useSnackbar()
+  const { snackBarNotification } = useSnackBarNotification()
 
   const openModal = () => {
     allowOpenModal === index && setOpen(true)
@@ -48,60 +47,77 @@ const OrderState = ({
 
   const toggleModal = () => setOpen((prevState) => !prevState)
 
-  const createSFInvoice = async () => {
-    const response = await createInvoice(
-      invoice(order?.id ?? 'unnknown', order)
+  const sendMailStateShipped = async (pdfInvoice: string) => {
+    if (!order) {
+      return
+    }
+    const response = await sendMailOrderShipped(
+      order.id,
+      order.form.email,
+      t(messages.order),
+      pdfInvoice
     )
+    snackBarNotification(response)
+  }
+
+  const sendMailStatePicked = async () => {
+    if (!order) {
+      return
+    }
+    const response = await sendMailOrderPicked(
+      order.id,
+      order.form.email,
+      t(messages.yourOrderHasBeenSent)
+    )
+    snackBarNotification(response)
+  }
+
+  const createSFInvoice = async () => {
+    if (!order) {
+      return
+    }
+
+    const response = await createInvoice(invoice(order.id, order))
     if (response) {
       const res = await response.json()
-      const id = res?.data?.Invoice.id
-      const token = res?.data?.Invoice.token
+      const id = res.data.Invoice.id
+      const token = res.data.Invoice.token
       const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
-      const responseMail = await sendMailOrderShipped(
-        order.id,
-        order.form.email,
-        'Faktúra k vašej objednávke',
-        pdfInvoice
-      )
-      if (responseMail.ok) {
-        enqueueSnackbar(
-          'Stava objednavky bol zmeneny a zakaznik informovany mailom o stave jeho objednávky',
-          SNACKBAR_OPTIONS_SUCCESS
-        )
-      } else {
-        enqueueSnackbar('Email sa nepodarilo odoslat', SNACKBAR_OPTIONS_ERROR)
-      }
+      sendMailStateShipped(pdfInvoice)
     }
   }
 
   const save = async () => {
-    const array = order?.orderState
-    const newArray = [...array!, { state: state, date: Date.now() }]
+    if (!order) {
+      return
+    }
+
+    const array = order.orderState
+    const newArray = [...array, { state: state, date: Date.now() }]
     const docData = {
       orderState: newArray,
     }
-    await updateDoc(doc(database, Collections.ORDERS, order?.id ?? ''), docData)
+    await updateDoc(doc(database, Collections.ORDERS, order.id), docData)
     await queryClient.invalidateQueries(ORDERS_KEY)
-    state === OrderStateEnum.SHIPPED && createSFInvoice()
-    if (state === OrderStateEnum.PICKED) {
-      const result = await sendMailOrderPicked(
-        order.id,
-        order.form.email,
-        'Vaša objednávka bola odoslaná'
-      )
 
-      if (result.ok) {
-        enqueueSnackbar(
-          'Stava objednávky bol zmenený a zákaznik informovaný mailom o stave jeho objednávky',
-          SNACKBAR_OPTIONS_SUCCESS
-        )
-      } else {
-        enqueueSnackbar('Email sa nepodarilo odoslat', SNACKBAR_OPTIONS_ERROR)
-      }
-    }
-
+    state === OrderStateEnum.PICKED && sendMailStatePicked()
+    state === OrderStateEnum.SHIPPED &&
+      order.payment !== Payment.ONLINE &&
+      createSFInvoice()
     toggleModal()
   }
+
+  const orderStateDate = dateState
+    ? new Date(dateState.date).toLocaleDateString()
+    : '-'
+
+  const orderStateTime = dateState
+    ? new Date(dateState.date).toLocaleTimeString()
+    : '-'
+
+  const orderStateIcon = dateState && (
+    <CheckCircleIcon className={styles.checkCircleIcon} />
+  )
 
   return (
     <>
@@ -110,21 +126,11 @@ const OrderState = ({
         <div>
           <div className={styles.checkRow}>
             <b>{message}</b>
-            {dateState && (
-              <CheckCircleIcon className={styles.checkCircleIcon} />
-            )}
+            {orderStateIcon}
           </div>
           <div style={{ color: 'gray' }}>
-            <div>
-              {dateState
-                ? new Date(dateState.date).toLocaleDateString()
-                : 'date'}
-            </div>
-            <div>
-              {dateState
-                ? new Date(dateState.date).toLocaleTimeString()
-                : 'time'}
-            </div>
+            <div>{orderStateDate}</div>
+            <div>{orderStateTime}</div>
           </div>
         </div>
       </div>

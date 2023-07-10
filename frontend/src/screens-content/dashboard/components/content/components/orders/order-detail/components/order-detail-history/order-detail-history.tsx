@@ -33,22 +33,22 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
       icon: (
         <AddShoppingCartIcon className={iconStyle(OrderStateEnum.DELIVERED)} />
       ),
-      message: 'Prijatá',
+      message: t(messages.accepted),
       state: OrderStateEnum.DELIVERED,
     },
     {
       icon: <ArchiveIcon className={iconStyle(OrderStateEnum.PACKED)} />,
-      message: 'Spracovaná',
+      message: t(messages.packed),
       state: OrderStateEnum.PACKED,
     },
     {
       icon: <LocalShippingIcon className={iconStyle(OrderStateEnum.PICKED)} />,
-      message: 'Odoslaná',
+      message: t(messages.shipped),
       state: OrderStateEnum.PICKED,
     },
     {
       icon: <RedeemIcon className={iconStyle(OrderStateEnum.SHIPPED)} />,
-      message: 'Dokončená',
+      message: t(messages.finished),
       state: OrderStateEnum.SHIPPED,
     },
   ]
@@ -60,7 +60,7 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
       icon={item.icon}
       message={item.message}
       state={item.state}
-      dateState={order?.orderState ? order?.orderState[index] : ''}
+      dateState={order?.orderState[index]}
       index={index}
     />
   ))
