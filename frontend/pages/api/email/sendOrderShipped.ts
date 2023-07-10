@@ -1,4 +1,4 @@
-import { emailTemplateOrderState } from 'api/emails/utils'
+import { emailTemplateOrderState } from 'api/email/utils'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import nodemailer from 'nodemailer'
 
