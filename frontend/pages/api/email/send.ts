@@ -1,6 +1,6 @@
-import { emailTemplateUser } from 'api/emails/utils'
-import type { NextApiRequest, NextApiResponse } from 'next'
-import nodemailer from 'nodemailer'
+import {emailTemplateUser} from '../../../src/api/email/utils'
+import type {NextApiRequest, NextApiResponse} from 'next'
+import {transporter} from "../../../src/api/email/transporter";
 
 const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
 
@@ -32,22 +32,6 @@ const send = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
       return
     }
 
-    const transporter = nodemailer.createTransport({
-      pool: true,
-      service: 'websupport',
-      host: 'smtp.m1.websupport.sk',
-      secure: true,
-      port: 465,
-      auth: {
-        user: 'noreply@lovepix.sk',
-        pass: 'Ov7<5=@dv)',
-      },
-      tls: {
-        // do not fail on invalid certs
-        rejectUnauthorized: false,
-      },
-    })
-
     const mailOptionsWithAttachment = {
       from: 'LovePix <noreply@lovepix.sk>',
       to: _body.formData.email,
@@ -78,7 +62,7 @@ const send = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
       return res.status(200).json('Email successfully sended')
     })
   } catch (error) {
-    res.status(500).json({ error: (error as Error).message })
+    res.status(500).json({error: (error as Error).message})
   }
 }
 
