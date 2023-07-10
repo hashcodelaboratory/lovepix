@@ -45,8 +45,9 @@
     margin-bottom: 2.5rem;
 }
 
+
 .googleMap{
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 3;
+    width: clamp(40vw, 90%, 80vw);
+    min-height: 60vh;
+    aspect-ratio: 4/3;
 }
