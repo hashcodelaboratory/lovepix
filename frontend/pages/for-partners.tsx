@@ -6,6 +6,7 @@ import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import CustomForPartners from '../src/screens-content/for-partners/for-partners'
 import FooterLayout from "../src/screens-content/footer/footer";
+import MetaTags from 'meta-tags/meta'
 
 const ForPartners: NextPage = () => {
   return (
@@ -16,6 +17,9 @@ const ForPartners: NextPage = () => {
         <link rel='icon' href='/favicon/favicon-16x16.png' />
       </Head>
 
+      {/* MetaTags has to be executed outside of head*/}
+      <MetaTags/>
+      
       <header>
         <ResponsiveAppBar />
       </header>

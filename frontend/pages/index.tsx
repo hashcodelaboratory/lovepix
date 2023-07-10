@@ -23,9 +23,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon/favicon-16x16.png" />
       </Head>
 
+      {/* MetaTags has to be executed outside of head*/}
+      <MetaTags/>
+      
       <header>
-        {/* MetaTags has to be executed outside of head*/}
-        <MetaTags/>
         <ResponsiveAppBar />
       </header>
 

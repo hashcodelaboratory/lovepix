@@ -6,6 +6,7 @@ import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import FooterLayout from '../src/screens-content/footer/footer'
 import EshopLayout from 'screens-content/e-shop/eshop'
+import MetaTags from 'meta-tags/meta'
 
 const Eshop: NextPage = () => {
   return (
@@ -16,6 +17,9 @@ const Eshop: NextPage = () => {
         <link rel='icon' href='/favicon/favicon-16x16.png' />
       </Head>
 
+      {/* MetaTags has to be executed outside of head*/}
+      <MetaTags/>
+      
       <header>
         <ResponsiveAppBar />
       </header>
