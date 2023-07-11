@@ -54,7 +54,7 @@ const OrderState = ({
     const response = await sendMailOrderShipped(
       order.id,
       order.form.email,
-      t(messages.order),
+      t(messages.shipped),
       pdfInvoice
     )
     snackBarNotification(

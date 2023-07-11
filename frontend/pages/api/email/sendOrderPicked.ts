@@ -1,6 +1,6 @@
 import { emailTemplateOrderState } from 'api/email/utils'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import nodemailer from 'nodemailer'
+import { transporter } from '../../../src/api/email/transporter'
 
 const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
 
@@ -34,22 +34,6 @@ const sendOrderShipped = async (
 
       return
     }
-
-    const transporter = nodemailer.createTransport({
-      pool: true,
-      service: 'websupport',
-      host: 'smtp.m1.websupport.sk',
-      secure: true,
-      port: 465,
-      auth: {
-        user: 'noreply@lovepix.sk',
-        pass: 'Ov7<5=@dv)',
-      },
-      tls: {
-        // do not fail on invalid certs
-        rejectUnauthorized: false,
-      },
-    })
 
     const mailOptions = {
       from: 'LovePix <noreply@lovepix.sk>',
