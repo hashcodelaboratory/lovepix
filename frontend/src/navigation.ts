@@ -20,4 +20,24 @@ const settings = [
   { title: SettingsTitles.LOGOUT, link: '', callBack: true },
 ]
 
-export { pages, settings }
+const menuItems = [
+  { title: PagesTitles.CONFIGURATOR, link: PagesUrls.CONFIGURATOR },
+  { title: PagesTitles.GALLERY, link: PagesUrls.GALLERY },
+  { title: PagesTitles.ESHOP, link: PagesUrls.ESHOP },
+  { title: PagesTitles.ABOUT_US, link: PagesUrls.ABOUT_US },
+  // TODO: fix contact
+  { title: 'Kontakt', link: '/contact' },
+]
+
+const appBarLeftItems = [
+  { title: PagesTitles.GALLERY, link: PagesUrls.GALLERY },
+  { title: PagesTitles.ESHOP, link: PagesUrls.ESHOP },
+]
+
+const appBarRightItems = [
+  { title: PagesTitles.ABOUT_US, link: PagesUrls.ABOUT_US },
+  // TODO: fix contact
+  { title: 'Kontakt', link: '/contact' },
+]
+
+export { pages, settings, menuItems, appBarLeftItems, appBarRightItems }
