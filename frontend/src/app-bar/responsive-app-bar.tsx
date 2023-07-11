@@ -121,19 +121,9 @@ const ResponsiveAppBar = () => {
               origin={configuration?.origin}
             />
             {appBarLeftItems.map(({ link, title }) => (
-              <Button
-                key={uuidv4()}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  mx: 1,
-                  color: 'black',
-                  display: 'block',
-                  fontFamily: 'monospace',
-                }}
-              >
-                <Link href={link}>{String(t(title))}</Link>
-              </Button>
+              <Link key={uuidv4()} href={link}>
+                <p className={styles.link}>{String(t(title))}</p>
+              </Link>
             ))}
             <Image
               src={logo}
@@ -145,19 +135,9 @@ const ResponsiveAppBar = () => {
               className={styles.icon}
             />
             {appBarRightItems.map(({ link, title }) => (
-              <Button
-                key={uuidv4()}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  mx: 1,
-                  color: 'black',
-                  display: 'block',
-                  fontFamily: 'monospace',
-                }}
-              >
-                <Link href={link}>{String(t(title))}</Link>
-              </Button>
+              <Link key={uuidv4()} onClick={handleCloseNavMenu} href={link}>
+                <p className={styles.link}>{String(t(title))}</p>
+              </Link>
             ))}
           </Box>
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>

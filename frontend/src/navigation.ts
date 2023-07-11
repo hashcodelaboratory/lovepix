@@ -31,10 +31,10 @@ const menuItems = [
 
 const appBarLeftItems = [
   { title: PagesTitles.GALLERY, link: PagesUrls.GALLERY },
-  { title: PagesTitles.ESHOP, link: PagesUrls.ESHOP },
 ]
 
 const appBarRightItems = [
+  { title: PagesTitles.ESHOP, link: PagesUrls.ESHOP },
   { title: PagesTitles.ABOUT_US, link: PagesUrls.ABOUT_US },
   // TODO: fix contact
   { title: 'Kontakt', link: '/contact' },
