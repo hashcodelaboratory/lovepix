@@ -7,8 +7,8 @@ import { UpdateTodoDto } from './dto/update-todo.dto';
 export class TodoService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  create(createTodoDto: CreateTodoDto) {
-    return this.prismaService.todo.create({
+  async create(createTodoDto: CreateTodoDto) {
+    return await this.prismaService.todo.create({
       data: createTodoDto
     })
   }
