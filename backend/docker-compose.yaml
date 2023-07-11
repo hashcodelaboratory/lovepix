@@ -1,26 +1,30 @@
 version: '3.8'
 services:
-  mongodb:
-    image: mongo:5.0.0
-    container_name: mongodb-server
+  # mongodb:
+  #   image: mongo:5.0.0
+  #   container_name: mongodb-server
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+  #     MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+  #   ports:
+  #     - '27019:27017'
+  #   networks:
+  #     - server-network
+  #   volumes:
+  #     - ./backend_data:/data/db
+  # restart: unless-stopped
+  mongo:
+    build: ./mongodb_rs
+    restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-    ports:
-      - '27019:27017'
+      MONGO_REPLICA_HOST: ${MONGO_REPLICA_HOST}
+      MONGO_REPLICA_PORT: ${MONGO_REPLICA_PORT}
     networks:
       - server-network
     volumes:
       - ./backend_data:/data/db
-    restart: unless-stopped
-  mongodb-replica:
-    build: ./mongodb_rs
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: prisma
-      MONGO_REPLICA_HOST: localhost
-      MONGO_REPLICA_PORT: 27017
     ports:
       - '27017:27017'
   mongo-express:
@@ -34,7 +38,7 @@ services:
       ME_CONFIG_BASICAUTH_USERNAME: ${MONGODB_BASICAUTH_USERNAME}
       ME_CONFIG_BASICAUTH_PASSWORD: ${MONGODB_BASICAUTH_PASSWORD}
     depends_on:
-      - mongodb
+      - mongo
     networks:
       - server-network
     ports:
@@ -45,20 +49,20 @@ services:
       timeout: 10s
       retries: 3
     restart: unless-stopped
-  server-backend:
-    container_name: server-backend
-    image: lovepix:1.0.0
-    # networks:
-    #   - server-network
-    #depends_on:
-    #  - nginx
-    ports:
-      - "4000:4000"
-    restart: unless-stopped
-    # environment:
-    #   MONGO_URI: mongodb
-    # env_file:
-    #   - ./.env
+  # server-backend:
+  #   container_name: server-backend
+  #   image: lovepix:1.0.0
+  #   # networks:
+  #   #   - server-network
+  #   #depends_on:
+  #   #  - nginx
+  #   ports:
+  #     - "4000:4000"
+  #   restart: unless-stopped
+  #   # environment:
+  #   #   MONGO_URI: mongodb
+  #   # env_file:
+  #   #   - ./.env
 
 volumes:
   backend_data:
@@ -66,4 +70,3 @@ volumes:
 networks:
   server-network:
     driver: bridge
-
