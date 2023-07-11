@@ -33,6 +33,9 @@ const Summary = ({ order }: SummaryProps) => {
 
   const [isLoading, setIsLoading] = useState(false)
 
+  console.log("✅",!order.shoppingCart.images.length);
+  
+
   const {
     register,
     watch,
