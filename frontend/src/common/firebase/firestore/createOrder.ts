@@ -85,7 +85,7 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
     }
   })
 
-  if (!images || !images.length) {
+  if (!images.length) {
     const cart = {
       products: data.shoppingCart?.products ?? [],
     }
