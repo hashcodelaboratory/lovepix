@@ -1,4 +1,5 @@
 type Invoice = {
+  name: string
   created: string
   delivery: string
   due: string

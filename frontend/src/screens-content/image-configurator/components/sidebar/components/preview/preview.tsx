@@ -1,12 +1,14 @@
 import styles from "../../../../image-configurator-layout.module.scss";
-import { CheckCircle, Delete, Filter1, Image } from "@mui/icons-material";
+import { CheckCircle, Delete, Filter1, Image as ImageIcon } from "@mui/icons-material";
 import { useTranslation } from "next-i18next";
 import { messages } from "../../../../../../messages/messages";
 import { configurationsTable } from "../../../../../../../database.config";
 import { Configuration } from "../../../../../../common/types/configuration";
 
 const IMAGE_WIDTH = 30;
-const REMOVE_IMAGE_WIDTH = 20;
+const IMAGE_HEIGHT = 30;
+const REMOVE_IMAGE_WIDTH = 26;
+const REMOVE_IMAGE_HEIGHT = 26;
 
 type PreviewProps = {
   configuration: Configuration;
@@ -23,14 +25,13 @@ const Preview = ({ configuration }: PreviewProps) => {
   const layout = configuration?.origin ? (
     <>
       <button className={styles.previewRemove} onClick={handleRemoveImage}>
-        <Delete style={{ width: REMOVE_IMAGE_WIDTH, height: REMOVE_IMAGE_WIDTH, margin: "auto" }} />
-        {String(t(messages.removeImage))}
+        <Delete style={{ width: REMOVE_IMAGE_WIDTH, height: REMOVE_IMAGE_HEIGHT, margin: "auto" }} />
       </button>
     </>
   ) : (
-    <Image
+    <ImageIcon
       color="disabled"
-      style={{ width: IMAGE_WIDTH, height: IMAGE_WIDTH, margin: "auto" }}
+      style={{ width: IMAGE_WIDTH, height: IMAGE_HEIGHT, margin: "auto" }}
     />
   );
 
@@ -40,11 +41,11 @@ const Preview = ({ configuration }: PreviewProps) => {
     <div className={styles.preview}>
       <div className={styles.header}>
         {icon}
-        <h3 className={styles.headerTitle}
+        <h4 className={styles.headerTitle}
             style={{ color: !!configuration?.origin ? "green" : "black" }}
         >
           {String(t(messages.yourPhoto))}
-        </h3>
+        </h4>
       </div>
       <div className={styles.previewImagePlaceholder}>{layout}</div>
     </div>

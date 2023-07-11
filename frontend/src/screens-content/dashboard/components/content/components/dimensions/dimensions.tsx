@@ -11,7 +11,7 @@ import { DIMENSIONS_KEY, DimensionType } from "../../../../../../common/api/use-
 import { SNACKBAR_OPTIONS_ERROR, SNACKBAR_OPTIONS_SUCCESS } from "../../../../../../snackbar/config";
 import { useSnackbar } from "notistack";
 import { useQueryClient } from "react-query";
-import { getDimensionsColumns } from "../utils/columns/dimensionsColumns";
+import { getDimensionsColumns } from "../utils/columns/dimensions-columns";
 import { AddCircle } from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";

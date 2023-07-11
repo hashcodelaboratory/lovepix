@@ -6,7 +6,7 @@ import {
 import styles from "../../../../dashboard.module.scss";
 import { useContext, useState } from "react";
 import DashboardContext from "../../../../context/dashboard-context";
-import { getUploadImagesColumns } from "../utils/columns/uploadImagesColumns";
+import { getUploadImagesColumns } from "../utils/columns/upload-images-columns";
 import { messages } from "../../../../../../messages/messages";
 import {
   SNACKBAR_OPTIONS_ERROR,

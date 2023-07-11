@@ -1,7 +1,6 @@
-import { Height } from '@mui/icons-material'
+import { CreateOrderRequest } from 'common/firebase/firestore/createOrder'
 import { FormInputs } from 'common/types/form'
 import { Image } from 'common/types/image'
-import { Order } from 'common/types/order'
 import { Product } from 'common/types/product'
 
 export type UserMail = {
@@ -18,15 +17,13 @@ export type UserMail = {
 }
 
 export const sendOrderMail = async (
-  data: FormInputs,
-  order: Order,
-  delivery: string | undefined,
-  payment: string | undefined,
-  pdfInvoice: string
+  orderId: string,
+  data: CreateOrderRequest,
+  pdfInvoice?: string
 ) => {
   let newImgArr: any[] = []
   let newProdArr: any[] = []
-  order.shoppingCart.images.forEach((item) => {
+  data?.shoppingCart?.images?.forEach((item) => {
     const newObj = {
       material: item.material,
       height: item.height,
@@ -37,7 +34,7 @@ export const sendOrderMail = async (
     newImgArr.push({ ...newObj })
   })
 
-  order.shoppingCart.products.forEach((item) => {
+  data?.shoppingCart?.products?.forEach((item) => {
     const newObj = {
       title: item.title,
       qty: item.qty,
@@ -47,14 +44,14 @@ export const sendOrderMail = async (
   })
 
   const body = {
-    id: 'unknown',
+    id: orderId,
     pdfInvoice: pdfInvoice,
     country: 'SK',
     date: new Date().toLocaleDateString(),
-    totalPrice: order.totalPrice,
-    payment: payment,
-    shipment: delivery,
-    formData: data,
+    totalPrice: data.totalPrice,
+    payment: data.payment,
+    shipment: data.delivery,
+    formData: data.form,
     images: newImgArr,
     products: newProdArr,
   }

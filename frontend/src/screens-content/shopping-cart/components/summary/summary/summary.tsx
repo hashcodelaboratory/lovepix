@@ -18,8 +18,7 @@ import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
 import { useRouter } from 'next/router'
 import { useStripe } from '@stripe/react-stripe-js'
 import { clearIndexedDb } from 'common/indexed-db/utils/clear'
-import { stripeCreateSession } from 'common/api/stripe-create-session'
-import { Payment as PaymentEnum } from '../../../../../common/enums/payment'
+import { Payment as PaymentEnum} from "../../../../../common/enums/payment"
 
 type SummaryProps = {
   order: Order
@@ -72,27 +71,13 @@ const Summary = ({ order }: SummaryProps) => {
       totalPrice: order?.totalPrice,
       delivery: data.delivery!,
       payment: data.payment!,
+      stripe: stripe ?? null,
     })
 
-    if (payment === PaymentEnum.ONLINE) {
-      await stripeCreateSession(stripe, order?.totalPrice)
-      // TODO: check
-      // const response = await createInvoice(
-      //   invoice(data, order, delivery ?? null, payment ?? null)
-      // )
-      // if (response) {
-      //   const res = await response.json()
-      // const invoiceData = res.data.Invoice
-      // const id = invoiceData.id
-      // const token = invoiceData.token
-      // const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
-      // await sendOrderMail(data, order, delivery, payment, pdfInvoice)
-      // await sendOrderMailtoAdmin()
-      // }
-    } else {
+    if (payment !== PaymentEnum.ONLINE) {
       await clearIndexedDb()
       await router.push({
-        pathname: '/',
+        pathname: '/thanks',
         query: { success: 'true' },
       })
     }
