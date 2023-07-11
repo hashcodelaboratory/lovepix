@@ -48,6 +48,7 @@ const CropperComponent = ({ configuration }: CropperComponentProps) => {
         dragMode='move'
         checkCrossOrigin={false}
         crossOrigin='anonymous'
+        autoCropArea={1}
       />
     </div>
   )
