@@ -31,8 +31,7 @@ const Summary = ({ order }: SummaryProps) => {
 
   const stripe = useStripe()
 
-  const [isLoading, setIsLoading] = useState(false)
-  
+  const [isLoading, setIsLoading] = useState(false)  
 
   const {
     register,
