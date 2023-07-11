@@ -1,35 +1,52 @@
-import Container from "@mui/material/Container";
-import { useGallery } from "../../common/api/use-gallery";
-import Image from "next/image";
-import { ImageLayout } from "../home/enums/enums";
-import styles from "./gallery.module.scss";
-import { useCategories } from "../../common/api/use-categories";
-import { Chip } from "@mui/material";
-import { useEffect, useState } from "react";
+import Container from '@mui/material/Container'
+import { useGallery } from '../../common/api/use-gallery'
+import Image from 'next/image'
+import { ImageLayout } from '../home/enums/enums'
+import styles from './gallery.module.scss'
+import { useCategories } from '../../common/api/use-categories'
+import { Chip } from '@mui/material'
+import { useEffect, useState } from 'react'
+import { messages } from '../../messages/messages'
+import { useTranslation } from 'react-i18next'
+import { CONFIGURATOR } from '../../constants/pages/urls'
+import { useRouter } from 'next/router'
+import { addFileFromGallery } from '../../common/utils/add-file-from-gallery'
 
 const GalleryLayout = (): JSX.Element => {
-  const { data: gallery } = useGallery();
-  const { data: categories } = useCategories();
+  const { t } = useTranslation()
+  const router = useRouter()
 
-  const [searchedCategories, setSearchedCategories] = useState<string[]>();
+  const { data: gallery } = useGallery()
+  const { data: categories } = useCategories()
 
-  const filtered = gallery?.filter((image) => searchedCategories?.some((r) => image.categories.includes(r)))
+  const [searchedCategories, setSearchedCategories] = useState<string[]>()
+
+  const filtered = gallery?.filter((image) =>
+    searchedCategories?.some((r) => image.categories.includes(r))
+  )
 
   useEffect(() => {
-    setSearchedCategories(categories?.map(({ name }) => name));
-  }, [categories]);
+    setSearchedCategories(categories?.map(({ name }) => name))
+  }, [categories])
 
   const onClickCategory = (name: string) => {
-    const variant = getCategoryVariant(name);
-    if (variant === "filled") {
-      setSearchedCategories(searchedCategories?.filter((category) => category !== name));
+    const variant = getCategoryVariant(name)
+    if (variant === 'filled') {
+      setSearchedCategories(
+        searchedCategories?.filter((category) => category !== name)
+      )
     } else {
-      setSearchedCategories([...(searchedCategories) ?? [], name]);
+      setSearchedCategories([...(searchedCategories ?? []), name])
     }
   }
 
   const getCategoryVariant = (name: string) => {
-    return searchedCategories?.includes(name) ? "filled" : "outlined";
+    return searchedCategories?.includes(name) ? 'filled' : 'outlined'
+  }
+
+  const add = async (path: string, id: string) => {
+    await addFileFromGallery(path, id)
+    await router.push(CONFIGURATOR)
   }
 
   return (
@@ -39,7 +56,7 @@ const GalleryLayout = (): JSX.Element => {
           <Chip
             key={id}
             label={name}
-            color="primary"
+            color='primary'
             variant={getCategoryVariant(name)}
             clickable
             onClick={() => onClickCategory(name)}
@@ -49,20 +66,27 @@ const GalleryLayout = (): JSX.Element => {
       </div>
       <div className={styles.galleryRow}>
         {filtered?.map((image) => (
-          <div key={image.id}>
+          <div
+            key={image.id}
+            className={styles.previewImageContainer}
+            onClick={() => add(image.fullPath, image.id)}
+          >
             <Image
               src={image?.url}
               layout={ImageLayout.INTRINSIC}
               width={380}
               height={320}
               className={styles.galleryImage}
-              alt=""
+              alt=''
             />
+            <button className={styles.previewImageLink}>
+              {t(messages.add)}
+            </button>
           </div>
         ))}
       </div>
     </Container>
-  );
-};
+  )
+}
 
-export default GalleryLayout;
+export default GalleryLayout

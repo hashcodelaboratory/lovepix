@@ -47,17 +47,9 @@ const Form = ({ register, errors, control }: FormProps): JSX.Element => {
             {...register(name, { required: true })}
             error={!!error}
             helperText={String(t(error ?? ""))}
-            variant="standard"
+            variant="outlined"
             size="small"
             className={styles.formField}
-            sx={{
-              width: fullWidth ? "100%" : "47%",
-              '& .MuiInput-root': {
-                '&:before, :after, :hover:not(.Mui-disabled):before': {
-                  borderBottom: 0,
-                },
-              },
-            }}
           />
         </div>
       )}

@@ -31,6 +31,7 @@ import * as PagesTitles from '../constants/pages/titles'
 import logo from '../assets/logo_color.png'
 import Image from "next/image";
 import { ImageLayout } from "../screens-content/home/enums/enums";
+import styles from './responsive-app-bar.module.scss';
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
@@ -48,8 +49,8 @@ const ResponsiveAppBar = () => {
     []
   )
 
-  const productsLength = order?.shoppingCart?.products?.length
-  const imagesLength = order?.shoppingCart?.images?.length
+  const productsLength = order?.shoppingCart?.products?.length ?? 0
+  const imagesLength = order?.shoppingCart?.images?.length ?? 0
   const totalLength = imagesLength + productsLength
 
   const BADGE_NUMBER = totalLength || 0
@@ -77,11 +78,15 @@ const ResponsiveAppBar = () => {
     handleCloseUserMenu()
   }
 
+  const navigate = () => {
+    router.push('/');
+  }
+
   return (
     <AppBar position='fixed' sx={{ backgroundColor: 'white' }}>
       <Container maxWidth='lg'>
         <Toolbar disableGutters>
-          <Image src={logo} layout={ImageLayout.FIXED} width={50} height={50} alt="" />
+          <Image src={logo} layout={ImageLayout.FIXED} width={50} height={50} alt="" onClick={navigate} className={styles.icon} />
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton

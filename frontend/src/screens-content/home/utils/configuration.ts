@@ -1,33 +1,28 @@
 import { Material } from '../../../common/enums/material'
 
 export const dimensionsByWidth = [
-  { width: 30, height: 20, id: 'w1' },
-  { width: 90, height: 60, id: 'w2' },
-  { width: 60, height: 40, id: 'w3' },
-  { width: 45, height: 30, id: 'w4' },
-  { width: 105, height: 70, id: 'w5' },
-  { width: 120, height: 80, id: 'w6' },
-  { width: 75, height: 50, id: 'w7' },
-  { width: 150, height: 100, id: 'w8' },
+  '30 x 20',
+  '90 x 60',
+  '60 x 40',
+  '45 x 30',
+  '105 x 70',
+  '120 x 80',
+  '75 x 50',
+  '150 x 100',
 ]
 
 export const dimensionsByHeight = [
-  { width: 20, height: 30, id: 'h1' },
-  { width: 30, height: 45, id: 'h2' },
-  { width: 40, height: 60, id: 'h3' },
-  { width: 50, height: 75, id: 'h4' },
-  { width: 60, height: 90, id: 'h5' },
-  { width: 80, height: 120, id: 'h6' },
-  { width: 70, height: 105, id: 'h7' },
-  { width: 100, height: 150, id: 'h8' },
+  '20 x 30',
+  '30 x 45',
+  '40 x 60',
+  '50 x 75',
+  '60 x 90',
+  '80 x 120',
+  '70 x 105',
+  '100 x 150',
 ]
 
-export const dimensionsBySquare = [
-  { width: 50, height: 50, id: 's1' },
-  { width: 80, height: 80, id: 's2' },
-  { width: 100, height: 100, id: 's3' },
-  { width: 20, height: 20, id: 's4' },
-]
+export const dimensionsBySquare = ['50 x 50', '80 x 80', '100 x 100', '20 x 20']
 
 export const materials = [
   {
