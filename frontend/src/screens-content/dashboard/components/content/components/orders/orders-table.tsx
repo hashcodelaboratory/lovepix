@@ -97,6 +97,7 @@ const OrdersTable = () => {
             checkboxSelection
             selectionModel={selectionModel}
             onSelectionModelChange={selectionChanged}
+            disableSelectionOnClick
           />
         </Box>
         <Box className={styles.ordersTableMainpanel}>
