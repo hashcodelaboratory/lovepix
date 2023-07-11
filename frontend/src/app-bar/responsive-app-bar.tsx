@@ -14,8 +14,6 @@ import { v4 as uuidv4 } from 'uuid'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import * as PagesUrls from '../constants/pages/urls'
 import { Badge } from '@mui/material'
-import { logOut } from 'auth'
-import useLoggedUser from 'common/api/use-logged-user'
 import { useRouter } from 'next/router'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { configurationsTable, orderTable } from '../../database.config'
@@ -67,14 +65,6 @@ const ResponsiveAppBar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
-  }
-
-  const { user } = useLoggedUser()
-
-  const handleLogout = () => {
-    logOut()
-    router.push(`/`)
-    handleCloseUserMenu()
   }
 
   const navigate = () => {
