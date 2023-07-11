@@ -9,7 +9,7 @@
 
 .mapContainer{
     margin-top: 2.5rem;
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
     align-content: center;
@@ -24,10 +24,10 @@
 
 .infoValueText{
     font-weight: 200;
-    color: inherit;
+    color: inherit !important;
     display: block;
     margin-block: 0.5em;
-    text-decoration: none;
+    text-decoration: none !important;
     text-align: end;
 }
 
