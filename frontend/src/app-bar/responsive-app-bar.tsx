@@ -121,7 +121,7 @@ const ResponsiveAppBar = () => {
               origin={configuration?.origin}
             />
             {appBarLeftItems.map(({ link, title }) => (
-              <Link key={uuidv4()} href={link}>
+              <Link key={uuidv4()} href={link} onClick={handleCloseNavMenu}>
                 <p className={styles.link}>{String(t(title))}</p>
               </Link>
             ))}
