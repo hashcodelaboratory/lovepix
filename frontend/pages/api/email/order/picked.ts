@@ -1,6 +1,6 @@
 import { emailTemplateOrderState } from 'api/email/utils'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { transporter } from '../../../src/api/email/transporter'
+import { transporter } from '../../../../src/api/email/transporter'
 
 const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
 
@@ -39,12 +39,6 @@ const sendOrderShipped = async (
       from: 'LovePix <noreply@lovepix.sk>',
       to: _body.dest,
       subject: 'Objednávka: #' + _body.id,
-      attachments: [
-        {
-          filename: `faktúra_${_body.id}.pdf`,
-          path: _body.pdfInvoice,
-        },
-      ],
       html: emailTemplateOrderState(_body),
     }
 

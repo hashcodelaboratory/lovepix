@@ -16,7 +16,7 @@ export const sendMailOrderShipped = async (
     text: text,
     pdfInvoice: pdf,
   }
-  return await fetch('/api/email/sendOrderShipped', {
+  return await fetch('/api/email/order/shipped', {
     method: 'POST',
     body: JSON.stringify(body),
   })

@@ -14,7 +14,7 @@ export const sendMailOrderPicked = async (
     dest: email,
     text: text,
   }
-  return await fetch('/api/email/sendOrderPicked', {
+  return await fetch('/api/email/order/picked', {
     method: 'POST',
     body: JSON.stringify(body),
   })
