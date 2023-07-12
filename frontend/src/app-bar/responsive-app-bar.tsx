@@ -2,24 +2,18 @@ import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
-import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
-import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
-import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import Link from 'next/link'
-import { pages, settings } from '../navigation'
+import { appBarLeftItems, appBarRightItems, menuItems } from '../navigation'
 import { useTranslation } from 'next-i18next'
 import { v4 as uuidv4 } from 'uuid'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import * as PagesUrls from '../constants/pages/urls'
 import { Badge } from '@mui/material'
-import { logIn, logOut } from 'auth'
-import useLoggedUser from 'common/api/use-logged-user'
 import { useRouter } from 'next/router'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { configurationsTable, orderTable } from '../../database.config'
@@ -27,17 +21,17 @@ import {
   CONFIGURATION_TABLE_KEY,
   ORDER_TABLE_KEY,
 } from '../common/indexed-db/hooks/keys'
-import * as PagesTitles from '../constants/pages/titles'
 import logo from '../assets/logo_color.png'
-import Image from "next/image";
-import { ImageLayout } from "../screens-content/home/enums/enums";
-import styles from './responsive-app-bar.module.scss';
+import Image from 'next/image'
+import { ImageLayout } from '../screens-content/home/enums/enums'
+import styles from './responsive-app-bar.module.scss'
+import SearchIcon from '@mui/icons-material/Search'
+import MenuIconComponent from './components/menu-sidebar/menu-icon/menu-icon'
+import LogoComponent from './components/menu-sidebar/logo/logo'
+import ConfiguratorComponent from './components/menu/configurator/configurator'
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  )
 
   const { t } = useTranslation()
 
@@ -58,47 +52,21 @@ const ResponsiveAppBar = () => {
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
   }
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget)
-  }
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   }
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null)
-  }
-
-  const { user } = useLoggedUser()
-
-  const handleLogout = () => {
-    logOut()
-    router.push(`/`)
-    handleCloseUserMenu()
-  }
-
   const navigate = () => {
-    router.push('/');
+    router.push('/')
   }
 
   return (
     <AppBar position='fixed' sx={{ backgroundColor: 'white' }}>
       <Container maxWidth='lg'>
         <Toolbar disableGutters>
-          <Image src={logo} layout={ImageLayout.FIXED} width={50} height={50} alt="" onClick={navigate} className={styles.icon} />
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size='large'
-              aria-label='account of current user'
-              aria-controls='menu-appbar'
-              aria-haspopup='true'
-              onClick={handleOpenNavMenu}
-              sx={{ color: 'black' }}
-            >
-              <MenuIcon />
-            </IconButton>
+            <MenuIconComponent open={handleOpenNavMenu} />
             <Menu
               id='menu-appbar'
               anchorEl={anchorElNav}
@@ -117,14 +85,7 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              <MenuItem key={uuidv4()} onClick={handleCloseNavMenu}>
-                <Typography textAlign='center'>
-                  <Link href={PagesUrls.CONFIGURATOR}>
-                    {String(t(PagesTitles.CONFIGURATOR))}
-                  </Link>
-                </Typography>
-              </MenuItem>
-              {pages.map((page) => (
+              {menuItems.map((page) => (
                 <MenuItem key={uuidv4()} onClick={handleCloseNavMenu}>
                   <Typography textAlign='center'>
                     <Link href={page.link}>{page.title}</Link>
@@ -142,118 +103,115 @@ const ResponsiveAppBar = () => {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'black',
-              textDecoration: 'none',
             }}
           >
-            lovepix
+            <LogoComponent navigate={navigate} />
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <Button
-              key={uuidv4()}
-              onClick={handleCloseNavMenu}
-              sx={{
-                my: 2,
-                mx: 1,
-                color: 'black',
-                display: 'block',
-                fontFamily: 'monospace',
-              }}
-            >
-              <Link href={PagesUrls.CONFIGURATOR}>
-                <Badge
-                  badgeContent={configuration?.origin ? '!' : 0}
-                  color='warning'
-                >
-                  {String(t(PagesTitles.CONFIGURATOR))}
-                </Badge>
+
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'none', md: 'flex' },
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <ConfiguratorComponent
+              close={handleCloseNavMenu}
+              origin={configuration?.origin}
+            />
+            {appBarLeftItems.map(({ link, title }) => (
+              <Link key={uuidv4()} href={link} onClick={handleCloseNavMenu}>
+                <p className={styles.link}>{String(t(title))}</p>
               </Link>
-            </Button>
-            {pages.map((page) => (
-              <Button
-                key={uuidv4()}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  mx: 1,
-                  color: 'black',
-                  display: 'block',
-                  fontFamily: 'monospace',
-                }}
-              >
-                <Link href={page.link}>{String(t(page.title))}</Link>
-              </Button>
+            ))}
+            <Image
+              src={logo}
+              layout={ImageLayout.FIXED}
+              width={50}
+              height={50}
+              alt=''
+              onClick={navigate}
+              className={styles.icon}
+            />
+            {appBarRightItems.map(({ link, title }) => (
+              <Link key={uuidv4()} onClick={handleCloseNavMenu} href={link}>
+                <p className={styles.link}>{String(t(title))}</p>
+              </Link>
             ))}
           </Box>
-
-          <Box sx={{ flexGrow: 0, display: 'flex' }}>
+          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+            <SearchIcon
+              sx={{
+                color: 'black',
+                display: 'block',
+                cursor: 'pointer',
+              }}
+            />
             <Link href={PagesUrls.SHOPPING_CART}>
               <Badge
                 badgeContent={BADGE_NUMBER}
                 color='error'
-                sx={{ my: 2, marginRight: 2 }}
+                sx={{ my: 2, marginRight: 2, marginLeft: 2 }}
               >
                 <ShoppingCartIcon
                   sx={{ color: 'black', display: 'block', cursor: 'pointer' }}
                 />
               </Badge>
             </Link>
-            <Tooltip title='Open settings'>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt={!!user ? user.displayName || '' : undefined}
-                  src='/static/images/avatar/2.jpg'
-                />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id='menu-appbar'
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {user ? (
-                settings.map((setting) => {
-                  const menuItem = (
-                    <MenuItem
-                      key={setting.title}
-                      onClick={() => setting.callBack && handleLogout()}
-                    >
-                      <Typography textAlign='center'>
-                        {setting.title}
-                      </Typography>
-                    </MenuItem>
-                  )
+            {/*<Tooltip title='Open settings'>*/}
+            {/*  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>*/}
+            {/*    <Avatar*/}
+            {/*      alt={!!user ? user.displayName || '' : undefined}*/}
+            {/*      src='/static/images/avatar/2.jpg'*/}
+            {/*    />*/}
+            {/*  </IconButton>*/}
+            {/*</Tooltip>*/}
+            {/*<Menu*/}
+            {/*  sx={{ mt: '45px' }}*/}
+            {/*  id='menu-sidebar-appbar'*/}
+            {/*  anchorEl={anchorElUser}*/}
+            {/*  anchorOrigin={{*/}
+            {/*    vertical: 'top',*/}
+            {/*    horizontal: 'right',*/}
+            {/*  }}*/}
+            {/*  keepMounted*/}
+            {/*  transformOrigin={{*/}
+            {/*    vertical: 'top',*/}
+            {/*    horizontal: 'right',*/}
+            {/*  }}*/}
+            {/*  open={Boolean(anchorElUser)}*/}
+            {/*  onClose={handleCloseUserMenu}*/}
+            {/*>*/}
+            {/*  {user ? (*/}
+            {/*    settings.map((setting) => {*/}
+            {/*      const menuItem = (*/}
+            {/*        <MenuItem*/}
+            {/*          key={setting.title}*/}
+            {/*          onClick={() => setting.callBack && handleLogout()}*/}
+            {/*        >*/}
+            {/*          <Typography textAlign='center'>*/}
+            {/*            {setting.title}*/}
+            {/*          </Typography>*/}
+            {/*        </MenuItem>*/}
+            {/*      )*/}
 
-                  if (setting.callBack) {
-                    return menuItem
-                  } else {
-                    return (
-                      <Link key={uuidv4()} href={setting.link}>
-                        {menuItem}
-                      </Link>
-                    )
-                  }
-                })
-              ) : (
-                <MenuItem onClick={logIn}>
-                  <Typography textAlign='center'>Login</Typography>
-                </MenuItem>
-              )}
-            </Menu>
+            {/*      if (setting.callBack) {*/}
+            {/*        return menuItem*/}
+            {/*      } else {*/}
+            {/*        return (*/}
+            {/*          <Link key={uuidv4()} href={setting.link}>*/}
+            {/*            {menuItem}*/}
+            {/*          </Link>*/}
+            {/*        )*/}
+            {/*      }*/}
+            {/*    })*/}
+            {/*  ) : (*/}
+            {/*    <MenuItem onClick={logIn}>*/}
+            {/*      <Typography textAlign='center'>Login</Typography>*/}
+            {/*    </MenuItem>*/}
+            {/*  )}*/}
+            {/*</Menu>*/}
           </Box>
         </Toolbar>
       </Container>
