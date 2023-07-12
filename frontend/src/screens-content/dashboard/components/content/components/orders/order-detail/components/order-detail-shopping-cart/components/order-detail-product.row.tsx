@@ -4,13 +4,16 @@ import Image from 'next/image'
 import { Order } from '../../../../../../../../../../common/types/order'
 import { Product } from 'common/types/product'
 
-type Props = {
+type OrderDetailProductRowProps = {
   product: Product
   index: number
   order: Order
 }
 
-const OrderDetailProductRow = ({ product, index }: Props): JSX.Element => {
+const OrderDetailProductRow = ({
+  product,
+  index,
+}: OrderDetailProductRowProps): JSX.Element => {
   return (
     <div className={styles.row} key={index}>
       <div
