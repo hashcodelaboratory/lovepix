@@ -4,7 +4,7 @@ import { Payment } from '../enums/payment'
 import { Product } from './product'
 import { Image } from './image'
 
-export type OrderStates = {
+export type OrderState = {
   date: number
   state: string
 }
@@ -21,5 +21,5 @@ export type Order = {
   payment: Payment
   totalPrice: number
   pdf: string
-  orderState: OrderStates[]
+  orderState: OrderState[]
 }

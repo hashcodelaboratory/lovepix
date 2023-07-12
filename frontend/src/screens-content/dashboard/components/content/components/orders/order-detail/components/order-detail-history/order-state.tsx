@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import styles from '../../order-detail.module.scss'
-import { Order, OrderStates } from 'common/types/order'
+import { Order, OrderState } from 'common/types/order'
 import { Collections } from 'common/firebase/enums'
 import { doc, updateDoc } from 'firebase/firestore'
 import { database } from 'common/firebase/config'
@@ -22,7 +22,7 @@ type Props = {
   order?: Order
   icon: any
   message: string
-  dateState: OrderStates | undefined
+  dateState: OrderState | undefined
   index: number
   state: string
 }
