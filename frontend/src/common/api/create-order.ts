@@ -84,6 +84,30 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
       }
     }
   })
+
+  if (!images.length) {
+    const cart = {
+      products: data.shoppingCart?.products ?? [],
+    }
+    const newOrderRef = doc(database, Collections.ORDERS, orderId)
+    await setDoc(newOrderRef, { ...data, shoppingCart: cart, stripe: '' })
+  }
+}
+
+const sendNotificationToUser = async (
+  data: CreateOrderRequest,
+  orderId: string
+) => {
+  const response = await createInvoice(invoice(orderId, data))
+  if (response) {
+    const res = await response.json()
+    const id = res?.data?.Invoice.id
+    const token = res?.data?.Invoice.token
+    const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+    await sendOrderMail(orderId, data, pdfInvoice)
+  }
+  await stripeCreateSession(data.stripe, data.totalPrice)
+  await sendOrderMailtoAdmin(orderId)
 }
 
 const createOrder = async (data: CreateOrderRequest) => {
@@ -95,16 +119,7 @@ const createOrder = async (data: CreateOrderRequest) => {
     await uploadToStorage(orderId, data)
 
     if (data.payment === Payment.ONLINE) {
-      const response = await createInvoice(invoice(orderId, data))
-      if (response) {
-        const res = await response.json()
-        const id = res?.data?.Invoice.id
-        const token = res?.data?.Invoice.token
-        const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
-        await sendOrderMail(orderId, data, pdfInvoice)
-      }
-      await stripeCreateSession(data?.stripe, data?.totalPrice)
-      await sendOrderMailtoAdmin(orderId)
+      sendNotificationToUser(data, orderId)
     } else {
       await sendOrderMail(orderId, data)
       await sendOrderMailtoAdmin(orderId)
