@@ -37,9 +37,10 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
 
   images?.map(async (image: Image, index) => {
     const uploadURL = `${StorageFolder.ORDERS}/${orderId}/images/`
+    const prefix = `${uploadURL}/${orderId}-${image.material}-${image.width}x${image.height}-${image.qty}`
 
-    const urlRef = await ref(storage, `${uploadURL}/updated/`)
-    const originRef = await ref(storage, `${uploadURL}/origin/`)
+    const urlRef = await ref(storage, `${prefix}-updated/`)
+    const originRef = await ref(storage, `${prefix}-origin/`)
 
     const urlRes = await fetch(image.url)
     const originRes = await fetch(image.origin)
