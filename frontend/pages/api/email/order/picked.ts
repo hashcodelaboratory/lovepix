@@ -46,7 +46,7 @@ const sendOrderShipped = async (
       if (error) {
         return res.send(error.toString())
       }
-      return res.status(200).json('Email successfully sended')
+      return res.status(200).json('Email sent successfully')
     })
   } catch (error) {
     res.status(500).json({ error: (error as Error).message })
