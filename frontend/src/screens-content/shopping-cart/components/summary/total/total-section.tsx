@@ -17,9 +17,13 @@ type TotalSectionProps = {
   payment?: Payment
   price?: number
   finalPrice: number
+  isSubscription: boolean
+  setSubscription: () => void
 }
 
 const TotalSection = ({
+  isSubscription,
+  setSubscription,
   delivery,
   payment,
   price,
@@ -36,15 +40,10 @@ const TotalSection = ({
   const paymentOption = t(String(getPaymentMessage(payment)))
   const deliveryOption = t(String(getDeliveryMessage(delivery)))
 
-  const [newsletter, setNewsLetter] = useState(false)
   const [bussinessCondition, setBussinessConditon] = useState(false)
 
   const handleChangeBussinessCondition = () => {
     setBussinessConditon((prevState) => !prevState)
-  }
-
-  const handleSubscribe = () => {
-    setNewsLetter((prevState) => !prevState)
   }
 
   return (
@@ -83,7 +82,7 @@ const TotalSection = ({
       <Link className={styles.text} style={{ cursor: 'pointer' }}>
         <b>{String(t(messages.privacy))}</b>
       </Link>
-      <div>
+      <div style={{ marginTop: 10 }}>
         <FormControlLabel
           control={
             <Checkbox
@@ -111,8 +110,8 @@ const TotalSection = ({
         <FormControlLabel
           control={
             <Checkbox
-              checked={newsletter}
-              onClick={handleSubscribe}
+              checked={isSubscription}
+              onClick={setSubscription}
               sx={{
                 color: '#606060',
                 '&.Mui-checked': {
