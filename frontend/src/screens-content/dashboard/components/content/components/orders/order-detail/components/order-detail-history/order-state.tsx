@@ -34,7 +34,7 @@ const OrderState = ({
   dateState,
   index,
   state,
-}: Props): JSX.Element => {
+}: Props) => {
   const { t } = useTranslation()
   const queryClient = useQueryClient()
   const allowOpenModal = order && order.orderState?.length
