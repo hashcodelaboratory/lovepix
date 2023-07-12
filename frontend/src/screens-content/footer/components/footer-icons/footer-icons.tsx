@@ -76,7 +76,7 @@ const FooterIcons = (): JSX.Element => {
           </Link>
           <p className={styles.footerDivider}>/</p>
           <Link className={styles.footerBottomContainerRowTextLink} href={PagesUrls.PRIVACY_POLICY} target="_blank">
-            {t(messages.privacy)}
+            {t(messages.privacyPolicy)}
           </Link>
           <p className={styles.footerDivider}>/</p>
           <Link className={styles.footerBottomContainerRowTextLink} href={PagesUrls.COOKIES} target="_blank">

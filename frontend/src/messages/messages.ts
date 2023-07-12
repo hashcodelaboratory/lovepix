@@ -111,6 +111,7 @@ export const messages = {
   cookies: 'cookies',
   conditions: 'conditions',
   copyright: 'copyright',
+  privacyPolicy: 'privacyPolicy',
   satisfaction: 'satisfaction',
   possibilities: 'possibilities',
   creatingTime: 'creatingTime',
