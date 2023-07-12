@@ -21,7 +21,10 @@ const OrderDetailRow = ({ image, index, order }: Props): JSX.Element => {
         style={{ justifyContent: 'flex-start', alignItems: 'center' }}
       >
         <p style={{ marginRight: 8 }}>{image.qty} ks</p>
-        <a target='_blank' href={`${image.url}`} rel='noopener noreferrer'>
+        <a
+          href={`${image.url}`}
+          download={`${order.id}-${image.material}-${image.width}x${image.height}-${image.qty}.jpeg`}
+        >
           <Image
             alt={image.url}
             src={image.url}
@@ -50,6 +53,11 @@ const OrderDetailRow = ({ image, index, order }: Props): JSX.Element => {
           PDF
         </Button>
       )}
+      <Button variant='outlined'>
+        <a target='_blank' href={image.origin} rel='noopener noreferrer'>
+          Origin
+        </a>
+      </Button>
     </div>
   )
 }
