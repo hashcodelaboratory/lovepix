@@ -1,10 +1,10 @@
 import { MutationOptions, useMutation, UseMutationResult } from 'react-query'
-import { database } from '../config'
+import { database } from '../firebase/config'
 import { doc, writeBatch } from '@firebase/firestore'
-import { Collections } from '../enums'
-import { FormInputs } from '../../types/form'
-import { Summary } from '../../types/summary'
-import { Image } from 'common/types/image'
+import { Collections } from '../firebase/enums'
+import { FormInputs } from '../types/form'
+import { Summary } from '../types/summary'
+import { Image } from '../types/image'
 
 export type UpdateOrderRequest = {
   image?: Image

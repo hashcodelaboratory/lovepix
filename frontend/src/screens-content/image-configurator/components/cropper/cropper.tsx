@@ -38,7 +38,7 @@ const CropperComponent = ({ configuration }: CropperComponentProps) => {
       <Cropper
         src={configuration?.origin ?? ''}
         style={{ height: 400, width: '100%' }}
-        initialAspectRatio={16 / 9}
+        initialAspectRatio={3 / 2}
         aspectRatio={aspectRatio}
         guides={true}
         ref={cropperRef}
@@ -48,6 +48,7 @@ const CropperComponent = ({ configuration }: CropperComponentProps) => {
         dragMode='move'
         checkCrossOrigin={false}
         crossOrigin='anonymous'
+        autoCropArea={1}
       />
     </div>
   )
