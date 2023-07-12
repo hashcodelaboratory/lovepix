@@ -19,9 +19,11 @@ const Material = ({ configuration }: MaterialProps) => {
   const { t } = useTranslation();
 
   const changeMaterial = (id: string) => {
-    configurationsTable.update(CONFIGURATION_TABLE_KEY, {
-      material: id,
-    });
+    if (id !== "m1" && id !== "m3") {
+      configurationsTable.update(CONFIGURATION_TABLE_KEY, {
+        material: id,
+      });
+    }
   };
 
   const materialItems = materials.map((material) => (
