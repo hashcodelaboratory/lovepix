@@ -1,13 +1,13 @@
-import { getBlob, ref } from "@firebase/storage";
-import { storage } from "../firebase/config";
-import { configurationsTable } from "../../../database.config";
-import { CONFIGURATION_TABLE_KEY } from "../indexed-db/hooks/keys";
+import { getBlob, ref } from '@firebase/storage'
+import { storage } from '../firebase/config'
+import { configurationsTable } from '../../../database.config'
+import { CONFIGURATION_TABLE_KEY } from '../indexed-db/hooks/keys'
 
-export const addFileFromGallery = async (path: string) => {
+export const addFileFromGallery = async (path: string, id?: string) => {
   const file = await getBlob(ref(storage, path))
 
-  const fr = new FileReader();
-  fr.readAsDataURL(file);
+  const fr = new FileReader()
+  fr.readAsDataURL(file)
 
   fr.onload = () => {
     const data = {
@@ -15,8 +15,9 @@ export const addFileFromGallery = async (path: string) => {
       image: undefined,
       dimensionId: undefined,
       material: undefined,
-    };
+      galleryItemId: id,
+    }
 
-    configurationsTable.add(data, CONFIGURATION_TABLE_KEY);
-  };
+    configurationsTable.add(data, CONFIGURATION_TABLE_KEY)
+  }
 }

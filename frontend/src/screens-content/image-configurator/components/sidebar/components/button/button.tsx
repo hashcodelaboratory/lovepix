@@ -9,7 +9,6 @@ import {
   configurationsTable,
   orderTable,
 } from '../../../../../../../database.config'
-import { DIMENSIONS } from '../../../../../../common/configuration/dimensions/dimensions'
 import { getPrice } from '../price/utils/generator'
 import { materials } from '../../../../../home/utils/configuration'
 import {
@@ -19,6 +18,7 @@ import {
 import { Image } from '../../../../../../common/types/image'
 import { useContext } from 'react'
 import ImageConfiguratorContext from '../../../../image-configurator-context/image-configurator-context'
+import { splitDimension } from '../../../../../../common/utils/split-dimension'
 
 const Button = () => {
   const { t } = useTranslation()
@@ -35,9 +35,10 @@ const Button = () => {
   const { state } = useContext(ImageConfiguratorContext)
 
   const handleUpdateOrder = async () => {
-    const dim = DIMENSIONS.find(
-      (dim) => dim.id === configuration?.dimensionId
-    ) ?? { width: 0, height: 0 }
+    const dim = splitDimension(configuration?.dimensionId) ?? {
+      width: 0,
+      height: 0,
+    }
 
     const material = materials.find(
       (material) => material.id === configuration?.material

@@ -2,14 +2,13 @@ import { CSSProperties } from 'react'
 import styles from '../../../../../../../image-configurator-layout.module.scss'
 
 type Props = {
-  x: number
-  y: number
+  x: string
   onClick?: () => void
   selected?: boolean
   style?: CSSProperties
 }
 
-const TabPanelBox = ({ x, y, onClick, selected, style = {} }: Props) => {
+const TabPanelBox = ({ x, onClick, selected, style = {} }: Props) => {
   return (
     <div
       className={styles.tabPanelBox}
@@ -20,9 +19,7 @@ const TabPanelBox = ({ x, y, onClick, selected, style = {} }: Props) => {
       }}
       onClick={onClick}
     >
-      <p style={{ fontSize: 12, color: 'gray' }}>
-        {x} x {y} cm
-      </p>
+      <p style={{ fontSize: 12, color: 'gray' }}>{x} cm</p>
     </div>
   )
 }
