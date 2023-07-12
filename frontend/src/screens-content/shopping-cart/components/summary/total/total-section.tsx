@@ -11,6 +11,7 @@ import {
 import { Delivery } from '../../../../../common/enums/delivery'
 import { Payment } from '../../../../../common/enums/payment'
 import { useState } from 'react'
+import CheckboxShoppingCart from '../checkbox-component'
 
 type TotalSectionProps = {
   delivery?: Delivery
@@ -83,27 +84,10 @@ const TotalSection = ({
         <b>{String(t(messages.privacy))}</b>
       </Link>
       <div style={{ marginTop: 10 }}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={bussinessCondition}
-              onClick={handleChangeBussinessCondition}
-              sx={{
-                color: '#606060',
-                '&.Mui-checked': {
-                  color: '#D32F2F',
-                },
-              }}
-            />
-          }
-          label={
-            <span className={styles.formFieldTitle}>
-              Odoslaním kontaktných údajov vyjadrujem súhlas so spracovaním
-              týchto údajov za účelom oslovenia s ponukou na uzatvorenie
-              finančných produktov v súlade so zákonom č. 122/2013 Z.z. o
-              ochrane osobných údajov v znení neskorších predpisov.
-            </span>
-          }
+        <CheckboxShoppingCart
+          value={bussinessCondition}
+          setValue={handleChangeBussinessCondition}
+          message={messages.agreeWithBussinessCondition}
         />
       </div>
       <div>
@@ -121,8 +105,8 @@ const TotalSection = ({
             />
           }
           label={
-            <span className={styles.formFieldTitle}>
-              Súhlasím so zasielaním rôznych ponúk a marketingových informácií.
+            <span className={styles.text} style={{ fontSize: 12 }}>
+              {t(messages.agreeWithNewsletter)}
             </span>
           }
         />

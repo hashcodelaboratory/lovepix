@@ -1,10 +1,11 @@
-import { Checkbox, FormControlLabel, TextField } from '@mui/material'
+import { TextField } from '@mui/material'
 import styles from '../../../../../shopping-cart.module.scss'
 import { Controller, FieldErrors, Control } from 'react-hook-form'
 import { messages } from '../../../../../../../messages/messages'
 import { useTranslation } from 'next-i18next'
 import { FormInputs } from '../../../../../../../common/types/form'
 import { useState } from 'react'
+import CheckboxShoppingCart from '../../../checkbox-component'
 
 type FormProps = {
   register: any
@@ -86,22 +87,10 @@ const FormShippingAddress = ({ register, control }: FormProps): JSX.Element => {
 
   return (
     <div>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={isShippingAdress}
-            onClick={handleChangeShippingAddress}
-            sx={{
-              color: '#606060',
-              '&.Mui-checked': {
-                color: '#D32F2F',
-              },
-            }}
-          />
-        }
-        label={
-          <span className={styles.formFieldTitle}>Doručiť na inú adresu.</span>
-        }
+      <CheckboxShoppingCart
+        value={isShippingAdress}
+        setValue={handleChangeShippingAddress}
+        message={messages.diffrentShippingAddress}
       />
       <div className={styles.form}>{isShippingAdress && fields}</div>
     </div>

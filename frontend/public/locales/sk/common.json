@@ -161,5 +161,9 @@
   "thanksSubtitleError": "Stalo sa niečo neočakávané, bohužiaľ vaša objednávka nebola úspešná.",
   "thanksSubtitleContactError": "Vráťte sa do e-shopu a nakúpte prosím znova.",
   "ico": "IČO",
-  "dic": "DIČ"
+  "dic": "DIČ",
+  "agreeWithNewsletter": " Súhlasím so zasielaním rôznych ponúk a marketingových informácií.",
+  "agreeWithBussinessCondition": "Odoslaním kontaktných údajov vyjadrujem súhlas so spracovaním týchto údajov za účelom oslovenia s ponukou na uzatvorenie finančných produktov v súlade so zákonom č. 122/2013 Z.z. o ochrane osobných údajov v znení neskorších predpisov.",
+  "diffrentShippingAddress": "Chcem doplniť firemné údaje.",
+  "addCompanyInfo": "Chcem doplniť firemné údaje."
 }

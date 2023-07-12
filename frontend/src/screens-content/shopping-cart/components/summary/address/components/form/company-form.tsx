@@ -1,10 +1,11 @@
-import { Checkbox, FormControlLabel, TextField } from '@mui/material'
+import { TextField } from '@mui/material'
 import styles from '../../../../../shopping-cart.module.scss'
 import { Controller, FieldErrors, Control } from 'react-hook-form'
 import { messages } from '../../../../../../../messages/messages'
 import { useTranslation } from 'next-i18next'
 import { FormInputs } from '../../../../../../../common/types/form'
 import { useState } from 'react'
+import CheckboxShoppingCart from '../../../checkbox-component'
 
 type FormProps = {
   register: any
@@ -66,24 +67,10 @@ const CompanyFrom = ({ register, errors, control }: FormProps): JSX.Element => {
 
   return (
     <div>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={companyInfo}
-            onClick={handleChangeCompany}
-            sx={{
-              color: '#606060',
-              '&.Mui-checked': {
-                color: '#D32F2F',
-              },
-            }}
-          />
-        }
-        label={
-          <span className={styles.formFieldTitle}>
-            Chcem doplniť firemné údaje.
-          </span>
-        }
+      <CheckboxShoppingCart
+        value={companyInfo}
+        setValue={handleChangeCompany}
+        message={messages.addCompanyInfo}
       />
       <div className={styles.form}>{companyInfo && fields}</div>
     </div>

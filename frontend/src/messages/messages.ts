@@ -162,4 +162,8 @@ export const messages = {
   thanksTitleError: 'thanksTitleError',
   thanksSubtitleError: 'thanksSubtitleError',
   thanksSubtitleContactError: 'thanksSubtitleContactError',
+  agreeWithNewsletter: 'agreeWithNewsletter',
+  agreeWithBussinessCondition: 'agreeWithBussinessCondition',
+  diffrentShippingAddress: 'diffrentShippingAddress',
+  addCompanyInfo: 'addCompanyInfo',
 }
