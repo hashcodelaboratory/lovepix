@@ -14,25 +14,27 @@ const OrderDetailProductRow = ({
   product,
   index,
 }: OrderDetailProductRowProps): JSX.Element => {
+  const { qty, url, title, price } = product
+
   return (
     <div className={styles.row} key={index}>
       <div
         className={styles.flex}
         style={{ justifyContent: 'flex-start', alignItems: 'center' }}
       >
-        <p style={{ marginRight: 8 }}>{product.qty} ks</p>
-        <a target='_blank' href={`${product.url}`} rel='noopener noreferrer'>
+        <p style={{ marginRight: 8 }}>{qty} ks</p>
+        <a target='_blank' href={`${url}`} rel='noopener noreferrer'>
           <Image
-            alt={product.url}
-            src={product.url}
+            alt={url}
+            src={url}
             width={40}
             height={40}
             layout={ImageLayout.FIXED}
           />
         </a>
       </div>
-      <div>{product.title}</div>
-      <div>{product.price.toFixed(2)} €</div>
+      <div>{title}</div>
+      <div>{price.toFixed(2)} €</div>
     </div>
   )
 }
