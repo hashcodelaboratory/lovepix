@@ -91,24 +91,10 @@ const TotalSection = ({
         />
       </div>
       <div>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={isSubscription}
-              onClick={setSubscription}
-              sx={{
-                color: '#606060',
-                '&.Mui-checked': {
-                  color: '#D32F2F',
-                },
-              }}
-            />
-          }
-          label={
-            <span className={styles.text} style={{ fontSize: 12 }}>
-              {t(messages.agreeWithNewsletter)}
-            </span>
-          }
+        <CheckboxShoppingCart
+          value={isSubscription}
+          setValue={setSubscription}
+          message={messages.agreeWithNewsletter}
         />
       </div>
       <button
