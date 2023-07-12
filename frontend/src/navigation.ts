@@ -7,7 +7,7 @@ const pages = [
   { title: PagesTitles.GALLERY, link: PagesUrls.GALLERY },
   { title: PagesTitles.ESHOP, link: PagesUrls.ESHOP },
   // TODO: uncomment in future usage
-  // { title: PagesTitles.MATERIALS, link: PagesUrls.MATERIALS },
+  { title: PagesTitles.MATERIALS, link: PagesUrls.MATERIALS },
   // { title: PagesTitles.FOR_PARTNERS, link: PagesUrls.FOR_PARTNERS },
   // { title: PagesTitles.ABOUT_US, link: PagesUrls.ABOUT_US },
 ]
