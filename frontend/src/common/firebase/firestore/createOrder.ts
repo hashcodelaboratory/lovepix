@@ -10,7 +10,7 @@ import { Payment } from '../../enums/payment'
 import { orderTable } from '../../../../database.config'
 import { Image } from 'common/types/image'
 import { Product } from 'common/types/product'
-import {generateOrderID} from "../../../screens-content/shopping-cart/components/summary/summary/generateOrderID";
+import { generateOrderID } from '../../../screens-content/shopping-cart/components/summary/summary/generateOrderID'
 import { createInvoice } from 'common/api/superfaktura'
 import { sendOrderMail } from 'common/api/send-mail'
 import { sendOrderMailtoAdmin } from 'common/api/send-mail-admins'
@@ -19,12 +19,9 @@ import { stripeCreateSession } from 'common/api/stripe-create-session'
 import { Stripe } from '@stripe/stripe-js'
 
 type OrderState = {
-  state: string,
+  state: string
   date: number
 }
-
-
-
 
 export type CreateOrderRequest = {
   form: FormInputs
