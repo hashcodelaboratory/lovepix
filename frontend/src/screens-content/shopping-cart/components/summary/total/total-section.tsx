@@ -1,6 +1,6 @@
 import styles from '../../../shopping-cart.module.scss'
 import { messages } from '../../../../../messages/messages'
-import { Link } from '@mui/material'
+import { Checkbox, FormControlLabel, Link } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import {
   getDeliveryMessage,
@@ -10,6 +10,7 @@ import {
 } from './utils'
 import { Delivery } from '../../../../../common/enums/delivery'
 import { Payment } from '../../../../../common/enums/payment'
+import { useState } from 'react'
 
 type TotalSectionProps = {
   delivery?: Delivery
@@ -34,6 +35,17 @@ const TotalSection = ({
   const deliveryPrice = delivery ? getPriceForDelivery(delivery) : '-'
   const paymentOption = t(String(getPaymentMessage(payment)))
   const deliveryOption = t(String(getDeliveryMessage(delivery)))
+
+  const [newsletter, setNewsLetter] = useState(false)
+  const [bussinessCondition, setBussinessConditon] = useState(false)
+
+  const handleChangeBussinessCondition = () => {
+    setBussinessConditon((prevState) => !prevState)
+  }
+
+  const handleSubscribe = () => {
+    setNewsLetter((prevState) => !prevState)
+  }
 
   return (
     <div className={styles.cartContainer}>
@@ -71,7 +83,56 @@ const TotalSection = ({
       <Link className={styles.text} style={{ cursor: 'pointer' }}>
         <b>{String(t(messages.privacy))}</b>
       </Link>
-      <button type='submit' className={styles.checkoutButton}>
+      <div>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={bussinessCondition}
+              onClick={handleChangeBussinessCondition}
+              sx={{
+                color: '#606060',
+                '&.Mui-checked': {
+                  color: '#D32F2F',
+                },
+              }}
+            />
+          }
+          label={
+            <span className={styles.formFieldTitle}>
+              Odoslaním kontaktných údajov vyjadrujem súhlas so spracovaním
+              týchto údajov za účelom oslovenia s ponukou na uzatvorenie
+              finančných produktov v súlade so zákonom č. 122/2013 Z.z. o
+              ochrane osobných údajov v znení neskorších predpisov.
+            </span>
+          }
+        />
+      </div>
+      <div>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={newsletter}
+              onClick={handleSubscribe}
+              sx={{
+                color: '#606060',
+                '&.Mui-checked': {
+                  color: '#D32F2F',
+                },
+              }}
+            />
+          }
+          label={
+            <span className={styles.formFieldTitle}>
+              Súhlasím so zasielaním rôznych ponúk a marketingových informácií.
+            </span>
+          }
+        />
+      </div>
+      <button
+        type='submit'
+        className={styles.checkoutButton}
+        disabled={!bussinessCondition}
+      >
         {String(t(messages.orderWithPayment))}
       </button>
     </div>

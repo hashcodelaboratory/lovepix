@@ -26,12 +26,10 @@ type SummaryProps = {
 
 const Summary = ({ order }: SummaryProps) => {
   const router = useRouter()
-
   const { mutate: createOrder } = useCreateOrder()
-
   const stripe = useStripe()
-
   const [isLoading, setIsLoading] = useState(false)
+
 
   const {
     register,
@@ -42,7 +40,7 @@ const Summary = ({ order }: SummaryProps) => {
     reset,
   } = useForm<FormInputs>({
     resolver: yupResolver(FORM_SCHEMA),
-    //defaultValues: { ...order },
+    reValidateMode: "onChange",
   })
   const { delivery, payment } = watch()
   const finalPrice =
@@ -50,12 +48,11 @@ const Summary = ({ order }: SummaryProps) => {
     getPriceForDelivery(delivery) +
     getPriceForPayment(payment)
 
-  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+  const onSubmit: SubmitHandler<FormInputs> = async (data) => {    
     setIsLoading(true)
-
     const { payment } = data
 
-    await createOrder({
+    const newOrder = {
       form: {
         firstName: data?.firstName,
         lastName: data?.lastName,
@@ -72,8 +69,9 @@ const Summary = ({ order }: SummaryProps) => {
       delivery: data.delivery!,
       payment: data.payment!,
       stripe: stripe ?? null,
-    })
-
+    }
+    data.note && Object.assign(newOrder, { note: data.note });
+    await createOrder(newOrder)
     if (payment !== PaymentEnum.ONLINE) {
       await clearIndexedDb()
       await router.push({
@@ -87,7 +85,8 @@ const Summary = ({ order }: SummaryProps) => {
 
   return (
     <Container className={styles.summaryContainer}>
-      <form className={styles.summary} onSubmit={handleSubmit(onSubmit)}>
+      <form  onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.summary}>
         <Address register={register} errors={errors} control={control} />
         <div className={styles.orderContainer}>
           <OrderItems
@@ -96,16 +95,19 @@ const Summary = ({ order }: SummaryProps) => {
             errors={errors}
             control={control}
           />
-          <TotalSection
+          <Delivery control={control} message={errors.delivery?.message} />
+        <Payment control={control} message={errors.payment?.message} />
+        </div>
+        </div>
+        <div className={styles.summarySecondRow}>
+        <Voucher />
+        <TotalSection
             delivery={delivery}
             payment={payment}
             price={order?.totalPrice}
             finalPrice={finalPrice}
           />
         </div>
-        <Voucher />
-        <Delivery control={control} message={errors.delivery?.message} />
-        <Payment control={control} message={errors.payment?.message} />
       </form>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}

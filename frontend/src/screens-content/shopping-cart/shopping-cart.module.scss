@@ -28,31 +28,18 @@ $delivery-container-width: 370px;
 }
 
 .summary {
-  width: 100%;
-  padding: 1rem 0;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+  display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
 
-.summary :nth-child(1) {
-  max-width: 756px;
+.summarySecondRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
 }
 
-.summary :nth-child(2) {
-  max-width: $delivery-container-width;
-}
-
-.summary :nth-child(3) {
-  max-width: $delivery-container-width;
-}
-
-.summary :nth-child(4) {
-  max-width: $delivery-container-width;
-}
-
-.summary :nth-child(5) {
-  max-width: $delivery-container-width;
+.form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .summaryColumn {
@@ -65,7 +52,6 @@ $delivery-container-width: 370px;
 }
 
 .cartContainer {
-  max-width: 756px;
   position: relative;
   padding: 1rem;
   margin: 0.5rem;
@@ -343,7 +329,7 @@ $delivery-container-width: 370px;
 .formFieldTitle {
   margin: 0;
   font-size: 0.8rem;
-  font-weight: 200;
+  font-weight: 400;
 }
 
 .deliveryField {
@@ -389,44 +375,4 @@ $delivery-container-width: 370px;
 .voucherTextField {
   margin: 1rem 0rem 0.5rem 0 !important;
   width: 304px;
-}
-
-@media only screen and (max-width: 600px) {
-  .formField {
-    width: 100%;
-  }
-}
-
-@media only screen and (min-width: 1205px) {
-  .cartContainer {
-    width: 100%;
-  }
-}
-
-@media only screen and (max-width: 1205px) {
-  .summary :nth-child(1) {
-    order: 1;
-  }
-
-  .summary :nth-child(2) {
-    order: 5;
-  }
-
-  .summary :nth-child(3) {
-    order: 3;
-    width: 100%;
-  }
-
-  .summary :nth-child(4) {
-    order: 4;
-  }
-
-  .summary :nth-child(5) {
-    order: 2;
-    width: 100%;
-  }
-
-  .orderContainer {
-    width: 100%;
-  }
 }

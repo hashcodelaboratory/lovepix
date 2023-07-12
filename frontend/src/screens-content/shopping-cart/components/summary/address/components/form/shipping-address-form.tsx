@@ -1,9 +1,10 @@
-import { TextField } from '@mui/material'
+import { Checkbox, FormControlLabel, TextField } from '@mui/material'
 import styles from '../../../../../shopping-cart.module.scss'
 import { Controller, FieldErrors, Control } from 'react-hook-form'
 import { messages } from '../../../../../../../messages/messages'
 import { useTranslation } from 'next-i18next'
 import { FormInputs } from '../../../../../../../common/types/form'
+import { useState } from 'react'
 
 type FormProps = {
   register: any
@@ -13,71 +14,44 @@ type FormProps = {
 
 type ControllerFieldType = {
   name:
-    | 'firstName'
-    | 'lastName'
-    | 'company'
-    | 'address'
-    | 'city'
-    | 'postalCode'
-    | 'phone'
-    | 'email'
-    | 'delivery'
-    | 'payment'
+    | 'firstNameShippingAddress'
+    | 'lastNameShippingAddress'
+    | 'addressShippingAddress'
+    | 'cityShippingAdress'
+    | 'postalCodeShippingAddress'
   message: string
   error?: string
   fullWidth?: boolean
 }
 
-const Form = ({ register, errors, control }: FormProps): JSX.Element => {
+const FormShippingAddress = ({ register, control }: FormProps): JSX.Element => {
   const { t } = useTranslation()
+  const [isShippingAdress, setIsShippingAddress] = useState(false)
 
   const FIELDS: ControllerFieldType[] = [
     {
-      name: 'firstName',
+      name: 'firstNameShippingAddress',
       message: messages.name,
-      error: errors.firstName?.message,
       fullWidth: true,
     },
     {
-      name: 'lastName',
+      name: 'lastNameShippingAddress',
       message: messages.surname,
-      error: errors.lastName?.message,
       fullWidth: true,
     },
     {
-      name: 'email',
-      message: messages.email,
-      error: errors.email?.message,
-      fullWidth: true,
-    },
-
-    {
-      name: 'phone',
-      message: messages.phone,
-      error: errors.phone?.message,
-      fullWidth: true,
-    },
-    {
-      name: 'address',
+      name: 'addressShippingAddress',
       message: messages.address,
-      error: errors.address?.message,
       fullWidth: true,
     },
     {
-      name: 'city',
+      name: 'cityShippingAdress',
       message: messages.city,
-      error: errors.city?.message,
       fullWidth: true,
     },
     {
-      name: 'postalCode',
+      name: 'postalCodeShippingAddress',
       message: messages.postalCode,
-      error: errors.postalCode?.message,
-      fullWidth: true,
-    },
-    {
-      name: 'company',
-      message: messages.company,
       fullWidth: true,
     },
   ]
@@ -94,7 +68,7 @@ const Form = ({ register, errors, control }: FormProps): JSX.Element => {
             placeholder={String(t(message))}
             fullWidth={fullWidth}
             {...field}
-            {...register(name, { required: true })}
+            {...register(name)}
             error={!!error}
             helperText={String(t(error ?? ''))}
             variant='outlined'
@@ -106,7 +80,32 @@ const Form = ({ register, errors, control }: FormProps): JSX.Element => {
     />
   ))
 
-  return <div className={styles.form}>{fields}</div>
+  const handleChangeShippingAddress = () => {
+    setIsShippingAddress((prevState) => !prevState)
+  }
+
+  return (
+    <div>
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={isShippingAdress}
+            onClick={handleChangeShippingAddress}
+            sx={{
+              color: '#606060',
+              '&.Mui-checked': {
+                color: '#D32F2F',
+              },
+            }}
+          />
+        }
+        label={
+          <span className={styles.formFieldTitle}>Doručiť na inú adresu.</span>
+        }
+      />
+      <div className={styles.form}>{isShippingAdress && fields}</div>
+    </div>
+  )
 }
 
-export default Form
+export default FormShippingAddress

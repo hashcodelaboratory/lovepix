@@ -91,7 +91,7 @@
   "square": "Square",
   "transaction": "Transaction",
   "free": "Free",
-  "orderWithPayment": "Finish order",
+  "orderWithPayment": "Order with payment obligation",
   "saveChanges": "Save changes",
   "change": "Change",
   "chooseCrop": "Choose crop",
@@ -102,7 +102,7 @@
   "showMore": "Show more",
   "service": "Service",
   "ourContacts": "Our contacts",
-  "copyright" : "Copyright © 2023 Lovepix. All rights reserved",
+  "copyright": "Copyright © 2023 Lovepix. All rights reserved",
   "cookies": "Cookies",
   "conditions": "Terms and Conditions",
   "satisfaction": "Satisfaction",
@@ -140,5 +140,7 @@
   "thanksLink": "Späť na domovskú stránku",
   "thanksTitleError": "Vaša objednávka nebola dokončená :/",
   "thanksSubtitleError": "Stalo sa niečo neočakávané, bohužiaľ vaša objednávka nebola úspešná.",
-  "thanksSubtitleContactError": "Vráťte sa do e-shopu a nakúpte prosím znova."
+  "thanksSubtitleContactError": "Vráťte sa do e-shopu a nakúpte prosím znova.",
+  "ico": "IČO",
+  "dic": "DIČ"
 }

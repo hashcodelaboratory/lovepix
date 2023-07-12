@@ -95,7 +95,7 @@
   "orderCreated": "Objednávka vytvorená",
   "transaction": "Prevodom",
   "free": "Zadarmo",
-  "orderWithPayment": "Dokončiť objednávku",
+  "orderWithPayment": "Objednať s povinnosťou platby",
   "saveChanges": "Uložiť zmeny",
   "change": "Zmeniť",
   "chooseCrop": "Vyberte výrez",
@@ -159,5 +159,7 @@
   "thanksLink": "Späť na domovskú stránku",
   "thanksTitleError": "Vaša objednávka nebola dokončená :/",
   "thanksSubtitleError": "Stalo sa niečo neočakávané, bohužiaľ vaša objednávka nebola úspešná.",
-  "thanksSubtitleContactError": "Vráťte sa do e-shopu a nakúpte prosím znova."
+  "thanksSubtitleContactError": "Vráťte sa do e-shopu a nakúpte prosím znova.",
+  "ico": "IČO",
+  "dic": "DIČ"
 }
