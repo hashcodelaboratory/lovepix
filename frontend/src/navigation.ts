@@ -7,7 +7,7 @@ const pages = [
   { title: PagesTitles.GALLERY, link: PagesUrls.GALLERY },
   { title: PagesTitles.ESHOP, link: PagesUrls.ESHOP },
   // TODO: uncomment in future usage
-  // { title: PagesTitles.MATERIALS, link: PagesUrls.MATERIALS },
+  { title: PagesTitles.MATERIALS, link: PagesUrls.MATERIALS },
   // { title: PagesTitles.FOR_PARTNERS, link: PagesUrls.FOR_PARTNERS },
   // { title: PagesTitles.ABOUT_US, link: PagesUrls.ABOUT_US },
 ]
@@ -24,6 +24,7 @@ const menuItems = [
   { title: PagesTitles.CONFIGURATOR, link: PagesUrls.CONFIGURATOR },
   { title: PagesTitles.GALLERY, link: PagesUrls.GALLERY },
   { title: PagesTitles.ESHOP, link: PagesUrls.ESHOP },
+  { title: PagesTitles.MATERIALS, link: PagesUrls.MATERIALS },
   { title: PagesTitles.ABOUT_US, link: PagesUrls.ABOUT_US },
   // TODO: fix contact
   { title: 'Kontakt', link: '/contact' },
@@ -36,6 +37,7 @@ const appBarLeftItems = [
 const appBarRightItems = [
   { title: PagesTitles.ESHOP, link: PagesUrls.ESHOP },
   { title: PagesTitles.ABOUT_US, link: PagesUrls.ABOUT_US },
+  { title: PagesTitles.MATERIALS, link: PagesUrls.MATERIALS },
   // TODO: fix contact
   { title: 'Kontakt', link: '/contact' },
 ]
