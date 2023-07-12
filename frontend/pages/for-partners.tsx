@@ -17,7 +17,7 @@ const ForPartners: NextPage = () => {
       </Head>
 
       {/* MetaTags has to be executed outside of head*/}
-      <MetaTags/>
+      <MetaTags desc='Spoznajte výhody partnerského systému Lovepix, vlastné produkty,veľkoobchodné ceny, ktoré sa vám po prihlásení automaticky zobrazia v eshope'/>
       
       <header>
         <ResponsiveAppBar />

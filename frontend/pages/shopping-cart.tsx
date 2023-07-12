@@ -22,7 +22,7 @@ const ShoppingCart: NextPage = () => {
       </Head>
 
       {/* MetaTags has to be executed outside of head*/}
-      <MetaTags/>
+      <MetaTags desc='Zháňate moderné obrazy do bytu, domu alebo kancelárie? Máme pre Vás tie najkrajšie, paličkovaná čipka či tlačený obraz - široký výber motívov za výrobné ceny. Produkty expedujeme do 3 dní.'/>
 
       <header>
         <ResponsiveAppBar />

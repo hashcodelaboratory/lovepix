@@ -18,7 +18,7 @@ const Materials: NextPage = () => {
       </Head>
 
       {/* MetaTags has to be executed outside of head*/}
-      <MetaTags/>
+      <MetaTags desc='Plátno pôsobí veľmi decentne a teplo. Má jemnú štruktúru a je ideálne napnuté. Tlačený motív pokračuje aj po hranách obrazu. Na zavesenie sú na zadnej strane pripravené malé háčiky. Hodí sa najmä do moderných interiérov. Hodnotu obrazu dodá aj spôsob zavesenia. Buď môžete použiť háčiky alebo hlinikové dištančné stĺpiky, ktoré obraz odsadia 3 cm od steny. Alucobond Je to sendvičový materiál, ktorý sa skladá z troch vrstiev hliník – plast – hliník o hrúbke 3mm. Tento materiál je veľmi pevný a trvácny, vhodný aj na exteriérové použitie. Potlačená plocha má úplne jemnú, matnú štruktúru a pôsobí veľmi príjemne. Tak ako pri akryle, aj tu je viacero možností zavesenia. Buď háčik alebo dištančné stĺpiky.'/>
 
       <header>
         <ResponsiveAppBar />

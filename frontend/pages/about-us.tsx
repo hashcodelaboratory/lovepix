@@ -17,7 +17,7 @@ const AboutUs: NextPage = () => {
       </Head>
 
       {/* MetaTags has to be executed outside of head*/}
-      <MetaTags/>
+      <MetaTags desc='Spoznajte našu online tlačiareň! Zameriavame sa na kvalitnú a rýchlu online tlač obrazov podľa vaších predstáv a predaju obrazov a darčekových predmetov. Všetko vybavíte online!'/>
 
       <header>
         <ResponsiveAppBar />

@@ -23,7 +23,7 @@ const Home: NextPage = () => {
       </Head>
 
       {/* MetaTags has to be executed outside of head*/}
-      <MetaTags/>
+      <MetaTags desc='Stačí nahrať Vašu fotografiu, vybrať si rozmer a materiál. Ostatné zariadime my. Okrem plátna tlačíme fotografie na akryl (plexisklo) a dosku hliník-PVC-hliník.'/>
       
       <header>
         <ResponsiveAppBar />

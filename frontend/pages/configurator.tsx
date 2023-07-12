@@ -25,7 +25,7 @@ const Configurator: NextPage = () => {
       </Head>
 
       {/* MetaTags has to be executed outside of head*/}
-      <MetaTags/>
+      <MetaTags desc='Obraz je potlačený na plátno, alucobond alebo na akryl pomocou najmodernejšej technológie UV tlače, čo zabezpečuje vynikajúci výsledok a dlhodobú trvácnosť.'/>
       
       <header>
         <ResponsiveAppBar />
