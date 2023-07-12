@@ -94,7 +94,10 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
   }
 }
 
-const sendNotificationToUser = async (data: CreateOrderRequest, orderId: string) => {
+const sendNotificationToUser = async (
+  data: CreateOrderRequest,
+  orderId: string
+) => {
   const response = await createInvoice(invoice(orderId, data))
   if (response) {
     const res = await response.json()
@@ -103,7 +106,7 @@ const sendNotificationToUser = async (data: CreateOrderRequest, orderId: string)
     const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
     await sendOrderMail(orderId, data, pdfInvoice)
   }
-  await stripeCreateSession(data?.stripe, data?.totalPrice)
+  await stripeCreateSession(data.stripe, data.totalPrice)
   await sendOrderMailtoAdmin(orderId)
 }
 
