@@ -1,21 +1,21 @@
 import { MutationOptions, useMutation, UseMutationResult } from 'react-query'
 import { collection, doc, getDocs, setDoc } from '@firebase/firestore'
-import { database, storage } from '../config'
-import { Collections } from '../enums'
-import { Delivery } from '../../enums/delivery'
-import { FormInputs } from '../../types/form'
+import { database, storage } from '../firebase/config'
+import { Collections } from '../firebase/enums'
+import { Delivery } from '../enums/delivery'
+import { FormInputs } from '../types/form'
 import { getDownloadURL, ref, uploadBytes } from '@firebase/storage'
-import { StorageFolder } from '../storage/enums'
-import { Payment } from '../../enums/payment'
-import { orderTable } from '../../../../database.config'
-import { Image } from 'common/types/image'
-import { Product } from 'common/types/product'
-import { createInvoice } from 'common/api/superfaktura'
-import { sendOrderMail } from 'common/api/send-mail'
-import { sendOrderMailtoAdmin } from 'common/api/send-mail-admins'
-import { generateOrderID } from 'screens-content/shopping-cart/components/summary/summary/generateOrderID'
-import { invoice } from 'screens-content/shopping-cart/components/summary/summary/utils'
-import { stripeCreateSession } from 'common/api/stripe-create-session'
+import { StorageFolder } from '../firebase/storage/enums'
+import { Payment } from '../enums/payment'
+import { orderTable } from '../../../database.config'
+import { Image } from '../types/image'
+import { Product } from '../types/product'
+import { createInvoice } from './superfaktura'
+import { sendOrderMail } from './send-mail'
+import { sendOrderMailtoAdmin } from './send-mail-admins'
+import { generateOrderID } from '../../screens-content/shopping-cart/components/summary/summary/generateOrderID'
+import { invoice } from '../../screens-content/shopping-cart/components/summary/summary/utils'
+import { stripeCreateSession } from './stripe-create-session'
 import { Stripe } from '@stripe/stripe-js'
 
 export type CreateOrderRequest = {
@@ -37,9 +37,10 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
 
   images?.map(async (image: Image, index) => {
     const uploadURL = `${StorageFolder.ORDERS}/${orderId}/images/`
+    const prefix = `${uploadURL}/${orderId}-${image.material}-${image.width}x${image.height}-${image.qty}`
 
-    const urlRef = await ref(storage, `${uploadURL}/updated/`)
-    const originRef = await ref(storage, `${uploadURL}/origin/`)
+    const urlRef = await ref(storage, `${prefix}-updated/`)
+    const originRef = await ref(storage, `${prefix}-origin/`)
 
     const urlRes = await fetch(image.url)
     const originRes = await fetch(image.origin)
@@ -84,6 +85,30 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
       }
     }
   })
+
+  if (!images.length) {
+    const cart = {
+      products: data.shoppingCart?.products ?? [],
+    }
+    const newOrderRef = doc(database, Collections.ORDERS, orderId)
+    await setDoc(newOrderRef, { ...data, shoppingCart: cart, stripe: '' })
+  }
+}
+
+const sendNotificationToUser = async (
+  data: CreateOrderRequest,
+  orderId: string
+) => {
+  const response = await createInvoice(invoice(orderId, data))
+  if (response) {
+    const res = await response.json()
+    const id = res?.data?.Invoice.id
+    const token = res?.data?.Invoice.token
+    const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+    await sendOrderMail(orderId, data, pdfInvoice)
+  }
+  await stripeCreateSession(data.stripe, data.totalPrice)
+  await sendOrderMailtoAdmin(orderId)
 }
 
 const createOrder = async (data: CreateOrderRequest) => {
@@ -95,16 +120,7 @@ const createOrder = async (data: CreateOrderRequest) => {
     await uploadToStorage(orderId, data)
 
     if (data.payment === Payment.ONLINE) {
-      const response = await createInvoice(invoice(orderId, data))
-      if (response) {
-        const res = await response.json()
-        const id = res?.data?.Invoice.id
-        const token = res?.data?.Invoice.token
-        const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
-        await sendOrderMail(orderId, data, pdfInvoice)
-      }
-      await stripeCreateSession(data?.stripe, data?.totalPrice)
-      await sendOrderMailtoAdmin(orderId)
+      sendNotificationToUser(data, orderId)
     } else {
       await sendOrderMail(orderId, data)
       await sendOrderMailtoAdmin(orderId)
