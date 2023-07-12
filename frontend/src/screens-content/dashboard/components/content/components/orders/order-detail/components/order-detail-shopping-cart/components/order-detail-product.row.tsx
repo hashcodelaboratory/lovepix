@@ -13,7 +13,7 @@ type OrderDetailProductRowProps = {
 const OrderDetailProductRow = ({
   product,
   index,
-}: OrderDetailProductRowProps): JSX.Element => {
+}: OrderDetailProductRowProps) => {
   const { qty, url, title, price } = product
 
   return (
