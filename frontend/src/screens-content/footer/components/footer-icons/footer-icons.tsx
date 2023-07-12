@@ -34,7 +34,7 @@ const FooterIcons = (): JSX.Element => {
       <div className={styles.footerBottomContainer}>
         <div className={styles.footerBottomContainerRow}>
           <div className={styles.footerBottomIcon}>
-            <Link href="https://www.facebook.com/lovepix.sk/" rel="noreferrer" target="_blank">
+            <Link href={PagesUrls.FACEBOOK} rel="noreferrer" target="_blank">
               <Image
                 src={facebookIcon}
                 layout={ImageLayout.FIXED}
@@ -45,7 +45,7 @@ const FooterIcons = (): JSX.Element => {
             </Link>
           </div>
           <div className={styles.footerBottomIcon}>
-            <Link href="https://www.instagram.com/lovepix.eu/" rel="noreferrer" target="_blank">
+            <Link href={PagesUrls.INSTAGRAM} rel="noreferrer" target="_blank">
               <Image
                 src={instagramIcon}
                 layout={ImageLayout.FIXED}
@@ -56,7 +56,7 @@ const FooterIcons = (): JSX.Element => {
             </Link>
           </div>
           <div className={styles.footerBottomIcon}>
-            <Link href="https://www.tiktok.com/" rel="noreferrer" target="_blank">
+            <Link href={PagesUrls.TIKTOK} rel="noreferrer" target="_blank">
               <Image
                 src={tiktokIcon}
                 layout={ImageLayout.FIXED}
