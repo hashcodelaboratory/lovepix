@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { FormInputs } from '../../../../../common/types/form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FORM_SCHEMA } from '../address/components/form/utils/schema'
-import { useCreateOrder } from '../../../../../common/firebase/firestore/createOrder'
+import { useCreateOrder } from '../../../../../common/api/create-order'
 import { useState } from 'react'
 import { Backdrop, CircularProgress } from '@mui/material'
 import Voucher from '../voucher/voucher'
@@ -18,7 +18,7 @@ import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
 import { useRouter } from 'next/router'
 import { useStripe } from '@stripe/react-stripe-js'
 import { clearIndexedDb } from 'common/indexed-db/utils/clear'
-import { Payment as PaymentEnum} from "../../../../../common/enums/payment"
+import { Payment as PaymentEnum } from '../../../../../common/enums/payment'
 
 type SummaryProps = {
   order: Order

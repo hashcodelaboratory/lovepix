@@ -62,7 +62,7 @@ const Button = () => {
           {
             url: state.cropper?.current?.cropper
               .getCroppedCanvas()
-              ?.toDataURL(),
+              ?.toDataURL('image/jpeg'),
             qty: 1,
             origin: configuration?.origin,
             width: dim.width,
