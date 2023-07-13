@@ -1,6 +1,6 @@
 import lovepixIcon from "../../../../assets/logo_gray.svg";
 import facebookIcon from "../../../../assets/facebook.svg";
-import twitterIcon from "../../../../assets/twitter.svg";
+import tiktokIcon from "../../../../assets/tiktok.svg";
 import instagramIcon from "../../../../assets/instagram.svg";
 import styles from "../../footer.module.scss";
 import { Container, Link } from "@mui/material";
@@ -12,7 +12,7 @@ import * as PagesUrls from "../../../../constants/pages/urls";
 
 const FooterIcons = (): JSX.Element => {
   const { t } = useTranslation();
-  // external href in <Link> does not work without 2 leading slashes or 'https://' 
+  // TODO: add change tiktok link
   return (
     <Container>
       <hr />
@@ -33,7 +33,7 @@ const FooterIcons = (): JSX.Element => {
       <div className={styles.footerBottomContainer}>
         <div className={styles.footerBottomContainerRow}>
           <div className={styles.footerBottomIcon}>
-            <Link href={PagesUrls.NONE}>
+            <Link href={PagesUrls.FACEBOOK} rel="noreferrer" target="_blank">
               <Image
                 src={facebookIcon}
                 layout={ImageLayout.FIXED}
@@ -44,7 +44,7 @@ const FooterIcons = (): JSX.Element => {
             </Link>
           </div>
           <div className={styles.footerBottomIcon}>
-            <Link href={PagesUrls.NONE}>
+            <Link href={PagesUrls.INSTAGRAM} rel="noreferrer" target="_blank">
               <Image
                 src={instagramIcon}
                 layout={ImageLayout.FIXED}
@@ -55,9 +55,9 @@ const FooterIcons = (): JSX.Element => {
             </Link>
           </div>
           <div className={styles.footerBottomIcon}>
-            <Link href={PagesUrls.NONE}>
+            <Link href={PagesUrls.TIKTOK} rel="noreferrer" target="_blank">
               <Image
-                src={twitterIcon}
+                src={tiktokIcon}
                 layout={ImageLayout.FIXED}
                 width={22}
                 height={22}

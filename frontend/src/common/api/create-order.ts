@@ -1,4 +1,3 @@
-import { MutationOptions, useMutation, UseMutationResult } from 'react-query'
 import { collection, doc, getDocs, setDoc } from '@firebase/firestore'
 import { database, storage } from '../firebase/config'
 import { Collections } from '../firebase/enums'
@@ -37,7 +36,15 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
   const payload: Image[] = []
   const images = data.shoppingCart?.images ?? []
 
-  images?.map(async (image: Image, index) => {
+  if (!images.length) {
+    const cart = {
+      products: data.shoppingCart?.products ?? [],
+    }
+    const newOrderRef = doc(database, Collections.ORDERS, orderId)
+    await setDoc(newOrderRef, { ...data, shoppingCart: cart, stripe: '' })
+  }
+
+  const promises: Promise<void>[] = images?.map(async (image, index) => {
     const uploadURL = `${StorageFolder.ORDERS}/${orderId}/images/`
     const prefix = `${uploadURL}/${orderId}-${image.material}-${image.width}x${image.height}-${image.qty}`
 
@@ -79,7 +86,7 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
           products: data.shoppingCart?.products ?? [],
         }
 
-        const newOrderRef = doc(database, Collections.ORDERS, orderId)
+        const newOrderRef = await doc(database, Collections.ORDERS, orderId)
 
         await setDoc(newOrderRef, { ...data, shoppingCart: cart, stripe: '' })
 
@@ -88,13 +95,7 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
     }
   })
 
-  if (!images.length) {
-    const cart = {
-      products: data.shoppingCart?.products ?? [],
-    }
-    const newOrderRef = doc(database, Collections.ORDERS, orderId)
-    await setDoc(newOrderRef, { ...data, shoppingCart: cart, stripe: '' })
-  }
+  await Promise.all(promises)
 }
 
 const sendNotificationToUser = async (
@@ -113,7 +114,7 @@ const sendNotificationToUser = async (
   await sendOrderMailtoAdmin(orderId)
 }
 
-const createOrder = async (data: CreateOrderRequest) => {
+export const createOrder = async (data: CreateOrderRequest) => {
   const ordersRef = await collection(database, Collections.ORDERS)
   const ordersSnap = await getDocs(ordersRef)
 
@@ -122,15 +123,10 @@ const createOrder = async (data: CreateOrderRequest) => {
     await uploadToStorage(orderId, data)
 
     if (data.payment === Payment.ONLINE) {
-      sendNotificationToUser(data, orderId)
+      await sendNotificationToUser(data, orderId)
     } else {
       await sendOrderMail(orderId, data)
       await sendOrderMailtoAdmin(orderId)
     }
   }
 }
-
-export const useCreateOrder = (
-  options?: MutationOptions<any, any, CreateOrderRequest>
-): UseMutationResult<any, any, CreateOrderRequest> =>
-  useMutation(createOrder, options)
