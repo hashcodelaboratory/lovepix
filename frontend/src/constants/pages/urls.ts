@@ -12,3 +12,6 @@ export const COOKIES = '/cookies'
 export const PRIVACY_POLICY = '/privacy-policy'
 export const CONDITIONS = '/conditions'
 export const NONE = '#'
+export const FACEBOOK = "https://www.facebook.com/lovepix.sk/"
+export const INSTAGRAM = "https://www.instagram.com/lovepix.eu/"
+export const TIKTOK = "https://www.tiktok.com/"
