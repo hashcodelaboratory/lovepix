@@ -19,7 +19,7 @@ type CreateOrderRequest = {
   payment: Payment
 }
 
-const invoiceItems = (data: CreateOrderRequest | Order | undefined) => {
+const invoiceItems = (data: CreateOrderRequest | Order) => {
   let newItems: InvoiceItem[] = []
   const productItems = [
     ...(data?.shoppingCart.products ?? []),
@@ -40,13 +40,13 @@ const invoiceItems = (data: CreateOrderRequest | Order | undefined) => {
   const deliveryPrice = data?.delivery === Delivery.COURIER ? 5 / 1.2 : 0
   const deliveryItem = {
     unit_price: deliveryPrice,
-    description: `Doprava - ${data?.delivery}`,
+    description: `Doprava - ${data.delivery}`,
     quantity: 1,
     unit: 'ks',
   }
   const paymentItem = {
     unit_price: 0,
-    description: `Platba - ${data?.payment}`,
+    description: `Platba - ${data.payment}`,
     quantity: 1,
     unit: 'ks',
   }
@@ -56,7 +56,7 @@ const invoiceItems = (data: CreateOrderRequest | Order | undefined) => {
 
 export const invoice = (
   orderId: string,
-  data: CreateOrderRequest | Order | undefined
+  data: CreateOrderRequest | Order
 ): SFInvoice => {
   const createdDate = dayjs(new Date()).format('YYYY-MM-DD')
   const dueDate = dayjs().add(15, 'day').format('YYYY-MM-DD')
