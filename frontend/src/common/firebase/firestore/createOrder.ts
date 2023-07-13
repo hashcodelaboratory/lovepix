@@ -17,11 +17,7 @@ import { sendOrderMailtoAdmin } from 'common/api/send-mail-admins'
 import { invoice } from 'screens-content/shopping-cart/components/summary/summary/utils'
 import { stripeCreateSession } from 'common/api/stripe-create-session'
 import { Stripe } from '@stripe/stripe-js'
-
-type OrderState = {
-  state: string
-  date: number
-}
+import { OrderState } from 'common/types/order'
 
 export type CreateOrderRequest = {
   form: FormInputs
