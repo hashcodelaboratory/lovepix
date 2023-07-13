@@ -173,6 +173,8 @@ export const messages = {
   metaDescriptionMaterials: 'metaDescriptionMaterials',
   metaDescriptionProfile: 'metaDescriptionProfile',
   metaDescriptionShoppingCart: 'metaDescriptionShoppingCart',
+  metaKeywordsText: 'metaKeywordsText',
+  metaAuthorText: 'metaAuthorText',
   accepted: 'accepted',
   packed: 'packed',
   shipped: 'shipped',
