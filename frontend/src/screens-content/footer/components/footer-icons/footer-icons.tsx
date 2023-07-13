@@ -12,7 +12,6 @@ import * as PagesUrls from "../../../../constants/pages/urls";
 
 const FooterIcons = (): JSX.Element => {
   const { t } = useTranslation();
-  // external href in <Link> does not work without 2 leading slashes or 'https://'
   // TODO: add change tiktok link
   return (
     <Container>
