@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
 import FooterLayout from "../src/screens-content/footer/footer";
 import MetaTags from 'meta-tags/meta';
+import { messages } from 'messages/messages';
 
 const Profile: NextPage = () => {
   return (
@@ -14,7 +15,7 @@ const Profile: NextPage = () => {
       </Head>
 
       {/* MetaTags has to be executed outside of head*/}
-      <MetaTags desc='Spoznajte našu online tlačiareň! Zameriavame sa na kvalitnú a rýchlu online tlač obrazov podľa vaších predstáv a predaju obrazov a darčekových predmetov. Všetko vybavíte online!'/>
+      <MetaTags desc={messages.metaDescriptionProfile}/>
 
       <header>
         <ResponsiveAppBar />
