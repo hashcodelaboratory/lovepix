@@ -3,7 +3,8 @@ import styles from "../../contacts.module.scss"
 import { useTranslation } from "react-i18next";
 
 const Information = (): JSX.Element => {
-
+  // TODO: replace facebook, instagram, tiktok links
+  // TODO: add translation
   return (
     <Container>
       <div>
