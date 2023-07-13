@@ -18,6 +18,7 @@ const CheckboxShoppingCart = ({ value, setValue, message }: CheckboxProps) => {
           checked={value}
           onClick={setValue}
           sx={{
+            lineHeight: '0px',
             color: '#606060',
             '&.Mui-checked': {
               color: '#D32F2F',
@@ -25,11 +26,7 @@ const CheckboxShoppingCart = ({ value, setValue, message }: CheckboxProps) => {
           }}
         />
       }
-      label={
-        <span className={styles.text} style={{ fontSize: 12 }}>
-          {t(message)}
-        </span>
-      }
+      label={<div className={styles.checkboxLabel}>{t(message)}</div>}
     />
   )
 }

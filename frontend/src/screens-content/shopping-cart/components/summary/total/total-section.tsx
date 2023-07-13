@@ -89,8 +89,6 @@ const TotalSection = ({
           setValue={handleChangeBussinessCondition}
           message={messages.agreeWithBussinessCondition}
         />
-      </div>
-      <div>
         <CheckboxShoppingCart
           value={isSubscription}
           setValue={setSubscription}
