@@ -19,6 +19,7 @@ import { Image } from '../../../../../../common/types/image'
 import { useContext } from 'react'
 import ImageConfiguratorContext from '../../../../image-configurator-context/image-configurator-context'
 import { splitDimension } from '../../../../../../common/utils/split-dimension'
+import { StorageFileType } from '../../../../../../common/firebase/storage/enums'
 
 const Button = () => {
   const { t } = useTranslation()
@@ -62,7 +63,7 @@ const Button = () => {
           {
             url: state.cropper?.current?.cropper
               .getCroppedCanvas()
-              ?.toDataURL(),
+              ?.toDataURL(StorageFileType.JPEG),
             qty: 1,
             origin: configuration?.origin,
             width: dim.width,

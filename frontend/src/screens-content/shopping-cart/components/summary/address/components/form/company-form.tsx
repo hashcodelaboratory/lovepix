@@ -4,6 +4,8 @@ import { Controller, FieldErrors, Control } from 'react-hook-form'
 import { messages } from '../../../../../../../messages/messages'
 import { useTranslation } from 'next-i18next'
 import { FormInputs } from '../../../../../../../common/types/form'
+import { useState } from 'react'
+import CheckboxShoppingCart from '../../../checkbox-component'
 
 type FormProps = {
   register: any
@@ -12,72 +14,25 @@ type FormProps = {
 }
 
 type ControllerFieldType = {
-  name:
-    | 'firstName'
-    | 'lastName'
-    | 'company'
-    | 'address'
-    | 'city'
-    | 'postalCode'
-    | 'phone'
-    | 'email'
-    | 'delivery'
-    | 'payment'
+  name: 'ico' | 'dic'
   message: string
   error?: string
   fullWidth?: boolean
 }
 
-const Form = ({ register, errors, control }: FormProps): JSX.Element => {
+const CompanyFrom = ({ register, errors, control }: FormProps): JSX.Element => {
   const { t } = useTranslation()
+  const [companyInfo, setCompanyInfo] = useState(false)
 
   const FIELDS: ControllerFieldType[] = [
     {
-      name: 'firstName',
-      message: messages.name,
-      error: errors.firstName?.message,
+      name: 'ico',
+      message: messages.ico,
       fullWidth: true,
     },
     {
-      name: 'lastName',
-      message: messages.surname,
-      error: errors.lastName?.message,
-      fullWidth: true,
-    },
-    {
-      name: 'email',
-      message: messages.email,
-      error: errors.email?.message,
-      fullWidth: true,
-    },
-
-    {
-      name: 'phone',
-      message: messages.phone,
-      error: errors.phone?.message,
-      fullWidth: true,
-    },
-    {
-      name: 'address',
-      message: messages.address,
-      error: errors.address?.message,
-      fullWidth: true,
-    },
-    {
-      name: 'city',
-      message: messages.city,
-      error: errors.city?.message,
-      fullWidth: true,
-    },
-    {
-      name: 'postalCode',
-      message: messages.postalCode,
-      error: errors.postalCode?.message,
-      fullWidth: true,
-    },
-    {
-      name: 'company',
-      message: messages.company,
+      name: 'dic',
+      message: messages.dic,
       fullWidth: true,
     },
   ]
@@ -94,7 +49,7 @@ const Form = ({ register, errors, control }: FormProps): JSX.Element => {
             placeholder={String(t(message))}
             fullWidth={fullWidth}
             {...field}
-            {...register(name, { required: true })}
+            {...register(name)}
             error={!!error}
             helperText={String(t(error ?? ''))}
             variant='outlined'
@@ -106,7 +61,20 @@ const Form = ({ register, errors, control }: FormProps): JSX.Element => {
     />
   ))
 
-  return <div className={styles.form}>{fields}</div>
+  const handleChangeCompany = () => {
+    setCompanyInfo((prevState) => !prevState)
+  }
+
+  return (
+    <div>
+      <CheckboxShoppingCart
+        value={companyInfo}
+        setValue={handleChangeCompany}
+        message={messages.addCompanyInfo}
+      />
+      <div className={styles.form}>{companyInfo && fields}</div>
+    </div>
+  )
 }
 
-export default Form
+export default CompanyFrom
