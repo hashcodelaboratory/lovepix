@@ -1,8 +1,7 @@
 import { emailTemplateOrderState } from 'api/email/utils'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { transporter } from '../../../../src/api/email/transporter'
-
-const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
+import { BAD_REQUEST_ERROR_MESSAGE } from 'utils'
 
 const sendOrderShipped = async (
   req: NextApiRequest,
