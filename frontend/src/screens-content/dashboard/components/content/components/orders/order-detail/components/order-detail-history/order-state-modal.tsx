@@ -1,4 +1,4 @@
-import { Box, Button, Modal } from '@mui/material'
+import { Box, Button, Modal, Typography } from '@mui/material'
 import { messages } from 'messages/messages'
 import { useTranslation } from 'next-i18next'
 import React from 'react'
@@ -36,7 +36,7 @@ const UpdateOrderState = ({ open, closeModal, save, title }: ModalProps) => {
         <h3>{t(messages.changeOrderState)}</h3>
         <div>
           {t(messages.changeOrderStateSubtitle)}
-          <p style={{ fontWeight: 700 }}>{title}</p>
+          <Typography fontWeight={700}>{title}</Typography>
         </div>
         <div style={{ marginTop: 20 }}>
           <Button variant='outlined' onClick={closeModal}>
