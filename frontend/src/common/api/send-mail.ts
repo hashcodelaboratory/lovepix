@@ -1,6 +1,7 @@
 import { CreateOrderRequest } from './create-order'
 import { FormInputs } from 'common/types/form'
 import { Image } from 'common/types/image'
+import { Order } from 'common/types/order'
 import { Product } from 'common/types/product'
 
 export type UserMail = {
@@ -18,7 +19,7 @@ export type UserMail = {
 
 export const sendOrderMail = async (
   orderId: string,
-  data: CreateOrderRequest,
+  data: CreateOrderRequest | Order,
   pdfInvoice?: string
 ) => {
   let newImgArr: any[] = []

@@ -7,7 +7,6 @@ import { FormInputs } from '../types/form'
 import { getDownloadURL, ref, uploadBytes } from '@firebase/storage'
 import { StorageFolder } from '../firebase/storage/enums'
 import { Payment } from '../enums/payment'
-import { orderTable } from '../../../database.config'
 import { Image } from '../types/image'
 import { Product } from '../types/product'
 import { createInvoice } from './superfaktura'
@@ -17,10 +16,13 @@ import { generateOrderID } from '../../screens-content/shopping-cart/components/
 import { invoice } from '../../screens-content/shopping-cart/components/summary/summary/utils'
 import { stripeCreateSession } from './stripe-create-session'
 import { Stripe } from '@stripe/stripe-js'
+import { OrderState } from 'common/types/order'
+import { orderTable } from '../../../database.config'
 
 export type CreateOrderRequest = {
   form: FormInputs
   date: number
+  orderState: OrderState[]
   shoppingCart: {
     images?: Image[]
     products?: Product[]

@@ -19,6 +19,7 @@ import { useRouter } from 'next/router'
 import { useStripe } from '@stripe/react-stripe-js'
 import { clearIndexedDb } from 'common/indexed-db/utils/clear'
 import { Payment as PaymentEnum } from '../../../../../common/enums/payment'
+import { OrderState } from 'common/enums/order-states'
 import { addContactToNewsletter } from 'common/api/add-contact-newsletter'
 
 type SummaryProps = {
@@ -69,6 +70,7 @@ const Summary = ({ order }: SummaryProps) => {
         email: data?.email,
       },
       date: Date.now(),
+      orderState: [{ state: OrderState.CREATED, date: Date.now() }],
       shoppingCart: order?.shoppingCart,
       totalPrice: order?.totalPrice,
       delivery: data.delivery!,
