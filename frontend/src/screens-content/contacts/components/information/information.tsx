@@ -21,9 +21,9 @@ const Information = (): JSX.Element => {
       </div>
       
       <h2 className={styles.infoSocialTitle}>{t(messages.socialSite)}</h2>
-      <Link href={PagesUrls.NONE} rel="noreferrer" target="_blank" className={styles.infoSocialLink}>Facebook</Link>
-      <Link href={PagesUrls.NONE} rel="noreferrer" target="_blank" className={styles.infoSocialLink}>Instagram</Link>
-      <Link href={PagesUrls.NONE} rel="noreferrer" target="_blank" className={styles.infoSocialLink}>Tiktok</Link>
+      <Link href={PagesUrls.FACEBOOK} rel="noreferrer" target="_blank" className={styles.infoSocialLink}>Facebook</Link>
+      <Link href={PagesUrls.INSTAGRAM} rel="noreferrer" target="_blank" className={styles.infoSocialLink}>Instagram</Link>
+      <Link href={PagesUrls.TIKTOK} rel="noreferrer" target="_blank" className={styles.infoSocialLink}>Tiktok</Link>
     </Container>
   );
 };
