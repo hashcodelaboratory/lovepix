@@ -2,7 +2,18 @@ import { UserMail } from 'common/api/send-mail'
 import { AdminEmail } from 'common/api/send-mail-admins'
 import { OrderStateMail } from 'common/api/send-mail-order-picked'
 
-export const emailTemplateUser = (_body: UserMail) => {
+export const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
+
+export const emailTemplateUser = ({
+  id,
+  date,
+  totalPrice,
+  payment,
+  shipment,
+  formData,
+  images,
+  products,
+}: UserMail) => {
   return `<!DOCTYPE html>
     <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
     <head>
@@ -91,7 +102,7 @@ export const emailTemplateUser = (_body: UserMail) => {
                                 <br><br>
                                 <p style="margin: 0 0 10px 0; font-family: 'Montserrat', sans-serif; font-size: 20px; line-height: 25px; color: #333;font-weight: 400;">POTVRDENIE OBJEDNÁVKY</p>
                                 <p style="font-size: 12px;font-family: 'Montserrat', sans-serif; font-weight: 200; color: #000000;">${
-                                  _body.formData.firstName
+                                  formData.firstName
                                 } ďakujeme za vašu objednávku! <br>
                                 Vašu objednávku spracujeme a budeme vás znova kontaktovať.</p>
                                 <br>
@@ -108,11 +119,7 @@ export const emailTemplateUser = (_body: UserMail) => {
                             <tr>
                                 <td style="text-align: center;">
                                 <p style="margin: 0 0 10px 0; font-family: 'Montserrat', sans-serif; font-size: 20px; line-height: 25px; color: #333;font-weight: 400;">DETAILY OBJEDNÁVKY</p>
-                                <p style="font-size: 11px;font-family: 'Montserrat', sans-serif; font-weight: 200; color: #46D5EF; float: left; font-style: italic; text-decoration: underline;">Číslo objednávky: #${
-                                  _body.id
-                                }</p><p style="font-size: 12px;font-family: 'Montserrat', sans-serif; font-weight: 200; color: #A7A7A7; float: right;">Dátum objednávky: ${
-    _body.date
-  }</p>
+                                <p style="font-size: 11px;font-family: 'Montserrat', sans-serif; font-weight: 200; color: #46D5EF; float: left; font-style: italic; text-decoration: underline;">Číslo objednávky: #${id}</p><p style="font-size: 12px;font-family: 'Montserrat', sans-serif; font-weight: 200; color: #A7A7A7; float: right;">Dátum objednávky: ${date}</p>
                                 </td>
                             </tr>
                         </table>
@@ -128,7 +135,7 @@ export const emailTemplateUser = (_body: UserMail) => {
                                 <td style="text-align: center;padding: 10px;font-weight: 700;color: #000;">Množstvo</td>
                                 <td style="text-align: right;padding: 10px;font-weight: 700;color: #000;">Cena</td>
                             </tr>
-                            ${_body?.products?.map(
+                            ${products?.map(
                               (item: any) =>
                                 `<tr style="border-top: 1px dotted #d3d3d3;">
                                   <td style="text-align: left;padding: 10px;color: #000;">${
@@ -142,7 +149,7 @@ export const emailTemplateUser = (_body: UserMail) => {
                                   } €</td>
                               </tr>`
                             )}
-                            ${_body?.images?.map(
+                            ${images?.map(
                               (item: any) =>
                                 `<tr style="border-top: 1px dotted #d3d3d3;">
                                     <td style="text-align: left;padding: 10px;color: #000;">${`${item.material} - ${item.height} x ${item.width}`}</td>
@@ -156,18 +163,14 @@ export const emailTemplateUser = (_body: UserMail) => {
                             )}
                             <tr style="border-top: 1px dotted #d3d3d3;">
                                 <td style="text-align: left;padding: 10px;color: #000;">Doručenie</td>
-                                <td style="text-align: right;padding: 10px;color: #000;" colspan="2">${
-                                  _body.shipment
-                                }</td>
+                                <td style="text-align: right;padding: 10px;color: #000;" colspan="2">${shipment}</td>
                             </tr>
                             <tr style="border-top: 1px dotted #d3d3d3;">
                                 <td style="text-align: left;padding: 10px;color: #000;">Spôsob platby</td>
-                                <td style="text-align: right;padding: 10px;color: #000;" colspan="2">${
-                                  _body.payment
-                                }</td>
+                                <td style="text-align: right;padding: 10px;color: #000;" colspan="2">${payment}</td>
                                 </tr>
                                 ${
-                                  _body.payment === 'TRANSACTION'
+                                  payment === 'TRANSACTION'
                                     ? `<tr style="border-top: 1px dotted #d3d3d3;">
                                 <td style="text-align: left;padding: 10px;color: #000; font-weight: 700">IBAN</td>
                                 <td style="text-align: right;padding: 10px;color: #000;" colspan="2" font-weight: 700">SK11 7500 0000 0040 2375 2975</td>
@@ -176,7 +179,7 @@ export const emailTemplateUser = (_body: UserMail) => {
                                     : ''
                                 }
                                 ${
-                                  _body.payment === 'TRANSACTION'
+                                  payment === 'TRANSACTION'
                                     ? `<tr style="border-top: 1px dotted #d3d3d3;">
                                 <td style="text-align: left;padding: 10px;color: #000; font-weight: 700">Ako variabilny symbol uveďte číslo objednávky.</td>
                                 </tr>
@@ -186,7 +189,7 @@ export const emailTemplateUser = (_body: UserMail) => {
                             <tr style="border-top: 1px dotted #d3d3d3;color: #000;">
                                 <td style="text-align: left;padding: 10px;">Cena spolu</td>
                                 <td style="text-align: right;font-size: 15px; fontWeight: 600;padding: 10px;" colspan="2">${Number(
-                                  _body.totalPrice
+                                  totalPrice
                                 ).toFixed(2)} € </td>
                             </tr>
                         </table>
@@ -201,15 +204,11 @@ export const emailTemplateUser = (_body: UserMail) => {
                                 <td style="text-align: left;">
                                 <p style="font-family: 'Montserrat', sans-serif; font-size: 12px; line-height: 14px; color: #333;font-weight: 700; text-decoration: underline;">Fakturačná adresa</p>
                                 <p style="font-size: 11px;font-family: 'Montserrat', sans-serif; font-weight: 200; color: #333; float: left;">
-                                ${_body.formData.firstName} ${
-    _body.formData.lastName
-  } <br>
-                                ${_body.formData.city}, ${
-    _body.formData.address
-  } <br>
+                                ${formData.firstName} ${formData.lastName} <br>
+                                ${formData.city}, ${formData.address} <br>
                         
-                                ${_body.formData.postalCode} <br>
-                                ${_body.formData.phone} <br><br>
+                                ${formData.postalCode} <br>
+                                ${formData.phone} <br><br>
                                 </p>
                                 </td>
                               
@@ -218,15 +217,11 @@ export const emailTemplateUser = (_body: UserMail) => {
                             <td style="text-align: left;">
                             <p style="font-family: 'Montserrat', sans-serif; font-size: 12px; line-height: 14px; color: #333;font-weight: 700; text-decoration: underline;">Doručovacia adresa</p>
                             <p style="font-size: 11px;font-family: 'Montserrat', sans-serif; font-weight: 200; color: #333; float: left;">
-                            ${_body.formData.firstName} ${
-    _body.formData.lastName
-  } <br>
-                                ${_body.formData.city}, ${
-    _body.formData.address
-  } <br>
+                            ${formData.firstName} ${formData.lastName} <br>
+                                ${formData.city}, ${formData.address} <br>
                              
-                                ${_body.formData.postalCode} <br>
-                                ${_body.formData.phone} <br><br>
+                                ${formData.postalCode} <br>
+                                ${formData.phone} <br><br>
                             </p>
                             </td>
                             </tr>
@@ -275,7 +270,7 @@ export const emailTemplateUser = (_body: UserMail) => {
     </html>`
 }
 
-export const emailTemplateAdmin = (_body: AdminEmail) => {
+export const emailTemplateAdmin = ({ id }: AdminEmail) => {
   return `<!DOCTYPE html>
     <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
     <head>
@@ -363,7 +358,7 @@ export const emailTemplateAdmin = (_body: AdminEmail) => {
                                 <td style="text-align: center;">
                                 <br><br>
                                 <p style="margin: 0 0 10px 0; font-family: 'Montserrat', sans-serif; font-size: 20px; line-height: 25px; color: #333;font-weight: 400;">NOVÁ OBJEDNÁVKA!</p>
-                                <p style="font-size: 12px;font-family: 'Montserrat', sans-serif; font-weight: 500; color: #000000;">#${_body.id}<br></p>
+                                <p style="font-size: 12px;font-family: 'Montserrat', sans-serif; font-weight: 500; color: #000000;">#${id}<br></p>
                                 <br>
                                 </td>
                             </tr>
@@ -412,7 +407,7 @@ export const emailTemplateAdmin = (_body: AdminEmail) => {
     </html>`
 }
 
-export const emailTemplateOrderState = (_body: OrderStateMail) => {
+export const emailTemplateOrderState = ({ id, text }: OrderStateMail) => {
   return `<!DOCTYPE html>
     <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
     <head>
@@ -499,8 +494,8 @@ export const emailTemplateOrderState = (_body: OrderStateMail) => {
                             <tr>
                                 <td style="text-align: center;">
                                 <br><br>
-                                <p style="margin: 0 0 10px 0; font-family: 'Montserrat', sans-serif; font-size: 20px; line-height: 25px; color: #333;font-weight: 400;">${_body.text}</p>
-                                <p style="font-size: 12px;font-family: 'Montserrat', sans-serif; font-weight: 500; color: #000000;">#${_body.id}<br></p>
+                                <p style="margin: 0 0 10px 0; font-family: 'Montserrat', sans-serif; font-size: 20px; line-height: 25px; color: #333;font-weight: 400;">${text}</p>
+                                <p style="font-size: 12px;font-family: 'Montserrat', sans-serif; font-weight: 500; color: #000000;">#${id}<br></p>
                                 <br>
                                 </td>
                             </tr>

@@ -1,7 +1,9 @@
-import { emailTemplateUser } from '../../../src/api/email/utils'
+import {
+  BAD_REQUEST_ERROR_MESSAGE,
+  emailTemplateUser,
+} from '../../../src/api/email/utils'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { transporter } from '../../../src/api/email/transporter'
-import { BAD_REQUEST_ERROR_MESSAGE } from 'utils'
 
 const send = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
   try {
