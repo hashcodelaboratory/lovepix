@@ -10,17 +10,22 @@
 .infoTitle{
     color: inherit;
     display: block;
-    font-weight: 500;
-    font-size: 3em;
+    font-weight: bold;
+    font-size: 2.2em;
     margin: 0 0 0.5em 0 !important;
 }
 
 .infoComment{
-    font-size: 1.2em;
-    line-height: 1.4em;
+    font-size: 1.25rem;
     font-weight: 300;
     display: block;
     margin: 0 0 1em 0 !important;
+}
+
+.infoSocialTitle{
+    font-size: 1.3em;
+    margin: 0.5em 0 1em 0 !important;
+    font-weight: bold;
 }
 
 .infoTitleContainer{
@@ -28,14 +33,14 @@
 }
 
 .infoValueTitle{
-    font-size: 1.2em;
+    font-size: 0.9em;
     font-weight: 800;
     display: block;
-    margin: 0 0 0.8em 0 !important;
+    margin: 0 0 0.4em 0 !important;
 }
 
 .infoValue{
-    font-size: 1.2;
+    font-size: 0.8em;
     font-weight: 300;
     display: block;
     margin: 0 0 0.4em 0 !important;
@@ -44,12 +49,14 @@
 .mainContainer{
     padding: 4em 2em 3em 2em !important;
     align-self: center;
+    min-height: 100vh;
 }
 
 .infoSocialLink{
     text-decoration: underline !important;
     display: block;
     margin: 0 0 0.6em 0 !important;
+    font-size: 0.9em;
     color: inherit;
 }
 
