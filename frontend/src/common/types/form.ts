@@ -1,5 +1,5 @@
-import { Delivery } from "../enums/delivery";
-import { Payment } from "../enums/payment";
+import { Delivery } from '../enums/delivery'
+import { Payment } from '../enums/payment'
 
 export type FormInputs = {
   firstName: string
@@ -12,4 +12,12 @@ export type FormInputs = {
   email: string
   delivery?: Delivery
   payment?: Payment
+  ico?: string
+  dic?: string
+  note?: string
+  firstNameShippingAddress?: string
+  lastNameShippingAddress?: string
+  addressShippingAddress?: string
+  cityShippingAdress?: string
+  postalCodeShippingAddress?: string
 }

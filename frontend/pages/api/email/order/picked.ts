@@ -1,11 +1,11 @@
 import {
   BAD_REQUEST_ERROR_MESSAGE,
-  emailTemplateAdmin,
-} from '../../../src/api/email/utils'
+  emailTemplateOrderState,
+} from 'api/email/utils'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { transporter } from '../../../src/api/email/transporter'
+import { transporter } from '../../../../src/api/email/transporter'
 
-const sendToAdmin = async (
+const sendOrderShipped = async (
   req: NextApiRequest,
   res: NextApiResponse<unknown>
 ) => {
@@ -40,18 +40,18 @@ const sendToAdmin = async (
       from: 'LovePix <noreply@lovepix.sk>',
       to: _body.dest,
       subject: 'Objednávka: #' + _body.id,
-      html: emailTemplateAdmin(_body),
+      html: emailTemplateOrderState(_body),
     }
 
     return transporter.sendMail(mailOptions, (error: any) => {
       if (error) {
         return res.send(error.toString())
       }
-      return res.status(200).json('Email successfully sended')
+      return res.status(200).json('Email sent successfully')
     })
   } catch (error) {
     res.status(500).json({ error: (error as Error).message })
   }
 }
 
-export default sendToAdmin
+export default sendOrderShipped

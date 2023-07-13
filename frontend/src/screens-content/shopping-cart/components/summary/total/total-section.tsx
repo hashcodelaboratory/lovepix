@@ -1,6 +1,6 @@
 import styles from '../../../shopping-cart.module.scss'
 import { messages } from '../../../../../messages/messages'
-import { Link } from '@mui/material'
+import { Checkbox, FormControlLabel, Link } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import {
   getDeliveryMessage,
@@ -10,15 +10,21 @@ import {
 } from './utils'
 import { Delivery } from '../../../../../common/enums/delivery'
 import { Payment } from '../../../../../common/enums/payment'
+import { useState } from 'react'
+import CheckboxShoppingCart from '../checkbox-component'
 
 type TotalSectionProps = {
   delivery?: Delivery
   payment?: Payment
   price?: number
   finalPrice: number
+  isSubscription: boolean
+  setSubscription: () => void
 }
 
 const TotalSection = ({
+  isSubscription,
+  setSubscription,
   delivery,
   payment,
   price,
@@ -34,6 +40,12 @@ const TotalSection = ({
   const deliveryPrice = delivery ? getPriceForDelivery(delivery) : '-'
   const paymentOption = t(String(getPaymentMessage(payment)))
   const deliveryOption = t(String(getDeliveryMessage(delivery)))
+
+  const [bussinessCondition, setBussinessConditon] = useState(false)
+
+  const handleChangeBussinessCondition = () => {
+    setBussinessConditon((prevState) => !prevState)
+  }
 
   return (
     <div className={styles.cartContainer}>
@@ -71,7 +83,23 @@ const TotalSection = ({
       <Link className={styles.text} style={{ cursor: 'pointer' }}>
         <b>{String(t(messages.privacy))}</b>
       </Link>
-      <button type='submit' className={styles.checkoutButton}>
+      <div style={{ marginTop: 10 }}>
+        <CheckboxShoppingCart
+          value={bussinessCondition}
+          setValue={handleChangeBussinessCondition}
+          message={messages.agreeWithBussinessCondition}
+        />
+        <CheckboxShoppingCart
+          value={isSubscription}
+          setValue={setSubscription}
+          message={messages.agreeWithNewsletter}
+        />
+      </div>
+      <button
+        type='submit'
+        className={styles.checkoutButton}
+        disabled={!bussinessCondition}
+      >
         {String(t(messages.orderWithPayment))}
       </button>
     </div>
