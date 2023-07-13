@@ -17,6 +17,8 @@
 .footerText {
   font-weight: 200;
   font-size: 12px;
+  display: block;
+  margin: 1em 0;
 }
 
 .footerIconsRow {
@@ -42,7 +44,7 @@
   font-weight: 200;
   font-size: 12px;
   margin: 0;
-  margin-left: 1rem;
+  margin-left: 1rem !important;
 }
 
 .footerBottomContainer {
@@ -78,4 +80,8 @@
   font-size: 12px;
   font-weight: 300;
   margin: 0 0.75rem;
+}
+
+.footerContainer{
+  margin: 1rem 0 0 0;
 }

@@ -1,4 +1,4 @@
-import { CreateOrderRequest } from 'common/firebase/firestore/createOrder'
+import { CreateOrderRequest } from './create-order'
 import { FormInputs } from 'common/types/form'
 import { Image } from 'common/types/image'
 import { Order } from 'common/types/order'

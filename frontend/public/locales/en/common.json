@@ -91,7 +91,7 @@
   "square": "Square",
   "transaction": "Transaction",
   "free": "Free",
-  "orderWithPayment": "Finish order",
+  "orderWithPayment": "Order with payment obligation",
   "saveChanges": "Save changes",
   "change": "Change",
   "chooseCrop": "Choose crop",
@@ -102,6 +102,10 @@
   "showMore": "Show more",
   "service": "Service",
   "ourContacts": "Our contacts",
+  "copyright": "Copyright © 2023 Lovepix. All rights reserved",
+  "cookies": "Cookies",
+  "conditions": "Terms and Conditions",
+  "privacyPolicy": "Privacy policy",
   "satisfaction": "Satisfaction",
   "possibilities": "Possibilities",
   "creatingTime": "Creating time",
@@ -151,5 +155,11 @@
   "emailErrorSnackbar": "Email sa nepodarilo odoslať",
   "yourOrderHasBeenSent": "Vaša objednávka bola odoslaná.",
   "createInvoiceSuccessMessage": "Faktúra bola úspešne vytvorená.",
-  "createInvoiceErrorMessage": "Nepodarilo sa nám vytvoriť faktúru."
+  "createInvoiceErrorMessage": "Nepodarilo sa nám vytvoriť faktúru.",
+  "ico": "IČO",
+  "dic": "DIČ",
+  "agreeWithNewsletter": " Súhlasím so zasielaním rôznych ponúk a marketingových informácií.",
+  "agreeWithBussinessCondition": "Odoslaním kontaktných údajov vyjadrujem súhlas so spracovaním týchto údajov za účelom oslovenia s ponukou na uzatvorenie finančných produktov v súlade so zákonom č. 122/2013 Z.z. o ochrane osobných údajov v znení neskorších predpisov.",
+  "diffrentShippingAddress": "Chcem odoslať objednávku na inú adresu.",
+  "addCompanyInfo": "Chcem doplniť firemné údaje."
 }

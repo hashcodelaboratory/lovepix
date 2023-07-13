@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { FormInputs } from '../../../../../common/types/form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FORM_SCHEMA } from '../address/components/form/utils/schema'
-import { useCreateOrder } from '../../../../../common/firebase/firestore/createOrder'
+import { useCreateOrder } from '../../../../../common/api/create-order'
 import { useState } from 'react'
 import { Backdrop, CircularProgress } from '@mui/material'
 import Voucher from '../voucher/voucher'
@@ -18,8 +18,9 @@ import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
 import { useRouter } from 'next/router'
 import { useStripe } from '@stripe/react-stripe-js'
 import { clearIndexedDb } from 'common/indexed-db/utils/clear'
-import { Payment as PaymentEnum} from "../../../../../common/enums/payment"
+import { Payment as PaymentEnum } from '../../../../../common/enums/payment'
 import { OrderState } from 'common/enums/order-states'
+import { addContactToNewsletter } from 'common/api/add-contact-newsletter'
 
 type SummaryProps = {
   order: Order
@@ -27,12 +28,14 @@ type SummaryProps = {
 
 const Summary = ({ order }: SummaryProps) => {
   const router = useRouter()
-
   const { mutate: createOrder } = useCreateOrder()
-
   const stripe = useStripe()
-
   const [isLoading, setIsLoading] = useState(false)
+  const [isSubscription, setIsSubscription] = useState(false)
+
+  const handleSubscribe = () => {
+    setIsSubscription((prevState) => !prevState)
+  }
 
   const {
     register,
@@ -43,7 +46,7 @@ const Summary = ({ order }: SummaryProps) => {
     reset,
   } = useForm<FormInputs>({
     resolver: yupResolver(FORM_SCHEMA),
-    //defaultValues: { ...order },
+    reValidateMode: 'onChange',
   })
   const { delivery, payment } = watch()
   const finalPrice =
@@ -53,10 +56,9 @@ const Summary = ({ order }: SummaryProps) => {
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setIsLoading(true)
-
     const { payment } = data
 
-    await createOrder({
+    const newOrder = {
       form: {
         firstName: data?.firstName,
         lastName: data?.lastName,
@@ -68,14 +70,28 @@ const Summary = ({ order }: SummaryProps) => {
         email: data?.email,
       },
       date: Date.now(),
-      orderState: [{state: OrderState.CREATED, date: Date.now()}],
+      orderState: [{ state: OrderState.CREATED, date: Date.now() }],
       shoppingCart: order?.shoppingCart,
       totalPrice: order?.totalPrice,
       delivery: data.delivery!,
       payment: data.payment!,
       stripe: stripe ?? null,
-    })
-
+    }
+    data.note && Object.assign(newOrder, { note: data.note })
+    data.firstNameShippingAddress &&
+      Object.assign(newOrder, {
+        firstNameShippingAddress: data?.firstNameShippingAddress,
+        lastNameShippingAddress: data?.lastNameShippingAddress,
+        addressShippingAddress: data?.addressShippingAddress,
+        cityShippingAdress: data?.cityShippingAdress,
+        postalCodeShippingAddress: data?.postalCodeShippingAddress,
+      })
+    data.ico &&
+      Object.assign(newOrder, {
+        ico: data?.ico,
+        dic: data?.dic,
+      })
+    await createOrder(newOrder)
     if (payment !== PaymentEnum.ONLINE) {
       await clearIndexedDb()
       await router.push({
@@ -83,31 +99,38 @@ const Summary = ({ order }: SummaryProps) => {
         query: { success: 'true' },
       })
     }
+    !isSubscription && (await addContactToNewsletter(data.email))
     reset()
     setIsLoading(false)
   }
 
   return (
     <Container className={styles.summaryContainer}>
-      <form className={styles.summary} onSubmit={handleSubmit(onSubmit)}>
-        <Address register={register} errors={errors} control={control} />
-        <div className={styles.orderContainer}>
-          <OrderItems
-            order={order}
-            register={register}
-            errors={errors}
-            control={control}
-          />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.summary}>
+          <Address register={register} errors={errors} control={control} />
+          <div className={styles.orderContainer}>
+            <OrderItems
+              order={order}
+              register={register}
+              errors={errors}
+              control={control}
+            />
+            <Delivery control={control} message={errors.delivery?.message} />
+            <Payment control={control} message={errors.payment?.message} />
+          </div>
+        </div>
+        <div className={styles.summarySecondRow}>
+          <Voucher />
           <TotalSection
             delivery={delivery}
             payment={payment}
             price={order?.totalPrice}
             finalPrice={finalPrice}
+            isSubscription={isSubscription}
+            setSubscription={handleSubscribe}
           />
         </div>
-        <Voucher />
-        <Delivery control={control} message={errors.delivery?.message} />
-        <Payment control={control} message={errors.payment?.message} />
       </form>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
