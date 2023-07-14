@@ -6,7 +6,6 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { FormInputs } from '../../../../../common/types/form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FORM_SCHEMA } from '../address/components/form/utils/schema'
-import { useCreateOrder } from '../../../../../common/api/create-order'
 import { useState } from 'react'
 import { Backdrop, CircularProgress } from '@mui/material'
 import Voucher from '../voucher/voucher'
@@ -21,6 +20,7 @@ import { clearIndexedDb } from 'common/indexed-db/utils/clear'
 import { Payment as PaymentEnum } from '../../../../../common/enums/payment'
 import { OrderState } from 'common/enums/order-states'
 import { addContactToNewsletter } from 'common/api/add-contact-newsletter'
+import { createOrder } from '../../../../../common/api/create-order'
 
 type SummaryProps = {
   order: Order
@@ -28,7 +28,6 @@ type SummaryProps = {
 
 const Summary = ({ order }: SummaryProps) => {
   const router = useRouter()
-  const { mutate: createOrder } = useCreateOrder()
   const stripe = useStripe()
   const [isLoading, setIsLoading] = useState(false)
   const [isSubscription, setIsSubscription] = useState(false)

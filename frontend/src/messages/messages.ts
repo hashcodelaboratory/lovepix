@@ -194,4 +194,5 @@ export const messages = {
   agreeWithBussinessCondition: 'agreeWithBussinessCondition',
   diffrentShippingAddress: 'diffrentShippingAddress',
   addCompanyInfo: 'addCompanyInfo',
+  contact: 'Contact'
 }

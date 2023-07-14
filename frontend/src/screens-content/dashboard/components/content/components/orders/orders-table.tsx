@@ -24,6 +24,22 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import OrderDetail from './order-detail/order-detail'
 import { Order } from '../../../../../../common/types/order'
 
+export const dataGridStyle = {
+  boxShadow: 2,
+  border: 2,
+  '& .MuiDataGrid-row': {
+    backgroundColor: 'white',
+  },
+  '& .MuiDataGrid-row:hover': {
+    cursor: 'pointer',
+    backgroundColor: '#de8593 !important',
+  },
+  '& .MuiDataGrid-row.Mui-selected': {
+    cursor: 'pointer',
+    backgroundColor: '#E51F3E !important',
+  },
+}
+
 const OrdersTable = () => {
   const {
     state: { orders },
@@ -38,11 +54,13 @@ const OrdersTable = () => {
   const [selectedRows, setSelectedRows] = useState<string[]>([])
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([])
 
-  const data = orders.map(({ id, date, form }) => ({
-    id: id,
-    date: new Date(date).toLocaleDateString() ?? '',
-    name: `${form?.firstName} ${form?.lastName}`,
-  }))
+  const data = orders
+    .sort((a: Order, b: Order) => (a.date < b.date ? 1 : -1))
+    .map(({ id, date, form }) => ({
+      id: id,
+      date: new Date(date).toLocaleDateString() ?? '',
+      name: `${form?.firstName} ${form?.lastName}`,
+    }))
 
   const [order, setOrder] = useState<Order>()
 
@@ -98,6 +116,7 @@ const OrdersTable = () => {
             selectionModel={selectionModel}
             onSelectionModelChange={selectionChanged}
             disableSelectionOnClick
+            sx={dataGridStyle}
           />
         </Box>
         <Box className={styles.ordersTableMainpanel}>
