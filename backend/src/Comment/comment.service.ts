@@ -17,15 +17,19 @@ export class CommentService {
         return this.prismaService.comment.findMany();
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} comment`;
+    async findOne(id: string) {
+        return await this.prismaService.comment.findUnique({
+            where: {
+                id: id
+            }
+        });
     }
 
-    update(id: number, updateCommentDto: UpdateCommentDto) {
-        return `This action updates a #${id} comment`;
-    }
-
-    remove(id: number) {
-        return `This action removes a #${id} comment`;
+    async remove(id: string) {
+        return await this.prismaService.comment.delete({
+            where: {
+                id: id
+            }
+        });
     }
 }

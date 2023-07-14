@@ -20,11 +20,11 @@ export class CommentController {
 
     @Get(':id')
     findOne(@Param('id') id: string) {
-        return this.commentService.findOne(+id);
+        return this.commentService.findOne(id);
     }
 
     @Delete(':id')
     remove(@Param('id') id: string) {
-        return this.commentService.remove(+id);
+        return this.commentService.remove(id);
     }
 }
