@@ -36,7 +36,7 @@ type InfoRowType = {
 const InfoRow = ({title, values}: InfoRowType): JSX.Element => {
   return (
     <div className={styles.infoRow}>
-      <p className={styles.infoValueTitle}>{title}</p>
+      <h2 className={styles.infoValueTitle}>{title}</h2>
       {values.map(value => <p className={styles.infoValue}>{value}</p>)}
     </div>
   );
