@@ -11,11 +11,11 @@ type Props = {
 const OrderDetailDelivery = ({ order }: Props): JSX.Element => {
   const { t } = useTranslation()
   const {
-    firstNameShippingAddress,
-    lastNameShippingAddress,
-    addressShippingAddress,
-    cityShippingAdress,
-    postalCodeShippingAddress,
+    firstNameShippingAddress = '-',
+    lastNameShippingAddress = '-',
+    addressShippingAddress = '-',
+    cityShippingAdress = '-',
+    postalCodeShippingAddress = '-',
   } = order?.form ?? {}
 
   return (
@@ -23,11 +23,11 @@ const OrderDetailDelivery = ({ order }: Props): JSX.Element => {
       <h4>{t(messages.shipping)}</h4>
       <div style={{ fontSize: 12 }}>
         <p>
-          {firstNameShippingAddress ?? '-'} {lastNameShippingAddress ?? '-'}
+          {firstNameShippingAddress} {lastNameShippingAddress}
         </p>
-        <p>{addressShippingAddress ?? '-'} </p>
-        <p>{cityShippingAdress ?? '-'}</p>
-        <p>{postalCodeShippingAddress ?? '-'}</p>
+        <p>{addressShippingAddress} </p>
+        <p>{cityShippingAdress}</p>
+        <p>{postalCodeShippingAddress}</p>
       </div>
     </Box>
   )
