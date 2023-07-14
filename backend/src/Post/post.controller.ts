@@ -32,4 +32,9 @@ export class PostController {
     remove(@Param('id') id: string) {
         return this.postService.remove(id);
     }
+
+    @Get('comments/:id')
+    findComments(@Param('id') id: string) {
+        return this.postService.findComments(id);
+    }
 }

@@ -32,4 +32,9 @@ export class UserController {
     remove(@Param('id') id: string) {
         return this.userService.remove(id);
     }
+
+    @Get('posts/:id')
+    findPosts(@Param('id') id: string) {
+        return this.userService.findPosts(id);
+    }
 }

@@ -41,4 +41,15 @@ export class PostService {
             }
         });
     }
+
+    async findComments(id: string) {
+        return await this.prismaService.post.findUnique({
+            where: {
+                id: id
+            },
+            include: {
+                comments: true
+            }
+        });
+    }
 }

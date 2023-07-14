@@ -35,14 +35,21 @@ export class UserService {
         });
     }
 
-    // update(id: number, updateUserDto: UpdateUserDto) {
-    //     return `This action updates a #${id} user`;
-    // }
-
     async remove(id: string) {
         return await this.prismaService.user.delete({
             where: {
                 id: id
+            }
+        });
+    }
+
+    async findPosts(id: string) {
+        return await this.prismaService.user.findUnique({
+            where: {
+                id: id
+            },
+            include: {
+                posts: true
             }
         });
     }
