@@ -17,16 +17,3 @@ const ContactsLayout = (): JSX.Element => {
 }
 
 export default ContactsLayout;
-
-/*
-
-    <Grid container spacing={2}>
-      <Grid xs={12} md={6}>
-          <Information/>
-      </Grid>
-
-      <Grid xs={12} md={6}>
-          <Map/>
-      </Grid>
-    </Grid>
-*/
