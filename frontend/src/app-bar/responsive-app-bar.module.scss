@@ -13,3 +13,13 @@
 .link:hover {
   cursor: pointer;
 }
+
+.langSwitch{
+  display: none;
+  font-size: 1.1em;
+  font-weight: 300;
+  border-radius: 10%;
+  border: 1px dotted grey;
+  color: black;
+  cursor: pointer;
+}

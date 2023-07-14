@@ -30,6 +30,19 @@ import MenuIconComponent from './components/menu-sidebar/menu-icon/menu-icon'
 import LogoComponent from './components/menu-sidebar/logo/logo'
 import ConfiguratorComponent from './components/menu/configurator/configurator'
 
+const LanguageSwitch = () => {
+  const {i18n} = useTranslation();
+  function getNext(){
+    return (i18n.language === "en")? "sk" : "en";
+  }
+  function langSwitch() {
+    i18n.changeLanguage(getNext());
+  }
+  return (
+    <button className={styles.langSwitch} onClick={langSwitch}>{getNext()}</button>
+  )
+} 
+
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
 
@@ -159,6 +172,7 @@ const ResponsiveAppBar = () => {
                 />
               </Badge>
             </Link>
+            <LanguageSwitch></LanguageSwitch>
             {/*<Tooltip title='Open settings'>*/}
             {/*  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>*/}
             {/*    <Avatar*/}
