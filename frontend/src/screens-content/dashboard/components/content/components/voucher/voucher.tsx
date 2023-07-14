@@ -13,10 +13,6 @@ import { useTranslation } from 'next-i18next'
 import { useContext, useState } from 'react'
 import DashboardContext from '../../../../context/dashboard-context'
 import {
-  DIMENSIONS_KEY,
-  DimensionType,
-} from '../../../../../../common/api/use-dimensions'
-import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
 } from '../../../../../../snackbar/config'
@@ -34,15 +30,19 @@ import Button from '@mui/material/Button'
 import { doc, setDoc } from '@firebase/firestore'
 import { database } from '../../../../../../common/firebase/config'
 import { Collections } from '../../../../../../common/firebase/enums'
-import { removeDimensions } from '../../../../api/dimensions/removeDimensions'
+import {
+  CATEGORIES_KEY,
+  CategoryType,
+} from '../../../../../../common/api/use-categories'
+import { removeCategory } from '../../../../api/categories/removeCategory'
 
-const Dimensions = (): JSX.Element => {
+const Voucher = (): JSX.Element => {
   const { t } = useTranslation()
   const { enqueueSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
 
   const {
-    state: { dimensions },
+    state: { categories },
   } = useContext(DashboardContext)
 
   const [selectedRows, setSelectedRows] = useState<string[]>([])
@@ -50,15 +50,15 @@ const Dimensions = (): JSX.Element => {
   const [detailRow, setDetailRow] = useState<GridRowParams>()
 
   const [open, setOpen] = useState(false)
-  const [dimensionLabel, setDimensionLabel] = useState<string>()
+  const [categoryLabel, setCategoryLabel] = useState<string>()
 
   const data =
-    dimensions?.map(
+    categories?.map(
       ({ id, name }) =>
         ({
           id: id,
           name: name,
-        } as DimensionType)
+        } as CategoryType)
     ) ?? []
 
   const reset = () => {
@@ -67,7 +67,7 @@ const Dimensions = (): JSX.Element => {
   }
 
   const removeData = () => {
-    const result = removeDimensions(selectedRows, queryClient)
+    const result = removeCategory(selectedRows, queryClient)
     if (result === '') {
       enqueueSnackbar(
         String(t(messages.filesRemoved)),
@@ -103,12 +103,12 @@ const Dimensions = (): JSX.Element => {
 
   const uploadToFirestore = async () => {
     await setDoc(
-      doc(database, Collections.DIMENSIONS, `DIM-${dimensionLabel?.trim()}`),
+      doc(database, Collections.CATEGORIES, `DIM-${categoryLabel?.trim()}`),
       {
-        name: dimensionLabel,
+        name: categoryLabel,
       }
     )
-    queryClient.invalidateQueries(DIMENSIONS_KEY)
+    queryClient.invalidateQueries(CATEGORIES_KEY)
     handleClose()
   }
 
@@ -119,7 +119,7 @@ const Dimensions = (): JSX.Element => {
         aria-controls='panel1a-content'
         id='panel1a-header'
       >
-        <h3>{String(t(messages.dimensions))}</h3>
+        <h3>{String(t(messages.code))}</h3>
       </AccordionSummary>
       <AccordionDetails>
         <div className={styles.rowContainer}>
@@ -155,7 +155,7 @@ const Dimensions = (): JSX.Element => {
             <AddCircle sx={{ marginLeft: 1 }} />
           </button>
           <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>{t(messages.dimensions)}</DialogTitle>
+            <DialogTitle>{t(messages.categories)}</DialogTitle>
             <DialogContent>
               <DialogContentText>
                 Pridajte rozmer, ktory chcete pouzivat v aplikacii
@@ -165,12 +165,12 @@ const Dimensions = (): JSX.Element => {
                 margin='dense'
                 id='name'
                 label='Rozmer'
-                value={dimensionLabel}
+                value={categoryLabel}
                 type='text'
                 fullWidth
                 variant='standard'
                 onChange={(e) => {
-                  setDimensionLabel(e.target.value)
+                  setCategoryLabel(e.target.value)
                 }}
               />
             </DialogContent>
@@ -185,4 +185,4 @@ const Dimensions = (): JSX.Element => {
   )
 }
 
-export default Dimensions
+export default Voucher

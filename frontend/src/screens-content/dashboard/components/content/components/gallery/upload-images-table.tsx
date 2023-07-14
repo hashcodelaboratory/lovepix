@@ -1,100 +1,116 @@
 import {
   DataGrid,
-  GridCallbackDetails, GridRowParams,
+  GridCallbackDetails,
+  GridRowParams,
   GridSelectionModel,
-} from "@mui/x-data-grid";
-import styles from "../../../../dashboard.module.scss";
-import { useContext, useState } from "react";
-import DashboardContext from "../../../../context/dashboard-context";
-import { getUploadImagesColumns } from "../utils/columns/upload-images-columns";
-import { messages } from "../../../../../../messages/messages";
+} from '@mui/x-data-grid'
+import styles from '../../../../dashboard.module.scss'
+import { useContext, useState } from 'react'
+import DashboardContext from '../../../../context/dashboard-context'
+import { getUploadImagesColumns } from '../utils/columns/upload-images-columns'
+import { messages } from '../../../../../../messages/messages'
 import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
-} from "../../../../../../snackbar/config";
-import { useSnackbar } from "notistack";
-import { useTranslation } from "next-i18next";
-import { useQueryClient } from "react-query";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { removeUploadedImages } from "../../../../api/gallery/removeUploadedImages";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import GalleryDetail from "./detail/gallery-detail";
-import { UPLOADED_IMAGES_KEY } from "../../../../api/gallery/useUploadedImages";
-import { GALLERY_KEY } from "../../../../../../common/api/use-gallery";
-import UploaderLayout from "./uploader/uploader";
+} from '../../../../../../snackbar/config'
+import { useSnackbar } from 'notistack'
+import { useTranslation } from 'next-i18next'
+import { useQueryClient } from 'react-query'
+import DeleteIcon from '@mui/icons-material/Delete'
+import { removeUploadedImages } from '../../../../api/gallery/removeUploadedImages'
+import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import GalleryDetail from './detail/gallery-detail'
+import { UPLOADED_IMAGES_KEY } from '../../../../api/gallery/useUploadedImages'
+import { GALLERY_KEY } from '../../../../../../common/api/use-gallery'
+import UploaderLayout from './uploader/uploader'
 
 const UploadImagesTable = () => {
   const {
     state: { galleryImages },
-  } = useContext(DashboardContext);
+  } = useContext(DashboardContext)
 
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar()
 
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
-  const [selectedRows, setSelectedRows] = useState<string[]>([]);
-  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
-  const [detailRow, setDetailRow] = useState<GridRowParams>();
+  const [selectedRows, setSelectedRows] = useState<string[]>([])
+  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([])
+  const [detailRow, setDetailRow] = useState<GridRowParams>()
 
-  const data = galleryImages?.map(({ id, name, url , size, timeCreated, contentType, price, categories, dimensions }, index) => ({
-    id: index,
-    name: name,
-    url: url,
-    size: size,
-    timeCreated: timeCreated,
-    contentType: contentType,
-    price: price,
-    docId: id,
-    categories: categories,
-    dimensions: dimensions
-  })) ?? [];
+  const data =
+    galleryImages?.map(
+      (
+        {
+          id,
+          name,
+          url,
+          size,
+          timeCreated,
+          contentType,
+          price,
+          categories,
+          dimensions,
+        },
+        index
+      ) => ({
+        id: index,
+        name: name,
+        url: url,
+        size: size,
+        timeCreated: timeCreated,
+        contentType: contentType,
+        price: price,
+        docId: id,
+        categories: categories,
+        dimensions: dimensions,
+      })
+    ) ?? []
 
   const reset = () => {
-    setSelectionModel([]);
-    setSelectedRows([]);
-  };
+    setSelectionModel([])
+    setSelectedRows([])
+  }
 
   const removeData = async () => {
-    const result = removeUploadedImages(selectedRows);
-    if (result === "") {
-      await queryClient.invalidateQueries(UPLOADED_IMAGES_KEY);
-      await queryClient.invalidateQueries(GALLERY_KEY);
+    const result = removeUploadedImages(selectedRows)
+    if (result === '') {
+      await queryClient.invalidateQueries(UPLOADED_IMAGES_KEY)
+      await queryClient.invalidateQueries(GALLERY_KEY)
       enqueueSnackbar(
         String(t(messages.filesRemoved)),
-        SNACKBAR_OPTIONS_SUCCESS,
-      );
-      reset();
+        SNACKBAR_OPTIONS_SUCCESS
+      )
+      reset()
     } else {
-      enqueueSnackbar(result, SNACKBAR_OPTIONS_ERROR);
+      enqueueSnackbar(result, SNACKBAR_OPTIONS_ERROR)
     }
-  };
+  }
 
   const selectionChanged = (
     selectionModel: GridSelectionModel,
-    details: GridCallbackDetails,
+    details: GridCallbackDetails
   ) => {
-    setSelectionModel(selectionModel);
-    setSelectedRows(selectionModel.map((item, index) =>
-      (data[index].name)));
-  };
+    setSelectionModel(selectionModel)
+    setSelectedRows(selectionModel.map((item, index) => data[index].name))
+  }
 
-  const buttonText = `(${selectedRows.length}) ${String(t(messages.removeAll))}`;
+  const buttonText = `(${selectedRows.length}) ${String(t(messages.removeAll))}`
 
   const onRowClick = (details: GridRowParams) => {
-    setDetailRow(details);
+    setDetailRow(details)
   }
 
   return (
     <Accordion>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
+        aria-controls='panel1a-content'
+        id='panel1a-header'
       >
-        <h1>{String(t(messages.uploadedImages))}</h1>
+        <h3>{String(t(messages.uploadedImages))}</h3>
       </AccordionSummary>
       <AccordionDetails>
         <div className={styles.rowContainer}>
@@ -126,7 +142,7 @@ const UploadImagesTable = () => {
         </button>
       </AccordionDetails>
     </Accordion>
-  );
-};
+  )
+}
 
-export default UploadImagesTable;
+export default UploadImagesTable

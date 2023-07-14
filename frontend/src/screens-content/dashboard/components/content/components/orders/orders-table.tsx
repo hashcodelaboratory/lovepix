@@ -84,7 +84,7 @@ const OrdersTable = () => {
         aria-controls='panel1a-content'
         id='panel1a-header'
       >
-        <h1>{String(t(messages.orders))}</h1>
+        <h3>{String(t(messages.orders))}</h3>
       </AccordionSummary>
       <AccordionDetails sx={{ display: 'flex' }}>
         <Box className={styles.ordersTableSidepanel}>

@@ -1,109 +1,125 @@
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { messages } from "../../../../../../messages/messages";
-import styles from "../../../../dashboard.module.scss";
-import { DataGrid, GridCallbackDetails, GridRowParams, GridSelectionModel } from "@mui/x-data-grid";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { useTranslation } from "next-i18next";
-import { useContext, useState } from "react";
-import DashboardContext from "../../../../context/dashboard-context";
-import { SNACKBAR_OPTIONS_ERROR, SNACKBAR_OPTIONS_SUCCESS } from "../../../../../../snackbar/config";
-import { useSnackbar } from "notistack";
-import { useQueryClient } from "react-query";
-import { getDimensionsColumns } from "../utils/columns/dimensions-columns";
-import { AddCircle } from "@mui/icons-material";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
-import { doc, setDoc } from "@firebase/firestore";
-import { database } from "../../../../../../common/firebase/config";
-import { Collections } from "../../../../../../common/firebase/enums";
-import { CATEGORIES_KEY, CategoryType } from "../../../../../../common/api/use-categories";
-import { removeCategory } from "../../../../api/categories/removeCategory";
+import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { messages } from '../../../../../../messages/messages'
+import styles from '../../../../dashboard.module.scss'
+import {
+  DataGrid,
+  GridCallbackDetails,
+  GridRowParams,
+  GridSelectionModel,
+} from '@mui/x-data-grid'
+import DeleteIcon from '@mui/icons-material/Delete'
+import { useTranslation } from 'next-i18next'
+import { useContext, useState } from 'react'
+import DashboardContext from '../../../../context/dashboard-context'
+import {
+  SNACKBAR_OPTIONS_ERROR,
+  SNACKBAR_OPTIONS_SUCCESS,
+} from '../../../../../../snackbar/config'
+import { useSnackbar } from 'notistack'
+import { useQueryClient } from 'react-query'
+import { getDimensionsColumns } from '../utils/columns/dimensions-columns'
+import { AddCircle } from '@mui/icons-material'
+import TextField from '@mui/material/TextField'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
+import Button from '@mui/material/Button'
+import { doc, setDoc } from '@firebase/firestore'
+import { database } from '../../../../../../common/firebase/config'
+import { Collections } from '../../../../../../common/firebase/enums'
+import {
+  CATEGORIES_KEY,
+  CategoryType,
+} from '../../../../../../common/api/use-categories'
+import { removeCategory } from '../../../../api/categories/removeCategory'
 
 const Categories = (): JSX.Element => {
-  const { t } = useTranslation();
-  const { enqueueSnackbar } = useSnackbar();
-  const queryClient = useQueryClient();
+  const { t } = useTranslation()
+  const { enqueueSnackbar } = useSnackbar()
+  const queryClient = useQueryClient()
 
   const {
     state: { categories },
-  } = useContext(DashboardContext);
+  } = useContext(DashboardContext)
 
-  const [selectedRows, setSelectedRows] = useState<string[]>([]);
-  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
-  const [detailRow, setDetailRow] = useState<GridRowParams>();
+  const [selectedRows, setSelectedRows] = useState<string[]>([])
+  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([])
+  const [detailRow, setDetailRow] = useState<GridRowParams>()
 
-  const [open, setOpen] = useState(false);
-  const [categoryLabel, setCategoryLabel] = useState<string>();
+  const [open, setOpen] = useState(false)
+  const [categoryLabel, setCategoryLabel] = useState<string>()
 
-  const data = categories?.map(({ id, name }) => ({
-    id: id,
-    name: name,
-  }) as CategoryType) ?? [];
+  const data =
+    categories?.map(
+      ({ id, name }) =>
+        ({
+          id: id,
+          name: name,
+        } as CategoryType)
+    ) ?? []
 
   const reset = () => {
-    setSelectionModel([]);
-    setSelectedRows([]);
-  };
+    setSelectionModel([])
+    setSelectedRows([])
+  }
 
   const removeData = () => {
-    const result = removeCategory(selectedRows, queryClient);
-    if (result === "") {
+    const result = removeCategory(selectedRows, queryClient)
+    if (result === '') {
       enqueueSnackbar(
         String(t(messages.filesRemoved)),
-        SNACKBAR_OPTIONS_SUCCESS,
-      );
-      reset();
+        SNACKBAR_OPTIONS_SUCCESS
+      )
+      reset()
     } else {
-      enqueueSnackbar(result, SNACKBAR_OPTIONS_ERROR);
+      enqueueSnackbar(result, SNACKBAR_OPTIONS_ERROR)
     }
-  };
+  }
 
   const selectionChanged = (
     selectionModel: GridSelectionModel,
-    details: GridCallbackDetails,
+    details: GridCallbackDetails
   ) => {
-    setSelectionModel(selectionModel);
-    setSelectedRows(selectionModel.map((item, index) =>
-      (data[index].name)));
-  };
+    setSelectionModel(selectionModel)
+    setSelectedRows(selectionModel.map((item, index) => data[index].name))
+  }
 
   const onRowClick = (details: GridRowParams) => {
-    setDetailRow(details);
-  };
+    setDetailRow(details)
+  }
 
-  const buttonText = `(${selectedRows.length}) ${String(t(messages.removeAll))}`;
+  const buttonText = `(${selectedRows.length}) ${String(t(messages.removeAll))}`
 
   const handleClickOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const uploadToFirestore = async () => {
-    await setDoc(doc(database, Collections.CATEGORIES, `DIM-${categoryLabel?.trim()}`),
-      ({
+    await setDoc(
+      doc(database, Collections.CATEGORIES, `DIM-${categoryLabel?.trim()}`),
+      {
         name: categoryLabel,
-      }));
-    queryClient.invalidateQueries(CATEGORIES_KEY);
-    handleClose();
-  };
+      }
+    )
+    queryClient.invalidateQueries(CATEGORIES_KEY)
+    handleClose()
+  }
 
   return (
     <Accordion>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
+        aria-controls='panel1a-content'
+        id='panel1a-header'
       >
-        <h1>{String(t(messages.categories))}</h1>
+        <h3>{String(t(messages.categories))}</h3>
       </AccordionSummary>
       <AccordionDetails>
         <div className={styles.rowContainer}>
@@ -146,15 +162,15 @@ const Categories = (): JSX.Element => {
               </DialogContentText>
               <TextField
                 autoFocus
-                margin="dense"
-                id="name"
-                label="Rozmer"
+                margin='dense'
+                id='name'
+                label='Rozmer'
                 value={categoryLabel}
-                type="text"
+                type='text'
                 fullWidth
-                variant="standard"
+                variant='standard'
                 onChange={(e) => {
-                  setCategoryLabel(e.target.value);
+                  setCategoryLabel(e.target.value)
                 }}
               />
             </DialogContent>
@@ -166,7 +182,7 @@ const Categories = (): JSX.Element => {
         </div>
       </AccordionDetails>
     </Accordion>
-  );
-};
+  )
+}
 
-export default Categories;
+export default Categories
