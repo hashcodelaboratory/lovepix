@@ -182,4 +182,5 @@ export const messages = {
   diffrentShippingAddress: 'diffrentShippingAddress',
   addCompanyInfo: 'addCompanyInfo',
   note: 'note',
+  billingAddress: 'billingAddress',
 }

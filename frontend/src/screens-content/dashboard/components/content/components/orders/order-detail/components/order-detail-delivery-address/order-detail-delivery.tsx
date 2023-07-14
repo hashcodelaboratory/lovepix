@@ -10,18 +10,24 @@ type Props = {
 
 const OrderDetailDelivery = ({ order }: Props): JSX.Element => {
   const { t } = useTranslation()
+  const {
+    firstNameShippingAddress,
+    lastNameShippingAddress,
+    addressShippingAddress,
+    cityShippingAdress,
+    postalCodeShippingAddress,
+  } = order?.form ?? {}
 
   return (
     <Box className={styles.box} style={{ width: 400 }}>
       <h4>{t(messages.shipping)}</h4>
       <div style={{ fontSize: 12 }}>
         <p>
-          {order?.form?.firstNameShippingAddress ?? '-'}{' '}
-          {order?.form.lastNameShippingAddress ?? '-'}
+          {firstNameShippingAddress ?? '-'} {lastNameShippingAddress ?? '-'}
         </p>
-        <p>{order?.form?.addressShippingAddress ?? '-'} </p>
-        <p>{order?.form?.cityShippingAdress ?? '-'}</p>
-        <p>{order?.form?.postalCodeShippingAddress ?? '-'}</p>
+        <p>{addressShippingAddress ?? '-'} </p>
+        <p>{cityShippingAdress ?? '-'}</p>
+        <p>{postalCodeShippingAddress ?? '-'}</p>
       </div>
     </Box>
   )

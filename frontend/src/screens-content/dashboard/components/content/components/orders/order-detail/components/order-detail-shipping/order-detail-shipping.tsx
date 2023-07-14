@@ -16,7 +16,7 @@ const OrderDetailShipping = ({ order }: Props): JSX.Element => {
     order?.form ?? {}
 
   const formular = [
-    { title: 'Ico', value: ico },
+    { title: 'ICO', value: ico },
     { title: 'DIC', value: dic },
     { title: messages.company, value: company },
     { title: messages.address, value: address },
@@ -35,7 +35,7 @@ const OrderDetailShipping = ({ order }: Props): JSX.Element => {
 
   return (
     <Box className={styles.box} style={{ width: 400 }}>
-      <h4>Fakturačná adresa</h4>
+      <h4>{t(messages.billingAddress)}</h4>
       {formList}
       <div className={styles.detailRow} style={{ marginTop: 20 }}>
         <LocalShippingIcon className={styles.detailIcon} />
