@@ -6,8 +6,7 @@ import { messages } from "messages/messages";
 
 const Information = (): JSX.Element => {
   const {t} = useTranslation();
-  // TODO: replace facebook, instagram, tiktok links
-  // TODO: translate Kontakt -> after merge of Social sites
+  
   return (
     <Container>
       <div>
