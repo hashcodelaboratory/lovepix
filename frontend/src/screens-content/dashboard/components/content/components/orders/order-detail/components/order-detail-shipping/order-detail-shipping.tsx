@@ -11,17 +11,20 @@ type Props = {
 const OrderDetailShipping = ({ order }: Props): JSX.Element => {
   const { t } = useTranslation()
 
+  const { ico, dic, company, address, city, postalCode, note } =
+    order?.form ?? {}
+
   return (
     <Box className={styles.box} style={{ width: 400 }}>
       <h4>Fakturačná adresa</h4>
       <div style={{ fontSize: 12 }}>
-        <p>ICO: {order?.form?.ico}</p>
-        <p>DIC: {order?.form?.dic}</p>
-        <p>COMPANY: {order?.form?.company}</p>
-        <p>{order?.form?.address}</p>
-        <p>{order?.form?.city} </p>
-        <p>{order?.form?.postalCode}</p>
-        <p>{order?.form.note}</p>
+        <p>ICO: {ico}</p>
+        <p>DIC: {dic}</p>
+        <p>COMPANY: {company}</p>
+        <p>{address}</p>
+        <p>{city} </p>
+        <p>{postalCode}</p>
+        <p>{note}</p>
       </div>
       <div className={styles.detailRow} style={{ marginTop: 20 }}>
         <LocalShippingIcon className={styles.detailIcon} />
