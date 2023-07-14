@@ -26,8 +26,7 @@ const menuItems = [
   { title: PagesTitles.ESHOP, link: PagesUrls.ESHOP },
   { title: PagesTitles.MATERIALS, link: PagesUrls.MATERIALS },
   { title: PagesTitles.ABOUT_US, link: PagesUrls.ABOUT_US },
-  // TODO: fix contact
-  { title: 'Kontakt', link: '/contact' },
+  { title: PagesTitles.CONTACT, link: PagesUrls.CONTACT },
 ]
 
 const appBarLeftItems = [
@@ -38,8 +37,7 @@ const appBarRightItems = [
   { title: PagesTitles.ESHOP, link: PagesUrls.ESHOP },
   { title: PagesTitles.ABOUT_US, link: PagesUrls.ABOUT_US },
   { title: PagesTitles.MATERIALS, link: PagesUrls.MATERIALS },
-  // TODO: fix contact
-  { title: 'Kontakt', link: '/contact' },
+  { title: PagesTitles.CONTACT, link: PagesUrls.CONTACT },
 ]
 
 export { pages, settings, menuItems, appBarLeftItems, appBarRightItems }
