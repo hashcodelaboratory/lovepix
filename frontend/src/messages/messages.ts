@@ -163,6 +163,7 @@ export const messages = {
   thanksTitleError: 'thanksTitleError',
   thanksSubtitleError: 'thanksSubtitleError',
   thanksSubtitleContactError: 'thanksSubtitleContactError',
+  metaDescriptionDefault: 'metaDescriptionDefault',
   metaDescriptionAboutUs: 'metaDescriptionAboutUs',
   metaDescriptionAccount: 'metaDescriptionAccount',
   metaDescriptionConfigurator: 'metaDescriptionConfigurator',
