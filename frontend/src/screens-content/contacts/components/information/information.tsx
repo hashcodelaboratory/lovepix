@@ -12,7 +12,7 @@ const Information = (): JSX.Element => {
     <Container>
       <div>
         <div className={styles.infoTitleContainer}>
-          <h1 className={styles.infoTitle}>Kontakt</h1>
+          <h1 className={styles.infoTitle}>{t(messages.contact)}</h1>
           <p className={styles.infoComment}>{t(messages.contactInfoComment)}
           </p>
         </div>
