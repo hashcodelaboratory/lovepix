@@ -152,7 +152,7 @@ export const messages = {
   onStock: 'onStock',
   addToBasket: 'addToBasket',
   withTax: 'withTax',
-  productAddedToCart: 'productAddedToBsket',
+  productAddedToCart: 'productAddedToCart',
   noMoreProdutsOnStock: 'noMoreProdutsOnStock',
   newsletterSuccessAdd: 'newsletterSuccessAdd',
   thanksTitle: 'thanksTitle',
