@@ -184,5 +184,6 @@ export const messages = {
   socialSite: 'socialSite',
   contactInfoComment: 'contactInfoComment',
   deliveryPoint: 'deliveryPoint',
-  billingInfo: 'billingInfo'
+  billingInfo: 'billingInfo',
+  contact: 'Contact'
 }
