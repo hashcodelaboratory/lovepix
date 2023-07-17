@@ -59,12 +59,11 @@ const LanguageSwitch = () => {
     router.push('','',{locale: i18n.language});
   }
 
-  let langMenu = [];
+  let langItems = [];
   for(const lang in languages){
     if(lang !== i18n.language){
-      langMenu.push(
-        <MenuItem onClick={langSwitch} data-lang={lang} className={styles.langItem} selected={false} autoFocus={false}>
-          <p className={styles.langTitle}>{languages[lang].lang_name}</p>
+      langItems.push(
+        <MenuItem onClick={langSwitch} data-lang={lang} sx={{padding: "3px 8px"}} selected={false} autoFocus={false}>
           <Image
             src={languages[lang].flag}
             layout={ImageLayout.FIXED}
@@ -78,8 +77,8 @@ const LanguageSwitch = () => {
   }
 
   return (
-    <div className={styles.langContainer}>
-      <div className={styles.langContainer} 
+    <div style={{marginLeft: "0.6em"}}>
+      <Box sx={{cursor: "pointer", display: "flex", alignItems: "center", alignContent: "center"}} 
         aria-controls={open ? 'lang-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
@@ -92,9 +91,10 @@ const LanguageSwitch = () => {
         height={32}
         alt=''
         className={styles.langIcon}
+        style={{display: "inline-block"}}
       />
       <div className={styles.langArrow}></div>
-      </div>
+      </Box>
       <Menu
         id="lang-menu"
         anchorEl={anchorEl}
@@ -109,8 +109,13 @@ const LanguageSwitch = () => {
           horizontal: "center",
         }}
         disableAutoFocusItem={true}
+        PaperProps={{
+          style: {
+            maxHeight: 200,
+          },
+        }}
       >
-        {langMenu}
+        {langItems}
       </Menu>
     </div>
   )

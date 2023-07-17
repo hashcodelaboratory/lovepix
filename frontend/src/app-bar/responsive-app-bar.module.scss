@@ -14,38 +14,15 @@
   cursor: pointer;
 }
 
-.langIcon{
-  display: inline-block;
-}
-
 .langArrow{
   width: 0;
   height: 0;
   font-size: 0.45em;
-  border-style: solid;
   border-right: 0.6em solid transparent;
   border-left: 0.6em solid transparent;
-  border-top: 0.7em solid rgba(0,0,0,0.7);
+  border-top: 0.7em solid rgba(0,0,0,0.8);
   border-bottom: 0;
   margin-left: 0.9em;
-  color: black;
+  margin-top: 0.2em;
   display: inline-block;
-}
-
-.langTitle{
-  display: none;
-  font-size: 14px;
-  padding-right: 1em;
-}
-
-.langItem{
-  padding: 3px 8px;
-}
-
-.langContainer{
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-left: 0.1em;
 }
