@@ -121,7 +121,7 @@ const CategoriesEshop = (): JSX.Element => {
         aria-controls='panel1a-content'
         id='panel1a-header'
       >
-        <h1>Kategorie eshop</h1>
+        <h1>Kategórie eshop</h1>
       </AccordionSummary>
       <AccordionDetails>
         <div className={styles.rowContainer}>
@@ -157,16 +157,14 @@ const CategoriesEshop = (): JSX.Element => {
             <AddCircle sx={{ marginLeft: 1 }} />
           </button>
           <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>{t(messages.categories)}</DialogTitle>
+            <DialogTitle>Kategórie eshop</DialogTitle>
             <DialogContent>
-              <DialogContentText>
-                Pridajte rozmer, ktory chcete pouzivat v aplikacii
-              </DialogContentText>
+              <DialogContentText>Zadaj názov kategórie</DialogContentText>
               <TextField
                 autoFocus
                 margin='dense'
                 id='name'
-                label='Rozmer'
+                label='Názov'
                 value={categoryLabel}
                 type='text'
                 fullWidth
