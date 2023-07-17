@@ -22,6 +22,7 @@ import { getDimensionsColumns } from '../utils/columns/dimensions-columns'
 import { CategoryType } from '../../../../../../common/api/use-categories'
 import { removeCategory } from '../../../../api/categories/removeCategory'
 import { VoucherType } from '../../../../../../common/api/use-vouchers'
+import VoucherDetail from './components/voucher-detail/voucher-detail'
 
 const Voucher = (): JSX.Element => {
   const { t } = useTranslation()
@@ -101,7 +102,7 @@ const Voucher = (): JSX.Element => {
             onRowClick={onRowClick}
             autoHeight
           />
-          <div>Test</div>
+          <VoucherDetail />
         </div>
         <div className={styles.rowContainer}>
           <button

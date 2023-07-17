@@ -81,7 +81,7 @@
   width: 225px;
   border-radius: 1rem;
   box-shadow: rgb(0 0 0 / 10%) 0rem 0.25rem 0.375rem -0.0625rem,
-    rgb(0 0 0 / 6%) 0rem 0.125rem 0.25rem -0.0625rem;
+  rgb(0 0 0 / 6%) 0rem 0.125rem 0.25rem -0.0625rem;
 }
 
 .cardIconContainer {
@@ -93,7 +93,7 @@
   background: linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
   border-radius: 0.75rem;
   box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem,
-    rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
+  rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
   color: white;
   display: flex;
   align-items: center;
@@ -133,10 +133,10 @@
   border-bottom: none;
   opacity: 0.25;
   background-image: linear-gradient(
-    to right,
-    rgba(52, 71, 103, 0),
-    rgba(52, 71, 103, 0.4),
-    rgba(52, 71, 103, 0)
+                  to right,
+                  rgba(52, 71, 103, 0),
+                  rgba(52, 71, 103, 0.4),
+                  rgba(52, 71, 103, 0)
   ) !important;
 }
 
@@ -174,7 +174,7 @@
   background-color: #0070f3;
   border: none;
   box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem,
-    rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
+  rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
 }
 
 .removeButton:disabled {
@@ -318,4 +318,21 @@
   color: #a3c8ef;
   width: 3rem;
   height: 3rem;
+}
+
+.voucherDetailBox {
+  position: relative;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem, rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
+  width: 800px;
+  height: 400px;
+  border-radius: 1rem;
+  margin: 0 1rem;
+  padding: 1rem;
+}
+
+.voucherDetailInputText {
+  margin: 0;
+  padding-bottom: 0.5rem;
+  font-size: 0.8rem;
 }
