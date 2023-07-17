@@ -183,4 +183,5 @@ export const messages = {
   addCompanyInfo: 'addCompanyInfo',
   note: 'note',
   billingAddress: 'billingAddress',
+  contact: 'Contact',
 }
