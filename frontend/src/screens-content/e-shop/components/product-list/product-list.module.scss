@@ -1,22 +1,37 @@
 .eshopContainer {
-    display: flex;
-    flex-direction: row;
-    background-color: white;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
 }
 
 .categoriesContainer {
-    padding: 10px;
-    min-width: 200px;
+  padding: 10px;
+  min-width: 200px;
 }
 
 .rightContainer {
-    width: 100%;
+  width: 100%;
 }
 
 .productsContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    row-gap: 0;
-    column-gap: 0px;
-    background-color: white;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  row-gap: 0;
+  column-gap: 0px;
+  background-color: white;
+}
+
+.categoryActive {
+  color: #e71d3e;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.categoryItem {
+  font-size: 14px;
+  padding: 5px;
+  font-weight: 600;
+  cursor: pointer;
 }
