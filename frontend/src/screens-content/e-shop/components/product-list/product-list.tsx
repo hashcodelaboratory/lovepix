@@ -14,15 +14,15 @@ const ProductList = () => {
     <Product key={products.id} product={{ ...products }} />
   ))
 
-  console.log(selectedCategory)
-
   useEffect(() => {
     refetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory])
 
   const handleChange = (category: string) => () => {
-    setSelectedCategory(category)
+    category === selectedCategory
+      ? setSelectedCategory(null)
+      : setSelectedCategory(category)
   }
 
   const categoriesList = categories?.map((item, index) => (
