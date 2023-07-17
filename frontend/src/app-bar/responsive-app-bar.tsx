@@ -5,7 +5,6 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
 import Container from '@mui/material/Container'
-import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
 import Link from 'next/link'
 import { appBarLeftItems, appBarRightItems, menuItems } from '../navigation'
@@ -22,7 +21,9 @@ import {
   ORDER_TABLE_KEY,
 } from '../common/indexed-db/hooks/keys'
 import logo from '../assets/logo_color.png'
-import Image from 'next/image'
+import flag_sk from '../assets/flag-sk.png'
+import flag_en from '../assets/flag-en.png'
+import Image, { StaticImageData } from 'next/image'
 import { ImageLayout } from '../screens-content/home/enums/enums'
 import styles from './responsive-app-bar.module.scss'
 import SearchIcon from '@mui/icons-material/Search'
@@ -31,15 +32,87 @@ import LogoComponent from './components/menu-sidebar/logo/logo'
 import ConfiguratorComponent from './components/menu/configurator/configurator'
 
 const LanguageSwitch = () => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = () => {
+    setAnchorEl(document.getElementById("lang-flag"));
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const {i18n} = useTranslation();
-  function getNext(){
-    return (i18n.language === "en")? "sk" : "en";
+  type langData = {
+    flag: StaticImageData,
+    lang_name?: string,
   }
-  function langSwitch() {
-    i18n.changeLanguage(getNext());
+
+  const router = useRouter();
+  const languages:{[key: string]: langData} = {
+    "sk": {flag: flag_sk, lang_name: "Slovensky"},
+    "en": {flag: flag_en, lang_name: "English"},
   }
+
+  function langSwitch(event: React.MouseEvent<HTMLElement>) {
+    i18n.changeLanguage(event.currentTarget.getAttribute("data-lang") ?? "sk");
+
+    router.push('','',{locale: i18n.language});
+  }
+
+  let langMenu = [];
+  for(const lang in languages){
+    if(lang !== i18n.language){
+      langMenu.push(
+        <MenuItem onClick={langSwitch} data-lang={lang} className={styles.langItem} selected={false} autoFocus={false}>
+          <p className={styles.langTitle}>{languages[lang].lang_name}</p>
+          <Image
+            src={languages[lang].flag}
+            layout={ImageLayout.FIXED}
+            width={32}
+            height={32}
+            alt=''
+            className={styles.icon}/>
+        </MenuItem>
+      )
+    }
+  }
+
   return (
-    <button className={styles.langSwitch} onClick={langSwitch}>{getNext()}</button>
+    <div className={styles.langContainer}>
+      <div className={styles.langContainer} 
+        aria-controls={open ? 'lang-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}>
+      <Image
+        id="lang-flag"
+        src={languages[i18n.language].flag}
+        layout={ImageLayout.FIXED}
+        width={32}
+        height={32}
+        alt=''
+        className={styles.langIcon}
+      />
+      <div className={styles.langArrow}></div>
+      </div>
+      <Menu
+        id="lang-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        disableAutoFocusItem={true}
+      >
+        {langMenu}
+      </Menu>
+    </div>
   )
 } 
 
