@@ -181,6 +181,7 @@ export const messages = {
   agreeWithBussinessCondition: 'agreeWithBussinessCondition',
   diffrentShippingAddress: 'diffrentShippingAddress',
   addCompanyInfo: 'addCompanyInfo',
+  contact: 'Contact',
   voucherCode: 'voucherCode',
   generateVoucherCode: 'generateVoucherCode',
   voucherCodeDesc: 'voucherCodeDesc',
