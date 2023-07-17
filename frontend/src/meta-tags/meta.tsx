@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useTranslation } from "react-i18next";
 import { messages } from "messages/messages";
 import { useEffect, useRef} from "react";
+import logo from '../assets/logo_color.png';
 
 type MetaTagsType = {
     desc?: string;
@@ -22,17 +23,17 @@ const MetaTags = ({desc}: MetaTagsType) => {
         author.current = t(messages.metaAuthorText);
         title.current = document.title;
         url_page.current = window.location.href;
-        image.current = document.getElementsByTagName("img")[0].src;
-    }, [])
+        image.current = window.location.protocol + "//" + window.location.host + logo.src;
+    }, [desc,t])
     return (
         <Head>
             <meta name="description" content={description.current}/>
             <meta name="keywords" content={keywords.current}/>
             <meta name="author" content={author.current}/>
-            <meta property="og:title" content={title.current} />
-            <meta property="og:url" content={url_page.current} />
+            <meta property="og:title" content={title.current}/>
+            <meta property="og:url" content={url_page.current}/>
             <meta property="og:image" content={image.current}/>
-            <meta property="og:description" content={description.current} />
+            <meta property="og:description" content={description.current}/>
         </Head>
     )
 }
