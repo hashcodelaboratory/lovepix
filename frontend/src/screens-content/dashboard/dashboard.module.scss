@@ -336,3 +336,17 @@
   padding-bottom: 0.5rem;
   font-size: 0.8rem;
 }
+
+.voucherDetailListRow {
+  background-color: whitesmoke;
+  font-size: 0.8rem;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+.voucherDetailListRow:hover {
+  background-color: #e5e5e5;
+  cursor: pointer;
+}
