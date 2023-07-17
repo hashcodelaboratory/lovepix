@@ -42,7 +42,6 @@ const ProductList = () => {
   return (
     <div className={styles.eshopContainer}>
       <div className={styles.categoriesContainer}>
-        <div>Kategorie </div>
         <div>{categoriesList}</div>
       </div>
       <div className={styles.rightContainer}>
