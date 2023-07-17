@@ -7,6 +7,9 @@ import MultipleStopIcon from '@mui/icons-material/MultipleStop'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { messages } from '../../../../../../../../messages/messages'
+import General from './components/general/general'
+import Strict from './components/strict/strict'
+import Limit from './components/limit/limit'
 
 enum SidePanelEnum {
   GENERAL = 'GENERAL',
@@ -24,11 +27,11 @@ const VoucherDetail = () => {
   const detailLayout = useMemo(() => {
     switch (sidePanel) {
       case SidePanelEnum.GENERAL:
-        return 'general'
+        return <General />
       case SidePanelEnum.STRICT:
-        return 'strict'
+        return <Strict />
       case SidePanelEnum.LIMIT:
-        return 'limit'
+        return <Limit />
     }
   }, [sidePanel])
 
@@ -54,7 +57,7 @@ const VoucherDetail = () => {
           multiline
           fullWidth
           rows={3}
-          placeholder='Popis kupónu'
+          placeholder={t(messages.voucherCodeDesc)}
         />
       </div>
       <div>
