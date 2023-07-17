@@ -181,4 +181,11 @@ export const messages = {
   agreeWithBussinessCondition: 'agreeWithBussinessCondition',
   diffrentShippingAddress: 'diffrentShippingAddress',
   addCompanyInfo: 'addCompanyInfo',
+  voucherCode: 'voucherCode',
+  generateVoucherCode: 'generateVoucherCode',
+  voucherCodeDesc: 'voucherCodeDesc',
+  voucherCodeData: 'voucherCodeData',
+  general: 'general',
+  strict: 'strict',
+  limit: 'limit',
 }
