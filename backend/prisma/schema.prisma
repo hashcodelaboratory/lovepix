@@ -10,13 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Todo {  
-    id     String   @id @default(auto()) @map("_id") @db.ObjectId  
-    label  String   
-    done   Boolean  @default(false)
-}
-
-
 model Post {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   slug     String    @unique
