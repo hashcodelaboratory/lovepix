@@ -189,4 +189,8 @@ export const messages = {
   general: 'general',
   strict: 'strict',
   limit: 'limit',
+  saleType: 'saleType',
+  voucherValue: 'voucherValue',
+  deliveryFree: 'deliveryFree',
+  expiration: 'expiration',
 }

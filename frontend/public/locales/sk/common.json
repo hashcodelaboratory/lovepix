@@ -188,5 +188,9 @@
   "voucherCodeData": "Údaje kupónu",
   "general": "Všeobecné",
   "strict": "Obmedzenie použitia",
-  "limit": "Limit využitia"
+  "limit": "Limit využitia",
+  "saleType": "Typ zľavy",
+  "voucherValue": "Hodnota kupónu",
+  "deliveryFree": "Povoliť dopravu zdarma",
+  "expiration": "Dátum expirácie"
 }

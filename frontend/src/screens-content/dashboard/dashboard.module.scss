@@ -325,7 +325,7 @@
   background-color: white;
   box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem, rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
   width: 1000px;
-  height: 400px;
+  height: 600px;
   border-radius: 1rem;
   margin: 0 1rem;
   padding: 1rem;
@@ -344,6 +344,7 @@
   display: flex;
   align-items: center;
   padding: 0 0.5rem;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .voucherDetailListRow:hover {
@@ -358,4 +359,16 @@
 
 .voucherDetailSidepanelContent {
   padding: 1rem;
+}
+
+.voucherGeneralRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.voucherGeneralText {
+  margin: 0;
+  font-size: 0.8rem;
+  width: 200px;
 }

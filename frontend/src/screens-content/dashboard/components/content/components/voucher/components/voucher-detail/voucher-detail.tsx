@@ -65,7 +65,7 @@ const VoucherDetail = () => {
           {t(messages.voucherCodeData)}
         </p>
         <div className={styles.voucherDetailSidepanelRow}>
-          <div>
+          <div style={{ backgroundColor: 'whitesmoke' }}>
             <div
               className={styles.voucherDetailListRow}
               onClick={() => changeSidePanel(SidePanelEnum.GENERAL)}
