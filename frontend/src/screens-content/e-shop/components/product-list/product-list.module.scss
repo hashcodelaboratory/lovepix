@@ -5,12 +5,13 @@
 }
 
 .categoriesContainer {
-  padding: 10px;
+  padding: 25px;
   min-width: 200px;
 }
 
 .rightContainer {
   width: 100%;
+  padding: 25px;
 }
 
 .productsContainer {
@@ -24,19 +25,22 @@
 .categoryActive {
   font-size: 14px;
   font-weight: 600;
-  padding: 5px;
+  margin-bottom: 5px;
   cursor: pointer;
 }
 
 .categoryItem {
   color: #414b56;
   font-size: 14px;
-  padding: 5px;
-  font-weight: 500;
+  margin-bottom: 5px;
   cursor: pointer;
 }
 
 .categoryItem:hover {
   color: black;
   font-weight: 600;
+}
+
+.categoryTitle {
+  margin-bottom: 25px;
 }
