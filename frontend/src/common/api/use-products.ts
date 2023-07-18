@@ -16,7 +16,7 @@ export type ProductsType = {
 }
 
 export const getProducts = async (
-  category: string | null
+  category?: string | null
 ): Promise<ProductsType[]> => {
   const allProducts = collection(database, Collections.PRODUCTS)
 
@@ -35,6 +35,6 @@ export const getProducts = async (
 }
 
 export const useProducts = (
-  category: string | null
+  category?: string | null
 ): UseQueryResult<ProductsType[]> =>
   useQuery([PRODUCT_KEY, category], () => getProducts(category))
