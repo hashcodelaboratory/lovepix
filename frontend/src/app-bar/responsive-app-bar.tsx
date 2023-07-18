@@ -42,16 +42,12 @@ const LanguageSwitch = () => {
   };
 
   const {i18n} = useTranslation();
-  type langData = {
-    flag: StaticImageData,
-    lang_name?: string,
-  }
 
   const router = useRouter();
-  const languages:{[key: string]: langData} = {
-    "sk": {flag: flag_sk, lang_name: "Slovensky"},
-    "en": {flag: flag_en, lang_name: "English"},
-  }
+  const languages = new Map<string, StaticImageData>([
+    ["sk", flag_sk],
+    ["en", flag_en],
+  ])
 
   function langSwitch(event: React.MouseEvent<HTMLElement>) {
     i18n.changeLanguage(event.currentTarget.getAttribute("data-lang") ?? "sk");
@@ -60,12 +56,12 @@ const LanguageSwitch = () => {
   }
 
   let langItems = [];
-  for(const lang in languages){
+  for (const [lang, flag] of Array.from(languages)) {
     if(lang !== i18n.language){
       langItems.push(
         <MenuItem onClick={langSwitch} data-lang={lang} sx={{padding: "3px 8px"}} selected={false} autoFocus={false}>
           <Image
-            src={languages[lang].flag}
+            src={flag}
             layout={ImageLayout.FIXED}
             width={32}
             height={32}
@@ -75,7 +71,8 @@ const LanguageSwitch = () => {
       )
     }
   }
-
+  const lang_code:string = languages.has(i18n.language)? i18n.language : "sk";
+  const flag:StaticImageData = languages.get(lang_code)!;
   return (
     <div style={{marginLeft: "0.6em"}}>
       <Box sx={{cursor: "pointer", display: "flex", alignItems: "center", alignContent: "center"}} 
@@ -85,7 +82,7 @@ const LanguageSwitch = () => {
         onClick={handleClick}>
       <Image
         id="lang-flag"
-        src={languages[i18n.language].flag}
+        src={flag}
         layout={ImageLayout.FIXED}
         width={32}
         height={32}
