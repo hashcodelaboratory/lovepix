@@ -1,4 +1,4 @@
-import { ProductsType } from 'common/api/use-products'
+import { ProductsType, useProducts } from 'common/api/use-products'
 import React from 'react'
 import Product from '../product/product'
 import styles from './product-list.module.scss'
@@ -8,20 +8,22 @@ import { useTranslation } from 'next-i18next'
 import { messages } from 'messages/messages'
 import { useRouter } from 'next/router'
 import { ESHOP } from 'constants/pages/urls'
-import useFilteredProducts from './use-filtered-products'
+import ProductSkeleton from '../product-skeleton/product-skeleton'
 
 const ProductList = () => {
   const { t } = useTranslation()
   const router = useRouter()
   const { kategoria } = router.query
+  const { data: products, isLoading } = useProducts(
+    (kategoria as string) ?? null
+  )
   const { data: categories } = useCategoriesEshop()
-  const { products } = useFilteredProducts((kategoria as string) ?? null)
 
   const productList = products?.map((products: ProductsType) => (
     <Product key={products.id} product={{ ...products }} />
   ))
 
-  const handleChange = (category: string) => () =>
+  const selectCategory = (category: string) => () =>
     router.push({
       pathname: '/e-shop',
       query: { kategoria: category },
@@ -32,7 +34,7 @@ const ProductList = () => {
   const categoriesList = categories?.map((item, index) => (
     <div
       key={index}
-      onClick={handleChange(item.name)}
+      onClick={selectCategory(item.name)}
       className={
         kategoria === item.name ? styles.categoryActive : styles.categoryItem
       }
@@ -60,8 +62,7 @@ const ProductList = () => {
           {categoryTitle}
         </Typography>
         <div className={styles.productsContainer}>
-          {/* {isLoading ? <ProductSkeleton /> : <>{productList}</>} */}
-          {productList}
+          {isLoading ? <ProductSkeleton /> : <>{productList}</>}
         </div>
       </div>
     </div>
