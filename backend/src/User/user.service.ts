@@ -43,13 +43,13 @@ export class UserService {
         });
     }
 
-    async findPosts(id: string) {
+    async findOrders(id: string) {
         return await this.prismaService.user.findUnique({
             where: {
                 id: id
             },
             include: {
-                posts: true
+                orders: true
             }
         });
     }

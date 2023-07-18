@@ -10,40 +10,71 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  slug     String    @unique
-  title    String
-  body     String
-  author   User      @relation(fields: [authorId], references: [id])
-  authorId String    @db.ObjectId
-  comments Comment[]
-}
-
-
 model User {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  email   String   @unique
-  name    String?
-  address Address?
-  posts   Post[]
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  email      String  @unique
+  password   String
+  first_name String?
+  last_name  String?
+  phone      String?
+  orders     Order[]
 }
 
-
-model Comment {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  comment String
-  post    Post   @relation(fields: [postId], references: [id])
-  postId  String @db.ObjectId
+model Product {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  name        String      @unique
+  category    String
+  description String?
+  quantity    Int
+  price       Float
+  image       String?
 }
 
-
-// Address is an embedded document
-
-type Address {
-  street String
-  city   String
-  state  String
-  zip    String
+model Order {
+  id       String      @id @default(auto()) @map("_id") @db.ObjectId
+  user     User       @relation(fields: [userID], references: [id])
+  userID   String     @db.ObjectId
+  total    Float
+  date     DateTime
+  items    OrderItem[]
+  form     Form
+  shipment Shipment
+  payment  Payment
 }
 
+model OrderItem {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  order     Order   @relation(fields: [orderID], references: [id])
+  orderID   String  @db.ObjectId
+  productID String  @db.ObjectId
+  quantity  Int
+  price     Float
+}
+
+type Shipment {
+  method String
+  price  Float
+}
+
+type Payment {
+  method String
+  price  Float
+}
+
+type Form {
+  first_name                  String
+  last_name                   String
+  email                       String
+  phone                       String
+  address                     String
+  city                        String
+  zip                         String
+  company                     String?
+  ICO                         String?
+  DIC                         String?
+  Delivery_address_street     String?
+  Delivery_address_city       String?
+  Delivery_address_zip        String?
+  Delivery_address_first_name String?
+  Delivery_address_last_name  String?
+}

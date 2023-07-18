@@ -4,8 +4,9 @@ import { AppService } from './app.service';
 import { MongooseModule } from "@nestjs/mongoose";
 import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './User/user.module';
-import { PostModule } from './Post/post.module';
-import { CommentModule } from './Comment/comment.module';
+import { OrderModule } from './Order/order.module';
+import { ProductModule } from './Product/product.module';
+import { OrderItemModule } from './OrderItem/order_item.module';
 
 
 
@@ -14,7 +15,7 @@ const ENV_PACKAGE = "dotenv";
 require(ENV_PACKAGE).config();
 
 @Module({
-  imports: [PrismaModule, UserModule, PostModule, CommentModule],
+  imports: [PrismaModule, UserModule, OrderModule, ProductModule, OrderItemModule],
   controllers: [AppController],
   providers: [AppService],
 })

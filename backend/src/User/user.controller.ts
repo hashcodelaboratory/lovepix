@@ -1,7 +1,7 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
-import {UserService} from './user.service';
-import {CreateUserDto} from './dto/create-user.dto';
-import {UpdateUserDto} from './dto/update-user.dto';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { UserService } from './user.service';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UserController {
@@ -33,8 +33,8 @@ export class UserController {
         return this.userService.remove(id);
     }
 
-    @Get('posts/:id')
-    findPosts(@Param('id') id: string) {
-        return this.userService.findPosts(id);
+    @Get(':id/orders')
+    findOrders(@Param('id') id: string) {
+        return this.userService.findOrders(id);
     }
 }
