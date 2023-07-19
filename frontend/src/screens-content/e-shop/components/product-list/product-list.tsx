@@ -18,6 +18,7 @@ const ProductList = () => {
     (kategoria as string) ?? null
   )
   const tablet = useMediaQuery('(max-width:1000px)')
+  const mobile = useMediaQuery('(max-width:580px)')
 
   const productList = products?.map((products: ProductsType) => (
     <Product key={products.id} product={{ ...products }} />
@@ -33,11 +34,15 @@ const ProductList = () => {
     <div className={styles.eshopContainer}>
       {tablet && <TemporaryDrawer />}
       {!tablet && <CategoriesSidebar />}
-      <div className={styles.rightContainer}>
+      <div className={mobile ? styles.pContainerMobile : styles.pContainer}>
         <Typography variant='h5' className={styles.categoryTitle}>
           {categoryTitle}
         </Typography>
-        <div className={styles.productsContainer}>
+        <div
+          className={
+            mobile ? styles.productsContainerMobile : styles.productsContainer
+          }
+        >
           {isLoading ? shimmers : productList}
         </div>
       </div>
