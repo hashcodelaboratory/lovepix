@@ -10,15 +10,17 @@ import { useTranslation } from 'react-i18next'
 import { messages } from '../../../../../../../../../../messages/messages'
 import MenuItem from '@mui/material/MenuItem'
 import { useState } from 'react'
-
-const enum SaleTypeEnum {
-  PERCENTAGE = 'PERCENTAGE',
-  FIX_CART = 'FIX_CART',
-  FIX_PRODUCT = 'FIX_PRODUCT',
-}
+import { SaleTypeEnum } from '../../../../../../../../../../common/voucher/utils/enums'
+import { Controller, useForm } from 'react-hook-form'
+import { FormInputs } from '../../voucher-detail'
 
 const General = () => {
   const { t } = useTranslation()
+  const {
+    control,
+    register,
+    formState: { errors },
+  } = useForm<FormInputs>()
 
   const [sale, setSale] = useState<SaleTypeEnum>(SaleTypeEnum.PERCENTAGE)
   const [value, setValue] = useState<number>()
@@ -33,24 +35,33 @@ const General = () => {
     <div>
       <div className={styles.voucherGeneralRow}>
         <p className={styles.voucherGeneralText}>{t(messages.saleType)}</p>
-        <Select
-          labelId='demo-simple-select-label'
-          id='demo-simple-select'
-          value={sale}
-          onChange={changeSale}
-          sx={{ ml: 1, width: 300 }}
-          size='small'
-        >
-          <MenuItem value={SaleTypeEnum.PERCENTAGE}>
-            {t(messages[SaleTypeEnum.PERCENTAGE])}
-          </MenuItem>
-          <MenuItem value={SaleTypeEnum.FIX_CART}>
-            {t(messages[SaleTypeEnum.FIX_CART])}
-          </MenuItem>
-          <MenuItem value={SaleTypeEnum.FIX_PRODUCT}>
-            {t(messages[SaleTypeEnum.FIX_PRODUCT])}
-          </MenuItem>
-        </Select>
+        <Controller
+          key={'saleType'}
+          name={'saleType'}
+          control={control}
+          render={({ field }) => (
+            <Select
+              {...field}
+              {...register('saleType', { required: true })}
+              error={!!errors.saleType?.message}
+              labelId='demo-simple-select-label'
+              id='demo-simple-select'
+              sx={{ ml: 1, width: 300 }}
+              size='small'
+              placeholder={SaleTypeEnum.PERCENTAGE}
+            >
+              <MenuItem value={SaleTypeEnum.PERCENTAGE}>
+                {t(messages[SaleTypeEnum.PERCENTAGE])}
+              </MenuItem>
+              <MenuItem value={SaleTypeEnum.FIX_CART}>
+                {t(messages[SaleTypeEnum.FIX_CART])}
+              </MenuItem>
+              <MenuItem value={SaleTypeEnum.FIX_PRODUCT}>
+                {t(messages[SaleTypeEnum.FIX_PRODUCT])}
+              </MenuItem>
+            </Select>
+          )}
+        />
       </div>
       <div className={styles.voucherGeneralRow}>
         <p className={styles.voucherGeneralText}>{t(messages.voucherValue)}</p>

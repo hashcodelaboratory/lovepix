@@ -12,17 +12,11 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { useTranslation } from 'next-i18next'
 import { useContext, useState } from 'react'
 import DashboardContext from '../../../../context/dashboard-context'
-import {
-  SNACKBAR_OPTIONS_ERROR,
-  SNACKBAR_OPTIONS_SUCCESS,
-} from '../../../../../../snackbar/config'
 import { useSnackbar } from 'notistack'
 import { useQueryClient } from 'react-query'
-import { getDimensionsColumns } from '../utils/columns/dimensions-columns'
-import { CategoryType } from '../../../../../../common/api/use-categories'
-import { removeCategory } from '../../../../api/categories/removeCategory'
 import { VoucherType } from '../../../../../../common/api/use-vouchers'
 import VoucherDetail from './components/voucher-detail/voucher-detail'
+import { getColumns } from './utils/columns'
 
 const Voucher = (): JSX.Element => {
   const { t } = useTranslation()
@@ -39,10 +33,10 @@ const Voucher = (): JSX.Element => {
 
   const data =
     vouchers?.map(
-      ({ name, id }) =>
+      ({ code, id }) =>
         ({
           id: id,
-          name: name,
+          code: code,
         } as VoucherType)
     ) ?? []
 
@@ -52,16 +46,16 @@ const Voucher = (): JSX.Element => {
   }
 
   const removeData = () => {
-    const result = removeCategory(selectedRows, queryClient)
-    if (result === '') {
-      enqueueSnackbar(
-        String(t(messages.filesRemoved)),
-        SNACKBAR_OPTIONS_SUCCESS
-      )
-      reset()
-    } else {
-      enqueueSnackbar(result, SNACKBAR_OPTIONS_ERROR)
-    }
+    // TODO: implement
+    // if (result === '') {
+    //   enqueueSnackbar(
+    //     String(t(messages.filesRemoved)),
+    //     SNACKBAR_OPTIONS_SUCCESS
+    //   )
+    //   reset()
+    // } else {
+    //   enqueueSnackbar(result, SNACKBAR_OPTIONS_ERROR)
+    // }
   }
 
   const selectionChanged = (
@@ -69,7 +63,7 @@ const Voucher = (): JSX.Element => {
     details: GridCallbackDetails
   ) => {
     setSelectionModel(selectionModel)
-    setSelectedRows(selectionModel.map((item, index) => data[index].name))
+    setSelectedRows(selectionModel.map((item, index) => data[index].code))
   }
 
   const onRowClick = (details: GridRowParams) => {
@@ -92,7 +86,7 @@ const Voucher = (): JSX.Element => {
           <DataGrid
             className={styles.contentTable}
             rows={data}
-            columns={getDimensionsColumns()}
+            columns={getColumns()}
             pageSize={10}
             rowsPerPageOptions={[5]}
             checkboxSelection
@@ -102,7 +96,7 @@ const Voucher = (): JSX.Element => {
             onRowClick={onRowClick}
             autoHeight
           />
-          <VoucherDetail />
+          <VoucherDetail detail={detailRow?.row} />
         </div>
         <div className={styles.rowContainer}>
           <button

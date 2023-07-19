@@ -4,7 +4,7 @@ export const VOUCHERS_KEY = 'VOUCHERS'
 
 export type VoucherType = {
   id: string
-  name: string
+  code: string
 }
 
 const getVouchers = async (): Promise<VoucherType[]> => {
