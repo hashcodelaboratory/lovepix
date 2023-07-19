@@ -14,7 +14,7 @@ const Account: NextPage = () => {
         <title>Account</title>
       </Head>
 
-      <MetaTags desc={messages.metaDescriptionAccount}/>
+      <MetaTags desc={messages.metaDescriptionAccount} img={messages.metaDefaultImageAccount}/>
 
       <header>
         <ResponsiveAppBar />

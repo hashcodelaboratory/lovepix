@@ -17,7 +17,7 @@ const Materials: NextPage = () => {
         <title>Materials</title>
       </Head>
 
-      <MetaTags desc={messages.metaDescriptionMaterials}/>
+      <MetaTags desc={messages.metaDescriptionMaterials} img={messages.metaDefaultImageMaterials}/>
 
       <header>
         <ResponsiveAppBar />

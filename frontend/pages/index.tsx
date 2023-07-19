@@ -23,7 +23,7 @@ const Home: NextPage = () => {
         <title>Lovepix</title>
       </Head>
 
-      <MetaTags desc={messages.metaDescriptionIndex}/>
+      <MetaTags desc={messages.metaDescriptionIndex} img={messages.metaDefaultImageIndex}/>
       
       <header>
         <ResponsiveAppBar />

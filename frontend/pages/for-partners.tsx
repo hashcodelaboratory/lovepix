@@ -16,7 +16,7 @@ const ForPartners: NextPage = () => {
         <title>For Partners</title>
       </Head>
 
-      <MetaTags desc={messages.metaDescriptionForPartners}/>
+      <MetaTags desc={messages.metaDescriptionForPartners} img={messages.metaDefaultImageForPartners}/>
       
       <header>
         <ResponsiveAppBar />

@@ -16,7 +16,7 @@ const Gallery: NextPage = () => {
         <title>Gallery</title>
       </Head>
 
-      <MetaTags desc={messages.metaDescriptionGallery}/>
+      <MetaTags desc={messages.metaDescriptionGallery} img={messages.metaDefaultImageGallery}/>
 
       <header>
         <ResponsiveAppBar />

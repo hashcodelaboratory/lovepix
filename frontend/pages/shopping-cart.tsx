@@ -21,7 +21,7 @@ const ShoppingCart: NextPage = () => {
         <title>Shopping cart</title>
       </Head>
 
-      <MetaTags desc={messages.metaDescriptionShoppingCart}/>
+      <MetaTags desc={messages.metaDescriptionShoppingCart} img={messages.metaDefaultImageShoppingCart}/>
 
       <header>
         <ResponsiveAppBar />

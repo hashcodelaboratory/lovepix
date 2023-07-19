@@ -16,7 +16,7 @@ const AboutUs: NextPage = () => {
         <title>About us</title>
       </Head>
 
-      <MetaTags desc={messages.metaDescriptionAboutUs}/>
+      <MetaTags desc={messages.metaDescriptionAboutUs} img={messages.metaDefaultImageAboutUs}/>
 
       <header>
         <ResponsiveAppBar />

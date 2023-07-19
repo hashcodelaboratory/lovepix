@@ -16,7 +16,7 @@ const Eshop: NextPage = () => {
         <title>E-shop</title>
       </Head>
 
-      <MetaTags desc={messages.metaDescriptionEShop}/>
+      <MetaTags desc={messages.metaDescriptionEShop} img={messages.metaDefaultImageEShop}/>
       
       <header>
         <ResponsiveAppBar />

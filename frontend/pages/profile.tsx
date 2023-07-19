@@ -13,7 +13,7 @@ const Profile: NextPage = () => {
         <title>Profile</title>
       </Head>
 
-      <MetaTags desc={messages.metaDescriptionProfile}/>
+      <MetaTags desc={messages.metaDescriptionProfile} img={messages.metaDefaultImageProfile}/>
 
       <header>
         <ResponsiveAppBar />

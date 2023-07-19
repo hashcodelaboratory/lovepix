@@ -24,7 +24,7 @@ const Configurator: NextPage = () => {
         <title>Configurator</title>
       </Head>
 
-      <MetaTags desc={messages.metaDescriptionConfigurator}/>
+      <MetaTags desc={messages.metaDescriptionConfigurator} img={messages.metaDefaultImageConfigurator}/>
       
       <header>
         <ResponsiveAppBar />
