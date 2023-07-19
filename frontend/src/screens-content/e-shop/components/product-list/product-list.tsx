@@ -14,7 +14,7 @@ const ProductList = () => {
   const { t } = useTranslation()
   const router = useRouter()
   const { kategoria } = router.query
-  const { data: products, isFetching } = useProducts(
+  const { data: products, isLoading } = useProducts(
     (kategoria as string) ?? null
   )
   const tablet = useMediaQuery('(max-width:1000px)')
@@ -38,7 +38,7 @@ const ProductList = () => {
           {categoryTitle}
         </Typography>
         <div className={styles.productsContainer}>
-          {isFetching ? shimmers : productList}
+          {isLoading ? shimmers : productList}
         </div>
       </div>
     </div>

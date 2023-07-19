@@ -11,7 +11,7 @@ const CategoriesSidebar = () => {
   const router = useRouter()
   const { t } = useTranslation()
   const { kategoria } = router.query
-  const { data: categories, isFetching } = useCategoriesEshop()
+  const { data: categories, isLoading } = useCategoriesEshop()
 
   const selectCategory = (category: string) => () =>
     router.push({
@@ -49,7 +49,7 @@ const CategoriesSidebar = () => {
       <div onClick={showAllProducts} className={categoryStyle}>
         {t(messages.allProducts)}
       </div>
-      {isFetching ? shimmers : categoriesList}
+      {isLoading ? shimmers : categoriesList}
     </div>
   )
 }
