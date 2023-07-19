@@ -15,6 +15,8 @@ export const removeCategoryEshop = (
   selectedRows: string[],
   queryClient: QueryClient
 ): string => {
+  console.log('😛', selectedRows)
+
   selectedRows.forEach(async (row) => {
     const q = query(
       collection(database, Collections.CATEGORIES_ESHOP),

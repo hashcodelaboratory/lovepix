@@ -6,7 +6,8 @@
 
 .categoriesContainer {
   padding: 25px;
-  min-width: 200px;
+  min-width: 250px;
+  border-right: 1.5px solid #e6e6e6;
 }
 
 .rightContainer {
@@ -16,9 +17,9 @@
 
 .productsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  row-gap: 0;
-  column-gap: 0px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 2fr));
+  row-gap: 5px;
+  column-gap: 5px;
   background-color: white;
 }
 
@@ -43,4 +44,21 @@
 
 .categoryTitle {
   margin-bottom: 25px !important;
+}
+
+.buttonHamburger {
+  position: absolute;
+  left: 0;
+  background-color: white;
+  border-radius: 0px 25px 25px 0px;
+  position: fixed;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.17);
+  z-index: 1;
+  padding: 10px;
+}
+
+.hamburger {
+  background-color: white;
+  //position: fixed;
+  color: #e81c40;
 }

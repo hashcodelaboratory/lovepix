@@ -2,12 +2,7 @@ import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { messages } from '../../../../../../messages/messages'
 import styles from '../../../../dashboard.module.scss'
-import {
-  DataGrid,
-  GridCallbackDetails,
-  GridRowParams,
-  GridSelectionModel,
-} from '@mui/x-data-grid'
+import { DataGrid, GridRowParams, GridSelectionModel } from '@mui/x-data-grid'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useTranslation } from 'next-i18next'
 import { useContext, useState } from 'react'
@@ -77,10 +72,7 @@ const CategoriesEshop = (): JSX.Element => {
     }
   }
 
-  const selectionChanged = (
-    selectionModel: GridSelectionModel,
-    details: GridCallbackDetails
-  ) => {
+  const selectionChanged = (selectionModel: GridSelectionModel) => {
     setSelectionModel(selectionModel)
     setSelectedRows(selectionModel.map((item, index) => data[index].name))
   }
