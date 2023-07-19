@@ -193,4 +193,6 @@ export const messages = {
   voucherValue: 'voucherValue',
   deliveryFree: 'deliveryFree',
   expiration: 'expiration',
+  minimal: 'minimal',
+  noMinimal: 'noMinimal',
 }

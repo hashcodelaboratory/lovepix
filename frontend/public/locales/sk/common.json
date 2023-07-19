@@ -192,5 +192,7 @@
   "saleType": "Typ zľavy",
   "voucherValue": "Hodnota kupónu",
   "deliveryFree": "Povoliť dopravu zdarma",
-  "expiration": "Dátum expirácie"
+  "expiration": "Dátum expirácie",
+  "minimal": "Minimálna suma",
+  "noMinimal": "Bez minimálnej sumy"
 }
