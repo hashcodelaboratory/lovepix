@@ -38,17 +38,17 @@ const General = () => {
           id='demo-simple-select'
           value={sale}
           onChange={changeSale}
-          sx={{ ml: 1 }}
+          sx={{ ml: 1, width: 300 }}
           size='small'
         >
           <MenuItem value={SaleTypeEnum.PERCENTAGE}>
-            {SaleTypeEnum.PERCENTAGE}
+            {t(messages[SaleTypeEnum.PERCENTAGE])}
           </MenuItem>
           <MenuItem value={SaleTypeEnum.FIX_CART}>
-            {SaleTypeEnum.FIX_CART}
+            {t(messages[SaleTypeEnum.FIX_CART])}
           </MenuItem>
           <MenuItem value={SaleTypeEnum.FIX_PRODUCT}>
-            {SaleTypeEnum.FIX_PRODUCT}
+            {t(messages[SaleTypeEnum.FIX_PRODUCT])}
           </MenuItem>
         </Select>
       </div>

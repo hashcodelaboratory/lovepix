@@ -175,5 +175,8 @@
   "deliveryFree": "Povoliť dopravu zdarma",
   "expiration": "Dátum expirácie",
   "minimal": "Minimálna suma",
-  "noMinimal": "Bez minimálnej sumy"
+  "noMinimal": "Bez minimálnej sumy",
+  "voucherLimit": "Limit použitia kupónu",
+  "voucherLimitUser": "Limit použitia pre používateľa",
+  "noLimit": "Neobmedzené použitie"
 }

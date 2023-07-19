@@ -195,4 +195,10 @@ export const messages = {
   expiration: 'expiration',
   minimal: 'minimal',
   noMinimal: 'noMinimal',
+  voucherLimit: 'voucherLimit',
+  voucherLimitUser: 'voucherLimitUser',
+  noLimit: 'noLimit',
+  PERCENTAGE: 'percentage',
+  FIX_CART: 'fixCart',
+  FIX_PRODUCT: 'fixProduct',
 }
