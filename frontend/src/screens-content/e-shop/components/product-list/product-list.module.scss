@@ -49,15 +49,14 @@
 .buttonHamburger {
   position: absolute !important;
   left: 0 !important;
-  background-color: white;
+  background-color: white !important;
   border-radius: 0px 25px 25px 0px !important;
   position: fixed !important;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.17);
   z-index: 1;
-  padding: 10px;
+  padding: 10px !important;
 }
 
 .hamburger {
-  background-color: white !important;
   color: #e81c40;
 }
