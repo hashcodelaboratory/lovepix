@@ -47,9 +47,9 @@ const CategoriesEshop = (): JSX.Element => {
 
   const data =
     categoriesEshop?.map(
-      ({ id, name }) =>
+      ({ name }) =>
         ({
-          id: id,
+          id: name,
           name: name,
         } as CategoryType)
     ) ?? []
@@ -74,7 +74,11 @@ const CategoriesEshop = (): JSX.Element => {
 
   const selectionChanged = (selectionModel: GridSelectionModel) => {
     setSelectionModel(selectionModel)
-    setSelectedRows(selectionModel.map((item, index) => data[index].name))
+    setSelectedRows(
+      selectionModel.map(
+        (item) => data.filter((_item) => item === _item.name)[0]?.name
+      )
+    )
   }
 
   const onRowClick = (details: GridRowParams) => {
