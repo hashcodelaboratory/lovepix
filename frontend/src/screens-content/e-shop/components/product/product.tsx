@@ -16,16 +16,7 @@ const Product = ({ product }: ProductContent) => {
 
   return (
     <div className={styles.productCart}>
-      <Image
-        src={image}
-        width={200}
-        height={300}
-        alt='image'
-        className={styles.image}
-        onClick={goTo}
-        blurDataURL='URL'
-        placeholder='blur'
-      />
+      <img src={image} alt={title} className={styles.image} onClick={goTo} />
       <span className={styles.title}>{title}</span>
       <span className={styles.description}>{description}</span>
       <span className={styles.price}>{price?.toFixed(2) ?? '-'} €</span>

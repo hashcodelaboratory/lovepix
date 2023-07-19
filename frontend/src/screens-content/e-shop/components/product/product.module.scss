@@ -1,6 +1,5 @@
 .productCart {
   background-color: white;
-  height: auto;
   display: flex;
   flex-direction: column;
   margin: 5px;
@@ -9,6 +8,8 @@
 .image {
   cursor: pointer;
   object-fit: contain;
+  height: auto;
+  width: auto;
 }
 
 .title {
