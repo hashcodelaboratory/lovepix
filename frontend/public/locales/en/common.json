@@ -163,5 +163,7 @@
   "diffrentShippingAddress": "Chcem odoslať objednávku na inú adresu.",
   "addCompanyInfo": "Chcem doplniť firemné údaje.",
   "Contact": "Kontakt",
-  "allProducts": "All products"
+  "allProducts": "All products",
+  "note": "Poznámka",
+  "billingAddress": "Fakturačná adresa"
 }

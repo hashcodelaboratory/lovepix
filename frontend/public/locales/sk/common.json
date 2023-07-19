@@ -182,5 +182,7 @@
   "diffrentShippingAddress": "Chcem odoslať objednávku na inú adresu.",
   "addCompanyInfo": "Chcem doplniť firemné údaje.",
   "Contact": "Kontakt",
-  "allProducts": "Všetky produkty"
+  "allProducts": "Všetky produkty",
+  "note": "Poznámka",
+  "billingAddress": "Fakturačná adresa"
 }
