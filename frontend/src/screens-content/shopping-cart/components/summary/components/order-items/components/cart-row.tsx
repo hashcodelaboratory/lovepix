@@ -9,9 +9,10 @@ import { removeImage, updateQuantity, UpdateQuantityWay } from '../utils/utils'
 type CartRowProps = {
   order: Order
   image: Image
+  index: number
 }
 
-const CartRow = ({ image, order }: CartRowProps): JSX.Element => {
+const CartRow = ({ image, order, index }: CartRowProps): JSX.Element => {
   return (
     <div className={styles.cartRow} key={image.origin}>
       <div className={styles.cartRowThumbnailContainer}>
@@ -31,7 +32,7 @@ const CartRow = ({ image, order }: CartRowProps): JSX.Element => {
             <div
               className={styles.cartRowRemove}
               onClick={() =>
-                updateQuantity(UpdateQuantityWay.DECREASE, order, image)
+                updateQuantity(UpdateQuantityWay.DECREASE, order, image, index)
               }
             >
               -
@@ -40,7 +41,7 @@ const CartRow = ({ image, order }: CartRowProps): JSX.Element => {
             <div
               className={styles.cartRowRemove}
               onClick={() =>
-                updateQuantity(UpdateQuantityWay.INCREASE, order, image)
+                updateQuantity(UpdateQuantityWay.INCREASE, order, image, index)
               }
             >
               +

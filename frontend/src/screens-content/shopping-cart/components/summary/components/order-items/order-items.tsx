@@ -29,8 +29,8 @@ const OrderItems = ({ order }: DeliveryProps) => {
         </h3>
       </div>
       <div className={styles.cartItemsContainer}>
-        {images?.map((image: Image) => (
-          <CartRow key={image.url} image={image} order={order} />
+        {images?.map((image: Image, index: number) => (
+          <CartRow key={image.url} image={image} order={order} index={index} />
         ))}
         {products?.map((product: Product) => (
           <CartRowProduct key={product.id} product={product} order={order} />
