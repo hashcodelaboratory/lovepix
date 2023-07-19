@@ -15,7 +15,7 @@ const CategoriesSidebar = () => {
 
   const selectCategory = (category: string) => () =>
     router.push({
-      pathname: '/e-shop',
+      pathname: ESHOP,
       query: { kategoria: category },
     })
 
