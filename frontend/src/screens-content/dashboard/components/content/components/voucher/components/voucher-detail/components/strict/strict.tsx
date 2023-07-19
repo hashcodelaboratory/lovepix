@@ -3,8 +3,15 @@ import { messages } from '../../../../../../../../../../messages/messages'
 import { TextField } from '@mui/material'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Control, UseFormRegister } from 'react-hook-form'
+import { FormInputs } from '../../voucher-detail'
 
-const Strict = () => {
+type StrictProps = {
+  control: Control<FormInputs>
+  register: UseFormRegister<FormInputs>
+  errors: any
+}
+const Strict = ({ control, register, errors }: StrictProps) => {
   const { t } = useTranslation()
 
   const [value, setValue] = useState<number>()

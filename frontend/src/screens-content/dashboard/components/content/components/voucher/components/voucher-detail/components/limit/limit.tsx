@@ -3,8 +3,16 @@ import { messages } from '../../../../../../../../../../messages/messages'
 import { TextField } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
+import { Control, UseFormRegister } from 'react-hook-form'
+import { FormInputs } from '../../voucher-detail'
 
-const Limit = () => {
+type LimitProps = {
+  control: Control<FormInputs>
+  register: UseFormRegister<FormInputs>
+  errors: any
+}
+
+const Limit = ({ control, register, errors }: LimitProps) => {
   const { t } = useTranslation()
 
   const [value, setValue] = useState<number>()

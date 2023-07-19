@@ -43,7 +43,6 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
 
   const {
     register,
-    watch,
     formState: { errors },
     handleSubmit,
     control,
@@ -60,13 +59,13 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
   const detailLayout = useMemo(() => {
     switch (sidePanel) {
       case SidePanelEnum.GENERAL:
-        return <General />
+        return <General control={control} register={register} errors={errors} />
       case SidePanelEnum.STRICT:
-        return <Strict />
+        return <Strict control={control} register={register} errors={errors} />
       case SidePanelEnum.LIMIT:
-        return <Limit />
+        return <Limit control={control} register={register} errors={errors} />
     }
-  }, [sidePanel])
+  }, [control, errors, register, sidePanel])
 
   const changeSidePanel = (param: SidePanelEnum) => {
     setSidePanel(param)

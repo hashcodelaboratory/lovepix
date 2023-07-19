@@ -1,35 +1,19 @@
 import styles from '../../../../../../../../dashboard.module.scss'
-import {
-  Checkbox,
-  FormControlLabel,
-  Select,
-  SelectChangeEvent,
-  TextField,
-} from '@mui/material'
+import { Checkbox, FormControlLabel, Select, TextField } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { messages } from '../../../../../../../../../../messages/messages'
 import MenuItem from '@mui/material/MenuItem'
-import { useState } from 'react'
 import { SaleTypeEnum } from '../../../../../../../../../../common/voucher/utils/enums'
-import { Controller, useForm } from 'react-hook-form'
+import { Controller, Control, UseFormRegister } from 'react-hook-form'
 import { FormInputs } from '../../voucher-detail'
 
-const General = () => {
+type GeneralProps = {
+  control: Control<FormInputs>
+  register: UseFormRegister<FormInputs>
+  errors: any
+}
+const General = ({ control, register, errors }: GeneralProps) => {
   const { t } = useTranslation()
-  const {
-    control,
-    register,
-    formState: { errors },
-  } = useForm<FormInputs>()
-
-  const [sale, setSale] = useState<SaleTypeEnum>(SaleTypeEnum.PERCENTAGE)
-  const [value, setValue] = useState<number>()
-  const [expiration, setExpiration] = useState<string>()
-
-  const changeSale = (e: SelectChangeEvent) => {
-    console.log(e)
-    setSale(e.target.value as SaleTypeEnum)
-  }
 
   return (
     <div>
@@ -65,28 +49,57 @@ const General = () => {
       </div>
       <div className={styles.voucherGeneralRow}>
         <p className={styles.voucherGeneralText}>{t(messages.voucherValue)}</p>
-        <TextField
-          type='number'
-          size='small'
-          sx={{ ml: 1 }}
-          placeholder='0'
-          onChange={(e) => setValue(Number(e.target.value))}
+        <Controller
+          key={'value'}
+          name={'value'}
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              {...register('value', { required: true })}
+              error={!!errors.value?.message}
+              helperText={errors.value?.message}
+              type='number'
+              size='small'
+              sx={{ ml: 1 }}
+              placeholder='0'
+            />
+          )}
         />
       </div>
       <div className={styles.voucherGeneralRow}>
         <p className={styles.voucherGeneralText}>{t(messages.deliveryFree)}</p>
-        <FormControlLabel
-          control={<Checkbox sx={{ ml: 1 }} />}
-          label={t(messages.deliveryFree)}
+        <Controller
+          key={'freeDelivery'}
+          name={'freeDelivery'}
+          control={control}
+          render={({ field }) => (
+            <FormControlLabel
+              {...field}
+              {...register('freeDelivery', { required: true })}
+              control={<Checkbox sx={{ ml: 1 }} />}
+              label={t(messages.deliveryFree)}
+            />
+          )}
         />
       </div>
       <div className={styles.voucherGeneralRow}>
         <p className={styles.voucherGeneralText}>{t(messages.expiration)}</p>
-        <TextField
-          type='date'
-          size='small'
-          sx={{ ml: 1 }}
-          onChange={(e) => setExpiration(e.target.value)}
+        <Controller
+          key={'expiration'}
+          name={'expiration'}
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              {...register('expiration', { required: true })}
+              error={!!errors.expiration?.message}
+              helperText={errors.expiration?.message}
+              type='date'
+              size='small'
+              sx={{ ml: 1 }}
+            />
+          )}
         />
       </div>
     </div>
