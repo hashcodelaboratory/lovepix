@@ -51,12 +51,15 @@ const GalleryLayout = (): JSX.Element => {
 
   return (
     <Container>
+      <h1 className={styles.galleryTitle}>Galéria</h1>
+      <p className={styles.gallerySubtitle}>
+        Vyberte si z našej ponuky obrazov. Inšpirujte sa dielami fotografov zo Slovenska.
+      </p>
       <div className={styles.galleryCategoryRow}>
         {categories?.map(({ id, name }) => (
           <Chip
             key={id}
             label={name}
-            color='primary'
             variant={getCategoryVariant(name)}
             clickable
             onClick={() => onClickCategory(name)}
