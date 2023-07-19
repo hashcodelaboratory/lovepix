@@ -13,9 +13,9 @@ import CategoriesSidebar from './categories-sidebar'
 const ProductList = () => {
   const { t } = useTranslation()
   const router = useRouter()
-  const { kategoria } = router.query
+  const { kategoria: category } = router.query
   const { data: products, isLoading } = useProducts(
-    (kategoria as string) ?? null
+    (category as string) ?? null
   )
   const tablet = useMediaQuery('(max-width:1000px)')
   const mobile = useMediaQuery('(max-width:580px)')
@@ -24,7 +24,7 @@ const ProductList = () => {
     <Product key={products.id} product={{ ...products }} />
   ))
 
-  const categoryTitle = kategoria ?? t(messages.allProducts)
+  const categoryTitle = category ?? t(messages.allProducts)
 
   const shimmers = [...Array(5)].map((index: number) => (
     <ProductSkeleton key={index} />
