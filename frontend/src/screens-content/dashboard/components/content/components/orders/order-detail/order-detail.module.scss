@@ -5,7 +5,8 @@
 }
 
 .box {
-  box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem, rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
+  box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem,
+    rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
   border: none;
   border-radius: 1rem;
   background-color: white;
@@ -47,7 +48,7 @@
 }
 
 .detailRow:hover {
-  background-color: #F3F4FA;
+  background-color: #f3f4fa;
 }
 
 .shippingIcon {
@@ -67,7 +68,7 @@
   border: 1px solid grey;
   border-radius: 50%;
   font-size: 40px;
-  background-color: #F3F4FA;
+  background-color: #f3f4fa;
 }
 
 .checkRow {
@@ -79,4 +80,3 @@
   color: #33de33;
   margin-left: 0.5rem;
 }
-
