@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
-import ContactsLayout from '../src/screens-content/contacts/contacts'
+import ContactsLayout from '../src/screens-content/contacts/contacts-layout'
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import FooterLayout from "../src/screens-content/footer/footer";
