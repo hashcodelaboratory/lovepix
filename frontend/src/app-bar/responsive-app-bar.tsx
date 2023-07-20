@@ -21,102 +21,14 @@ import {
   ORDER_TABLE_KEY,
 } from '../common/indexed-db/hooks/keys'
 import logo from '../assets/logo_color.png'
-import flag_sk from '../assets/flag-sk.png'
-import flag_en from '../assets/flag-en.png'
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { ImageLayout } from '../screens-content/home/enums/enums'
 import styles from './responsive-app-bar.module.scss'
 import SearchIcon from '@mui/icons-material/Search'
 import MenuIconComponent from './components/menu-sidebar/menu-icon/menu-icon'
 import LogoComponent from './components/menu-sidebar/logo/logo'
 import ConfiguratorComponent from './components/menu/configurator/configurator'
-
-const LanguageSwitch = () => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = () => {
-    setAnchorEl(document.getElementById("lang-flag"));
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const {i18n} = useTranslation();
-
-  const router = useRouter();
-  const languages = new Map<string, StaticImageData>([
-    ["sk", flag_sk],
-    ["en", flag_en],
-  ])
-
-  function langSwitch(event: React.MouseEvent<HTMLElement>) {
-    i18n.changeLanguage(event.currentTarget.getAttribute("data-lang") ?? "sk");
-
-    router.push('','',{locale: i18n.language});
-  }
-
-  let langItems = [];
-  for (const [lang, flag] of Array.from(languages)) {
-    if(lang !== i18n.language){
-      langItems.push(
-        <MenuItem onClick={langSwitch} data-lang={lang} sx={{padding: "3px 8px"}} selected={false} autoFocus={false}>
-          <Image
-            src={flag}
-            layout={ImageLayout.FIXED}
-            width={32}
-            height={32}
-            alt=''
-            className={styles.icon}/>
-        </MenuItem>
-      )
-    }
-  }
-  const lang_code:string = languages.has(i18n.language)? i18n.language : "sk";
-  const flag:StaticImageData = languages.get(lang_code)!;
-  return (
-    <div style={{marginLeft: "0.6em"}}>
-      <Box sx={{cursor: "pointer", display: "flex", alignItems: "center", alignContent: "center"}} 
-        aria-controls={open ? 'lang-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}>
-      <Image
-        id="lang-flag"
-        src={flag}
-        layout={ImageLayout.FIXED}
-        width={32}
-        height={32}
-        alt=''
-        className={styles.langIcon}
-        style={{display: "inline-block"}}
-      />
-      <div className={styles.langArrow}></div>
-      </Box>
-      <Menu
-        id="lang-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
-        disableAutoFocusItem={true}
-        PaperProps={{
-          style: {
-            maxHeight: 200,
-          },
-        }}
-      >
-        {langItems}
-      </Menu>
-    </div>
-  )
-} 
+import LanguageSwitch from './components/language-switch/language-switch'
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
@@ -247,7 +159,7 @@ const ResponsiveAppBar = () => {
                 />
               </Badge>
             </Link>
-            {/*<LanguageSwitch></LanguageSwitch>*/}
+            <LanguageSwitch></LanguageSwitch>
             {/*<Tooltip title='Open settings'>*/}
             {/*  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>*/}
             {/*    <Avatar*/}
