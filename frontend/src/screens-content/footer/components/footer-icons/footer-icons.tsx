@@ -9,7 +9,6 @@ import { ImageLayout } from '../../../home/enums/enums'
 import { useTranslation } from 'react-i18next'
 import { messages } from '../../../../messages/messages'
 import * as PagesUrls from '../../../../constants/pages/urls'
-
 import Tooltip from '@mui/material/Tooltip'
 import IconButton from '@mui/material/IconButton'
 import Avatar from '@mui/material/Avatar'
@@ -19,7 +18,6 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Typography from '@mui/material/Typography'
 import { logIn, logOut } from 'auth'
-import { v4 as uuidv4 } from 'uuid'
 import { useRouter } from 'next/router'
 import { settings } from 'navigation'
 import { DASHBOARD } from 'constants/settings/titles'
@@ -42,12 +40,10 @@ const FooterIcons = (): JSX.Element => {
     router.push(`/`)
     handleCloseUserMenu()
   }
-  // const { user, allowedSettings } = useLoggedUser()
 
   const userSettings = settings.filter((item) => item.title !== DASHBOARD)
   const menuOptions = user?.isAdmin ? settings : userSettings
 
-  // external href in <Link> does not work without 2 leading slashes or 'https://'
   return (
     <Container>
       <hr />
