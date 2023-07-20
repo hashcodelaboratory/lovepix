@@ -3,6 +3,7 @@ import styles from "../../contacts.module.scss"
 import { useTranslation } from "react-i18next";
 import * as PagesUrls from "../../../../constants/pages/urls";
 import { messages } from "messages/messages";
+import { v4 as uuidv4 } from 'uuid'
 
 const Information = (): JSX.Element => {
   const {t} = useTranslation();
@@ -33,10 +34,11 @@ type InfoRowType = {
 }
 
 const InfoRow = ({title, values}: InfoRowType): JSX.Element => {
+
   return (
     <div className={styles.infoRow}>
       <h2 className={styles.infoValueTitle}>{title}</h2>
-      {values.map(value => <p className={styles.infoValue}>{value}</p>)}
+      {values.map(value => <p className={styles.infoValue} key={uuidv4()}>{value}</p>)}
     </div>
   );
 };
