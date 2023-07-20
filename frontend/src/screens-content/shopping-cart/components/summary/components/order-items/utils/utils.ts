@@ -31,7 +31,9 @@ export const removeImage = (url?: string, shoppingCart?: ShoppingCart) => {
     shoppingCart?.images?.length === 1 &&
     shoppingCart?.products?.length === 0
   ) {
-    orderTable.clear()
+    orderTable.update(ORDER_TABLE_KEY, {
+      shoppingCart: { images: [], products: [], totalPrice: 0 },
+    })
   } else {
     orderTable.update(ORDER_TABLE_KEY, {
       shoppingCart: {
@@ -64,7 +66,9 @@ export const removeProduct = (id?: string, shoppingCart?: ShoppingCart) => {
     shoppingCart?.products?.length === 1 &&
     shoppingCart?.images?.length === 0
   ) {
-    orderTable.clear()
+    orderTable.update(ORDER_TABLE_KEY, {
+      shoppingCart: { images: [], products: [], totalPrice: 0 },
+    })
   } else {
     orderTable.update(ORDER_TABLE_KEY, {
       shoppingCart: {
