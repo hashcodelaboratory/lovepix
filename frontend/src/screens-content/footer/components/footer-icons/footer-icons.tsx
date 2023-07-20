@@ -10,7 +10,38 @@ import { useTranslation } from "react-i18next";
 import { messages } from "../../../../messages/messages";
 import * as PagesUrls from "../../../../constants/pages/urls";
 
+import Tooltip from '@mui/material/Tooltip'
+import IconButton from '@mui/material/IconButton'
+import Avatar from '@mui/material/Avatar'
+import useLoggedUser from 'common/api/use-logged-user'
+import React from 'react'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import Typography from '@mui/material/Typography'
+import { logIn, logOut } from 'auth'
+import { v4 as uuidv4 } from 'uuid'
+import { useRouter } from 'next/router'
+
 const FooterIcons = (): JSX.Element => {
+
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  )
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget)
+  }
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null)
+  }
+  const { user, allowedSettings } = useLoggedUser()
+  const router = useRouter()
+  const handleLogout = () => {
+    logOut()
+    router.push(`/`)
+    handleCloseUserMenu()
+  }
+  // const { user, allowedSettings } = useLoggedUser()
+
   const { t } = useTranslation();
   // external href in <Link> does not work without 2 leading slashes or 'https://' 
   return (
@@ -30,6 +61,66 @@ const FooterIcons = (): JSX.Element => {
         <Link className={styles.footerIconsText} href="https://www.hashlab.com" target="_blank" rel="noreferrer">hashlab.com</Link>
       </div>
       <hr />
+
+      <Tooltip title='Open settings'>
+        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+          <Avatar
+            alt={!!user ? user.displayName || '' : undefined}
+            src='/static/images/avatar/2.jpg'
+          />
+        </IconButton>
+      </Tooltip>
+      {/* <p>hello</p> */}
+      {/* <p>{adminemails[1]}</p> */}
+      {/* <p>{userEmail}</p> */}
+      {/* <p>{test}</p> */}
+      
+      <Menu
+        sx={{ mt: '45px' }}
+        id='menu-sidebar-appbar'
+        anchorEl={anchorElUser}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={Boolean(anchorElUser)}
+        onClose={handleCloseUserMenu}
+      >
+        {user ? (
+          allowedSettings.map((setting) => {
+            const menuItem = (
+              <MenuItem
+                key={setting.title}
+                onClick={() => setting.callBack && handleLogout()}
+              >
+                <Typography textAlign='center'>
+                  {setting.title}
+                </Typography>
+              </MenuItem>
+            )
+
+            if (setting.callBack) {
+              return menuItem
+            } else {
+              return (
+                <Link key={uuidv4()} href={setting.link}>
+                  {menuItem}
+                </Link>
+              )
+            }
+          })
+        ) : (
+          <MenuItem onClick={logIn}>
+            <Typography textAlign='center'>Login</Typography>
+          </MenuItem>
+        )}
+      </Menu>
+
       <div className={styles.footerBottomContainer}>
         <div className={styles.footerBottomContainerRow}>
           <div className={styles.footerBottomIcon}>
