@@ -47,17 +47,16 @@ type FooterColumnType = {
 
 const FooterColumn = ({ title, links, address}: FooterColumnType): JSX.Element => {
   const { t } = useTranslation();
-  let ret = [];
-  for(let i=0; i<links.length;i++){
-    ret.push( <Link href={address[i] ?? PagesUrls.NONE} passHref={true}>
-                <MUILink  key={links[i]} className={styles.footerText}>{t(links[i])}
-                </MUILink>
-              </Link>);
-  }
   return (
     <div className={styles.footerColumn}>
       <h3 className={styles.footerTitle}>{t(title)}</h3>
-      {ret}
+      {
+        links.map((link, i) => 
+          <Link href={address[i] ?? PagesUrls.NONE} passHref={true}>
+            <MUILink  key={link} className={styles.footerText}>{t(link)}
+            </MUILink>
+          </Link>)
+      }
     </div>
   );
 };
