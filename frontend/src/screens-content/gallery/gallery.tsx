@@ -25,8 +25,15 @@ const GalleryLayout = (): JSX.Element => {
     searchedCategories?.some((r) => image.categories.includes(r))
   )
 
+  const parseParams = function(params:(string | undefined | string[])):string[]{
+    console.log(params);
+    if(typeof params === 'string') return [params];
+    return params ?? [];
+  }
+
   useEffect(() => {
-    setSearchedCategories(categories?.map(({ name }) => name))
+    let params: string[] = parseParams(router.query.categories);
+    setSearchedCategories(params.length === 0? categories?.map(({ name }) => name): params);
   }, [categories])
 
   const onClickCategory = (name: string) => {

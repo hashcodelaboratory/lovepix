@@ -4,7 +4,8 @@ import { messages } from "../../../../messages/messages";
 import { useTranslation } from "react-i18next";
 import { useCategories } from "../../../../common/api/use-categories";
 import { FOR_PARTNERS } from "../../../../constants/pages/titles";
-import { Link } from "@mui/material";
+import { Link as MUILink } from "@mui/material";
+import Link from "next/link"
 import * as PagesUrls from "../../../../constants/pages/urls";
 
 const FooterLinks = (): JSX.Element => {
@@ -26,7 +27,7 @@ const FooterLinks = (): JSX.Element => {
         <FooterColumn
           title={messages.gallery}
           links={categories?.map(({ name }) => name) ?? []}
-          address={[]}
+          address={categories?.map(({ name }) => { return {pathname: PagesUrls.GALLERY, query:{categories: [name]}}}) ?? []}
         />
         <FooterColumn
           title={"Lovepix"}
@@ -41,14 +42,17 @@ const FooterLinks = (): JSX.Element => {
 type FooterColumnType = {
   title: string;
   links: string[];
-  address: string[];
+  address: (string | object)[];
 }
 
 const FooterColumn = ({ title, links, address}: FooterColumnType): JSX.Element => {
   const { t } = useTranslation();
   let ret = [];
   for(let i=0; i<links.length;i++){
-    ret.push(<Link href={address[i] ?? PagesUrls.NONE} key={links[i]} className={styles.footerText}>{t(links[i])}</Link>);
+    ret.push( <Link href={address[i] ?? PagesUrls.NONE} passHref={true}>
+                <MUILink  key={links[i]} className={styles.footerText}>{t(links[i])}
+                </MUILink>
+              </Link>);
   }
   return (
     <div className={styles.footerColumn}>
