@@ -3,7 +3,6 @@ import Summary from './components/summary/summary/summary'
 import { Order } from '../../common/types/order'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
-import CircularProgress from '@mui/material/CircularProgress'
 
 type CustomShoppingCartProps = {
   order: Order

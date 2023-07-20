@@ -90,7 +90,7 @@ export const updateQuantity = async (
 
   const filtered = [...array]
 
-  const totalPriceProducts = filtered?.reduce(
+  const totalPriceProducts = order?.shoppingCart?.products?.reduce(
     (accumulator, { qty, price }) => accumulator + qty * price,
     0
   )

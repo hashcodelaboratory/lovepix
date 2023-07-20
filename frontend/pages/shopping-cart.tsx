@@ -9,13 +9,9 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { orderTable } from '../database.config'
 import { ORDER_TABLE_KEY } from '../src/common/indexed-db/hooks/keys'
 import FooterLayout from '../src/screens-content/footer/footer'
-import EmptyCart from 'screens-content/shopping-cart/components/empty-cart/empty-cart'
-import CircularProgress from '@mui/material/CircularProgress'
 
 const ShoppingCart: NextPage = () => {
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
-
-  console.log(order)
 
   return (
     <div className={styles.container}>
