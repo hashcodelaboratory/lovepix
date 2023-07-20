@@ -38,9 +38,9 @@ const LanguageSwitch = () => {
   return (
     <>
       <Box sx={{cursor: "pointer", display: "flex", alignItems: "center", alignContent: "center", marginLeft: "0.6em"}} 
-        aria-controls={open ? 'lang-menu' : undefined}
+        aria-controls='lang-menu'
         aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
+        aria-expanded={open}
         onClick={handleClick}>
         <Image
           id="lang-flag"
