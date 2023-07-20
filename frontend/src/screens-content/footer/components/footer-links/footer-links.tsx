@@ -16,7 +16,7 @@ const FooterLinks = (): JSX.Element => {
         <FooterColumn
           title={messages.service}
           links={[messages.ourContacts, messages.satisfaction, messages.possibilities, messages.creatingTime, messages.complaint]}
-          address={[PagesUrls.OUR_CONTACTS]}
+          address={[PagesUrls.CONTACT]}
         />
         <FooterColumn
           title={messages.fromPhoto}
@@ -31,7 +31,7 @@ const FooterLinks = (): JSX.Element => {
         <FooterColumn
           title={"Lovepix"}
           links={[messages.materials, messages.story, FOR_PARTNERS, messages.download, messages.blog]}
-          address={[]}
+          address={[PagesUrls.MATERIALS, PagesUrls.NONE, PagesUrls.FOR_PARTNERS]}
         />
       </div>
     </Container>
