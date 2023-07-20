@@ -16,7 +16,13 @@ const Product = ({ product }: ProductContent) => {
 
   return (
     <div className={styles.productCart}>
-      <img src={image} alt={title} className={styles.image} onClick={goTo} />
+      <img
+        src={image}
+        alt={title}
+        style={{ maxWidth: 300 }}
+        className={styles.image}
+        onClick={goTo}
+      />
       <span className={styles.title}>{title}</span>
       <span className={styles.description}>{description}</span>
       <span className={styles.price}>{price?.toFixed(2) ?? '-'} €</span>
