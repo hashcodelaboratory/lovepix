@@ -12,7 +12,6 @@ export enum Pages {
   COOKIES = '/cookies',
   PRIVACY_POLICY = '/privacy-policy',
   CONDITIONS = '/conditions',
-  NONE = '#',
   CONTACT = '/contact',
   PROFILE = '/profile',
   ACCOUNT = '/account',

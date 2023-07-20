@@ -60,27 +60,23 @@ export const metadata: Record<Pages, Metadata> = {
     descriptionKey: localizationKey.metaDescriptionThankYou
   },
   [Pages.OUR_CONTACTS]: {
-    titleKey: '',
-    descriptionKey: ''
+    titleKey: localizationKey.metaTitleContact,
+    descriptionKey: localizationKey.metaDescriptionContact
   },
   [Pages.COOKIES]: {
-    titleKey: '',
-    descriptionKey: ''
+    titleKey: localizationKey.metaTitleCookies,
+    descriptionKey: localizationKey.metaDescriptionCookies
   },
   [Pages.PRIVACY_POLICY]: {
-    titleKey: '',
-    descriptionKey: ''
+    titleKey: localizationKey.metaTitlePrivacyPolicy,
+    descriptionKey: localizationKey.metaDescriptionPrivacyPolicy
   },
   [Pages.CONDITIONS]: {
-    titleKey: '',
-    descriptionKey: ''
-  },
-  [Pages.NONE]: {
-    titleKey: '',
-    descriptionKey: ''
+    titleKey: localizationKey.metaTitleConditions,
+    descriptionKey: localizationKey.metaDescriptionConditions
   },
   [Pages.CONTACT]: {
-    titleKey: '',
-    descriptionKey: ''
+    titleKey: localizationKey.metaTitleContact,
+    descriptionKey: localizationKey.metaDescriptionContact
   }
 }
