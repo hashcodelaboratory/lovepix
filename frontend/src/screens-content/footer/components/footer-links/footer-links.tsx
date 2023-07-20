@@ -96,6 +96,7 @@ const FooterLinks = (): JSX.Element => {
   }]
 
   const columns = footerColumns.map(({title, links}) => <FooterColumn
+    key={title}
     title={title}
     links={links}
   />)
