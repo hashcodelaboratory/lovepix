@@ -4,9 +4,10 @@ import { messages } from "../../../../messages/messages";
 import { useTranslation } from "react-i18next";
 import { useCategories } from "../../../../common/api/use-categories";
 import { FOR_PARTNERS } from "../../../../constants/pages/titles";
-import { Link as MUILink } from "@mui/material";
-import Link from "next/link"
+import NextLink from "next/link";
+import { Link } from "@mui/material";
 import * as PagesUrls from "../../../../constants/pages/urls";
+import { UrlObject } from "url";
 
 const FooterLinks = (): JSX.Element => {
   const { data: categories } = useCategories();
@@ -42,7 +43,7 @@ const FooterLinks = (): JSX.Element => {
 type FooterColumnType = {
   title: string;
   links: string[];
-  address: (string | object)[];
+  address: (string | UrlObject)[];
 }
 
 const FooterColumn = ({ title, links, address}: FooterColumnType): JSX.Element => {
@@ -52,10 +53,10 @@ const FooterColumn = ({ title, links, address}: FooterColumnType): JSX.Element =
       <h3 className={styles.footerTitle}>{t(title)}</h3>
       {
         links.map((link, i) => 
-          <Link href={address[i] ?? PagesUrls.NONE} passHref={true}>
-            <MUILink  key={link} className={styles.footerText}>{t(link)}
-            </MUILink>
-          </Link>)
+          <NextLink href={address[i] ?? PagesUrls.NONE} passHref={true}>
+            <Link key={link} className={styles.footerText}>{t(link)}
+            </Link>
+          </NextLink>)
       }
     </div>
   );
