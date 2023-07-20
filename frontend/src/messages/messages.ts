@@ -181,7 +181,11 @@ export const messages = {
   agreeWithBussinessCondition: 'agreeWithBussinessCondition',
   diffrentShippingAddress: 'diffrentShippingAddress',
   addCompanyInfo: 'addCompanyInfo',
+  socialSite: 'socialSite',
+  contactInfoComment: 'contactInfoComment',
+  deliveryPoint: 'deliveryPoint',
+  billingInfo: 'billingInfo',
+  contact: 'Contact',
   note: 'note',
   billingAddress: 'billingAddress',
-  contact: 'Contact',
 }
