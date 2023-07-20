@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useTranslation } from "react-i18next";
 import { messages } from "messages/messages";
-import { useEffect, useRef, useState} from "react";
+import { useEffect, useState} from "react";
 
 type MetaTagsType = {
     desc?: string;
@@ -20,27 +20,26 @@ const MetaTags = ({desc,img}: MetaTagsType) => {
     const [img_url, setImg_Url] = useState("");
     //Use effect is necessary for the functionality. Window and document cannot be used outside of it
     useEffect(() => {
-        let checkImage;
+        let checkImage = false;
         const listofImages = document.getElementsByTagName("img");
         //For loop starts from two in order to leave out img components located in the header such as logo and svgs
         for(let i = 2; i < listofImages.length;i++){
-            checkImage = listofImages[i].srcset.includes("/_next/image", 0);
+            checkImage = listofImages[i].srcset.includes("/_next/image");
             if(checkImage === true){
-                setImages(listofImages[i].src)
+                setImages(listofImages[i].src);
             }
         }
         if(images === ""){
             setImg_Url(window.location.protocol + "//" + window.location.host + t(img ?? messages.metaDefaultImage));
-            console.log(t(img_url))
         }else{
-            setImg_Url(images);
+            setImg_Url(t(images));
         }
         setDescription(t(desc ?? messages.metaDescriptionDefault));
-        setKeywords(t(messages.metaKeywordsText)) ;
-        setAuthor(t(messages.metaAuthorText)) ;
-        setTitle(document.title) ;
+        setKeywords(t(messages.metaKeywordsText));
+        setAuthor(t(messages.metaAuthorText));
+        setTitle(document.title);
         setUrl_Page(window.location.href);
-        setImage(t(img_url));
+        setImage(img_url);
     })
     return (
         <Head>
