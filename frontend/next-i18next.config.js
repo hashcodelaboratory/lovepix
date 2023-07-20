@@ -7,7 +7,7 @@ module.exports = {
 
     domains: [
       {domain: 'lovepix.sk', defaultLocale: 'sk'},
-      {domain: 'lovepix.en', defaultLocale: 'en'},
+      {domain: 'lovepix.com', defaultLocale: 'en'},
     ]
   },
   localePath: path.resolve('./public/locales'),
