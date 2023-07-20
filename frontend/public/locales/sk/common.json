@@ -185,5 +185,7 @@
   "contactInfoComment": "Potrebujete poradiť? Nenašli ste čo ste hľadali? Potrebujete vyrobiť niečo na mieru? Radi vám s tým pomôžeme. Ozvite sa nám!",
   "deliveryPoint": "Odberné miesto",
   "billingInfo": "Fakturačné údaje",
+  "note": "Poznámka",
+  "billingAddress": "Fakturačná adresa",
   "Contact": "Kontakt"
 }

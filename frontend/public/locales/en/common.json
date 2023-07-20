@@ -166,5 +166,7 @@
   "contactInfoComment": "Need help? Haven't found what you're looking for? Need something custom made? We'll gladly help you out. Contact us!",
   "deliveryPoint": "Delivery point",
   "billingInfo": "Billing info",
+  "note": "Poznámka",
+  "billingAddress": "Fakturačná adresa",
   "Contact": "Kontakt"
 }
