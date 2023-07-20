@@ -48,7 +48,7 @@ const FooterColumn = ({title, links, address}: FooterColumnType): JSX.Element =>
   const {t} = useTranslation();
   let ret = [];
   for (let i = 0; i < links.length; i++) {
-    ret.push(<Link href={address[i] ?? Pages.NONE} key={links[i]} className={styles.footerText}>{t(links[i])}</Link>);
+    ret.push(<Link href={address[i] ?? '#'} key={links[i]} className={styles.footerText}>{t(links[i])}</Link>);
   }
   return (
     <div className={styles.footerColumn}>
