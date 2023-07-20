@@ -7,7 +7,7 @@ import thanks from '../../assets/thanks.png'
 import styles from './thanks.module.scss'
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt'
 import { useTranslation } from 'react-i18next'
-import { messages } from '../../messages/messages'
+import { localizationKey } from '../../localization/localization-key'
 
 enum StateEnum {
   SUCCESS = 'SUCCESS',
@@ -24,18 +24,18 @@ const Thank = (): JSX.Element => {
     () => ({
       title:
         status === StateEnum.SUCCESS
-          ? messages.thanksTitle
-          : messages.thanksTitleError,
+          ? localizationKey.thanksTitle
+          : localizationKey.thanksTitleError,
       subtitle:
         status === StateEnum.SUCCESS
-          ? messages.thanksSubtitle
-          : messages.thanksSubtitleError,
+          ? localizationKey.thanksSubtitle
+          : localizationKey.thanksSubtitleError,
       subtitleContact:
         status === StateEnum.SUCCESS
-          ? messages.thanksSubtitleContact
-          : messages.thanksSubtitleContactError,
-      subtitleThx: messages.thanksSubtitleThx,
-      link: messages.thanksLink,
+          ? localizationKey.thanksSubtitleContact
+          : localizationKey.thanksSubtitleContactError,
+      subtitleThx: localizationKey.thanksSubtitleThx,
+      link: localizationKey.thanksLink,
     }),
     [status]
   )

@@ -1,32 +1,32 @@
 import { Route } from 'common/enums/routes'
-import { messages } from '../../../../../messages/messages'
+import { localizationKey } from '../../../../../localization/localization-key'
 
 export const SIDEBAR_MENU_LIST: {
   title: string
   link: string
 }[] = [
   {
-    title: messages.home,
+    title: localizationKey.home,
     link: Route.DASHBOARD,
   },
   {
-    title: messages.orders,
+    title: localizationKey.orders,
     link: '',
   },
   {
-    title: messages.products,
+    title: localizationKey.products,
     link: Route.DASHBOARD_PRODUCTS,
   },
   {
-    title: messages.dimensions,
+    title: localizationKey.dimensions,
     link: '',
   },
   {
-    title: messages.categories,
+    title: localizationKey.categories,
     link: '',
   },
   {
-    title: messages.storage,
+    title: localizationKey.storage,
     link: '',
   },
 ]

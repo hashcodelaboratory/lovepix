@@ -2,7 +2,7 @@ import styles from '../../order-detail.module.scss'
 import { Box } from '@mui/material'
 import { Order } from '../../../../../../../../../common/types/order'
 import { useTranslation } from 'next-i18next'
-import { messages } from 'messages/messages'
+import { localizationKey } from '../../../../../../../../../localization/localization-key'
 
 type Props = {
   order?: Order
@@ -20,7 +20,7 @@ const OrderDetailDelivery = ({ order }: Props): JSX.Element => {
 
   return (
     <Box className={styles.box} style={{ width: 400 }}>
-      <h4>{t(messages.shipping)}</h4>
+      <h4>{t(localizationKey.shipping)}</h4>
       <div style={{ fontSize: 12 }}>
         <p>
           {firstNameShippingAddress} {lastNameShippingAddress}

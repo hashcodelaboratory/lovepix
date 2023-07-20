@@ -1,38 +1,29 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
+import type {NextPage} from 'next'
+import {GetStaticProps} from 'next'
 import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
-import { GetStaticProps } from 'next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import CustomShoppingCart from '../src/screens-content/shopping-cart/shopping-cart'
-import { useLiveQuery } from 'dexie-react-hooks'
-import { orderTable } from '../database.config'
-import { ORDER_TABLE_KEY } from '../src/common/indexed-db/hooks/keys'
+import {useLiveQuery} from 'dexie-react-hooks'
+import {orderTable} from '../database.config'
+import {ORDER_TABLE_KEY} from '../src/common/indexed-db/hooks/keys'
 import FooterLayout from '../src/screens-content/footer/footer'
-import MetaTags from 'meta-tags/meta'
-import { messages } from 'messages/messages'
 
 const ShoppingCart: NextPage = () => {
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Shopping cart</title>
-      </Head>
-
-      <MetaTags desc={messages.metaDescriptionShoppingCart} img={messages.metaDefaultImageShoppingCart}/>
-
       <header>
-        <ResponsiveAppBar />
+        <ResponsiveAppBar/>
       </header>
 
       <main className={styles.main}>
-        <CustomShoppingCart order={order} />
+        <CustomShoppingCart order={order}/>
       </main>
 
       <footer>
-        <FooterLayout />
+        <FooterLayout/>
       </footer>
     </div>
   )
@@ -40,7 +31,7 @@ const ShoppingCart: NextPage = () => {
 
 export default ShoppingCart
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({locale}) => {
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'sk', ['common'])),

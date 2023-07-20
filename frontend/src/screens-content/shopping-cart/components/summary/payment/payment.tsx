@@ -1,6 +1,6 @@
 import styles from "../../../shopping-cart.module.scss";
 import { useTranslation } from "next-i18next";
-import { messages } from "../../../../../messages/messages";
+import { localizationKey } from "../../../../../localization/localization-key";
 import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@mui/material";
 import { Control, Controller } from "react-hook-form";
 import { FormInputs } from "../../../../../common/types/form";
@@ -17,7 +17,7 @@ const Payment = ({ control, message }: DeliverySectionProps) => {
   return (
     <div className={styles.cartContainer}>
       <div className={styles.cartTitleContainer}>
-        <h3 className={styles.cartTitleText}>{String(t(messages.payment))}</h3>
+        <h3 className={styles.cartTitleText}>{String(t(localizationKey.payment))}</h3>
       </div>
       <Controller
         name="payment"
@@ -34,8 +34,8 @@ const Payment = ({ control, message }: DeliverySectionProps) => {
                 control={<Radio />}
                 label={
                   <div className={styles.radioGroupLabel}>
-                    <p className={styles.paymentBox}>{String(t(messages.online))}</p>
-                    <p className={styles.deliveryLightText}>{String(t(messages.free))}</p>
+                    <p className={styles.paymentBox}>{String(t(localizationKey.online))}</p>
+                    <p className={styles.deliveryLightText}>{String(t(localizationKey.free))}</p>
                   </div>
                 }
                 className={styles.deliveryField}
@@ -45,7 +45,7 @@ const Payment = ({ control, message }: DeliverySectionProps) => {
                 control={<Radio />}
                 label={
                   <div className={styles.radioGroupLabel}>
-                    <p className={styles.paymentBox}>{String(t(messages.personalDelivery))}</p>
+                    <p className={styles.paymentBox}>{String(t(localizationKey.personalDelivery))}</p>
                     <p className={styles.deliveryLightText}>2.00 €</p>
                   </div>
                 }
@@ -56,7 +56,7 @@ const Payment = ({ control, message }: DeliverySectionProps) => {
                 control={<Radio />}
                 label={
                   <div className={styles.radioGroupLabel}>
-                    <p className={styles.paymentBox}>{String(t(messages.transaction))}</p>
+                    <p className={styles.paymentBox}>{String(t(localizationKey.transaction))}</p>
                   </div>
                 }
                 className={styles.deliveryField}

@@ -1,7 +1,7 @@
 import styles from "../../home.module.scss";
 import Container from "@mui/material/Container";
 import {useTranslation} from "next-i18next";
-import {messages} from "../../../../messages/messages";
+import {localizationKey} from "../../../../localization/localization-key";
 import useNavigation from "../../../../navigation/use-navigation";
 
 export enum CarouselTestIds {
@@ -11,7 +11,7 @@ export enum CarouselTestIds {
 const Carousel = (): JSX.Element => {
   const {t} = useTranslation();
   const {navigateToConfigurator} = useNavigation();
-  const {printPhoto, uploadPhotoSubcontent, uploadPhoto} = messages;
+  const {printPhoto, uploadPhotoSubcontent, uploadPhoto} = localizationKey;
 
   return (
     <div className={styles.carousel}>
