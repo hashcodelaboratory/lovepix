@@ -222,6 +222,10 @@
   "agreeWithBussinessCondition": "Odoslaním kontaktných údajov vyjadrujem súhlas so spracovaním týchto údajov za účelom oslovenia s ponukou na uzatvorenie finančných produktov v súlade so zákonom č. 122/2013 Z.z. o ochrane osobných údajov v znení neskorších predpisov.",
   "diffrentShippingAddress": "Chcem odoslať objednávku na inú adresu.",
   "addCompanyInfo": "Chcem doplniť firemné údaje.",
+  "socialSite": "Sociálne siete",
+  "contactInfoComment": "Potrebujete poradiť? Nenašli ste čo ste hľadali? Potrebujete vyrobiť niečo na mieru? Radi vám s tým pomôžeme. Ozvite sa nám!",
+  "deliveryPoint": "Odberné miesto",
+  "billingInfo": "Fakturačné údaje",
   "note": "Poznámka",
   "billingAddress": "Fakturačná adresa",
   "Contact": "Kontakt"
