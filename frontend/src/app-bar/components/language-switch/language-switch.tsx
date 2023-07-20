@@ -7,6 +7,8 @@ import { ImageLayout } from '../../../screens-content/home/enums/enums'
 import styles from '../../responsive-app-bar.module.scss'
 import flag_sk from '../../../assets/flag-sk.png'
 import flag_en from '../../../assets/flag-en.png'
+import Link from "next/link";
+import * as PagesUrls from '../../../constants/pages/urls'
 
 const LanguageSwitch = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -19,18 +21,11 @@ const LanguageSwitch = () => {
   };
 
   const {i18n} = useTranslation();
-
-  const router = useRouter();
+  
   const languages = new Map<string, StaticImageData>([
     ["sk", flag_sk],
     ["en", flag_en],
   ])
-
-  function langSwitch(event: React.MouseEvent<HTMLElement>) {
-    i18n.changeLanguage(event.currentTarget.getAttribute("data-lang") ?? "sk");
-
-    router.push('','',{locale: i18n.language});
-  }
 
   const lang_code:string = languages.has(i18n.language)? i18n.language : "sk";
   const flag:StaticImageData = languages.get(lang_code)!;
@@ -75,14 +70,16 @@ const LanguageSwitch = () => {
         }}
       >
       {Array.from(languages).filter(item => i18n.language !== item[0]).map(item => 
-        <MenuItem onClick={langSwitch} data-lang={item[0]} sx={{padding: "3px 8px"}} selected={false} autoFocus={false}>
-          <Image
-            src={item[1]}
-            layout={ImageLayout.FIXED}
-            width={32}
-            height={32}
-            alt=''
-            className={styles.icon}/>
+        <MenuItem sx={{padding: "3px 8px"}} selected={false} autoFocus={false}>
+          <Link href={PagesUrls.NONE} locale={item[0]}>
+            <Image
+              src={item[1]}
+              layout={ImageLayout.FIXED}
+              width={32}
+              height={32}
+              alt=''
+              className={styles.icon}/>
+          </Link>
         </MenuItem>)}
       </Menu>
     </>
