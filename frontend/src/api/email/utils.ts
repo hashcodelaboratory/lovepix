@@ -204,6 +204,9 @@ export const emailTemplateUser = ({
                                 <td style="text-align: left;">
                                 <p style="font-family: 'Montserrat', sans-serif; font-size: 12px; line-height: 14px; color: #333;font-weight: 700; text-decoration: underline;">Fakturačná adresa</p>
                                 <p style="font-size: 11px;font-family: 'Montserrat', sans-serif; font-weight: 200; color: #333; float: left;">
+                                ${formData?.ico} <br>
+                                ${formData?.dic} <br>
+                                ${formData?.company} <br>
                                 ${formData.firstName} ${formData.lastName} <br>
                                 ${formData.city}, ${formData.address} <br>
                         
@@ -217,11 +220,22 @@ export const emailTemplateUser = ({
                             <td style="text-align: left;">
                             <p style="font-family: 'Montserrat', sans-serif; font-size: 12px; line-height: 14px; color: #333;font-weight: 700; text-decoration: underline;">Doručovacia adresa</p>
                             <p style="font-size: 11px;font-family: 'Montserrat', sans-serif; font-weight: 200; color: #333; float: left;">
-                            ${formData.firstName} ${formData.lastName} <br>
-                                ${formData.city}, ${formData.address} <br>
+                            ${
+                              formData.addressShippingAddress ??
+                              formData.firstName
+                            } ${
+    formData.lastNameShippingAddress ?? formData.lastName
+  } <br>
+                                ${
+                                  formData.cityShippingAdress ?? formData.city
+                                }, ${
+    formData.addressShippingAddress ?? formData.address
+  } <br>
                              
-                                ${formData.postalCode} <br>
-                                ${formData.phone} <br><br>
+                                ${
+                                  formData.postalCodeShippingAddress ??
+                                  formData.postalCode
+                                } <br>
                             </p>
                             </td>
                             </tr>
@@ -236,7 +250,7 @@ export const emailTemplateUser = ({
                             <tr>
                                 <td style="text-align: center;">
                                     <img src="https://firebasestorage.googleapis.com/v0/b/lovepix-78bf6.appspot.com/o/png%2Flovepix_logo.png?alt=media&token=939bc382-c47e-4cac-a677-a78a0bd00d06" width="110" height="" alt="alt_text" border="0" style="height: auto; font-family: 'Montserrat', sans-serif; font-size: 15px; line-height: 15px; color: #555555;">  <br><br>
-                                    <a href="https://www.lovepix.sk" style="font-family: 'Montserrat', sans-serif; font-size: 20px; line-height: 24px; color: #333;font-weight: 700;">www.fesicomp.eu</a>
+                                    <a href="https://www.lovepix.sk" style="font-family: 'Montserrat', sans-serif; font-size: 20px; line-height: 24px; color: #333;font-weight: 700;">www.lovepix.sk</a>
                                     <br><br>
                                 </td>
                             </tr>
