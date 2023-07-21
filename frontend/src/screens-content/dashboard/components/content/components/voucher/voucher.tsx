@@ -55,10 +55,11 @@ const Voucher = (): JSX.Element => {
 
   const data =
     vouchers?.map(
-      ({ code, id }) =>
+      ({ code, id, expiration }) =>
         ({
-          id: id,
-          code: code,
+          id,
+          code,
+          expiration,
         } as VoucherType)
     ) ?? []
 

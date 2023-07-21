@@ -4,7 +4,7 @@ import Button from '@mui/material/Button'
 import SettingsIcon from '@mui/icons-material/Settings'
 import HideSourceIcon from '@mui/icons-material/HideSource'
 import MultipleStopIcon from '@mui/icons-material/MultipleStop'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { localizationKey } from '../../../../../../../../localization/localization-key'
 import General from './components/general/general'
@@ -25,6 +25,7 @@ import {
 import { useSnackbar } from 'notistack'
 import { useQueryClient } from 'react-query'
 import { useAddVoucher } from '../../../../../../api/vouchers/add-voucher'
+import { useVoucherDetail } from '../../../../../../../../common/api/use-voucher'
 
 enum SidePanelEnum {
   GENERAL = 'GENERAL',
@@ -52,6 +53,21 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
   const { t } = useTranslation()
   const { enqueueSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
+
+  const { mutate: getVoucherDetail } = useVoucherDetail({
+    onSuccess: (data) => {
+      reset(data)
+    },
+    onError: () => {},
+  })
+
+  useEffect(() => {
+    if (detail) {
+      getVoucherDetail({ id: detail.id })
+    } else {
+      reset()
+    }
+  }, [detail])
 
   const {
     register,
@@ -98,7 +114,6 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
   }
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    console.log(data)
     addVoucher(data)
   }
 

@@ -1,10 +1,19 @@
 import { useQuery, UseQueryResult } from 'react-query'
+import { SaleTypeEnum } from '../voucher/utils/enums'
 
 export const VOUCHERS_KEY = 'VOUCHERS'
 
 export type VoucherType = {
   id: string
   code: string
+  description: string
+  saleType: SaleTypeEnum
+  value: number
+  freeDelivery: boolean
+  expiration: string
+  minimalValue?: number
+  limit?: number
+  limitUser?: number
 }
 
 const getVouchers = async (): Promise<VoucherType[]> => {
