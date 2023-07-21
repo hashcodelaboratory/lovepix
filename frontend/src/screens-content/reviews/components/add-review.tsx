@@ -1,9 +1,23 @@
-import { Button, Rating, TextField, Typography } from '@mui/material'
-import { addReview } from 'common/api/add-review'
+import {
+  Backdrop,
+  Button,
+  CircularProgress,
+  Rating,
+  TextField,
+  Typography,
+} from '@mui/material'
+import { useAddReview } from 'common/api/add-review'
+import { REVIEWS_KEY } from 'common/api/use-reviews'
 import { messages } from 'messages/messages'
 import { useTranslation } from 'next-i18next'
+import { useSnackbar } from 'notistack'
 import React, { useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { useQueryClient } from 'react-query'
+import {
+  SNACKBAR_OPTIONS_ERROR,
+  SNACKBAR_OPTIONS_SUCCESS,
+} from 'snackbar/config'
 
 export type FormReview = {
   name: string
@@ -23,12 +37,28 @@ const AddReview = () => {
   } = useForm<FormReview>({
     //resolver: yupResolver(FORM_SCHEMA),
   })
+  const queryClient = useQueryClient()
+  const { enqueueSnackbar } = useSnackbar()
+  const { mutate: addReview, isLoading } = useAddReview({
+    onSuccess: () => {
+      enqueueSnackbar(String('Ďakujeme za recenziu'), SNACKBAR_OPTIONS_SUCCESS)
+      queryClient.invalidateQueries(REVIEWS_KEY)
+      reset()
+      setRating(null)
+    },
+    onError: () => {
+      enqueueSnackbar(
+        String('Vašu recenziu sa neporilo pridať. Skúste to znova.'),
+        SNACKBAR_OPTIONS_ERROR
+      )
+      queryClient.invalidateQueries(REVIEWS_KEY)
+    },
+  })
 
   const onSubmit: SubmitHandler<FormReview> = async (data) => {
     if (data) {
-      addReview(data, rating)
+      await addReview({ data, rating })
     }
-    reset()
   }
 
   return (
@@ -157,6 +187,12 @@ const AddReview = () => {
           Pridať recenziu
         </Button>
       </form>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isLoading}
+      >
+        <CircularProgress color='inherit' />
+      </Backdrop>
     </div>
   )
 }
