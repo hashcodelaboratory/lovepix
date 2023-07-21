@@ -13,7 +13,7 @@ const useLoggedUser = () => {
   const [fetching, setFetching] = useState(true)
   const { data: admins } = useAdmins()
 
-  useEffect(() => {
+  const getUser = () => {
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
         setUser(null)
@@ -28,6 +28,10 @@ const useLoggedUser = () => {
 
       setFetching(false)
     })
+  }
+
+  useEffect(() => {
+    getUser()
   }, [admins])
 
   return { user, fetching }
