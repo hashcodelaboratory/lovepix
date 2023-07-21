@@ -237,7 +237,6 @@ export const localizationKey = {
   contact: 'Contact',
   note: 'note',
   billingAddress: 'billingAddress',
-  contact: 'Contact',
   voucherCode: 'voucherCode',
   generateVoucherCode: 'generateVoucherCode',
   voucherCodeDesc: 'voucherCodeDesc',

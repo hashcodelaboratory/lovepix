@@ -1,7 +1,7 @@
 import styles from '../../../../../../../../dashboard.module.scss'
 import { Checkbox, FormControlLabel, Select, TextField } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { messages } from '../../../../../../../../../../messages/messages'
+import { localizationKey } from '../../../../../../../../../../localization/localization-key'
 import MenuItem from '@mui/material/MenuItem'
 import { SaleTypeEnum } from '../../../../../../../../../../common/voucher/utils/enums'
 import { Controller, Control, UseFormRegister } from 'react-hook-form'
@@ -18,7 +18,9 @@ const General = ({ control, register, errors }: GeneralProps) => {
   return (
     <div>
       <div className={styles.voucherGeneralRow}>
-        <p className={styles.voucherGeneralText}>{t(messages.saleType)}</p>
+        <p className={styles.voucherGeneralText}>
+          {t(localizationKey.saleType)}
+        </p>
         <Controller
           key={'saleType'}
           name={'saleType'}
@@ -35,20 +37,22 @@ const General = ({ control, register, errors }: GeneralProps) => {
               placeholder={SaleTypeEnum.PERCENTAGE}
             >
               <MenuItem value={SaleTypeEnum.PERCENTAGE}>
-                {t(messages[SaleTypeEnum.PERCENTAGE])}
+                {t(localizationKey[SaleTypeEnum.PERCENTAGE])}
               </MenuItem>
               <MenuItem value={SaleTypeEnum.FIX_CART}>
-                {t(messages[SaleTypeEnum.FIX_CART])}
+                {t(localizationKey[SaleTypeEnum.FIX_CART])}
               </MenuItem>
               <MenuItem value={SaleTypeEnum.FIX_PRODUCT}>
-                {t(messages[SaleTypeEnum.FIX_PRODUCT])}
+                {t(localizationKey[SaleTypeEnum.FIX_PRODUCT])}
               </MenuItem>
             </Select>
           )}
         />
       </div>
       <div className={styles.voucherGeneralRow}>
-        <p className={styles.voucherGeneralText}>{t(messages.voucherValue)}</p>
+        <p className={styles.voucherGeneralText}>
+          {t(localizationKey.voucherValue)}
+        </p>
         <Controller
           key={'value'}
           name={'value'}
@@ -68,7 +72,9 @@ const General = ({ control, register, errors }: GeneralProps) => {
         />
       </div>
       <div className={styles.voucherGeneralRow}>
-        <p className={styles.voucherGeneralText}>{t(messages.deliveryFree)}</p>
+        <p className={styles.voucherGeneralText}>
+          {t(localizationKey.deliveryFree)}
+        </p>
         <Controller
           key={'freeDelivery'}
           name={'freeDelivery'}
@@ -78,13 +84,15 @@ const General = ({ control, register, errors }: GeneralProps) => {
               {...field}
               {...register('freeDelivery', { required: true })}
               control={<Checkbox sx={{ ml: 1 }} />}
-              label={t(messages.deliveryFree)}
+              label={t(localizationKey.deliveryFree)}
             />
           )}
         />
       </div>
       <div className={styles.voucherGeneralRow}>
-        <p className={styles.voucherGeneralText}>{t(messages.expiration)}</p>
+        <p className={styles.voucherGeneralText}>
+          {t(localizationKey.expiration)}
+        </p>
         <Controller
           key={'expiration'}
           name={'expiration'}

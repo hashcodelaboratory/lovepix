@@ -1,5 +1,5 @@
 import styles from '../../../../../../../../dashboard.module.scss'
-import { messages } from '../../../../../../../../../../messages/messages'
+import { localizationKey } from '../../../../../../../../../../localization/localization-key'
 import { TextField } from '@mui/material'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -19,12 +19,14 @@ const Strict = ({ control, register, errors }: StrictProps) => {
   return (
     <div>
       <div className={styles.voucherGeneralRow}>
-        <p className={styles.voucherGeneralText}>{t(messages.minimal)}</p>
+        <p className={styles.voucherGeneralText}>
+          {t(localizationKey.minimal)}
+        </p>
         <TextField
           type='number'
           size='small'
           sx={{ ml: 1, width: 200 }}
-          placeholder={t(messages.noMinimal)}
+          placeholder={t(localizationKey.noMinimal)}
           onChange={(e) => setValue(Number(e.target.value))}
         />
       </div>

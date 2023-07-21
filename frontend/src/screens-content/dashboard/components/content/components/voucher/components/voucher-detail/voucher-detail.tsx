@@ -6,7 +6,7 @@ import HideSourceIcon from '@mui/icons-material/HideSource'
 import MultipleStopIcon from '@mui/icons-material/MultipleStop'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { messages } from '../../../../../../../../messages/messages'
+import { localizationKey } from '../../../../../../../../localization/localization-key'
 import General from './components/general/general'
 import Strict from './components/strict/strict'
 import Limit from './components/limit/limit'
@@ -80,7 +80,7 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <p className={styles.voucherDetailInputText}>
-            {t(messages.voucherCode)}
+            {t(localizationKey.voucherCode)}
           </p>
           <div>
             <Controller
@@ -100,11 +100,11 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
               )}
             />
             <Button variant='contained'>
-              {t(messages.generateVoucherCode)}
+              {t(localizationKey.generateVoucherCode)}
             </Button>
           </div>
           <p className={styles.voucherDetailInputText} style={{ marginTop: 8 }}>
-            {t(messages.voucherCodeDesc)}
+            {t(localizationKey.voucherCodeDesc)}
           </p>
           <Controller
             key={'description'}
@@ -120,14 +120,14 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
                 multiline
                 fullWidth
                 rows={3}
-                placeholder={t(messages.voucherCodeDesc)}
+                placeholder={t(localizationKey.voucherCodeDesc)}
               />
             )}
           />
         </div>
         <div>
           <p className={styles.voucherDetailInputText} style={{ marginTop: 8 }}>
-            {t(messages.voucherCodeData)}
+            {t(localizationKey.voucherCodeData)}
           </p>
           <div className={styles.voucherDetailSidepanelRow}>
             <div style={{ backgroundColor: 'whitesmoke' }}>
@@ -136,21 +136,21 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
                 onClick={() => changeSidePanel(SidePanelEnum.GENERAL)}
               >
                 <SettingsIcon sx={{ mr: 1 }} />
-                <p>{t(messages.general)}</p>
+                <p>{t(localizationKey.general)}</p>
               </div>
               <div
                 className={styles.voucherDetailListRow}
                 onClick={() => changeSidePanel(SidePanelEnum.STRICT)}
               >
                 <HideSourceIcon sx={{ mr: 1 }} />
-                <p>{t(messages.strict)}</p>
+                <p>{t(localizationKey.strict)}</p>
               </div>
               <div
                 className={styles.voucherDetailListRow}
                 onClick={() => changeSidePanel(SidePanelEnum.LIMIT)}
               >
                 <MultipleStopIcon sx={{ mr: 1 }} />
-                <p>{t(messages.limit)}</p>
+                <p>{t(localizationKey.limit)}</p>
               </div>
             </div>
             <div className={styles.voucherDetailSidepanelContent}>

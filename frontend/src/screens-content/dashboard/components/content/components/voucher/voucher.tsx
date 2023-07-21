@@ -1,6 +1,6 @@
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { messages } from '../../../../../../messages/messages'
+import { localizationKey } from '../../../../../../localization/localization-key'
 import styles from '../../../../dashboard.module.scss'
 import {
   DataGrid,
@@ -35,7 +35,7 @@ const Voucher = (): JSX.Element => {
   const { mutate: removeVouchers } = useRemoveVouchers({
     onSuccess: () => {
       enqueueSnackbar(
-        String(t(messages.filesRemoved)),
+        String(t(localizationKey.filesRemoved)),
         SNACKBAR_OPTIONS_SUCCESS
       )
       reset()
@@ -79,7 +79,9 @@ const Voucher = (): JSX.Element => {
     setDetailRow(details)
   }
 
-  const buttonText = `(${selectedRows.length}) ${String(t(messages.removeAll))}`
+  const buttonText = `(${selectedRows.length}) ${String(
+    t(localizationKey.removeAll)
+  )}`
 
   return (
     <Accordion>
@@ -88,7 +90,7 @@ const Voucher = (): JSX.Element => {
         aria-controls='panel1a-content'
         id='panel1a-header'
       >
-        <h3>{String(t(messages.code))}</h3>
+        <h3>{String(t(localizationKey.code))}</h3>
       </AccordionSummary>
       <AccordionDetails>
         <div className={styles.rowContainer}>

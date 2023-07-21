@@ -1,5 +1,5 @@
 import styles from '../../../../../../../../dashboard.module.scss'
-import { messages } from '../../../../../../../../../../messages/messages'
+import { localizationKey } from '../../../../../../../../../../localization/localization-key'
 import { TextField } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
@@ -20,24 +20,26 @@ const Limit = ({ control, register, errors }: LimitProps) => {
   return (
     <div>
       <div className={styles.voucherGeneralRow}>
-        <p className={styles.voucherGeneralText}>{t(messages.voucherLimit)}</p>
-        <TextField
-          type='number'
-          size='small'
-          sx={{ ml: 1, width: 300 }}
-          placeholder={t(messages.noLimit)}
-          onChange={(e) => setValue(Number(e.target.value))}
-        />
-      </div>
-      <div className={styles.voucherGeneralRow}>
         <p className={styles.voucherGeneralText}>
-          {t(messages.voucherLimitUser)}
+          {t(localizationKey.voucherLimit)}
         </p>
         <TextField
           type='number'
           size='small'
           sx={{ ml: 1, width: 300 }}
-          placeholder={t(messages.noLimit)}
+          placeholder={t(localizationKey.noLimit)}
+          onChange={(e) => setValue(Number(e.target.value))}
+        />
+      </div>
+      <div className={styles.voucherGeneralRow}>
+        <p className={styles.voucherGeneralText}>
+          {t(localizationKey.voucherLimitUser)}
+        </p>
+        <TextField
+          type='number'
+          size='small'
+          sx={{ ml: 1, width: 300 }}
+          placeholder={t(localizationKey.noLimit)}
           onChange={(e) => setValue(Number(e.target.value))}
         />
       </div>
