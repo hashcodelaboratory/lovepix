@@ -1,4 +1,5 @@
 import { Button, Rating, TextField, Typography } from '@mui/material'
+import { addReview } from 'common/api/add-review'
 import { messages } from 'messages/messages'
 import { useTranslation } from 'next-i18next'
 import React, { useState } from 'react'
@@ -8,12 +9,11 @@ export type FormReview = {
   name: string
   email: string
   review: string
-  rating: number
 }
 
 const AddReview = () => {
   const { t } = useTranslation()
-  const [value, setValue] = useState<number | null>(null)
+  const [rating, setRating] = useState<number | null>(null)
   const {
     register,
     formState: { errors },
@@ -25,11 +25,21 @@ const AddReview = () => {
   })
 
   const onSubmit: SubmitHandler<FormReview> = async (data) => {
-    console.log(data)
+    if (data) {
+      addReview(data, rating)
+    }
+    reset()
   }
 
   return (
-    <div style={{ margin: 'auto', justifyContent: 'center', maxWidth: 350 }}>
+    <div
+      style={{
+        margin: 'auto',
+        justifyContent: 'center',
+        maxWidth: 350,
+        marginBottom: 20,
+      }}
+    >
       <Typography variant='h5' marginBottom={'20px'}>
         Pridajte vašu recenziu
       </Typography>
@@ -47,7 +57,7 @@ const AddReview = () => {
                 fullWidth
                 {...register('name', { required: true })}
                 error={!!errors.name?.message}
-                //helperText={String(error ?? '')}
+                helperText={String(errors.name?.message ?? '')}
                 variant='outlined'
                 size='small'
                 sx={{
@@ -76,7 +86,7 @@ const AddReview = () => {
                 {...register('email', { required: true })}
                 error={!!errors.email?.message}
                 fullWidth
-                //helperText={String(error ?? '')}
+                helperText={String(errors.email?.message ?? '')}
                 variant='outlined'
                 size='small'
                 sx={{
@@ -92,12 +102,14 @@ const AddReview = () => {
             </div>
           )}
         />
-        <div style={{ marginBottom: 10 }}>
+        <div
+          style={{ marginBottom: 10, display: 'flex', alignItems: 'center' }}
+        >
+          <span>Hodnotenie:</span>
           <Rating
-            name='simple-controlled'
-            value={value}
+            value={rating}
             onChange={(event, newValue) => {
-              setValue(newValue)
+              setRating(newValue)
             }}
           />
         </div>
@@ -116,7 +128,7 @@ const AddReview = () => {
                 {...field}
                 {...register('review', { required: true })}
                 error={!!errors.review?.message}
-                //helperText={String(error ?? '')}
+                helperText={String(errors.review?.message ?? '')}
                 variant='outlined'
                 size='small'
                 sx={{
@@ -132,7 +144,6 @@ const AddReview = () => {
             </div>
           )}
         />
-
         <Button
           type='submit'
           variant='outlined'
