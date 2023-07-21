@@ -184,5 +184,6 @@
   "noMinimal": "Bez minimálnej sumy",
   "voucherLimit": "Limit použitia kupónu",
   "voucherLimitUser": "Limit použitia pre používateľa",
-  "noLimit": "Neobmedzené použitie"
+  "noLimit": "Neobmedzené použitie",
+  "added": "Added"
 }

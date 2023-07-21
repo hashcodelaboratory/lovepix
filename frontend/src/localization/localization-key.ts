@@ -256,4 +256,5 @@ export const localizationKey = {
   PERCENTAGE: 'percentage',
   FIX_CART: 'fixCart',
   FIX_PRODUCT: 'fixProduct',
+  added: 'added',
 }

@@ -71,7 +71,7 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
   const { mutate: addVoucher } = useAddVoucher({
     onSuccess: () => {
       enqueueSnackbar(
-        String(t(localizationKey.filesRemoved)),
+        String(t(localizationKey.added)),
         SNACKBAR_OPTIONS_SUCCESS
       )
       reset()
