@@ -4,7 +4,7 @@ import { SyntheticEvent, useEffect, useState } from 'react'
 import { a11yProps } from './utils/utils'
 import TabPanel from './components/tab-panel'
 import { useTranslation } from 'next-i18next'
-import { messages } from '../../../../../../../../messages/messages'
+import { localizationKey } from '../../../../../../../../localization/localization-key'
 import TabPanelBox from './components/tab-panel-box'
 import {
   dimensionsByHeight,
@@ -73,9 +73,9 @@ const DimensionContent = ({ configuration }: DimensionContentProps) => {
           variant='fullWidth'
           visibleScrollbar
         >
-          <Tab label={String(t(messages.byWidth))} {...a11yProps(0)} />
-          <Tab label={String(t(messages.byHeight))} {...a11yProps(1)} />
-          <Tab label={String(t(messages.square))} {...a11yProps(2)} />
+          <Tab label={String(t(localizationKey.byWidth))} {...a11yProps(0)} />
+          <Tab label={String(t(localizationKey.byHeight))} {...a11yProps(1)} />
+          <Tab label={String(t(localizationKey.square))} {...a11yProps(2)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>

@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material'
 import styles from '../../../../../shopping-cart.module.scss'
 import { Controller, FieldErrors, Control } from 'react-hook-form'
-import { messages } from '../../../../../../../messages/messages'
+import { localizationKey } from '../../../../../../../localization/localization-key'
 import { useTranslation } from 'next-i18next'
 import { FormInputs } from '../../../../../../../common/types/form'
 import { useState } from 'react'
@@ -27,12 +27,12 @@ const CompanyFrom = ({ register, errors, control }: FormProps): JSX.Element => {
   const FIELDS: ControllerFieldType[] = [
     {
       name: 'ico',
-      message: messages.ico,
+      message: localizationKey.ico,
       fullWidth: true,
     },
     {
       name: 'dic',
-      message: messages.dic,
+      message: localizationKey.dic,
       fullWidth: true,
     },
   ]
@@ -70,7 +70,7 @@ const CompanyFrom = ({ register, errors, control }: FormProps): JSX.Element => {
       <CheckboxShoppingCart
         value={companyInfo}
         setValue={handleChangeCompany}
-        message={messages.addCompanyInfo}
+        message={localizationKey.addCompanyInfo}
       />
       <div className={styles.form}>{companyInfo && fields}</div>
     </div>

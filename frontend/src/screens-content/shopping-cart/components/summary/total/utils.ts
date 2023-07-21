@@ -1,24 +1,24 @@
-import { messages } from 'messages/messages'
+import { localizationKey } from '../../../../../localization/localization-key'
 import { Delivery as DeliveryOptions } from '../../../../../common/enums/delivery'
 import { Payment as PaymentEnum } from '../../../../../common/enums/payment'
 
 export const getDeliveryMessage = (param?: DeliveryOptions) => {
   switch (param) {
     case DeliveryOptions.COURIER:
-      return messages.courier
+      return localizationKey.courier
     default:
-      return messages.personalCollect
+      return localizationKey.personalCollect
   }
 }
 
 export const getPaymentMessage = (param?: PaymentEnum) => {
   switch (param) {
     case PaymentEnum.ONLINE:
-      return messages.online
+      return localizationKey.online
     case PaymentEnum.PERSONAL_DELIVERY:
-      return messages.personalDelivery
+      return localizationKey.personalDelivery
     default:
-      return messages.transaction
+      return localizationKey.transaction
   }
 }
 
