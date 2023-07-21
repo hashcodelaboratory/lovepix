@@ -8,7 +8,7 @@ import {
 import styles from '../../../../dashboard.module.scss'
 import { useContext, useEffect, useState } from 'react'
 import DashboardContext from '../../../../context/dashboard-context'
-import { messages } from '../../../../../../messages/messages'
+import { localizationKey } from '../../../../../../localization/localization-key'
 import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
@@ -73,7 +73,7 @@ const OrdersTable = () => {
     try {
       await removeOrders(selectedRows, queryClient)
       enqueueSnackbar(
-        String(t(messages.filesRemoved)),
+        String(t(localizationKey.filesRemoved)),
         SNACKBAR_OPTIONS_SUCCESS
       )
     } catch (error) {
@@ -93,7 +93,7 @@ const OrdersTable = () => {
     setSelectedRows(selectionModel.map((item, index) => data[index].id))
   }
 
-  const buttonText = String(t(messages.removeAll))
+  const buttonText = String(t(localizationKey.removeAll))
 
   return (
     <Accordion>
@@ -102,7 +102,7 @@ const OrdersTable = () => {
         aria-controls='panel1a-content'
         id='panel1a-header'
       >
-        <h3>{String(t(messages.orders))}</h3>
+        <h1>{String(t(localizationKey.orders))}</h1>
       </AccordionSummary>
       <AccordionDetails sx={{ display: 'flex' }}>
         <Box className={styles.ordersTableSidepanel}>

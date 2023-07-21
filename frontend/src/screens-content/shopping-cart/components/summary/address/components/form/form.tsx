@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material'
 import styles from '../../../../../shopping-cart.module.scss'
 import { Controller, FieldErrors, Control } from 'react-hook-form'
-import { messages } from '../../../../../../../messages/messages'
+import { localizationKey } from '../../../../../../../localization/localization-key'
 import { useTranslation } from 'next-i18next'
 import { FormInputs } from '../../../../../../../common/types/form'
 
@@ -34,50 +34,50 @@ const Form = ({ register, errors, control }: FormProps): JSX.Element => {
   const FIELDS: ControllerFieldType[] = [
     {
       name: 'firstName',
-      message: messages.name,
+      message: localizationKey.name,
       error: errors.firstName?.message,
       fullWidth: true,
     },
     {
       name: 'lastName',
-      message: messages.surname,
+      message: localizationKey.surname,
       error: errors.lastName?.message,
       fullWidth: true,
     },
     {
       name: 'email',
-      message: messages.email,
+      message: localizationKey.email,
       error: errors.email?.message,
       fullWidth: true,
     },
 
     {
       name: 'phone',
-      message: messages.phone,
+      message: localizationKey.phone,
       error: errors.phone?.message,
       fullWidth: true,
     },
     {
       name: 'address',
-      message: messages.address,
+      message: localizationKey.address,
       error: errors.address?.message,
       fullWidth: true,
     },
     {
       name: 'city',
-      message: messages.city,
+      message: localizationKey.city,
       error: errors.city?.message,
       fullWidth: true,
     },
     {
       name: 'postalCode',
-      message: messages.postalCode,
+      message: localizationKey.postalCode,
       error: errors.postalCode?.message,
       fullWidth: true,
     },
     {
       name: 'company',
-      message: messages.company,
+      message: localizationKey.company,
       fullWidth: true,
     },
   ]

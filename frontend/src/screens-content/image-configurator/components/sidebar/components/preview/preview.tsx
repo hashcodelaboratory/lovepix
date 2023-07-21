@@ -1,7 +1,7 @@
 import styles from "../../../../image-configurator-layout.module.scss";
 import { CheckCircle, Delete, Filter1, Image as ImageIcon } from "@mui/icons-material";
 import { useTranslation } from "next-i18next";
-import { messages } from "../../../../../../messages/messages";
+import { localizationKey } from "../../../../../../localization/localization-key";
 import { configurationsTable } from "../../../../../../../database.config";
 import { Configuration } from "../../../../../../common/types/configuration";
 
@@ -44,7 +44,7 @@ const Preview = ({ configuration }: PreviewProps) => {
         <h4 className={styles.headerTitle}
             style={{ color: !!configuration?.origin ? "green" : "black" }}
         >
-          {String(t(messages.yourPhoto))}
+          {String(t(localizationKey.yourPhoto))}
         </h4>
       </div>
       <div className={styles.previewImagePlaceholder}>{layout}</div>

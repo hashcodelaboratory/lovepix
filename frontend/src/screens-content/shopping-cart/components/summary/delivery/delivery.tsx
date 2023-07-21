@@ -1,6 +1,6 @@
 import styles from "../../../shopping-cart.module.scss";
 import { useTranslation } from "next-i18next";
-import { messages } from "../../../../../messages/messages";
+import { localizationKey } from "../../../../../localization/localization-key";
 import { FormControl, FormControlLabel, FormHelperText, Radio, RadioGroup } from "@mui/material";
 import { Delivery as DeliveryOptions } from "../../../../../common/enums/delivery";
 import { Control, Controller } from "react-hook-form";
@@ -17,7 +17,7 @@ const Delivery = ({ control, message }: DeliverySectionProps) => {
   return (
     <div className={styles.cartContainer}>
       <div className={styles.cartTitleContainer}>
-        <h3 className={styles.cartTitleText}>{String(t(messages.delivery))}</h3>
+        <h3 className={styles.cartTitleText}>{String(t(localizationKey.delivery))}</h3>
       </div>
       <Controller
         name="delivery"
@@ -36,7 +36,7 @@ const Delivery = ({ control, message }: DeliverySectionProps) => {
                 label={
                   <div className={styles.radioGroupLabel}>
                     <p className={styles.priceBox}>5.00 €</p>
-                    <div className={styles.deliveryLightText}>{String(t(messages.courier))}</div>
+                    <div className={styles.deliveryLightText}>{String(t(localizationKey.courier))}</div>
                   </div>
                 }
                 className={styles.deliveryField}
@@ -46,8 +46,8 @@ const Delivery = ({ control, message }: DeliverySectionProps) => {
                 control={<Radio />}
                 label={
                   <div className={styles.radioGroupLabel}>
-                    <p className={styles.priceBox}>{String(t(messages.free))}</p>
-                    <div className={styles.deliveryLightText}>{String(t(messages.personalCollect))}</div>
+                    <p className={styles.priceBox}>{String(t(localizationKey.free))}</p>
+                    <div className={styles.deliveryLightText}>{String(t(localizationKey.personalCollect))}</div>
                   </div>
                 }
                 className={styles.deliveryField}

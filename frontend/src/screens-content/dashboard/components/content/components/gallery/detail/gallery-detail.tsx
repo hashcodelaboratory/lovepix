@@ -9,7 +9,7 @@ import DashboardContext from "../../../../../context/dashboard-context";
 import { doc, updateDoc } from "@firebase/firestore";
 import { database } from "../../../../../../../common/firebase/config";
 import { Collections } from "../../../../../../../common/firebase/enums";
-import { messages } from "../../../../../../../messages/messages";
+import { localizationKey } from "../../../../../../../localization/localization-key";
 import { useQueryClient } from "react-query";
 import { GALLERY_KEY } from "../../../../../../../common/api/use-gallery";
 
@@ -108,7 +108,7 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
             alt=""
           />
           <div className={styles.galleryDetailContainer}>
-            <div className={styles.galleryDetailTextFieldTitle}>{t(messages.name)}: </div>
+            <div className={styles.galleryDetailTextFieldTitle}>{t(localizationKey.name)}: </div>
             <TextField
               className={styles.galleryDetailTitle}
               size="small"
