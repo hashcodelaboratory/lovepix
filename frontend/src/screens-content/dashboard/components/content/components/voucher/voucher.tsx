@@ -17,6 +17,11 @@ import { useQueryClient } from 'react-query'
 import { VoucherType } from '../../../../../../common/api/use-vouchers'
 import VoucherDetail from './components/voucher-detail/voucher-detail'
 import { getColumns } from './utils/columns'
+import { useRemoveVouchers } from '../../../../api/vouchers/remove-vouchers'
+import {
+  SNACKBAR_OPTIONS_ERROR,
+  SNACKBAR_OPTIONS_SUCCESS,
+} from '../../../../../../snackbar/config'
 
 const Voucher = (): JSX.Element => {
   const { t } = useTranslation()
@@ -26,6 +31,19 @@ const Voucher = (): JSX.Element => {
   const {
     state: { vouchers },
   } = useContext(DashboardContext)
+
+  const { mutate: removeVouchers } = useRemoveVouchers({
+    onSuccess: () => {
+      enqueueSnackbar(
+        String(t(messages.filesRemoved)),
+        SNACKBAR_OPTIONS_SUCCESS
+      )
+      reset()
+    },
+    onError: (e) => {
+      enqueueSnackbar(e, SNACKBAR_OPTIONS_ERROR)
+    },
+  })
 
   const [selectedRows, setSelectedRows] = useState<string[]>([])
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([])
@@ -46,16 +64,7 @@ const Voucher = (): JSX.Element => {
   }
 
   const removeData = () => {
-    // TODO: implement
-    // if (result === '') {
-    //   enqueueSnackbar(
-    //     String(t(messages.filesRemoved)),
-    //     SNACKBAR_OPTIONS_SUCCESS
-    //   )
-    //   reset()
-    // } else {
-    //   enqueueSnackbar(result, SNACKBAR_OPTIONS_ERROR)
-    // }
+    // removeVouchers(['a'])
   }
 
   const selectionChanged = (
