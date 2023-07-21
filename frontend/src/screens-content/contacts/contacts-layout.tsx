@@ -10,7 +10,7 @@ const ContactsLayout = (): JSX.Element => {
         <Information/>
       </Grid>
 
-      <Grid item xs={12} md={7} className={styles.mapContainer}>
+      <Grid item xs={12} md={7} alignItems="center">
         <Map/>
       </Grid>
     </Grid>
