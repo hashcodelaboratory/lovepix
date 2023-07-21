@@ -10,11 +10,21 @@ import { localizationKey } from '../../../../../../../../localization/localizati
 import General from './components/general/general'
 import Strict from './components/strict/strict'
 import Limit from './components/limit/limit'
-import { VoucherType } from '../../../../../../../../common/api/use-vouchers'
+import {
+  VOUCHERS_KEY,
+  VoucherType,
+} from '../../../../../../../../common/api/use-vouchers'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { SaleTypeEnum } from '../../../../../../../../common/voucher/utils/enums'
 import { FORM_SCHEMA } from '../../utils/schema'
+import {
+  SNACKBAR_OPTIONS_ERROR,
+  SNACKBAR_OPTIONS_SUCCESS,
+} from '../../../../../../../../snackbar/config'
+import { useSnackbar } from 'notistack'
+import { useQueryClient } from 'react-query'
+import { useAddVoucher } from '../../../../../../api/vouchers/add-voucher'
 
 enum SidePanelEnum {
   GENERAL = 'GENERAL',
@@ -40,6 +50,8 @@ type VoucherDetailProps = {
 
 const VoucherDetail = ({ detail }: VoucherDetailProps) => {
   const { t } = useTranslation()
+  const { enqueueSnackbar } = useSnackbar()
+  const queryClient = useQueryClient()
 
   const {
     register,
@@ -55,6 +67,20 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
   const [sidePanel, setSidePanel] = useState<SidePanelEnum>(
     SidePanelEnum.GENERAL
   )
+
+  const { mutate: addVoucher } = useAddVoucher({
+    onSuccess: () => {
+      enqueueSnackbar(
+        String(t(localizationKey.filesRemoved)),
+        SNACKBAR_OPTIONS_SUCCESS
+      )
+      reset()
+      queryClient.invalidateQueries(VOUCHERS_KEY)
+    },
+    onError: (e: any) => {
+      enqueueSnackbar(e, SNACKBAR_OPTIONS_ERROR)
+    },
+  })
 
   const detailLayout = useMemo(() => {
     switch (sidePanel) {
@@ -73,6 +99,7 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     console.log(data)
+    addVoucher(data)
   }
 
   return (

@@ -14,7 +14,10 @@ import { useContext, useState } from 'react'
 import DashboardContext from '../../../../context/dashboard-context'
 import { useSnackbar } from 'notistack'
 import { useQueryClient } from 'react-query'
-import { VoucherType } from '../../../../../../common/api/use-vouchers'
+import {
+  VOUCHERS_KEY,
+  VoucherType,
+} from '../../../../../../common/api/use-vouchers'
 import VoucherDetail from './components/voucher-detail/voucher-detail'
 import { getColumns } from './utils/columns'
 import { useRemoveVouchers } from '../../../../api/vouchers/remove-vouchers'
@@ -39,6 +42,7 @@ const Voucher = (): JSX.Element => {
         SNACKBAR_OPTIONS_SUCCESS
       )
       reset()
+      queryClient.invalidateQueries(VOUCHERS_KEY)
     },
     onError: (e) => {
       enqueueSnackbar(e, SNACKBAR_OPTIONS_ERROR)
@@ -64,7 +68,7 @@ const Voucher = (): JSX.Element => {
   }
 
   const removeData = () => {
-    // removeVouchers(['a'])
+    removeVouchers({ ids: selectedRows })
   }
 
   const selectionChanged = (
@@ -72,7 +76,7 @@ const Voucher = (): JSX.Element => {
     details: GridCallbackDetails
   ) => {
     setSelectionModel(selectionModel)
-    setSelectedRows(selectionModel.map((item, index) => data[index].code))
+    setSelectedRows(selectionModel.map((item, index) => data[index].id))
   }
 
   const onRowClick = (details: GridRowParams) => {
