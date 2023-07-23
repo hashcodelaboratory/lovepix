@@ -187,5 +187,11 @@
   "billingInfo": "Fakturačné údaje",
   "note": "Poznámka",
   "billingAddress": "Fakturačná adresa",
-  "Contact": "Kontakt"
+  "Contact": "Kontakt",
+  "addYourReview": "Pridajte vašu recenziu",
+  "addReview": "Pridať recenziu",
+  "rating": "Hodnotenie",
+  "writeYourReviewHere": "Sem napíšte svoju recenziu :)",
+  "thankYouForYourReview": "Ďakujeme za Vašu recenziu.",
+  "errorMessageReview": "Vašu recenziu sa neporilo pridať. Skúste to znova."
 }

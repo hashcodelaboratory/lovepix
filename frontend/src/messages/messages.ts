@@ -188,4 +188,10 @@ export const messages = {
   contact: 'Contact',
   note: 'note',
   billingAddress: 'billingAddress',
+  addYourReview: 'addYourReview',
+  addReview: 'addReview',
+  rating: 'rating',
+  writeYourReviewHere: 'writeYourReviewHere',
+  thankYouForYourReview: 'thankYouForYourReview',
+  errorMessageReview: 'errorMessageReview',
 }

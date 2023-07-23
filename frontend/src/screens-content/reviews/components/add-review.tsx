@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import {
   Backdrop,
   Button,
@@ -18,6 +19,7 @@ import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
 } from 'snackbar/config'
+import { FORM_SCHEMA_REVIEW } from './utils'
 
 export type FormReview = {
   name: string
@@ -35,20 +37,23 @@ const AddReview = () => {
     control,
     reset,
   } = useForm<FormReview>({
-    //resolver: yupResolver(FORM_SCHEMA),
+    resolver: yupResolver(FORM_SCHEMA_REVIEW),
   })
   const queryClient = useQueryClient()
   const { enqueueSnackbar } = useSnackbar()
   const { mutate: addReview, isLoading } = useAddReview({
     onSuccess: () => {
-      enqueueSnackbar(String('Ďakujeme za recenziu'), SNACKBAR_OPTIONS_SUCCESS)
+      enqueueSnackbar(
+        String(t(messages.thankYouForYourReview)),
+        SNACKBAR_OPTIONS_SUCCESS
+      )
       queryClient.invalidateQueries(REVIEWS_KEY)
       reset()
       setRating(null)
     },
     onError: () => {
       enqueueSnackbar(
-        String('Vašu recenziu sa neporilo pridať. Skúste to znova.'),
+        String(t(messages.errorMessageReview)),
         SNACKBAR_OPTIONS_ERROR
       )
       queryClient.invalidateQueries(REVIEWS_KEY)
@@ -71,7 +76,7 @@ const AddReview = () => {
       }}
     >
       <Typography variant='h5' marginBottom={'20px'}>
-        Pridajte vašu recenziu
+        {String(t(messages.addYourReview))}
       </Typography>
       <form id='my-form' onSubmit={handleSubmit(onSubmit)}>
         <Controller
@@ -80,9 +85,9 @@ const AddReview = () => {
           render={({ field }) => (
             <div>
               <TextField
-                placeholder={t(messages.name)}
+                placeholder={String(t(messages.name))}
                 id={'name'}
-                label={t(messages.name)}
+                label={String(t(messages.name))}
                 {...field}
                 fullWidth
                 {...register('name', { required: true })}
@@ -135,7 +140,7 @@ const AddReview = () => {
         <div
           style={{ marginBottom: 10, display: 'flex', alignItems: 'center' }}
         >
-          <span>Hodnotenie:</span>
+          <span>{t(messages.rating)}:</span>
           <Rating
             value={rating}
             onChange={(event, newValue) => {
@@ -149,7 +154,7 @@ const AddReview = () => {
           render={({ field }) => (
             <div>
               <TextField
-                placeholder={'Sem napíšte svoju recenziu :)'}
+                placeholder={t(messages.writeYourReviewHere)}
                 id={'review'}
                 label={'Recenzia'}
                 multiline
@@ -184,7 +189,7 @@ const AddReview = () => {
             color: 'white',
           }}
         >
-          Pridať recenziu
+          {t(messages.addReview)}
         </Button>
       </form>
       <Backdrop
