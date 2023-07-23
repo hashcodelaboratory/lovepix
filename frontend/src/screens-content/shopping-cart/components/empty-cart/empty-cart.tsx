@@ -2,7 +2,7 @@ import { ShoppingCart } from '@mui/icons-material'
 import styles from '../../shopping-cart.module.scss'
 import { Button, Container } from '@mui/material'
 import { useTranslation } from 'next-i18next'
-import { messages } from '../../../../messages/messages'
+import { localizationKey } from '../../../../localization/localization-key'
 import { useRouter } from 'next/router'
 
 const EmptyCart = () => {
@@ -18,8 +18,8 @@ const EmptyCart = () => {
     <Container>
       <div className={styles.emptyCartContainer}>
         <ShoppingCart className={styles.icon} />
-        <p className={styles.title}>{String(t(messages.emptyCart))}</p>
-        <Button onClick={redirect}>{String(t(messages.backToShop))}</Button>
+        <p className={styles.title}>{String(t(localizationKey.emptyCart))}</p>
+        <Button onClick={redirect}>{String(t(localizationKey.backToShop))}</Button>
       </div>
     </Container>
   )

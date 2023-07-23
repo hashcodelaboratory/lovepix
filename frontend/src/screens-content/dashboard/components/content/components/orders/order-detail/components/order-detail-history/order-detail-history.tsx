@@ -1,5 +1,5 @@
 import styles from '../../order-detail.module.scss'
-import { messages } from '../../../../../../../../../messages/messages'
+import { localizationKey } from '../../../../../../../../../localization/localization-key'
 import { Box } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import { Order } from '../../../../../../../../../common/types/order'
@@ -28,27 +28,27 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
   const states = [
     {
       icon: <InventoryIcon className={iconStyle(CREATED)} />,
-      message: t(messages.orderCreated),
+      message: t(localizationKey.orderCreated),
       state: CREATED,
     },
     {
       icon: <AddShoppingCartIcon className={iconStyle(DELIVERED)} />,
-      message: t(messages.accepted),
+      message: t(localizationKey.accepted),
       state: DELIVERED,
     },
     {
       icon: <ArchiveIcon className={iconStyle(PACKED)} />,
-      message: t(messages.packed),
+      message: t(localizationKey.packed),
       state: PACKED,
     },
     {
       icon: <LocalShippingIcon className={iconStyle(PICKED)} />,
-      message: t(messages.shipped),
+      message: t(localizationKey.shipped),
       state: PICKED,
     },
     {
       icon: <RedeemIcon className={iconStyle(SHIPPED)} />,
-      message: t(messages.finished),
+      message: t(localizationKey.finished),
       state: SHIPPED,
     },
   ]
@@ -67,7 +67,7 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
 
   return (
     <Box className={styles.box} style={{ width: 400 }}>
-      <h4>{t(messages.orderHistory)}</h4>
+      <h4>{t(localizationKey.orderHistory)}</h4>
       {stateColumn}
     </Box>
   )

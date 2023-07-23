@@ -6,7 +6,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import styles from './add-product.module.scss'
 import { addPhoto, addProductValues, FORM_SCHEMA } from './utils'
 import { useQueryClient } from 'react-query'
-import { messages } from 'messages/messages'
+import { localizationKey } from '../../../../../localization/localization-key'
 import Image from 'next/image'
 import { FormAddProduct } from 'common/types/form-add-product'
 
@@ -125,7 +125,7 @@ const AddProduct = () => {
             />
           </div>
           <Button variant='outlined' onClick={removeImage}>
-            {t(messages.removeImage)}
+            {t(localizationKey.removeImage)}
           </Button>
         </>
       )}
@@ -137,7 +137,7 @@ const AddProduct = () => {
           id='my-form'
           className={styles.button}
         >
-          {t(messages.addNewProduct)}
+          {t(localizationKey.addNewProduct)}
         </Button>
       </form>
     </div>

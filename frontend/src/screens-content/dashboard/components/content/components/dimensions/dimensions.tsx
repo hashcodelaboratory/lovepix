@@ -1,6 +1,6 @@
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { messages } from "../../../../../../messages/messages";
+import { localizationKey } from "../../../../../../localization/localization-key";
 import styles from "../../../../dashboard.module.scss";
 import { DataGrid, GridCallbackDetails, GridRowParams, GridSelectionModel } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -56,7 +56,7 @@ const Dimensions = (): JSX.Element => {
     const result = removeDimensions(selectedRows, queryClient);
     if (result === "") {
       enqueueSnackbar(
-        String(t(messages.filesRemoved)),
+        String(t(localizationKey.filesRemoved)),
         SNACKBAR_OPTIONS_SUCCESS,
       );
       reset();
@@ -78,7 +78,7 @@ const Dimensions = (): JSX.Element => {
     setDetailRow(details);
   };
 
-  const buttonText = `(${selectedRows.length}) ${String(t(messages.removeAll))}`;
+  const buttonText = `(${selectedRows.length}) ${String(t(localizationKey.removeAll))}`;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -104,7 +104,7 @@ const Dimensions = (): JSX.Element => {
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        <h1>{String(t(messages.dimensions))}</h1>
+        <h1>{String(t(localizationKey.dimensions))}</h1>
       </AccordionSummary>
       <AccordionDetails>
         <div className={styles.rowContainer}>
@@ -140,7 +140,7 @@ const Dimensions = (): JSX.Element => {
             <AddCircle sx={{ marginLeft: 1 }} />
           </button>
           <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>{t(messages.dimensions)}</DialogTitle>
+            <DialogTitle>{t(localizationKey.dimensions)}</DialogTitle>
             <DialogContent>
               <DialogContentText>
                 Pridajte rozmer, ktory chcete pouzivat v aplikacii

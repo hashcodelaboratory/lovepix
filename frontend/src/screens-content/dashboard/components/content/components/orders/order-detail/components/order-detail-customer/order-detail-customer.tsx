@@ -1,5 +1,5 @@
 import styles from '../../order-detail.module.scss'
-import { messages } from '../../../../../../../../../messages/messages'
+import { localizationKey } from '../../../../../../../../../localization/localization-key'
 import { Box } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import { Order } from '../../../../../../../../../common/types/order'
@@ -19,7 +19,7 @@ const OrderDetailCustomer = ({ order }: Props): JSX.Element => {
 
   return (
     <Box className={styles.box} style={{ width: '100%', height: 200 }}>
-      <h4>{t(messages.customerDetails)}</h4>
+      <h4>{t(localizationKey.customerDetails)}</h4>
       <div className={styles.detailRow}>
         <PersonIcon className={styles.detailIcon} />
         {`${order?.form?.firstName} ${order?.form?.lastName}`}
