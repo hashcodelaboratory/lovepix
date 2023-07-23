@@ -9,7 +9,6 @@ import {
 } from '@mui/material'
 import { useAddReview } from 'common/api/add-review'
 import { REVIEWS_KEY } from 'common/api/use-reviews'
-import { messages } from 'messages/messages'
 import { useTranslation } from 'next-i18next'
 import { useSnackbar } from 'notistack'
 import React, { useState } from 'react'
@@ -20,6 +19,7 @@ import {
   SNACKBAR_OPTIONS_SUCCESS,
 } from 'snackbar/config'
 import { FORM_SCHEMA_REVIEW } from './utils'
+import { localizationKey } from 'localization/localization-key'
 
 export type FormReview = {
   name: string
@@ -44,7 +44,7 @@ const AddReview = () => {
   const { mutate: addReview, isLoading } = useAddReview({
     onSuccess: () => {
       enqueueSnackbar(
-        String(t(messages.thankYouForYourReview)),
+        String(t(localizationKey.thankYouForYourReview)),
         SNACKBAR_OPTIONS_SUCCESS
       )
       queryClient.invalidateQueries(REVIEWS_KEY)
@@ -53,7 +53,7 @@ const AddReview = () => {
     },
     onError: () => {
       enqueueSnackbar(
-        String(t(messages.errorMessageReview)),
+        String(t(localizationKey.errorMessageReview)),
         SNACKBAR_OPTIONS_ERROR
       )
       queryClient.invalidateQueries(REVIEWS_KEY)
@@ -76,7 +76,7 @@ const AddReview = () => {
       }}
     >
       <Typography variant='h5' marginBottom={'20px'}>
-        {String(t(messages.addYourReview))}
+        {String(t(localizationKey.addYourReview))}
       </Typography>
       <form id='my-form' onSubmit={handleSubmit(onSubmit)}>
         <Controller
@@ -85,9 +85,9 @@ const AddReview = () => {
           render={({ field }) => (
             <div>
               <TextField
-                placeholder={String(t(messages.name))}
+                placeholder={String(t(localizationKey.name))}
                 id={'name'}
-                label={String(t(messages.name))}
+                label={String(t(localizationKey.name))}
                 {...field}
                 fullWidth
                 {...register('name', { required: true })}
@@ -114,9 +114,9 @@ const AddReview = () => {
           render={({ field }) => (
             <div>
               <TextField
-                placeholder={t(messages.email)}
+                placeholder={t(localizationKey.email)}
                 id={'email'}
-                label={t(messages.email)}
+                label={t(localizationKey.email)}
                 {...field}
                 {...register('email', { required: true })}
                 error={!!errors.email?.message}
@@ -140,7 +140,7 @@ const AddReview = () => {
         <div
           style={{ marginBottom: 10, display: 'flex', alignItems: 'center' }}
         >
-          <span>{t(messages.rating)}:</span>
+          <span>{t(localizationKey.rating)}:</span>
           <Rating
             value={rating}
             onChange={(event, newValue) => {
@@ -154,7 +154,7 @@ const AddReview = () => {
           render={({ field }) => (
             <div>
               <TextField
-                placeholder={t(messages.writeYourReviewHere)}
+                placeholder={t(localizationKey.writeYourReviewHere)}
                 id={'review'}
                 label={'Recenzia'}
                 multiline
@@ -189,7 +189,7 @@ const AddReview = () => {
             color: 'white',
           }}
         >
-          {t(messages.addReview)}
+          {t(localizationKey.addReview)}
         </Button>
       </form>
       <Backdrop
