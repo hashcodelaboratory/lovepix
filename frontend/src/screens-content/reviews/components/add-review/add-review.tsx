@@ -18,8 +18,9 @@ import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
 } from 'snackbar/config'
-import { FORM_SCHEMA_REVIEW } from './utils'
+import { FORM_SCHEMA_REVIEW } from '../utils'
 import { localizationKey } from 'localization/localization-key'
+import InputReview from './input-review'
 
 export type FormReview = {
   name: string
@@ -79,63 +80,21 @@ const AddReview = () => {
         {String(t(localizationKey.addYourReview))}
       </Typography>
       <form id='my-form' onSubmit={handleSubmit(onSubmit)}>
-        <Controller
+        <InputReview
           name={'name'}
+          label={localizationKey.name}
+          register={register}
           control={control}
-          render={({ field }) => (
-            <div>
-              <TextField
-                placeholder={String(t(localizationKey.name))}
-                id={'name'}
-                label={String(t(localizationKey.name))}
-                {...field}
-                fullWidth
-                {...register('name', { required: true })}
-                error={!!errors.name?.message}
-                helperText={String(errors.name?.message ?? '')}
-                variant='outlined'
-                size='small'
-                sx={{
-                  backgroundColor: 'white',
-                  marginBottom: '10px',
-                  '& .MuiInput-root': {
-                    '&:before, :after, :hover:not(.Mui-disabled):before': {
-                      borderBottom: 0,
-                    },
-                  },
-                }}
-              />
-            </div>
-          )}
+          errors={errors}
+          placeholder={localizationKey.name}
         />
-        <Controller
+        <InputReview
           name={'email'}
+          label={localizationKey.email}
+          register={register}
           control={control}
-          render={({ field }) => (
-            <div>
-              <TextField
-                placeholder={t(localizationKey.email)}
-                id={'email'}
-                label={t(localizationKey.email)}
-                {...field}
-                {...register('email', { required: true })}
-                error={!!errors.email?.message}
-                fullWidth
-                helperText={String(errors.email?.message ?? '')}
-                variant='outlined'
-                size='small'
-                sx={{
-                  marginBottom: '10px',
-                  backgroundColor: 'white',
-                  '& .MuiInput-root': {
-                    '&:before, :after, :hover:not(.Mui-disabled):before': {
-                      borderBottom: 0,
-                    },
-                  },
-                }}
-              />
-            </div>
-          )}
+          errors={errors}
+          placeholder={localizationKey.email}
         />
         <div
           style={{ marginBottom: 10, display: 'flex', alignItems: 'center' }}

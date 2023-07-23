@@ -1,5 +1,5 @@
 import { MutationOptions, UseMutationResult, useMutation } from 'react-query'
-import { FormReview } from 'screens-content/reviews/components/add-review'
+import { FormReview } from 'screens-content/reviews/components/add-review/add-review'
 
 export type VoucherDetailRequest = {
   data: FormReview
