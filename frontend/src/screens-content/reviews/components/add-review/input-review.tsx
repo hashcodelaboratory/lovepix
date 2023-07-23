@@ -14,6 +14,7 @@ type InputProps = {
   control: any
   errors: any
   placeholder: string
+  multiline?: boolean
 }
 
 const InputReview = ({
@@ -23,6 +24,7 @@ const InputReview = ({
   control,
   errors,
   placeholder,
+  multiline,
 }: InputProps) => {
   const { t } = useTranslation()
 
@@ -38,6 +40,7 @@ const InputReview = ({
               id={name}
               label={t(label)}
               fullWidth
+              multiline={multiline}
               rows={4}
               {...field}
               {...register(name, { required: true })}

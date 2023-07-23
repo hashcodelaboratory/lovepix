@@ -107,36 +107,14 @@ const AddReview = () => {
             }}
           />
         </div>
-        <Controller
+        <InputReview
           name={'review'}
+          label={'Recenzia'}
+          register={register}
           control={control}
-          render={({ field }) => (
-            <div>
-              <TextField
-                placeholder={t(localizationKey.writeYourReviewHere)}
-                id={'review'}
-                label={'Recenzia'}
-                multiline
-                fullWidth
-                rows={4}
-                {...field}
-                {...register('review', { required: true })}
-                error={!!errors.review?.message}
-                helperText={String(errors.review?.message ?? '')}
-                variant='outlined'
-                size='small'
-                sx={{
-                  marginBottom: '10px',
-                  backgroundColor: 'white',
-                  '& .MuiInput-root': {
-                    '&:before, :after, :hover:not(.Mui-disabled):before': {
-                      borderBottom: 0,
-                    },
-                  },
-                }}
-              />
-            </div>
-          )}
+          errors={errors}
+          placeholder={localizationKey.writeYourReviewHere}
+          multiline
         />
         <Button
           type='submit'
