@@ -39,7 +39,7 @@ const sendOrderShipped = async (
     const mailOptions = {
       from: 'LovePix <noreply@lovepix.sk>',
       to: _body.dest,
-      subject: 'Objednávka: #' + _body.id,
+      subject: 'Objednávka: #' + _body.id + 'Odoslaná',
       html: emailTemplateOrderState(_body),
     }
 
