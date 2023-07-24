@@ -125,7 +125,7 @@ const Summary = ({ order }: SummaryProps) => {
           </div>
         </div>
         <div className={styles.summarySecondRow}>
-          <Voucher />
+          <Voucher voucher={order?.voucher} />
           <TotalSection
             delivery={delivery}
             payment={payment}

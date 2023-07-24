@@ -6,12 +6,15 @@ import { useVoucherDetail } from '../../../../../common/api/use-voucher'
 import { ChangeEvent, useState } from 'react'
 import { orderTable } from '../../../../../../database.config'
 import { ORDER_TABLE_KEY } from '../../../../../common/indexed-db/hooks/keys'
-import { getVoucherValue } from './utils/voucher-value'
+import { VoucherType } from '../../../../../common/types/order'
 
-const Voucher = () => {
+type VoucherProps = {
+  voucher?: VoucherType
+}
+const Voucher = ({ voucher }: VoucherProps) => {
   const { t } = useTranslation()
 
-  const [voucherInput, setVoucherInput] = useState('')
+  const [voucherInput, setVoucherInput] = useState(voucher?.code ?? '')
   const [error, setError] = useState<string>()
   const [isSuccess, setIsSuccess] = useState<boolean>()
 
@@ -33,9 +36,9 @@ const Voucher = () => {
           orderTable.update(ORDER_TABLE_KEY, {
             voucher: {
               code: res.code,
-              value: getVoucherValue(res.saleType, res.value),
+              value: res.value,
               saleType: res.saleType,
-            },
+            } as VoucherType,
           })
         } else {
           setIsSuccess(false)

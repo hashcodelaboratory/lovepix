@@ -52,7 +52,7 @@ export const getPriceWithVoucher = (
 
   switch (saleType) {
     case SaleTypeEnum.PERCENTAGE:
-      return (finalPrice / 100) * value
+      return finalPrice - (finalPrice / 100) * value
     default:
       return finalPrice - value
   }
