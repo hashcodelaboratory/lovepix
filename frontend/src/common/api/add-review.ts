@@ -1,12 +1,12 @@
 import { MutationOptions, UseMutationResult, useMutation } from 'react-query'
 import { FormReview } from 'screens-content/reviews/components/add-review/add-review'
 
-export type VoucherDetailRequest = {
+export type AddReviewRequest = {
   data: FormReview
   rating: number | null
 }
 
-export const addReview = async (data: VoucherDetailRequest) => {
+export const addReview = async (data: AddReviewRequest) => {
   const body = {
     date: Date.now(),
     name: data.data.name,
@@ -21,6 +21,6 @@ export const addReview = async (data: VoucherDetailRequest) => {
 }
 
 export const useAddReview = (
-  options?: MutationOptions<any, any, VoucherDetailRequest>
-): UseMutationResult<any, any, VoucherDetailRequest> =>
+  options?: MutationOptions<any, any, AddReviewRequest>
+): UseMutationResult<any, any, AddReviewRequest> =>
   useMutation(addReview, options)
