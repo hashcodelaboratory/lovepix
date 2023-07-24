@@ -34,10 +34,19 @@ const create = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
 
     // returning result
 
-    await addDoc(collection(database, Collections.REVIEWS), _body)
-    return res.status(200).json({
-      status: 'success',
-    })
+    const responseReview = await addDoc(
+      collection(database, Collections.REVIEWS),
+      _body
+    )
+    if (responseReview) {
+      return res.status(200).json({
+        status: 'success',
+      })
+    } else {
+      return res.status(404).json({
+        status: 'not found',
+      })
+    }
   } catch (error) {
     res.status(500).json({ error: (error as Error).message })
   }
