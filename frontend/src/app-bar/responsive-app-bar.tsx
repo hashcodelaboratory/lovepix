@@ -156,7 +156,7 @@ const ResponsiveAppBar = () => {
                 />
               </Badge>
             </Link>
-            {<LanguageSwitch></LanguageSwitch>}
+            {/*<LanguageSwitch></LanguageSwitch>*/}
             {/*<Tooltip title='Open settings'>*/}
             {/*  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>*/}
             {/*    <Avatar*/}
