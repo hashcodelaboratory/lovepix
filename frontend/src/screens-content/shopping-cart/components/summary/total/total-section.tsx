@@ -1,5 +1,5 @@
 import styles from '../../../shopping-cart.module.scss'
-import { messages } from '../../../../../messages/messages'
+import { localizationKey } from '../../../../../localization/localization-key'
 import { Checkbox, FormControlLabel, Link } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import {
@@ -50,49 +50,49 @@ const TotalSection = ({
   return (
     <div className={styles.cartContainer}>
       <div className={styles.cartTitleContainer}>
-        <h3 className={styles.cartTitleText}>{String(t(messages.summary))}</h3>
+        <h3 className={styles.cartTitleText}>{String(t(localizationKey.summary))}</h3>
       </div>
       <div className={styles.totalContainer}>
         <span>
-          {t(messages.payment)} {payment && <>- {paymentOption}</>}
+          {t(localizationKey.payment)} {payment && <>- {paymentOption}</>}
         </span>
         <span>{paymentPrice} €</span>
       </div>
       <div className={styles.totalContainer}>
         <span>
-          {t(messages.delivery)} {delivery && <>- {deliveryOption}</>}
+          {t(localizationKey.delivery)} {delivery && <>- {deliveryOption}</>}
         </span>
         <span>{deliveryPrice} €</span>
       </div>
       <hr />
       <div className={styles.totalContainer}>
-        <span>{String(t(messages.totalWithoutTax))}</span>
+        <span>{String(t(localizationKey.totalWithoutTax))}</span>
         <span>{priceWithoutTax} €</span>
       </div>
       <div className={styles.totalContainer}>
-        <span>{String(t(messages.tax))}</span>
+        <span>{String(t(localizationKey.tax))}</span>
         <span>{taxFromPrice} €</span>
       </div>
       <div className={styles.totalContainer}>
         <span className={styles.summarySectionTitleFinalPrice}>
-          {String(t(messages.total))}
+          {String(t(localizationKey.total))}
         </span>
         <span className={styles.price}>{finalPriceWithTax} €</span>
       </div>
-      <p className={styles.text}>{String(t(messages.personalData))}</p>
+      <p className={styles.text}>{String(t(localizationKey.personalData))}</p>
       <Link className={styles.text} style={{ cursor: 'pointer' }}>
-        <b>{String(t(messages.privacy))}</b>
+        <b>{String(t(localizationKey.privacy))}</b>
       </Link>
       <div style={{ marginTop: 10 }}>
         <CheckboxShoppingCart
           value={bussinessCondition}
           setValue={handleChangeBussinessCondition}
-          message={messages.agreeWithBussinessCondition}
+          message={localizationKey.agreeWithBussinessCondition}
         />
         <CheckboxShoppingCart
           value={isSubscription}
           setValue={setSubscription}
-          message={messages.agreeWithNewsletter}
+          message={localizationKey.agreeWithNewsletter}
         />
       </div>
       <button
@@ -100,7 +100,7 @@ const TotalSection = ({
         className={styles.checkoutButton}
         disabled={!bussinessCondition}
       >
-        {String(t(messages.orderWithPayment))}
+        {String(t(localizationKey.orderWithPayment))}
       </button>
     </div>
   )
