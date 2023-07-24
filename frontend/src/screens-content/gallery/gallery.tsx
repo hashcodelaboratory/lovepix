@@ -53,7 +53,8 @@ const GalleryLayout = (): JSX.Element => {
     <Container>
       <h1 className={styles.galleryTitle}>Galéria</h1>
       <p className={styles.gallerySubtitle}>
-        Vyberte si z našej ponuky obrazov. Inšpirujte sa dielami fotografov zo Slovenska.
+      Vitajte v našej úžasnej webovej galérii! S radosťou vám predstavujeme našu najnovšiu kolekciu obrázkov a produktov. <br />
+      Od živých abstrakcií až po umelecké diela, veríme že každý návštevník nájde niečo, čo ho zaujme. Nájdete tu širokú škálu unikátnych a kvalitných výrobkov.
       </p>
       <div className={styles.galleryCategoryRow}>
         {categories?.map(({ id, name }) => (
