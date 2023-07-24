@@ -168,7 +168,7 @@
   "metaDescriptionAccount": "Spoznajte našu online tlačiareň! Zameriavame sa na kvalitnú a rýchlu online tlač obrazov podľa vaších predstáv a predaju obrazov a darčekových predmetov. Všetko vybavíte online!",
   "metaTitleAccount": "Účet",
   "metaDescriptionConfigurator": "Obraz je potlačený na plátno, alucobond alebo na akryl pomocou najmodernejšej technológie UV tlače, čo zabezpečuje vynikajúci výsledok a dlhodobú trvácnosť.",
-  "metaTitleConfigurator":  "Konfigurátor",
+  "metaTitleConfigurator": "Konfigurátor",
   "metaDescriptionEShop": "Zháňate moderné obrazy do bytu, domu alebo kancelárie? Máme pre Vás tie najkrajšie, paličkovaná čipka či tlačený obraz - široký výber motívov za výrobné ceny. Produkty expedujeme nasledujúci deň.",
   "metaTitleEShop": "E-shop",
   "metaDescriptionForPartners": "Spoznajte výhody partnerského systému Lovepix, vlastné produkty,veľkoobchodné ceny, ktoré sa vám po prihlásení automaticky zobrazia v eshope",
@@ -230,11 +230,12 @@
   "agreeWithBussinessCondition": "Odoslaním kontaktných údajov vyjadrujem súhlas so spracovaním týchto údajov za účelom oslovenia s ponukou na uzatvorenie finančných produktov v súlade so zákonom č. 122/2013 Z.z. o ochrane osobných údajov v znení neskorších predpisov.",
   "diffrentShippingAddress": "Chcem odoslať objednávku na inú adresu.",
   "addCompanyInfo": "Chcem doplniť firemné údaje.",
+  "Contact": "Kontakt",
+  "allProducts": "Všetky produkty",
   "socialSite": "Sociálne siete",
   "contactInfoComment": "Potrebujete poradiť? Nenašli ste čo ste hľadali? Potrebujete vyrobiť niečo na mieru? Radi vám s tým pomôžeme. Ozvite sa nám!",
   "deliveryPoint": "Odberné miesto",
   "billingInfo": "Fakturačné údaje",
   "note": "Poznámka",
-  "billingAddress": "Fakturačná adresa",
-  "Contact": "Kontakt"
+  "billingAddress": "Fakturačná adresa"
 }

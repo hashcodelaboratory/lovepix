@@ -14,6 +14,7 @@ type AddProductType = {
 export const addProduct = async (params: AddProductType) => {
   const { data, url, name } = params
   const docData = {
+    category: data.category,
     title: data.title,
     price: data.price,
     description: data.description,

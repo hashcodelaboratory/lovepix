@@ -230,11 +230,12 @@ export const localizationKey = {
   agreeWithBussinessCondition: 'agreeWithBussinessCondition',
   diffrentShippingAddress: 'diffrentShippingAddress',
   addCompanyInfo: 'addCompanyInfo',
+  contact: 'Contact',
+  allProducts: 'allProducts',
   socialSite: 'socialSite',
   contactInfoComment: 'contactInfoComment',
   deliveryPoint: 'deliveryPoint',
   billingInfo: 'billingInfo',
-  contact: 'Contact',
   note: 'note',
   billingAddress: 'billingAddress',
 }
