@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-const phoneRegExp = /^([0-9]{10})|((\+421)[0-9]{9})$/
+const phoneRegExp = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
 
 const emailRegExp =
   // eslint-disable-next-line
