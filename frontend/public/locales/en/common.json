@@ -185,5 +185,6 @@
   "voucherLimit": "Limit použitia kupónu",
   "voucherLimitUser": "Limit použitia pre používateľa",
   "noLimit": "Neobmedzené použitie",
-  "added": "Added"
+  "added": "Added",
+  "invalidVoucher": "Nesprávny kupón"
 }

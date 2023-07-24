@@ -256,5 +256,6 @@
   "percentage": "Percentuálna zľava",
   "fixCart": "Pevná zľava na celý košík",
   "fixProduct": "Pevná zľava na produkt",
-  "added": "Pridaný"
+  "added": "Pridaný",
+  "invalidVoucher": "Nesprávny kupón"
 }

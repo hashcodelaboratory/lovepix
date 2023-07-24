@@ -35,6 +35,7 @@ const voucherDetail = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const voucherRef = doc(database, Collections.VOUCHERS, _body.id)
+
     const voucherSnap = await getDoc(voucherRef)
 
     if (voucherSnap.exists()) {

@@ -257,4 +257,5 @@ export const localizationKey = {
   FIX_CART: 'fixCart',
   FIX_PRODUCT: 'fixProduct',
   added: 'added',
+  invalidVoucher: 'invalidVoucher',
 }

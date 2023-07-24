@@ -133,6 +133,7 @@ const Summary = ({ order }: SummaryProps) => {
             finalPrice={finalPrice}
             isSubscription={isSubscription}
             setSubscription={handleSubscribe}
+            voucher={order?.voucher}
           />
         </div>
       </form>
