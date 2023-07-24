@@ -4,6 +4,7 @@ import {
 } from 'api/email/utils'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { transporter } from '../../../../src/api/email/transporter'
+import { OrderState } from 'common/enums/order-states'
 
 const sendOrderShipped = async (
   req: NextApiRequest,
@@ -39,7 +40,7 @@ const sendOrderShipped = async (
     const mailOptions = {
       from: 'LovePix <noreply@lovepix.sk>',
       to: _body.dest,
-      subject: 'Objednávka: #' + _body.id + '- Odoslaná',
+      subject: 'Objednávka: #' + _body.id + OrderState.PICKED,
       html: emailTemplateOrderState(_body),
     }
 
