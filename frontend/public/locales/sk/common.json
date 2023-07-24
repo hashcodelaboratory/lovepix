@@ -71,6 +71,7 @@
   "deliveryValidation": "Doprava je povinný údaj.",
   "paymentValidation": "Platba je povinný údaj.",
   "firstNameValidation": "Meno je povinný údaj.",
+  "emailValidation": "Email je povinný údaj",
   "lastNameValidation": "Priezvisko je povinný údaj.",
   "addressValidation": "Adresa je povinný údaj.",
   "cityValidation": "Mesto je povinný údaj.",
@@ -238,7 +239,8 @@
   "billingInfo": "Fakturačné údaje",
   "note": "Poznámka",
   "billingAddress": "Fakturačná adresa",
-  "Contact": "Kontakt",
+  "phoneRegexValidation": "Telefónne číslo nemá správny formát",
+  "emailRegexValidation": "Nesprávny formát emailu.",
   "Vesmír": "Vesmír",
   "Príroda": "Príroda"
 }
