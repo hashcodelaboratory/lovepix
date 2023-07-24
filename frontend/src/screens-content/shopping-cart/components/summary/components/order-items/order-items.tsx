@@ -1,6 +1,6 @@
 import styles from '../../../../shopping-cart.module.scss'
 import { useTranslation } from 'next-i18next'
-import { messages } from '../../../../../../messages/messages'
+import { localizationKey } from '../../../../../../localization/localization-key'
 import { FieldErrors, Control } from 'react-hook-form'
 import { Order } from '../../../../../../common/types/order'
 import { Image } from '../../../../../../common/types/image'
@@ -25,7 +25,7 @@ const OrderItems = ({ order }: DeliveryProps) => {
     <div className={styles.cartContainer}>
       <div className={styles.cartTitleContainer}>
         <h3 className={styles.cartTitleText}>
-          {String(t(messages.singleOrder))}
+          {String(t(localizationKey.singleOrder))}
         </h3>
       </div>
       <div className={styles.cartItemsContainer}>
