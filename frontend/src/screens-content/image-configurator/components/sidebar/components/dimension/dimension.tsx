@@ -1,7 +1,7 @@
 import Header from "../header/header";
 import { CheckCircle, Filter2 } from "@mui/icons-material";
 import styles from "../../../../image-configurator-layout.module.scss";
-import { messages } from "../../../../../../messages/messages";
+import { localizationKey } from "../../../../../../localization/localization-key";
 import { useTranslation } from "next-i18next";
 import DimensionContent from "./components/dimension-content/dimension-content";
 import { Configuration } from "../../../../../../common/types/configuration";
@@ -20,7 +20,7 @@ const Dimension = ({ configuration }: DimensionProps) => {
       <div className={styles.dimension}>
         <Header
           icon={icon}
-          title={String(t(messages.chooseDimension))}
+          title={String(t(localizationKey.chooseDimension))}
           success={!!configuration?.dimensionId}
         />
         <DimensionContent configuration={configuration} />

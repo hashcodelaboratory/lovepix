@@ -1,11 +1,11 @@
 import styles from '../../../home.module.scss'
 import { useTranslation } from 'next-i18next'
-import { messages } from '../../../../../messages/messages'
+import { localizationKey } from '../../../../../localization/localization-key'
 
 const DropzoneIdle = () => {
   const { t } = useTranslation()
 
-  const { uploadPhoto, uploadPhotoSubcontent } = messages
+  const { uploadPhoto, uploadPhotoSubcontent } = localizationKey
 
   return (
     <div style={{ textAlign: 'center' }}>

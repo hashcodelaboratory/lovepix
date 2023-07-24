@@ -1,7 +1,7 @@
 import styles from "../../../../image-configurator-layout.module.scss";
 import Header from "../header/header";
 import { CheckCircle, Filter3 } from "@mui/icons-material";
-import { messages } from "../../../../../../messages/messages";
+import { localizationKey } from "../../../../../../localization/localization-key";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
@@ -64,7 +64,7 @@ const Material = ({ configuration }: MaterialProps) => {
     <div className={styles.containerPadding}>
       <Header
         icon={icon}
-        title={String(t(messages.chooseMaterial))}
+        title={String(t(localizationKey.chooseMaterial))}
         success={!!configuration?.material}
       />
       <div

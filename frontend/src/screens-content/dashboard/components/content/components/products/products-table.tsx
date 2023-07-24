@@ -7,7 +7,7 @@ import styles from "../../../../dashboard.module.scss";
 import { useContext, useState } from "react";
 import DashboardContext from "../../../../context/dashboard-context";
 import { getUploadImagesColumns } from "../utils/columns/upload-images-columns";
-import { messages } from "../../../../../../messages/messages";
+import { localizationKey } from "../../../../../../localization/localization-key";
 import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
@@ -62,7 +62,7 @@ const ProductsTable = () => {
       await queryClient.invalidateQueries(UPLOADED_IMAGES_KEY);
       await queryClient.invalidateQueries(GALLERY_KEY);
       enqueueSnackbar(
-        String(t(messages.filesRemoved)),
+        String(t(localizationKey.filesRemoved)),
         SNACKBAR_OPTIONS_SUCCESS,
       );
       reset();
@@ -80,7 +80,7 @@ const ProductsTable = () => {
       (data[index].name)));
   };
 
-  const buttonText = `(${selectedRows.length}) ${String(t(messages.removeAll))}`;
+  const buttonText = `(${selectedRows.length}) ${String(t(localizationKey.removeAll))}`;
 
   const onRowClick = (details: GridRowParams) => {
     setDetailRow(details);
@@ -93,7 +93,7 @@ const ProductsTable = () => {
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        <h1>{String(t(messages.products))}</h1>
+        <h1>{String(t(localizationKey.products))}</h1>
       </AccordionSummary>
       <AccordionDetails>
         <div className={styles.rowContainer}>

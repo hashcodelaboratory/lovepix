@@ -1,6 +1,6 @@
 import styles from '../../../shopping-cart.module.scss'
 import { useTranslation } from 'next-i18next'
-import { messages } from '../../../../../messages/messages'
+import { localizationKey } from '../../../../../localization/localization-key'
 import Form from './components/form/form'
 import { FormInputs } from '../../../../../common/types/form'
 import { Control, FieldErrors } from 'react-hook-form'
@@ -21,7 +21,7 @@ const Address = ({ register, errors, control }: CartProps) => {
     <div className={styles.cartContainer}>
       <div className={styles.cartTitleContainer}>
         <h3 className={styles.cartTitleText}>
-          {String(t(messages.invoiceAddress))}
+          {String(t(localizationKey.invoiceAddress))}
         </h3>
       </div>
       <Form register={register} errors={errors} control={control} />
