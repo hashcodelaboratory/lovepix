@@ -38,6 +38,7 @@ const AddReview = () => {
     reset,
   } = useForm<FormReview>({
     resolver: yupResolver(FORM_SCHEMA_REVIEW),
+    reValidateMode: 'onChange',
   })
   const queryClient = useQueryClient()
   const { enqueueSnackbar } = useSnackbar()

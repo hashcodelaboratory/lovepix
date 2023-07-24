@@ -1,11 +1,8 @@
 import React from 'react'
-import { Control, Controller, UseFormRegister, useForm } from 'react-hook-form'
+import { Controller, UseFormRegister } from 'react-hook-form'
 import { FormReview } from './add-review'
 import { TextField } from '@mui/material'
-import { localizationKey } from 'localization/localization-key'
 import { useTranslation } from 'next-i18next'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { FORM_SCHEMA_REVIEW } from '../utils'
 
 type InputProps = {
   name: 'name' | 'email' | 'review'
