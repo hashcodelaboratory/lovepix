@@ -85,7 +85,7 @@ const AddReview = () => {
           label={localizationKey.name}
           register={register}
           control={control}
-          errors={errors}
+          errors={errors.name?.message}
           placeholder={localizationKey.name}
         />
         <InputReview
@@ -93,7 +93,7 @@ const AddReview = () => {
           label={localizationKey.email}
           register={register}
           control={control}
-          errors={errors}
+          errors={errors.email?.message}
           placeholder={localizationKey.email}
         />
         <div
@@ -112,7 +112,7 @@ const AddReview = () => {
           label={'Recenzia'}
           register={register}
           control={control}
-          errors={errors}
+          errors={errors.review?.message}
           placeholder={localizationKey.writeYourReviewHere}
           multiline
         />

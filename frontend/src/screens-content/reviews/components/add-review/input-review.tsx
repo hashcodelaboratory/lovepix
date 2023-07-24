@@ -1,5 +1,5 @@
 import React from 'react'
-import { Controller, UseFormRegister } from 'react-hook-form'
+import { Control, Controller, UseFormRegister } from 'react-hook-form'
 import { FormReview } from './add-review'
 import { TextField } from '@mui/material'
 import { useTranslation } from 'next-i18next'
@@ -8,7 +8,7 @@ type InputProps = {
   name: 'name' | 'email' | 'review'
   label: string
   register: UseFormRegister<FormReview>
-  control: any
+  control: Control<FormReview, any>
   errors: any
   placeholder: string
   multiline?: boolean
@@ -41,8 +41,8 @@ const InputReview = ({
               rows={4}
               {...field}
               {...register(name, { required: true })}
-              error={!!errors.review?.message}
-              helperText={String(errors.review?.message ?? '')}
+              error={!!errors}
+              helperText={String(errors ?? '')}
               variant='outlined'
               size='small'
               sx={{
