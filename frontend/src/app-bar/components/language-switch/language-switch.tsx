@@ -71,7 +71,7 @@ const LanguageSwitch = () => {
       >
       {Array.from(languages).filter(item => i18n.language !== item[0]).map(item => 
         <MenuItem sx={{padding: "3px 8px"}} selected={false} autoFocus={false}>
-          <Link href={PagesUrls.NONE} locale={item[0]}>
+          <Link href={"#"} locale={item[0]}>
             <Image
               src={item[1]}
               layout={ImageLayout.FIXED}
