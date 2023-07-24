@@ -84,7 +84,7 @@ const ProductDetailLayout = () => {
 
     if (product?.qty === count) {
       enqueueSnackbar(
-        String(t(localizationKey.noMoreProdutsOnStock)),
+        String(t(localizationKey.noMoreProdutsInStock)),
         SNACKBAR_OPTIONS_ERROR
       )
       return
@@ -140,7 +140,7 @@ const ProductDetailLayout = () => {
       <div className={styles.title}>{t(localizationKey.description)}</div>
       <hr />
       <div className={styles.description}>{description}</div>
-      <div className={styles.title}>{t(localizationKey.simmilarProducts)}</div>
+      <div className={styles.title}>{t(localizationKey.similarProducts)}</div>
       <div style={{ display: 'flex', overflow: 'auto', marginTop: 20 }}>
         {productList}
       </div>
