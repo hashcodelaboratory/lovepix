@@ -71,6 +71,7 @@
   "deliveryValidation": "Delivery field is required.",
   "paymentValidation": "Payment field is required.",
   "firstNameValidation": "First name field is required.",
+  "emailValidation": "Email field is required.",
   "lastNameValidation": "Last name field is required.",
   "addressValidation": "Address field is required.",
   "cityValidation": "City field is required.",
@@ -238,6 +239,8 @@
   "billingInfo": "Billing info",
   "note": "Poznámka",
   "billingAddress": "Fakturačná adresa",
+  "phoneRegexValidation": "Wrong format of your phone number",
+  "emailRegexValidation": "Wrong format of your email",
   "Vesmír": "Space",
   "Príroda": "Nature"
 }

@@ -74,6 +74,7 @@ export const localizationKey = {
   deliveryValidation: 'deliveryValidation',
   paymentValidation: 'paymentValidation',
   firstNameValidation: 'firstNameValidation',
+  emailValidation: 'emailValidation',
   lastNameValidation: 'lastNameValidation',
   addressValidation: 'addressValidation',
   cityValidation: 'cityValidation',
@@ -237,4 +238,6 @@ export const localizationKey = {
   billingInfo: 'billingInfo',
   note: 'note',
   billingAddress: 'billingAddress',
+  phoneRegexValidation: 'phoneRegexValidation',
+  emailRegexValidation: 'emailRegexValidation',
 }
