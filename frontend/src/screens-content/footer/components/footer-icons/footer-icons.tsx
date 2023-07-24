@@ -1,14 +1,14 @@
-import lovepixIcon from "../../../../assets/logo_gray.svg";
-import facebookIcon from "../../../../assets/facebook.svg";
-import twitterIcon from "../../../../assets/twitter.svg";
-import instagramIcon from "../../../../assets/instagram.svg";
-import styles from "../../footer.module.scss";
-import { Container, Link } from "@mui/material";
-import Image from "next/image";
-import { ImageLayout } from "../../../home/enums/enums";
-import { useTranslation } from "react-i18next";
-import { messages } from "../../../../messages/messages";
-import * as PagesUrls from "../../../../constants/pages/urls";
+import lovepixIcon from '../../../../assets/logo_gray.svg'
+import facebookIcon from '../../../../assets/facebook.svg'
+import twitterIcon from '../../../../assets/twitter.svg'
+import instagramIcon from '../../../../assets/instagram.svg'
+import styles from '../../footer.module.scss'
+import { Container, Link } from '@mui/material'
+import Image from 'next/image'
+import { ImageLayout } from '../../../home/enums/enums'
+import { useTranslation } from 'react-i18next'
+import { messages } from '../../../../messages/messages'
+import * as PagesUrls from '../../../../constants/pages/urls'
 
 import Tooltip from '@mui/material/Tooltip'
 import IconButton from '@mui/material/IconButton'
@@ -19,11 +19,13 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Typography from '@mui/material/Typography'
 import { logIn, logOut } from 'auth'
-import { v4 as uuidv4 } from 'uuid'
+// import { v4 as uuidv4 } from 'uuid'
 import { useRouter } from 'next/router'
+import { settings } from 'navigation'
+import { DASHBOARD } from 'constants/settings/titles'
 
 const FooterIcons = (): JSX.Element => {
-
+  const { t } = useTranslation()
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   )
@@ -33,17 +35,17 @@ const FooterIcons = (): JSX.Element => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
-  const { user, allowedSettings } = useLoggedUser()
+  const { user } = useLoggedUser()
   const router = useRouter()
   const handleLogout = () => {
     logOut()
     router.push(`/`)
     handleCloseUserMenu()
   }
-  // const { user, allowedSettings } = useLoggedUser()
 
-  const { t } = useTranslation();
-  // external href in <Link> does not work without 2 leading slashes or 'https://' 
+  const userSettings = settings.filter((item) => item.title !== DASHBOARD)
+  const menuOptions = user?.isAdmin ? settings : userSettings
+  // external href in <Link> does not work without 2 leading slashes or 'https://'
   return (
     <Container>
       <hr />
@@ -53,7 +55,7 @@ const FooterIcons = (): JSX.Element => {
           layout={ImageLayout.FIXED}
           width={22}
           height={22}
-          alt=""
+          alt=''
         />
         <p className={styles.footerIconsText}><b>{t(messages.partners)}:</b></p>
         <Link className={styles.footerIconsText} href="https://www.mojkalendar.sk" target="_blank" rel="noreferrer">mojkalendar.sk</Link>
@@ -70,10 +72,6 @@ const FooterIcons = (): JSX.Element => {
           />
         </IconButton>
       </Tooltip>
-      {/* <p>hello</p> */}
-      {/* <p>{adminemails[1]}</p> */}
-      {/* <p>{userEmail}</p> */}
-      {/* <p>{test}</p> */}
       
       <Menu
         sx={{ mt: '45px' }}
@@ -92,28 +90,14 @@ const FooterIcons = (): JSX.Element => {
         onClose={handleCloseUserMenu}
       >
         {user ? (
-          allowedSettings.map((setting) => {
-            const menuItem = (
-              <MenuItem
-                key={setting.title}
-                onClick={() => setting.callBack && handleLogout()}
-              >
-                <Typography textAlign='center'>
-                  {setting.title}
-                </Typography>
-              </MenuItem>
-            )
-
-            if (setting.callBack) {
-              return menuItem
-            } else {
-              return (
-                <Link key={uuidv4()} href={setting.link}>
-                  {menuItem}
-                </Link>
-              )
-            }
-          })
+          menuOptions.map((setting) => (
+            <MenuItem
+              key={setting.title}
+              onClick={() => setting.callBack && handleLogout()}
+            >
+              <Typography textAlign='center'>{setting.title}</Typography>
+            </MenuItem>
+          ))
         ) : (
           <MenuItem onClick={logIn}>
             <Typography textAlign='center'>Login</Typography>
@@ -179,4 +163,4 @@ const FooterIcons = (): JSX.Element => {
   );
 };
 
-export default FooterIcons;
+export default FooterIcons
