@@ -1,6 +1,6 @@
 import Card from "./components/card/card";
 import styles from "../../dashboard.module.scss";
-import { messages } from "../../../../messages/messages";
+import { localizationKey } from "../../../../localization/localization-key";
 import UploadImagesTable from "./components/gallery/upload-images-table";
 import { useContext } from "react";
 import DashboardContext from "../../context/dashboard-context";
@@ -26,57 +26,57 @@ const Content = ({ isFetching }: Props) => {
       <div className={styles.cardRow}>
         <Card
           header={{
-            title: messages.orders,
+            title: localizationKey.orders,
             count: isFetching ? "-" : orders?.length.toString(),
             icon: <LibraryBooksIcon />,
           }}
           footer={{
             value: "+ 15 %",
-            text: messages.thanLastWeek,
+            text: localizationKey.thanLastWeek,
           }}
         />
         <Card
           header={{
-            title: messages.products,
+            title: localizationKey.products,
             count: isFetching ? "-" : orders?.length.toString(),
             icon: <LibraryBooksIcon />,
           }}
           footer={{
             value: "+ 25 %",
-            text: messages.thanLastWeek,
+            text: localizationKey.thanLastWeek,
           }}
         />
         <Card
           header={{
-            title: messages.dimensions,
+            title: localizationKey.dimensions,
             count: isFetching ? "-" : String(dimensions?.length),
             icon: <InventoryIcon />,
           }}
           footer={{
             value: "+ 15 %",
-            text: messages.thanLastWeek,
+            text: localizationKey.thanLastWeek,
           }}
         />
         <Card
           header={{
-            title: messages.categories,
+            title: localizationKey.categories,
             count: isFetching ? "-" : String(categories?.length),
             icon: <InventoryIcon />,
           }}
           footer={{
             value: "+ 35 %",
-            text: messages.thanLastWeek,
+            text: localizationKey.thanLastWeek,
           }}
         />
         <Card
           header={{
-            title: messages.uploadedImages,
+            title: localizationKey.uploadedImages,
             count: isFetching ? "-" : uploadImages?.length.toString(),
             icon: <FolderCopyIcon />,
           }}
           footer={{
             value: "+ 45 %",
-            text: messages.thanLastWeek,
+            text: localizationKey.thanLastWeek,
           }}
         />
       </div>

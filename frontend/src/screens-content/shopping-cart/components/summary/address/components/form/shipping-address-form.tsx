@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material'
 import styles from '../../../../../shopping-cart.module.scss'
 import { Controller, FieldErrors, Control } from 'react-hook-form'
-import { messages } from '../../../../../../../messages/messages'
+import { localizationKey } from '../../../../../../../localization/localization-key'
 import { useTranslation } from 'next-i18next'
 import { FormInputs } from '../../../../../../../common/types/form'
 import { useState } from 'react'
@@ -32,27 +32,27 @@ const FormShippingAddress = ({ register, control }: FormProps): JSX.Element => {
   const FIELDS: ControllerFieldType[] = [
     {
       name: 'firstNameShippingAddress',
-      message: messages.name,
+      message: localizationKey.name,
       fullWidth: true,
     },
     {
       name: 'lastNameShippingAddress',
-      message: messages.surname,
+      message: localizationKey.surname,
       fullWidth: true,
     },
     {
       name: 'addressShippingAddress',
-      message: messages.address,
+      message: localizationKey.address,
       fullWidth: true,
     },
     {
       name: 'cityShippingAdress',
-      message: messages.city,
+      message: localizationKey.city,
       fullWidth: true,
     },
     {
       name: 'postalCodeShippingAddress',
-      message: messages.postalCode,
+      message: localizationKey.postalCode,
       fullWidth: true,
     },
   ]
@@ -90,7 +90,7 @@ const FormShippingAddress = ({ register, control }: FormProps): JSX.Element => {
       <CheckboxShoppingCart
         value={isShippingAdress}
         setValue={handleChangeShippingAddress}
-        message={messages.diffrentShippingAddress}
+        message={localizationKey.diffrentShippingAddress}
       />
       <div className={styles.form}>{isShippingAdress && fields}</div>
     </div>

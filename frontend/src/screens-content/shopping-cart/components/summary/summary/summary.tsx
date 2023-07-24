@@ -76,20 +76,25 @@ const Summary = ({ order }: SummaryProps) => {
       payment: data.payment!,
       stripe: stripe ?? null,
     }
+
     data.note && Object.assign(newOrder, { note: data.note })
+    const shippingAddressForm = {
+      firstNameShippingAddress: data?.firstNameShippingAddress,
+      lastNameShippingAddress: data?.lastNameShippingAddress,
+      addressShippingAddress: data?.addressShippingAddress,
+      cityShippingAdress: data?.cityShippingAdress,
+      postalCodeShippingAddress: data?.postalCodeShippingAddress,
+    }
+
     data.firstNameShippingAddress &&
-      Object.assign(newOrder, {
-        firstNameShippingAddress: data?.firstNameShippingAddress,
-        lastNameShippingAddress: data?.lastNameShippingAddress,
-        addressShippingAddress: data?.addressShippingAddress,
-        cityShippingAdress: data?.cityShippingAdress,
-        postalCodeShippingAddress: data?.postalCodeShippingAddress,
-      })
+      Object.assign(newOrder.form, shippingAddressForm)
+
     data.ico &&
-      Object.assign(newOrder, {
+      Object.assign(newOrder.form, {
         ico: data?.ico,
         dic: data?.dic,
       })
+
     await createOrder(newOrder)
     if (payment !== PaymentEnum.ONLINE) {
       await clearIndexedDb()

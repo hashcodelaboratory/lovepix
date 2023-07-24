@@ -1,6 +1,6 @@
 import { Container } from "@mui/system";
 import { useTranslation } from "react-i18next";
-import { messages } from "../../../../messages/messages";
+import { localizationKey } from "../../../../localization/localization-key";
 import styles from "../../shopping-cart.module.scss";
 import { ShoppingCart } from "@mui/icons-material";
 import { useRouter } from "next/router";
@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 const ThanksForOrder = () => {
   const { t } = useTranslation();
 
-  const { thanks, forOrder, backToShop, orderInfo, thanksContact } = messages;
+  const { thanks, forOrder, backToShop, orderInfo, thanksContact } = localizationKey;
 
   const { push } = useRouter();
 

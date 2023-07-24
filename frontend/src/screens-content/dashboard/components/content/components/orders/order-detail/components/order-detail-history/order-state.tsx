@@ -14,7 +14,7 @@ import { OrderState as OrderStateEnum } from 'common/enums/order-states'
 import { sendMailOrderPicked } from 'common/api/send-mail-order-picked'
 import { sendMailOrderShipped } from 'common/api/send-mail-order-shipped'
 import { Payment } from 'common/enums/payment'
-import { messages } from 'messages/messages'
+import { localizationKey } from '../../../../../../../../../localization/localization-key'
 import { useTranslation } from 'next-i18next'
 import { useSnackBarNotification } from './use-sanckbar-notification'
 
@@ -54,13 +54,13 @@ const OrderState = ({
     const response = await sendMailOrderShipped(
       order.id,
       order.form.email,
-      t(messages.shipped),
+      t(localizationKey.shipped),
       pdfInvoice
     )
     snackBarNotification(
       response,
-      messages.orderStateSnackbar,
-      messages.emailErrorSnackbar
+      localizationKey.orderStateSnackbar,
+      localizationKey.emailErrorSnackbar
     )
   }
 
@@ -71,12 +71,12 @@ const OrderState = ({
     const response = await sendMailOrderPicked(
       order.id,
       order.form.email,
-      t(messages.yourOrderHasBeenSent)
+      t(localizationKey.yourOrderHasBeenSent)
     )
     snackBarNotification(
       response,
-      messages.orderStateSnackbar,
-      messages.emailErrorSnackbar
+      localizationKey.orderStateSnackbar,
+      localizationKey.emailErrorSnackbar
     )
   }
 
@@ -88,8 +88,8 @@ const OrderState = ({
     const response = await createInvoice(invoice(order.id, order))
     snackBarNotification(
       response,
-      messages.createInvoiceSuccessMessage,
-      messages.createInvoiceErrorMessage
+      localizationKey.createInvoiceSuccessMessage,
+      localizationKey.createInvoiceErrorMessage
     )
     if (response.ok) {
       const res = await response.json()
