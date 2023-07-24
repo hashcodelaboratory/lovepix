@@ -11,7 +11,7 @@ export const FORM_SCHEMA = yup
     postalCode: yup.string().required('postalCodeValidation'),
     phone: yup
       .string()
-      .matches(phoneRegExp, 'Telefon nemá správný formát.')
+      .matches(phoneRegExp, 'phoneRegexValidation')
       .required('phoneValidation'),
     email: yup.string().email().required('emailValidation'),
     delivery: yup.string().required('deliveryValidation'),

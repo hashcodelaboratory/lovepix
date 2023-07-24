@@ -169,5 +169,6 @@
   "billingInfo": "Billing info",
   "note": "Poznámka",
   "billingAddress": "Fakturačná adresa",
-  "Contact": "Kontakt"
+  "Contact": "Kontakt",
+  "phoneRegexValidation": "Wrong format of your phone number"
 }

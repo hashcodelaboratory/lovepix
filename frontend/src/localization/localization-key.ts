@@ -238,4 +238,5 @@ export const localizationKey = {
   contact: 'Contact',
   note: 'note',
   billingAddress: 'billingAddress',
+  phoneRegexValidation: 'phoneRegexValidation',
 }

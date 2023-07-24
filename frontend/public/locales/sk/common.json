@@ -237,5 +237,6 @@
   "billingInfo": "Fakturačné údaje",
   "note": "Poznámka",
   "billingAddress": "Fakturačná adresa",
-  "Contact": "Kontakt"
+  "Contact": "Kontakt",
+  "phoneRegexValidation": "Telefónne číslo nemá správny formát"
 }
