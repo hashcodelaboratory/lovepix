@@ -174,5 +174,6 @@
   "rating": "Hodnotenie",
   "writeYourReviewHere": "Sem napíšte svoju recenziu :)",
   "thankYouForYourReview": "Ďakujeme za Vašu recenziu.",
-  "errorMessageReview": "Vašu recenziu sa neporilo pridať. Skúste to znova."
+  "errorMessageReview": "Vašu recenziu sa neporilo pridať. Skúste to znova.",
+  "reviewPageYourReviews": "Vaše recenzie"
 }

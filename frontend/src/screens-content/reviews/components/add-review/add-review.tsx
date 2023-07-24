@@ -4,7 +4,6 @@ import {
   Button,
   CircularProgress,
   Rating,
-  TextField,
   Typography,
 } from '@mui/material'
 import { useAddReview } from 'common/api/add-review'
@@ -12,7 +11,7 @@ import { REVIEWS_KEY } from 'common/api/use-reviews'
 import { useTranslation } from 'next-i18next'
 import { useSnackbar } from 'notistack'
 import React, { useState } from 'react'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { useQueryClient } from 'react-query'
 import {
   SNACKBAR_OPTIONS_ERROR,

@@ -243,4 +243,5 @@ export const localizationKey = {
   writeYourReviewHere: 'writeYourReviewHere',
   thankYouForYourReview: 'thankYouForYourReview',
   errorMessageReview: 'errorMessageReview',
+  reviewPageYourReviews: 'reviewPageYourReviews',
 }
