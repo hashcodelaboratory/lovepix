@@ -1,5 +1,5 @@
 import { Box, Button, Modal, Typography } from '@mui/material'
-import { messages } from 'messages/messages'
+import { localizationKey } from '../../../../../../../../../localization/localization-key'
 import { useTranslation } from 'next-i18next'
 import React from 'react'
 
@@ -33,17 +33,17 @@ const UpdateOrderState = ({ open, closeModal, save, title }: ModalProps) => {
       aria-describedby='modal-modal-description'
     >
       <Box sx={style}>
-        <h3>{t(messages.changeOrderState)}</h3>
+        <h3>{t(localizationKey.changeOrderState)}</h3>
         <div>
-          {t(messages.changeOrderStateSubtitle)}
+          {t(localizationKey.changeOrderStateSubtitle)}
           <Typography fontWeight={700}>{title}</Typography>
         </div>
         <div style={{ marginTop: 20 }}>
           <Button variant='outlined' onClick={closeModal}>
-            {t(messages.cancel)}
+            {t(localizationKey.cancel)}
           </Button>
           <Button variant='outlined' onClick={save} style={{ marginLeft: 10 }}>
-            {t(messages.confirm)}
+            {t(localizationKey.confirm)}
           </Button>
         </div>
       </Box>

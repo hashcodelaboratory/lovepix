@@ -1,4 +1,4 @@
-import { CONFIGURATOR } from 'constants/pages/urls'
+import { Pages } from 'constants/pages/urls'
 import { IndexableType, Table } from 'dexie'
 import { NextRouter } from 'next/router'
 import { CONFIGURATION_TABLE_KEY } from "../../../../common/indexed-db/hooks/keys";
@@ -39,7 +39,7 @@ const handleDB =
     }
 
     router.push({
-      pathname: CONFIGURATOR,
+      pathname: Pages.CONFIGURATOR,
     })
   }
 

@@ -6,9 +6,9 @@ import styles from './gallery.module.scss'
 import {useCategories} from '../../common/api/use-categories'
 import {Chip} from '@mui/material'
 import {useEffect, useState} from 'react'
-import {messages} from '../../messages/messages'
+import {localizationKey} from '../../localization/localization-key'
 import {useTranslation} from 'react-i18next'
-import {CONFIGURATOR} from '../../constants/pages/urls'
+import {Pages} from "../../constants/pages/urls";
 import {useRouter} from 'next/router'
 import {addFileFromGallery} from '../../common/utils/add-file-from-gallery'
 import {useGalleryQuery} from "./use-gallery-query";
@@ -62,7 +62,7 @@ const GalleryLayout = (): JSX.Element => {
 
   const add = async (path: string, id: string) => {
     await addFileFromGallery(path, id)
-    await router.push(CONFIGURATOR)
+    await router.push(Pages.CONFIGURATOR)
   }
 
   return (
@@ -96,7 +96,7 @@ const GalleryLayout = (): JSX.Element => {
               alt=''
             />
             <button className={styles.previewImageLink}>
-              {t(messages.add)}
+              {t(localizationKey.add)}
             </button>
           </div>
         ))}

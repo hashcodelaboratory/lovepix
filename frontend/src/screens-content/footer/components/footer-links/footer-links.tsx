@@ -1,13 +1,13 @@
 import styles from "../../footer.module.scss";
 import Container from "@mui/material/Container";
-import {messages} from "../../../../messages/messages";
+import {localizationKey} from "../../../../localization/localization-key";
 import {useCategories} from "../../../../common/api/use-categories";
 import {FOR_PARTNERS} from "../../../../constants/pages/titles";
 import {Link as MUILink} from "@mui/material";
 import {useTranslation} from "next-i18next";
 import React from "react";
 import Link from "next/link";
-import {GALLERY} from "constants/pages/urls";
+import {Pages} from "../../../../constants/pages/urls";
 import {composeUrlWithQuery} from "./util";
 
 type Link = {
@@ -16,47 +16,47 @@ type Link = {
 }
 
 const serviceLinks: Link[] = [{
-  label: messages.ourContacts,
+  label: localizationKey.ourContacts,
   // TODO: TBD
   href: undefined
 }, {
-  label: messages.satisfaction,
+  label: localizationKey.satisfaction,
   // TODO: TBD
   href: undefined
 }, {
-  label: messages.possibilities,
+  label: localizationKey.possibilities,
   // TODO: TBD
   href: undefined
 }, {
-  label: messages.creatingTime,
+  label: localizationKey.creatingTime,
   // TODO: TBD
   href: undefined
 }, {
-  label: messages.complaint,
+  label: localizationKey.complaint,
   // TODO: TBD
   href: undefined
 }]
 
 const fromPhotoLinks: Link[] = [{
-  label: messages.canvasPhoto,
+  label: localizationKey.canvasPhoto,
   // TODO: TBD
   href: undefined
 }, {
-  label: messages.acrylPhoto,
+  label: localizationKey.acrylPhoto,
   // TODO: TBD
   href: undefined
 }, {
-  label: messages.dibondPhoto,
+  label: localizationKey.dibondPhoto,
   // TODO: TBD
   href: undefined
 }]
 
 const lovePixLinks: Link[] = [{
-  label: messages.materials,
+  label: localizationKey.materials,
   // TODO: TBD
   href: undefined,
 }, {
-  label: messages.story,
+  label: localizationKey.story,
   // TODO: TBD
   href: undefined
 }, {
@@ -64,11 +64,11 @@ const lovePixLinks: Link[] = [{
   // TODO: TBD
   href: undefined
 }, {
-  label: messages.download,
+  label: localizationKey.download,
   // TODO: TBD
   href: undefined
 }, {
-  label: messages.blog,
+  label: localizationKey.blog,
   // TODO: TBD
   href: undefined
 }]
@@ -78,17 +78,17 @@ const FooterLinks = (): JSX.Element => {
 
   const galleryLinks: Link[] = (categories ?? []).map(({name}) => ({
     label: name,
-    href: composeUrlWithQuery(GALLERY, {category: name})
+    href: composeUrlWithQuery(Pages.GALLERY, {category: name})
   }))
 
   const footerColumns: { title: string, links: Link[] }[] = [{
-    title: messages.service,
+    title: localizationKey.service,
     links: serviceLinks,
   }, {
-    title: messages.fromPhoto,
+    title: localizationKey.fromPhoto,
     links: fromPhotoLinks
   }, {
-    title: messages.gallery,
+    title: localizationKey.gallery,
     links: galleryLinks
   }, {
     title: "Lovepix", // TODO: extract this to one general place

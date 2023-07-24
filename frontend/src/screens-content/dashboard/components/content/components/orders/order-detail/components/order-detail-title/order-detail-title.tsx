@@ -1,4 +1,4 @@
-import { messages } from "../../../../../../../../../messages/messages";
+import { localizationKey } from "../../../../../../../../../localization/localization-key";
 import { useTranslation } from "next-i18next";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 const OrderDetailTitle = ({ id }: Props): JSX.Element => {
   const { t } = useTranslation();
 
-  return <p><b>{t(messages.singleOrder)}</b> {id}</p>;
+  return <p><b>{t(localizationKey.singleOrder)}</b> {id}</p>;
 };
 
 export default OrderDetailTitle;
