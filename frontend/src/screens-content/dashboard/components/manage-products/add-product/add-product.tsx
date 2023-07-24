@@ -1,5 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, TextField } from '@mui/material'
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
+} from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import React, { ChangeEvent, useRef, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
@@ -9,9 +17,10 @@ import { useQueryClient } from 'react-query'
 import { localizationKey } from '../../../../../localization/localization-key'
 import Image from 'next/image'
 import { FormAddProduct } from 'common/types/form-add-product'
+import { useCategoriesEshop } from 'common/api/use-categories-eshop'
 
 type ControllerFieldType = {
-  name: 'title' | 'price' | 'count' | 'description'
+  name: 'title' | 'price' | 'count' | 'description' | 'category'
   error?: string
 }
 
@@ -30,6 +39,13 @@ const AddProduct = () => {
     defaultValues: addProductValues,
   })
   const [image, setImage] = useState<File | undefined>()
+  const { data: categories } = useCategoriesEshop()
+
+  const [category, setCategory] = React.useState('')
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setCategory(event.target.value)
+  }
 
   const FIELDS: ControllerFieldType[] = [
     {
@@ -130,6 +146,36 @@ const AddProduct = () => {
         </>
       )}
       <form id='my-form' onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          name={'category'}
+          control={control}
+          render={({ field }) => (
+            <div>
+              <FormControl fullWidth>
+                <InputLabel id='demo-multiple-name-label'>
+                  {t(localizationKey.categories)}
+                </InputLabel>
+                <Select
+                  label='category'
+                  labelId='demo-simple-select-helper-label'
+                  id='demo-simple-select-helper'
+                  {...field}
+                  {...register('category', { required: true })}
+                  error={!!errors.category?.message}
+                  value={category}
+                  onChange={handleChange}
+                  variant='outlined'
+                >
+                  {categories?.map((item, index) => (
+                    <MenuItem key={index} value={item.name}>
+                      {item.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+          )}
+        />
         {fields}
         <Button
           type='submit'

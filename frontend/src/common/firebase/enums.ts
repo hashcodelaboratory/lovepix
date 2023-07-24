@@ -5,6 +5,7 @@ export enum Collections {
   DIMENSIONS = 'dimensions',
   CATEGORIES = 'categories',
   PRODUCTS = 'products',
+  CATEGORIES_ESHOP = 'categories-eshop',
 }
 
 export enum Languages {
