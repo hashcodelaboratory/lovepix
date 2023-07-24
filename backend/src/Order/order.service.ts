@@ -5,7 +5,7 @@ import { UpdateOrderDto } from "./dto/update-order.dto";
 
 @Injectable()
 export class OrderService {
-    constructor(private readonly prismaService: PrismaService) { }
+    constructor(private readonly prismaService: PrismaService) {}
 
     async create(createOrderDto: CreateOrderDto) {
         return await this.prismaService.order.create({
@@ -25,14 +25,12 @@ export class OrderService {
         });
     }
 
-    async findItems(id: string) {
-        return await this.prismaService.order.findUnique({
+    async update(id: string, updateOrderDto: UpdateOrderDto) {
+        return await this.prismaService.order.update({
             where: {
                 id: id
             },
-            include: {
-                items: true
-            }
+            data: updateOrderDto
         });
     }
 
