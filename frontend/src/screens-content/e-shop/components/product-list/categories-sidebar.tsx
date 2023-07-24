@@ -3,9 +3,9 @@ import { useRouter } from 'next/router'
 import styles from './product-list.module.scss'
 import React from 'react'
 import { Skeleton, Typography } from '@mui/material'
-import { messages } from 'messages/messages'
-import { ESHOP } from 'constants/pages/urls'
 import { useTranslation } from 'next-i18next'
+import { ESHOP } from 'constants/pages/titles'
+import { localizationKey } from 'localization/localization-key'
 
 const CategoriesSidebar = () => {
   const router = useRouter()
@@ -44,10 +44,10 @@ const CategoriesSidebar = () => {
   return (
     <div className={styles.categoriesContainer}>
       <Typography variant='h5' className={styles.categoryTitle}>
-        {t(messages.categories)}
+        {t(localizationKey.categories)}
       </Typography>
       <div onClick={showAllProducts} className={categoryStyle}>
-        {t(messages.allProducts)}
+        {t(localizationKey.allProducts)}
       </div>
       {isLoading ? shimmers : categoriesList}
     </div>
