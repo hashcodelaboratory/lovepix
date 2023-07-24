@@ -17,8 +17,7 @@ type Link = {
 
 const serviceLinks: Link[] = [{
   label: localizationKey.ourContacts,
-  // TODO: TBD
-  href: undefined
+  href: Pages.CONTACT
 }, {
   label: localizationKey.satisfaction,
   // TODO: TBD
@@ -53,16 +52,13 @@ const fromPhotoLinks: Link[] = [{
 
 const lovePixLinks: Link[] = [{
   label: localizationKey.materials,
-  // TODO: TBD
-  href: undefined,
+  href: Pages.ABOUT_US,
 }, {
   label: localizationKey.story,
-  // TODO: TBD
-  href: undefined
+  href: Pages.ABOUT_US
 }, {
   label: FOR_PARTNERS,
-  // TODO: TBD
-  href: undefined
+  href: Pages.FOR_PARTNERS
 }, {
   label: localizationKey.download,
   // TODO: TBD

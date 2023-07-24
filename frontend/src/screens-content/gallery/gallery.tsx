@@ -21,7 +21,7 @@ const GalleryLayout = (): JSX.Element => {
   const {data: gallery} = useGallery()
   const {data: categories} = useCategories()
 
-  const [searchedCategories, setSearchedCategories] = useState<string[]>([])
+  const [searchedCategories, setSearchedCategories] = useState<string[]>(queryGallery ? [queryGallery] : [])
 
   const filtered = gallery?.filter((image) =>
     searchedCategories?.some((r) => image.categories.includes(r))
