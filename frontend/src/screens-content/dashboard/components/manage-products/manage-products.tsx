@@ -8,7 +8,7 @@ import { getProductsColumns } from './table-columns'
 
 const ManageProducts = () => {
   const queryClient = useQueryClient()
-  const { data } = useProducts()
+  const { data } = useProducts(null)
 
   return (
     <div className={styles.manageProductsContainer}>

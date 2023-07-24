@@ -22,7 +22,8 @@ export const addProduct = async (params: AddProductType) => {
     image: url,
     path: name,
   }
-  await setDoc(doc(database, Collections.PRODUCTS, `P${Date.now()}`), docData)
+  const documentId = data.title.replace(/\s+/g, '-').toLowerCase()
+  await setDoc(doc(database, Collections.PRODUCTS, documentId), docData)
 }
 
 //TODO: use when BE ready
