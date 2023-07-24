@@ -1,6 +1,5 @@
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { messages } from '../../../../../../messages/messages'
 import styles from '../../../../dashboard.module.scss'
 import { DataGrid, GridRowParams, GridSelectionModel } from '@mui/x-data-grid'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -28,6 +27,7 @@ import { Collections } from '../../../../../../common/firebase/enums'
 import { CategoryType } from '../../../../../../common/api/use-categories'
 import { CATEGORIES_ESHOP_KEY } from 'common/api/use-categories-eshop'
 import { removeCategoryEshop } from 'screens-content/dashboard/api/categories-eshop/remove-category-eshop'
+import { localizationKey } from 'localization/localization-key'
 
 const CategoriesEshop = (): JSX.Element => {
   const { t } = useTranslation()
@@ -63,7 +63,7 @@ const CategoriesEshop = (): JSX.Element => {
     const result = removeCategoryEshop(selectedRows, queryClient)
     if (result === '') {
       enqueueSnackbar(
-        String(t(messages.filesRemoved)),
+        String(t(localizationKey.filesRemoved)),
         SNACKBAR_OPTIONS_SUCCESS
       )
       reset()
@@ -85,7 +85,9 @@ const CategoriesEshop = (): JSX.Element => {
     setDetailRow(details)
   }
 
-  const buttonText = `(${selectedRows.length}) ${String(t(messages.removeAll))}`
+  const buttonText = `(${selectedRows.length}) ${String(
+    t(localizationKey.removeAll)
+  )}`
 
   const handleClickOpen = () => {
     setOpen(true)

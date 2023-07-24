@@ -153,7 +153,7 @@ const AddProduct = () => {
             <div>
               <FormControl fullWidth>
                 <InputLabel id='demo-multiple-name-label'>
-                  {t(messages.categories)}
+                  {t(localizationKey.categories)}
                 </InputLabel>
                 <Select
                   label='category'
