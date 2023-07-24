@@ -25,6 +25,7 @@ const General = ({ control, register, errors }: GeneralProps) => {
           key={'saleType'}
           name={'saleType'}
           control={control}
+          defaultValue={SaleTypeEnum.DEFAULT}
           render={({ field }) => (
             <Select
               {...field}
@@ -35,6 +36,8 @@ const General = ({ control, register, errors }: GeneralProps) => {
               sx={{ ml: 1, width: 300 }}
               size='small'
               placeholder={SaleTypeEnum.PERCENTAGE}
+              defaultValue={SaleTypeEnum.DEFAULT}
+              value={field.value || ''}
             >
               <MenuItem value={SaleTypeEnum.PERCENTAGE}>
                 {t(localizationKey[SaleTypeEnum.PERCENTAGE])}

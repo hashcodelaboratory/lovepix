@@ -58,14 +58,11 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
     onSuccess: (data) => {
       reset(data)
     },
-    onError: () => {},
   })
 
   useEffect(() => {
     if (detail) {
       getVoucherDetail({ id: detail.id })
-    } else {
-      reset()
     }
   }, [detail])
 
