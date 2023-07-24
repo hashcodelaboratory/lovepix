@@ -238,5 +238,6 @@
   "note": "Poznámka",
   "billingAddress": "Fakturačná adresa",
   "Contact": "Kontakt",
-  "phoneRegexValidation": "Telefónne číslo nemá správny formát"
+  "phoneRegexValidation": "Telefónne číslo nemá správny formát",
+  "emailRegexValidation": "Nesprávny formát emailu."
 }

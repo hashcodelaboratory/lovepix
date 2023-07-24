@@ -170,5 +170,6 @@
   "note": "Poznámka",
   "billingAddress": "Fakturačná adresa",
   "Contact": "Kontakt",
-  "phoneRegexValidation": "Wrong format of your phone number"
+  "phoneRegexValidation": "Wrong format of your phone number",
+  "emailRegexValidation": "Wrong format of your email"
 }
