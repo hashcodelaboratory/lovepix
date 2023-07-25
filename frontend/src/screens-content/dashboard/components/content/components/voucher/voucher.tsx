@@ -66,6 +66,7 @@ const Voucher = (): JSX.Element => {
   const reset = () => {
     setSelectionModel([])
     setSelectedRows([])
+    setDetailRow(undefined)
   }
 
   const removeData = () => {
