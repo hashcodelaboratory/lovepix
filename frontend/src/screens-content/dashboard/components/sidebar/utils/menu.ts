@@ -18,8 +18,8 @@ export const SIDEBAR_MENU_LIST: {
     link: DashboardRoutes.PRODUCTS,
   },
   {
-    title: localizationKey.storage,
-    link: '',
+    title: localizationKey.gallery,
+    link: DashboardRoutes.GALLERY,
   },
   {
     title: localizationKey.dimensions,

@@ -1,13 +1,11 @@
 import Card from './components/card/card'
 import styles from '../../dashboard.module.scss'
 import { localizationKey } from '../../../../localization/localization-key'
-import UploadImagesTable from './components/gallery/upload-images-table'
 import { useContext } from 'react'
 import DashboardContext from '../../context/dashboard-context'
 import OrdersTable from './components/orders/orders-table'
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks'
 import InventoryIcon from '@mui/icons-material/Inventory'
-import FolderCopyIcon from '@mui/icons-material/FolderCopy'
 import { DashboardRoutes } from '../../../../common/enums/routes'
 
 type Props = {
@@ -52,17 +50,6 @@ const Content = ({ isFetching }: Props) => {
             text: localizationKey.thanLastWeek,
           }}
           link={DashboardRoutes.PRODUCTS}
-        />
-        <Card
-          header={{
-            title: localizationKey.storage,
-            count: isFetching ? '-' : uploadImages?.length.toString(),
-            icon: <FolderCopyIcon />,
-          }}
-          footer={{
-            value: '+ 45 %',
-            text: localizationKey.thanLastWeek,
-          }}
         />
         <Card
           header={{
@@ -122,10 +109,10 @@ const Content = ({ isFetching }: Props) => {
             value: '+ 35 %',
             text: localizationKey.thanLastWeek,
           }}
+          link={DashboardRoutes.GALLERY}
         />
       </div>
       <OrdersTable />
-      <UploadImagesTable />
     </div>
   )
 }
