@@ -24,17 +24,13 @@ import { useOrders } from '../../../../api/orders/useOrders'
 
 export const dataGridStyle = {
   boxShadow: 2,
-  border: 2,
-  '& .MuiDataGrid-row': {
-    backgroundColor: 'white',
-  },
   '& .MuiDataGrid-row:hover': {
     cursor: 'pointer',
-    backgroundColor: '#de8593 !important',
+    backgroundColor: '#f5f5f5 !important',
   },
   '& .MuiDataGrid-row.Mui-selected': {
     cursor: 'pointer',
-    backgroundColor: '#E51F3E !important',
+    backgroundColor: '#f5f5f5 !important',
   },
 }
 
