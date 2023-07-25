@@ -55,7 +55,7 @@ const GalleryLayout = (): JSX.Element => {
         {categories?.map(({id, name}) => (
           <Chip
             key={id}
-            label={name}
+            label={t(name)}
             color='primary'
             variant={getCategoryVariant(name)}
             clickable

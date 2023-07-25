@@ -237,4 +237,5 @@ export const localizationKey = {
   billingInfo: 'billingInfo',
   note: 'note',
   billingAddress: 'billingAddress',
+  withoutTaxes: 'withoutTaxes',
 }

@@ -3,6 +3,8 @@
   "Materials": "Materiály",
   "About us": "O nás",
   "For partners": "Pre partnerov",
+  "Image configurator": "Konfigurátor obrázkov",
+  "Contact": "Kontakt",
   "printPhoto": "Vytlačte si svoje foto na plátno",
   "processingOrder": "Máte rozpracovanú konfiguráciu",
   "doYouWant": "chcete",
@@ -230,7 +232,6 @@
   "agreeWithBussinessCondition": "Odoslaním kontaktných údajov vyjadrujem súhlas so spracovaním týchto údajov za účelom oslovenia s ponukou na uzatvorenie finančných produktov v súlade so zákonom č. 122/2013 Z.z. o ochrane osobných údajov v znení neskorších predpisov.",
   "diffrentShippingAddress": "Chcem odoslať objednávku na inú adresu.",
   "addCompanyInfo": "Chcem doplniť firemné údaje.",
-  "Contact": "Kontakt",
   "allProducts": "Všetky produkty",
   "socialSite": "Sociálne siete",
   "contactInfoComment": "Potrebujete poradiť? Nenašli ste čo ste hľadali? Potrebujete vyrobiť niečo na mieru? Radi vám s tým pomôžeme. Ozvite sa nám!",
@@ -238,7 +239,8 @@
   "billingInfo": "Fakturačné údaje",
   "note": "Poznámka",
   "billingAddress": "Fakturačná adresa",
-  "Contact": "Kontakt",
   "Vesmír": "Vesmír",
-  "Príroda": "Príroda"
+  "Príroda": "Príroda",
+  "Mestá a obce": "Mestá a obce",
+  "withoutTaxes": "bez DPH"
 }

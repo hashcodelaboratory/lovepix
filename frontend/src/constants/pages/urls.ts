@@ -16,7 +16,7 @@ export enum Pages {
   PROFILE = '/profile',
   ACCOUNT = '/account',
   DASHBOARD = '/dashboard',
-  DEBUG = '/debug'
+  DEBUG = '/debug',
 }
 
 export const FACEBOOK = "https://www.facebook.com/lovepix.sk/"
