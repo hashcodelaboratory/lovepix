@@ -7,4 +7,5 @@ export const DashboardRoutes = {
   ORDERS: `${Route.DASHBOARD}/orders`,
   VOUCHERS: `${Route.DASHBOARD}/vouchers`,
   CATEGORIES_ESHOP: `${Route.DASHBOARD}/categories-eshop`,
+  CATEGORIES: `${Route.DASHBOARD}/categories`,
 }

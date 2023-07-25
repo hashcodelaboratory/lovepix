@@ -29,7 +29,7 @@ import {
 import { removeCategoryEshop } from 'screens-content/dashboard/api/categories-eshop/remove-category-eshop'
 import { localizationKey } from 'localization/localization-key'
 
-const CategoriesEshop = (): JSX.Element => {
+const CategoriesEshopLayout = (): JSX.Element => {
   const { t } = useTranslation()
   const { enqueueSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
@@ -172,4 +172,4 @@ const CategoriesEshop = (): JSX.Element => {
   )
 }
 
-export default CategoriesEshop
+export default CategoriesEshopLayout

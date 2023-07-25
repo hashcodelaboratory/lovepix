@@ -3,18 +3,18 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import React from 'react'
 import Sidebar from 'screens-content/dashboard/components/sidebar/sidebar'
 import styles from './dashboard.module.scss'
-import VouchersLayout from '../../src/screens-content/dashboard/components/content/components/voucher/voucher'
+import CategoriesLayout from '../../src/screens-content/dashboard/components/content/components/categories/categories'
 
-const Vouchers = () => {
+const Categories = () => {
   return (
     <div className={styles.dashboardContainer}>
       <Sidebar />
-      <VouchersLayout />
+      <CategoriesLayout />
     </div>
   )
 }
 
-export default Vouchers
+export default Categories
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {

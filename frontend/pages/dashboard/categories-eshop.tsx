@@ -3,18 +3,18 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import React from 'react'
 import Sidebar from 'screens-content/dashboard/components/sidebar/sidebar'
 import styles from './dashboard.module.scss'
-import CategoriesEshop from '../../src/screens-content/dashboard/components/content/components/categories-e-shop/categories-eshop'
+import CategoriesEshopLayout from '../../src/screens-content/dashboard/components/content/components/categories-e-shop/categories-eshop'
 
-const Products = () => {
+const CategoriesEshop = () => {
   return (
     <div className={styles.dashboardContainer}>
       <Sidebar />
-      <CategoriesEshop />
+      <CategoriesEshopLayout />
     </div>
   )
 }
 
-export default Products
+export default CategoriesEshop
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {

@@ -27,7 +27,7 @@ export const SIDEBAR_MENU_LIST: {
   },
   {
     title: localizationKey.categories,
-    link: '',
+    link: DashboardRoutes.CATEGORIES,
   },
   {
     title: 'Kategórie e-shop',

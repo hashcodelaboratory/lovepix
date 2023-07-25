@@ -24,7 +24,7 @@ import {
   SNACKBAR_OPTIONS_SUCCESS,
 } from '../../../../../../snackbar/config'
 
-const Voucher = (): JSX.Element => {
+const VoucherLayout = (): JSX.Element => {
   const { t } = useTranslation()
   const { enqueueSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
@@ -115,4 +115,4 @@ const Voucher = (): JSX.Element => {
   )
 }
 
-export default Voucher
+export default VoucherLayout
