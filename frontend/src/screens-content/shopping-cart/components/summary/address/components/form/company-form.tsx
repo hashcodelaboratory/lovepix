@@ -46,6 +46,7 @@ const CompanyFrom = ({ register, errors, control }: FormProps): JSX.Element => {
         <div style={{ padding: 5 }}>
           <p className={styles.formFieldTitle}>{String(t(message))}</p>
           <TextField
+            type='number'
             placeholder={String(t(message))}
             fullWidth={fullWidth}
             {...field}

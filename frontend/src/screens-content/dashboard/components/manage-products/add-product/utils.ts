@@ -27,6 +27,7 @@ export const FORM_SCHEMA = yup
       .transform((value) => (Number.isNaN(value) ? null : value))
       .nullable()
       .required('countValidation'),
+    category: yup.string().required('categoryValidation'),
   })
   .required()
 

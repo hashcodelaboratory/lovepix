@@ -1,6 +1,7 @@
 import {
   DataGrid,
-  GridCallbackDetails, GridRowParams,
+  GridCallbackDetails,
+  GridRowParams,
   GridSelectionModel,
 } from "@mui/x-data-grid";
 import styles from "../../../../dashboard.module.scss";
