@@ -12,7 +12,7 @@ const Product = ({ product }: ProductContent) => {
   const router = useRouter()
   const { id, title, price, image, description } = product
 
-  const goTo = () => router.push(`/product/${id}`)
+  const goTo = () => router.push(`/${id}`)
 
   return (
     <div className={styles.productCart}>
