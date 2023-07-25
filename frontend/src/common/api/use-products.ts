@@ -3,7 +3,7 @@ import { collection, getDocs } from '@firebase/firestore'
 import { database } from '../firebase/config'
 import { Collections } from '../firebase/enums'
 
-export const PRODUCT_KEY = 'PRODUCTS_DASHBOARD'
+export const PRODUCT_KEY = 'PRODUCTS'
 
 export type ProductsType = {
   id: string
