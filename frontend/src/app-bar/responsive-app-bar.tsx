@@ -17,9 +17,6 @@ import {useRouter} from 'next/router'
 import {useLiveQuery} from 'dexie-react-hooks'
 import {configurationsTable, orderTable} from '../../database.config'
 import {CONFIGURATION_TABLE_KEY, ORDER_TABLE_KEY,} from '../common/indexed-db/hooks/keys'
-import logo from '../assets/logo_color.png'
-import Image from 'next/image'
-import {ImageLayout} from '../screens-content/home/enums/enums'
 import styles from './responsive-app-bar.module.scss'
 import SearchIcon from '@mui/icons-material/Search'
 import MenuIconComponent from './components/menu-sidebar/menu-icon/menu-icon'
@@ -90,9 +87,7 @@ const ResponsiveAppBar = () => {
               ))}
             </Menu>
           </Box>
-          <Typography
-            variant='h5'
-            noWrap
+          <Box
             sx={{
               mr: 2,
               display: {xs: 'flex', md: 'none'},
@@ -100,7 +95,7 @@ const ResponsiveAppBar = () => {
             }}
           >
             <LogoComponent navigate={navigate}/>
-          </Typography>
+          </Box>
 
           <Box
             sx={{
@@ -119,15 +114,7 @@ const ResponsiveAppBar = () => {
                 <p className={styles.link}>{String(t(title))}</p>
               </Link>
             ))}
-            <Image
-              src={logo}
-              layout={ImageLayout.FIXED}
-              width={50}
-              height={50}
-              alt=''
-              onClick={navigate}
-              className={styles.icon}
-            />
+            <LogoComponent navigate={navigate}/>
             {appBarRightItems.map(({link, title}) => (
               <Link key={uuidv4()} onClick={handleCloseNavMenu} href={link}>
                 <p className={styles.link}>{String(t(title))}</p>
