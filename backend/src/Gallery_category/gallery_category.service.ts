@@ -14,7 +14,11 @@ export class GalleryCategoryService {
     }
 
     findAll() {
-        return this.prismaService.gallery_category.findMany();
+        return this.prismaService.gallery_category.findMany({
+            include: {
+                galleries: true
+            }
+        });
     }
 
     async findOne(id: string) {
