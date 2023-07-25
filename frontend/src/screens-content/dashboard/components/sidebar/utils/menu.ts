@@ -1,4 +1,4 @@
-import { Route } from 'common/enums/routes'
+import { DashboardRoutes, Route } from 'common/enums/routes'
 import { localizationKey } from '../../../../../localization/localization-key'
 
 export const SIDEBAR_MENU_LIST: {
@@ -15,7 +15,7 @@ export const SIDEBAR_MENU_LIST: {
   },
   {
     title: localizationKey.products,
-    link: Route.DASHBOARD_PRODUCTS,
+    link: `${Route.DASHBOARD}${DashboardRoutes.PRODUCTS}`,
   },
   {
     title: localizationKey.storage,

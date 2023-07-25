@@ -10,9 +10,9 @@ import InventoryIcon from '@mui/icons-material/Inventory'
 import FolderCopyIcon from '@mui/icons-material/FolderCopy'
 import Dimensions from './components/dimensions/dimensions'
 import Categories from './components/categories/categories'
-import ProductsTable from './components/products/products-table'
 import CategoriesEshop from './components/categoriesEshop/categories-eshop'
 import Voucher from './components/voucher/voucher'
+import { DashboardRoutes, Route } from '../../../../common/enums/routes'
 
 type Props = {
   isFetching: boolean
@@ -20,7 +20,15 @@ type Props = {
 
 const Content = ({ isFetching }: Props) => {
   const {
-    state: { uploadImages, orders, dimensions, categories },
+    state: {
+      uploadImages,
+      orders,
+      dimensions,
+      categories,
+      vouchers,
+      galleryImages,
+      categoriesEshop,
+    },
   } = useContext(DashboardContext)
 
   return (
@@ -47,6 +55,7 @@ const Content = ({ isFetching }: Props) => {
             value: '+ 25 %',
             text: localizationKey.thanLastWeek,
           }}
+          link={`${Route.DASHBOARD}${DashboardRoutes.PRODUCTS}`}
         />
         <Card
           header={{
@@ -84,7 +93,7 @@ const Content = ({ isFetching }: Props) => {
         <Card
           header={{
             title: 'Kategórie e-shop',
-            count: isFetching ? '-' : String(categories?.length),
+            count: isFetching ? '-' : String(categoriesEshop?.length),
             icon: <InventoryIcon />,
           }}
           footer={{
@@ -95,7 +104,18 @@ const Content = ({ isFetching }: Props) => {
         <Card
           header={{
             title: localizationKey.code,
-            count: isFetching ? '-' : String(categories?.length),
+            count: isFetching ? '-' : String(vouchers?.length),
+            icon: <InventoryIcon />,
+          }}
+          footer={{
+            value: '+ 35 %',
+            text: localizationKey.thanLastWeek,
+          }}
+        />
+        <Card
+          header={{
+            title: localizationKey.gallery,
+            count: isFetching ? '-' : String(galleryImages?.length),
             icon: <InventoryIcon />,
           }}
           footer={{
@@ -105,7 +125,6 @@ const Content = ({ isFetching }: Props) => {
         />
       </div>
       <OrdersTable />
-      <ProductsTable />
       <UploadImagesTable />
       <Dimensions />
       <Categories />

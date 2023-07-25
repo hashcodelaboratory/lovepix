@@ -1,4 +1,8 @@
 export enum Route {
   DASHBOARD = '/dashboard',
-  DASHBOARD_PRODUCTS = '/dashboard/product',
+}
+
+export enum DashboardRoutes {
+  PRODUCTS = '/products',
+  ORDERS = '/orders',
 }
