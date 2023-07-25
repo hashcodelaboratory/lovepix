@@ -11,7 +11,7 @@ export const SIDEBAR_MENU_LIST: {
   },
   {
     title: localizationKey.orders,
-    link: '',
+    link: DashboardRoutes.ORDERS,
   },
   {
     title: localizationKey.products,

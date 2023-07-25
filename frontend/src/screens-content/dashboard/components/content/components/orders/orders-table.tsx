@@ -6,8 +6,7 @@ import {
   GridSelectionModel,
 } from '@mui/x-data-grid'
 import styles from '../../../../dashboard.module.scss'
-import { useContext, useEffect, useState } from 'react'
-import DashboardContext from '../../../../context/dashboard-context'
+import { useEffect, useState } from 'react'
 import { localizationKey } from '../../../../../../localization/localization-key'
 import {
   SNACKBAR_OPTIONS_ERROR,
@@ -19,10 +18,9 @@ import { useQueryClient } from 'react-query'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { getOrdersColumns } from '../utils/columns/orders-columns'
 import { removeOrders } from '../../../../api/orders/remove-orders'
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import OrderDetail from './order-detail/order-detail'
 import { Order } from '../../../../../../common/types/order'
+import { useOrders } from '../../../../api/orders/useOrders'
 
 export const dataGridStyle = {
   boxShadow: 2,
@@ -41,9 +39,7 @@ export const dataGridStyle = {
 }
 
 const OrdersTable = () => {
-  const {
-    state: { orders },
-  } = useContext(DashboardContext)
+  const { data: orders = [] } = useOrders()
 
   const { enqueueSnackbar } = useSnackbar()
 
@@ -96,15 +92,8 @@ const OrdersTable = () => {
   const buttonText = String(t(localizationKey.removeAll))
 
   return (
-    <Accordion>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls='panel1a-content'
-        id='panel1a-header'
-      >
-        <h1>{String(t(localizationKey.orders))}</h1>
-      </AccordionSummary>
-      <AccordionDetails sx={{ display: 'flex' }}>
+    <div>
+      <div style={{ display: 'flex' }}>
         <Box className={styles.ordersTableSidepanel}>
           <DataGrid
             className={styles.contentTable}
@@ -122,7 +111,7 @@ const OrdersTable = () => {
         <Box className={styles.ordersTableMainpanel}>
           <OrderDetail order={order} />
         </Box>
-      </AccordionDetails>
+      </div>
       <button
         className={styles.removeButton}
         onClick={removeData}
@@ -132,7 +121,7 @@ const OrdersTable = () => {
         {buttonText}
         <DeleteIcon sx={{ marginLeft: 1 }} />
       </button>
-    </Accordion>
+    </div>
   )
 }
 

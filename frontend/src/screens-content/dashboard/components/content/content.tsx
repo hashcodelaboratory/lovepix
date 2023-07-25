@@ -3,7 +3,6 @@ import styles from '../../dashboard.module.scss'
 import { localizationKey } from '../../../../localization/localization-key'
 import { useContext } from 'react'
 import DashboardContext from '../../context/dashboard-context'
-import OrdersTable from './components/orders/orders-table'
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks'
 import InventoryIcon from '@mui/icons-material/Inventory'
 import { DashboardRoutes } from '../../../../common/enums/routes'
@@ -20,7 +19,6 @@ const Content = ({ isFetching }: Props) => {
       dimensions,
       categories,
       vouchers,
-      galleryImages,
       categoriesEshop,
     },
   } = useContext(DashboardContext)
@@ -38,6 +36,7 @@ const Content = ({ isFetching }: Props) => {
             value: '+ 15 %',
             text: localizationKey.thanLastWeek,
           }}
+          link={DashboardRoutes.ORDERS}
         />
         <Card
           header={{
@@ -102,7 +101,7 @@ const Content = ({ isFetching }: Props) => {
         <Card
           header={{
             title: localizationKey.gallery,
-            count: isFetching ? '-' : String(galleryImages?.length),
+            count: isFetching ? '-' : String(uploadImages?.length),
             icon: <InventoryIcon />,
           }}
           footer={{
@@ -112,7 +111,6 @@ const Content = ({ isFetching }: Props) => {
           link={DashboardRoutes.GALLERY}
         />
       </div>
-      <OrdersTable />
     </div>
   )
 }
