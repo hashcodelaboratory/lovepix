@@ -112,7 +112,7 @@ const Voucher = (): JSX.Element => {
             onRowClick={onRowClick}
             autoHeight
           />
-          <VoucherDetail detail={detailRow?.row} />
+          <VoucherDetail detail={detailRow?.row} tableReset={reset} />
         </div>
         <div className={styles.rowContainer}>
           <button

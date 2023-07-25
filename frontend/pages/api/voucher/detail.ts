@@ -23,7 +23,7 @@ const voucherDetail = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const _body = await JSON.parse(req.body)
 
-    if (!_body) {
+    if (!_body || !_body.code) {
       return res.status(400).json({
         error: BAD_REQUEST_ERROR_MESSAGE,
       })
@@ -31,7 +31,7 @@ const voucherDetail = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const q = query(
       collection(database, Collections.VOUCHERS),
-      where('code', '==', _body.id)
+      where('code', '==', _body.code)
     )
 
     const voucherSnap = await getDocs(q)
@@ -41,7 +41,7 @@ const voucherDetail = async (req: NextApiRequest, res: NextApiResponse) => {
         error: NOT_FOUND_ERROR_MESSAGE,
       })
     } else {
-      voucherSnap.forEach((doc) => {
+      voucherSnap.docs.map((doc) => {
         return res.status(200).json({ ...doc.data(), id: doc.id })
       })
     }
