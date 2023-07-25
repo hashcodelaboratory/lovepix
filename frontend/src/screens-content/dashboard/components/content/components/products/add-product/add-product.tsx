@@ -14,10 +14,10 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import styles from './add-product.module.scss'
 import { addPhoto, addProductValues, FORM_SCHEMA } from './utils'
 import { useQueryClient } from 'react-query'
-import { localizationKey } from '../../../../../localization/localization-key'
+import { localizationKey } from '../../../../../../../localization/localization-key'
 import Image from 'next/image'
-import { FormAddProduct } from 'common/types/form-add-product'
-import { useCategoriesEshop } from 'common/api/use-categories-eshop'
+import { FormAddProduct } from '../../../../../../../common/types/form-add-product'
+import { useCategoriesEshop } from '../../../../../../../common/api/use-categories-eshop'
 
 type ControllerFieldType = {
   name: 'title' | 'price' | 'count' | 'description' | 'category'

@@ -10,9 +10,8 @@ import InventoryIcon from '@mui/icons-material/Inventory'
 import FolderCopyIcon from '@mui/icons-material/FolderCopy'
 import Dimensions from './components/dimensions/dimensions'
 import Categories from './components/categories/categories'
-import CategoriesEshop from './components/categoriesEshop/categories-eshop'
-import Voucher from './components/voucher/voucher'
-import { DashboardRoutes, Route } from '../../../../common/enums/routes'
+import CategoriesEshop from './components/categories-e-shop/categories-eshop'
+import { DashboardRoutes } from '../../../../common/enums/routes'
 
 type Props = {
   isFetching: boolean
@@ -55,7 +54,7 @@ const Content = ({ isFetching }: Props) => {
             value: '+ 25 %',
             text: localizationKey.thanLastWeek,
           }}
-          link={`${Route.DASHBOARD}${DashboardRoutes.PRODUCTS}`}
+          link={DashboardRoutes.PRODUCTS}
         />
         <Card
           header={{
@@ -111,6 +110,7 @@ const Content = ({ isFetching }: Props) => {
             value: '+ 35 %',
             text: localizationKey.thanLastWeek,
           }}
+          link={DashboardRoutes.VOUCHERS}
         />
         <Card
           header={{
@@ -129,7 +129,6 @@ const Content = ({ isFetching }: Props) => {
       <Dimensions />
       <Categories />
       <CategoriesEshop />
-      <Voucher />
     </div>
   )
 }

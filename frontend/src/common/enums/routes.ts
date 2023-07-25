@@ -2,7 +2,8 @@ export enum Route {
   DASHBOARD = '/dashboard',
 }
 
-export enum DashboardRoutes {
-  PRODUCTS = '/products',
-  ORDERS = '/orders',
+export const DashboardRoutes = {
+  PRODUCTS: `${Route.DASHBOARD}/products`,
+  ORDERS: `${Route.DASHBOARD}/orders`,
+  VOUCHERS: `${Route.DASHBOARD}/vouchers`,
 }

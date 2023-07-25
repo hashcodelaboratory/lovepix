@@ -1,12 +1,12 @@
 import { DataGrid } from '@mui/x-data-grid'
-import { useProducts } from 'common/api/use-products'
+import { useProducts } from '../../../../../../common/api/use-products'
 import React from 'react'
 import { useQueryClient } from 'react-query'
 import AddProduct from './add-product/add-product'
-import styles from './manage-products.module.scss'
+import styles from './products.module.scss'
 import { getProductsColumns } from './table-columns'
 
-const ManageProducts = () => {
+const ProductsLayout = () => {
   const queryClient = useQueryClient()
   const { data } = useProducts()
 
@@ -30,4 +30,4 @@ const ManageProducts = () => {
   )
 }
 
-export default ManageProducts
+export default ProductsLayout

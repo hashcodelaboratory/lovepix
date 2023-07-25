@@ -15,7 +15,7 @@ export const SIDEBAR_MENU_LIST: {
   },
   {
     title: localizationKey.products,
-    link: `${Route.DASHBOARD}${DashboardRoutes.PRODUCTS}`,
+    link: DashboardRoutes.PRODUCTS,
   },
   {
     title: localizationKey.storage,
@@ -35,6 +35,6 @@ export const SIDEBAR_MENU_LIST: {
   },
   {
     title: localizationKey.code,
-    link: '',
+    link: DashboardRoutes.VOUCHERS,
   },
 ]
