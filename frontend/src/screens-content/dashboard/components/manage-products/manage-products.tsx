@@ -1,5 +1,4 @@
 import { DataGrid } from '@mui/x-data-grid'
-
 import React from 'react'
 import { useQueryClient } from 'react-query'
 import AddProduct from './add-product/add-product'

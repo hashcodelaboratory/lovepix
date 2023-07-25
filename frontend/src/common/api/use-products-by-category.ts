@@ -4,7 +4,7 @@ import { database } from '../firebase/config'
 import { Collections } from '../firebase/enums'
 import { query, where } from 'firebase/firestore'
 
-export const PRODUCT_KEY = 'PRODUCTS'
+export const PRODUCT_BY_CATEGORY_KEY = 'PRODUCTS_BY_CATEGORY'
 
 export type ProductsType = {
   id: string
@@ -37,4 +37,4 @@ export const getProducts = async (
 export const useProductsByCategory = (
   category?: string | null
 ): UseQueryResult<ProductsType[]> =>
-  useQuery([PRODUCT_KEY, category], () => getProducts(category))
+  useQuery([PRODUCT_BY_CATEGORY_KEY, category], () => getProducts(category))
