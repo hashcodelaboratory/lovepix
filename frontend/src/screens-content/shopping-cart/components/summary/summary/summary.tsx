@@ -13,7 +13,11 @@ import Delivery from '../delivery/delivery'
 import Payment from '../payment/payment'
 import OrderItems from '../components/order-items/order-items'
 import TotalSection from '../total/total-section'
-import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
+import {
+  getPriceForDelivery,
+  getPriceForPayment,
+  getPriceWithVoucher,
+} from '../total/utils'
 import { useRouter } from 'next/router'
 import { useStripe } from '@stripe/react-stripe-js'
 import { clearIndexedDb } from 'common/indexed-db/utils/clear'
@@ -51,7 +55,12 @@ const Summary = ({ order }: SummaryProps) => {
   const finalPrice =
     Number(order?.totalPrice) +
     getPriceForDelivery(delivery) +
-    getPriceForPayment(payment)
+    getPriceForPayment(payment) -
+    getPriceWithVoucher(
+      order?.totalPrice,
+      order.voucher?.saleType,
+      order?.voucher?.value
+    )
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setIsLoading(true)

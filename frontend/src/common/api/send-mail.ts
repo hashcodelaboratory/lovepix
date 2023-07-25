@@ -1,7 +1,7 @@
 import { CreateOrderRequest } from './create-order'
 import { FormInputs } from 'common/types/form'
 import { Image } from 'common/types/image'
-import { Order } from 'common/types/order'
+import { Order, VoucherType } from 'common/types/order'
 import { Product } from 'common/types/product'
 
 export type UserMail = {
@@ -15,6 +15,7 @@ export type UserMail = {
   payment: string | undefined
   shipment: string | undefined
   formData: FormInputs
+  voucher?: VoucherType
 }
 
 export const sendOrderMail = async (
@@ -55,6 +56,7 @@ export const sendOrderMail = async (
     formData: data.form,
     images: newImgArr,
     products: newProdArr,
+    voucher: data.voucher,
   }
   return await fetch('/api/email/send', {
     method: 'POST',
