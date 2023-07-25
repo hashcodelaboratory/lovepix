@@ -1,5 +1,3 @@
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { localizationKey } from '../../../../../../localization/localization-key'
 import styles from '../../../../dashboard.module.scss'
 import {
@@ -10,11 +8,11 @@ import {
 } from '@mui/x-data-grid'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useTranslation } from 'next-i18next'
-import { useContext, useState } from 'react'
-import DashboardContext from '../../../../context/dashboard-context'
+import { useState } from 'react'
 import { useSnackbar } from 'notistack'
 import { useQueryClient } from 'react-query'
 import {
+  useVouchers,
   VOUCHERS_KEY,
   VoucherType,
 } from '../../../../../../common/api/use-vouchers'
@@ -26,14 +24,11 @@ import {
   SNACKBAR_OPTIONS_SUCCESS,
 } from '../../../../../../snackbar/config'
 
-const Voucher = (): JSX.Element => {
+const VoucherLayout = (): JSX.Element => {
   const { t } = useTranslation()
   const { enqueueSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
-
-  const {
-    state: { vouchers },
-  } = useContext(DashboardContext)
+  const { data: vouchers = [] } = useVouchers()
 
   const { mutate: removeVouchers } = useRemoveVouchers({
     onSuccess: () => {
@@ -90,44 +85,35 @@ const Voucher = (): JSX.Element => {
   )}`
 
   return (
-    <Accordion>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls='panel1a-content'
-        id='panel1a-header'
-      >
-        <h3>{String(t(localizationKey.code))}</h3>
-      </AccordionSummary>
-      <AccordionDetails>
-        <div className={styles.rowContainer}>
-          <DataGrid
-            className={styles.contentTable}
-            rows={data}
-            columns={getColumns()}
-            pageSize={10}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-            disableSelectionOnClick
-            selectionModel={selectionModel}
-            onSelectionModelChange={selectionChanged}
-            onRowClick={onRowClick}
-            autoHeight
-          />
-          <VoucherDetail detail={detailRow?.row} tableReset={reset} />
-        </div>
-        <div className={styles.rowContainer}>
-          <button
-            className={styles.removeButton}
-            onClick={removeData}
-            disabled={selectedRows.length === 0}
-          >
-            {buttonText}
-            <DeleteIcon sx={{ marginLeft: 1 }} />
-          </button>
-        </div>
-      </AccordionDetails>
-    </Accordion>
+    <div className={styles.contentContainer}>
+      <div className={styles.rowContainer}>
+        <DataGrid
+          className={styles.contentTable}
+          rows={data}
+          columns={getColumns()}
+          pageSize={10}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+          disableSelectionOnClick
+          selectionModel={selectionModel}
+          onSelectionModelChange={selectionChanged}
+          onRowClick={onRowClick}
+          autoHeight
+        />
+        <VoucherDetail detail={detailRow?.row} tableReset={reset} />
+      </div>
+      <div className={styles.rowContainer}>
+        <button
+          className={styles.removeButton}
+          onClick={removeData}
+          disabled={selectedRows.length === 0}
+        >
+          {buttonText}
+          <DeleteIcon sx={{ marginLeft: 1 }} />
+        </button>
+      </div>
+    </div>
   )
 }
 
-export default Voucher
+export default VoucherLayout

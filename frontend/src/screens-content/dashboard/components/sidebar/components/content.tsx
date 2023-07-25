@@ -1,5 +1,5 @@
-import styles from '../../dashboard.module.scss'
-import { SIDEBAR_MENU_LIST } from './utils/menu'
+import styles from '../../../dashboard.module.scss'
+import { SIDEBAR_MENU_LIST } from '../utils/menu'
 import { useTranslation } from 'next-i18next'
 import { v4 as uuidv4 } from 'uuid'
 import { useRouter } from 'next/router'

@@ -14,9 +14,8 @@ const ProductList = () => {
   const { t } = useTranslation()
   const router = useRouter()
   const { kategoria: category } = router.query
-  const { data: products, isLoading } = useProducts(
-    (category as string) ?? null
-  )
+
+  const { data: products, isLoading } = useProducts(category as string)
   const tablet = useMediaQuery('(max-width:1000px)')
   const mobile = useMediaQuery('(max-width:580px)')
 

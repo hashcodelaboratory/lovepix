@@ -1,7 +1,7 @@
 import styles from '../../dashboard.module.scss'
-import SidebarHeader from './header'
-import SidebarFooter from './footer'
-import SidebarContent from './content'
+import SidebarHeader from './components/header'
+import SidebarFooter from './components/footer'
+import SidebarContent from './components/content'
 
 const Sidebar = () => (
   <div className={styles.sidebarContainer}>

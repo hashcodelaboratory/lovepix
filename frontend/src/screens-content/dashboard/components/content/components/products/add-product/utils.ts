@@ -1,10 +1,10 @@
-import { PRODUCT_KEY } from 'common/api/use-products'
+import { PRODUCT_KEY } from '../../../../../../../common/api/use-products'
 import { QueryClient } from 'react-query'
 import * as yup from 'yup'
 import { FullMetadata } from '@firebase/storage'
-import { FormAddProduct } from 'common/types/form-add-product'
-import { addProduct } from 'common/api/add-product'
-import { uploadToStorage } from 'common/api/add-product-photo'
+import { FormAddProduct } from '../../../../../../../common/types/form-add-product'
+import { addProduct } from '../../../../../../../common/api/add-product'
+import { uploadToStorage } from '../../../../../../../common/api/add-product-photo'
 
 export const addProductValues = {
   title: '',

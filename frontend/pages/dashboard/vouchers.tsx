@@ -1,20 +1,20 @@
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import React from 'react'
-import ManageProducts from 'screens-content/dashboard/components/manage-products/manage-products'
 import Sidebar from 'screens-content/dashboard/components/sidebar/sidebar'
-import styles from './product-dashboard.module.scss'
+import styles from './dashboard.module.scss'
+import VouchersLayout from '../../src/screens-content/dashboard/components/content/components/voucher/voucher'
 
-const Product = () => {
+const Vouchers = () => {
   return (
-    <div className={styles.productDashboardContainer}>
+    <div className={styles.dashboardContainer}>
       <Sidebar />
-      <ManageProducts />
+      <VouchersLayout />
     </div>
   )
 }
 
-export default Product
+export default Vouchers
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
