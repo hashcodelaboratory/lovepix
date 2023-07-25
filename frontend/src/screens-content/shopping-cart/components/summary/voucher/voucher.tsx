@@ -48,7 +48,7 @@ const Voucher = ({ voucher }: VoucherProps) => {
   })
 
   const getVoucherDetail = () => {
-    getDetail({ id: voucherInput })
+    getDetail({ code: voucherInput })
   }
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {

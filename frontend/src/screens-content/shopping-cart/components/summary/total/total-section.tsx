@@ -38,11 +38,7 @@ const TotalSection = ({
 
   const priceWithoutTax = price ? Number(finalPrice * 0.8).toFixed(2) : '-'
   const taxFromPrice = price ? Number(finalPrice * 0.2).toFixed(2) : '-'
-  const finalPriceWithVoucher = getPriceWithVoucher(
-    finalPrice,
-    voucher?.saleType,
-    voucher?.value
-  ).toFixed(2)
+  const _finalPrice = finalPrice.toFixed(2)
 
   const paymentPrice = payment ? getPriceForPayment(payment) : '-'
   const deliveryPrice = delivery ? getPriceForDelivery(delivery) : '-'
@@ -77,7 +73,8 @@ const TotalSection = ({
       {voucher && (
         <div className={styles.totalContainer}>
           <span>
-            {t(localizationKey.code)} {voucher && <>- {voucher.code}</>}
+            {t(localizationKey.code)}
+            {voucher && <>: {voucher.code}</>}
           </span>
           <span>- {voucher.value} €</span>
         </div>
@@ -95,7 +92,7 @@ const TotalSection = ({
         <span className={styles.summarySectionTitleFinalPrice}>
           {String(t(localizationKey.total))}
         </span>
-        <span className={styles.price}>{finalPriceWithVoucher} €</span>
+        <span className={styles.price}>{_finalPrice} €</span>
       </div>
       <p className={styles.text}>{String(t(localizationKey.personalData))}</p>
       <Link className={styles.text} style={{ cursor: 'pointer' }}>
