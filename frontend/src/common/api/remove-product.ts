@@ -1,4 +1,4 @@
-import { PRODUCT_KEY } from 'common/api/use-products'
+import { PRODUCT_KEY } from 'common/api/use-products-by-category'
 import { database, storage } from 'common/firebase/config'
 import { Collections } from 'common/firebase/enums'
 import { deleteDoc, doc } from 'firebase/firestore'

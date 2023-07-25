@@ -2,9 +2,8 @@ import { useQuery, UseQueryResult } from 'react-query'
 import { collection, getDocs } from '@firebase/firestore'
 import { database } from '../firebase/config'
 import { Collections } from '../firebase/enums'
-import { query, where } from 'firebase/firestore'
 
-export const PRODUCT_KEY = 'PRODUCTS'
+export const PRODUCT_KEY = 'PRODUCTS_DASHBOARD'
 
 export type ProductsType = {
   id: string
@@ -15,26 +14,15 @@ export type ProductsType = {
   count: number
 }
 
-export const getProducts = async (
-  category?: string | null
-): Promise<ProductsType[]> => {
+export const getProducts = async (): Promise<ProductsType[]> => {
   const allProducts = collection(database, Collections.PRODUCTS)
 
-  const filteredProducts = query(
-    collection(database, Collections.PRODUCTS),
-    where('category', '==', category)
-  )
-
-  const option = category !== null ? filteredProducts : allProducts
-
-  const querySnapshot = await getDocs(option)
+  const querySnapshot = await getDocs(allProducts)
 
   return querySnapshot.docs.map(
     (doc) => ({ id: doc.id, ...doc.data() } as ProductsType)
   )
 }
 
-export const useProducts = (
-  category?: string | null
-): UseQueryResult<ProductsType[]> =>
-  useQuery([PRODUCT_KEY, category], () => getProducts(category))
+export const useProducts = (): UseQueryResult<ProductsType[]> =>
+  useQuery([PRODUCT_KEY], () => getProducts())

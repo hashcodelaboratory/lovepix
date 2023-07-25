@@ -1,4 +1,4 @@
-import { PRODUCT_KEY } from 'common/api/use-products'
+import { PRODUCT_KEY } from 'common/api/use-products-by-category'
 import { QueryClient } from 'react-query'
 import * as yup from 'yup'
 import { FullMetadata } from '@firebase/storage'

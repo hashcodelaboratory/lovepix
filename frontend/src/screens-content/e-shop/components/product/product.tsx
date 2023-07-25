@@ -1,4 +1,4 @@
-import { ProductsType } from 'common/api/use-products'
+import { ProductsType } from 'common/api/use-products-by-category'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React from 'react'
