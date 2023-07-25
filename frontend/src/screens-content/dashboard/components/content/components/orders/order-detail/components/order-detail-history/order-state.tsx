@@ -47,6 +47,19 @@ const OrderState = ({
 
   const toggleModal = () => setOpen((prevState) => !prevState)
 
+  const updateOrderState = async () => {
+    if (!order) {
+      return
+    }
+    const array = order.orderState
+    const newArray = [...array, { state: state, date: Date.now() }]
+    const docData = {
+      orderState: newArray,
+    }
+    await updateDoc(doc(database, Collections.ORDERS, order.id), docData)
+    await queryClient.invalidateQueries(ORDERS_KEY)
+  }
+
   const sendMailStateShipped = async (pdfInvoice: string) => {
     if (!order) {
       return
@@ -73,6 +86,9 @@ const OrderState = ({
       order.form.email,
       t(localizationKey.yourOrderHasBeenSent)
     )
+    if (response.ok) {
+      updateOrderState()
+    }
     snackBarNotification(
       response,
       localizationKey.orderStateSnackbar,
@@ -97,6 +113,7 @@ const OrderState = ({
       const token = res.data?.Invoice.token
       const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
       sendMailStateShipped(pdfInvoice)
+      updateOrderState()
     }
   }
 
@@ -105,18 +122,16 @@ const OrderState = ({
       return
     }
 
-    const array = order.orderState
-    const newArray = [...array, { state: state, date: Date.now() }]
-    const docData = {
-      orderState: newArray,
-    }
-    await updateDoc(doc(database, Collections.ORDERS, order.id), docData)
-    await queryClient.invalidateQueries(ORDERS_KEY)
-
-    state === OrderStateEnum.PICKED && sendMailStatePicked()
-    state === OrderStateEnum.SHIPPED &&
-      order.payment !== Payment.ONLINE &&
+    if (state === OrderStateEnum.PICKED) {
+      sendMailStatePicked()
+    } else if (
+      state === OrderStateEnum.SHIPPED &&
+      order.payment !== Payment.ONLINE
+    ) {
       createSFInvoice()
+    } else {
+      updateOrderState()
+    }
     toggleModal()
   }
 
