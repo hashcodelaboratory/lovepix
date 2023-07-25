@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { FormInputs } from '../../../../../common/types/form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FORM_SCHEMA } from '../address/components/form/utils/schema'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Backdrop, CircularProgress } from '@mui/material'
 import Voucher from '../voucher/voucher'
 import Delivery from '../delivery/delivery'
@@ -52,15 +52,24 @@ const Summary = ({ order }: SummaryProps) => {
     reValidateMode: 'onChange',
   })
   const { delivery, payment } = watch()
-  const finalPrice =
-    Number(order?.totalPrice) +
-    getPriceForDelivery(delivery) +
-    getPriceForPayment(payment) -
-    getPriceWithVoucher(
+  const finalPrice = useMemo(
+    () =>
+      Number(order?.totalPrice) +
+      getPriceForDelivery(delivery) +
+      getPriceForPayment(payment) -
+      getPriceWithVoucher(
+        order?.totalPrice,
+        order.voucher?.saleType,
+        order?.voucher?.value
+      ),
+    [
+      delivery,
       order?.totalPrice,
       order.voucher?.saleType,
-      order?.voucher?.value
-    )
+      order.voucher?.value,
+      payment,
+    ]
+  )
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setIsLoading(true)

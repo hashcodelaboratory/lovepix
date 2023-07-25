@@ -82,16 +82,17 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
   )
 
   const { mutate: addVoucher } = useAddVoucher({
-    onSuccess: () => {
-      enqueueSnackbar(
-        String(t(localizationKey.added)),
-        SNACKBAR_OPTIONS_SUCCESS
-      )
-      reset()
-      queryClient.invalidateQueries(VOUCHERS_KEY)
-    },
-    onError: (e: any) => {
-      enqueueSnackbar(e, SNACKBAR_OPTIONS_ERROR)
+    onSuccess: (res) => {
+      if (res.error) {
+        enqueueSnackbar(res.error, SNACKBAR_OPTIONS_ERROR)
+      } else {
+        enqueueSnackbar(
+          String(t(localizationKey.added)),
+          SNACKBAR_OPTIONS_SUCCESS
+        )
+        reset()
+        queryClient.invalidateQueries(VOUCHERS_KEY)
+      }
     },
   })
 
