@@ -119,7 +119,7 @@ const CategoriesEshop = (): JSX.Element => {
         aria-controls='panel1a-content'
         id='panel1a-header'
       >
-        <h1>Kategórie eshop</h1>
+        <h1>Kategórie e-shop</h1>
       </AccordionSummary>
       <AccordionDetails>
         <div className={styles.rowContainer}>
@@ -155,7 +155,7 @@ const CategoriesEshop = (): JSX.Element => {
             <AddCircle sx={{ marginLeft: 1 }} />
           </button>
           <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Kategórie eshop</DialogTitle>
+            <DialogTitle>Kategórie e-shop</DialogTitle>
             <DialogContent>
               <DialogContentText>Zadaj názov kategórie</DialogContentText>
               <TextField

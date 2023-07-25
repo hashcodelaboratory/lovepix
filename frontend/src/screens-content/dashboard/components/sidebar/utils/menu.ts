@@ -18,6 +18,10 @@ export const SIDEBAR_MENU_LIST: {
     link: Route.DASHBOARD_PRODUCTS,
   },
   {
+    title: localizationKey.storage,
+    link: '',
+  },
+  {
     title: localizationKey.dimensions,
     link: '',
   },
@@ -26,7 +30,11 @@ export const SIDEBAR_MENU_LIST: {
     link: '',
   },
   {
-    title: localizationKey.storage,
+    title: 'Kategórie e-shop',
+    link: '',
+  },
+  {
+    title: localizationKey.code,
     link: '',
   },
 ]

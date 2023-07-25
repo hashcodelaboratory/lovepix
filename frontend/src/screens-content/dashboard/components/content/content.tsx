@@ -50,6 +50,17 @@ const Content = ({ isFetching }: Props) => {
         />
         <Card
           header={{
+            title: localizationKey.storage,
+            count: isFetching ? '-' : uploadImages?.length.toString(),
+            icon: <FolderCopyIcon />,
+          }}
+          footer={{
+            value: '+ 45 %',
+            text: localizationKey.thanLastWeek,
+          }}
+        />
+        <Card
+          header={{
             title: localizationKey.dimensions,
             count: isFetching ? '-' : String(dimensions?.length),
             icon: <InventoryIcon />,
@@ -72,12 +83,23 @@ const Content = ({ isFetching }: Props) => {
         />
         <Card
           header={{
-            title: localizationKey.uploadedImages,
-            count: isFetching ? '-' : uploadImages?.length.toString(),
-            icon: <FolderCopyIcon />,
+            title: 'Kategórie e-shop',
+            count: isFetching ? '-' : String(categories?.length),
+            icon: <InventoryIcon />,
           }}
           footer={{
-            value: '+ 45 %',
+            value: '+ 35 %',
+            text: localizationKey.thanLastWeek,
+          }}
+        />
+        <Card
+          header={{
+            title: localizationKey.code,
+            count: isFetching ? '-' : String(categories?.length),
+            icon: <InventoryIcon />,
+          }}
+          footer={{
+            value: '+ 35 %',
             text: localizationKey.thanLastWeek,
           }}
         />
