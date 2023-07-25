@@ -238,6 +238,13 @@ export const localizationKey = {
   billingInfo: 'billingInfo',
   note: 'note',
   billingAddress: 'billingAddress',
+  addYourReview: 'addYourReview',
+  addReview: 'addReview',
+  rating: 'rating',
+  writeYourReviewHere: 'writeYourReviewHere',
+  thankYouForYourReview: 'thankYouForYourReview',
+  errorMessageReview: 'errorMessageReview',
+  reviewPageYourReviews: 'reviewPageYourReviews',
   phoneRegexValidation: 'phoneRegexValidation',
   emailRegexValidation: 'emailRegexValidation',
 }
