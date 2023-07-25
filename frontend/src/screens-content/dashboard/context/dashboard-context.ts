@@ -13,6 +13,7 @@ type DashboardContextProps = {
     galleryImages: GalleryItem[]
     dimensions: DimensionType[]
     categories: CategoryType[]
+    categoriesEshop: CategoryType[]
     vouchers: VoucherType[]
   }
 }
