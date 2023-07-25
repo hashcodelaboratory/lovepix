@@ -23,7 +23,7 @@ export const SIDEBAR_MENU_LIST: {
   },
   {
     title: localizationKey.dimensions,
-    link: '',
+    link: DashboardRoutes.DIMENSIONS,
   },
   {
     title: localizationKey.categories,
