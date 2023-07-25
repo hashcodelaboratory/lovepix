@@ -89,7 +89,7 @@ export const emailTemplateUser = ({
                 <!-- Hero Image, Flush : BEGIN -->
                 <tr>
                     <td style="background-color: #ffffff;text-align: left; padding: 30px 10px;">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/lovepix-78bf6.appspot.com/o/png%2Flovepix_logo.png?alt=media&token=939bc382-c47e-4cac-a677-a78a0bd00d06" width="110" height="" alt="fesi_comp" border="0" style="height: auto; font-family: 'Montserrat', sans-serif; font-size: 15px; line-height: 15px; color: #555555;">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/lovepix-78bf6.appspot.com/o/png%2Flovepix_logo.png?alt=media&token=939bc382-c47e-4cac-a677-a78a0bd00d06" width="110" height="" alt="lovepix.sk" border="0" style="height: auto; font-family: 'Montserrat', sans-serif; font-size: 15px; line-height: 15px; color: #555555;">
                     </td>
                 </tr>
                 <!-- Hero Image, Flush : END -->
