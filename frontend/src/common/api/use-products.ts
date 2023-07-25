@@ -15,23 +15,33 @@ export type ProductsType = {
   count: number
 }
 
-export const getProducts = async (
-  category?: string | null
-): Promise<ProductsType[]> => {
-  const allProducts = collection(database, Collections.PRODUCTS)
-
-  const filteredProducts = query(
-    collection(database, Collections.PRODUCTS),
-    where('category', '==', category)
+const getProductsByCategory = async (category: string) => {
+  const querySnapshot = await getDocs(
+    query(
+      collection(database, Collections.PRODUCTS),
+      where('category', '==', category)
+    )
   )
-
-  const option = category !== null ? filteredProducts : allProducts
-
-  const querySnapshot = await getDocs(option)
-
   return querySnapshot.docs.map(
     (doc) => ({ id: doc.id, ...doc.data() } as ProductsType)
   )
+}
+
+export const getAllProducts = async (): Promise<ProductsType[]> => {
+  const querySnapshot = await getDocs(
+    collection(database, Collections.PRODUCTS)
+  )
+  return querySnapshot.docs.map(
+    (doc) => ({ id: doc.id, ...doc.data() } as ProductsType)
+  )
+}
+
+const getProducts = (category: string | null | undefined) => {
+  if (category) {
+    return getProductsByCategory(category)
+  } else {
+    return getAllProducts()
+  }
 }
 
 export const useProducts = (
