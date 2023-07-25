@@ -12,6 +12,7 @@ import Dimensions from './components/dimensions/dimensions'
 import Categories from './components/categories/categories'
 import ProductsTable from './components/products/products-table'
 import CategoriesEshop from './components/categoriesEshop/categories-eshop'
+import Voucher from './components/voucher/voucher'
 
 type Props = {
   isFetching: boolean
@@ -87,6 +88,7 @@ const Content = ({ isFetching }: Props) => {
       <Dimensions />
       <Categories />
       <CategoriesEshop />
+      <Voucher />
     </div>
   )
 }

@@ -75,6 +75,7 @@ const Summary = ({ order }: SummaryProps) => {
       delivery: data.delivery!,
       payment: data.payment!,
       stripe: stripe ?? null,
+      voucher: order?.voucher,
     }
 
     data.note && Object.assign(newOrder, { note: data.note })
@@ -125,7 +126,7 @@ const Summary = ({ order }: SummaryProps) => {
           </div>
         </div>
         <div className={styles.summarySecondRow}>
-          <Voucher />
+          <Voucher voucher={order?.voucher} />
           <TotalSection
             delivery={delivery}
             payment={payment}
@@ -133,6 +134,7 @@ const Summary = ({ order }: SummaryProps) => {
             finalPrice={finalPrice}
             isSubscription={isSubscription}
             setSubscription={handleSubscribe}
+            voucher={order?.voucher}
           />
         </div>
       </form>

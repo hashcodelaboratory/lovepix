@@ -17,6 +17,7 @@ import { stripeCreateSession } from './stripe-create-session'
 import { Stripe } from '@stripe/stripe-js'
 import { OrderState } from 'common/types/order'
 import { orderTable } from '../../../database.config'
+import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 
 export type CreateOrderRequest = {
   form: FormInputs
@@ -90,7 +91,9 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
 
         await setDoc(newOrderRef, { ...data, shoppingCart: cart, stripe: '' })
 
-        orderTable.clear()
+        orderTable.update(ORDER_TABLE_KEY, {
+          shoppingCart: { images: [], products: [], totalPrice: 0 },
+        })
       }
     }
   })
