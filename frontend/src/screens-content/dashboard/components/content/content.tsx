@@ -10,7 +10,6 @@ import InventoryIcon from '@mui/icons-material/Inventory'
 import FolderCopyIcon from '@mui/icons-material/FolderCopy'
 import Dimensions from './components/dimensions/dimensions'
 import Categories from './components/categories/categories'
-import CategoriesEshop from './components/categories-e-shop/categories-eshop'
 import { DashboardRoutes } from '../../../../common/enums/routes'
 
 type Props = {
@@ -99,6 +98,7 @@ const Content = ({ isFetching }: Props) => {
             value: '+ 35 %',
             text: localizationKey.thanLastWeek,
           }}
+          link={DashboardRoutes.CATEGORIES_ESHOP}
         />
         <Card
           header={{
@@ -128,7 +128,6 @@ const Content = ({ isFetching }: Props) => {
       <UploadImagesTable />
       <Dimensions />
       <Categories />
-      <CategoriesEshop />
     </div>
   )
 }

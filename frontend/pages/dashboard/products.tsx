@@ -7,7 +7,7 @@ import styles from './dashboard.module.scss'
 
 const Products = () => {
   return (
-    <div className={styles.productDashboardContainer}>
+    <div className={styles.dashboardContainer}>
       <Sidebar />
       <ProductsLayout />
     </div>
