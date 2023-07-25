@@ -1,13 +1,7 @@
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { localizationKey } from '../../../../../../localization/localization-key'
 import styles from '../../../../dashboard.module.scss'
-import {
-  DataGrid,
-  GridCallbackDetails,
-  GridRowParams,
-  GridSelectionModel,
-} from '@mui/x-data-grid'
+import { DataGrid, GridRowParams, GridSelectionModel } from '@mui/x-data-grid'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useTranslation } from 'next-i18next'
 import { useContext, useState } from 'react'
@@ -30,19 +24,18 @@ import Button from '@mui/material/Button'
 import { doc, setDoc } from '@firebase/firestore'
 import { database } from '../../../../../../common/firebase/config'
 import { Collections } from '../../../../../../common/firebase/enums'
-import {
-  CATEGORIES_KEY,
-  CategoryType,
-} from '../../../../../../common/api/use-categories'
-import { removeCategory } from '../../../../api/categories/removeCategory'
+import { CategoryType } from '../../../../../../common/api/use-categories'
+import { CATEGORIES_ESHOP_KEY } from 'common/api/use-categories-eshop'
+import { removeCategoryEshop } from 'screens-content/dashboard/api/categories-eshop/remove-category-eshop'
+import { localizationKey } from 'localization/localization-key'
 
-const Categories = (): JSX.Element => {
+const CategoriesEshop = (): JSX.Element => {
   const { t } = useTranslation()
   const { enqueueSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
 
   const {
-    state: { categories },
+    state: { categoriesEshop },
   } = useContext(DashboardContext)
 
   const [selectedRows, setSelectedRows] = useState<string[]>([])
@@ -53,10 +46,10 @@ const Categories = (): JSX.Element => {
   const [categoryLabel, setCategoryLabel] = useState<string>()
 
   const data =
-    categories?.map(
-      ({ id, name }) =>
+    categoriesEshop?.map(
+      ({ name }) =>
         ({
-          id: id,
+          id: name,
           name: name,
         } as CategoryType)
     ) ?? []
@@ -67,7 +60,7 @@ const Categories = (): JSX.Element => {
   }
 
   const removeData = () => {
-    const result = removeCategory(selectedRows, queryClient)
+    const result = removeCategoryEshop(selectedRows, queryClient)
     if (result === '') {
       enqueueSnackbar(
         String(t(localizationKey.filesRemoved)),
@@ -79,12 +72,13 @@ const Categories = (): JSX.Element => {
     }
   }
 
-  const selectionChanged = (
-    selectionModel: GridSelectionModel,
-    details: GridCallbackDetails
-  ) => {
+  const selectionChanged = (selectionModel: GridSelectionModel) => {
     setSelectionModel(selectionModel)
-    setSelectedRows(selectionModel.map((item, index) => data[index].name))
+    setSelectedRows(
+      selectionModel.map(
+        (item) => data.filter((_item) => item === _item.name)[0]?.name
+      )
+    )
   }
 
   const onRowClick = (details: GridRowParams) => {
@@ -105,12 +99,16 @@ const Categories = (): JSX.Element => {
 
   const uploadToFirestore = async () => {
     await setDoc(
-      doc(database, Collections.CATEGORIES, `DIM-${categoryLabel?.trim()}`),
+      doc(
+        database,
+        Collections.CATEGORIES_ESHOP,
+        `eshop-${categoryLabel?.trim()}`
+      ),
       {
         name: categoryLabel,
       }
     )
-    queryClient.invalidateQueries(CATEGORIES_KEY)
+    queryClient.invalidateQueries(CATEGORIES_ESHOP_KEY)
     handleClose()
   }
 
@@ -121,7 +119,7 @@ const Categories = (): JSX.Element => {
         aria-controls='panel1a-content'
         id='panel1a-header'
       >
-        <h1>{String(t(localizationKey.categories))}</h1>
+        <h1>Kategórie eshop</h1>
       </AccordionSummary>
       <AccordionDetails>
         <div className={styles.rowContainer}>
@@ -157,16 +155,14 @@ const Categories = (): JSX.Element => {
             <AddCircle sx={{ marginLeft: 1 }} />
           </button>
           <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>{t(localizationKey.categories)}</DialogTitle>
+            <DialogTitle>Kategórie eshop</DialogTitle>
             <DialogContent>
-              <DialogContentText>
-                Pridajte rozmer, ktory chcete pouzivat v aplikacii
-              </DialogContentText>
+              <DialogContentText>Zadaj názov kategórie</DialogContentText>
               <TextField
                 autoFocus
                 margin='dense'
                 id='name'
-                label='Rozmer'
+                label='Názov'
                 value={categoryLabel}
                 type='text'
                 fullWidth
@@ -187,4 +183,4 @@ const Categories = (): JSX.Element => {
   )
 }
 
-export default Categories
+export default CategoriesEshop

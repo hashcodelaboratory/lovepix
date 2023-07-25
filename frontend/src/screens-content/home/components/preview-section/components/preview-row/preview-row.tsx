@@ -36,7 +36,7 @@ const PreviewRow = ({galleryData, title}: PreviewRowProps): JSX.Element => {
   return (
     <div className={styles.previewRow}>
       <div className={styles.previewTitleRow}>
-        <h3>{title}</h3>
+        <h3>{t(title)}</h3>
         <button className={styles.previewTitleRowButton}>
           <p onClick={redirect} className={styles.previewTitleRowButtonText}>{t(localizationKey.showMore)}</p>
           <ArrowForwardIcon sx={{width: 16}}/>

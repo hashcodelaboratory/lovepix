@@ -39,7 +39,7 @@ const sendOrderShipped = async (
     const mailOptions = {
       from: 'LovePix <noreply@lovepix.sk>',
       to: _body.dest,
-      subject: 'Objednávka: #' + _body.id,
+      subject: 'Objednávka: #' + _body.id + 'Doručená',
       attachments: [
         {
           filename: `faktúra_${_body.id}.pdf`,

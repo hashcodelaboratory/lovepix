@@ -204,8 +204,8 @@ export const emailTemplateUser = ({
                                 <td style="text-align: left;">
                                 <p style="font-family: 'Montserrat', sans-serif; font-size: 12px; line-height: 14px; color: #333;font-weight: 700; text-decoration: underline;">Fakturačná adresa</p>
                                 <p style="font-size: 11px;font-family: 'Montserrat', sans-serif; font-weight: 200; color: #333; float: left;">
-                                ${formData?.ico} <br>
-                                ${formData?.dic} <br>
+                                ${formData?.ico ?? ''} <br>
+                                ${formData?.dic ?? ''} <br>
                                 ${formData?.company} <br>
                                 ${formData.firstName} ${formData.lastName} <br>
                                 ${formData.city}, ${formData.address} <br>
