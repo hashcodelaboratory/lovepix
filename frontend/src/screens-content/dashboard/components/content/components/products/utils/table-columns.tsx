@@ -1,10 +1,10 @@
 import { GridColDef } from '@mui/x-data-grid'
 import { QueryClient } from 'react-query'
 import DeleteIcon from '@mui/icons-material/Delete'
-import styles from './products.module.scss'
+import styles from '../products.module.scss'
 import Image from 'next/image'
-import { ImageLayout } from '../../../../../home/enums/enums'
-import { removeUploadedProductImage } from '../../../../../../common/api/remove-product'
+import { ImageLayout } from '../../../../../../home/enums/enums'
+import { removeUploadedProductImage } from '../../../../../../../common/api/remove-product'
 
 export const getProductsColumns = (queryClient: QueryClient): GridColDef[] => [
   {

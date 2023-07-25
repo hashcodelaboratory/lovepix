@@ -92,7 +92,7 @@ const OrdersTable = () => {
   const buttonText = String(t(localizationKey.removeAll))
 
   return (
-    <div>
+    <div className={styles.contentContainer}>
       <div style={{ display: 'flex' }}>
         <Box className={styles.ordersTableSidepanel}>
           <DataGrid

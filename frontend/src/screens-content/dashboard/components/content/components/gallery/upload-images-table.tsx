@@ -104,7 +104,7 @@ const UploadImagesTable = () => {
   }
 
   return (
-    <div>
+    <div className={styles.contentContainer}>
       <div className={styles.rowContainer}>
         <DataGrid
           className={styles.contentTable}
