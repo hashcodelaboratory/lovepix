@@ -37,4 +37,3 @@ yarn-error.log*
 .idea
 
 frontend/.env
-test.py
