@@ -19,11 +19,11 @@ type CreateOrderRequest = {
   payment: Payment
 }
 
-const invoiceItems = (data: CreateOrderRequest) => {
+const invoiceItems = (data: CreateOrderRequest | Order) => {
   let newItems: InvoiceItem[] = []
   const productItems = [
-    ...(data.shoppingCart.products ?? []),
-    ...(data.shoppingCart.images ?? []),
+    ...(data?.shoppingCart.products ?? []),
+    ...(data?.shoppingCart.images ?? []),
   ]
 
   productItems?.forEach((item: any) => {
@@ -37,7 +37,7 @@ const invoiceItems = (data: CreateOrderRequest) => {
     }
     newItems.push({ ...items })
   })
-  const deliveryPrice = data.delivery === Delivery.COURIER ? 5 / 1.2 : 0
+  const deliveryPrice = data?.delivery === Delivery.COURIER ? 5 / 1.2 : 0
   const deliveryItem = {
     unit_price: deliveryPrice,
     description: `Doprava - ${data.delivery}`,
@@ -56,7 +56,7 @@ const invoiceItems = (data: CreateOrderRequest) => {
 
 export const invoice = (
   orderId: string,
-  data: CreateOrderRequest
+  data: CreateOrderRequest | Order
 ): SFInvoice => {
   const createdDate = dayjs(new Date()).format('YYYY-MM-DD')
   const dueDate = dayjs().add(15, 'day').format('YYYY-MM-DD')
@@ -69,9 +69,9 @@ export const invoice = (
     },
     InvoiceItem: invoiceItems(data),
     Client: {
-      name: `${data.form.firstName} ${data.form.lastName}`,
-      address: data.form.address,
-      city: data.form.city,
+      name: `${data?.form.firstName} ${data?.form.lastName}`,
+      address: data?.form.address ?? '',
+      city: data?.form.city ?? '',
     },
   }
 }

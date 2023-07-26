@@ -1,32 +1,40 @@
-import { Route } from 'common/enums/routes'
-import { messages } from '../../../../../messages/messages'
+import { DashboardRoutes, Route } from 'common/enums/routes'
+import { localizationKey } from '../../../../../localization/localization-key'
 
 export const SIDEBAR_MENU_LIST: {
   title: string
   link: string
 }[] = [
   {
-    title: messages.home,
+    title: localizationKey.home,
     link: Route.DASHBOARD,
   },
   {
-    title: messages.orders,
-    link: '',
+    title: localizationKey.orders,
+    link: DashboardRoutes.ORDERS,
   },
   {
-    title: messages.products,
-    link: Route.DASHBOARD_PRODUCTS,
+    title: localizationKey.products,
+    link: DashboardRoutes.PRODUCTS,
   },
   {
-    title: messages.dimensions,
-    link: '',
+    title: localizationKey.gallery,
+    link: DashboardRoutes.GALLERY,
   },
   {
-    title: messages.categories,
-    link: '',
+    title: localizationKey.dimensions,
+    link: DashboardRoutes.DIMENSIONS,
   },
   {
-    title: messages.storage,
-    link: '',
+    title: localizationKey.categories,
+    link: DashboardRoutes.CATEGORIES,
+  },
+  {
+    title: 'Kategórie e-shop',
+    link: DashboardRoutes.CATEGORIES_ESHOP,
+  },
+  {
+    title: localizationKey.code,
+    link: DashboardRoutes.VOUCHERS,
   },
 ]

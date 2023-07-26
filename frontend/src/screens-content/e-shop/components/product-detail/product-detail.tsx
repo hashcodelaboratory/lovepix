@@ -10,7 +10,7 @@ import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 import { orderTable } from '../../../../../database.config'
 import { ProductsType, useProducts } from 'common/api/use-products'
 import Product from '../product/product'
-import { messages } from 'messages/messages'
+import { localizationKey } from '../../../../localization/localization-key'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { shoppingCartPrice } from './utils'
@@ -84,7 +84,7 @@ const ProductDetailLayout = () => {
 
     if (product?.qty === count) {
       enqueueSnackbar(
-        String(t(messages.noMoreProdutsOnStock)),
+        String(t(localizationKey.noMoreProdutsInStock)),
         SNACKBAR_OPTIONS_ERROR
       )
       return
@@ -94,7 +94,7 @@ const ProductDetailLayout = () => {
       ? orderTable.update(ORDER_TABLE_KEY, payloadAddtoCart())
       : orderTable.add(payloadAddtoCart(), ORDER_TABLE_KEY)
     enqueueSnackbar(
-      String(t(messages.productAddedToCart)),
+      String(t(localizationKey.productAddedToCart)),
       SNACKBAR_OPTIONS_SUCCESS
     )
   }
@@ -130,17 +130,17 @@ const ProductDetailLayout = () => {
               className={styles.button}
               onClick={addToCart}
             >
-              {t(messages.addToCart)}
+              {t(localizationKey.addToCart)}
             </Button>
             <hr />
             <InfoPanel quantity={count} />
           </div>
         </Grid>
       </Grid>
-      <div className={styles.title}>{t(messages.description)}</div>
+      <div className={styles.title}>{t(localizationKey.description)}</div>
       <hr />
       <div className={styles.description}>{description}</div>
-      <div className={styles.title}>{t(messages.simmilarProducts)}</div>
+      <div className={styles.title}>{t(localizationKey.similarProducts)}</div>
       <div style={{ display: 'flex', overflow: 'auto', marginTop: 20 }}>
         {productList}
       </div>

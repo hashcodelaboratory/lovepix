@@ -1,6 +1,6 @@
 import styles from './newsletter.module.scss'
 import { useTranslation } from 'react-i18next'
-import { messages } from '../../../../messages/messages'
+import { localizationKey } from '../../../../localization/localization-key'
 import Container from '@mui/material/Container'
 import { TextField } from '@mui/material'
 import { useState } from 'react'
@@ -18,7 +18,7 @@ const Newsletter = (): JSX.Element => {
     const res = await addContactToNewsletter(email)
     if (res) {
       enqueueSnackbar(
-        String(t(messages.newsletterSuccessAdd)),
+        String(t(localizationKey.newsletterSuccessAdd)),
         SNACKBAR_OPTIONS_SUCCESS
       )
     }
@@ -30,22 +30,22 @@ const Newsletter = (): JSX.Element => {
         <div className={styles.container}>
           <div className={styles.content}>
             <p className={styles.title}>
-              {String(t(messages.newsletterLogin))}
+              {String(t(localizationKey.newsletterLogin))}
             </p>
             <p className={styles.subtitle}>
-              {String(t(messages.newsletterGet))}
+              {String(t(localizationKey.newsletterGet))}
             </p>
             <div className={styles.row}>
               <p className={styles.textFieldText}>
-                {String(t(messages.putMail))}
+                {String(t(localizationKey.putMail))}
               </p>
               <p className={styles.textFieldTextSecondary}>
-                {String(t(messages.logout))}
+                {String(t(localizationKey.logout))}
               </p>
             </div>
             <div className={styles.row}>
               <TextField
-                placeholder={String(t(messages.yourMail))}
+                placeholder={String(t(localizationKey.yourMail))}
                 fullWidth
                 variant='standard'
                 size='small'
@@ -65,13 +65,13 @@ const Newsletter = (): JSX.Element => {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <button className={styles.button} onClick={handleNewsletter}>
-                {String(t(messages.login))}
+                {String(t(localizationKey.login))}
               </button>
             </div>
             <p className={styles.note}>
-              {String(t(messages.newsletter))}
+              {String(t(localizationKey.newsletter))}
               <span className={styles.noteLink}>
-                {String(t(messages.here))}
+                {String(t(localizationKey.here))}
               </span>
             </p>
           </div>

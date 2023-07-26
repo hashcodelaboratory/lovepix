@@ -1,0 +1,65 @@
+.infoRow{
+    padding: 0 0 1.5em 0 !important;
+}
+
+.infoTitle{
+    color: inherit;
+    display: block;
+    font-weight: bold;
+    font-size: 2.1em;
+    margin: 0 0 0.5em 0 !important;
+}
+
+.infoComment{
+    font-size: 1.25rem;
+    font-weight: 300;
+    display: block;
+    margin: 0 0 1em 0 !important;
+}
+
+.infoSocialTitle{
+    font-size: 1.3em;
+    margin: 0.5em 0 1em 0 !important;
+    font-weight: bold;
+}
+
+.infoTitleContainer{
+    padding: 0 0 1em 0 !important;
+}
+
+.infoValueTitle{
+    font-size: 0.9em;
+    font-weight: 800;
+    display: block;
+    margin: 0 0 0.4em 0 !important;
+}
+
+.infoValue{
+    font-size: 0.8em;
+    font-weight: 300;
+    display: block;
+    margin: 0 0 0.4em 0 !important;
+}
+
+.mainContainer{
+    padding: 4em 2em 3em 2em !important;
+    align-self: center;
+    min-height: 100vh;
+}
+
+.infoSocialLink{
+    text-decoration: underline !important;
+    display: block;
+    margin: 0 0 0.6em 0 !important;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.googleMap{
+    border-radius: 10px;
+    border: transparent;
+    width: 100%;
+    height: 100%;
+    min-height: 50vh;
+    max-height: 80vh;
+}

@@ -14,29 +14,34 @@ type Props = {
 }
 
 const OrderDetailRow = ({ image, index, order }: Props): JSX.Element => {
+  const { origin, url, material, width, height, qty, price, pdf } = image
+
   return (
-    <div className={styles.row} key={image.url}>
+    <div className={styles.row} key={url}>
       <div
         className={styles.flex}
         style={{ justifyContent: 'flex-start', alignItems: 'center' }}
       >
-        <p style={{ marginRight: 8 }}>{image.qty} ks</p>
-        <a target='_blank' href={`${image.url}`} rel='noopener noreferrer'>
+        <p style={{ marginRight: 8 }}>{qty} ks</p>
+        <a
+          href={`${url}`}
+          download={`${order.id}-${material}-${width}x${height}-${qty}.jpeg`}
+        >
           <Image
-            alt={image.url}
-            src={image.url}
+            alt={url}
+            src={url}
             width={40}
             height={40}
             layout={ImageLayout.FIXED}
           />
         </a>
       </div>
-      <div>{image.material}</div>
+      <div>{material}</div>
       <div>
-        {image.width}x{image.height}
+        {width}x{height}
       </div>
-      <div>{image.price.toFixed(2)} €</div>
-      {image.pdf ? (
+      <div>{price.toFixed(2)} €</div>
+      {pdf ? (
         <a target='_blank' href={image.pdf} rel='noopener noreferrer'>
           <PictureAsPdfIcon color='error' />
         </a>
@@ -50,6 +55,11 @@ const OrderDetailRow = ({ image, index, order }: Props): JSX.Element => {
           PDF
         </Button>
       )}
+      <Button variant='outlined'>
+        <a target='_blank' href={origin} rel='noopener noreferrer'>
+          Origin
+        </a>
+      </Button>
     </div>
   )
 }

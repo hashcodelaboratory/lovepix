@@ -1,23 +1,23 @@
 import Container from '@mui/material/Container'
-import { useGallery } from '../../common/api/use-gallery'
+import {useGallery} from '../../common/api/use-gallery'
 import Image from 'next/image'
-import { ImageLayout } from '../home/enums/enums'
+import {ImageLayout} from '../home/enums/enums'
 import styles from './gallery.module.scss'
-import { useCategories } from '../../common/api/use-categories'
-import { Chip } from '@mui/material'
-import { useEffect, useState } from 'react'
-import { messages } from '../../messages/messages'
-import { useTranslation } from 'react-i18next'
-import { CONFIGURATOR } from '../../constants/pages/urls'
-import { useRouter } from 'next/router'
-import { addFileFromGallery } from '../../common/utils/add-file-from-gallery'
+import {useCategories} from '../../common/api/use-categories'
+import {Chip} from '@mui/material'
+import {useEffect, useState} from 'react'
+import {localizationKey} from '../../localization/localization-key'
+import {useTranslation} from 'react-i18next'
+import {useRouter} from 'next/router'
+import {addFileFromGallery} from '../../common/utils/add-file-from-gallery'
+import {Pages} from "../../constants/pages/urls";
 
 const GalleryLayout = (): JSX.Element => {
-  const { t } = useTranslation()
+  const {t} = useTranslation()
   const router = useRouter()
 
-  const { data: gallery } = useGallery()
-  const { data: categories } = useCategories()
+  const {data: gallery} = useGallery()
+  const {data: categories} = useCategories()
 
   const [searchedCategories, setSearchedCategories] = useState<string[]>()
 
@@ -26,7 +26,7 @@ const GalleryLayout = (): JSX.Element => {
   )
 
   useEffect(() => {
-    setSearchedCategories(categories?.map(({ name }) => name))
+    setSearchedCategories(categories?.map(({name}) => name))
   }, [categories])
 
   const onClickCategory = (name: string) => {
@@ -46,13 +46,13 @@ const GalleryLayout = (): JSX.Element => {
 
   const add = async (path: string, id: string) => {
     await addFileFromGallery(path, id)
-    await router.push(CONFIGURATOR)
+    await router.push(Pages.CONFIGURATOR)
   }
 
   return (
     <Container>
       <div className={styles.galleryCategoryRow}>
-        {categories?.map(({ id, name }) => (
+        {categories?.map(({id, name}) => (
           <Chip
             key={id}
             label={name}
@@ -80,7 +80,7 @@ const GalleryLayout = (): JSX.Element => {
               alt=''
             />
             <button className={styles.previewImageLink}>
-              {t(messages.add)}
+              {t(localizationKey.add)}
             </button>
           </div>
         ))}

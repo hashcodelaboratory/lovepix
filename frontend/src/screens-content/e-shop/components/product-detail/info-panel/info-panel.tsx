@@ -4,7 +4,7 @@ import Delivery from '@icons/icon-delivery'
 import Experience from '@icons/icon-experience'
 import Access from '@icons/icon-access'
 import styles from './info-panel.module.scss'
-import { messages } from 'messages/messages'
+import { localizationKey } from '../../../../../localization/localization-key'
 import Money from '@icons/icon-money'
 
 type Info = {
@@ -17,12 +17,12 @@ const InfoPanel = ({ quantity }: Info) => {
   const shopInfo = [
     {
       img: <Experience width={50} height={50} />,
-      title: t(messages.pickUpInfo),
+      title: t(localizationKey.pickUpInfo),
       description: 'Duklianská 38, Spišská Nová Ves',
     },
     {
       img: <Delivery width={50} height={50} />,
-      title: t(messages.fastDelivery),
+      title: t(localizationKey.fastDelivery),
       description: '',
     },
     {
@@ -32,7 +32,7 @@ const InfoPanel = ({ quantity }: Info) => {
     },
     {
       img: <Money width={50} height={50} />,
-      title: t(messages.moneyBackGuarantee),
+      title: t(localizationKey.moneyBackGuarantee),
       description: '',
     },
   ]
