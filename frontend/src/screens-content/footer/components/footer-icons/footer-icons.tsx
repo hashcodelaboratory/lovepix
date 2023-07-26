@@ -14,12 +14,84 @@ import {
   Pages,
   TIKTOK,
 } from '../../../../constants/pages/urls'
+import useLoggedUser from 'common/api/use-logged-user'
+import { useRouter } from 'next/router'
+import { logIn, logOut } from 'auth'
+import { settings } from 'navigation'
+import { DASHBOARD } from 'constants/settings/titles'
+import { useState } from 'react'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import Typography from '@mui/material/Typography'
+import Tooltip from '@mui/material/Tooltip'
+import IconButton from '@mui/material/IconButton'
+import Avatar from '@mui/material/Avatar'
 
 const FooterIcons = (): JSX.Element => {
   const { t } = useTranslation()
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget)
+  }
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null)
+  }
+  const { user } = useLoggedUser()
+  const router = useRouter()
+  const handleLogout = () => {
+    logOut()
+    router.push(`/`)
+    handleCloseUserMenu()
+  }
+
+  const userSettings = settings.filter((item) => item.title !== DASHBOARD)
+  const menuOptions = user?.isAdmin ? settings : userSettings
+
   // TODO: add change tiktok link
   return (
     <Container>
+      <div>
+        <Tooltip title='Open settings'>
+          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <Avatar
+              alt={!!user ? user.displayName || '' : undefined}
+              src='/static/images/avatar/2.jpg'
+            />
+          </IconButton>
+        </Tooltip>
+
+        <Menu
+          sx={{ mt: '45px' }}
+          id='menu-sidebar-appbar'
+          anchorEl={anchorElUser}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={Boolean(anchorElUser)}
+          onClose={handleCloseUserMenu}
+        >
+          {user ? (
+            menuOptions.map((setting) => (
+              <MenuItem
+                key={setting.title}
+                onClick={() => setting.callBack && handleLogout()}
+              >
+                <Typography textAlign='center'>{setting.title}</Typography>
+              </MenuItem>
+            ))
+          ) : (
+            <MenuItem onClick={logIn}>
+              <Typography textAlign='center'>Login</Typography>
+            </MenuItem>
+          )}
+        </Menu>
+      </div>
       <hr />
       <div className={styles.footerIconsRow}>
         <Image
@@ -57,6 +129,7 @@ const FooterIcons = (): JSX.Element => {
           hashlab.com
         </Link>
       </div>
+
       <hr />
       <div className={styles.footerBottomContainer}>
         <div className={styles.footerBottomContainerRow}>
@@ -95,6 +168,7 @@ const FooterIcons = (): JSX.Element => {
             </Link>
           </div>
         </div>
+
         <div className={styles.footerBottomContainerRow}>
           <p
             className={styles.footerBottomContainerRowText}
