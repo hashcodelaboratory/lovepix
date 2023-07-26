@@ -1,11 +1,11 @@
 import { GridColDef } from '@mui/x-data-grid'
-import styles from "../../../../../dashboard.module.scss";
+import styles from '../../../../../dashboard.module.scss'
 
 export const getColumns = (): GridColDef[] => [
   {
     field: 'code',
     headerName: 'Code',
-    width: 80,
+    width: 120,
     editable: false,
   },
   {

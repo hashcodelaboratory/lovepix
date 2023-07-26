@@ -13,6 +13,7 @@ export const emailTemplateUser = ({
   formData,
   images,
   products,
+  voucher,
 }: UserMail) => {
   return `<!DOCTYPE html>
     <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -89,7 +90,7 @@ export const emailTemplateUser = ({
                 <!-- Hero Image, Flush : BEGIN -->
                 <tr>
                     <td style="background-color: #ffffff;text-align: left; padding: 30px 10px;">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/lovepix-78bf6.appspot.com/o/png%2Flovepix_logo.png?alt=media&token=939bc382-c47e-4cac-a677-a78a0bd00d06" width="110" height="" alt="fesi_comp" border="0" style="height: auto; font-family: 'Montserrat', sans-serif; font-size: 15px; line-height: 15px; color: #555555;">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/lovepix-78bf6.appspot.com/o/png%2Flovepix_logo.png?alt=media&token=939bc382-c47e-4cac-a677-a78a0bd00d06" width="110" height="" alt="lovepix.sk" border="0" style="height: auto; font-family: 'Montserrat', sans-serif; font-size: 15px; line-height: 15px; color: #555555;">
                     </td>
                 </tr>
                 <!-- Hero Image, Flush : END -->
@@ -186,6 +187,14 @@ export const emailTemplateUser = ({
                                 `
                                     : ''
                                 }
+                            {voucher && <tr style="border-top: 1px dotted #d3d3d3;">
+                                <td style="text-align: left;padding: 10px;color: #000;">Zľavový kupón: ${
+                                  voucher?.code
+                                }</td>
+                                <td style="text-align: right;padding: 10px;color: #000;" colspan="2">- ${
+                                  voucher?.value
+                                }</td>
+                            </tr>}
                             <tr style="border-top: 1px dotted #d3d3d3;color: #000;">
                                 <td style="text-align: left;padding: 10px;">Cena spolu</td>
                                 <td style="text-align: right;font-size: 15px; fontWeight: 600;padding: 10px;" colspan="2">${Number(

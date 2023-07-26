@@ -5,18 +5,14 @@ import { Collections } from '../../../src/common/firebase/enums'
 import { collection, query } from '@firebase/firestore'
 import { CategoryType } from '../../../src/common/api/use-categories'
 
-const voucherlist = async (req: NextApiRequest, res: NextApiResponse) => {
+const voucherList = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const q = query(collection(database, Collections.VOUCHERS))
     const docsSnapshot = await getDocs(q)
     if (docsSnapshot.docs) {
       return res
         .status(200)
-        .json(
-          docsSnapshot.docs.map(
-            (doc) => ({ id: doc.id, ...doc.data() } as CategoryType)
-          )
-        )
+        .json(docsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
     } else {
       res.status(400).json({
         error: 'No such documents!',
@@ -29,4 +25,4 @@ const voucherlist = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default voucherlist
+export default voucherList

@@ -10,10 +10,7 @@ import { localizationKey } from '../../../../../../../../localization/localizati
 import General from './components/general/general'
 import Strict from './components/strict/strict'
 import Limit from './components/limit/limit'
-import {
-  VOUCHERS_KEY,
-  VoucherType,
-} from '../../../../../../../../common/api/use-vouchers'
+import { VOUCHERS_KEY } from '../../../../../../../../common/api/use-vouchers'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { SaleTypeEnum } from '../../../../../../../../common/voucher/utils/enums'
@@ -26,6 +23,7 @@ import { useSnackbar } from 'notistack'
 import { useQueryClient } from 'react-query'
 import { useAddVoucher } from '../../../../../../api/vouchers/add-voucher'
 import { useVoucherDetail } from '../../../../../../../../common/api/use-voucher'
+import { useEditVoucher } from '../../../../../../api/vouchers/edit-voucher'
 
 enum SidePanelEnum {
   GENERAL = 'GENERAL',
@@ -45,24 +43,44 @@ export type FormInputs = {
   limitUser: number
 }
 
-type VoucherDetailProps = {
-  detail?: VoucherType
+type VoucherTableRow = {
+  id: string
+  code: string
+  expiration: string
 }
 
-const VoucherDetail = ({ detail }: VoucherDetailProps) => {
+type VoucherDetailProps = {
+  tableReset: () => void
+  detail?: VoucherTableRow
+}
+
+const EMPTY_OBJECT = {
+  code: '',
+  description: '',
+  saleType: SaleTypeEnum.DEFAULT,
+  value: 0,
+  freeDelivery: false,
+  expiration: '',
+}
+
+const VoucherDetail = ({ tableReset, detail }: VoucherDetailProps) => {
   const { t } = useTranslation()
   const { enqueueSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
 
   const { mutate: getVoucherDetail } = useVoucherDetail({
     onSuccess: (data) => {
-      reset(data)
+      if (data.error) {
+        enqueueSnackbar(data.error, SNACKBAR_OPTIONS_ERROR)
+      } else {
+        reset(data)
+      }
     },
   })
 
   useEffect(() => {
     if (detail) {
-      getVoucherDetail({ id: detail.id })
+      getVoucherDetail({ code: detail.code })
     }
   }, [detail])
 
@@ -81,17 +99,37 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
     SidePanelEnum.GENERAL
   )
 
+  const fullReset = () => {
+    reset(EMPTY_OBJECT)
+    tableReset()
+    queryClient.invalidateQueries(VOUCHERS_KEY)
+  }
+
   const { mutate: addVoucher } = useAddVoucher({
-    onSuccess: () => {
-      enqueueSnackbar(
-        String(t(localizationKey.added)),
-        SNACKBAR_OPTIONS_SUCCESS
-      )
-      reset()
-      queryClient.invalidateQueries(VOUCHERS_KEY)
+    onSuccess: (res) => {
+      if (res.error) {
+        enqueueSnackbar(res.error, SNACKBAR_OPTIONS_ERROR)
+      } else {
+        enqueueSnackbar(
+          String(t(localizationKey.added)),
+          SNACKBAR_OPTIONS_SUCCESS
+        )
+        fullReset()
+      }
     },
-    onError: (e: any) => {
-      enqueueSnackbar(e, SNACKBAR_OPTIONS_ERROR)
+  })
+
+  const { mutate: editVoucher } = useEditVoucher({
+    onSuccess: (res) => {
+      if (res.error) {
+        enqueueSnackbar(res.error, SNACKBAR_OPTIONS_ERROR)
+      } else {
+        enqueueSnackbar(
+          String(t(localizationKey.added)),
+          SNACKBAR_OPTIONS_SUCCESS
+        )
+        fullReset()
+      }
     },
   })
 
@@ -111,7 +149,7 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
   }
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    addVoucher(data)
+    detail ? await editVoucher(data) : addVoucher(data)
   }
 
   return (
@@ -199,7 +237,7 @@ const VoucherDetail = ({ detail }: VoucherDetailProps) => {
         </div>
         <div>
           <div className={styles.voucherFooterRow}>
-            <Button variant='outlined' onClick={() => reset()}>
+            <Button variant='outlined' onClick={fullReset}>
               Reset
             </Button>
             <Button type='submit' variant='contained' sx={{ ml: 1 }}>

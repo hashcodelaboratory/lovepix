@@ -1,9 +1,9 @@
-import styles from '../../dashboard.module.scss'
+import styles from '../../../dashboard.module.scss'
 
 const SidebarHeader = () => {
   return (
     <div className={styles.sidebarHeader}>
-      <h2 className={styles.sidebarHeaderTitle}>Waller</h2>
+      <h2 className={styles.sidebarHeaderTitle}>Lovepix</h2>
     </div>
   )
 }
