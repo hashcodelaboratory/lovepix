@@ -5,6 +5,7 @@ import { Configuration } from '../../../../../../common/types/configuration'
 import { splitDimension } from '../../../../../../common/utils/split-dimension'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from 'localization/localization-key'
+import * as Symbols from '../../../../../../constants/symbols/symbols'
 
 type PriceProps = {
   configuration: Configuration
@@ -35,11 +36,11 @@ const Price = ({ configuration }: PriceProps) => {
     <div className={styles.containerPadding}>
       <div className={styles.price}>
         <h4>
-          <b>Cena</b>
+          <b>{t(localizationKey.price)}</b>
         </h4>
-        <p className={styles.priceNoTax}>{noTaxPrice}{"€ " + t(localizationKey.withoutTaxes)}</p>
+        <p className={styles.priceNoTax}>{noTaxPrice}{Symbols.EURO} {t(localizationKey.withoutTaxes)}</p>
         <h4>
-          <b>{price} € </b>
+          <b>{price} {Symbols.EURO}</b>
         </h4>
       </div>
       <hr />
