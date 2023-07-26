@@ -1,7 +1,7 @@
 import { MutationOptions, useMutation, UseMutationResult } from 'react-query'
 
 export type VoucherDetailRequest = {
-  id: string
+  code: string
 }
 
 const getVoucherDetail = async (data: VoucherDetailRequest) => {

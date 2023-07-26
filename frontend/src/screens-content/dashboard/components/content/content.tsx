@@ -1,18 +1,11 @@
 import Card from './components/card/card'
 import styles from '../../dashboard.module.scss'
 import { localizationKey } from '../../../../localization/localization-key'
-import UploadImagesTable from './components/gallery/upload-images-table'
 import { useContext } from 'react'
 import DashboardContext from '../../context/dashboard-context'
-import OrdersTable from './components/orders/orders-table'
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks'
 import InventoryIcon from '@mui/icons-material/Inventory'
-import FolderCopyIcon from '@mui/icons-material/FolderCopy'
-import Dimensions from './components/dimensions/dimensions'
-import Categories from './components/categories/categories'
-import ProductsTable from './components/products/products-table'
-import CategoriesEshop from './components/categoriesEshop/categories-eshop'
-import Voucher from './components/voucher/voucher'
+import { DashboardRoutes } from '../../../../common/enums/routes'
 
 type Props = {
   isFetching: boolean
@@ -20,7 +13,14 @@ type Props = {
 
 const Content = ({ isFetching }: Props) => {
   const {
-    state: { uploadImages, orders, dimensions, categories },
+    state: {
+      uploadImages,
+      orders,
+      dimensions,
+      categories,
+      vouchers,
+      categoriesEshop,
+    },
   } = useContext(DashboardContext)
 
   return (
@@ -36,6 +36,7 @@ const Content = ({ isFetching }: Props) => {
             value: '+ 15 %',
             text: localizationKey.thanLastWeek,
           }}
+          link={DashboardRoutes.ORDERS}
         />
         <Card
           header={{
@@ -47,6 +48,7 @@ const Content = ({ isFetching }: Props) => {
             value: '+ 25 %',
             text: localizationKey.thanLastWeek,
           }}
+          link={DashboardRoutes.PRODUCTS}
         />
         <Card
           header={{
@@ -58,6 +60,7 @@ const Content = ({ isFetching }: Props) => {
             value: '+ 15 %',
             text: localizationKey.thanLastWeek,
           }}
+          link={DashboardRoutes.DIMENSIONS}
         />
         <Card
           header={{
@@ -69,26 +72,45 @@ const Content = ({ isFetching }: Props) => {
             value: '+ 35 %',
             text: localizationKey.thanLastWeek,
           }}
+          link={DashboardRoutes.CATEGORIES}
         />
         <Card
           header={{
-            title: localizationKey.uploadedImages,
-            count: isFetching ? '-' : uploadImages?.length.toString(),
-            icon: <FolderCopyIcon />,
+            title: 'Kategórie e-shop',
+            count: isFetching ? '-' : String(categoriesEshop?.length),
+            icon: <InventoryIcon />,
           }}
           footer={{
-            value: '+ 45 %',
+            value: '+ 35 %',
             text: localizationKey.thanLastWeek,
           }}
+          link={DashboardRoutes.CATEGORIES_ESHOP}
+        />
+        <Card
+          header={{
+            title: localizationKey.code,
+            count: isFetching ? '-' : String(vouchers?.length),
+            icon: <InventoryIcon />,
+          }}
+          footer={{
+            value: '+ 35 %',
+            text: localizationKey.thanLastWeek,
+          }}
+          link={DashboardRoutes.VOUCHERS}
+        />
+        <Card
+          header={{
+            title: localizationKey.gallery,
+            count: isFetching ? '-' : String(uploadImages?.length),
+            icon: <InventoryIcon />,
+          }}
+          footer={{
+            value: '+ 35 %',
+            text: localizationKey.thanLastWeek,
+          }}
+          link={DashboardRoutes.GALLERY}
         />
       </div>
-      <OrdersTable />
-      <ProductsTable />
-      <UploadImagesTable />
-      <Dimensions />
-      <Categories />
-      <CategoriesEshop />
-      <Voucher />
     </div>
   )
 }

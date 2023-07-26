@@ -1,5 +1,3 @@
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { localizationKey } from '../../../../../../localization/localization-key'
 import styles from '../../../../dashboard.module.scss'
 import {
@@ -10,8 +8,7 @@ import {
 } from '@mui/x-data-grid'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useTranslation } from 'next-i18next'
-import { useContext, useState } from 'react'
-import DashboardContext from '../../../../context/dashboard-context'
+import { useState } from 'react'
 import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
@@ -33,17 +30,16 @@ import { Collections } from '../../../../../../common/firebase/enums'
 import {
   CATEGORIES_KEY,
   CategoryType,
+  useCategories,
 } from '../../../../../../common/api/use-categories'
 import { removeCategory } from '../../../../api/categories/removeCategory'
 
-const Categories = (): JSX.Element => {
+const CategoriesLayout = (): JSX.Element => {
   const { t } = useTranslation()
   const { enqueueSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
 
-  const {
-    state: { categories },
-  } = useContext(DashboardContext)
+  const { data: categories = [] } = useCategories()
 
   const [selectedRows, setSelectedRows] = useState<string[]>([])
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([])
@@ -115,76 +111,67 @@ const Categories = (): JSX.Element => {
   }
 
   return (
-    <Accordion>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls='panel1a-content'
-        id='panel1a-header'
-      >
-        <h1>{String(t(localizationKey.categories))}</h1>
-      </AccordionSummary>
-      <AccordionDetails>
-        <div className={styles.rowContainer}>
-          <DataGrid
-            className={styles.contentTable}
-            rows={data}
-            columns={getDimensionsColumns()}
-            pageSize={10}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-            disableSelectionOnClick
-            selectionModel={selectionModel}
-            onSelectionModelChange={selectionChanged}
-            onRowClick={onRowClick}
-            autoHeight
-          />
-        </div>
-        <div className={styles.rowContainer}>
-          <button
-            className={styles.removeButton}
-            onClick={removeData}
-            disabled={selectedRows.length === 0}
-          >
-            {buttonText}
-            <DeleteIcon sx={{ marginLeft: 1 }} />
-          </button>
-          <button
-            className={styles.removeButton}
-            onClick={handleClickOpen}
-            // disabled={selectedRows.length === 0}
-          >
-            ADD
-            <AddCircle sx={{ marginLeft: 1 }} />
-          </button>
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>{t(localizationKey.categories)}</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                Pridajte rozmer, ktory chcete pouzivat v aplikacii
-              </DialogContentText>
-              <TextField
-                autoFocus
-                margin='dense'
-                id='name'
-                label='Rozmer'
-                value={categoryLabel}
-                type='text'
-                fullWidth
-                variant='standard'
-                onChange={(e) => {
-                  setCategoryLabel(e.target.value)
-                }}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button onClick={uploadToFirestore}>Add</Button>
-            </DialogActions>
-          </Dialog>
-        </div>
-      </AccordionDetails>
-    </Accordion>
+    <div className={styles.contentContainer}>
+      <div className={styles.rowContainer}>
+        <DataGrid
+          className={styles.contentTable}
+          rows={data}
+          columns={getDimensionsColumns()}
+          pageSize={10}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+          disableSelectionOnClick
+          selectionModel={selectionModel}
+          onSelectionModelChange={selectionChanged}
+          onRowClick={onRowClick}
+          autoHeight
+        />
+      </div>
+      <div className={styles.rowContainer}>
+        <button
+          className={styles.removeButton}
+          onClick={removeData}
+          disabled={selectedRows.length === 0}
+        >
+          {buttonText}
+          <DeleteIcon sx={{ marginLeft: 1 }} />
+        </button>
+        <button
+          className={styles.removeButton}
+          onClick={handleClickOpen}
+          // disabled={selectedRows.length === 0}
+        >
+          ADD
+          <AddCircle sx={{ marginLeft: 1 }} />
+        </button>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>{t(localizationKey.categories)}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Pridajte rozmer, ktory chcete pouzivat v aplikacii
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin='dense'
+              id='name'
+              label='Rozmer'
+              value={categoryLabel}
+              type='text'
+              fullWidth
+              variant='standard'
+              onChange={(e) => {
+                setCategoryLabel(e.target.value)
+              }}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={uploadToFirestore}>Add</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    </div>
   )
 }
 
-export default Categories
+export default CategoriesLayout
