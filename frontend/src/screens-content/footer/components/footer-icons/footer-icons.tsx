@@ -9,6 +9,7 @@ import {ImageLayout} from "../../../home/enums/enums";
 import {useTranslation} from "react-i18next";
 import {localizationKey} from "../../../../localization/localization-key";
 import {FACEBOOK, INSTAGRAM, Pages, TIKTOK} from "../../../../constants/pages/urls";
+import LanguageSwitch from "./language-switch";
 
 const FooterIcons = (): JSX.Element => {
   const {t} = useTranslation();
@@ -35,6 +36,7 @@ const FooterIcons = (): JSX.Element => {
       <hr/>
       <div className={styles.footerBottomContainer}>
         <div className={styles.footerBottomContainerRow}>
+          <LanguageSwitch></LanguageSwitch>
           <div className={styles.footerBottomIcon}>
             <Link href={FACEBOOK} rel="noreferrer" target="_blank">
               <Image
@@ -71,7 +73,7 @@ const FooterIcons = (): JSX.Element => {
           </div>
         </div>
         <div className={styles.footerBottomContainerRow}>
-          <p className={styles.footerBottomContainerRowText} style={{marginRight: 36}}>
+          <p className={styles.footerBottomContainerRowText} style={{marginRight: "2em"}}>
             {t(localizationKey.copyright)}
           </p>
           <Link className={styles.footerBottomContainerRowTextLink} href={Pages.CONDITIONS} target="_blank">

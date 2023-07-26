@@ -25,7 +25,6 @@ import SearchIcon from '@mui/icons-material/Search'
 import MenuIconComponent from './components/menu-sidebar/menu-icon/menu-icon'
 import LogoComponent from './components/menu-sidebar/logo/logo'
 import ConfiguratorComponent from './components/menu/configurator/configurator'
-import LanguageSwitch from './components/language-switch/language-switch'
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
@@ -156,7 +155,6 @@ const ResponsiveAppBar = () => {
                 />
               </Badge>
             </Link>
-            {/*<LanguageSwitch></LanguageSwitch>*/}
             {/*<Tooltip title='Open settings'>*/}
             {/*  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>*/}
             {/*    <Avatar*/}
