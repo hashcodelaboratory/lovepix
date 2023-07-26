@@ -8,40 +8,50 @@ import {Chip} from '@mui/material'
 import {useEffect, useState} from 'react'
 import {localizationKey} from '../../localization/localization-key'
 import {useTranslation} from 'react-i18next'
+import {Pages} from "../../constants/pages/urls";
 import {useRouter} from 'next/router'
 import {addFileFromGallery} from '../../common/utils/add-file-from-gallery'
-import {Pages} from "../../constants/pages/urls";
+import {useGalleryQuery} from "./use-gallery-query";
 
 const GalleryLayout = (): JSX.Element => {
   const {t} = useTranslation()
   const router = useRouter()
+  const queryGallery = useGalleryQuery()
 
   const {data: gallery} = useGallery()
   const {data: categories} = useCategories()
 
-  const [searchedCategories, setSearchedCategories] = useState<string[]>()
+  const [searchedCategories, setSearchedCategories] = useState<string[]>([])
 
   const filtered = gallery?.filter((image) =>
     searchedCategories?.some((r) => image.categories.includes(r))
   )
 
   useEffect(() => {
-    setSearchedCategories(categories?.map(({name}) => name))
-  }, [categories])
+    if (!queryGallery) {
+      setSearchedCategories((categories ?? []).map(({name}) => name))
+
+      return
+    }
+
+    setSearchedCategories([queryGallery])
+  }, [queryGallery, categories])
 
   const onClickCategory = (name: string) => {
     const variant = getCategoryVariant(name)
     if (variant === 'filled') {
       setSearchedCategories(
-        searchedCategories?.filter((category) => category !== name)
+        searchedCategories.filter((category) => category !== name)
       )
     } else {
-      setSearchedCategories([...(searchedCategories ?? []), name])
+      setSearchedCategories([...searchedCategories, name])
     }
   }
 
   const getCategoryVariant = (name: string) => {
-    return searchedCategories?.includes(name) ? 'filled' : 'outlined'
+    const isPartOfFilter = searchedCategories?.includes(name) ?? false
+
+    return isPartOfFilter ? 'filled' : 'outlined'
   }
 
   const add = async (path: string, id: string) => {
