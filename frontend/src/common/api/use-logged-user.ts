@@ -13,25 +13,27 @@ const useLoggedUser = () => {
   const [fetching, setFetching] = useState(true)
   const { data: admins } = useAdmins()
 
-  const getUser = () => {
+  const checkIfAdmin = (user: User) => {
+    const admin = admins?.find((item) => item.email === user.email)
+    const newUser = { ...user, isAdmin: !!admin }
+    setUser(newUser)
+  }
+
+  const getUser = async () => {
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
         setUser(null)
         setFetching(false)
-
         return
       }
 
-      const admin = admins?.find((item) => item.email === user.email)
-
-      setUser({ ...user, isAdmin: !!admin })
-
-      setFetching(false)
+      checkIfAdmin(user)
     })
+    setFetching(false)
   }
 
   useEffect(() => {
-    getUser()
+    admins && getUser()
   }, [admins])
 
   return { user, fetching }

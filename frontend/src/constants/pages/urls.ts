@@ -16,9 +16,10 @@ export enum Pages {
   PROFILE = '/profile',
   ACCOUNT = '/account',
   DASHBOARD = '/dashboard',
-  DEBUG = '/debug'
+  DEBUG = '/debug',
+  REVIEWS = '/reviews',
 }
 
-export const FACEBOOK = "https://www.facebook.com/lovepix.sk/"
-export const INSTAGRAM = "https://www.instagram.com/lovepix.eu/"
-export const TIKTOK = "https://www.tiktok.com/"
+export const FACEBOOK = 'https://www.facebook.com/lovepix.sk/'
+export const INSTAGRAM = 'https://www.instagram.com/lovepix.eu/'
+export const TIKTOK = 'https://www.tiktok.com/'

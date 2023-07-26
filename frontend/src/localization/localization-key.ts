@@ -189,6 +189,8 @@ export const localizationKey = {
   metaTitleThankYou: 'metaTitleThankYou',
   metaDescriptionDashboard: 'metaDescriptionDashboard',
   metaTitleDashboard: 'metaTitleDashboard',
+  metaDescriptionReview: 'metaDescriptionReview',
+  metaTitleReview: 'metaTitleReview',
   metaDescriptionDebug: 'metaDescriptionDebug',
   metaTitleDebug: 'metaTitleDebug',
   metaDescriptionContact: 'metaDescriptionContact',
