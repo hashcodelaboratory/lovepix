@@ -21,7 +21,7 @@ const GalleryLayout = (): JSX.Element => {
   const {data: gallery} = useGallery()
   const {data: categories} = useCategories()
 
-  const [searchedCategories, setSearchedCategories] = useState<string[]>(queryGallery ? [queryGallery] : [])
+  const [searchedCategories, setSearchedCategories] = useState<string[]>([])
 
   const filtered = gallery?.filter((image) =>
     searchedCategories?.some((r) => image.categories.includes(r))
@@ -29,19 +29,13 @@ const GalleryLayout = (): JSX.Element => {
 
   useEffect(() => {
     if (!queryGallery) {
+      setSearchedCategories((categories ?? []).map(({name}) => name))
+
       return
     }
 
     setSearchedCategories([queryGallery])
-  }, [queryGallery])
-
-  useEffect(() => {
-    if (searchedCategories.length) {
-      return
-    }
-
-    setSearchedCategories((categories ?? []).map(({name}) => name))
-  }, [categories])
+  }, [queryGallery, categories])
 
   const onClickCategory = (name: string) => {
     const variant = getCategoryVariant(name)
