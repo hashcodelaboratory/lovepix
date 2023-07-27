@@ -22,7 +22,11 @@ export const addProduct = async (params: AddProductType) => {
     image: url,
     path: name,
   }
-  const documentId = data.title.replace(/\s+/g, '-').toLowerCase()
+  const documentId = data.title
+    .replace(/\s+/g, '-')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
   await setDoc(doc(database, Collections.PRODUCTS, documentId), docData)
 }
 
