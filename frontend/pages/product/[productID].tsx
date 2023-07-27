@@ -5,28 +5,24 @@ import React from 'react'
 import ProductDetailLayout from 'screens-content/e-shop/components/product-detail/product-detail'
 import FooterLayout from 'screens-content/footer/footer'
 import styles from '../../styles/Home.module.css'
-import Head from 'next/head'
+
 import { useRouter } from 'next/router'
 import { useProduct } from 'common/api/use-product'
+import { Head } from 'metadata/head'
 
 const ProductDetail: NextPage = () => {
   const router = useRouter()
   const id = router.query.productID as string
-  const { data } = useProduct(id)
-
-  console.log(id)
+  const { data, isLoading } = useProduct(id)
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>{data?.title}</title>
-        <meta name={id} content={id} />
-      </Head>
+      <Head title={data?.title ?? ''} description={data?.title ?? ''} />
       <header>
         <ResponsiveAppBar />
       </header>
       <main className={styles.main}>
-        <ProductDetailLayout />
+        <ProductDetailLayout product={data} isLoading={isLoading} />
       </main>
       <footer>
         <FooterLayout />
