@@ -1,16 +1,17 @@
-name: LOVEPIX DockerHub Deployment on ORGANIZATION K8s PROD environment - FRONTEND
-# on: [push] # - only for test
-on:
-  workflow_dispatch:
+name: Fesicomp DockerHub Deployment on ORGANIZATION DEV environment - BACKEND
+on: [push] # - only for testing
+# on:
+#   workflow_dispatch:
 
-  push:
-    branches:
-      - main
+#   push:
+#     branches:
+#       - main
 
 defaults:
   run:
-    working-directory: ./frontend  
+    working-directory: ./frontend 
 
+environment: Test
 env:
   DOCKER_HUB_USER: ${{secrets.DOCKER_HUB_USERNAME}}
   DOCKER_HUB_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
@@ -30,18 +31,20 @@ env:
   NEXT_PUBLIC_NODE_MAILER_PORT: ${{secrets.NEXT_PUBLIC_NODE_MAILER_PORT}}
   NEXT_PUBLIC_NODE_MAILER_USER: ${{secrets.NEXT_PUBLIC_NODE_MAILER_USER}}
   NEXT_PUBLIC_NODE_MAILER_PASSWORD: ${{secrets.NEXT_PUBLIC_NODE_MAILER_PASSWORD}}
-
+  
 jobs:
   push-lovepix-image-on-dockerhub:  
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        #env:
       - name: Build docker LOVEPIX frontend image
-        run: time DOCKER_BUILDKIT=1 docker build -t waller-fe:latest --build-arg NEXT_PUBLIC_SMART_EMAILING_HOST --build-arg NEXT_PUBLIC_SMART_EMAILING_TOKEN --build-arg NEXT_PUBLIC_SMART_EMAILING_CONTACT_LIST_ID --build-arg NEXT_PUBLIC_SUPERFAKTURA_EMAIL --build-arg NEXT_PUBLIC_SUPERFAKTURA_API_KEY --build-arg NEXT_PUBLIC_SUPERFAKTURA_COMPANY_ID --build-arg NEXT_PUBLIC_SUPERFAKTURA_MODULE --build-arg NEXT_PUBLIC_STRIPE_PUBLIC_KEY --build-arg NEXT_PUBLIC_STRIPE_SECRET_KEY --build-arg NEXT_PUBLIC_NODE_MAILER_SERVICE --build-arg NEXT_PUBLIC_NODE_MAILER_HOST --build-arg NEXT_PUBLIC_NODE_MAILER_SECURE --build-arg NEXT_PUBLIC_NODE_MAILER_PORT --build-arg NEXT_PUBLIC_NODE_MAILER_USER --build-arg NEXT_PUBLIC_NODE_MAILER_PASSWORD .
+        run: |
+          docker-compose up -d
       - name: Docker images 
         run: docker images
-      - name: Tag the image of WALLER-fe
+      - name: Tag the image of LOVEPIX-fe
         run: docker tag waller-fe:latest $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
       - name: Docker images 
         run: docker images
@@ -52,24 +55,30 @@ jobs:
         run: docker push $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
 
   deploy:
-    name: Deploy on EC2 and on Workers Node Kubernetes - LOVEPIX
-    needs: push-lovepix-image-on-dockerhub
+    name: Deploy on EC2
+    needs: build-images-on-dockerhub
     runs-on: ubuntu-latest
     steps:
-    - name: deploying on ec2 and rebuild kubernetes pods
-      uses: appleboy/ssh-action@v0.1.7
-      with:
-        envs: DOCKER_HUB_USER, DOCKER_HUB_PASSWORD, DOCKER_TAG_WALLER_FE
-        host: ${{ secrets.ORG_AWS_WALLER_PROD_HOST }}
-        username: ec2-user
-        key: ${{ secrets.ORG_AWS_WALLER_PROD_PEM }}
-        port: 22
-        script: |
-           cd docker-nginx-letsencrypt-https-ec2
-           kubectl get pods -n staging
-           docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
-           docker rmi $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
-           docker pull $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
-           kubectl delete deployments lovepix -n staging
-           kubectl apply -f k8s_lovepix/frontend/stage.yaml
-
+      - name: deploying on ec2 and rebuild docker-compose with nginX
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          envs: DOCKER_HUB_USER, DOCKER_HUB_PASSWORD, DOCKER_TAG_WALLER_FE
+          host: ${{ secrets.NEW_ORG_AWS_TEST_HOST }}
+          username: ec2-user
+          key: ${{ secrets.NEW_ORG_AWS_TEST_PEM }}
+          port: 22
+          script: |
+            cd docker-nginx-letsencrypt-https-ec2
+            cd docker
+            docker images
+            touch test.txt
+            docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
+            containerId=$( docker container ls -a | grep server-frontend | awk '{ print $1 }' )
+            docker stop $containerId
+            docker rm $containerId
+            docker rmi $DOCKER_HUB_USER/$DOCKER_TAG_ENV
+            docker pull $DOCKER_HUB_USER/$DOCKER_TAG_ENV
+            docker pull $DOCKER_HUB_USER/$DOCKER_TAG_MONGO_EXPRESS
+            docker pull $DOCKER_HUB_USER/$DOCKER_TAG_MONGO
+            docker-compose up -d --no-deps --build nginx
+            docker-compose up -d --no-deps --build server-frontend
