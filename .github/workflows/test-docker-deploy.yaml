@@ -56,7 +56,7 @@ jobs:
 
   deploy:
     name: Deploy on EC2
-    needs: build-images-on-dockerhub
+    needs: push-lovepix-image-on-dockerhub
     runs-on: ubuntu-latest
     steps:
       - name: deploying on ec2 and rebuild docker-compose with nginX
