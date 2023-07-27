@@ -1,8 +1,7 @@
-import { ProductsType } from 'common/api/use-products-by-category'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React from 'react'
 import styles from './product.module.scss'
+import { ProductsType } from 'common/api/use-products'
 
 type ProductContent = {
   product: ProductsType

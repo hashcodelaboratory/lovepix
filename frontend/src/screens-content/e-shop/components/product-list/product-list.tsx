@@ -1,4 +1,3 @@
-import { ProductsType } from 'common/api/use-products-by-category'
 import React from 'react'
 import Product from '../product/product'
 import styles from './product-list.module.scss'
@@ -9,7 +8,7 @@ import ProductSkeleton from '../product-skeleton/product-skeleton'
 import TemporaryDrawer from './drawer'
 import CategoriesSidebar from './categories-sidebar'
 import { localizationKey } from 'localization/localization-key'
-import { useProducts } from 'common/api/use-products'
+import { ProductsType, useProducts } from 'common/api/use-products'
 
 const ProductList = () => {
   const { t } = useTranslation()

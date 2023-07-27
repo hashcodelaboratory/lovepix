@@ -1,4 +1,4 @@
-import { ProductsType } from 'common/api/use-products-by-category'
+import { ProductsType } from 'common/api/use-products'
 
 export const shoppingCartPrice = (order: any, price: number) => {
   let totalPrice: number = 0
