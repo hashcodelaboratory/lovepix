@@ -270,5 +270,20 @@
   "fixCart": "Pevná zľava na celý košík",
   "fixProduct": "Pevná zľava na produkt",
   "added": "Pridaný",
-  "invalidVoucher": "Nesprávny kupón"
+  "invalidVoucher": "Nesprávny kupón",
+  "/gallery": "/galeria",
+  "/materials": "/materialy",
+  "/about-us": "/o-nas",
+  "/for-partners": "/pre-partnerov",
+  "/shopping-cart": "/kosik",
+  "/configurator": "/konfigurator",
+  "/e-shop": "/e-shop",
+  "/thanks": "/dakujeme",
+  "/our-contacts": "/nase-kontakty",
+  "/cookies": "/cookies",
+  "/privacy-policy": "/zasady-ochrany-osobnych-udajov",
+  "/conditions": "/vseobecne-obchodne-podmienky",
+  "/contact": "/kontakt",
+  "/profile": "/profil",
+  "/account": "/ucet"
 }

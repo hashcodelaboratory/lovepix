@@ -7,7 +7,7 @@ import {Link as MUILink} from "@mui/material";
 import {useTranslation} from "next-i18next";
 import React from "react";
 import Link from "next/link";
-import {Pages} from "../../../../constants/pages/urls";
+import * as Pages  from "../../../../constants/pages/urls";
 import {composeUrlWithQuery} from "./util";
 
 type Link = {
@@ -15,66 +15,67 @@ type Link = {
   href: string | undefined;
 }
 
-const serviceLinks: Link[] = [{
-  label: localizationKey.ourContacts,
-  href: Pages.CONTACT
-}, {
-  label: localizationKey.satisfaction,
-  // TODO: TBD
-  href: undefined
-}, {
-  label: localizationKey.possibilities,
-  // TODO: TBD
-  href: undefined
-}, {
-  label: localizationKey.creatingTime,
-  // TODO: TBD
-  href: undefined
-}, {
-  label: localizationKey.complaint,
-  // TODO: TBD
-  href: undefined
-}]
-
-const fromPhotoLinks: Link[] = [{
-  label: localizationKey.canvasPhoto,
-  // TODO: TBD
-  href: undefined
-}, {
-  label: localizationKey.acrylPhoto,
-  // TODO: TBD
-  href: undefined
-}, {
-  label: localizationKey.dibondPhoto,
-  // TODO: TBD
-  href: undefined
-}]
-
-const lovePixLinks: Link[] = [{
-  label: localizationKey.materials,
-  href: Pages.ABOUT_US,
-}, {
-  label: localizationKey.story,
-  href: Pages.ABOUT_US
-}, {
-  label: FOR_PARTNERS,
-  href: Pages.FOR_PARTNERS
-}, {
-  label: localizationKey.download,
-  // TODO: TBD
-  href: undefined
-}, {
-  label: localizationKey.blog,
-  // TODO: TBD
-  href: undefined
-}]
-
 const FooterLinks = (): JSX.Element => {
   const {data: categories} = useCategories();
+  const {t} = useTranslation()
+  
+  const serviceLinks: Link[] = [{
+    label: localizationKey.ourContacts,
+    href: t(Pages.CONTACT)
+  }, {
+    label: localizationKey.satisfaction,
+    // TODO: TBD
+    href: undefined
+  }, {
+    label: localizationKey.possibilities,
+    // TODO: TBD
+    href: undefined
+  }, {
+    label: localizationKey.creatingTime,
+    // TODO: TBD
+    href: undefined
+  }, {
+    label: localizationKey.complaint,
+    // TODO: TBD
+    href: undefined
+  }]
+  
+  const fromPhotoLinks: Link[] = [{
+    label: localizationKey.canvasPhoto,
+    // TODO: TBD
+    href: undefined
+  }, {
+    label: localizationKey.acrylPhoto,
+    // TODO: TBD
+    href: undefined
+  }, {
+    label: localizationKey.dibondPhoto,
+    // TODO: TBD
+    href: undefined
+  }]
+  
+  const lovePixLinks: Link[] = [{
+    label: localizationKey.materials,
+    href: t(Pages.MATERIALS),
+  }, {
+    label: localizationKey.story,
+    href: t(Pages.ABOUT_US)
+  }, {
+    label: FOR_PARTNERS,
+    href: t(Pages.FOR_PARTNERS)
+  }, {
+    label: localizationKey.download,
+    // TODO: TBD
+    href: undefined
+  }, {
+    label: localizationKey.blog,
+    // TODO: TBD
+    href: undefined
+  }]
 
   const galleryLinks: Link[] = (categories ?? []).map(({name}) => ({
     label: name,
-    href: composeUrlWithQuery(Pages.GALLERY, {category: name})
+    href: composeUrlWithQuery(t(Pages.GALLERY), {category: name})
   }))
 
   const footerColumns: { title: string, links: Link[] }[] = [{

@@ -1,4 +1,4 @@
-import {Pages} from "constants/pages/urls"
+import {Pages}  from "constants/pages/urls"
 import {localizationKey} from "./localization-key";
 
 type Metadata = {

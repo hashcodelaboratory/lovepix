@@ -11,7 +11,7 @@ import {appBarLeftItems, appBarRightItems, menuItems} from '../navigation'
 import {useTranslation} from 'next-i18next'
 import {v4 as uuidv4} from 'uuid'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import {Pages} from '../constants/pages/urls'
+import * as Pages  from '../constants/pages/urls'
 import {Badge} from '@mui/material'
 import {useRouter} from 'next/router'
 import {useLiveQuery} from 'dexie-react-hooks'
@@ -81,7 +81,7 @@ const ResponsiveAppBar = () => {
               {menuItems.map((page) => (
                 <MenuItem key={uuidv4()} onClick={handleCloseNavMenu}>
                   <Typography textAlign='center'>
-                    <Link href={page.link}>{page.title}</Link>
+                    <Link href={t(page.link)}>{page.title}</Link>
                   </Typography>
                 </MenuItem>
               ))}
@@ -110,13 +110,13 @@ const ResponsiveAppBar = () => {
               origin={configuration?.origin}
             />
             {appBarLeftItems.map(({link, title}) => (
-              <Link key={uuidv4()} href={link} onClick={handleCloseNavMenu}>
+              <Link key={uuidv4()} href={t(link)} onClick={handleCloseNavMenu}>
                 <p className={styles.link}>{String(t(title))}</p>
               </Link>
             ))}
             <LogoComponent navigate={navigate}/>
             {appBarRightItems.map(({link, title}) => (
-              <Link key={uuidv4()} onClick={handleCloseNavMenu} href={link}>
+              <Link key={uuidv4()} onClick={handleCloseNavMenu} href={t(link)}>
                 <p className={styles.link}>{String(t(title))}</p>
               </Link>
             ))}

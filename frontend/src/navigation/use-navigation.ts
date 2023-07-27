@@ -1,4 +1,4 @@
-import {Pages} from "constants/pages/urls";
+import * as Pages  from "constants/pages/urls";
 import {useRouter} from "next/router";
 
 const useNavigation = () => {

@@ -267,5 +267,20 @@
   "voucherLimitUser": "Limit použitia pre používateľa",
   "noLimit": "Neobmedzené použitie",
   "added": "Added",
-  "invalidVoucher": "Nesprávny kupón"
+  "invalidVoucher": "Nesprávny kupón",
+  "/gallery": "/gallery",
+  "/materials": "/materials",
+  "/about-us": "/about-us",
+  "/for-partners": "/for-partners",
+  "/shopping-cart": "/shopping-cart",
+  "/configurator": "/configurator",
+  "/e-shop": "/e-shop",
+  "/thanks": "/thanks",
+  "/our-contacts": "/our-contacts",
+  "/cookies": "/cookies",
+  "/privacy-policy": "/privacy-policy",
+  "/conditions": "/conditions",
+  "/contact": "/contact",
+  "/profile": "/profile",
+  "/account": "/account"
 }

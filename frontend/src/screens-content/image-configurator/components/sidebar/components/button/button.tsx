@@ -3,7 +3,7 @@ import { ShoppingCart } from '@mui/icons-material'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from '../../../../../../localization/localization-key'
 import { useRouter } from 'next/router'
-import { Pages } from 'constants/pages/urls'
+import * as Pages  from 'constants/pages/urls'
 import { useLiveQuery } from 'dexie-react-hooks'
 import {
   configurationsTable,

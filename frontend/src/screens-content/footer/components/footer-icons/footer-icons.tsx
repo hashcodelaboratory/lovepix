@@ -8,7 +8,7 @@ import Image from "next/image";
 import {ImageLayout} from "../../../home/enums/enums";
 import {useTranslation} from "react-i18next";
 import {localizationKey} from "../../../../localization/localization-key";
-import {FACEBOOK, INSTAGRAM, Pages, TIKTOK} from "../../../../constants/pages/urls";
+import * as Pages from "../../../../constants/pages/urls";
 
 const FooterIcons = (): JSX.Element => {
   const {t} = useTranslation();
@@ -36,7 +36,7 @@ const FooterIcons = (): JSX.Element => {
       <div className={styles.footerBottomContainer}>
         <div className={styles.footerBottomContainerRow}>
           <div className={styles.footerBottomIcon}>
-            <Link href={FACEBOOK} rel="noreferrer" target="_blank">
+            <Link href={Pages.FACEBOOK} rel="noreferrer" target="_blank">
               <Image
                 src={facebookIcon}
                 layout={ImageLayout.FIXED}
@@ -47,7 +47,7 @@ const FooterIcons = (): JSX.Element => {
             </Link>
           </div>
           <div className={styles.footerBottomIcon}>
-            <Link href={INSTAGRAM} rel="noreferrer" target="_blank">
+            <Link href={Pages.INSTAGRAM} rel="noreferrer" target="_blank">
               <Image
                 src={instagramIcon}
                 layout={ImageLayout.FIXED}
@@ -58,7 +58,7 @@ const FooterIcons = (): JSX.Element => {
             </Link>
           </div>
           <div className={styles.footerBottomIcon}>
-            <Link href={TIKTOK} rel="noreferrer" target="_blank">
+            <Link href={Pages.TIKTOK} rel="noreferrer" target="_blank">
               <Image
                 src={tiktokIcon}
                 layout={ImageLayout.FIXED}
@@ -74,15 +74,15 @@ const FooterIcons = (): JSX.Element => {
           <p className={styles.footerBottomContainerRowText} style={{marginRight: 36}}>
             {t(localizationKey.copyright)}
           </p>
-          <Link className={styles.footerBottomContainerRowTextLink} href={Pages.CONDITIONS} target="_blank">
+          <Link className={styles.footerBottomContainerRowTextLink} href={t(Pages.CONDITIONS)} target="_blank">
             {t(localizationKey.conditions)}
           </Link>
           <p className={styles.footerDivider}>/</p>
-          <Link className={styles.footerBottomContainerRowTextLink} href={Pages.PRIVACY_POLICY} target="_blank">
+          <Link className={styles.footerBottomContainerRowTextLink} href={t(Pages.PRIVACY_POLICY)} target="_blank">
             {t(localizationKey.privacyPolicy)}
           </Link>
           <p className={styles.footerDivider}>/</p>
-          <Link className={styles.footerBottomContainerRowTextLink} href={Pages.COOKIES} target="_blank">
+          <Link className={styles.footerBottomContainerRowTextLink} href={t(Pages.COOKIES)} target="_blank">
             {t(localizationKey.cookies)}
           </Link>
         </div>
