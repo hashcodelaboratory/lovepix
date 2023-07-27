@@ -16,7 +16,7 @@ const settings = [
   // { title: SettingsTitles.PROFILE, link: Pages.PROFILE },
   // { title: SettingsTitles.ACCOUNT, link: Pages.ACCOUNT },
   { title: SettingsTitles.DASHBOARD, link: Pages.DASHBOARD },
-  { title: SettingsTitles.LOGOUT, link: '', callBack: true },
+  { title: SettingsTitles.LOGOUT, link: undefined, callBack: true },
 ]
 
 const menuItems = [
