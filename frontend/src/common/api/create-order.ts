@@ -15,8 +15,9 @@ import { generateOrderID } from '../../screens-content/shopping-cart/components/
 import { invoice } from '../../screens-content/shopping-cart/components/summary/summary/utils'
 import { stripeCreateSession } from './stripe-create-session'
 import { Stripe } from '@stripe/stripe-js'
-import { OrderState } from 'common/types/order'
+import { OrderState, VoucherType } from 'common/types/order'
 import { orderTable } from '../../../database.config'
+import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 
 export type CreateOrderRequest = {
   form: FormInputs
@@ -30,6 +31,7 @@ export type CreateOrderRequest = {
   delivery: Delivery
   payment: Payment
   stripe: Stripe | null
+  voucher?: VoucherType
 }
 
 const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
@@ -90,7 +92,9 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
 
         await setDoc(newOrderRef, { ...data, shoppingCart: cart, stripe: '' })
 
-        orderTable.clear()
+        orderTable.update(ORDER_TABLE_KEY, {
+          shoppingCart: { images: [], products: [], totalPrice: 0 },
+        })
       }
     }
   })

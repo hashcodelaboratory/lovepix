@@ -1,4 +1,4 @@
-import { Route } from 'common/enums/routes'
+import { DashboardRoutes, Route } from 'common/enums/routes'
 import { localizationKey } from '../../../../../localization/localization-key'
 
 export const SIDEBAR_MENU_LIST: {
@@ -11,22 +11,30 @@ export const SIDEBAR_MENU_LIST: {
   },
   {
     title: localizationKey.orders,
-    link: '',
+    link: DashboardRoutes.ORDERS,
   },
   {
     title: localizationKey.products,
-    link: Route.DASHBOARD_PRODUCTS,
+    link: DashboardRoutes.PRODUCTS,
+  },
+  {
+    title: localizationKey.gallery,
+    link: DashboardRoutes.GALLERY,
   },
   {
     title: localizationKey.dimensions,
-    link: '',
+    link: DashboardRoutes.DIMENSIONS,
   },
   {
     title: localizationKey.categories,
-    link: '',
+    link: DashboardRoutes.CATEGORIES,
   },
   {
-    title: localizationKey.storage,
-    link: '',
+    title: 'Kategórie e-shop',
+    link: DashboardRoutes.CATEGORIES_ESHOP,
+  },
+  {
+    title: localizationKey.code,
+    link: DashboardRoutes.VOUCHERS,
   },
 ]

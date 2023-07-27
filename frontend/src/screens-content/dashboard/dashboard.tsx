@@ -8,6 +8,7 @@ import { useGallery } from '../../common/api/use-gallery'
 import { useDimensions } from '../../common/api/use-dimensions'
 import { useCategories } from '../../common/api/use-categories'
 import { useCategoriesEshop } from 'common/api/use-categories-eshop'
+import { useVouchers } from '../../common/api/use-vouchers'
 
 const CustomDashboard = () => {
   const { data: uploadImages = [], isFetching: isFetchingUpload } =
@@ -21,6 +22,7 @@ const CustomDashboard = () => {
     useCategories()
   const { data: categoriesEshop = [], isFetching: isFetchingCategoriesEshop } =
     useCategoriesEshop()
+  const { data: vouchers = [], isFetching: isFetchingVouchers } = useVouchers()
 
   return (
     <DashboardContext.Provider
@@ -32,6 +34,7 @@ const CustomDashboard = () => {
           dimensions,
           categories,
           categoriesEshop,
+          vouchers,
         },
       }}
     >
@@ -44,7 +47,8 @@ const CustomDashboard = () => {
             isFetchingGallery ||
             isFetchingDimensions ||
             isFetchingCategories ||
-            isFetchingCategoriesEshop
+            isFetchingCategoriesEshop ||
+            isFetchingVouchers
           }
         />
       </div>
