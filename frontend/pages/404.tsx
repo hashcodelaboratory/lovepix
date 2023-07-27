@@ -34,18 +34,7 @@ const Custom404 = () => {
           <ArrowRightAltIcon />
         </p>
         <p>{t(localizationKey.the404PageCheckOurProducts)}</p>
-        <div
-          style={{
-            display: 'flex',
-            overflow: 'auto',
-            marginTop: 20,
-            maxWidth: 800,
-            width: '100%',
-            padding: 10,
-          }}
-        >
-          {productList}
-        </div>
+        <div className={styles.productList}>{productList}</div>
       </div>
     </Container>
   )
