@@ -52,7 +52,7 @@ jobs:
         run: | 
           docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD  
       - name: Docker Push of LOVEPIX-fe image
-        run: docker push dominiksecka/waller:waller_fe_test
+        run: docker push $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
 
   deploy:
     name: Deploy on EC2
@@ -77,8 +77,6 @@ jobs:
             docker stop $containerId
             docker rm $containerId
             docker rmi $DOCKER_HUB_USER/$DOCKER_TAG_ENV
-            docker pull $DOCKER_HUB_USER/$DOCKER_TAG_ENV
-            docker pull $DOCKER_HUB_USER/$DOCKER_TAG_MONGO_EXPRESS
-            docker pull $DOCKER_HUB_USER/$DOCKER_TAG_MONGO
+            docker pull $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
             docker-compose up -d --no-deps --build nginx
             docker-compose up -d --no-deps --build server-frontend
