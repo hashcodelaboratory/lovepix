@@ -8,7 +8,7 @@ import {Chip} from '@mui/material'
 import {useEffect, useState} from 'react'
 import {localizationKey} from '../../localization/localization-key'
 import {useTranslation} from 'react-i18next'
-import * as Pages  from "../../constants/pages/urls";
+import {Pages}  from "../../constants/pages/urls";
 import {useRouter} from 'next/router'
 import {addFileFromGallery} from '../../common/utils/add-file-from-gallery'
 import {useGalleryQuery} from "./use-gallery-query";

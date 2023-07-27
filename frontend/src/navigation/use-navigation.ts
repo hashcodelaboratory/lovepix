@@ -1,4 +1,4 @@
-import * as Pages  from "constants/pages/urls";
+import {Pages}  from "constants/pages/urls";
 import { useTranslation } from "next-i18next";
 import {useRouter} from "next/router";
 

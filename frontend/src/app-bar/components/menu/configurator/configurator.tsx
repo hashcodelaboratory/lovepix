@@ -4,7 +4,7 @@ import * as React from 'react'
 import {useTranslation} from 'react-i18next'
 import {Badge} from '@mui/material'
 import styles from '../../../responsive-app-bar.module.scss'
-import * as Pages  from '../../../../constants/pages/urls'
+import {Pages}  from '../../../../constants/pages/urls'
 
 type Props = {
   close: () => void

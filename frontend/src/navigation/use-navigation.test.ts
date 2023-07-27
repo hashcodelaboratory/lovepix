@@ -1,5 +1,5 @@
 import {renderHook} from "@testing-library/react";
-import * as Pages  from "constants/pages/urls";
+import {Pages}  from "constants/pages/urls";
 import useNavigation from "./use-navigation";
 
 const mockedPush = jest.fn()

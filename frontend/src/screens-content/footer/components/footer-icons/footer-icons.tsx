@@ -8,7 +8,7 @@ import Image from "next/image";
 import {ImageLayout} from "../../../home/enums/enums";
 import {useTranslation} from "react-i18next";
 import {localizationKey} from "../../../../localization/localization-key";
-import * as Pages from "../../../../constants/pages/urls";
+import {Pages, FACEBOOK, INSTAGRAM, TIKTOK} from "../../../../constants/pages/urls";
 
 const FooterIcons = (): JSX.Element => {
   const {t} = useTranslation();
@@ -36,7 +36,7 @@ const FooterIcons = (): JSX.Element => {
       <div className={styles.footerBottomContainer}>
         <div className={styles.footerBottomContainerRow}>
           <div className={styles.footerBottomIcon}>
-            <Link href={Pages.FACEBOOK} rel="noreferrer" target="_blank">
+            <Link href={FACEBOOK} rel="noreferrer" target="_blank">
               <Image
                 src={facebookIcon}
                 layout={ImageLayout.FIXED}
@@ -47,7 +47,7 @@ const FooterIcons = (): JSX.Element => {
             </Link>
           </div>
           <div className={styles.footerBottomIcon}>
-            <Link href={Pages.INSTAGRAM} rel="noreferrer" target="_blank">
+            <Link href={INSTAGRAM} rel="noreferrer" target="_blank">
               <Image
                 src={instagramIcon}
                 layout={ImageLayout.FIXED}
@@ -58,7 +58,7 @@ const FooterIcons = (): JSX.Element => {
             </Link>
           </div>
           <div className={styles.footerBottomIcon}>
-            <Link href={Pages.TIKTOK} rel="noreferrer" target="_blank">
+            <Link href={TIKTOK} rel="noreferrer" target="_blank">
               <Image
                 src={tiktokIcon}
                 layout={ImageLayout.FIXED}

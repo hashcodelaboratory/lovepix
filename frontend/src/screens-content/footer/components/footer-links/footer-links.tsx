@@ -7,7 +7,7 @@ import {Link as MUILink} from "@mui/material";
 import {useTranslation} from "next-i18next";
 import React from "react";
 import Link from "next/link";
-import * as Pages  from "../../../../constants/pages/urls";
+import {Pages}  from "../../../../constants/pages/urls";
 import {composeUrlWithQuery} from "./util";
 
 type Link = {
@@ -18,7 +18,7 @@ type Link = {
 const FooterLinks = (): JSX.Element => {
   const {data: categories} = useCategories();
   const {t} = useTranslation()
-  
+
   const serviceLinks: Link[] = [{
     label: localizationKey.ourContacts,
     href: t(Pages.CONTACT)

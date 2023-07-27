@@ -5,7 +5,7 @@ import {GalleryItem} from "../../../../../../common/types/gallery";
 import {useTranslation} from "react-i18next";
 import {localizationKey} from "../../../../../../localization/localization-key";
 import {useRouter} from "next/router";
-import * as Pages  from "../../../../../../constants/pages/urls";
+import {Pages}  from "../../../../../../constants/pages/urls";
 
 type PreviewRowProps = {
   galleryData?: GalleryItem[];

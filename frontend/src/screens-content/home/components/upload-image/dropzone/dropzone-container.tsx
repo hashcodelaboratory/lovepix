@@ -14,7 +14,7 @@ import {useRouter} from "next/router";
 import {configurationsTable} from "../../../../../../database.config";
 import {Configuration} from "../../../../../common/types/configuration";
 import {CONFIGURATION_TABLE_KEY} from "../../../../../common/indexed-db/hooks/keys";
-import * as Pages  from "constants/pages/urls";
+import {Pages}  from "constants/pages/urls";
 
 type DropzoneContainerProps = {
   configuration: Configuration;
