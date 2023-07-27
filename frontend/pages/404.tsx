@@ -7,15 +7,14 @@ import { ProductsType, useProducts } from 'common/api/use-products'
 import Product from 'screens-content/e-shop/components/product/product'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from 'localization/localization-key'
+import { Route } from 'common/enums/routes'
 
 const Custom404 = () => {
   const { data: products } = useProducts()
   const router = useRouter()
   const { t } = useTranslation()
 
-  const redirect = () => {
-    router.push('/')
-  }
+  const redirect = () => router.push('/')
 
   const productList = products?.map((product: ProductsType) => (
     <div key={product.id}>
