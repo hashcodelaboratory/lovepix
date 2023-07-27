@@ -18,7 +18,7 @@ const PreviewCard = ({item}: PreviewCardProps): JSX.Element => {
 
   const add = async (path: string) => {
     await addFileFromGallery(path, item?.id)
-    await router.push(Pages.CONFIGURATOR)
+    await router.push(t(Pages.CONFIGURATOR))
   }
 
   return (

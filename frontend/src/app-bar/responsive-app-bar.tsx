@@ -129,7 +129,7 @@ const ResponsiveAppBar = () => {
                 cursor: 'pointer',
               }}
             />
-            <Link href={Pages.SHOPPING_CART}>
+            <Link href={t(Pages.SHOPPING_CART)}>
               <Badge
                 badgeContent={BADGE_NUMBER}
                 color='error'
