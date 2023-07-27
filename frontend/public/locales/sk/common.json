@@ -273,5 +273,9 @@
   "fixCart": "Pevná zľava na celý košík",
   "fixProduct": "Pevná zľava na produkt",
   "added": "Pridaný",
-  "invalidVoucher": "Nesprávny kupón"
+  "invalidVoucher": "Nesprávny kupón",
+  "thanLastWeek": "ako posledný týžden",
+  "totalWithoutTax": "Celkom bez DPH",
+  "taxPercent": "DPH 20%",
+  "metaTitleDefault": "metaTitleDefault"
 }
