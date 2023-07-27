@@ -1,5 +1,5 @@
 name: Fesicomp DockerHub Deployment on ORGANIZATION TEST environment - BACKEND
-on: [push] # - only for testing
+on: [push] # - only for test
 # on:
 #   workflow_dispatch:
 
