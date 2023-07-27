@@ -7,7 +7,7 @@ import {Link as MUILink} from "@mui/material";
 import {useTranslation} from "next-i18next";
 import React from "react";
 import Link from "next/link";
-import {Pages}  from "../../../../constants/pages/urls";
+import {Pages} from "../../../../constants/pages/urls";
 import {composeUrlWithQuery} from "./util";
 
 type Link = {

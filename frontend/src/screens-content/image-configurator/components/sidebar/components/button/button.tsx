@@ -3,7 +3,7 @@ import { ShoppingCart } from '@mui/icons-material'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from '../../../../../../localization/localization-key'
 import { useRouter } from 'next/router'
-import {Pages}  from 'constants/pages/urls'
+import {Pages} from 'constants/pages/urls'
 import { useLiveQuery } from 'dexie-react-hooks'
 import {
   configurationsTable,
@@ -83,7 +83,7 @@ const Button = () => {
 
     configurationsTable.clear()
 
-    await router.push(`${Pages.SHOPPING_CART}`)
+    await router.push(`${t(Pages.SHOPPING_CART)}`)
   }
 
   const disabled =

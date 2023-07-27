@@ -6,7 +6,7 @@ import {useTranslation} from 'next-i18next'
 import {localizationKey} from '../../../../../../../../localization/localization-key'
 import {addFileFromGallery} from '../../../../../../../../common/utils/add-file-from-gallery'
 import {useRouter} from 'next/router'
-import {Pages}  from "../../../../../../../../constants/pages/urls";
+import {Pages} from "../../../../../../../../constants/pages/urls";
 
 type PreviewCardProps = {
   item?: GalleryItem
