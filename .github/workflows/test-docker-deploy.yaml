@@ -43,7 +43,8 @@ jobs:
       - name: Docker images 
         run: docker images
       - name: Tag the image of LOVEPIX-fe
-        run: docker tag waller-fe:latest $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
+        # run: docker tag waller-fe:latest $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
+        run: docker tag waller-fe:latest dominiksecka/waller:waller_fe_test
       - name: Docker images 
         run: docker images
       - name: DOCKER LOGIN
