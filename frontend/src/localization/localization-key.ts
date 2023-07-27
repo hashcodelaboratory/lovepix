@@ -270,4 +270,9 @@ export const localizationKey = {
   FIX_PRODUCT: 'fixProduct',
   added: 'added',
   invalidVoucher: 'invalidVoucher',
+  the404PageTitle: 'the404PageTitle',
+  the404NoResults: 'the404NoResults',
+  the404PageTryAgain: 'the404PageTryAgain',
+  the404PageBackOnHome: 'the404PageBackOnHome',
+  the404PageCheckOurProducts: 'the404PageCheckOurProducts',
 }
