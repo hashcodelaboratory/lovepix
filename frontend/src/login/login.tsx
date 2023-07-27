@@ -10,12 +10,10 @@ import { logIn, logOut } from 'auth'
 import useLoggedUser from 'common/api/use-logged-user'
 import { DASHBOARD } from 'constants/settings/titles'
 import { settings } from 'navigation'
-import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
 const Login = () => {
-  const { t } = useTranslation()
   const { user } = useLoggedUser()
   const router = useRouter()
 
@@ -29,7 +27,6 @@ const Login = () => {
 
   const handleLogout = () => {
     logOut()
-    router.push(`/`)
     handleCloseUserMenu()
   }
 
