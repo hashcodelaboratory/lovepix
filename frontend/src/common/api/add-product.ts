@@ -24,9 +24,10 @@ export const addProduct = async (params: AddProductType) => {
   }
   const documentId = data.title
     .replace(/\s+/g, '-')
-    .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+
   await setDoc(doc(database, Collections.PRODUCTS, documentId), docData)
 }
 
