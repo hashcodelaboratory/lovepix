@@ -11,7 +11,6 @@ defaults:
   run:
     working-directory: ./frontend 
 
-environment: Test
 env:
   DOCKER_HUB_USER: ${{secrets.DOCKER_HUB_USERNAME}}
   DOCKER_HUB_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
@@ -35,6 +34,7 @@ env:
 jobs:
   push-lovepix-image-on-dockerhub:  
     runs-on: ubuntu-latest 
+    environment: Test
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
