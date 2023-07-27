@@ -32,4 +32,9 @@ export class OrderController {
     remove(@Param('id') id: string) {
         return this.orderService.remove(id);
     }
+
+    @Delete()
+    removeAll() {
+        return this.orderService.removeAll();
+    }    
 }

@@ -13,11 +13,6 @@ export class AddressService {
                 data: createAddressDto
             })
         }
-        else{
-            return await this.prismaService.address.create({
-                data: createAddressDto
-            })
-        }
     }
 
     findAll() {

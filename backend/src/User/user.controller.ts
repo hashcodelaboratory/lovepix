@@ -37,4 +37,9 @@ export class UserController {
     findOrders(@Param('id') id: string) {
         return this.userService.findOrders(id);
     }
+
+    @Delete()
+    removeAll() {
+        return this.userService.removeAll();
+    }
 }

@@ -8,7 +8,6 @@ import { CategoryModule } from './Category/category.module';
 import { DimensionModule } from './Dimension/dimension.module';
 import { GalleryModule } from './Gallery/gallery.module';
 import { GalleryCategoryModule } from './Gallery_category/gallery_category.module';
-import { MaterialModule } from './Material/material.module';
 import { OrderModule } from './Order/order.module';
 import { OrderStateModule } from './Order_state/order_state.module';
 import { PaymentModule } from './Payment/payment.module';
@@ -24,7 +23,7 @@ const ENV_PACKAGE = "dotenv";
 require(ENV_PACKAGE).config();
 
 @Module({
-  imports: [PrismaModule, UserModule, AddressModule, CategoryModule, DimensionModule, GalleryModule, GalleryCategoryModule, MaterialModule, OrderModule, OrderStateModule, PaymentModule, ProductModule, RecipientModule, ShipmentModule],
+  imports: [PrismaModule, UserModule, AddressModule, CategoryModule, DimensionModule, GalleryModule, GalleryCategoryModule, OrderModule, OrderStateModule, PaymentModule, ProductModule, RecipientModule, ShipmentModule],
   controllers: [AppController],
   providers: [AppService],
 })

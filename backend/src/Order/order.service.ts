@@ -9,7 +9,15 @@ export class OrderService {
 
     async create(createOrderDto: CreateOrderDto) {
         return await this.prismaService.order.create({
-            data: createOrderDto
+            data: {
+                ...createOrderDto,
+                products: {
+                    connect: createOrderDto.productIDs.map((product) => ({id: product}))
+                },
+                images: {
+                    connect: createOrderDto.imageIDs.map((image) => ({id: image}))
+                },
+            }
         })
     }
 
@@ -40,5 +48,9 @@ export class OrderService {
                 id: id
             }
         });
+    }
+
+    async removeAll() {
+        return await this.prismaService.order.deleteMany({});
     }
 }

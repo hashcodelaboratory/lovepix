@@ -8,9 +8,29 @@ export class ProductService {
     constructor(private readonly prismaService: PrismaService) {}
 
     async create(createProductDto: CreateProductDto) {
-        return await this.prismaService.product.create({
-            data: createProductDto
-        })
+        if(Array.isArray(createProductDto)) {
+            createProductDto.forEach(async (product) => {
+                await this.prismaService.product.create({
+                    data: {
+                        ...product,
+                        categories: {
+                            connect: product.categoryIDs.map((category) => ({id: category}))
+                        },
+                    }
+                })
+            })
+            return createProductDto;
+        }
+        else {
+            return await this.prismaService.product.create({
+                data: {
+                    ...createProductDto,
+                    categories: {
+                        connect: createProductDto.categoryIDs.map((category) => ({id: category}))
+                    },
+                }
+            })
+        }
     }
 
     findAll() {
@@ -40,5 +60,9 @@ export class ProductService {
                 id: id
             }
         });
+    }
+
+    async removeAll() {
+        return await this.prismaService.product.deleteMany({});
     }
 }

@@ -66,4 +66,8 @@ export class UserService {
             data: createUserDto
         })
     }
+
+    async removeAll() {
+        return await this.prismaService.user.deleteMany({});
+    }
 }

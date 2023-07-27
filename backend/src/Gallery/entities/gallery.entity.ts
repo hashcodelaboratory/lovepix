@@ -16,6 +16,7 @@ export class GalleryEntity implements GalleryModel {
     url: string;
     name: string;
     image: string;
+    material: string;
     orderIDs: string[];
     orders: Order[];
 }

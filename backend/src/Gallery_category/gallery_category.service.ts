@@ -25,6 +25,9 @@ export class GalleryCategoryService {
         return await this.prismaService.gallery_category.findUnique({
             where: {
                 id: id
+            },
+            include: {
+                galleries: true
             }
         });
     }

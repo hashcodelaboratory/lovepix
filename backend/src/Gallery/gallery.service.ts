@@ -2,32 +2,45 @@ import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
 import { CreateGalleryDto } from "./dto/create-gallery.dto";
 import { UpdateGalleryDto } from "./dto/update-gallery.dto";
-import { UpdateDimensionDto } from "src/Dimension/dto/update-dimension.dto";
-import { UpdateGallery_categoryDto } from "src/Gallery_category/dto/update-gallery_category.dto";
 
 @Injectable()
 export class GalleryService {
     constructor(private readonly prismaService: PrismaService) {}
 
     async create(createGalleryDto: CreateGalleryDto) {
-        if(Array.isArray(createGalleryDto)){
-            return await this.prismaService.gallery.createMany({
-                data: createGalleryDto
+        if(Array.isArray(createGalleryDto)) {
+            createGalleryDto.forEach(async (gallery) => {
+                await this.prismaService.gallery.create({
+                    data: {
+                        ...gallery,
+                        dimensions: {
+                            connect: gallery.dimensionIDs.map((dimension) => ({id: dimension}))
+                        },
+                        gallery_categories: {
+                            connect: gallery.gallery_categoryIDs.map((gallery_category) => ({id: gallery_category}))
+                        }
+                    }
+                })
             })
+            return createGalleryDto;
         }
-        else{
+        else {
             return await this.prismaService.gallery.create({
-                data: createGalleryDto
+                data: {
+                    ...createGalleryDto,
+                    dimensions: {
+                        connect: createGalleryDto.dimensionIDs.map((dimension) => ({id: dimension}))
+                    },
+                    gallery_categories: {
+                        connect: createGalleryDto.gallery_categoryIDs.map((gallery_category) => ({id: gallery_category}))
+                    }
+                }
             })
         }
     }
 
     findAll() {
         return this.prismaService.gallery.findMany({
-            include: {
-                dimensions: true,
-                gallery_categories: true
-            }
         });
     }
 
