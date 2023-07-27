@@ -12,9 +12,9 @@ defaults:
     working-directory: ./frontend  
 
 env:
-  DOCKER_HUB_USER: ${{secrets.DOCKER_HUB_USERNAME}}
-  DOCKER_HUB_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
-  DOCKER_TAG_WALLER_FE: ${{secrets.DOCKER_TAG_WALLER_FE}}
+  DOCKER_HUB_USER: ${{secrets.DOCKER_HUB_USERNAME_PROD}}
+  DOCKER_HUB_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD_PROD}}
+  DOCKER_TAG_WALLER_FE: ${{secrets.DOCKER_TAG_WALLER_FE_PROD}}
   NEXT_PUBLIC_SMART_EMAILING_HOST: ${{secrets.NEXT_PUBLIC_SMART_EMAILING_HOST}}
   NEXT_PUBLIC_SMART_EMAILING_TOKEN: ${{secrets.NEXT_PUBLIC_SMART_EMAILING_TOKEN}}
   NEXT_PUBLIC_SMART_EMAILING_CONTACT_LIST_ID: ${{secrets.NEXT_PUBLIC_SMART_EMAILING_CONTACT_LIST_ID}}
@@ -34,6 +34,7 @@ env:
 jobs:
   push-lovepix-image-on-dockerhub:  
     runs-on: ubuntu-latest
+    environment: Production
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -55,6 +56,7 @@ jobs:
     name: Deploy on EC2 and on Workers Node Kubernetes - LOVEPIX
     needs: push-lovepix-image-on-dockerhub
     runs-on: ubuntu-latest
+    environment: Production
     steps:
     - name: deploying on ec2 and rebuild kubernetes pods
       uses: appleboy/ssh-action@v0.1.7
