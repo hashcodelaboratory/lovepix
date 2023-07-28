@@ -31,7 +31,7 @@ export type CreateOrderRequest = {
   delivery: Delivery
   payment: Payment
   stripe: Stripe | null
-  voucher?: VoucherType
+  voucher: VoucherType | null
 }
 
 const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
