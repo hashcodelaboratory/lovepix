@@ -71,7 +71,7 @@ const GalleryLayout = (): JSX.Element => {
             variant={getCategoryVariant(name)}
             clickable
             onClick={() => onClickCategory(name)}
-            className={styles.galleryChip}
+            className={`${styles.galleryChip} ${getCategoryVariant(name) === 'outlined' ? '' : styles.clicked}`}
           />
         ))}
       </div>

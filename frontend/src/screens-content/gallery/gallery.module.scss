@@ -26,6 +26,22 @@
 
 .galleryChip {
   margin-right: 0.5rem !important;
+  margin: 0;
+  background-color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.galleryChip:hover {
+  outline: 1px solid gray;
+}
+
+.galleryChip.clicked {
+  outline: 1px solid gray;
 }
 
 .previewImageContainer {
