@@ -161,4 +161,5 @@ export const messages = {
   thanksTitleError: 'thanksTitleError',
   thanksSubtitleError: 'thanksSubtitleError',
   thanksSubtitleContactError: 'thanksSubtitleContactError',
+  galleryInfo: 'galleryInfo',
 }
