@@ -79,7 +79,7 @@ const LanguageSwitch = () => {
         disableAutoFocusItem={true}
       >
       {Array.from(languages).map(item => 
-        <MenuItem selected={false} autoFocus={false} data-lang={item[0]} className={styles.langItem} onClick={() => {itemClick(item[0])}}>
+        <MenuItem key={item[0]} selected={false} autoFocus={false} data-lang={item[0]} className={styles.langItem} onClick={() => {itemClick(item[0])}}>
             <Image
               src={item[1].flag}
               alt=''
