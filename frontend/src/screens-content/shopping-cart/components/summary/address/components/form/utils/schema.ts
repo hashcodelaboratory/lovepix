@@ -20,7 +20,7 @@ export const FORM_SCHEMA = yup
     email: yup
       .string()
       .email()
-      .matches(emailRegExp, 'phoneRegexValidation')
+      .matches(emailRegExp, 'emailRegexValidation')
       .required('emailRegexValidation'),
     delivery: yup.string().required('deliveryValidation'),
     payment: yup.string().required('paymentValidation'),

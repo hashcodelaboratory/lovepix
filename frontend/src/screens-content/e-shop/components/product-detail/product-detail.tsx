@@ -8,7 +8,6 @@ import styles from './product-detail.module.scss'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 import { orderTable } from '../../../../../database.config'
-import { ProductsType, useProducts } from 'common/api/use-products'
 import Product from '../product/product'
 import { localizationKey } from '../../../../localization/localization-key'
 import { useTranslation } from 'next-i18next'
@@ -19,10 +18,11 @@ import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
 } from 'snackbar/config'
+import { ProductsType, useProducts } from 'common/api/use-products'
 
 const ProductDetailLayout = () => {
   const router = useRouter()
-  const id = router.query.productID as string;
+  const id = router.query.productID as string
   const { t } = useTranslation()
   const { data, isLoading, refetch } = useProduct(id)
   const { image, title, price, count, description } = data ?? {}
@@ -31,7 +31,7 @@ const ProductDetailLayout = () => {
   const { enqueueSnackbar } = useSnackbar()
 
   useEffect(() => {
-    refetch();
+    refetch()
   }, [id])
 
   const productList = products?.map((product: ProductsType) => (

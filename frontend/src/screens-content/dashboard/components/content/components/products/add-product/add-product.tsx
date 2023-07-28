@@ -40,7 +40,6 @@ const AddProduct = () => {
   })
   const [image, setImage] = useState<File | undefined>()
   const { data: categories } = useCategoriesEshop()
-
   const [category, setCategory] = React.useState('')
 
   const handleChange = (event: SelectChangeEvent) => {

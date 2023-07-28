@@ -1,22 +1,22 @@
 import ResponsiveAppBar from 'app-bar/responsive-app-bar'
-import {GetStaticPaths, GetStaticProps, NextPage} from 'next'
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import React from 'react'
-import ProductDetailLayout from 'screens-content/e-shop/components/product-detail/product-detail'
 import FooterLayout from 'screens-content/footer/footer'
-import styles from '../../styles/Home.module.css'
+import styles from '../styles/Home.module.css'
+import ProductDetailLayout from 'screens-content/e-shop/components/product-detail/product-detail'
 
 const ProductDetail: NextPage = () => {
   return (
     <div className={styles.container}>
       <header>
-        <ResponsiveAppBar/>
+        <ResponsiveAppBar />
       </header>
       <main className={styles.main}>
-        <ProductDetailLayout/>
+        <ProductDetailLayout />
       </main>
       <footer>
-        <FooterLayout/>
+        <FooterLayout />
       </footer>
     </div>
   )
@@ -31,7 +31,7 @@ export const getStaticPaths: GetStaticPaths<{
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({locale}) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'sk', ['common'])),
