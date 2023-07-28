@@ -27,9 +27,9 @@
 .galleryChip {
   margin-right: 0.5rem !important;
   margin: 0;
-  background-color: white;
+  background-color: white !important;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.5rem !important;
   padding: 0 1.5rem;
   cursor: pointer;
   display: flex;
@@ -63,7 +63,7 @@
   .previewImageLink {
     left: 50% !important;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     display: block;
     position: absolute;
     padding: 1rem;
