@@ -1,9 +1,9 @@
 import styles from '../../../../image-configurator-layout.module.scss'
 import { ShoppingCart } from '@mui/icons-material'
 import { useTranslation } from 'next-i18next'
-import { messages } from '../../../../../../messages/messages'
+import { localizationKey } from '../../../../../../localization/localization-key'
 import { useRouter } from 'next/router'
-import { SHOPPING_CART } from 'constants/pages/urls'
+import { Pages } from 'constants/pages/urls'
 import { useLiveQuery } from 'dexie-react-hooks'
 import {
   configurationsTable,
@@ -83,7 +83,7 @@ const Button = () => {
 
     configurationsTable.clear()
 
-    await router.push(`${SHOPPING_CART}`)
+    await router.push(`${Pages.SHOPPING_CART}`)
   }
 
   const disabled =
@@ -97,7 +97,7 @@ const Button = () => {
         disabled={disabled}
       >
         <ShoppingCart />
-        <p className={styles.buttonTitle}>{String(t(messages.toCart))}</p>
+        <p className={styles.buttonTitle}>{String(t(localizationKey.toCart))}</p>
       </button>
     </div>
   )

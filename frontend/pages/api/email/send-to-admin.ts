@@ -1,8 +1,9 @@
-import {emailTemplateAdmin} from '../../../src/api/email/utils'
-import type {NextApiRequest, NextApiResponse} from 'next'
-import {transporter} from "../../../src/api/email/transporter";
-
-const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
+import {
+  BAD_REQUEST_ERROR_MESSAGE,
+  emailTemplateAdmin,
+} from '../../../src/api/email/utils'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { transporter } from '../../../src/api/email/transporter'
 
 const sendToAdmin = async (
   req: NextApiRequest,
@@ -49,7 +50,7 @@ const sendToAdmin = async (
       return res.status(200).json('Email successfully sended')
     })
   } catch (error) {
-    res.status(500).json({error: (error as Error).message})
+    res.status(500).json({ error: (error as Error).message })
   }
 }
 

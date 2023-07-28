@@ -6,9 +6,8 @@ import {
   GridSelectionModel,
 } from '@mui/x-data-grid'
 import styles from '../../../../dashboard.module.scss'
-import { useContext, useEffect, useState } from 'react'
-import DashboardContext from '../../../../context/dashboard-context'
-import { messages } from '../../../../../../messages/messages'
+import { useEffect, useState } from 'react'
+import { localizationKey } from '../../../../../../localization/localization-key'
 import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
@@ -19,15 +18,24 @@ import { useQueryClient } from 'react-query'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { getOrdersColumns } from '../utils/columns/orders-columns'
 import { removeOrders } from '../../../../api/orders/remove-orders'
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import OrderDetail from './order-detail/order-detail'
 import { Order } from '../../../../../../common/types/order'
+import { useOrders } from '../../../../api/orders/useOrders'
+
+export const dataGridStyle = {
+  boxShadow: 2,
+  '& .MuiDataGrid-row:hover': {
+    cursor: 'pointer',
+    backgroundColor: '#f5f5f5 !important',
+  },
+  '& .MuiDataGrid-row.Mui-selected': {
+    cursor: 'pointer',
+    backgroundColor: '#f5f5f5 !important',
+  },
+}
 
 const OrdersTable = () => {
-  const {
-    state: { orders },
-  } = useContext(DashboardContext)
+  const { data: orders = [] } = useOrders()
 
   const { enqueueSnackbar } = useSnackbar()
 
@@ -38,11 +46,13 @@ const OrdersTable = () => {
   const [selectedRows, setSelectedRows] = useState<string[]>([])
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([])
 
-  const data = orders.map(({ id, date, form }) => ({
-    id: id,
-    date: new Date(date).toLocaleDateString() ?? '',
-    name: `${form?.firstName} ${form?.lastName}`,
-  }))
+  const data = orders
+    .sort((a: Order, b: Order) => (a.date < b.date ? 1 : -1))
+    .map(({ id, date, form }) => ({
+      id: id,
+      date: new Date(date).toLocaleDateString() ?? '',
+      name: `${form?.firstName} ${form?.lastName}`,
+    }))
 
   const [order, setOrder] = useState<Order>()
 
@@ -55,7 +65,7 @@ const OrdersTable = () => {
     try {
       await removeOrders(selectedRows, queryClient)
       enqueueSnackbar(
-        String(t(messages.filesRemoved)),
+        String(t(localizationKey.filesRemoved)),
         SNACKBAR_OPTIONS_SUCCESS
       )
     } catch (error) {
@@ -75,18 +85,11 @@ const OrdersTable = () => {
     setSelectedRows(selectionModel.map((item, index) => data[index].id))
   }
 
-  const buttonText = String(t(messages.removeAll))
+  const buttonText = String(t(localizationKey.removeAll))
 
   return (
-    <Accordion>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls='panel1a-content'
-        id='panel1a-header'
-      >
-        <h1>{String(t(messages.orders))}</h1>
-      </AccordionSummary>
-      <AccordionDetails sx={{ display: 'flex' }}>
+    <div className={styles.contentContainer}>
+      <div style={{ display: 'flex' }}>
         <Box className={styles.ordersTableSidepanel}>
           <DataGrid
             className={styles.contentTable}
@@ -98,12 +101,13 @@ const OrdersTable = () => {
             selectionModel={selectionModel}
             onSelectionModelChange={selectionChanged}
             disableSelectionOnClick
+            sx={dataGridStyle}
           />
         </Box>
         <Box className={styles.ordersTableMainpanel}>
           <OrderDetail order={order} />
         </Box>
-      </AccordionDetails>
+      </div>
       <button
         className={styles.removeButton}
         onClick={removeData}
@@ -113,7 +117,7 @@ const OrdersTable = () => {
         {buttonText}
         <DeleteIcon sx={{ marginLeft: 1 }} />
       </button>
-    </Accordion>
+    </div>
   )
 }
 

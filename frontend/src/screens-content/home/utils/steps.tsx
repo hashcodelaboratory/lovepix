@@ -1,4 +1,4 @@
-import { messages } from '../../../messages/messages'
+import { localizationKey } from '../../../localization/localization-key'
 import Icon from '@icons/icon'
 import { IconType } from '@icons/enums'
 
@@ -7,19 +7,19 @@ export const STEPS: {
   icon: JSX.Element
 }[] = [
   {
-    title: messages.uploadPhotoStepOne,
+    title: localizationKey.uploadPhotoStepOne,
     icon: <Icon icon={IconType.UPLOAD_PHOTO} />,
   },
   {
-    title: messages.uploadPhotoStepTwo,
+    title: localizationKey.uploadPhotoStepTwo,
     icon: <Icon icon={IconType.SELECT_DIMENSION} />,
   },
   {
-    title: messages.uploadPhotoStepThree,
+    title: localizationKey.uploadPhotoStepThree,
     icon: <Icon icon={IconType.UPDATE_CROPPER} />,
   },
   {
-    title: messages.uploadPhotoStepFour,
+    title: localizationKey.uploadPhotoStepFour,
     icon: <Icon icon={IconType.CHOOSE_MATERIAL} />,
   },
 ]

@@ -1,24 +1,24 @@
 import styles from '../../../../../../home.module.scss'
-import { GalleryItem } from '../../../../../../../../common/types/gallery'
+import {GalleryItem} from '../../../../../../../../common/types/gallery'
 import Image from 'next/image'
-import { ImageLayout } from '../../../../../../enums/enums'
-import { useTranslation } from 'next-i18next'
-import { messages } from '../../../../../../../../messages/messages'
-import { addFileFromGallery } from '../../../../../../../../common/utils/add-file-from-gallery'
-import { CONFIGURATOR } from '../../../../../../../../constants/pages/urls'
-import { useRouter } from 'next/router'
+import {ImageLayout} from '../../../../../../enums/enums'
+import {useTranslation} from 'next-i18next'
+import {localizationKey} from '../../../../../../../../localization/localization-key'
+import {addFileFromGallery} from '../../../../../../../../common/utils/add-file-from-gallery'
+import {useRouter} from 'next/router'
+import {Pages} from "../../../../../../../../constants/pages/urls";
 
 type PreviewCardProps = {
   item?: GalleryItem
 }
 
-const PreviewCard = ({ item }: PreviewCardProps): JSX.Element => {
-  const { t } = useTranslation()
+const PreviewCard = ({item}: PreviewCardProps): JSX.Element => {
+  const {t} = useTranslation()
   const router = useRouter()
 
   const add = async (path: string) => {
     await addFileFromGallery(path, item?.id)
-    await router.push(CONFIGURATOR)
+    await router.push(Pages.CONFIGURATOR)
   }
 
   return (
@@ -36,10 +36,10 @@ const PreviewCard = ({ item }: PreviewCardProps): JSX.Element => {
             height={300}
             className={styles.previewImageFromUrl}
           />
-          <button className={styles.previewImageLink}>{t(messages.add)}</button>
+          <button className={styles.previewImageLink}>{t(localizationKey.add)}</button>
         </div>
       ) : (
-        <div className={styles.previewImage} />
+        <div className={styles.previewImage}/>
       )}
       <div className={styles.previewImageDescription}>
         <p className={styles.previewTitle}>{item?.name}</p>

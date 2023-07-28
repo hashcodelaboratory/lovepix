@@ -1,31 +1,31 @@
-import { Group } from "@mantine/core";
-import { Dropzone } from "@mantine/dropzone";
+import {Group} from "@mantine/core";
+import {Dropzone} from "@mantine/dropzone";
 import styles from "../../../home.module.scss";
-import { DROPZONE_STYLE } from "./utils";
+import {DROPZONE_STYLE} from "./utils";
 import DropzoneIdle from "./dropzone-idle";
-import { FileRejection } from "react-dropzone";
+import {FileRejection} from "react-dropzone";
 import Icon from "@icons/icon";
-import { IconType } from "@icons/enums";
-import { useSnackbar } from "notistack";
-import { SNACKBAR_OPTIONS_ERROR } from "../../../../../snackbar/config";
-import { messages } from "../../../../../messages/messages";
-import { useTranslation } from "next-i18next";
-import { useRouter } from "next/router";
-import { CONFIGURATOR } from "constants/pages/urls";
-import { configurationsTable } from "../../../../../../database.config";
-import { Configuration } from "../../../../../common/types/configuration";
-import { CONFIGURATION_TABLE_KEY } from "../../../../../common/indexed-db/hooks/keys";
+import {IconType} from "@icons/enums";
+import {useSnackbar} from "notistack";
+import {SNACKBAR_OPTIONS_ERROR} from "../../../../../snackbar/config";
+import {localizationKey} from "../../../../../localization/localization-key";
+import {useTranslation} from "next-i18next";
+import {useRouter} from "next/router";
+import {configurationsTable} from "../../../../../../database.config";
+import {Configuration} from "../../../../../common/types/configuration";
+import {CONFIGURATION_TABLE_KEY} from "../../../../../common/indexed-db/hooks/keys";
+import {Pages} from "constants/pages/urls";
 
 type DropzoneContainerProps = {
   configuration: Configuration;
 }
 
-const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
-  const { t } = useTranslation();
+const DropzoneContainer = ({configuration}: DropzoneContainerProps) => {
+  const {t} = useTranslation();
 
-  const { printPhoto } = messages;
+  const {printPhoto} = localizationKey;
 
-  const { enqueueSnackbar } = useSnackbar();
+  const {enqueueSnackbar} = useSnackbar();
 
   const router = useRouter();
 
@@ -50,11 +50,11 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
   };
 
   const onReject = (files: FileRejection[]) => {
-    enqueueSnackbar(`${String(t(messages.fileRejected))} - ${files[0].errors[0].message}`, SNACKBAR_OPTIONS_ERROR);
+    enqueueSnackbar(`${String(t(localizationKey.fileRejected))} - ${files[0].errors[0].message}`, SNACKBAR_OPTIONS_ERROR);
   };
 
   const handleContinueConfiguration = () => {
-    router.push(CONFIGURATOR);
+    router.push(Pages.CONFIGURATOR);
   };
 
   return configuration?.origin ? null : (
@@ -75,12 +75,12 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
       >
         <h1 className={styles.containerTitle}>{String(t(printPhoto))}</h1>
         <Dropzone.Accept>
-          <Icon icon={IconType.UPLOAD_PHOTO} />
+          <Icon icon={IconType.UPLOAD_PHOTO}/>
         </Dropzone.Accept>
         <Dropzone.Reject>
-          <Icon icon={IconType.UPLOAD_PHOTO} />
+          <Icon icon={IconType.UPLOAD_PHOTO}/>
         </Dropzone.Reject>
-        <DropzoneIdle />
+        <DropzoneIdle/>
       </Group>
     </Dropzone>
   );

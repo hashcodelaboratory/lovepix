@@ -3,4 +3,5 @@ export type FormAddProduct = {
   price: number | undefined
   count: number | undefined
   description: string
+  category: string
 }

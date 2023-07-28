@@ -1,4 +1,3 @@
-import { MutationOptions, useMutation, UseMutationResult } from 'react-query'
 import { collection, doc, getDocs, setDoc } from '@firebase/firestore'
 import { database, storage } from '../firebase/config'
 import { Collections } from '../firebase/enums'
@@ -7,7 +6,6 @@ import { FormInputs } from '../types/form'
 import { getDownloadURL, ref, uploadBytes } from '@firebase/storage'
 import { StorageFolder } from '../firebase/storage/enums'
 import { Payment } from '../enums/payment'
-import { orderTable } from '../../../database.config'
 import { Image } from '../types/image'
 import { Product } from '../types/product'
 import { createInvoice } from './superfaktura'
@@ -17,10 +15,14 @@ import { generateOrderID } from '../../screens-content/shopping-cart/components/
 import { invoice } from '../../screens-content/shopping-cart/components/summary/summary/utils'
 import { stripeCreateSession } from './stripe-create-session'
 import { Stripe } from '@stripe/stripe-js'
+import { OrderState, VoucherType } from 'common/types/order'
+import { orderTable } from '../../../database.config'
+import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 
 export type CreateOrderRequest = {
   form: FormInputs
   date: number
+  orderState: OrderState[]
   shoppingCart: {
     images?: Image[]
     products?: Product[]
@@ -29,17 +31,27 @@ export type CreateOrderRequest = {
   delivery: Delivery
   payment: Payment
   stripe: Stripe | null
+  voucher: VoucherType | null
 }
 
 const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
   const payload: Image[] = []
   const images = data.shoppingCart?.images ?? []
 
-  images?.map(async (image: Image, index) => {
-    const uploadURL = `${StorageFolder.ORDERS}/${orderId}/images/`
+  if (!images.length) {
+    const cart = {
+      products: data.shoppingCart?.products ?? [],
+    }
+    const newOrderRef = doc(database, Collections.ORDERS, orderId)
+    await setDoc(newOrderRef, { ...data, shoppingCart: cart, stripe: '' })
+  }
 
-    const urlRef = await ref(storage, `${uploadURL}/updated/`)
-    const originRef = await ref(storage, `${uploadURL}/origin/`)
+  const promises: Promise<void>[] = images?.map(async (image, index) => {
+    const uploadURL = `${StorageFolder.ORDERS}/${orderId}/images/`
+    const prefix = `${uploadURL}/${orderId}-${image.material}-${image.width}x${image.height}-${image.qty}`
+
+    const urlRef = await ref(storage, `${prefix}-updated/`)
+    const originRef = await ref(storage, `${prefix}-origin/`)
 
     const urlRes = await fetch(image.url)
     const originRes = await fetch(image.origin)
@@ -76,17 +88,37 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
           products: data.shoppingCart?.products ?? [],
         }
 
-        const newOrderRef = doc(database, Collections.ORDERS, orderId)
+        const newOrderRef = await doc(database, Collections.ORDERS, orderId)
 
         await setDoc(newOrderRef, { ...data, shoppingCart: cart, stripe: '' })
 
-        orderTable.clear()
+        orderTable.update(ORDER_TABLE_KEY, {
+          shoppingCart: { images: [], products: [], totalPrice: 0 },
+        })
       }
     }
   })
+
+  await Promise.all(promises)
 }
 
-const createOrder = async (data: CreateOrderRequest) => {
+const sendNotificationToUser = async (
+  data: CreateOrderRequest,
+  orderId: string
+) => {
+  const response = await createInvoice(invoice(orderId, data))
+  if (response) {
+    const res = await response.json()
+    const id = res?.data?.Invoice.id
+    const token = res?.data?.Invoice.token
+    const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+    await sendOrderMail(orderId, data, pdfInvoice)
+  }
+  await stripeCreateSession(data.stripe, data.totalPrice)
+  await sendOrderMailtoAdmin(orderId)
+}
+
+export const createOrder = async (data: CreateOrderRequest) => {
   const ordersRef = await collection(database, Collections.ORDERS)
   const ordersSnap = await getDocs(ordersRef)
 
@@ -95,24 +127,10 @@ const createOrder = async (data: CreateOrderRequest) => {
     await uploadToStorage(orderId, data)
 
     if (data.payment === Payment.ONLINE) {
-      const response = await createInvoice(invoice(orderId, data))
-      if (response) {
-        const res = await response.json()
-        const id = res?.data?.Invoice.id
-        const token = res?.data?.Invoice.token
-        const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
-        await sendOrderMail(orderId, data, pdfInvoice)
-      }
-      await stripeCreateSession(data?.stripe, data?.totalPrice)
-      await sendOrderMailtoAdmin(orderId)
+      await sendNotificationToUser(data, orderId)
     } else {
       await sendOrderMail(orderId, data)
       await sendOrderMailtoAdmin(orderId)
     }
   }
 }
-
-export const useCreateOrder = (
-  options?: MutationOptions<any, any, CreateOrderRequest>
-): UseMutationResult<any, any, CreateOrderRequest> =>
-  useMutation(createOrder, options)

@@ -1,21 +1,21 @@
 import lovepixIcon from "../../../../assets/logo_gray.svg";
 import facebookIcon from "../../../../assets/facebook.svg";
-import twitterIcon from "../../../../assets/twitter.svg";
+import tiktokIcon from "../../../../assets/tiktok.svg";
 import instagramIcon from "../../../../assets/instagram.svg";
 import styles from "../../footer.module.scss";
-import { Container, Link } from "@mui/material";
+import {Container, Link} from "@mui/material";
 import Image from "next/image";
-import { ImageLayout } from "../../../home/enums/enums";
-import { useTranslation } from "react-i18next";
-import { messages } from "../../../../messages/messages";
-import * as PagesUrls from "../../../../constants/pages/urls";
+import {ImageLayout} from "../../../home/enums/enums";
+import {useTranslation} from "react-i18next";
+import {localizationKey} from "../../../../localization/localization-key";
+import {FACEBOOK, INSTAGRAM, Pages, TIKTOK} from "../../../../constants/pages/urls";
 
 const FooterIcons = (): JSX.Element => {
-  const { t } = useTranslation();
-  // external href in <Link> does not work without 2 leading slashes or 'https://' 
+  const {t} = useTranslation();
+  // TODO: add change tiktok link
   return (
     <Container>
-      <hr />
+      <hr/>
       <div className={styles.footerIconsRow}>
         <Image
           src={lovepixIcon}
@@ -24,16 +24,19 @@ const FooterIcons = (): JSX.Element => {
           height={22}
           alt=""
         />
-        <p className={styles.footerIconsText}><b>{t(messages.partners)}:</b></p>
-        <Link className={styles.footerIconsText} href="https://www.mojkalendar.sk" target="_blank" rel="noreferrer">mojkalendar.sk</Link>
-        <Link className={styles.footerIconsText} href="https://www.odfotma.sk" target="_blank" rel="noreferrer">odfotma.sk</Link>
-        <Link className={styles.footerIconsText} href="https://www.hashlab.com" target="_blank" rel="noreferrer">hashlab.com</Link>
+        <p className={styles.footerIconsText}><b>{t(localizationKey.partners)}:</b></p>
+        <Link className={styles.footerIconsText} href="https://www.mojkalendar.sk" target="_blank"
+              rel="noreferrer">mojkalendar.sk</Link>
+        <Link className={styles.footerIconsText} href="https://www.odfotma.sk" target="_blank"
+              rel="noreferrer">odfotma.sk</Link>
+        <Link className={styles.footerIconsText} href="https://www.hashlab.com" target="_blank"
+              rel="noreferrer">hashlab.com</Link>
       </div>
-      <hr />
+      <hr/>
       <div className={styles.footerBottomContainer}>
         <div className={styles.footerBottomContainerRow}>
           <div className={styles.footerBottomIcon}>
-            <Link href={PagesUrls.NONE}>
+            <Link href={FACEBOOK} rel="noreferrer" target="_blank">
               <Image
                 src={facebookIcon}
                 layout={ImageLayout.FIXED}
@@ -44,7 +47,7 @@ const FooterIcons = (): JSX.Element => {
             </Link>
           </div>
           <div className={styles.footerBottomIcon}>
-            <Link href={PagesUrls.NONE}>
+            <Link href={INSTAGRAM} rel="noreferrer" target="_blank">
               <Image
                 src={instagramIcon}
                 layout={ImageLayout.FIXED}
@@ -55,9 +58,9 @@ const FooterIcons = (): JSX.Element => {
             </Link>
           </div>
           <div className={styles.footerBottomIcon}>
-            <Link href={PagesUrls.NONE}>
+            <Link href={TIKTOK} rel="noreferrer" target="_blank">
               <Image
-                src={twitterIcon}
+                src={tiktokIcon}
                 layout={ImageLayout.FIXED}
                 width={22}
                 height={22}
@@ -68,19 +71,19 @@ const FooterIcons = (): JSX.Element => {
           </div>
         </div>
         <div className={styles.footerBottomContainerRow}>
-          <p className={styles.footerBottomContainerRowText} style={{ marginRight: 36 }}>
-            {t(messages.copyright)}
+          <p className={styles.footerBottomContainerRowText} style={{marginRight: 36}}>
+            {t(localizationKey.copyright)}
           </p>
-          <Link className={styles.footerBottomContainerRowTextLink} href={PagesUrls.CONDITIONS} target="_blank">
-            {t(messages.conditions)}
+          <Link className={styles.footerBottomContainerRowTextLink} href={Pages.CONDITIONS} target="_blank">
+            {t(localizationKey.conditions)}
           </Link>
           <p className={styles.footerDivider}>/</p>
-          <Link className={styles.footerBottomContainerRowTextLink} href={PagesUrls.PRIVACY_POLICY} target="_blank">
-            {t(messages.privacyPolicy)}
+          <Link className={styles.footerBottomContainerRowTextLink} href={Pages.PRIVACY_POLICY} target="_blank">
+            {t(localizationKey.privacyPolicy)}
           </Link>
           <p className={styles.footerDivider}>/</p>
-          <Link className={styles.footerBottomContainerRowTextLink} href={PagesUrls.COOKIES} target="_blank">
-            {t(messages.cookies)}
+          <Link className={styles.footerBottomContainerRowTextLink} href={Pages.COOKIES} target="_blank">
+            {t(localizationKey.cookies)}
           </Link>
         </div>
       </div>

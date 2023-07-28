@@ -5,7 +5,8 @@
 }
 
 .box {
-  box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem, rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
+  box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem,
+  rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
   border: none;
   border-radius: 1rem;
   background-color: white;
@@ -43,6 +44,11 @@
   align-items: center;
   margin-bottom: 1rem;
   font-size: 12px;
+  cursor: pointer;
+}
+
+.detailRow:hover {
+  background-color: #f3f4fa;
 }
 
 .shippingIcon {
@@ -55,6 +61,16 @@
   height: 40px !important;
 }
 
+.shippingIconDisable {
+  color: grey;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid grey;
+  border-radius: 50%;
+  font-size: 40px;
+  background-color: #f3f4fa;
+}
+
 .checkRow {
   display: flex;
   align-items: center;
@@ -63,4 +79,32 @@
 .checkCircleIcon {
   color: #33de33;
   margin-left: 0.5rem;
+}
+
+.boxDark {
+  background-color: whitesmoke;
+  padding: 1rem;
+  border-radius: 0.8rem;
+}
+
+.boxTitle {
+  font-weight: 200;
+}
+
+.boxText {
+  font-weight: 600;
+}
+
+.detailBoxRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  font-size: 12px;
+}
+
+.detailBoxRowLeft {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
 }

@@ -1,38 +1,106 @@
 import styles from "../../footer.module.scss";
 import Container from "@mui/material/Container";
-import { messages } from "../../../../messages/messages";
-import { useTranslation } from "react-i18next";
-import { useCategories } from "../../../../common/api/use-categories";
-import { FOR_PARTNERS } from "../../../../constants/pages/titles";
-import { Link } from "@mui/material";
-import * as PagesUrls from "../../../../constants/pages/urls";
+import {localizationKey} from "../../../../localization/localization-key";
+import {useCategories} from "../../../../common/api/use-categories";
+import {FOR_PARTNERS} from "../../../../constants/pages/titles";
+import {Link as MUILink} from "@mui/material";
+import {useTranslation} from "next-i18next";
+import React from "react";
+import Link from "next/link";
+import {Pages} from "../../../../constants/pages/urls";
+import {composeUrlWithQuery} from "./util";
+
+type Link = {
+  label: string;
+  href: string | undefined;
+}
+
+const serviceLinks: Link[] = [{
+  label: localizationKey.ourContacts,
+  href: Pages.CONTACT
+}, {
+  label: localizationKey.satisfaction,
+  // TODO: TBD
+  href: undefined
+}, {
+  label: localizationKey.possibilities,
+  // TODO: TBD
+  href: undefined
+}, {
+  label: localizationKey.creatingTime,
+  // TODO: TBD
+  href: undefined
+}, {
+  label: localizationKey.complaint,
+  // TODO: TBD
+  href: undefined
+}]
+
+const fromPhotoLinks: Link[] = [{
+  label: localizationKey.canvasPhoto,
+  // TODO: TBD
+  href: undefined
+}, {
+  label: localizationKey.acrylPhoto,
+  // TODO: TBD
+  href: undefined
+}, {
+  label: localizationKey.dibondPhoto,
+  // TODO: TBD
+  href: undefined
+}]
+
+const lovePixLinks: Link[] = [{
+  label: localizationKey.materials,
+  href: Pages.ABOUT_US,
+}, {
+  label: localizationKey.story,
+  href: Pages.ABOUT_US
+}, {
+  label: FOR_PARTNERS,
+  href: Pages.FOR_PARTNERS
+}, {
+  label: localizationKey.download,
+  // TODO: TBD
+  href: undefined
+}, {
+  label: localizationKey.blog,
+  // TODO: TBD
+  href: undefined
+}]
 
 const FooterLinks = (): JSX.Element => {
-  const { data: categories } = useCategories();
+  const {data: categories} = useCategories();
+
+  const galleryLinks: Link[] = (categories ?? []).map(({name}) => ({
+    label: name,
+    href: composeUrlWithQuery(Pages.GALLERY, {category: name})
+  }))
+
+  const footerColumns: { title: string, links: Link[] }[] = [{
+    title: localizationKey.service,
+    links: serviceLinks,
+  }, {
+    title: localizationKey.fromPhoto,
+    links: fromPhotoLinks
+  }, {
+    title: localizationKey.gallery,
+    links: galleryLinks
+  }, {
+    title: "Lovepix", // TODO: extract this to one general place
+    links: lovePixLinks
+  }]
+
+  const columns = footerColumns.map(({title, links}) => <FooterColumn
+    key={title}
+    title={title}
+    links={links}
+  />)
 
   return (
     <Container>
       <div className={styles.footerRow}>
-        <FooterColumn
-          title={messages.service}
-          links={[messages.ourContacts, messages.satisfaction, messages.possibilities, messages.creatingTime, messages.complaint]}
-          address={[PagesUrls.OUR_CONTACTS]}
-        />
-        <FooterColumn
-          title={messages.fromPhoto}
-          links={[messages.canvasPhoto, messages.acrylPhoto, messages.dibondPhoto]}
-          address={[]}
-        />
-        <FooterColumn
-          title={messages.gallery}
-          links={categories?.map(({ name }) => name) ?? []}
-          address={[]}
-        />
-        <FooterColumn
-          title={"Lovepix"}
-          links={[messages.materials, messages.story, FOR_PARTNERS, messages.download, messages.blog]}
-          address={[]}
-        />
+        {columns}
       </div>
     </Container>
   );
@@ -40,20 +108,26 @@ const FooterLinks = (): JSX.Element => {
 
 type FooterColumnType = {
   title: string;
-  links: string[];
-  address: string[];
+  links: {
+    label: string;
+    href: string | undefined;
+  }[]
 }
 
-const FooterColumn = ({ title, links, address}: FooterColumnType): JSX.Element => {
-  const { t } = useTranslation();
-  let ret = [];
-  for(let i=0; i<links.length;i++){
-    ret.push(<Link href={address[i] ?? PagesUrls.NONE} key={links[i]} className={styles.footerText}>{t(links[i])}</Link>);
-  }
+const FooterColumn = ({
+                        title, links
+                      }: FooterColumnType): JSX.Element => {
+  const {t} = useTranslation()
+  const formattedLinks = links.map(({href, label}) => href && <Link href={href} passHref={true}>
+      <MUILink key={label} className={styles.footerText}>
+        {t(label)}
+      </MUILink>
+  </Link>)
+
   return (
     <div className={styles.footerColumn}>
       <h3 className={styles.footerTitle}>{t(title)}</h3>
-      {ret}
+      {formattedLinks}
     </div>
   );
 };

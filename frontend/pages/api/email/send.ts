@@ -1,8 +1,9 @@
-import {emailTemplateUser} from '../../../src/api/email/utils'
-import type {NextApiRequest, NextApiResponse} from 'next'
-import {transporter} from "../../../src/api/email/transporter";
-
-const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
+import {
+  BAD_REQUEST_ERROR_MESSAGE,
+  emailTemplateUser,
+} from '../../../src/api/email/utils'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { transporter } from '../../../src/api/email/transporter'
 
 const send = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
   try {
@@ -62,7 +63,7 @@ const send = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
       return res.status(200).json('Email successfully sended')
     })
   } catch (error) {
-    res.status(500).json({error: (error as Error).message})
+    res.status(500).json({ error: (error as Error).message })
   }
 }
 
