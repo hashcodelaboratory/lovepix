@@ -163,6 +163,7 @@ export const localizationKey = {
   thanksTitleError: 'thanksTitleError',
   thanksSubtitleError: 'thanksSubtitleError',
   thanksSubtitleContactError: 'thanksSubtitleContactError',
+  galleryInfo: 'galleryInfo',
   metaDescriptionDefault: 'metaDescriptionDefault',
   metaTitleDefault: 'metaTitleDefault',
   metaDescriptionAboutUs: 'metaDescriptionAboutUs',

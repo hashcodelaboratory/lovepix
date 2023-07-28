@@ -1,3 +1,13 @@
+.galleryTitle {
+  margin-top: 40px;
+}
+
+.gallerySubtitle {
+  margin-top: 15px;
+  margin-bottom: 25px;
+  font-weight: 400;
+}
+
 .galleryRow {
   margin-top: 2rem;
   display: flex;
@@ -11,10 +21,27 @@
 .galleryCategoryRow {
   margin-top: 2rem;
   display: flex;
+  color: white;
 }
 
 .galleryChip {
   margin-right: 0.5rem !important;
+  margin: 0;
+  background-color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.galleryChip:hover {
+  outline: 1px solid gray;
+}
+
+.galleryChip.clicked {
+  outline: 1px solid gray;
 }
 
 .previewImageContainer {
@@ -40,12 +67,12 @@
     display: block;
     position: absolute;
     padding: 1rem;
-    border: 4px solid white;
+    border: 1px solid white;
     background: transparent;
     color: white;
     text-transform: uppercase;
-    font-size: 1.5vw;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 400;
     cursor: pointer;
   }
 }
