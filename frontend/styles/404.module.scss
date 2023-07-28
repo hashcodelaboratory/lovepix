@@ -1,0 +1,32 @@
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.text {
+  margin: 0;
+}
+
+.link {
+  margin: 2rem 0;
+  text-decoration: underline;
+  display: flex;
+  align-items: center;
+}
+
+.link:hover {
+  cursor: pointer;
+}
+
+.productList {
+  display: flex;
+  overflow: auto;
+  margin-top: 20;
+  max-width: 800;
+  width: 100%;
+  padding: 10;
+}

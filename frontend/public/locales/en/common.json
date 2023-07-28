@@ -189,6 +189,8 @@
   "metaTitleThankYou": "Ďakujeme",
   "metaDescriptionDashboard": "Dashboard",
   "metaTitleDashboard": "Dashboard",
+  "metaDescriptionReview": "Recenzie",
+  "metaTitleReview": "Recenzie",
   "metaDescriptionDebug": "Debug",
   "metaTitleDebug": "Debug",
   "metaDescriptionContact": "TBD",
@@ -268,5 +270,10 @@
   "voucherLimitUser": "Limit použitia pre používateľa",
   "noLimit": "Neobmedzené použitie",
   "added": "Added",
-  "invalidVoucher": "Nesprávny kupón"
+  "invalidVoucher": "Nesprávny kupón",
+  "the404PageTitle": "oooops ... tu nič nie je :/",
+  "the404NoResults": "Nenašli ste čo ste hľadali?",
+  "the404PageTryAgain": "Skúste to prosím od začiatku.",
+  "the404PageBackOnHome": "Späť na domovskú stránku.",
+  "the404PageCheckOurProducts": "alebo si vyberte z našich produktov"
 }
