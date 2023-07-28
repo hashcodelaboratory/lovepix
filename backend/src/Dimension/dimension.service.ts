@@ -41,4 +41,8 @@ export class DimensionService {
             }
         });
     }
+
+    async removeAll() {
+        return await this.prismaService.dimension.deleteMany();
+    }
 }

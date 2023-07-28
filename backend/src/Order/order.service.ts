@@ -9,15 +9,7 @@ export class OrderService {
 
     async create(createOrderDto: CreateOrderDto) {
         return await this.prismaService.order.create({
-            data: {
-                ...createOrderDto,
-                products: {
-                    connect: createOrderDto.productIDs.map((product) => ({id: product}))
-                },
-                images: {
-                    connect: createOrderDto.imageIDs.map((image) => ({id: image}))
-                },
-            }
+            data: createOrderDto,
         })
     }
 

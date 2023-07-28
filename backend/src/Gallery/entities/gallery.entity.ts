@@ -1,5 +1,5 @@
 import { Gallery as GalleryModel } from '@prisma/client';
-import type { Gallery_category, Dimension, Order } from '@prisma/client';
+import type { Gallery_category, Dimension } from '@prisma/client';
 
 export class GalleryEntity implements GalleryModel {
     id: string;
@@ -17,6 +17,4 @@ export class GalleryEntity implements GalleryModel {
     name: string;
     image: string;
     material: string;
-    orderIDs: string[];
-    orders: Order[];
 }

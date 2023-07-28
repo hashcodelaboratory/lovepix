@@ -32,4 +32,9 @@ export class DimensionController {
     remove(@Param('id') id: string) {
         return this.dimensionService.remove(id);
     }
+
+    @Delete()
+    removeAll() {
+        return this.dimensionService.removeAll();
+    }
 }

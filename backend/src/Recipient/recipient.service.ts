@@ -14,7 +14,11 @@ export class RecipientService {
     }
 
     findAll() {
-        return this.prismaService.recipient.findMany();
+        return this.prismaService.recipient.findMany({
+            include: {
+                orders: true
+            }
+        });
     }
 
     async findOne(id: string) {

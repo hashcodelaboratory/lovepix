@@ -14,6 +14,7 @@ import { PaymentModule } from './Payment/payment.module';
 import { ProductModule } from './Product/product.module';
 import { RecipientModule } from './Recipient/recipient.module';
 import { ShipmentModule } from './Shipment/shipment.module';
+import { OrderItemModule } from './Order_item/order_item.module';
 
 
 
@@ -23,7 +24,7 @@ const ENV_PACKAGE = "dotenv";
 require(ENV_PACKAGE).config();
 
 @Module({
-  imports: [PrismaModule, UserModule, AddressModule, CategoryModule, DimensionModule, GalleryModule, GalleryCategoryModule, OrderModule, OrderStateModule, PaymentModule, ProductModule, RecipientModule, ShipmentModule],
+  imports: [PrismaModule, UserModule, AddressModule, CategoryModule, DimensionModule, GalleryModule, GalleryCategoryModule, OrderModule, OrderStateModule, PaymentModule, ProductModule, RecipientModule, ShipmentModule, OrderItemModule],
   controllers: [AppController],
   providers: [AppService],
 })

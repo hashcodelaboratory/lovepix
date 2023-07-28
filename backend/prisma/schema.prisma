@@ -48,20 +48,31 @@ model Address {
 }
 
 model Order {
-  id            String      @id @default(auto()) @map("_id") @db.ObjectId
-  recipient     Recipient   @relation(fields: [recipientID], references: [id])
-  recipientID   String      @db.ObjectId
-  products      Product[]   @relation(fields: [productIDs], references: [id])
-  productIDs    String[]    @db.ObjectId
-  images        Gallery[]   @relation(fields: [imageIDs], references: [id])
-  imageIDs      String[]    @db.ObjectId
-  order_state   Order_state @relation(fields: [order_stateID], references: [id])
-  order_stateID String      @db.ObjectId
-  payment       Payment     @relation(fields: [paymentID], references: [id])
-  paymentID     String      @db.ObjectId
-  shipment      Shipment    @relation(fields: [shipmentID], references: [id])
-  shipmentID    String      @db.ObjectId
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  recipient     Recipient    @relation(fields: [recipientID], references: [id])
+  recipientID   String       @db.ObjectId
+  order_state   Order_state  @relation(fields: [order_stateID], references: [id])
+  order_stateID String       @db.ObjectId
+  payment       Payment      @relation(fields: [paymentID], references: [id])
+  paymentID     String       @db.ObjectId
+  shipment      Shipment     @relation(fields: [shipmentID], references: [id])
+  shipmentID    String       @db.ObjectId
+  order_items   Order_item[]
   order_date    DateTime
+}
+
+model Order_item {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  order     Order    @relation(fields: [orderID], references: [id])
+  orderID   String   @db.ObjectId
+  product   Product? @relation(fields: [productID], references: [id])
+  productID String?  @db.ObjectId
+  image     Gallery? @relation(fields: [imageID], references: [id])
+  imageID   String?  @db.ObjectId
+  quantity  Int
+  material  String?
+  dimension String?
+  voucher   String?
 }
 
 model Order_state {
@@ -85,17 +96,16 @@ model Shipment {
 }
 
 model Product {
-  id          String     @id @default(auto()) @map("_id") @db.ObjectId
-  categories  Category[] @relation(fields: [categoryIDs], references: [id])
-  categoryIDs String[]   @db.ObjectId
-  name        String     @unique
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  categories  Category[]   @relation(fields: [categoryIDs], references: [id])
+  categoryIDs String[]     @db.ObjectId
+  name        String       @unique
   description String
   count       Int
   image       String
   path        String
   price       Float
-  orderIDs    String[]   @db.ObjectId
-  orders      Order[]    @relation(fields: [orderIDs], references: [id])
+  orders      Order_item[]
 }
 
 model Category {
@@ -121,8 +131,7 @@ model Gallery {
   name                String
   image               String
   material            String?
-  orderIDs            String[]           @db.ObjectId
-  orders              Order[]            @relation(fields: [orderIDs], references: [id])
+  orders              Order_item[]
 }
 
 model Gallery_category {
