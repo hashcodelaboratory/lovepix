@@ -14,7 +14,11 @@ export class OrderService {
     }
 
     findAll() {
-        return this.prismaService.order.findMany();
+        return this.prismaService.order.findMany({
+            include: {
+                order_items: true
+            }
+        });
     }
 
     async findOne(id: string) {

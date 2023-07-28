@@ -5,4 +5,5 @@ export class OrderStateEntity implements OrderStateModel {
     id: string;
     title: string;
     orders: Order[]
+    date: Date;
 }

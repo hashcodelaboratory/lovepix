@@ -78,6 +78,7 @@ model Order_item {
 model Order_state {
   id     String  @id @default(auto()) @map("_id") @db.ObjectId
   title  String  @unique
+  date   DateTime
   orders Order[]
 }
 

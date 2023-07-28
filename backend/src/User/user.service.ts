@@ -21,7 +21,11 @@ export class UserService {
     }
 
     findAll() {
-        return this.prismaService.user.findMany();
+        return this.prismaService.user.findMany({
+            include: {
+                orders: true
+            }
+        });
     }
 
 
