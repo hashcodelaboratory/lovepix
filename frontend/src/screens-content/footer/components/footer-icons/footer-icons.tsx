@@ -60,7 +60,8 @@ const FooterIcons = (): JSX.Element => {
       <hr />
       <div className={styles.footerBottomContainer}>
         <div className={styles.footerBottomContainerRow}>
-          <LanguageSwitch/>
+          {/* TODO: enable when internationalization will be requested as new feature*/}
+          {/*<LanguageSwitch/>*/}
           <div className={styles.footerBottomIcon}>
             <Link href={FACEBOOK} rel='noreferrer' target='_blank'>
               <Image
