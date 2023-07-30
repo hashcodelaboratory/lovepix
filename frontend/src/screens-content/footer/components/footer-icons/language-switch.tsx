@@ -5,7 +5,7 @@ import flag_sk from '../../../../assets/flag_sk.png'
 import flag_en from '../../../../assets/flag_en.png'
 import styles from "./language.module.scss"
 import { Box, Menu, MenuItem } from "@mui/material";
-import ArrowDown from "../../../../assets/icons/arrowDown"
+import IconArrowDown from "@icons/icon-arrow-down"
 import {ImageLayout} from "../../../home/enums/enums";
 import {localizationKey} from "../../../../localization/localization-key";
 import { useRouter } from "next/router";
@@ -60,7 +60,7 @@ const LanguageSwitch = () => {
         />
         <p style={{fontSize: "12px", fontWeight:"300", marginLeft: "1em", marginBlock: "0em"}}>{t(localizationKey.changeLanguage)}</p>
         <div style={{display:"grid", alignItems:"center", marginLeft:"0.4em"}}>
-        <ArrowDown height={5} width={7}></ArrowDown>
+        <IconArrowDown height={5} width={7}></IconArrowDown>
         </div>
       </Box>
       <Menu

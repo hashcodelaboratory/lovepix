@@ -6,7 +6,7 @@ type IIcon = {
    color?: string
  }
 
-const ArrowDown = ({width, height, color}: IIcon) => {
+const IconArrowDown = ({width, height, color}: IIcon) => {
    return (
       <svg
    width={width}
@@ -26,4 +26,4 @@ const ArrowDown = ({width, height, color}: IIcon) => {
    )
 }
 
-export default ArrowDown
+export default IconArrowDown
