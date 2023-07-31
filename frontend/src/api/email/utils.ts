@@ -188,11 +188,16 @@ export const emailTemplateUser = ({
                                     : ''
                                 }
                             ${
-                              voucher &&
-                              `<tr style="border-top: 1px dotted #d3d3d3;">
-                                <td style="text-align: left;padding: 10px;color: #000;">Zľavový kupón: ${voucher?.code}</td>
-                                <td style="text-align: right;padding: 10px;color: #000;" colspan="2">- ${voucher?.value}</td>
+                              voucher
+                                ? `<tr style="border-top: 1px dotted #d3d3d3;">
+                                <td style="text-align: left;padding: 10px;color: #000;">Zľavový kupón: ${
+                                  voucher?.code ?? ''
+                                }</td>
+                                <td style="text-align: right;padding: 10px;color: #000;" colspan="2">- ${
+                                  voucher?.value ?? ''
+                                } %</td>
                             </tr>`
+                                : ''
                             }
                             <tr style="border-top: 1px dotted #d3d3d3;color: #000;">
                                 <td style="text-align: left;padding: 10px;">Cena spolu</td>
