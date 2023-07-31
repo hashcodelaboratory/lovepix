@@ -5,12 +5,14 @@ import Avatar from '@icons/avatar'
 import { ReviewType } from 'common/api/use-reviews'
 import { Rating } from '@mui/material'
 import RemoveReviewModal from '../remove-review/remove-review-modal'
+import useLoggedUser from 'common/api/use-logged-user'
 
 type ReviewProps = {
   reviewItems: ReviewType
 }
 
 const SingleReview = ({ reviewItems }: ReviewProps) => {
+  const { user } = useLoggedUser()
   const { name, date, rating, review, id } = reviewItems
   const [open, setOpen] = useState(false)
 
@@ -18,7 +20,12 @@ const SingleReview = ({ reviewItems }: ReviewProps) => {
 
   return (
     <div style={{ marginTop: 20 }}>
-      <DeleteIcon className={styles.removeIcon} onClick={() => toggleModal()} />
+      {user?.isAdmin && (
+        <DeleteIcon
+          className={styles.removeIcon}
+          onClick={() => toggleModal()}
+        />
+      )}
       <div className={styles.reviewBlock}>
         <div className={styles.reviewer}>
           <Avatar />

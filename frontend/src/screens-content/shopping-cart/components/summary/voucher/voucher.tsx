@@ -75,7 +75,6 @@ const Voucher = ({ voucher }: VoucherProps) => {
           error={!!error}
           helperText={error}
           color={isSuccess ? 'success' : 'primary'}
-          focused
         />
         <Button
           variant='contained'

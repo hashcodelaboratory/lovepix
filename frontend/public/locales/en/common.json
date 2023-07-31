@@ -162,6 +162,7 @@
   "thanksTitleError": "Vaša objednávka nebola dokončená :/",
   "thanksSubtitleError": "Stalo sa niečo neočakávané, bohužiaľ vaša objednávka nebola úspešná.",
   "thanksSubtitleContactError": "Vráťte sa do e-shopu a nakúpte prosím znova.",
+  "galleryInfo": "Vitajte v našej úžasnej webovej galérii! S radosťou vám predstavujeme našu najnovšiu kolekciu obrázkov a produktov. Od živých abstrakcií až po umelecké diela, veríme že každý návštevník nájde niečo, čo ho zaujme. Nájdete tu širokú škálu unikátnych a kvalitných výrobkov.",
   "metaDescriptionDefault": "Spoznajte našu online tlačiareň! Zameriavame sa na kvalitnú a rýchlu online tlač obrazov podľa vaších predstáv a predaju obrazov a darčekových predmetov. Všetko vybavíte online!",
   "metaDescriptionTitle": "Lovepix",
   "metaDescriptionAboutUs": "Spoznajte našu online tlačiareň! Zameriavame sa na kvalitnú a rýchlu online tlač obrazov podľa vaších predstáv a predaju obrazov a darčekových predmetov. Všetko vybavíte online!",
@@ -188,6 +189,8 @@
   "metaTitleThankYou": "Ďakujeme",
   "metaDescriptionDashboard": "Dashboard",
   "metaTitleDashboard": "Dashboard",
+  "metaDescriptionReview": "Recenzie",
+  "metaTitleReview": "Recenzie",
   "metaDescriptionDebug": "Debug",
   "metaTitleDebug": "Debug",
   "metaDescriptionContact": "TBD",
@@ -282,5 +285,10 @@
   "/conditions": "/conditions",
   "/contact": "/contact",
   "/profile": "/profile",
-  "/account": "/account"
+  "/account": "/account",
+  "the404PageTitle": "oooops ... tu nič nie je :/",
+  "the404NoResults": "Nenašli ste čo ste hľadali?",
+  "the404PageTryAgain": "Skúste to prosím od začiatku.",
+  "the404PageBackOnHome": "Späť na domovskú stránku.",
+  "the404PageCheckOurProducts": "alebo si vyberte z našich produktov"
 }
