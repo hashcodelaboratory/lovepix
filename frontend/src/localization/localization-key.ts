@@ -122,6 +122,9 @@ export const localizationKey = {
   dibondPhoto: 'dibondPhoto',
   gallery: 'Gallery',
   materials: 'Materials',
+  aboutUs: 'About us',
+  forPartners: 'For partners',
+  imageConfigurator: 'Image configurator',
   story: 'story',
   download: 'download',
   blog: 'blog',
@@ -276,4 +279,5 @@ export const localizationKey = {
   the404PageTryAgain: 'the404PageTryAgain',
   the404PageBackOnHome: 'the404PageBackOnHome',
   the404PageCheckOurProducts: 'the404PageCheckOurProducts',
+  date: "date",
 }
