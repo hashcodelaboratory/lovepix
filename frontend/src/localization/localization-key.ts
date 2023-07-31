@@ -280,4 +280,8 @@ export const localizationKey = {
   the404PageBackOnHome: 'the404PageBackOnHome',
   the404PageCheckOurProducts: 'the404PageCheckOurProducts',
   date: "date",
+  languageSwitch: {
+    sk: 'languageSwitchSlovakLanguageLabel',
+    en: 'languageSwitchEnglishLanguageLabel'
+  }
 }
