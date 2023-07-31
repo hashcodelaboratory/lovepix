@@ -10,6 +10,7 @@ import {useTranslation} from 'react-i18next'
 import {localizationKey} from '../../../../localization/localization-key'
 import {FACEBOOK, INSTAGRAM, Pages, TIKTOK,} from '../../../../constants/pages/urls'
 import Login from 'login/login'
+import LanguageSwitch from '../language-switch/language-switch'
 
 const FooterIcons = (): JSX.Element => {
   const {t} = useTranslation()
@@ -60,7 +61,7 @@ const FooterIcons = (): JSX.Element => {
       <div className={styles.footerBottomContainer}>
         <div className={styles.footerBottomContainerRow}>
           {/* TODO: enable when internationalization will be requested as new feature*/}
-          {/*<LanguageSwitch/>*/}
+          {<LanguageSwitch/>}
           <div className={styles.footerBottomIcon}>
             <Link href={FACEBOOK} rel='noreferrer' target='_blank'>
               <Image

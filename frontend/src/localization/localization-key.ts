@@ -279,7 +279,7 @@ export const localizationKey = {
   the404PageTryAgain: 'the404PageTryAgain',
   the404PageBackOnHome: 'the404PageBackOnHome',
   the404PageCheckOurProducts: 'the404PageCheckOurProducts',
-  date: "date",
+  date: 'date',
   languageSwitch: {
     sk: 'languageSwitchSlovakLanguageLabel',
     en: 'languageSwitchEnglishLanguageLabel'
