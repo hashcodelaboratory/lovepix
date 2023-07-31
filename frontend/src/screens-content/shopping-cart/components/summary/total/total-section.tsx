@@ -1,13 +1,12 @@
 import styles from '../../../shopping-cart.module.scss'
 import { localizationKey } from '../../../../../localization/localization-key'
-import { Checkbox, FormControlLabel, Link } from '@mui/material'
+import { Link } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import {
   getDeliveryMessage,
   getPaymentMessage,
   getPriceForDelivery,
   getPriceForPayment,
-  getPriceWithVoucher,
 } from './utils'
 import { Delivery } from '../../../../../common/enums/delivery'
 import { Payment } from '../../../../../common/enums/payment'
