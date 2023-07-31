@@ -11,10 +11,7 @@ import UpdateOrderState from './order-state-modal'
 import { invoice } from 'screens-content/shopping-cart/components/summary/summary/utils'
 import { createInvoice } from 'common/api/superfaktura'
 import { OrderState as OrderStateEnum } from 'common/enums/order-states'
-import {
-  sendMailOrderPicked,
-  sendMailOrderShipped,
-} from 'common/api/send-mail-order-shipped'
+import { sendMailOrderShipped } from 'common/api/send-mail-order-shipped'
 import { sendMailOrderDelivered } from 'common/api/send-mail-order-delivered'
 import { Payment } from 'common/enums/payment'
 import { localizationKey } from '../../../../../../../../../localization/localization-key'
