@@ -275,5 +275,7 @@
   "the404NoResults": "Nenašli ste čo ste hľadali?",
   "the404PageTryAgain": "Skúste to prosím od začiatku.",
   "the404PageBackOnHome": "Späť na domovskú stránku.",
-  "the404PageCheckOurProducts": "alebo si vyberte z našich produktov"
+  "the404PageCheckOurProducts": "alebo si vyberte z našich produktov",
+  "languageSwitchSlovakLanguageLabel": "Slovak",
+  "languageSwitchEnglishLanguageLabel": "English"
 }

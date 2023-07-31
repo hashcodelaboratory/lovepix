@@ -9,17 +9,16 @@ import {ImageLayout} from '../../../home/enums/enums'
 import {useTranslation} from 'react-i18next'
 import {localizationKey} from '../../../../localization/localization-key'
 import {FACEBOOK, INSTAGRAM, Pages, TIKTOK,} from '../../../../constants/pages/urls'
-import LanguageSwitch from "./language-switch";
 import Login from 'login/login'
 
 const FooterIcons = (): JSX.Element => {
-  const { t } = useTranslation()
+  const {t} = useTranslation()
 
   // TODO: add change tiktok link
   return (
     <Container>
-      <Login />
-      <hr />
+      <Login/>
+      <hr/>
       <div className={styles.footerIconsRow}>
         <Image
           src={lovepixIcon}
@@ -57,7 +56,7 @@ const FooterIcons = (): JSX.Element => {
         </Link>
       </div>
 
-      <hr />
+      <hr/>
       <div className={styles.footerBottomContainer}>
         <div className={styles.footerBottomContainerRow}>
           {/* TODO: enable when internationalization will be requested as new feature*/}
@@ -101,7 +100,7 @@ const FooterIcons = (): JSX.Element => {
         <div className={styles.footerBottomContainerRow}>
           <p
             className={styles.footerBottomContainerRowText}
-            style={{ marginRight: 36 }}
+            style={{marginRight: 36}}
           >
             {t(localizationKey.copyright)}
           </p>
