@@ -61,6 +61,10 @@ module.exports = {
             source: '/ucet',
             destination: '/account',
           },
+          {
+            source: '/recenzie',
+            destination: '/reviews',
+          },
         ]
     },
 }
