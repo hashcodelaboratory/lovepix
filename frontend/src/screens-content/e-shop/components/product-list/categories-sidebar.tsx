@@ -4,8 +4,8 @@ import styles from './product-list.module.scss'
 import React from 'react'
 import { Skeleton, Typography } from '@mui/material'
 import { useTranslation } from 'next-i18next'
-import { Pages as PagesUrls } from 'constants/pages/urls'
 import { localizationKey } from 'localization/localization-key'
+import { Route } from 'common/enums/routes'
 
 const CategoriesSidebar = () => {
   const router = useRouter()
@@ -15,7 +15,7 @@ const CategoriesSidebar = () => {
 
   const selectCategory = (category: string) => () =>
     router.push({
-      pathname: PagesUrls.ESHOP,
+      pathname: Route.ESHOP,
       query: { kategoria: category },
     })
 
@@ -31,7 +31,7 @@ const CategoriesSidebar = () => {
     </div>
   ))
 
-  const showAllProducts = () => router.push(PagesUrls.ESHOP)
+  const showAllProducts = () => router.push(Route.ESHOP)
 
   const categoryStyle = !!kategoria
     ? styles.categoryItem

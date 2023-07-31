@@ -1,4 +1,3 @@
-import { ProductsType, useProducts } from 'common/api/use-products'
 import React from 'react'
 import Product from '../product/product'
 import styles from './product-list.module.scss'
@@ -9,12 +8,12 @@ import ProductSkeleton from '../product-skeleton/product-skeleton'
 import TemporaryDrawer from './drawer'
 import CategoriesSidebar from './categories-sidebar'
 import { localizationKey } from 'localization/localization-key'
+import { ProductsType, useProducts } from 'common/api/use-products'
 
 const ProductList = () => {
   const { t } = useTranslation()
   const router = useRouter()
   const { kategoria: category } = router.query
-
   const { data: products, isLoading } = useProducts(category as string)
   const tablet = useMediaQuery('(max-width:1000px)')
   const mobile = useMediaQuery('(max-width:580px)')
