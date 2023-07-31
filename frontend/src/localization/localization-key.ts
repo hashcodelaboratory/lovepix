@@ -164,6 +164,7 @@ export const localizationKey = {
   thanksSubtitleContactError: 'thanksSubtitleContactError',
   metaDescriptionDefault: 'metaDescriptionDefault',
   metaTitleDefault: 'metaTitleDefault',
+  metaDescriptionTitle: 'metaDescriptionTitle',
   metaDescriptionAboutUs: 'metaDescriptionAboutUs',
   metaTitleAboutUs: 'metaTitleAboutUs',
   metaDescriptionAccount: 'metaDescriptionAccount',
