@@ -5,7 +5,7 @@ export type VoucherDetailRequest = {
 }
 
 const getVoucherDetail = async (data: VoucherDetailRequest) => {
-  const res = await fetch('api/voucher/detail', {
+  const res = await fetch('/api/voucher/detail', {
     method: 'POST',
     body: JSON.stringify({
       ...data,
