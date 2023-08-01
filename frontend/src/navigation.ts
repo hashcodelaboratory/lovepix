@@ -23,7 +23,6 @@ const menuItems = [
   { title: PagesTitles.CONFIGURATOR, link: Pages.CONFIGURATOR },
   { title: PagesTitles.GALLERY, link: Pages.GALLERY },
   { title: PagesTitles.ESHOP, link: Pages.ESHOP },
-  { title: PagesTitles.MATERIALS, link: Pages.MATERIALS },
   { title: PagesTitles.ABOUT_US, link: Pages.ABOUT_US },
   { title: PagesTitles.CONTACT, link: Pages.CONTACT },
 ]
