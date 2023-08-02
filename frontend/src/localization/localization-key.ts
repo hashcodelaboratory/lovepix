@@ -168,7 +168,6 @@ export const localizationKey = {
   galleryInfo: 'galleryInfo',
   metaDescriptionDefault: 'metaDescriptionDefault',
   metaTitleDefault: 'metaTitleDefault',
-  metaDescriptionTitle: 'metaDescriptionTitle',
   metaDescriptionAboutUs: 'metaDescriptionAboutUs',
   metaTitleAboutUs: 'metaTitleAboutUs',
   metaDescriptionAccount: 'metaDescriptionAccount',
