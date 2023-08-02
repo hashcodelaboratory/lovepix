@@ -10,10 +10,141 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Todo {  
-    id     String   @id @default(auto()) @map("_id") @db.ObjectId  
-    label  String   
-    done   Boolean  @default(false)
+model User {
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  first_name String
+  last_name  String
+  email      String      @unique
+  password   String
+  phone      String
+  orders     Recipient[]
 }
 
+model Recipient {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  user               User?    @relation(fields: [userID], references: [id])
+  userID             String?  @db.ObjectId
+  billing_address    Address  @relation("billing", fields: [billing_addressID], references: [id])
+  billing_addressID  String   @db.ObjectId
+  shipping_address   Address? @relation("shipping", fields: [shipping_addressID], references: [id])
+  shipping_addressID String?  @db.ObjectId
+  orders             Order[]
+  ico                String?
+  dic                String?
+}
 
+model Address {
+  id               String      @id @default(auto()) @map("_id") @db.ObjectId
+  first_name       String
+  last_name        String
+  street           String
+  city             String
+  zip              String
+  email            String
+  phone            String
+  company          String?
+  billing_address  Recipient[] @relation("billing")
+  shipping_address Recipient[] @relation("shipping")
+}
+
+model Order {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  recipient     Recipient    @relation(fields: [recipientID], references: [id])
+  recipientID   String       @db.ObjectId
+  order_state   Order_state  @relation(fields: [order_stateID], references: [id])
+  order_stateID String       @db.ObjectId
+  payment       Payment      @relation(fields: [paymentID], references: [id])
+  paymentID     String       @db.ObjectId
+  shipment      Shipment     @relation(fields: [shipmentID], references: [id])
+  shipmentID    String       @db.ObjectId
+  order_items   Order_item[]
+  order_date    DateTime
+}
+
+model Order_item {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  order     Order    @relation(fields: [orderID], references: [id])
+  orderID   String   @db.ObjectId
+  product   Product? @relation(fields: [productID], references: [id])
+  productID String?  @db.ObjectId
+  image     Gallery? @relation(fields: [imageID], references: [id])
+  imageID   String?  @db.ObjectId
+  quantity  Int
+  material  String?
+  dimension String?
+  voucher   String?
+}
+
+model Order_state {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  title  String  @unique
+  date   DateTime
+  orders Order[]
+}
+
+model Payment {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  method String  @unique
+  price  Float
+  orders Order[]
+}
+
+model Shipment {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  method String  @unique
+  price  Float
+  orders Order[]
+}
+
+model Product {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  categories  Category[]   @relation(fields: [categoryIDs], references: [id])
+  categoryIDs String[]     @db.ObjectId
+  name        String       @unique
+  description String
+  count       Int
+  image       String
+  path        String
+  price       Float
+  orders      Order_item[]
+}
+
+model Category {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  title      String    @unique
+  products   Product[] @relation(fields: [productIDs], references: [id])
+  productIDs String[]  @db.ObjectId
+}
+
+model Gallery {
+  id                  String             @id @default(auto()) @map("_id") @db.ObjectId
+  gallery_categories  Gallery_category[] @relation(fields: [gallery_categoryIDs], references: [id])
+  gallery_categoryIDs String[]           @db.ObjectId
+  dimensions          Dimension[]        @relation(fields: [dimensionIDs], references: [id])
+  dimensionIDs        String[]           @db.ObjectId
+  bucket              String
+  full_path           String
+  price               Float
+  size                Float
+  time_created        DateTime
+  updated_at          DateTime
+  url                 String
+  name                String
+  image               String
+  material            String?
+  orders              Order_item[]
+}
+
+model Gallery_category {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  title      String    @unique
+  galleryIDs String[]  @db.ObjectId
+  galleries  Gallery[] @relation(fields: [galleryIDs], references: [id])
+}
+
+model Dimension {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  title      String    @unique
+  galleryIDs String[]  @db.ObjectId
+  galleries  Gallery[] @relation(fields: [galleryIDs], references: [id])
+}
