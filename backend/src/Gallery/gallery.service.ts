@@ -41,6 +41,9 @@ export class GalleryService {
 
     findAll() {
         return this.prismaService.gallery.findMany({
+            include: {
+                orders: true,
+            }
         });
     }
 
