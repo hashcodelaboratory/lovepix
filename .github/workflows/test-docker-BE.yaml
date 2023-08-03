@@ -53,4 +53,4 @@ jobs:
       - name: Docker Push of LOVEPIX-be image
         run: docker push $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
       - name: Docker push of mongo-db-replicaset
-        run: 
+        run: docker push $DOCKER_HUB_USER/$DOCKER_TAG_MONGO_RS
