@@ -7,13 +7,14 @@ WORKDIR /app
 
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
+COPY prisma ./prisma/
 
 # Install yarn
 RUN npm install yarn -g --force
-RUN npm install prisma @prisma/client
 
 # Install app dependencies
 RUN yarn install --network-timeout 100000
+RUN npx prisma generate
 
 # Bundle app source
 COPY . .
