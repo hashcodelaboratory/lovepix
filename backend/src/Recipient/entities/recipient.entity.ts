@@ -3,12 +3,12 @@ import type { User, Address, Order } from '@prisma/client';
 
 export class RecipientEntity implements RecipientModel {
     id: string;
-    userID: string;
+    userId: string;
     user: User;
-    billing_addressID: string;
-    billing_address: Address;
-    shipping_addressID: string;
-    shipping_address: Address;
+    billingAddressId: string;
+    billingAddress: Address;
+    shippingAddressId: string;
+    shippingAddress: Address;
     orders: Order[]
     ico: string;
     dic: string;
