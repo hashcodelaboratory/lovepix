@@ -1,6 +1,6 @@
 module.exports = {
     async rewrites() {
-        return [
+        return [ //For link translation to work they have to be changed in localization file and rewrites respectively
           {
             source: '/galeria',
             destination: '/gallery',
@@ -14,11 +14,11 @@ module.exports = {
             destination: '/about-us',
           },
           {
-            source: '/pre-partnerov',
+            source: '/partneri',
             destination: '/for-partners',
           },
           {
-            source: '/kosik',
+            source: '/nakupny-kosik',
             destination: '/shopping-cart',
           },
           {
@@ -26,7 +26,7 @@ module.exports = {
             destination: '/configurator',
           },
           {
-            source: '/e-shop',
+            source: '/obchod',
             destination: '/e-shop',
           },
           {
@@ -34,8 +34,8 @@ module.exports = {
             destination: '/thanks',
           },
           {
-            source: '/nase-kontakty',
-            destination: '/our-contacts',
+            source: '/kontakt',
+            destination: '/contact',
           },
           {
             source: '/cookies',
@@ -48,10 +48,6 @@ module.exports = {
           {
             source: '/vseobecne-obchodne-podmienky',
             destination: '/conditions',
-          },
-          {
-            source: '/kontakt',
-            destination: '/contact',
           },
           {
             source: '/profil',
