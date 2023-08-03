@@ -36,11 +36,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build docker MONGO DB Replicaset
-        run: time DOCKER_BUILDKIT=1 docker build -t mongo:4 --build-arg MONGO_INITDB_ROOT_USERNAME --build-arg MONGO_INITDB_ROOT_PASSWORD --build-arg MONGODB_SERVER --build-arg MONGODB_ENABLE_ADMIN --build-arg MONGODB_ADMINUSERNAME --build-arg MONGODB_ADMINPASSWORD --build-arg MONGODB_BASICAUTH_USERNAME --build-arg MONGODB_BASICAUTH_PASSWORD --build-arg MONGO_URL --build-arg MONGO_REPLICA_HOST --build-arg MONGO_REPLICA_PORT -f ./mongodb_rs/Dockerfile .
+        run: time DOCKER_BUILDKIT=1 docker build -t mongo:4 --build-arg MONGO_INITDB_ROOT_USERNAME --build-arg MONGO_INITDB_ROOT_PASSWORD --build-arg MONGODB_SERVER --build-arg MONGODB_ENABLE_ADMIN --build-arg MONGODB_ADMINUSERNAME --build-arg MONGODB_ADMINPASSWORD --build-arg MONGODB_BASICAUTH_USERNAME --build-arg MONGODB_BASICAUTH_PASSWORD --build-arg DATABASE_URL --build-arg MONGO_REPLICA_HOST --build-arg MONGO_REPLICA_PORT -f ./mongodb_rs/Dockerfile .
       - name: Docker images 
         run: docker images
       - name: Build docker LOVEPIX backend image
-        run: time DOCKER_BUILDKIT=1 docker build -t lovepix-be:latest --build-arg MONGO_INITDB_ROOT_USERNAME --build-arg MONGO_INITDB_ROOT_PASSWORD --build-arg MONGODB_SERVER --build-arg MONGODB_ENABLE_ADMIN --build-arg MONGODB_ADMINUSERNAME --build-arg MONGODB_ADMINPASSWORD --build-arg MONGODB_BASICAUTH_USERNAME --build-arg MONGODB_BASICAUTH_PASSWORD --build-arg MONGO_URL --build-arg MONGO_REPLICA_HOST --build-arg MONGO_REPLICA_PORT .
+        run: time DOCKER_BUILDKIT=1 docker build -t lovepix-be:latest --build-arg MONGO_INITDB_ROOT_USERNAME --build-arg MONGO_INITDB_ROOT_PASSWORD --build-arg MONGODB_SERVER --build-arg MONGODB_ENABLE_ADMIN --build-arg MONGODB_ADMINUSERNAME --build-arg MONGODB_ADMINPASSWORD --build-arg MONGODB_BASICAUTH_USERNAME --build-arg MONGODB_BASICAUTH_PASSWORD --build-arg DATABASE_URL --build-arg MONGO_REPLICA_HOST --build-arg MONGO_REPLICA_PORT .
       - name: Docker images 
         run: docker images
       - name: Tag the image of LOVEPIX-be
