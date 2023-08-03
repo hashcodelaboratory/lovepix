@@ -10,6 +10,7 @@ COPY package*.json ./
 
 # Install yarn
 RUN npm install yarn -g --force
+RUN npm install prisma @prisma/client
 
 # Install app dependencies
 RUN yarn install --network-timeout 100000
