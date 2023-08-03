@@ -59,7 +59,7 @@ export const metadata: Record<Pages, Metadata> = {
     titleKey: localizationKey.metaTitleThankYou,
     descriptionKey: localizationKey.metaDescriptionThankYou,
   },
-  [Pages.OUR_CONTACTS]: {
+  [Pages.CONTACT]: {
     titleKey: localizationKey.metaTitleContact,
     descriptionKey: localizationKey.metaDescriptionContact,
   },
@@ -74,10 +74,6 @@ export const metadata: Record<Pages, Metadata> = {
   [Pages.CONDITIONS]: {
     titleKey: localizationKey.metaTitleConditions,
     descriptionKey: localizationKey.metaDescriptionConditions,
-  },
-  [Pages.CONTACT]: {
-    titleKey: localizationKey.metaTitleContact,
-    descriptionKey: localizationKey.metaDescriptionContact,
   },
   [Pages.REVIEWS]: {
     titleKey: localizationKey.metaTitleReview,
