@@ -4,6 +4,6 @@ import type { Product } from '@prisma/client';
 export class CategoryEntity implements CategoryModel {
     id: string;
     title: string;
-    productIDs: string[];
+    productIds: string[];
     products: Product[];
 }
