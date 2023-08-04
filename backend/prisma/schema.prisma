@@ -1,37 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-generator client {
-  provider = "prisma-client-js"
-}
-
-datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
-}
-
-model User {
-  id        String      @id @default(auto()) @map("_id") @db.ObjectId
-  firstName String
-  lastName  String
-  email     String      @unique
-  password  String
-  phone     String
-  orders    Recipient[]
-}
-
-model Recipient {
-  id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  user              User?    @relation(fields: [userId], references: [id])
-  userId            String?  @db.ObjectId
-  billingAddress    Address  @relation("billing", fields: [billingAddressId], references: [id])
-  billingAddressId  String   @db.ObjectId
-  shippingAddress   Address? @relation("shipping", fields: [shippingAddressId], references: [id])
-  shippingAddressId String?  @db.ObjectId
-  orders            Order[]
-  ico               String?
-  dic               String?
-}
+//🧩Don't Edit this file.✨Generated in Fri Aug 04 2023 11:31:35 GMT+0200 (Central European Summer Time)✨
 
 model Address {
   id              String      @id @default(auto()) @map("_id") @db.ObjectId
@@ -45,6 +12,55 @@ model Address {
   company         String?
   billingAddress  Recipient[] @relation("billing")
   shippingAddress Recipient[] @relation("shipping")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  title      String    @unique
+  products   Product[] @relation(fields: [productIds], references: [id])
+  productIds String[]  @db.ObjectId
+}
+
+model Dimension {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  title      String    @unique
+  galleryIds String[]  @db.ObjectId
+  galleries  Gallery[] @relation(fields: [galleryIds], references: [id])
+}
+
+model Gallery {
+  id                 String            @id @default(auto()) @map("_id") @db.ObjectId
+  galleryCategories  GalleryCategory[] @relation(fields: [galleryCategoryIds], references: [id])
+  galleryCategoryIds String[]          @db.ObjectId
+  dimensions         Dimension[]       @relation(fields: [dimensionIds], references: [id])
+  dimensionIds       String[]          @db.ObjectId
+  bucket             String
+  fullPath           String
+  price              Float
+  size               Float
+  timeCreated        DateTime
+  updatedAt          DateTime
+  url                String
+  name               String
+  image              String
+  material           String?
+  orders             OrderItem[]
+}
+
+model GalleryCategory {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  title      String    @unique
+  galleryIds String[]  @db.ObjectId
+  galleries  Gallery[] @relation(fields: [galleryIds], references: [id])
 }
 
 model Order {
@@ -89,13 +105,6 @@ model Payment {
   orders Order[]
 }
 
-model Shipment {
-  id     String  @id @default(auto()) @map("_id") @db.ObjectId
-  method String  @unique
-  price  Float
-  orders Order[]
-}
-
 model Product {
   id          String      @id @default(auto()) @map("_id") @db.ObjectId
   categories  Category[]  @relation(fields: [categoryIds], references: [id])
@@ -109,42 +118,32 @@ model Product {
   orders      OrderItem[]
 }
 
-model Category {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  title      String    @unique
-  products   Product[] @relation(fields: [productIds], references: [id])
-  productIds String[]  @db.ObjectId
+model Recipient {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  user              User?    @relation(fields: [userId], references: [id])
+  userId            String?  @db.ObjectId
+  billingAddress    Address  @relation("billing", fields: [billingAddressId], references: [id])
+  billingAddressId  String   @db.ObjectId
+  shippingAddress   Address? @relation("shipping", fields: [shippingAddressId], references: [id])
+  shippingAddressId String?  @db.ObjectId
+  orders            Order[]
+  ico               String?
+  dic               String?
 }
 
-model Gallery {
-  id                 String            @id @default(auto()) @map("_id") @db.ObjectId
-  galleryCategories  GalleryCategory[] @relation(fields: [galleryCategoryIds], references: [id])
-  galleryCategoryIds String[]          @db.ObjectId
-  dimensions         Dimension[]       @relation(fields: [dimensionIds], references: [id])
-  dimensionIds       String[]          @db.ObjectId
-  bucket             String
-  fullPath           String
-  price              Float
-  size               Float
-  timeCreated        DateTime
-  updatedAt          DateTime
-  url                String
-  name               String
-  image              String
-  material           String?
-  orders             OrderItem[]
+model Shipment {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  method String  @unique
+  price  Float
+  orders Order[]
 }
 
-model GalleryCategory {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  title      String    @unique
-  galleryIds String[]  @db.ObjectId
-  galleries  Gallery[] @relation(fields: [galleryIds], references: [id])
-}
-
-model Dimension {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  title      String    @unique
-  galleryIds String[]  @db.ObjectId
-  galleries  Gallery[] @relation(fields: [galleryIds], references: [id])
+model User {
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  firstName String
+  lastName  String
+  email     String      @unique
+  password  String
+  phone     String
+  orders    Recipient[]
 }

@@ -1,5 +1,5 @@
 import { Order as OrderModel } from '@prisma/client';
-import type { Recipient, OrderState, Payment, Shipment } from '@prisma/client';
+import type { Recipient, OrderState, Payment, Shipment, OrderItem } from '@prisma/client';
 
 export class OrderEntity implements OrderModel {
     id: string;
@@ -12,4 +12,5 @@ export class OrderEntity implements OrderModel {
     shipment: Shipment;
     shipmentId: string;
     orderDate: Date;
+    orderItems: OrderItem[];
 }
