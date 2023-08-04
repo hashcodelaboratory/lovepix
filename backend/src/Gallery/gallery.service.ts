@@ -29,10 +29,10 @@ export class GalleryService {
                 data: {
                     ...createGalleryDto,
                     dimensions: {
-                        connect: createGalleryDto.dimensionIDs.map((dimension) => ({id: dimension}))
+                        connect: createGalleryDto.dimensionIds.map((dimension) => ({id: dimension}))
                     },
-                    gallery_categories: {
-                        connect: createGalleryDto.gallery_categoryIDs.map((gallery_category) => ({id: gallery_category}))
+                    galleryCategories: {
+                        connect: createGalleryDto.galleryCategoryIds.map((gallery_category) => ({id: gallery_category}))
                     }
                 }
             })

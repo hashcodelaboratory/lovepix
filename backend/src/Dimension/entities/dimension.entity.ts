@@ -4,6 +4,6 @@ import type { Gallery } from '@prisma/client';
 export class DimensionEntity implements DimensionModel {
     id: string;
     title: string;
-    galleryIDs: string[];
+    galleryIds: string[];
     galleries: Gallery[];
 }
