@@ -1,5 +1,4 @@
 name: LOVEPIX DockerHub Deployment on ORGANIZATION TEST environment - FRONTEND
-# on: [push] # - only for test
 on:
   workflow_dispatch:
 
