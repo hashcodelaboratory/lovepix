@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { v4 as uuidv4 } from 'uuid'
 
 export type Material = {
-  title?: string
+  title: string
   subtitle?: string
   description?: string
   illustration?: string

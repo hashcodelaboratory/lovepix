@@ -96,6 +96,10 @@
   transform: scale(1.12);
   z-index: 1;
 }
+.imageBlur{
+  filter: blur(0.15rem);
+  // -webkit-filter: blur(8px);
+}
 
 .relativeContainer {
   position: relative;

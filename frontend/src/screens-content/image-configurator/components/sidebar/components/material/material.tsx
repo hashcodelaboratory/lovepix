@@ -10,6 +10,7 @@ import { materials } from "screens-content/home/utils/configuration";
 import { configurationsTable } from "../../../../../../../database.config";
 import { CONFIGURATION_TABLE_KEY } from "../../../../../../common/indexed-db/hooks/keys";
 import { Configuration } from "../../../../../../common/types/configuration";
+import { useMaterials } from "common/api/use-materials";
 
 type MaterialProps = {
   configuration: Configuration;
@@ -17,11 +18,19 @@ type MaterialProps = {
 
 const Material = ({ configuration }: MaterialProps) => {
   const { t } = useTranslation();
+  const { data: materialsdata } = useMaterials()
+
+  // const { data: materialsdata } = useMaterials()
+  const unavailable = materialsdata?.filter((item) => item.availability == false)
+  const titles = unavailable?.map(item => item.id)
 
   const changeMaterial = (id: string) => {
-    configurationsTable.update(CONFIGURATION_TABLE_KEY, {
+    const aa = materialsdata?.find(item => item.id == id)
+    if (aa?.availability){
+      configurationsTable.update(CONFIGURATION_TABLE_KEY, {
       material: id,
-    });
+      });
+    }
   };
 
   const materialItems = materials.map((material) => (
@@ -40,19 +49,26 @@ const Material = ({ configuration }: MaterialProps) => {
             : styles.relativeContainer
         }
       >
-        <Image
-          onClick={() => changeMaterial(material.id)}
-          alt={material.id}
-          key={uuidv4()}
-          src={material?.image ?? ""}
-          height={112}
-          width={112}
-          layout={ImageLayout.INTRINSIC}
-          objectFit="cover"
-          style={{
-            cursor: "pointer",
-          }}
-        />
+        <div 
+          className={
+            titles?.includes(material.id) 
+              ? styles.imageBlur
+              : styles.relativeContainer
+          }>
+          <Image
+            onClick={() => changeMaterial(material.id)}
+            alt={material.id}
+            key={uuidv4()}
+            src={material?.image ?? ""}
+            height={112}
+            width={112}
+            layout={ImageLayout.INTRINSIC}
+            objectFit="cover"
+            style={{
+              cursor: "pointer",
+            }}
+          />
+        </div>
       </div>
       <p className={styles.materialCardTitle}>{material.name}</p>
     </div>
