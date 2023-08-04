@@ -73,5 +73,49 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   },
-  "main": "index.js"
+  "main": "index.js",
+  "prisma.import.schema":{
+    "prisma":{
+      "schema": "prisma/schema.prisma"
+    },
+    "address":{
+      "schema": "prisma/address.prisma"
+    },
+    "category":{
+      "schema": "prisma/category.prisma"
+    },
+    "dimension":{
+      "schema": "prisma/dimension.prisma"
+    },
+    "gallery":{
+      "schema": "prisma/gallery.prisma"
+    },
+    "galleryCategory":{
+      "schema": "prisma/galleryCategory.prisma"
+    },
+    "order":{
+      "schema": "prisma/order.prisma"
+    },
+    "orderItem":{
+      "schema": "prisma/orderItem.prisma"
+    },
+    "orderState":{
+      "schema": "prisma/orderState.prisma"
+    },
+    "payment":{
+      "schema": "prisma/payment.prisma"
+    },
+    "product":{
+      "schema": "prisma/product.prisma"
+    },
+    "recipient":{
+      "schema": "prisma/recipient.prisma"
+    },
+    "shipment":{
+      "schema": "prisma/shipment.prisma"
+    },
+    "user":{
+      "schema": "prisma/user.prisma"
+    }
+  }
 }
