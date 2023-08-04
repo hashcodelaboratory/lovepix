@@ -1,4 +1,4 @@
-name: LOVEPIX DockerHub Deployment on ORGANIZATION TEST environment - BACKEND
+name: LOVEPIX DockerHub Deployment on ORGANIZATION TEST environment - FRONTEND
 on:
   workflow_dispatch:
 
