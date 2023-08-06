@@ -19,7 +19,7 @@ const SingleReview = ({ reviewItems }: ReviewProps) => {
   const toggleModal = () => setOpen((prevState) => !prevState)
 
   return (
-    <div style={{ marginTop: 20 }}>
+    <div style={{ marginTop: 20, minWidth: 300, margin: 5 }}>
       {user?.isAdmin && (
         <DeleteIcon
           className={styles.removeIcon}
