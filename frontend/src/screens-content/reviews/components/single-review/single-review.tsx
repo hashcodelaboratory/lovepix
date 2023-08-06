@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete'
-import styles from '../review-list/review-list.module.scss'
+import styles from '../review-list/review-block.module.scss'
 import Avatar from '@icons/avatar'
 import { ReviewType } from 'common/api/use-reviews'
 import { Rating } from '@mui/material'

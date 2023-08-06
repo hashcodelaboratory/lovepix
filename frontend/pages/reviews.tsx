@@ -1,5 +1,4 @@
 import type { GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
 import FooterLayout from '../src/screens-content/footer/footer'
