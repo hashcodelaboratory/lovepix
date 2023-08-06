@@ -3,6 +3,7 @@ import PreviewRow from './components/preview-row/preview-row'
 import { GalleryItem } from '../../../../common/types/gallery'
 import { Pages } from 'constants/pages/urls'
 import PreviewCard from './components/preview-row/components/preview-card/preview-card'
+import { localizationKey } from 'localization/localization-key'
 
 type PreviewSectionProps = {
   galleryData?: GalleryItem[]
@@ -15,7 +16,7 @@ const GallerySection = ({ galleryData }: PreviewSectionProps): JSX.Element => {
 
   return (
     <Container style={{ marginBottom: 30 }}>
-      <PreviewRow route={Pages.GALLERY} title={'Galeria'}>
+      <PreviewRow route={Pages.GALLERY} title={localizationKey.gallery}>
         <div style={{ display: 'flex', overflow: 'auto', marginTop: 20 }}>
           {cards}
         </div>

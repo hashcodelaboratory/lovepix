@@ -4,11 +4,15 @@ import ReviewList from 'screens-content/reviews/components/review-list/review-li
 import styles from './review-section.module.scss'
 import { Pages } from 'constants/pages/urls'
 import PreviewRow from '../preview-section/components/preview-row/preview-row'
+import { localizationKey } from 'localization/localization-key'
 
 const ReviewsSection = () => {
   return (
     <Container style={{ marginBottom: 30 }}>
-      <PreviewRow title={'Recenzie'} route={Pages.REVIEWS}>
+      <PreviewRow
+        title={localizationKey.reviewPageYourReviews}
+        route={Pages.REVIEWS}
+      >
         <div className={styles.reviewContainer}>
           <ReviewList />
         </div>

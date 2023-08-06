@@ -4,6 +4,7 @@ import React from 'react'
 import Product from 'screens-content/e-shop/components/product/product'
 import { Pages } from 'constants/pages/urls'
 import PreviewRow from '../preview-section/components/preview-row/preview-row'
+import { localizationKey } from 'localization/localization-key'
 
 const ProductsSection = () => {
   const { data: products } = useProducts()
@@ -14,7 +15,7 @@ const ProductsSection = () => {
 
   return (
     <Container style={{ marginBottom: 30 }}>
-      <PreviewRow title={'Produkty'} route={Pages.ESHOP}>
+      <PreviewRow title={localizationKey.products} route={Pages.ESHOP}>
         <div style={{ display: 'flex', overflow: 'auto', marginTop: 20 }}>
           {productList}
         </div>
