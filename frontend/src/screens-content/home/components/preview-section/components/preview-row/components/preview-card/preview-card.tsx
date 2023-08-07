@@ -31,7 +31,7 @@ const PreviewCard = ({ item }: PreviewCardProps): JSX.Element => {
           <img
             alt={item?.name}
             src={item?.url ?? ''}
-            style={{ width: 300, height: 300 }}
+            style={{ width: 300, height: 300, objectFit: 'cover' }}
           />
           <button className={styles.previewImageLink}>
             {t(localizationKey.add)}
