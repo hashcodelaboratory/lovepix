@@ -1,21 +1,21 @@
 import { Gallery as GalleryModel } from '@prisma/client';
-import type { Gallery_category, Dimension, Order_item } from '@prisma/client';
+import type { GalleryCategory, Dimension, OrderItem } from '@prisma/client';
 
 export class GalleryEntity implements GalleryModel {
     id: string;
-    gallery_categoryIDs: string[];
-    gallery_categories: Gallery_category[];
-    dimensionIDs: string[];
+    galleryCategoryIds: string[];
+    galleryCategories: GalleryCategory[];
+    dimensionIds: string[];
     dimensions: Dimension[];
     bucket: string;
-    full_path: string;
+    fullPath: string;
     price: number;
     size: number;
-    time_created: Date;
-    updated_at: Date;
+    timeCreated: Date;
+    updatedAt: Date;
     url: string;
     name: string;
     image: string;
     material: string;
-    orders: Order_item[];
+    orders: OrderItem[];
 }

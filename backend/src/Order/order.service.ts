@@ -16,7 +16,7 @@ export class OrderService {
     findAll() {
         return this.prismaService.order.findMany({
             include: {
-                order_items: true
+                orderItems: true
             }
         });
     }
