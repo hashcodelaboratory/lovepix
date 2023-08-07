@@ -19,14 +19,12 @@ type MaterialProps = {
 const Material = ({ configuration }: MaterialProps) => {
   const { t } = useTranslation();
   const { data: materialsdata } = useMaterials()
-
-  // const { data: materialsdata } = useMaterials()
+  
   const unavailable = materialsdata?.filter((item) => item.availability == false)
   const titles = unavailable?.map(item => item.id)
 
   const changeMaterial = (id: string) => {
-    const aa = materialsdata?.find(item => item.id == id)
-    if (aa?.availability){
+    if ((materialsdata?.find(item => item.id == id))?.availability){
       configurationsTable.update(CONFIGURATION_TABLE_KEY, {
       material: id,
       });

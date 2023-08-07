@@ -18,23 +18,21 @@ import Button from '@mui/material/Button'
 import { doc, updateDoc } from '@firebase/firestore'
 import { database } from '../../../../../../common/firebase/config'
 import { Collections } from '../../../../../../common/firebase/enums'
-
+import { useSnackbar } from 'notistack'
 import { MATERIALS_KEY, MaterialType, useMaterials } from 'common/api/use-materials'
 
 const MaterialsLayout = (): JSX.Element => {
   const { t } = useTranslation()
-  // const { enqueueSnackbar } = useSnackbar()
+  const { enqueueSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
 
   const { data: materials = [] } = useMaterials()
 
   const [selectedRows, setSelectedRows] = useState<string[]>([])
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>( materials.filter((material) => material.availability == true).map((material) => material.id))
-  console.log('selectionModel')
-  console.log(selectionModel)
-  const [detailRow, setDetailRow] = useState<GridRowParams>()
 
-  const [open, setOpen] = useState(false)
+  // const [open, setOpen] = useState(false)
+  const [dialogStatus, setDialogStatus] = useState(false)
 
   const data =
     materials?.map(
@@ -44,11 +42,6 @@ const MaterialsLayout = (): JSX.Element => {
           title: title,
         } as MaterialType)
     ) ?? []
-  
-  // const reset = () => {
-  //   setSelectionModel([])
-  //   setSelectedRows([])
-  // }
 
   const selectionChanged = (
     selectionModel: GridSelectionModel,
@@ -58,17 +51,15 @@ const MaterialsLayout = (): JSX.Element => {
     setSelectedRows(selectionModel.map((item, index) => data[index].title))
   }
 
-  const onRowClick = (details: GridRowParams) => {
-    setDetailRow(details)
-  }
+  // const handleClickOpen = () => {
+  //   setOpen(true)
+  // }
 
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
+  // const handleClose = () => {
+  //   setOpen(false)
+  // }
+  // const [prevState, setPrevState] = useState(false)
+  const toggleButton = () => setDialogStatus(!dialogStatus)
   
   const uploadToFirestore = async ( item:MaterialType, available:boolean ) => {
     await updateDoc(
@@ -78,11 +69,13 @@ const MaterialsLayout = (): JSX.Element => {
       }
     )
     queryClient.invalidateQueries(MATERIALS_KEY)
-    handleClose()
+    // handleClose()
+    toggleButton()
   }
   const saveChanges = () => {
     data.map(item => selectionModel.includes(item.id) ? uploadToFirestore(item, true) : uploadToFirestore(item, false))
-    handleClose()
+    // handleClose()
+    toggleButton()
   }
 
 
@@ -99,32 +92,29 @@ const MaterialsLayout = (): JSX.Element => {
           disableSelectionOnClick
           selectionModel={selectionModel}
           onSelectionModelChange={selectionChanged}
-          onRowClick={onRowClick}
           autoHeight
-          // sx={{
-          //   "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer": {
-          //     display: "none"
-          //   }
-          // }}
         />
       </div>
 
       <div className={styles.rowContainer}>
         <button
           className={styles.removeButton}
-          onClick={handleClickOpen}
+          // onClick={handleClickOpen}
+          onClick={toggleButton}
         >
           {t(localizationKey.saveChanges)}
         </button>
-        <Dialog open={open} onClose={handleClose}>
+        {/* <Dialog open={open} onClose={handleClose}> */}
+        <Dialog open={dialogStatus} onClose={toggleButton}>
           <DialogContent>
             <DialogContentText>
-              Naozaj chcete uložiť vykonané zmeny?
+            {t(localizationKey.changeValidation)}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>Nie</Button>
-            <Button onClick={saveChanges}>Áno</Button>
+            {/* <Button onClick={handleClose}>{t(localizationKey.no)}</Button> */}
+            <Button onClick={toggleButton}>{t(localizationKey.no)}</Button>
+            <Button onClick={saveChanges}>{t(localizationKey.yes)}</Button>
           </DialogActions>
         </Dialog>
       </div>
