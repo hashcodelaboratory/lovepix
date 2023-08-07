@@ -1,0 +1,8 @@
+import { Order } from "./order"
+
+model OrderState {
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  title  String   @unique
+  date   DateTime
+  orders Order[]
+}

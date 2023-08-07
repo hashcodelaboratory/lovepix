@@ -1,0 +1,15 @@
+import { Recipient } from "./recipient"
+
+model Address {
+  id              String      @id @default(auto()) @map("_id") @db.ObjectId
+  firstName       String
+  lastName        String
+  street          String
+  city            String
+  zip             String
+  email           String
+  phone           String
+  company         String?
+  billingAddress  Recipient[] @relation("billing")
+  shippingAddress Recipient[] @relation("shipping")
+}

@@ -1,9 +1,9 @@
 import { Product as ProductModel } from '@prisma/client';
-import type { Category, Order_item } from '@prisma/client';
+import type { Category, OrderItem } from '@prisma/client';
 
 export class ProductEntity implements ProductModel {
     id: string;
-    categoryIDs: string[];
+    categoryIds: string[];
     categories: Category[]; 
     name: string;
     description: string;
@@ -11,5 +11,5 @@ export class ProductEntity implements ProductModel {
     image: string;
     path: string;
     price: number;
-    orders: Order_item[];
+    orders: OrderItem[];
 }
