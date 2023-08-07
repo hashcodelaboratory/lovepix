@@ -10,9 +10,9 @@ type PreviewSectionProps = {
 }
 
 const GallerySection = ({ galleryData }: PreviewSectionProps): JSX.Element => {
-  const cards = galleryData
-    ?.map((item) => <PreviewCard key={item.id} item={item} />)
-    .slice(0, 3)
+  const cards = galleryData?.map((item) => (
+    <PreviewCard key={item.id} item={item} />
+  ))
 
   return (
     <Container style={{ marginBottom: 30 }}>
