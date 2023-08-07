@@ -37,7 +37,8 @@ const Login = () => {
     setting.callBack && handleLogout()
     setting.link && router.push(setting.link)
   }
-  const userProfile = !!user ? user.photoURL || '' : '/static/images/avatar/2.jpg'
+
+  const userProfile = user?.photoURL ?? '/static/images/avatar/2.jpg'
   return (
     <div>
       <Tooltip title='Open settings'>
