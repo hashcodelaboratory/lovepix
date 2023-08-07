@@ -34,9 +34,8 @@ const CustomMaterials = () => {
 
   const { data: materialsdata } = useMaterials()
   const visible = materialsdata?.filter((item) => item.availability == true)
-  const titles = visible?.map(item => item.title)
 
-  const visibleMaterials = materials.filter((item) => titles?.includes(item.title))
+  const visibleMaterials = materials.filter((item) => visible?.map(item => item.title)?.includes(item.title))
   return <>{visibleMaterials.map(materialSection)}</>
 }
 
