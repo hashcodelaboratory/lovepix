@@ -6,33 +6,20 @@ import {
   GridRowParams,
   GridSelectionModel,
 } from '@mui/x-data-grid'
-import DeleteIcon from '@mui/icons-material/Delete'
 import { useTranslation } from 'next-i18next'
-import { useState, useEffect } from 'react'
-import {
-  SNACKBAR_OPTIONS_ERROR,
-  SNACKBAR_OPTIONS_SUCCESS,
-} from '../../../../../../snackbar/config'
-import { useSnackbar } from 'notistack'
+import { useState } from 'react'
 import { useQueryClient } from 'react-query'
 import { getMaterialsColumns } from '../utils/columns/materials-columns'
-import { AddCircle, CheckBox } from '@mui/icons-material'
-import TextField from '@mui/material/TextField'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
 import Button from '@mui/material/Button'
-import { doc, setDoc, updateDoc } from '@firebase/firestore'
+import { doc, updateDoc } from '@firebase/firestore'
 import { database } from '../../../../../../common/firebase/config'
 import { Collections } from '../../../../../../common/firebase/enums'
 
 import { MATERIALS_KEY, MaterialType, useMaterials } from 'common/api/use-materials'
-
-
-import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid"
-import { Checkbox } from '@mui/material'
 
 const MaterialsLayout = (): JSX.Element => {
   const { t } = useTranslation()
@@ -42,10 +29,10 @@ const MaterialsLayout = (): JSX.Element => {
   const { data: materials = [] } = useMaterials()
 
   const [selectedRows, setSelectedRows] = useState<string[]>([])
-  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([])
+  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>( materials.filter((material) => material.availability == true).map((material) => material.id))
+  console.log('selectionModel')
+  console.log(selectionModel)
   const [detailRow, setDetailRow] = useState<GridRowParams>()
-
-  const [materialsLabel, setmaterialsLabel] = useState<string>()
 
   const [open, setOpen] = useState(false)
 
@@ -58,14 +45,14 @@ const MaterialsLayout = (): JSX.Element => {
         } as MaterialType)
     ) ?? []
   
-  const reset = () => {
-    setSelectionModel([])
-    setSelectedRows([])
-  }
+  // const reset = () => {
+  //   setSelectionModel([])
+  //   setSelectedRows([])
+  // }
 
   const selectionChanged = (
     selectionModel: GridSelectionModel,
-    // details: GridCallbackDetails
+    details: GridCallbackDetails
   ) => {
     setSelectionModel(selectionModel)
     setSelectedRows(selectionModel.map((item, index) => data[index].title))
@@ -74,7 +61,6 @@ const MaterialsLayout = (): JSX.Element => {
   const onRowClick = (details: GridRowParams) => {
     setDetailRow(details)
   }
-
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -106,7 +92,6 @@ const MaterialsLayout = (): JSX.Element => {
         <DataGrid
           className={styles.contentTable}
           rows={data}
-          // columns={columns}
           columns={getMaterialsColumns(t(localizationKey.materials))}
           pageSize={10}
           rowsPerPageOptions={[5]}
@@ -116,6 +101,11 @@ const MaterialsLayout = (): JSX.Element => {
           onSelectionModelChange={selectionChanged}
           onRowClick={onRowClick}
           autoHeight
+          // sx={{
+          //   "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer": {
+          //     display: "none"
+          //   }
+          // }}
         />
       </div>
 
