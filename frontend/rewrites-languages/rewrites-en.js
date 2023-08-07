@@ -1,6 +1,6 @@
 const rewrites_en = [
     {
-        source: '/gallery',
+        source: '/en/gallery',
         destination: '/en/gallery',
         locale: false
     },
