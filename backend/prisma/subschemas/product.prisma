@@ -1,0 +1,15 @@
+import { Category } from "./category"
+import { OrderItem } from "./orderItem"
+
+model Product {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  categories  Category[]  @relation(fields: [categoryIds], references: [id])
+  categoryIds String[]    @db.ObjectId
+  name        String      @unique
+  description String
+  count       Int
+  image       String
+  path        String
+  price       Float
+  orders      OrderItem[]
+}

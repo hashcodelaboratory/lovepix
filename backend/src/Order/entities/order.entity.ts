@@ -1,15 +1,16 @@
 import { Order as OrderModel } from '@prisma/client';
-import type { Recipient, Order_state, Payment, Shipment } from '@prisma/client';
+import type { Recipient, OrderState, Payment, Shipment, OrderItem } from '@prisma/client';
 
 export class OrderEntity implements OrderModel {
     id: string;
     recipient: Recipient;
-    recipientID: string;
-    order_state: Order_state;
-    order_stateID: string;
+    recipientId: string;
+    orderState: OrderState;
+    orderStateId: string;
     payment: Payment;
-    paymentID: string;
+    paymentId: string;
     shipment: Shipment;
-    shipmentID: string;
-    order_date: Date;
+    shipmentId: string;
+    orderDate: Date;
+    orderItems: OrderItem[];
 }

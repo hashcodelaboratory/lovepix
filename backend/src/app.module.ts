@@ -7,14 +7,14 @@ import { AddressModule } from './Address/address.module';
 import { CategoryModule } from './Category/category.module';
 import { DimensionModule } from './Dimension/dimension.module';
 import { GalleryModule } from './Gallery/gallery.module';
-import { GalleryCategoryModule } from './Gallery_category/gallery_category.module';
+import { GalleryCategoryModule } from './GalleryCategory/galleryCategory.module';
 import { OrderModule } from './Order/order.module';
-import { OrderStateModule } from './Order_state/order_state.module';
+import { OrderStateModule } from './OrderState/orderState.module';
 import { PaymentModule } from './Payment/payment.module';
 import { ProductModule } from './Product/product.module';
 import { RecipientModule } from './Recipient/recipient.module';
 import { ShipmentModule } from './Shipment/shipment.module';
-import { OrderItemModule } from './Order_item/order_item.module';
+import { OrderItemModule } from './OrderItem/orderItem.module';
 
 
 

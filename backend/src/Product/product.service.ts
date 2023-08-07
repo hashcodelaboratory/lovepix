@@ -26,7 +26,7 @@ export class ProductService {
                 data: {
                     ...createProductDto,
                     categories: {
-                        connect: createProductDto.categoryIDs.map((category) => ({id: category}))
+                        connect: createProductDto.categoryIds.map((category) => ({id: category}))
                     },
                 }
             })
