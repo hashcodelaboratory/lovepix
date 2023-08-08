@@ -65,6 +65,48 @@ export class GalleryService {
     }
 
     async remove(id: string) {
+        const dimensions = await this.prismaService.dimension.findMany({
+            where: {
+                galleries: {
+                    some: {
+                        id: id
+                    }
+                }
+            }
+        });
+        dimensions.forEach(async (dimension) => {
+            await this.prismaService.dimension.update({
+                where: {
+                    id: dimension.id
+                },
+                data: {
+                    galleryIds: {
+                        set: dimension.galleryIds.filter((gallery) => gallery !== id)
+                    }
+                }
+            })
+        })
+        const galleryCategories = await this.prismaService.galleryCategory.findMany({
+            where: {
+                galleries: {
+                    some: {
+                        id: id
+                    }
+                }
+            }
+        });
+        galleryCategories.forEach(async (galleryCategory) => {
+            await this.prismaService.galleryCategory.update({
+                where: {
+                    id: galleryCategory.id
+                },
+                data: {
+                    galleryIds: {
+                        set: galleryCategory.galleryIds.filter((gallery) => gallery !== id)
+                    }
+                }
+            })
+        })
         return await this.prismaService.gallery.delete({
             where: {
                 id: id

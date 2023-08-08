@@ -15,9 +15,9 @@ export class CategoryService {
 
     findAll() {
         return this.prismaService.category.findMany({
-            include: {
-                products: true
-            }
+            // include: {
+            //     products: true
+            // }
         });
     }
 
@@ -39,6 +39,27 @@ export class CategoryService {
     }
 
     async remove(id: string) {
+        const products = await this.prismaService.product.findMany({
+            where: {
+                categories: {
+                    some: {
+                        id: id
+                    }
+                }
+            }
+        });
+        products.forEach(async (product) => {
+            await this.prismaService.product.update({
+                where: {
+                    id: product.id
+                },
+                data: {
+                    categoryIds: {
+                        set: product.categoryIds.filter((category) => category !== id)
+                    }
+                }
+            })
+        })
         return await this.prismaService.category.delete({
             where: {
                 id: id

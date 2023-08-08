@@ -35,6 +35,27 @@ export class DimensionService {
     }
 
     async remove(id: string) {
+        const galleries = await this.prismaService.gallery.findMany({
+            where: {
+                dimensions: {
+                    some: {
+                        id: id
+                    }
+                }
+            }
+        });
+        galleries.forEach(async (gallery) => {
+            await this.prismaService.gallery.update({
+                where: {
+                    id: gallery.id
+                },
+                data: {
+                    dimensionIds: {
+                        set: gallery.dimensionIds.filter((dimension) => dimension !== id)
+                    }
+                }
+            })
+        })
         return await this.prismaService.dimension.delete({
             where: {
                 id: id

@@ -59,6 +59,27 @@ export class ProductService {
     }
 
     async remove(id: string) {
+        const categories = await this.prismaService.category.findMany({
+            where: {
+                products: {
+                    some: {
+                        id: id
+                    }
+                }
+            }
+        });
+        categories.forEach(async (category) => {
+            await this.prismaService.category.update({
+                where: {
+                    id: category.id
+                },
+                data: {
+                    productIds:{
+                        set: category.productIds.filter((product) => product !== id)
+                    }
+                }
+            })
+        })
         return await this.prismaService.product.delete({
             where: {
                 id: id

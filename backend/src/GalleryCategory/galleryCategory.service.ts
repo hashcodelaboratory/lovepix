@@ -42,6 +42,27 @@ export class GalleryCategoryService {
     }
 
     async remove(id: string) {
+        const galleries = await this.prismaService.gallery.findMany({
+            where: {
+                galleryCategories: {
+                    some: {
+                        id: id
+                    }
+                }
+            }
+        });
+        galleries.forEach(async (gallery) => {
+            await this.prismaService.gallery.update({
+                where: {
+                    id: gallery.id
+                },
+                data: {
+                    galleryCategoryIds: {
+                        set: gallery.galleryCategoryIds.filter((galleryCategory) => galleryCategory !== id)
+                    }
+                }
+            })
+        })
         return await this.prismaService.galleryCategory.delete({
             where: {
                 id: id
