@@ -15,9 +15,9 @@ export class CategoryService {
 
     findAll() {
         return this.prismaService.category.findMany({
-            // include: {
-            //     products: true
-            // }
+            include: {
+                products: true
+            }
         });
     }
 
