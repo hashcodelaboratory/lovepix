@@ -9,10 +9,7 @@ export const getMaterialsColumns = (title:string): GridColDef[] => [
         editable: false,
     },
     {
-        hideable: false,
         headerName: 'Available',
         ...GRID_CHECKBOX_SELECTION_COL_DEF,
-        cellClassName: 'MuiDataGrid-cellCheckbox',
-        headerClassName: 'MuiDataGrid-columnHeaderCheckbox',
     },
 ];

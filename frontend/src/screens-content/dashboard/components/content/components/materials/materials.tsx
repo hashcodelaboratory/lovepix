@@ -7,7 +7,7 @@ import {
   GridSelectionModel,
 } from '@mui/x-data-grid'
 import { useTranslation } from 'next-i18next'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useQueryClient } from 'react-query'
 import { getMaterialsColumns } from '../utils/columns/materials-columns'
 import Dialog from '@mui/material/Dialog'
@@ -28,10 +28,11 @@ const MaterialsLayout = (): JSX.Element => {
 
   const { data: materials = [] } = useMaterials()
 
-  const [selectedRows, setSelectedRows] = useState<string[]>([])
-  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>( materials.filter((material) => material.availability == true).map((material) => material.id))
+  const availableMaterials = materials.filter((material) => material.availability == true).map((material) => material.id)
 
-  // const [open, setOpen] = useState(false)
+  const [selectedRows, setSelectedRows] = useState<string[]>([])
+  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>( availableMaterials )
+
   const [dialogStatus, setDialogStatus] = useState(false)
 
   const data =
@@ -51,14 +52,6 @@ const MaterialsLayout = (): JSX.Element => {
     setSelectedRows(selectionModel.map((item, index) => data[index].title))
   }
 
-  // const handleClickOpen = () => {
-  //   setOpen(true)
-  // }
-
-  // const handleClose = () => {
-  //   setOpen(false)
-  // }
-  // const [prevState, setPrevState] = useState(false)
   const toggleButton = () => setDialogStatus(!dialogStatus)
   
   const uploadToFirestore = async ( item:MaterialType, available:boolean ) => {
@@ -69,15 +62,18 @@ const MaterialsLayout = (): JSX.Element => {
       }
     )
     queryClient.invalidateQueries(MATERIALS_KEY)
-    // handleClose()
     toggleButton()
   }
   const saveChanges = () => {
     data.map(item => selectionModel.includes(item.id) ? uploadToFirestore(item, true) : uploadToFirestore(item, false))
-    // handleClose()
     toggleButton()
   }
 
+  useEffect(() => {
+    if (selectionModel.length == 0){
+      setSelectionModel(availableMaterials)
+    }
+  }, [availableMaterials]);
 
   return (
     <div className={styles.contentContainer}>
@@ -99,12 +95,10 @@ const MaterialsLayout = (): JSX.Element => {
       <div className={styles.rowContainer}>
         <button
           className={styles.removeButton}
-          // onClick={handleClickOpen}
           onClick={toggleButton}
         >
           {t(localizationKey.saveChanges)}
         </button>
-        {/* <Dialog open={open} onClose={handleClose}> */}
         <Dialog open={dialogStatus} onClose={toggleButton}>
           <DialogContent>
             <DialogContentText>
@@ -112,7 +106,6 @@ const MaterialsLayout = (): JSX.Element => {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            {/* <Button onClick={handleClose}>{t(localizationKey.no)}</Button> */}
             <Button onClick={toggleButton}>{t(localizationKey.no)}</Button>
             <Button onClick={saveChanges}>{t(localizationKey.yes)}</Button>
           </DialogActions>
