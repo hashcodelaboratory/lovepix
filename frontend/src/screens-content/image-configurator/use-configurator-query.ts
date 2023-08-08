@@ -10,7 +10,7 @@ export const useConfiguratorQuery = () => {
       return undefined
     }
 
-    const validArgs = ["material","image","dimensionId"]
+    const validArgs = ["material","image","dimensionId","origin"]
     return Object.fromEntries(Object.entries(query).filter(([key]) => validArgs.includes(key)))
   }, [router.query])
 }
