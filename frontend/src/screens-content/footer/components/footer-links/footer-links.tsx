@@ -9,6 +9,8 @@ import React from "react";
 import Link from "next/link";
 import {Pages} from "../../../../constants/pages/urls";
 import {composeUrlWithQuery} from "./util";
+import {materials} from "../../../home/utils/configuration"
+import { Material } from "common/enums/material";
 
 type Link = {
   label: string;
@@ -32,20 +34,6 @@ const serviceLinks: Link[] = [{
   href: undefined
 }, {
   label: localizationKey.complaint,
-  // TODO: TBD
-  href: undefined
-}]
-
-const fromPhotoLinks: Link[] = [{
-  label: localizationKey.canvasPhoto,
-  // TODO: TBD
-  href: undefined
-}, {
-  label: localizationKey.acrylPhoto,
-  // TODO: TBD
-  href: undefined
-}, {
-  label: localizationKey.dibondPhoto,
   // TODO: TBD
   href: undefined
 }]
@@ -75,6 +63,17 @@ const FooterLinks = (): JSX.Element => {
   const galleryLinks: Link[] = (categories ?? []).map(({name}) => ({
     label: name,
     href: composeUrlWithQuery(Pages.GALLERY, {category: name})
+  }))
+
+  const materialsName = new Map<string, string>([
+    [Material.AKRYL, localizationKey.acrylPhoto],
+    [Material.CANVAS, localizationKey.canvasPhoto],
+    [Material.DIBOND, localizationKey.dibondPhoto],    
+  ])
+
+  const fromPhotoLinks: Link[] = materials.map((item) => ({
+    label: materialsName.get(item.name) ?? item.name,
+    href: composeUrlWithQuery(Pages.CONFIGURATOR,{material: item.id})
   }))
 
   const footerColumns: { title: string, links: Link[] }[] = [{

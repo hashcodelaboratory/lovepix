@@ -15,6 +15,7 @@ import {configurationsTable} from "../../../../../../database.config";
 import {Configuration} from "../../../../../common/types/configuration";
 import {CONFIGURATION_TABLE_KEY} from "../../../../../common/indexed-db/hooks/keys";
 import {Pages} from "constants/pages/urls";
+import { useConfiguratorQuery } from "screens-content/image-configurator/use-configurator-query";
 
 type DropzoneContainerProps = {
   configuration: Configuration;
@@ -28,6 +29,7 @@ const DropzoneContainer = ({configuration}: DropzoneContainerProps) => {
   const {enqueueSnackbar} = useSnackbar();
 
   const router = useRouter();
+  const query = useConfiguratorQuery()
 
   const onDrop = async (files: File[]) => {
     const file = files[0];
@@ -39,8 +41,8 @@ const DropzoneContainer = ({configuration}: DropzoneContainerProps) => {
       const data = {
         origin: fr.result as string,
         image: undefined,
-        dimensionId: undefined,
-        material: undefined,
+        dimensionId: query?.dimensionId,
+        material: query?.material,
       };
 
       configurationsTable.add(data, CONFIGURATION_TABLE_KEY);
