@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { OrderItemService } from './orderItem.service';
-import { CreateOrderItemDto } from './dto/create-orderItem.dto';
-import { UpdateOrderItemDto } from './dto/update-orderItem.dto';
+import { OrderItemDto } from './dto/orderItem.dto';
 
 @Controller('orderItems')
 export class OrderItemController {
@@ -9,8 +8,8 @@ export class OrderItemController {
     }
 
     @Post()
-    create(@Body() createOrderItemDto: CreateOrderItemDto) {
-        return this.orderItemService.create(createOrderItemDto);
+    create(@Body() createData: OrderItemDto) {
+        return this.orderItemService.create(createData);
     }
 
     @Get()
@@ -24,8 +23,8 @@ export class OrderItemController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateOrderItemDto: UpdateOrderItemDto) {
-        return this.orderItemService.update(id, updateOrderItemDto);
+    update(@Param('id') id: string, @Body() updateData: Partial<OrderItemDto>) {
+        return this.orderItemService.update(id, updateData);
     }
 
     @Delete(':id')

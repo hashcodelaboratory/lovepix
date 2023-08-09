@@ -1,15 +1,14 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import { ShipmentService } from './shipment.service';
-import { CreateShipmentDto } from './dto/create-shipment.dto';
-import { UpdateShipmentDto } from './dto/update-shipment.dto';
+import { ShipmentDto } from './dto/shipment.dto';
 
 @Controller('shipments')
 export class ShipmentController {
     constructor(private readonly shipmentService: ShipmentService) {}
     
     @Post()
-    create(@Body() createShipmentDto: CreateShipmentDto) {
-        return this.shipmentService.create(createShipmentDto);
+    create(@Body() createData: ShipmentDto) {
+        return this.shipmentService.create(createData);
     }
     
     @Get()
@@ -23,8 +22,8 @@ export class ShipmentController {
     }
     
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateShipmentDto: UpdateShipmentDto) {
-        return this.shipmentService.update(id, updateShipmentDto);
+    update(@Param('id') id: string, @Body() updateData: Partial<ShipmentDto>) {
+        return this.shipmentService.update(id, updateData);
     }
     
     @Delete(':id')

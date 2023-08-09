@@ -1,15 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
-import { CreateGalleryCategoryDto } from "./dto/create-galleryCategory.dto";
-import { UpdateGalleryCategoryDto } from "./dto/update-galleryCategory.dto";
+import { GalleryCategoryDto } from "./dto/galleryCategory.dto";
 
 @Injectable()
 export class GalleryCategoryService {
     constructor(private readonly prismaService: PrismaService) {}
 
-    async create(createGalleryCategoryDto: CreateGalleryCategoryDto) {
+    async create(createData: GalleryCategoryDto) {
         return await this.prismaService.galleryCategory.create({
-            data: createGalleryCategoryDto
+            data: createData
         })
     }
 
@@ -32,12 +31,12 @@ export class GalleryCategoryService {
         });
     }
 
-    async update(id: string, updateGalleryCategoryDto: UpdateGalleryCategoryDto) {
+    async update(id: string, updateData: Partial<GalleryCategoryDto>) {
         return await this.prismaService.galleryCategory.update({
             where: {
                 id: id
             },
-            data: updateGalleryCategoryDto
+            data: updateData
         });
     }
 

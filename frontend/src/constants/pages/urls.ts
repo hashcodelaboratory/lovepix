@@ -8,7 +8,6 @@ export enum Pages {
   CONFIGURATOR = '/configurator',
   ESHOP = '/e-shop',
   THANKS = '/dakujeme',
-  OUR_CONTACTS = '/our-contacts',
   COOKIES = '/cookies',
   PRIVACY_POLICY = '/privacy-policy',
   CONDITIONS = '/conditions',
@@ -17,6 +16,12 @@ export enum Pages {
   ACCOUNT = '/account',
   DASHBOARD = '/dashboard',
   DEBUG = '/debug',
+  BLOG = '/blog',
+  DOWNLOAD = '/download',
+  SATISFACTION = '/satisfaction',
+  POSSIBILITIES = '/possibilities',
+  PRODUCTION_TIME = '/production-time',
+  COMPLAINT = '/complaint',
   REVIEWS = '/reviews',
 }
 

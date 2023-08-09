@@ -1,15 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
-import { CreateDimensionDto } from "./dto/create-dimension.dto";
-import { UpdateDimensionDto } from "./dto/update-dimension.dto";
+import { DimensionDto } from "./dto/dimension.dto";
 
 @Injectable()
 export class DimensionService {
     constructor(private readonly prismaService: PrismaService) {}
 
-    async create(createDimensionDto: CreateDimensionDto) {
+    async create(createData: DimensionDto) {
         return await this.prismaService.dimension.create({
-            data: createDimensionDto
+            data: createData
         })
     }
 
@@ -25,12 +24,12 @@ export class DimensionService {
         });
     }
 
-    async update(id: string, updateDimensionDto: UpdateDimensionDto) {
+    async update(id: string, updateData: Partial<DimensionDto>) {
         return await this.prismaService.dimension.update({
             where: {
                 id: id
             },
-            data: updateDimensionDto
+            data: updateData
         });
     }
 

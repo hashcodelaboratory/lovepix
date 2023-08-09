@@ -23,24 +23,38 @@ const serviceLinks: Link[] = [{
 }, {
   label: localizationKey.satisfaction,
   // TODO: TBD
-  href: undefined
+  href: Pages.SATISFACTION
 }, {
   label: localizationKey.possibilities,
   // TODO: TBD
-  href: undefined
+  href: Pages.POSSIBILITIES
 }, {
   label: localizationKey.creatingTime,
   // TODO: TBD
-  href: undefined
+  href: Pages.PRODUCTION_TIME
 }, {
   label: localizationKey.complaint,
   // TODO: TBD
-  href: undefined
+  href: Pages.COMPLAINT
+}]
+
+const fromPhotoLinks: Link[] = [{
+  label: localizationKey.canvasPhoto,
+  // TODO: TBD
+  href: Pages.MATERIALS
+}, {
+  label: localizationKey.acrylPhoto,
+  // TODO: TBD
+  href: Pages.MATERIALS
+}, {
+  label: localizationKey.dibondPhoto,
+  // TODO: TBD
+  href: Pages.MATERIALS
 }]
 
 const lovePixLinks: Link[] = [{
   label: localizationKey.materials,
-  href: Pages.ABOUT_US,
+  href: Pages.MATERIALS,
 }, {
   label: localizationKey.story,
   href: Pages.ABOUT_US
@@ -50,11 +64,11 @@ const lovePixLinks: Link[] = [{
 }, {
   label: localizationKey.download,
   // TODO: TBD
-  href: undefined
+  href: Pages.DOWNLOAD,
 }, {
   label: localizationKey.blog,
   // TODO: TBD
-  href: undefined
+  href: Pages.BLOG
 }]
 
 const FooterLinks = (): JSX.Element => {
@@ -63,17 +77,6 @@ const FooterLinks = (): JSX.Element => {
   const galleryLinks: Link[] = (categories ?? []).map(({name}) => ({
     label: name,
     href: composeUrlWithQuery(Pages.GALLERY, {category: name})
-  }))
-
-  const materialsName = new Map<string, string>([
-    [Material.AKRYL, localizationKey.acrylPhoto],
-    [Material.CANVAS, localizationKey.canvasPhoto],
-    [Material.DIBOND, localizationKey.dibondPhoto],    
-  ])
-
-  const fromPhotoLinks: Link[] = materials.map((item) => ({
-    label: materialsName.get(item.name) ?? item.name,
-    href: composeUrlWithQuery(Pages.CONFIGURATOR,{material: item.id})
   }))
 
   const footerColumns: { title: string, links: Link[] }[] = [{

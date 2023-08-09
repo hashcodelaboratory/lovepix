@@ -1,15 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
-import { CreateGalleryDto } from "./dto/create-gallery.dto";
-import { UpdateGalleryDto } from "./dto/update-gallery.dto";
+import { GalleryDto } from "./dto/gallery.dto";
 
 @Injectable()
 export class GalleryService {
     constructor(private readonly prismaService: PrismaService) {}
 
-    async create(createGalleryDto: CreateGalleryDto) {
-        if(Array.isArray(createGalleryDto)) {
-            createGalleryDto.forEach(async (gallery) => {
+    async create(createData: GalleryDto) {
+        if(Array.isArray(createData)) {
+            createData.forEach(async (gallery) => {
                 await this.prismaService.gallery.create({
                     data: {
                         ...gallery,
@@ -22,17 +21,17 @@ export class GalleryService {
                     }
                 })
             })
-            return createGalleryDto;
+            return createData;
         }
         else {
             return await this.prismaService.gallery.create({
                 data: {
-                    ...createGalleryDto,
+                    ...createData,
                     dimensions: {
-                        connect: createGalleryDto.dimensionIds.map((dimension) => ({id: dimension}))
+                        connect: createData.dimensionIds.map((dimension) => ({id: dimension}))
                     },
                     galleryCategories: {
-                        connect: createGalleryDto.galleryCategoryIds.map((gallery_category) => ({id: gallery_category}))
+                        connect: createData.galleryCategoryIds.map((gallery_category) => ({id: gallery_category}))
                     }
                 }
             })
@@ -55,12 +54,12 @@ export class GalleryService {
         });
     }
 
-    async update(id: string, updateGalleryDto: UpdateGalleryDto) {
+    async update(id: string, updateData: Partial<GalleryDto>) {
         return await this.prismaService.gallery.update({
             where: {
                 id: id
             },
-            data: updateGalleryDto
+            data: updateData
         });
     }
 

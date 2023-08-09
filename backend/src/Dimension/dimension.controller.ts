@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { DimensionService } from './dimension.service';
-import { CreateDimensionDto } from './dto/create-dimension.dto';
-import { UpdateDimensionDto } from './dto/update-dimension.dto';
+import { DimensionDto } from './dto/dimension.dto';
+
 
 @Controller('dimensions')
 export class DimensionController {
@@ -9,8 +9,8 @@ export class DimensionController {
     }
 
     @Post()
-    create(@Body() createDimensionDto: CreateDimensionDto) {
-        return this.dimensionService.create(createDimensionDto);
+    create(@Body() createData: DimensionDto) {
+        return this.dimensionService.create(createData);
     }
 
     @Get()
@@ -24,8 +24,8 @@ export class DimensionController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateDimensionDto: UpdateDimensionDto) {
-        return this.dimensionService.update(id, updateDimensionDto);
+    update(@Param('id') id: string, @Body() updateData: Partial<DimensionDto>) {
+        return this.dimensionService.update(id, updateData);
     }
 
     @Delete(':id')
