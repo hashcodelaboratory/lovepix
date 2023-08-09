@@ -1,15 +1,14 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { RecipientService } from './recipient.service';
-import { CreateRecipientDto } from './dto/create-recipient.dto';
-import { UpdateRecipientDto } from './dto/update-recipient.dto';
+import { RecipientDto } from './dto/recipient.dto';
 
 @Controller('recipients')
 export class RecipientController {
     constructor(private readonly recipientService: RecipientService) {}
     
     @Post()
-    create(@Body() createRecipientDto: CreateRecipientDto) {
-        return this.recipientService.create(createRecipientDto);
+    create(@Body() createData: RecipientDto) {
+        return this.recipientService.create(createData);
     }
     
     @Get()
@@ -23,8 +22,8 @@ export class RecipientController {
     }
     
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateRecipientDto: UpdateRecipientDto) {
-        return this.recipientService.update(id, updateRecipientDto);
+    update(@Param('id') id: string, @Body() updateData: Partial<RecipientDto>) {
+        return this.recipientService.update(id, updateData);
     }
     
     @Delete(':id')

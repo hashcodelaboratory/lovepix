@@ -1,21 +1,20 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
-import { CreateAddressDto } from "./dto/create-address.dto";
-import { UpdateAddressDto } from "./dto/update-address.dto";
+import { AddressDto } from "./dto/address.dto";
 
 @Injectable()
 export class AddressService {
     constructor(private readonly prismaService: PrismaService) {}
 
-    async create(createAddressDto: CreateAddressDto) {
-        if(Array.isArray(createAddressDto)){
+    async create(createData: AddressDto) {
+        if(Array.isArray(createData)){
             return await this.prismaService.address.createMany({
-                data: createAddressDto
+                data: createData
             })
         }
         else{
             return await this.prismaService.address.create({
-                data: createAddressDto
+                data: createData
             });
         }
     }
@@ -32,12 +31,12 @@ export class AddressService {
         });
     }
 
-    async update(id: string, updateAddressDto: UpdateAddressDto) {
+    async update(id: string, updateData: Partial<AddressDto>) {
         return await this.prismaService.address.update({
             where: {
                 id: id
             },
-            data: updateAddressDto
+            data: updateData
         });
     }
 
