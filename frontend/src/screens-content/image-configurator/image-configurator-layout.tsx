@@ -26,7 +26,7 @@ const ImageConfiguratorLayout = ({ configuration }: ImageConfiguratorLayoutProps
 
   const query = useConfiguratorQuery()
   useEffect(() => {
-    if(!query?.material) return
+    if(!query || Object.entries(query).length == 0) return
     configurationsTable.update(CONFIGURATION_TABLE_KEY, query)
   },[query])
 
