@@ -59,5 +59,29 @@ const rewrites_sk = [
         source: '/recenzie',
         destination: '/reviews',
     },
+    {
+        source: '/blog',
+        destination: '/blog',
+    },
+    {
+        source: '/na-stiahnutie',
+        destination: '/download',
+    },
+    {
+        source: '/zaruka-spokojnosti',
+        destination: '/satisfaction',
+    },
+    {
+        source: '/moznosti-objednavky-a-platby',
+        destination: '/possibilities',
+    },
+    {
+        source: '/casy-vyroby',
+        destination: '/production-time',
+    },
+    {
+        source: '/reklamacia-a-vratenie',
+        destination: '/complaint',
+    },
 ]
 module.exports = rewrites_sk

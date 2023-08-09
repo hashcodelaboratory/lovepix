@@ -74,5 +74,35 @@ const rewrites_en = [
         destination: '/en/reviews',
         locale: false
     },
+    {
+        source: '/en/blog',
+        destination: '/en/blog',
+        locale: false
+    },
+    {
+        source: '/en/download',
+        destination: '/en/download',
+        locale: false
+    },
+    {
+        source: '/en/satisfaction',
+        destination: '/en/satisfaction',
+        locale: false
+    },
+    {
+        source: '/en/possibilitie',
+        destination: '/en/possibilities',
+        locale: false
+    },
+    {
+        source: '/en/production-time',
+        destination: '/en/production-time',
+        locale: false
+    },
+    {
+        source: '/en/complaint',
+        destination: '/en/complaint',
+        locale: false
+    },
 ]
 module.exports = rewrites_en

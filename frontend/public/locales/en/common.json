@@ -304,5 +304,11 @@
   "/conditions": "/en/conditions",
   "/profile": "/en/profile",
   "/account": "/en/account",
-  "/reviews": "/en/reviews"
+  "/reviews": "/en/reviews",
+  "/blog": "/en/blog",
+  "/download": "/en/download",
+  "/satisfaction": "/en/satisfaction",
+  "/possibilities": "/en/possibilities",
+  "/production-time": "/en/production-time",
+  "/complaint": "/en/complaint"
 }

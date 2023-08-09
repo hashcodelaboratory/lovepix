@@ -14,15 +14,15 @@ export enum Pages {
   CONDITIONS = '/conditions',
   PROFILE = '/profile',
   ACCOUNT = '/account',
-  DASHBOARD = '/dashboard',
-  DEBUG = '/debug',
+  REVIEWS = '/reviews',
   BLOG = '/blog',
   DOWNLOAD = '/download',
   SATISFACTION = '/satisfaction',
   POSSIBILITIES = '/possibilities',
   PRODUCTION_TIME = '/production-time',
   COMPLAINT = '/complaint',
-  REVIEWS = '/reviews',
+  DASHBOARD = '/dashboard',
+  DEBUG = '/debug',
 }
 
 export const FACEBOOK = 'https://www.facebook.com/lovepix.sk/'

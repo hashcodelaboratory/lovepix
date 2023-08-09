@@ -307,5 +307,11 @@
   "/conditions": "/vseobecne-obchodne-podmienky",
   "/profile": "/profil",
   "/account": "/ucet",
-  "/reviews": "/recenzie"
+  "/reviews": "/recenzie",
+  "/blog": "/blog",
+  "/download": "/na-stiahnutie",
+  "/satisfaction": "/zaruka-spokojnosti",
+  "/possibilities": "/moznosti-objednavky-a-platby",
+  "/production-time": "/casy-vyroby",
+  "/complaint": "/reklamacia-a-vratenie"
 }
