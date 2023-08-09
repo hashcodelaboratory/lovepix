@@ -38,13 +38,15 @@ const Login = () => {
     setting.link && router.push(setting.link)
   }
 
+  const userProfile = user?.photoURL ?? '/static/images/avatar/2.jpg'
   return (
     <div>
       <Tooltip title='Open settings'>
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
           <Avatar
             alt={!!user ? user.displayName || '' : undefined}
-            src='/static/images/avatar/2.jpg'
+            src={userProfile}
+            imgProps={{referrerPolicy: "no-referrer"}}
           />
         </IconButton>
       </Tooltip>
