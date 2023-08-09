@@ -8,6 +8,7 @@ export type Material = {
   subtitle?: string
   description?: string
   illustration?: string
+  id?: string
 }
 
 export const materialSection = (material: Material, index: number) => {
@@ -35,7 +36,7 @@ export const materialSection = (material: Material, index: number) => {
           objectFit='cover'
         />
       </Grid>
-      <Grid item xs={12} md={9}>
+      <Grid item xs={12} md={9} id={material.id}>
         <p className={styles.title}>{material.title}</p>
         <p className={styles.text}>{material.subtitle}</p>
         <p className={styles.text}>{material.description}</p>
