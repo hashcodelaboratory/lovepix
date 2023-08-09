@@ -39,15 +39,15 @@ const serviceLinks: Link[] = [{
 const fromPhotoLinks: Link[] = [{
   label: localizationKey.canvasPhoto,
   // TODO: TBD
-  href: Pages.MATERIALS
+  href: Pages.MATERIALS+"#canvas"
 }, {
   label: localizationKey.acrylPhoto,
   // TODO: TBD
-  href: Pages.MATERIALS
+  href: Pages.MATERIALS+"#acryl"
 }, {
   label: localizationKey.dibondPhoto,
   // TODO: TBD
-  href: Pages.MATERIALS
+  href: Pages.MATERIALS+"#dibond"
 }]
 
 const lovePixLinks: Link[] = [{
