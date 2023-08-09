@@ -1,10 +1,16 @@
 import {localizationKey} from "../../localization/localization-key"
 
-export const GALLERY = localizationKey.gallery
-export const MATERIALS = localizationKey.materials
-export const ABOUT_US = localizationKey.aboutUs
-export const FOR_PARTNERS = localizationKey.forPartners
-export const CONFIGURATOR = localizationKey.imageConfigurator
+export const GALLERY = 'Gallery'
+export const MATERIALS = 'Materials'
+export const ABOUT_US = 'About us'
+export const FOR_PARTNERS = 'For partners'
+export const CONFIGURATOR = 'Image configurator'
 export const ESHOP = 'E-shop'
-export const THANKS = localizationKey.thanks
-export const CONTACT = localizationKey.contact
+export const THANKS = 'Thanks'
+export const CONTACT = 'Contact'
+export const DOWNLOAD = 'Download'
+export const BLOG = 'Blog'
+export const SATISFACTION = 'Satisfaction'
+export const POSSIBILITIES = 'Possibilities'
+export const PRODUCTION_TIME = 'Production time'
+export const COMPLAINT = 'Complaint'

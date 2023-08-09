@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { GalleryCategoryService } from './galleryCategory.service';
-import { CreateGalleryCategoryDto } from './dto/create-galleryCategory.dto';
-import { UpdateGalleryCategoryDto } from './dto/update-galleryCategory.dto';
+import { GalleryCategoryDto } from './dto/galleryCategory.dto';
 
 @Controller('galleryCategories')
 export class GalleryCategoryController {
@@ -9,8 +8,8 @@ export class GalleryCategoryController {
     }
 
     @Post()
-    create(@Body() createGalleryCategoryDto: CreateGalleryCategoryDto) {
-        return this.galleryCategoryService.create(createGalleryCategoryDto);
+    create(@Body() createData: GalleryCategoryDto) {
+        return this.galleryCategoryService.create(createData);
     }
 
     @Get()
@@ -24,8 +23,8 @@ export class GalleryCategoryController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateGalleryCategoryDto: UpdateGalleryCategoryDto) {
-        return this.galleryCategoryService.update(id, updateGalleryCategoryDto);
+    update(@Param('id') id: string, @Body() updateData: Partial<GalleryCategoryDto>) {
+        return this.galleryCategoryService.update(id, updateData);
     }
 
     @Delete(':id')

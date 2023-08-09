@@ -1,15 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
-import { CreatePaymentDto } from "./dto/create-payment.dto";
-import { UpdatePaymentDto } from "./dto/update-payment.dto";
+import { PaymentDto } from "./dto/payment.dto";
 
 @Injectable()
 export class PaymentService {
     constructor(private readonly prismaService: PrismaService) {}
 
-    async create(createPaymentDto: CreatePaymentDto) {
+    async create(createData: PaymentDto) {
         return await this.prismaService.payment.create({
-            data: createPaymentDto
+            data: createData
         })
     }
 
@@ -25,12 +24,12 @@ export class PaymentService {
         });
     }
 
-    async update(id: string, updatePaymentDto: UpdatePaymentDto) {
+    async update(id: string, updateData: Partial<PaymentDto>) {
         return await this.prismaService.payment.update({
             where: {
                 id: id
             },
-            data: updatePaymentDto
+            data: updateData
         });
     }
 

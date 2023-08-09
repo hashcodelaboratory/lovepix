@@ -1,15 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
-import { CreateRecipientDto } from "./dto/create-recipient.dto";
-import { UpdateRecipientDto } from "./dto/update-recipient.dto";
+import { RecipientDto } from "./dto/recipient.dto";
 
 @Injectable()
 export class RecipientService {
     constructor(private readonly prismaService: PrismaService) {}
 
-    async create(createRecipientDto: CreateRecipientDto) {
+    async create(createData: RecipientDto) {
         return await this.prismaService.recipient.create({
-            data: createRecipientDto
+            data: createData
         })
     }
 
@@ -29,12 +28,12 @@ export class RecipientService {
         });
     }
 
-    async update(id: string, updateRecipientDto: UpdateRecipientDto) {
+    async update(id: string, updateData: Partial<RecipientDto>) {
         return await this.prismaService.recipient.update({
             where: {
                 id: id
             },
-            data: updateRecipientDto
+            data: updateData
         });
     }
 

@@ -1,21 +1,20 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { UpdateUserDto } from "./dto/update-user.dto";
+import { UserDto } from "./dto/user.dto";
 
 @Injectable()
 export class UserService {
     constructor(private readonly prismaService: PrismaService) {}
 
-    async create(createUserDto: CreateUserDto) {
-        if(Array.isArray(createUserDto)){
+    async create(createData: UserDto) {
+        if(Array.isArray(createData)){
             return await this.prismaService.user.createMany({
-                data: createUserDto
+                data: createData
             })
         }
         else{
             return await this.prismaService.user.create({
-                data: createUserDto
+                data: createData
             })
         }
     }
@@ -37,12 +36,12 @@ export class UserService {
         });
     }
 
-    async update(id: string, updateUserDto: UpdateUserDto) {
+    async update(id: string, updateData: Partial<UserDto>) {
         return await this.prismaService.user.update({
             where: {
                 id: id
             },
-            data: updateUserDto
+            data: updateData
         });
     }
 
@@ -65,9 +64,9 @@ export class UserService {
         });
     }
 
-    async createMany(createUserDto: CreateUserDto[]) {
+    async createMany(createData: UserDto[]) {
         return await this.prismaService.user.createMany({
-            data: createUserDto
+            data: createData
         })
     }
 
