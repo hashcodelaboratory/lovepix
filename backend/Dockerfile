@@ -49,4 +49,4 @@ RUN yarn build
 EXPOSE 4000
 
 # Start the server using the production build
-CMD [ "node", "dist/src/main.js" ]
+CMD [ "node", "dist/main.js" ]
