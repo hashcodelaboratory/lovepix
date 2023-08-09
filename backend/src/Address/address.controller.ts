@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { AddressService } from './address.service';
-import { CreateAddressDto } from './dto/create-address.dto';
-import { UpdateAddressDto } from './dto/update-address.dto';
+import { AddressDto } from './dto/address.dto';
+import { PartialType } from '@nestjs/mapped-types';
 
 @Controller('addresses')
 export class AddressController {
@@ -9,8 +9,8 @@ export class AddressController {
     }
 
     @Post()
-    create(@Body() createAddressDto: CreateAddressDto) {
-        return this.addressService.create(createAddressDto);
+    create(@Body() createData: AddressDto) {
+        return this.addressService.create(createData);
     }
 
     @Get()
@@ -24,8 +24,8 @@ export class AddressController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateAddressDto: UpdateAddressDto) {
-        return this.addressService.update(id, updateAddressDto);
+    update(@Param('id') id: string, @Body() updateData: Partial<AddressDto>) {
+        return this.addressService.update(id, updateData);
     }
 
     @Delete(':id')

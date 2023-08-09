@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { OrderStateService } from './orderState.service';
-import { CreateOrderStateDto } from './dto/create-orderState.dto';
-import { UpdateOrderStateDto } from './dto/update-orderState.dto';
+import { OrderStateDto } from './dto/orderState.dto';
 
 @Controller('orderStates')
 export class OrderStateController {
@@ -9,8 +8,8 @@ export class OrderStateController {
     }
 
     @Post()
-    create(@Body() createOrderStateDto: CreateOrderStateDto) {
-        return this.orderStateService.create(createOrderStateDto);
+    create(@Body() createData: OrderStateDto) {
+        return this.orderStateService.create(createData);
     }
 
     @Get()
@@ -24,8 +23,8 @@ export class OrderStateController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateOrderStateDto: UpdateOrderStateDto) {
-        return this.orderStateService.update(id, updateOrderStateDto);
+    update(@Param('id') id: string, @Body() updateData: Partial<OrderStateDto>) {
+        return this.orderStateService.update(id, updateData);
     }
 
     @Delete(':id')

@@ -1,15 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
-import { CreateProductDto } from "./dto/create-product.dto"; 
-import { UpdateProductDto } from "./dto/update-product.dto";
+import { ProductDto } from "./dto/product.dto"; 
 
 @Injectable()
 export class ProductService {
     constructor(private readonly prismaService: PrismaService) {}
 
-    async create(createProductDto: CreateProductDto) {
-        if(Array.isArray(createProductDto)) {
-            createProductDto.forEach(async (product) => {
+    async create(createData: ProductDto) {
+        if(Array.isArray(createData)) {
+            createData.forEach(async (product) => {
                 await this.prismaService.product.create({
                     data: {
                         ...product,
@@ -19,14 +18,14 @@ export class ProductService {
                     }
                 })
             })
-            return createProductDto;
+            return createData;
         }
         else {
             return await this.prismaService.product.create({
                 data: {
-                    ...createProductDto,
+                    ...createData,
                     categories: {
-                        connect: createProductDto.categoryIds.map((category) => ({id: category}))
+                        connect: createData.categoryIds.map((category) => ({id: category}))
                     },
                 }
             })
@@ -49,12 +48,12 @@ export class ProductService {
         });
     }
 
-    async update(id: string, updateProductDto: UpdateProductDto) {
+    async update(id: string, updateData: Partial<ProductDto>) {
         return await this.prismaService.product.update({
             where: {
                 id: id
             },
-            data: updateProductDto
+            data: updateData
         });
     }
 

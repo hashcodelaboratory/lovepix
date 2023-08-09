@@ -59,10 +59,6 @@ export const metadata: Record<Pages, Metadata> = {
     titleKey: localizationKey.metaTitleThankYou,
     descriptionKey: localizationKey.metaDescriptionThankYou,
   },
-  [Pages.CONTACT]: {
-    titleKey: localizationKey.metaTitleContact,
-    descriptionKey: localizationKey.metaDescriptionContact,
-  },
   [Pages.COOKIES]: {
     titleKey: localizationKey.metaTitleCookies,
     descriptionKey: localizationKey.metaDescriptionCookies,
@@ -74,6 +70,34 @@ export const metadata: Record<Pages, Metadata> = {
   [Pages.CONDITIONS]: {
     titleKey: localizationKey.metaTitleConditions,
     descriptionKey: localizationKey.metaDescriptionConditions,
+  },
+  [Pages.CONTACT]: {
+    titleKey: localizationKey.metaTitleContact,
+    descriptionKey: localizationKey.metaDescriptionContact
+  },
+  [Pages.DOWNLOAD]: {
+    titleKey: localizationKey.metaTitleDownload,
+    descriptionKey: localizationKey.metaDescriptionDownload
+  },
+  [Pages.BLOG]: {
+    titleKey: localizationKey.metaTitleBlog,
+    descriptionKey: localizationKey.metaDescriptionBlog
+  },
+  [Pages.SATISFACTION]: {
+    titleKey: localizationKey.metaTitleSatisfaction,
+    descriptionKey: localizationKey.metaDescriptionSatisfaction
+  },
+  [Pages.POSSIBILITIES]: {
+    titleKey: localizationKey.metaTitlePossibilities,
+    descriptionKey: localizationKey.metaDescriptionPossibilities
+  },
+  [Pages.PRODUCTION_TIME]: {
+    titleKey: localizationKey.metaTitleProductionTime,
+    descriptionKey: localizationKey.metaDescriptionProductionTime
+  },
+  [Pages.COMPLAINT]: {
+    titleKey: localizationKey.metaTitleComplaint,
+    descriptionKey: localizationKey.metaDescriptionComplaint
   },
   [Pages.REVIEWS]: {
     titleKey: localizationKey.metaTitleReview,

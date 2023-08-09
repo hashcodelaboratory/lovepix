@@ -22,33 +22,33 @@ const getServiceLinks = (t: TFunction<"translation", undefined>): Link[] => [{
 }, {
   label: localizationKey.satisfaction,
   // TODO: TBD
-  href: undefined
+  href: Pages.SATISFACTION
 }, {
   label: localizationKey.possibilities,
   // TODO: TBD
-  href: undefined
+  href: Pages.POSSIBILITIES
 }, {
   label: localizationKey.creatingTime,
   // TODO: TBD
-  href: undefined
+  href: Pages.PRODUCTION_TIME
 }, {
   label: localizationKey.complaint,
   // TODO: TBD
-  href: undefined
+  href: Pages.COMPLAINT
 }]
 
 const getFromPhotoLinks = (t: TFunction<"translation", undefined>): Link[] => [{
   label: localizationKey.canvasPhoto,
   // TODO: TBD
-  href: undefined
+  href: Pages.MATERIALS
 }, {
   label: localizationKey.acrylPhoto,
   // TODO: TBD
-  href: undefined
+  href: Pages.MATERIALS
 }, {
   label: localizationKey.dibondPhoto,
   // TODO: TBD
-  href: undefined
+  href: Pages.MATERIALS
 }]
 
 const getLovePixLinks = (t: TFunction<"translation", undefined>): Link[] => [{
@@ -63,11 +63,11 @@ const getLovePixLinks = (t: TFunction<"translation", undefined>): Link[] => [{
 }, {
   label: localizationKey.download,
   // TODO: TBD
-  href: undefined
+  href: Pages.DOWNLOAD,
 }, {
   label: localizationKey.blog,
   // TODO: TBD
-  href: undefined
+  href: Pages.BLOG
 }]
 
 const getGalleryLinks = (t: TFunction<"translation", undefined>,categories: CategoryType[] | undefined): Link[] => (categories ?? []).map(({name}) => ({

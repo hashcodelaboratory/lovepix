@@ -16,6 +16,12 @@ export enum Pages {
   ACCOUNT = '/account',
   DASHBOARD = '/dashboard',
   DEBUG = '/debug',
+  BLOG = '/blog',
+  DOWNLOAD = '/download',
+  SATISFACTION = '/satisfaction',
+  POSSIBILITIES = '/possibilities',
+  PRODUCTION_TIME = '/production-time',
+  COMPLAINT = '/complaint',
   REVIEWS = '/reviews',
 }
 
