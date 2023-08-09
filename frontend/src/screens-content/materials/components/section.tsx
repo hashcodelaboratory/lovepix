@@ -23,6 +23,7 @@ export const materialSection = (material: Material, index: number) => {
       columnSpacing={4}
       direction={direction}
       alignItems='center'
+      id={material.id}
     >
       <Grid item xs={12} md={3}>
         <Image
@@ -36,7 +37,7 @@ export const materialSection = (material: Material, index: number) => {
           objectFit='cover'
         />
       </Grid>
-      <Grid item xs={12} md={9} id={material.id}>
+      <Grid item xs={12} md={9}>
         <p className={styles.title}>{material.title}</p>
         <p className={styles.text}>{material.subtitle}</p>
         <p className={styles.text}>{material.description}</p>
