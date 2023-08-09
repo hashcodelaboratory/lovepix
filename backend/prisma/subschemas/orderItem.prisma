@@ -1,0 +1,17 @@
+import { Gallery } from "./gallery"
+import { Order } from "./order"
+import { Product } from "./product"
+
+model OrderItem {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  order     Order    @relation(fields: [orderId], references: [id])
+  orderId   String   @db.ObjectId
+  product   Product? @relation(fields: [productId], references: [id])
+  productId String?  @db.ObjectId
+  image     Gallery? @relation(fields: [imageId], references: [id])
+  imageId   String?  @db.ObjectId
+  quantity  Int
+  material  String?
+  dimension String?
+  voucher   String?
+}

@@ -8,7 +8,6 @@ export enum Pages {
   CONFIGURATOR = '/configurator',
   ESHOP = '/e-shop',
   THANKS = '/dakujeme',
-  OUR_CONTACTS = '/our-contacts',
   COOKIES = '/cookies',
   PRIVACY_POLICY = '/privacy-policy',
   CONDITIONS = '/conditions',
@@ -16,9 +15,16 @@ export enum Pages {
   PROFILE = '/profile',
   ACCOUNT = '/account',
   DASHBOARD = '/dashboard',
-  DEBUG = '/debug'
+  DEBUG = '/debug',
+  BLOG = '/blog',
+  DOWNLOAD = '/download',
+  SATISFACTION = '/satisfaction',
+  POSSIBILITIES = '/possibilities',
+  PRODUCTION_TIME = '/production-time',
+  COMPLAINT = '/complaint',
+  REVIEWS = '/reviews',
 }
 
-export const FACEBOOK = "https://www.facebook.com/lovepix.sk/"
-export const INSTAGRAM = "https://www.instagram.com/lovepix.eu/"
-export const TIKTOK = "https://www.tiktok.com/"
+export const FACEBOOK = 'https://www.facebook.com/lovepix.sk/'
+export const INSTAGRAM = 'https://www.instagram.com/lovepix.eu/'
+export const TIKTOK = 'https://www.tiktok.com/'

@@ -5,7 +5,6 @@ import OrderDetailHistory from './components/order-detail-history/order-detail-h
 import OrderDetailCustomer from './components/order-detail-customer/order-detail-customer'
 import OrderDetailShipping from './components/order-detail-shipping/order-detail-shipping'
 import OrderDetailTitle from './components/order-detail-title/order-detail-title'
-import OrderDetailDelivery from './components/order-detail-delivery-address/order-detail-delivery'
 
 type OrderDetailProps = {
   order?: Order
@@ -21,7 +20,6 @@ const OrderDetail = ({ order }: OrderDetailProps): JSX.Element => (
     <div className={styles.flex}>
       <OrderDetailCustomer order={order} />
       <OrderDetailShipping order={order} />
-      <OrderDetailDelivery order={order} />
     </div>
   </div>
 )

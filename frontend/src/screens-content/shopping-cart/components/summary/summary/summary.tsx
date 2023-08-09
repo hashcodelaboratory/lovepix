@@ -6,14 +6,18 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { FormInputs } from '../../../../../common/types/form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FORM_SCHEMA } from '../address/components/form/utils/schema'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Backdrop, CircularProgress } from '@mui/material'
 import Voucher from '../voucher/voucher'
 import Delivery from '../delivery/delivery'
 import Payment from '../payment/payment'
 import OrderItems from '../components/order-items/order-items'
 import TotalSection from '../total/total-section'
-import { getPriceForDelivery, getPriceForPayment } from '../total/utils'
+import {
+  getPriceForDelivery,
+  getPriceForPayment,
+  getPriceWithVoucher,
+} from '../total/utils'
 import { useRouter } from 'next/router'
 import { useStripe } from '@stripe/react-stripe-js'
 import { clearIndexedDb } from 'common/indexed-db/utils/clear'
@@ -48,10 +52,24 @@ const Summary = ({ order }: SummaryProps) => {
     reValidateMode: 'onChange',
   })
   const { delivery, payment } = watch()
-  const finalPrice =
-    Number(order?.totalPrice) +
-    getPriceForDelivery(delivery) +
-    getPriceForPayment(payment)
+  const finalPrice = useMemo(
+    () =>
+      Number(order?.totalPrice) +
+      getPriceForDelivery(delivery) +
+      getPriceForPayment(payment) -
+      getPriceWithVoucher(
+        order?.totalPrice,
+        order.voucher?.saleType,
+        order?.voucher?.value
+      ),
+    [
+      delivery,
+      order?.totalPrice,
+      order.voucher?.saleType,
+      order.voucher?.value,
+      payment,
+    ]
+  )
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setIsLoading(true)
@@ -75,6 +93,7 @@ const Summary = ({ order }: SummaryProps) => {
       delivery: data.delivery!,
       payment: data.payment!,
       stripe: stripe ?? null,
+      voucher: order?.voucher ?? null,
     }
 
     data.note && Object.assign(newOrder, { note: data.note })
@@ -125,7 +144,7 @@ const Summary = ({ order }: SummaryProps) => {
           </div>
         </div>
         <div className={styles.summarySecondRow}>
-          <Voucher />
+          <Voucher voucher={order?.voucher} />
           <TotalSection
             delivery={delivery}
             payment={payment}
@@ -133,6 +152,7 @@ const Summary = ({ order }: SummaryProps) => {
             finalPrice={finalPrice}
             isSubscription={isSubscription}
             setSubscription={handleSubscribe}
+            voucher={order?.voucher}
           />
         </div>
       </form>
