@@ -2,38 +2,35 @@ import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
 import { CreateCategoryDto } from "./dto/create-category.dto";
 import { UpdateCategoryDto } from "./dto/update-category.dto";
+import {findById} from "../utils/query";
+
+const findAllCategoriesQueryWithProducts = {
+    include: {
+        products: true
+    }
+}
 
 @Injectable()
 export class CategoryService {
     constructor(private readonly prismaService: PrismaService) {}
 
     async create(createCategoryDto: CreateCategoryDto) {
-        return await this.prismaService.category.create({
+        return this.prismaService.category.create({
             data: createCategoryDto
         })
     }
 
     findAll() {
-        return this.prismaService.category.findMany({
-            include: {
-                products: true
-            }
-        });
+        return this.prismaService.category.findMany(findAllCategoriesQueryWithProducts);
     }
 
     async findOne(id: string) {
-        return await this.prismaService.category.findUnique({
-            where: {
-                id: id
-            }
-        });
+        return this.prismaService.category.findUnique(findById(id));
     }
 
     async update(id: string, updateCategoryDto: UpdateCategoryDto) {
-        return await this.prismaService.category.update({
-            where: {
-                id: id
-            },
+        return this.prismaService.category.update({
+            ...findById(id),
             data: updateCategoryDto
         });
     }
@@ -48,22 +45,17 @@ export class CategoryService {
                 }
             }
         });
-        products.forEach(async (product) => {
-            await this.prismaService.product.update({
-                where: {
-                    id: product.id
-                },
-                data: {
-                    categoryIds: {
-                        set: product.categoryIds.filter((category) => category !== id)
-                    }
+        const promises = products.map(({id, categoryIDs}) => this.prismaService.product.update({
+            ...findById(id),
+            data: {
+                categoryIDs: {
+                    set: categoryIDs.filter((category) => category !== id)
                 }
-            })
-        })
-        return await this.prismaService.category.delete({
-            where: {
-                id: id
             }
-        });
+        }))
+
+        await Promise.all(promises)
+
+        return this.prismaService.category.delete(findById(id));
     }
 }
