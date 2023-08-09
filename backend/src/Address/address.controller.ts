@@ -8,9 +8,14 @@ export class AddressController {
     constructor(private readonly addressService: AddressService) {
     }
 
+    //post request to create one or many addresses
     @Post()
-    create(@Body() createData: AddressDto) {
-        return this.addressService.create(createData);
+    create(@Body() createData: AddressDto | AddressDto[]) {
+        if (Array.isArray(createData)) {
+            return this.addressService.createMany(createData);
+        } else {
+            return this.addressService.create(createData);
+        }
     }
 
     @Get()

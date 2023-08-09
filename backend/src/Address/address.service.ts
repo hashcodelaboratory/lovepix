@@ -7,16 +7,15 @@ export class AddressService {
     constructor(private readonly prismaService: PrismaService) {}
 
     async create(createData: AddressDto) {
-        if(Array.isArray(createData)){
-            return await this.prismaService.address.createMany({
-                data: createData
-            })
-        }
-        else{
-            return await this.prismaService.address.create({
-                data: createData
-            });
-        }
+        return await this.prismaService.address.create({
+            data: createData
+        });
+    }
+
+    async createMany(createData: AddressDto[]) {
+        return await this.prismaService.address.createMany({
+            data: createData
+        })
     }
 
     findAll() {
