@@ -15,7 +15,7 @@ import LanguageSwitch from '../language-switch/language-switch'
 const FooterIcons = (): JSX.Element => {
   const {t} = useTranslation()
 
-  // TODO: add change tiktok link
+  // TODO: change tiktok link
   return (
     <Container>
       <Login/>
