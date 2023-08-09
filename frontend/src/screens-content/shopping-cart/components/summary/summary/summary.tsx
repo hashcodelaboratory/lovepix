@@ -93,7 +93,7 @@ const Summary = ({ order }: SummaryProps) => {
       delivery: data.delivery!,
       payment: data.payment!,
       stripe: stripe ?? null,
-      voucher: order?.voucher,
+      voucher: order?.voucher ?? null,
     }
 
     data.note && Object.assign(newOrder, { note: data.note })

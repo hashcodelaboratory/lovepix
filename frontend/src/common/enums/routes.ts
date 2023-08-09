@@ -1,5 +1,6 @@
 export enum Route {
   DASHBOARD = '/dashboard',
+  ESHOP = '/e-shop',
 }
 
 export const DashboardRoutes = {

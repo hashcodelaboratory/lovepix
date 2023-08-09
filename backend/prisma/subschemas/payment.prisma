@@ -1,0 +1,8 @@
+import { Order } from "./order"
+
+model Payment {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  method String  @unique
+  price  Float
+  orders Order[]
+}
