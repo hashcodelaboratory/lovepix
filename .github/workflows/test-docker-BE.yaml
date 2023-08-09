@@ -1,5 +1,5 @@
 name: LOVEPIX DockerHub Deployment on ORGANIZATION TEST environment - BACKEND
-#testing
+#testß
 on:
   workflow_dispatch:
 
@@ -76,11 +76,14 @@ jobs:
             docker images
             touch test.txt
             docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
-            containerId=$( docker container ls -a | grep server-backend | awk '{ print $1 }' )
-            docker stop $containerId
-            docker rm $containerId
-            docker rmi $DOCKER_HUB_USER/$DOCKER_TAG_ENV
+            containerId_backend=$( docker container ls -a | grep server-backend | awk '{ print $1 }' )
+            containerId_mongo_express=$( docker container ls -a | grep mongo-express | awk '{ print $1 }' )
+            docker stop $containerId_backend
+            docker rm $containerId_backend
+            docker stop $containerId_mongo_express
+            docker rm $containerId_mongo_express
             docker pull $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_BE
+            docker images | grep none | awk '{ print $3; }' | xargs docker rmi
             docker-compose up -d --no-deps --build nginx
             docker-compose up -d --no-deps --build mongodb mongo-express
             docker-compose up -d --no-deps --build server-backend
