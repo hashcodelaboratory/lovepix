@@ -32,7 +32,7 @@ const ProductDetailLayout = () => {
 
   useEffect(() => {
     refetch()
-  }, [id])
+  }, [id, refetch])
 
   const productList = products?.map((product: ProductsType) => (
     <div key={product.id}>

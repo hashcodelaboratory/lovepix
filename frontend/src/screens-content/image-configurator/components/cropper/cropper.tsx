@@ -24,7 +24,7 @@ const CropperComponent = ({ configuration }: CropperComponentProps) => {
   useEffect(() => {
     cropperRef?.current?.cropper?.setAspectRatio(aspectRatio)
     stateAction.setCropper(cropperRef)
-  }, [cropperRef, aspectRatio])
+  }, [cropperRef, aspectRatio, stateAction])
 
   if (!configuration?.origin)
     return (

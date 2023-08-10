@@ -51,7 +51,7 @@ const DimensionContent = ({ configuration }: DimensionContentProps) => {
     if (dimensionsHeight.find((dim) => dim === configuration?.dimensionId)) {
       setValue(1)
     }
-  }, [configuration?.dimensionId])
+  }, [configuration?.dimensionId, dimensionsSquare, dimensionsWidth, dimensionsHeight])
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue)

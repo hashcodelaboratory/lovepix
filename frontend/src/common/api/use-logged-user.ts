@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from 'firebase/auth'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { auth } from '../firebase/config'
 import { User } from 'firebase/auth'
 import { useAdmins } from 'common/api/use-admins'
@@ -18,6 +18,7 @@ const useLoggedUser = () => {
     const newUser = { ...user, isAdmin: !!admin }
     setUser(newUser)
   }
+  const callbackCheckIfAdmin = useCallback(checkIfAdmin, [admins])
 
   const getUser = async () => {
     onAuthStateChanged(auth, async (user) => {
@@ -27,14 +28,15 @@ const useLoggedUser = () => {
         return
       }
 
-      checkIfAdmin(user)
+      callbackCheckIfAdmin(user)
     })
     setFetching(false)
   }
-
+  const callbackGetUser = useCallback(getUser, [callbackCheckIfAdmin])
+  
   useEffect(() => {
-    admins && getUser()
-  }, [admins])
+    admins && callbackGetUser()
+  }, [admins, callbackGetUser])
 
   return { user, fetching }
 }

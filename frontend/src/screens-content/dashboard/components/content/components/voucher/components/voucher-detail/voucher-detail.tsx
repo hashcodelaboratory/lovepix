@@ -82,7 +82,7 @@ const VoucherDetail = ({ tableReset, detail }: VoucherDetailProps) => {
     if (detail) {
       getVoucherDetail({ code: detail.code })
     }
-  }, [detail])
+  }, [detail, getVoucherDetail])
 
   const {
     register,
