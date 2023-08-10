@@ -84,5 +84,5 @@ jobs:
             docker rm $containerId_mongo_express
             docker pull $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_BE
             docker images | grep none | awk '{ print $3; }' | xargs docker rmi
-            docker-compose -f docker-compose-backend.yaml up -d --no-deps --build nginx
+            docker-compose up -d --no-deps --build nginx
             docker-compose -f docker-compose-backend.yaml up -d --no-deps --build server-backend mongodb mongo-express 
