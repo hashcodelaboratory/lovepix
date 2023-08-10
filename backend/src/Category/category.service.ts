@@ -1,6 +1,29 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
 import { CategoryDto } from "./dto/category.dto";
+import {findById} from "../utils/query";
+
+// const findAllCategoriesQueryWithProducts = {
+//     include: {
+//         products: true
+//     }
+// }
+
+const findAllProductsQueryWithThatCategory = (id: string) => ({
+    where: {
+        categories: {
+            some: {
+                id: id
+            }
+        }
+    }
+})
+
+const updateRelationsQueryOnCategoryDelete = (id: string, categoryIds: string[]) => ({
+    categoryIds: {
+        set: categoryIds.filter((category) => category !== id)
+    }
+})
 
 @Injectable()
 export class CategoryService {
@@ -14,34 +37,30 @@ export class CategoryService {
 
     findAll() {
         return this.prismaService.category.findMany({
-            include: {
-                products: true
-            }
         });
     }
 
     async findOne(id: string) {
-        return await this.prismaService.category.findUnique({
-            where: {
-                id: id
-            }
-        });
+        return await this.prismaService.category.findUnique(findById(id));
     }
 
     async update(id: string, updateData: Partial<CategoryDto>) {
         return await this.prismaService.category.update({
-            where: {
-                id: id
-            },
+            ...findById(id),
             data: updateData
         });
     }
 
     async remove(id: string) {
-        return await this.prismaService.category.delete({
-            where: {
-                id: id
-            }
-        });
+        const products = await this.prismaService.product.findMany(findAllProductsQueryWithThatCategory(id));
+        
+        await this.prismaService.$transaction([
+            ...products.map((product) => this.prismaService.product.update({
+                ...findById(product.id),
+                data: updateRelationsQueryOnCategoryDelete(id, product.categoryIds)
+            })),
+        ])
+
+        return this.prismaService.category.delete(findById(id));
     }
 }
