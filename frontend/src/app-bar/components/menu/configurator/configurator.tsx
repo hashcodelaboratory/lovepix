@@ -14,8 +14,8 @@ const ConfiguratorComponent = ({close, origin}: Props) => {
   const {t} = useTranslation()
 
   return (
-    <Link onClick={close} href={Pages.CONFIGURATOR}>
-      <Badge badgeContent={origin ? '!' : 0} color='warning'>
+    <Link href={Pages.CONFIGURATOR}>
+      <Badge badgeContent={origin ? '!' : 0} color='warning' onClick={close}>
         <p className={styles.link} style={{margin: 0}}>
           {String(t(PagesTitles.CONFIGURATOR))}
         </p>

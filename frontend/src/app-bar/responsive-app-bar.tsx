@@ -110,14 +110,14 @@ const ResponsiveAppBar = () => {
               origin={configuration?.origin}
             />
             {appBarLeftItems.map(({link, title}) => (
-              <Link key={uuidv4()} href={link} onClick={handleCloseNavMenu}>
-                <p className={styles.link}>{String(t(title))}</p>
+              <Link key={uuidv4()} href={link}>
+                <p className={styles.link} onClick={handleCloseNavMenu}>{String(t(title))}</p>
               </Link>
             ))}
             <LogoComponent navigate={navigate}/>
             {appBarRightItems.map(({link, title}) => (
-              <Link key={uuidv4()} onClick={handleCloseNavMenu} href={link}>
-                <p className={styles.link}>{String(t(title))}</p>
+              <Link key={uuidv4()} href={link}>
+                <p className={styles.link} onClick={handleCloseNavMenu}>{String(t(title))}</p>
               </Link>
             ))}
           </Box>
