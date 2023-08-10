@@ -2,6 +2,23 @@ import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
 import { CreateProductDto } from "./dto/create-product.dto"; 
 import { UpdateProductDto } from "./dto/update-product.dto";
+import { findById } from "../utils/query";
+
+const findAllCategoriesQueryWithThatProduct = (id: string) => ({
+    where: {
+        products: {
+            some: {
+                id: id
+            }
+        }
+    }
+})
+
+const updateRelationsQueryOnProductDelete = (id: string, productIds: string[]) => ({
+    productIds: {
+        set: productIds.filter((product) => product !== id)
+    }
+})
 
 @Injectable()
 export class ProductService {
@@ -42,49 +59,28 @@ export class ProductService {
     }
 
     async findOne(id: string) {
-        return await this.prismaService.product.findUnique({
-            where: {
-                id: id
-            }
-        });
+        return this.prismaService.product.findUnique(findById(id));
     }
 
     async update(id: string, updateProductDto: UpdateProductDto) {
-        return await this.prismaService.product.update({
-            where: {
-                id: id
-            },
+        return this.prismaService.product.update({
+            ...findById(id),
             data: updateProductDto
         });
     }
 
     async remove(id: string) {
-        const categories = await this.prismaService.category.findMany({
-            where: {
-                products: {
-                    some: {
-                        id: id
-                    }
-                }
-            }
-        });
-        categories.forEach(async (category) => {
-            await this.prismaService.category.update({
-                where: {
-                    id: category.id
-                },
-                data: {
-                    productIds:{
-                        set: category.productIds.filter((product) => product !== id)
-                    }
-                }
-            })
-        })
-        return await this.prismaService.product.delete({
-            where: {
-                id: id
-            }
-        });
+        const categories = await this.prismaService.category.findMany(findAllCategoriesQueryWithThatProduct(id));
+        
+        await this.prismaService.$transaction([
+            ...categories.map((category) => this.prismaService.category.update({
+                ...findById(category.id),
+                data: updateRelationsQueryOnProductDelete(id, category.productIds)
+            })),
+        ])
+
+
+        return this.prismaService.product.delete(findById(id));
     }
 
     async removeAll() {

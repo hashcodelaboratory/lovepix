@@ -4,11 +4,27 @@ import { CreateCategoryDto } from "./dto/create-category.dto";
 import { UpdateCategoryDto } from "./dto/update-category.dto";
 import {findById} from "../utils/query";
 
-const findAllCategoriesQueryWithProducts = {
-    include: {
-        products: true
+// const findAllCategoriesQueryWithProducts = {
+//     include: {
+//         products: true
+//     }
+// }
+
+const findAllProductsQueryWithThatCategory = (id: string) => ({
+    where: {
+        categories: {
+            some: {
+                id: id
+            }
+        }
     }
-}
+})
+
+const updateRelationsQueryOnCategoryDelete = (id: string, categoryIds: string[]) => ({
+    categoryIds: {
+        set: categoryIds.filter((category) => category !== id)
+    }
+})
 
 @Injectable()
 export class CategoryService {
@@ -21,7 +37,7 @@ export class CategoryService {
     }
 
     findAll() {
-        return this.prismaService.category.findMany(findAllCategoriesQueryWithProducts);
+        return this.prismaService.category.findMany();
     }
 
     async findOne(id: string) {
@@ -36,25 +52,14 @@ export class CategoryService {
     }
 
     async remove(id: string) {
-        const products = await this.prismaService.product.findMany({
-            where: {
-                categories: {
-                    some: {
-                        id: id
-                    }
-                }
-            }
-        });
-        const promises = products.map(({id, categoryIDs}) => this.prismaService.product.update({
-            ...findById(id),
-            data: {
-                categoryIDs: {
-                    set: categoryIDs.filter((category) => category !== id)
-                }
-            }
-        }))
-
-        await Promise.all(promises)
+        const products = await this.prismaService.product.findMany(findAllProductsQueryWithThatCategory(id));
+        
+        await this.prismaService.$transaction([
+            ...products.map((product) => this.prismaService.product.update({
+                ...findById(product.id),
+                data: updateRelationsQueryOnCategoryDelete(id, product.categoryIds)
+            })),
+        ])
 
         return this.prismaService.category.delete(findById(id));
     }
