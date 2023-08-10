@@ -7,7 +7,13 @@ export class OrderStateService {
     constructor(private readonly prismaService: PrismaService) {}
 
     async create(createData: OrderStateDto) {
-        return await this.prismaService.orderState.create({
+        return this.prismaService.orderState.create({
+            data: createData
+        })
+    }
+
+    async createMany(createData: OrderStateDto[]) {
+        return this.prismaService.orderState.createMany({
             data: createData
         })
     }

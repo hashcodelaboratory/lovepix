@@ -2,36 +2,29 @@ import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
 import { ProductDto } from "./dto/product.dto"; 
 
+const createProductQuery = (createData: ProductDto) => ({
+    data: {
+        ...createData,
+        categories: {
+            connect: createData.categoryIds.map((category) => ({id: category}))
+        },
+    }
+})
+
 @Injectable()
 export class ProductService {
     constructor(private readonly prismaService: PrismaService) {}
 
     async create(createData: ProductDto) {
-        if(Array.isArray(createData)) {
-            createData.forEach(async (product) => {
-                await this.prismaService.product.create({
-                    data: {
-                        ...product,
-                        categories: {
-                            connect: product.categoryIDs.map((category) => ({id: category}))
-                        },
-                    }
-                })
-            })
-            return createData;
-        }
-        else {
-            return await this.prismaService.product.create({
-                data: {
-                    ...createData,
-                    categories: {
-                        connect: createData.categoryIds.map((category) => ({id: category}))
-                    },
-                }
-            })
-        }
+        return this.prismaService.product.create(createProductQuery(createData))
     }
 
+    async createMany(createData: ProductDto[]) {
+        return this.prismaService.$transaction([
+            ...createData.map((product) => this.prismaService.product.create(createProductQuery(product)))
+        ])
+    }
+    
     findAll() {
         return this.prismaService.product.findMany({
             include: {

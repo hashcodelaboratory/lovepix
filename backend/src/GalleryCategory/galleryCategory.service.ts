@@ -7,16 +7,19 @@ export class GalleryCategoryService {
     constructor(private readonly prismaService: PrismaService) {}
 
     async create(createData: GalleryCategoryDto) {
-        return await this.prismaService.galleryCategory.create({
+        return this.prismaService.galleryCategory.create({
+            data: createData
+        })
+    }
+
+    async createMany(createData: GalleryCategoryDto[]) {
+        return this.prismaService.galleryCategory.createMany({
             data: createData
         })
     }
 
     findAll() {
         return this.prismaService.galleryCategory.findMany({
-            include: {
-                galleries: true
-            }
         });
     }
 

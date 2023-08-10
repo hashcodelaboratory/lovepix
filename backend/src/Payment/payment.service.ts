@@ -7,7 +7,13 @@ export class PaymentService {
     constructor(private readonly prismaService: PrismaService) {}
 
     async create(createData: PaymentDto) {
-        return await this.prismaService.payment.create({
+        return this.prismaService.payment.create({
+            data: createData
+        })
+    }
+
+    async createMany(createData: PaymentDto[]) {
+        return this.prismaService.payment.createMany({
             data: createData
         })
     }

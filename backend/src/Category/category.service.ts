@@ -7,17 +7,19 @@ export class CategoryService {
     constructor(private readonly prismaService: PrismaService) {}
 
     async create(createData: CategoryDto) {
-        return await this.prismaService.category.create({
+        return this.prismaService.category.create({
+            data: createData
+        })
+    }
+
+    async createMany(createData: CategoryDto[]) {
+        return this.prismaService.category.createMany({
             data: createData
         })
     }
 
     findAll() {
-        return this.prismaService.category.findMany({
-            include: {
-                products: true
-            }
-        });
+        return this.prismaService.category.findMany();
     }
 
     async findOne(id: string) {

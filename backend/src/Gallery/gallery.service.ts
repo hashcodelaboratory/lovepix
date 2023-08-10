@@ -2,40 +2,30 @@ import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
 import { GalleryDto } from "./dto/gallery.dto";
 
+const createGalleryQuery = (createData: GalleryDto) => ({
+    data: {
+        ...createData,
+        dimensions: {
+            connect: createData.dimensionIds.map((dimension) => ({id: dimension}))
+        },
+        galleryCategories: {
+            connect: createData.galleryCategoryIds.map((galleryCategory) => ({id: galleryCategory}))
+        }
+    }
+})
+
 @Injectable()
 export class GalleryService {
     constructor(private readonly prismaService: PrismaService) {}
 
     async create(createData: GalleryDto) {
-        if(Array.isArray(createData)) {
-            createData.forEach(async (gallery) => {
-                await this.prismaService.gallery.create({
-                    data: {
-                        ...gallery,
-                        dimensions: {
-                            connect: gallery.dimensionIDs.map((dimension) => ({id: dimension}))
-                        },
-                        gallery_categories: {
-                            connect: gallery.gallery_categoryIDs.map((gallery_category) => ({id: gallery_category}))
-                        }
-                    }
-                })
-            })
-            return createData;
-        }
-        else {
-            return await this.prismaService.gallery.create({
-                data: {
-                    ...createData,
-                    dimensions: {
-                        connect: createData.dimensionIds.map((dimension) => ({id: dimension}))
-                    },
-                    galleryCategories: {
-                        connect: createData.galleryCategoryIds.map((gallery_category) => ({id: gallery_category}))
-                    }
-                }
-            })
-        }
+        return this.prismaService.gallery.create(createGalleryQuery(createData))
+    }
+
+    async createMany(createData: GalleryDto[]) {
+        return this.prismaService.$transaction([
+            ...createData.map((gallery) => this.prismaService.gallery.create(createGalleryQuery(gallery)))
+        ])
     }
 
     findAll() {

@@ -7,13 +7,13 @@ export class AddressService {
     constructor(private readonly prismaService: PrismaService) {}
 
     async create(createData: AddressDto) {
-        return await this.prismaService.address.create({
+        return this.prismaService.address.create({
             data: createData
         });
     }
 
     async createMany(createData: AddressDto[]) {
-        return await this.prismaService.address.createMany({
+        return this.prismaService.address.createMany({
             data: createData
         })
     }

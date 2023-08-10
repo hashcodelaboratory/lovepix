@@ -7,7 +7,13 @@ export class RecipientService {
     constructor(private readonly prismaService: PrismaService) {}
 
     async create(createData: RecipientDto) {
-        return await this.prismaService.recipient.create({
+        return this.prismaService.recipient.create({
+            data: createData
+        })
+    }
+
+    async createMany(createData: RecipientDto[]) {
+        return this.prismaService.recipient.createMany({
             data: createData
         })
     }

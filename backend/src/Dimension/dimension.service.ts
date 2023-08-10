@@ -7,7 +7,13 @@ export class DimensionService {
     constructor(private readonly prismaService: PrismaService) {}
 
     async create(createData: DimensionDto) {
-        return await this.prismaService.dimension.create({
+        return this.prismaService.dimension.create({
+            data: createData
+        })
+    }
+
+    async createMany(createData: DimensionDto[]) {
+        return this.prismaService.dimension.createMany({
             data: createData
         })
     }

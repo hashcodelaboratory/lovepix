@@ -1,21 +1,20 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { AddressService } from './address.service';
 import { AddressDto } from './dto/address.dto';
-import { PartialType } from '@nestjs/mapped-types';
 
 @Controller('addresses')
 export class AddressController {
     constructor(private readonly addressService: AddressService) {
     }
 
-    //post request to create one or many addresses
     @Post()
-    create(@Body() createData: AddressDto | AddressDto[]) {
-        if (Array.isArray(createData)) {
-            return this.addressService.createMany(createData);
-        } else {
-            return this.addressService.create(createData);
-        }
+    create(@Body() createData: AddressDto) {
+        return this.addressService.create(createData);
+    }
+    
+    @Post('many')
+    createMany(@Body() createData: AddressDto[]) {
+        return this.addressService.createMany(createData);
     }
 
     @Get()

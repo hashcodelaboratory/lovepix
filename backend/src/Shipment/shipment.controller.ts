@@ -10,6 +10,11 @@ export class ShipmentController {
     create(@Body() createData: ShipmentDto) {
         return this.shipmentService.create(createData);
     }
+
+    @Post('many')
+    createMany(@Body() createData: ShipmentDto[]) {
+        return this.shipmentService.createMany(createData);
+    }
     
     @Get()
     findAll() {

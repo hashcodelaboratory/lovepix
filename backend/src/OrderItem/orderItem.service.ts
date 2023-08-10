@@ -7,7 +7,13 @@ export class OrderItemService {
     constructor(private readonly prismaService: PrismaService) {}
 
     async create(createData: OrderItemDto) {
-        return await this.prismaService.orderItem.create({
+        return this.prismaService.orderItem.create({
+            data: createData
+        })
+    }
+
+    async createMany(createData: OrderItemDto[]) {
+        return this.prismaService.orderItem.createMany({
             data: createData
         })
     }

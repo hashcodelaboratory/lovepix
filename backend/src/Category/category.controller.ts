@@ -12,6 +12,11 @@ export class CategoryController {
         return this.categoryService.create(createData);
     }
 
+    @Post('many')
+    createMany(@Body() createData: CategoryDto[]) {
+        return this.categoryService.createMany(createData);
+    }
+
     @Get()
     findAll() {
         return this.categoryService.findAll();

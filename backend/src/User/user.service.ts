@@ -7,16 +7,15 @@ export class UserService {
     constructor(private readonly prismaService: PrismaService) {}
 
     async create(createData: UserDto) {
-        if(Array.isArray(createData)){
-            return await this.prismaService.user.createMany({
-                data: createData
-            })
-        }
-        else{
-            return await this.prismaService.user.create({
-                data: createData
-            })
-        }
+        return this.prismaService.user.create({
+            data: createData
+        })
+    }
+
+    async createMany(createData: UserDto[]) {
+        return this.prismaService.user.createMany({
+            data: createData
+        })
     }
 
     findAll() {
@@ -62,12 +61,6 @@ export class UserService {
                 orders: true
             }
         });
-    }
-
-    async createMany(createData: UserDto[]) {
-        return await this.prismaService.user.createMany({
-            data: createData
-        })
     }
 
     async removeAll() {
