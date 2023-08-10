@@ -41,7 +41,7 @@ services:
     image: lovepix-be:1.0.0
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.local
     networks:
       - server-network
     #depends_on:
@@ -50,7 +50,7 @@ services:
       - "4000:4000"
     restart: unless-stopped
     # environment:
-    #   MONGO_URI: mongodb
+    #   MONGO_URI: mongo
     # env_file:
     #   - ./.env
 
