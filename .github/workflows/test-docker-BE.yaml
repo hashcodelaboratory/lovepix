@@ -66,7 +66,7 @@ jobs:
       - name: deploying on ec2 and rebuild docker-compose with nginX
         uses: appleboy/ssh-action@v0.1.7
         with:
-          envs: DOCKER_HUB_USER, DOCKER_HUB_PASSWORD, DOCKER_TAG_WALLER_BE
+          envs: DOCKER_HUB_USER, DOCKER_HUB_PASSWORD, DOCKER_TAG_WALLER_BE, MONGO_INITDB_ROOT_USERNAME, MONGO_INITDB_ROOT_PASSWORD, MONGODB_SERVER, MONGODB_ENABLE_ADMIN, MONGODB_ADMINUSERNAME, MONGODB_ADMINPASSWORD, MONGODB_BASICAUTH_USERNAME, MONGODB_BASICAUTH_PASSWORD, DATABASE_URL
           host: ${{ secrets.NEW_ORG_AWS_TEST_HOST }}
           username: ec2-user
           key: ${{ secrets.NEW_ORG_AWS_TEST_PEM }}
