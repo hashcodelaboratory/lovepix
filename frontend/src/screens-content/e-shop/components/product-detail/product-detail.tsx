@@ -8,7 +8,6 @@ import styles from './product-detail.module.scss'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 import { orderTable } from '../../../../../database.config'
-import { ProductsType, useProducts } from 'common/api/use-products'
 import Product from '../product/product'
 import { localizationKey } from '../../../../localization/localization-key'
 import { useTranslation } from 'next-i18next'
@@ -19,6 +18,7 @@ import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
 } from 'snackbar/config'
+import { ProductsType, useProducts } from 'common/api/use-products'
 
 type ProductProps = {
   product: ProductType | undefined

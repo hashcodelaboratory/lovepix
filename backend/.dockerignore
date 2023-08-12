@@ -3,3 +3,4 @@ Dockerfile
 .env
 node_modules
 backend_data/
+mongodb_rs/

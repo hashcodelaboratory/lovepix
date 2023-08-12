@@ -21,38 +21,38 @@ const serviceLinks: Link[] = [{
 }, {
   label: localizationKey.satisfaction,
   // TODO: TBD
-  href: undefined
+  href: Pages.SATISFACTION
 }, {
   label: localizationKey.possibilities,
   // TODO: TBD
-  href: undefined
+  href: Pages.POSSIBILITIES
 }, {
   label: localizationKey.creatingTime,
   // TODO: TBD
-  href: undefined
+  href: Pages.PRODUCTION_TIME
 }, {
   label: localizationKey.complaint,
   // TODO: TBD
-  href: undefined
+  href: Pages.COMPLAINT
 }]
 
 const fromPhotoLinks: Link[] = [{
   label: localizationKey.canvasPhoto,
   // TODO: TBD
-  href: undefined
+  href: Pages.MATERIALS
 }, {
   label: localizationKey.acrylPhoto,
   // TODO: TBD
-  href: undefined
+  href: Pages.MATERIALS
 }, {
   label: localizationKey.dibondPhoto,
   // TODO: TBD
-  href: undefined
+  href: Pages.MATERIALS
 }]
 
 const lovePixLinks: Link[] = [{
   label: localizationKey.materials,
-  href: Pages.ABOUT_US,
+  href: Pages.MATERIALS,
 }, {
   label: localizationKey.story,
   href: Pages.ABOUT_US
@@ -62,11 +62,11 @@ const lovePixLinks: Link[] = [{
 }, {
   label: localizationKey.download,
   // TODO: TBD
-  href: undefined
+  href: Pages.DOWNLOAD,
 }, {
   label: localizationKey.blog,
   // TODO: TBD
-  href: undefined
+  href: Pages.BLOG
 }]
 
 const FooterLinks = (): JSX.Element => {
