@@ -37,8 +37,8 @@ const PreviewRow = ({
     <div>
       <div className={styles.previewTitleRow}>
         <h3>{t(title)}</h3>
-        <button className={styles.previewTitleRowButton}>
-          <p onClick={redirect} className={styles.previewTitleRowButtonText}>
+        <button className={styles.previewTitleRowButton} onClick={redirect}>
+          <p className={styles.previewTitleRowButtonText}>
             {t(localizationKey.showMore)}
           </p>
           <ArrowForwardIcon sx={{ width: 16 }} />
