@@ -238,6 +238,7 @@
   "orderStateSnackbar": "Stav objednavky bol zmeneny a zákazník informovaný mailom o stave jeho objednávky.",
   "emailErrorSnackbar": "Email sa nepodarilo odoslať",
   "yourOrderHasBeenSent": "Vaša objednávka bola odoslaná.",
+  "yourOrderHasBeenDelivered": "Vaša objednávka bola doručená",
   "createInvoiceSuccessMessage": "Faktúra bola úspešne vytvorená.",
   "createInvoiceErrorMessage": "Nepodarilo sa nám vytvoriť faktúru.",
   "ico": "IČO",
