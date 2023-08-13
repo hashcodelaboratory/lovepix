@@ -8,6 +8,10 @@ import {configurationsTable} from "../database.config";
 import {CONFIGURATION_TABLE_KEY} from "../src/common/indexed-db/hooks/keys";
 import {useGallery} from "../src/common/api/use-gallery";
 import FooterLayout from "../src/screens-content/footer/footer";
+import ReactGA from 'react-ga';
+
+const TRACKING_ID = "ADD-ID"; // YOUR_OWN_TRACKING_ID
+ReactGA.initialize(TRACKING_ID);
 
 const Home: NextPage = () => {
   const configuration = useLiveQuery(() => configurationsTable.get(CONFIGURATION_TABLE_KEY), []);
