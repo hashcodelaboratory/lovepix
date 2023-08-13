@@ -5,8 +5,17 @@ import styles from './review-section.module.scss'
 import { Pages } from 'constants/pages/urls'
 import PreviewRow from '../preview-section/components/preview-row/preview-row'
 import { localizationKey } from 'localization/localization-key'
+import { useReviews } from 'common/api/use-reviews'
 
 const ReviewsSection = () => {
+  const { data: reviews } = useReviews()
+
+  console.log(reviews)
+
+  if (!reviews?.length) {
+    return null
+  }
+
   return (
     <Container style={{ marginBottom: 30 }}>
       <PreviewRow
@@ -14,7 +23,7 @@ const ReviewsSection = () => {
         route={Pages.REVIEWS}
       >
         <div className={styles.reviewContainer}>
-          <ReviewList />
+          <ReviewList reviews={reviews} />
         </div>
       </PreviewRow>
     </Container>
