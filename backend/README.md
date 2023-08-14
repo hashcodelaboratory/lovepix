@@ -55,8 +55,7 @@ BASICAUTH_PASSWORD=
 MONGO_REPLICA_HOST=
 MONGO_REPLICA_PORT=
 API_KEY=
-
-DATABASE_URL="mongodb://<MONGO_INITDB_ROOT_USERNAME>:<MONGO_INITDB_ROOT_USERNAME>@localhost:27017/lovepix?ssl=false&serverSelectionTimeoutMS=2000&authSource=admin"
+DATABASE_URL=
 ```
 
 ## Run docker-compose.yaml (docker start MongoDB instance and Mongo-Express instance) 
