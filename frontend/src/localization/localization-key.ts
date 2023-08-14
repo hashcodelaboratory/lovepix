@@ -239,6 +239,7 @@ export const localizationKey = {
   emailErrorSnackbar: 'emailErrorSnackbar',
   yourOrderHasBeenSent: 'yourOrderHasBeenSent',
   createInvoiceSuccessMessage: 'createInvoiceSuccessMessage',
+  yourOrderHasBeenDelivered: 'yourOrderHasBeenDelivered',
   createInvoiceErrorMessage: 'createInvoiceErrorMessage',
   agreeWithNewsletter: 'agreeWithNewsletter',
   agreeWithBussinessCondition: 'agreeWithBussinessCondition',

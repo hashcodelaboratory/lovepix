@@ -1,6 +1,6 @@
 import { UserMail } from 'common/api/send-mail'
 import { AdminEmail } from 'common/api/send-mail-admins'
-import { OrderStateMail } from 'common/api/send-mail-order-picked'
+import { OrderStateMail } from 'common/api/send-mail-order-shipped'
 
 export const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
 
@@ -187,14 +187,18 @@ export const emailTemplateUser = ({
                                 `
                                     : ''
                                 }
-                            {voucher && <tr style="border-top: 1px dotted #d3d3d3;">
+                            ${
+                              voucher
+                                ? `<tr style="border-top: 1px dotted #d3d3d3;">
                                 <td style="text-align: left;padding: 10px;color: #000;">Zľavový kupón: ${
-                                  voucher?.code
+                                  voucher?.code ?? ''
                                 }</td>
                                 <td style="text-align: right;padding: 10px;color: #000;" colspan="2">- ${
-                                  voucher?.value
-                                }</td>
-                            </tr>}
+                                  voucher?.value ?? ''
+                                } %</td>
+                            </tr>`
+                                : ''
+                            }
                             <tr style="border-top: 1px dotted #d3d3d3;color: #000;">
                                 <td style="text-align: left;padding: 10px;">Cena spolu</td>
                                 <td style="text-align: right;font-size: 15px; fontWeight: 600;padding: 10px;" colspan="2">${Number(

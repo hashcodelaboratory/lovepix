@@ -22,9 +22,11 @@ const Product = ({ product }: ProductContent) => {
         className={styles.image}
         onClick={goTo}
       />
-      <span className={styles.title}>{title}</span>
-      <span className={styles.description}>{description}</span>
-      <span className={styles.price}>{price?.toFixed(2) ?? '-'} €</span>
+      <div style={{ margin: 5 }}>
+        <span className={styles.title}>{title}</span>
+        <span className={styles.description}>{description}</span>
+        <span className={styles.price}>{price?.toFixed(2) ?? '-'} €</span>
+      </div>
     </div>
   )
 }
