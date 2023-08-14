@@ -15,6 +15,8 @@ import { ProductModule } from './Product/product.module';
 import { RecipientModule } from './Recipient/recipient.module';
 import { ShipmentModule } from './Shipment/shipment.module';
 import { OrderItemModule } from './OrderItem/orderItem.module';
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -24,8 +26,8 @@ const ENV_PACKAGE = "dotenv";
 require(ENV_PACKAGE).config();
 
 @Module({
-  imports: [PrismaModule, UserModule, AddressModule, CategoryModule, DimensionModule, GalleryModule, GalleryCategoryModule, OrderModule, OrderStateModule, PaymentModule, ProductModule, RecipientModule, ShipmentModule, OrderItemModule],
+  imports: [AuthModule, PrismaModule, UserModule, AddressModule, CategoryModule, DimensionModule, GalleryModule, GalleryCategoryModule, OrderModule, OrderStateModule, PaymentModule, ProductModule, RecipientModule, ShipmentModule, OrderItemModule, AuthModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AuthService],
 })
 export class AppModule {}
