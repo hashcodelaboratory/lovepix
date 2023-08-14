@@ -30,13 +30,17 @@
 
 ```bash
 $ yarn install
+
+OR
+
+$ yarn 
 ```
 
-## Running the app
+## Running the app (inicialization with packages)
 
 ```bash
-# development
-$ yarn run start
+# development (command from package.json)
+$ yarn start:be
 
 # watch mode
 $ yarn run start:dev
@@ -45,29 +49,39 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
-## Test
+## Init Prisma and MongoDB in local development
 
 ```bash
-# unit tests
-$ yarn run test
+# prisma init
+$ prisma init
 
-# e2e tests
-$ yarn run test:e2e
+# prisma generate
+$ prisma generate
 
-# test coverage
-$ yarn run test:cov
+# push all collections to the MongoDB
+$ prisma db push
 ```
 
-## Support
+## Create .env file for local development (variables are in .env.teplate or new-lovepix ORG slack canal in pinned message)
+```bash
+MONGO_INITDB_ROOT_USERNAME=
+MONGO_INITDB_ROOT_PASSWORD=
+MONGODB_SERVER=
+MONGODB_ENABLE_ADMIN=
+MONGODB_ADMINUSERNAME=
+MONGODB_ADMINPASSWORD=
+BASICAUTH_USERNAME=
+BASICAUTH_PASSWORD=
+MONGO_REPLICA_HOST=
+MONGO_REPLICA_PORT=
+API_KEY=
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+DATABASE_URL="mongodb://<MONGO_INITDB_ROOT_USERNAME>:<MONGO_INITDB_ROOT_USERNAME>@localhost:27017/lovepix?ssl=false&serverSelectionTimeoutMS=2000&authSource=admin"
+```
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+## Run docker-compose.yaml (docker start MongoDB instance and Mongo-Express instance) 
+```bash
+$ cd backend
+$ docker-compose up -d      (run docker-compose yaml file)
+$ docker ps -a              (list of docker running docker containers)
+```
