@@ -36,32 +36,6 @@ OR
 $ yarn 
 ```
 
-## Running the app (inicialization with packages)
-
-```bash
-# development (command from package.json)
-$ yarn start:be
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
-```
-
-## Init Prisma and MongoDB in local development
-
-```bash
-# prisma init
-$ prisma init
-
-# prisma generate
-$ prisma generate
-
-# push all collections to the MongoDB
-$ prisma db push
-```
-
 ## Create .env file for local development (variables are in .env.teplate or new-lovepix ORG slack canal in pinned message)
 ```bash
 MONGO_INITDB_ROOT_USERNAME=
@@ -85,3 +59,28 @@ $ cd backend
 $ docker-compose up -d      (run docker-compose yaml file)
 $ docker ps -a              (list of docker running docker containers)
 ```
+
+## Init Prisma and MongoDB in local development
+
+```bash
+# prisma init
+$ prisma init
+
+# prisma generate
+$ prisma generate
+
+# push all collections to the MongoDB
+$ prisma db push
+```
+## Running the app (inicialization with packages)
+```bash
+# development (command from package.json)
+$ yarn start:be
+
+# watch mode
+$ yarn run start:dev
+
+# production mode
+$ yarn run start:prod
+```
+
