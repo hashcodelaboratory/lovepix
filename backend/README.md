@@ -26,17 +26,23 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Installation of Prisma globally
+
+```bash
+$ npm install -g prisma
+```
+
+## Installation dependencies
 
 ```bash
 $ yarn install
 
 OR
 
-$ yarn 
+$ yarn
 ```
 
-## Create .env file for local development (variables are in .env.teplate or new-lovepix ORG slack canal in pinned message)
+## Create .env file for local development (variables are in .env.teplate or new-lovepix ORG slack canal in pinned message), note: need to modify DATABASE_URL - mongo_username and mongo_password too
 ```bash
 MONGO_INITDB_ROOT_USERNAME=
 MONGO_INITDB_ROOT_PASSWORD=
@@ -57,6 +63,10 @@ DATABASE_URL="mongodb://<MONGO_INITDB_ROOT_USERNAME>:<MONGO_INITDB_ROOT_USERNAME
 ```bash
 $ cd backend
 $ docker-compose up -d      (run docker-compose yaml file)
+```
+### Optional Docker commands
+```bash
+$ docker-compose down       (exit all containers which are in docker-compose.yaml file)
 $ docker ps -a              (list of docker running docker containers)
 ```
 
