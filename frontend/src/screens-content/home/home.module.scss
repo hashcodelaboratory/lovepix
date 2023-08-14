@@ -254,19 +254,14 @@
 }
 
 .previewCard {
-  flex: 1;
   margin-right: 0.5rem;
-}
-
-.previewCard:nth-child(3) {
-  margin-right: 0;
 }
 
 .previewImage {
   height: 25vw;
   max-height: 368px;
   background-color: white;
-  background-image: url("../../assets/placeholder.jpeg");
+  background-image: url('../../assets/placeholder.jpeg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -292,7 +287,7 @@
   .previewImageLink {
     left: 50% !important;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     display: block;
     position: absolute;
     padding: 1rem;
@@ -331,7 +326,7 @@
   max-width: 1200px;
   height: 40vw;
   max-height: 600px;
-  background-image: url("../../assets/placeholder.jpeg");
+  background-image: url('../../assets/placeholder.jpeg');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -362,4 +357,3 @@
     left: 5vw !important;
   }
 }
-

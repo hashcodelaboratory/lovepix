@@ -89,7 +89,7 @@ const Summary = ({ order }: SummaryProps) => {
       date: Date.now(),
       orderState: [{ state: OrderState.CREATED, date: Date.now() }],
       shoppingCart: order?.shoppingCart,
-      totalPrice: order?.totalPrice,
+      totalPrice: finalPrice,
       delivery: data.delivery!,
       payment: data.payment!,
       stripe: stripe ?? null,

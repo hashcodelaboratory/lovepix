@@ -19,6 +19,12 @@ const OrderDetailShoppingCart = ({ order }: Props): JSX.Element => {
         <h4>{t(localizationKey.shoppingCart)}</h4>
         <h4>{Number(order?.totalPrice).toFixed(2)} €</h4>
       </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <h4>{t(localizationKey.voucherCode)}</h4>
+        <h4 style={{ color: '#E51F3D' }}>
+          {order?.voucher?.code ?? 'Bez kuponu'}
+        </h4>
+      </div>
       {order?.shoppingCart?.images?.map((image, index) => (
         <OrderDetailRow key={index} index={index} image={image} order={order} />
       ))}
