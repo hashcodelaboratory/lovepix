@@ -20,6 +20,7 @@ import { orderTable } from '../../../database.config'
 import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 
 export type CreateOrderRequest = {
+  id?: string
   form: FormInputs
   date: number
   orderState: OrderState[]
@@ -27,6 +28,7 @@ export type CreateOrderRequest = {
     images?: Image[]
     products?: Product[]
   }
+  pdf?: string
   totalPrice: number
   delivery: Delivery
   payment: Payment
