@@ -42,7 +42,7 @@ OR
 $ yarn
 ```
 
-## Create .env file for local development (variables are in .env.teplate or new-lovepix ORG slack canal in pinned message), note: need to modify DATABASE_URL - mongo_username and mongo_password too
+## Create .env file for local development (variables are in .env.template or new-lovepix ORG slack channel in pinned message), note: need to modify DATABASE_URL - mongo_username and mongo_password too
 ```bash
 MONGO_INITDB_ROOT_USERNAME=
 MONGO_INITDB_ROOT_PASSWORD=
