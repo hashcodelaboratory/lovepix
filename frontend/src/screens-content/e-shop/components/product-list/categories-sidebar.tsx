@@ -21,7 +21,7 @@ const CategoriesSidebar = () => {
 
   const categoriesList = categories?.map((item, index) => (
     <div
-      key={index}
+      key={item.id}
       onClick={selectCategory(item.name)}
       className={
         kategoria === item.name ? styles.categoryActive : styles.categoryItem

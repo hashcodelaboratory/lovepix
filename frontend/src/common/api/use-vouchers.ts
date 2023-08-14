@@ -17,7 +17,7 @@ export type VoucherType = {
 }
 
 const getVouchers = async (): Promise<VoucherType[]> => {
-  const res = await fetch('api/voucher/list')
+  const res = await fetch('/api/voucher/list')
   return res.json()
 }
 

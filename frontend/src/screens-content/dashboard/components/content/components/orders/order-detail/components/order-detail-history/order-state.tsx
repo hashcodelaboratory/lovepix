@@ -11,8 +11,8 @@ import UpdateOrderState from './order-state-modal'
 import { invoice } from 'screens-content/shopping-cart/components/summary/summary/utils'
 import { createInvoice } from 'common/api/superfaktura'
 import { OrderState as OrderStateEnum } from 'common/enums/order-states'
-import { sendMailOrderPicked } from 'common/api/send-mail-order-picked'
 import { sendMailOrderShipped } from 'common/api/send-mail-order-shipped'
+import { sendMailOrderDelivered } from 'common/api/send-mail-order-delivered'
 import { Payment } from 'common/enums/payment'
 import { localizationKey } from '../../../../../../../../../localization/localization-key'
 import { useTranslation } from 'next-i18next'
@@ -60,14 +60,14 @@ const OrderState = ({
     await queryClient.invalidateQueries(ORDERS_KEY)
   }
 
-  const sendMailStateShipped = async (pdfInvoice: string) => {
+  const sendMailStateDelivered = async (pdfInvoice: string) => {
     if (!order) {
       return
     }
-    const response = await sendMailOrderShipped(
+    const response = await sendMailOrderDelivered(
       order.id,
       order.form.email,
-      t(localizationKey.shipped),
+      t(localizationKey.yourOrderHasBeenDelivered),
       pdfInvoice
     )
     snackBarNotification(
@@ -77,11 +77,11 @@ const OrderState = ({
     )
   }
 
-  const sendMailStatePicked = async () => {
+  const sendMailOrderStateShipped = async () => {
     if (!order) {
       return
     }
-    const response = await sendMailOrderPicked(
+    const response = await sendMailOrderShipped(
       order.id,
       order.form.email,
       t(localizationKey.yourOrderHasBeenSent)
@@ -112,7 +112,7 @@ const OrderState = ({
       const id = res.data?.Invoice.id
       const token = res.data?.Invoice.token
       const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
-      sendMailStateShipped(pdfInvoice)
+      sendMailStateDelivered(pdfInvoice)
       updateOrderState()
     }
   }
@@ -123,7 +123,7 @@ const OrderState = ({
     }
 
     if (state === OrderStateEnum.PICKED) {
-      sendMailStatePicked()
+      sendMailOrderStateShipped()
     } else if (
       state === OrderStateEnum.SHIPPED &&
       order.payment !== Payment.ONLINE

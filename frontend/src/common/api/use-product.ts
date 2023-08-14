@@ -6,7 +6,8 @@ import { getDoc } from 'firebase/firestore'
 
 export const PRODUCT_KEY = 'PRODUCT'
 
-type ProductType = {
+export type ProductType = {
+  id: string
   title: string
   image: string
   price: number
