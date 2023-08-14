@@ -4,9 +4,8 @@ import {
 } from 'api/email/utils'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { transporter } from '../../../../src/api/email/transporter'
-import { OrderState } from 'common/enums/order-states'
 
-const sendOrderShipped = async (
+const sendOrderDelivered = async (
   req: NextApiRequest,
   res: NextApiResponse<unknown>
 ) => {
@@ -40,7 +39,13 @@ const sendOrderShipped = async (
     const mailOptions = {
       from: 'LovePix <noreply@lovepix.sk>',
       to: _body.dest,
-      subject: 'Objednávka: #' + _body.id + OrderState.PICKED,
+      subject: 'Objednávka: #' + _body.id + '- Dokončená',
+      attachments: [
+        {
+          filename: `faktúra_${_body.id}.pdf`,
+          path: _body.pdfInvoice,
+        },
+      ],
       html: emailTemplateOrderState(_body),
     }
 
@@ -55,4 +60,4 @@ const sendOrderShipped = async (
   }
 }
 
-export default sendOrderShipped
+export default sendOrderDelivered

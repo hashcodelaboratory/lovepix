@@ -1,5 +1,5 @@
 import { Button, Container, Grid, Skeleton } from '@mui/material'
-import { useProduct } from 'common/api/use-product'
+import { ProductType, useProduct } from 'common/api/use-product'
 import Image from 'next/image'
 import React, { useEffect } from 'react'
 import { ImageLayout } from 'screens-content/home/enums/enums'
@@ -20,18 +20,24 @@ import {
 } from 'snackbar/config'
 import { ProductsType, useProducts } from 'common/api/use-products'
 
-const ProductDetailLayout = () => {
+type ProductProps = {
+  product: ProductType | undefined
+  isLoading: boolean
+}
+
+const ProductDetailLayout = ({ product, isLoading }: ProductProps) => {
   const router = useRouter()
   const id = router.query.productID as string
   const { t } = useTranslation()
-  const { data, isLoading, refetch } = useProduct(id)
-  const { image, title, price, count, description } = data ?? {}
+  const { refetch } = useProduct(id)
+  const { image, title, price, count, description } = product ?? {}
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
   const { data: products } = useProducts()
   const { enqueueSnackbar } = useSnackbar()
 
   useEffect(() => {
     refetch()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   const productList = products?.map((product: ProductsType) => (
