@@ -24,7 +24,8 @@ const CustomDashboard = () => {
   const { data: categoriesEshop = [], isFetching: isFetchingCategoriesEshop } =
     useCategoriesEshop()
   const { data: vouchers = [], isFetching: isFetchingVouchers } = useVouchers()
-  const { data: materials = [], isFetching: isFetchingMaterials } = useMaterials()
+  const { data: materials = [], isFetching: isFetchingMaterials } =
+    useMaterials()
 
   return (
     <DashboardContext.Provider
@@ -37,7 +38,7 @@ const CustomDashboard = () => {
           categories,
           categoriesEshop,
           vouchers,
-          materials
+          materials,
         },
       }}
     >

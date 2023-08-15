@@ -19,7 +19,11 @@ import { doc, updateDoc } from '@firebase/firestore'
 import { database } from '../../../../../../common/firebase/config'
 import { Collections } from '../../../../../../common/firebase/enums'
 import { useSnackbar } from 'notistack'
-import { MATERIALS_KEY, MaterialType, useMaterials } from 'common/api/use-materials'
+import {
+  MATERIALS_KEY,
+  MaterialType,
+  useMaterials,
+} from 'common/api/use-materials'
 
 const MaterialsLayout = (): JSX.Element => {
   const { t } = useTranslation()
@@ -28,10 +32,13 @@ const MaterialsLayout = (): JSX.Element => {
 
   const { data: materials = [] } = useMaterials()
 
-  const availableMaterials = materials.filter((material) => material.availability == true).map((material) => material.id)
+  const availableMaterials = materials
+    .filter((material) => material.availability == true)
+    .map((material) => material.id)
 
   const [selectedRows, setSelectedRows] = useState<string[]>([])
-  const [selectionModel, setSelectionModel] = useState<GridSelectionModel>( availableMaterials )
+  const [selectionModel, setSelectionModel] =
+    useState<GridSelectionModel>(availableMaterials)
 
   const [dialogStatus, setDialogStatus] = useState(false)
 
@@ -53,27 +60,28 @@ const MaterialsLayout = (): JSX.Element => {
   }
 
   const toggleButton = () => setDialogStatus(!dialogStatus)
-  
-  const uploadToFirestore = async ( item:MaterialType, available:boolean ) => {
-    await updateDoc(
-      doc(database, Collections.MATERIALS, item.id),
-      {
-        availability: available,
-      }
-    )
+
+  const uploadToFirestore = async (item: MaterialType, available: boolean) => {
+    await updateDoc(doc(database, Collections.MATERIALS, item.id), {
+      availability: available,
+    })
     queryClient.invalidateQueries(MATERIALS_KEY)
     toggleButton()
   }
   const saveChanges = () => {
-    data.map(item => selectionModel.includes(item.id) ? uploadToFirestore(item, true) : uploadToFirestore(item, false))
+    data.map((item) =>
+      selectionModel.includes(item.id)
+        ? uploadToFirestore(item, true)
+        : uploadToFirestore(item, false)
+    )
     toggleButton()
   }
 
   useEffect(() => {
-    if (selectionModel.length == 0){
+    if (selectionModel.length == 0) {
       setSelectionModel(availableMaterials)
     }
-  }, [availableMaterials]);
+  }, [availableMaterials])
 
   return (
     <div className={styles.contentContainer}>
@@ -93,16 +101,13 @@ const MaterialsLayout = (): JSX.Element => {
       </div>
 
       <div className={styles.rowContainer}>
-        <button
-          className={styles.removeButton}
-          onClick={toggleButton}
-        >
+        <button className={styles.removeButton} onClick={toggleButton}>
           {t(localizationKey.saveChanges)}
         </button>
         <Dialog open={dialogStatus} onClose={toggleButton}>
           <DialogContent>
             <DialogContentText>
-            {t(localizationKey.changeValidation)}
+              {t(localizationKey.changeValidation)}
             </DialogContentText>
           </DialogContent>
           <DialogActions>

@@ -14,13 +14,13 @@ export type MaterialType = {
 }
 
 const getMaterials = async (): Promise<MaterialType[]> => {
-    const querySnapshot = await getDocs(
-        collection(database, Collections.MATERIALS)
-    )
-    return querySnapshot.docs.map(
-        (doc) => ({ id: doc.id, ...doc.data() } as MaterialType)
-    )
+  const querySnapshot = await getDocs(
+    collection(database, Collections.MATERIALS)
+  )
+  return querySnapshot.docs.map(
+    (doc) => ({ id: doc.id, ...doc.data() } as MaterialType)
+  )
 }
-  
+
 export const useMaterials = (): UseQueryResult<MaterialType[]> =>
   useQuery([MATERIALS_KEY], () => getMaterials())
