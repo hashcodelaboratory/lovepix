@@ -1,7 +1,9 @@
 name: LOVEPIX DockerHub Deployment on ORGANIZATION K8s PROD environment - FRONTEND
 on:
   workflow_dispatch:
-
+  create:
+    tags:
+      - release_*
   push:
     branches:
       - main

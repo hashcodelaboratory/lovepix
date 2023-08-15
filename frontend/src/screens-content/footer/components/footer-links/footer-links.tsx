@@ -9,6 +9,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Pages } from '../../../../constants/pages/urls'
 import { composeUrlWithQuery } from './util'
+import { materialSectionId } from 'common/types/url-id'
 import { v4 as uuidv4 } from 'uuid'
 
 type Link = {
@@ -47,17 +48,17 @@ const fromPhotoLinks: Link[] = [
   {
     label: localizationKey.canvasPhoto,
     // TODO: TBD
-    href: Pages.MATERIALS,
+    href: `${Pages.MATERIALS}#${materialSectionId.canvas}`,
   },
   {
     label: localizationKey.acrylPhoto,
     // TODO: TBD
-    href: Pages.MATERIALS,
+    href: `${Pages.MATERIALS}#${materialSectionId.acryl}`,
   },
   {
     label: localizationKey.dibondPhoto,
     // TODO: TBD
-    href: Pages.MATERIALS,
+    href: `${Pages.MATERIALS}#${materialSectionId.dibond}`,
   },
 ]
 
