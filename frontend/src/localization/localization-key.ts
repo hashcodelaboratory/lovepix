@@ -291,6 +291,6 @@ export const localizationKey = {
   date: 'date',
   languageSwitch: {
     sk: 'languageSwitchSlovakLanguageLabel',
-    en: 'languageSwitchEnglishLanguageLabel'
-  }
+    en: 'languageSwitchEnglishLanguageLabel',
+  },
 }
