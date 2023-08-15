@@ -18,6 +18,7 @@ import {OrderItemModule} from './OrderItem/orderItem.module';
 import {AuthService} from './auth/auth.service';
 import {AuthModule} from './auth/auth.module';
 import {ConfigModule} from "@nestjs/config";
+import { UsersModule } from './data/users/users.module';
 
 
 const ENV_PACKAGE = "dotenv";
@@ -27,7 +28,7 @@ require(ENV_PACKAGE).config();
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal: true
-  }), AuthModule, PrismaModule, UserModule, AddressModule, CategoryModule, DimensionModule, GalleryModule, GalleryCategoryModule, OrderModule, OrderStateModule, PaymentModule, ProductModule, RecipientModule, ShipmentModule, OrderItemModule, AuthModule],
+  }), AuthModule, PrismaModule, UserModule, AddressModule, CategoryModule, DimensionModule, GalleryModule, GalleryCategoryModule, OrderModule, OrderStateModule, PaymentModule, ProductModule, RecipientModule, ShipmentModule, OrderItemModule, AuthModule, UsersModule],
   controllers: [AppController],
   providers: [AppService, AuthService],
 })
