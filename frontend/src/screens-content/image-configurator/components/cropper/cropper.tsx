@@ -24,6 +24,7 @@ const CropperComponent = ({ configuration }: CropperComponentProps) => {
   useEffect(() => {
     cropperRef?.current?.cropper?.setAspectRatio(aspectRatio)
     stateAction.setCropper(cropperRef)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cropperRef, aspectRatio])
 
   if (!configuration?.origin)

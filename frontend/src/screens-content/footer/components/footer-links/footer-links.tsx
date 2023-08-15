@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { Pages } from '../../../../constants/pages/urls'
 import { composeUrlWithQuery } from './util'
 import { materialSectionId } from 'common/types/url-id'
+import { v4 as uuidv4 } from 'uuid'
 
 type Link = {
   label: string
@@ -137,7 +138,7 @@ const FooterColumn = ({ title, links }: FooterColumnType): JSX.Element => {
   const formattedLinks = links.map(
     ({ href, label }) =>
       href && (
-        <Link href={href} passHref={true}>
+        <Link href={href} passHref={true} key={uuidv4()}>
           <MUILink key={label} className={styles.footerText}>
             {t(label)}
           </MUILink>
