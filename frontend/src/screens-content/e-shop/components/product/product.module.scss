@@ -19,6 +19,18 @@
   font-size: 14px;
 }
 
+.previewProduct {
+  margin-right: 0.5rem;
+}
+
+.previewImageDescription {
+  margin-top: 1rem;
+}
+
+.productTitle {
+  margin: 0.2rem 0;
+}
+
 .description {
   margin-top: 10px;
   font-size: 12px;
@@ -30,8 +42,9 @@
 }
 
 .price {
-  margin-top: 10px;
   font-size: 12px;
+  font-weight: 100;
+  margin: 0;
 }
 
 .addToCart {
