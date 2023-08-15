@@ -5,6 +5,6 @@ const rewrites = rewrites_sk.concat(rewrites_en)
 
 module.exports = {
   async rewrites() {
-    return rewrites
+    return rewrites // url changes related to files : public/locales, rewrites-languages, constants/pages/urls
   },
 }
