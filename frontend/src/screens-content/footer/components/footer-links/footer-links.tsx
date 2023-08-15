@@ -13,6 +13,7 @@ import Link from 'next/link'
 import { Pages } from '../../../../constants/pages/urls'
 import { composeUrlWithQuery } from './util'
 import { TFunction } from 'react-i18next'
+import { materialSectionId } from 'common/types/url-id'
 import { v4 as uuidv4 } from 'uuid'
 
 type Link = {
@@ -46,15 +47,18 @@ const getServiceLinks = (t: TFunction<'translation', undefined>): Link[] => [
 const getFromPhotoLinks = (t: TFunction<'translation', undefined>): Link[] => [
   {
     label: localizationKey.canvasPhoto,
-    href: t(Pages.MATERIALS),
+    // TODO: TBD
+    href: `${t(Pages.MATERIALS)}#${materialSectionId.canvas}`,
   },
   {
     label: localizationKey.acrylPhoto,
-    href: t(Pages.MATERIALS),
+    // TODO: TBD
+    href: `${t(Pages.MATERIALS)}#${materialSectionId.acryl}`,
   },
   {
     label: localizationKey.dibondPhoto,
-    href: t(Pages.MATERIALS),
+    // TODO: TBD
+    href: `${t(Pages.MATERIALS)}#${materialSectionId.dibond}`,
   },
 ]
 

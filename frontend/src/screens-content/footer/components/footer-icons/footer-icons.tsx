@@ -15,6 +15,7 @@ import {
   TIKTOK,
 } from '../../../../constants/pages/urls'
 import Login from 'login/login'
+import LanguageSwitch from '../language-switch/language-switch'
 
 const FooterIcons = (): JSX.Element => {
   const { t } = useTranslation()
