@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   create:
     tags:
-      -test_*
+      - test_*
 
 defaults:
   run:
