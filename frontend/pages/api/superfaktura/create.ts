@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
-import authorizationHeaders from 'api/superfaktura/utils/authorization-headers'
+import authorizationHeaders from '../../../src/api/superfaktura/utils/authorization-headers'
 
 const API_URL_CREATE = 'https://moja.superfaktura.sk/invoices/create'
 const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
