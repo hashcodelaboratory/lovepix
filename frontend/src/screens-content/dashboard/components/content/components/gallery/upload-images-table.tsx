@@ -1,9 +1,4 @@
-import {
-  DataGrid,
-  GridCallbackDetails,
-  GridRowParams,
-  GridSelectionModel,
-} from '@mui/x-data-grid'
+import { DataGrid, GridRowParams, GridSelectionModel } from '@mui/x-data-grid'
 import styles from '../../../../dashboard.module.scss'
 import { useState } from 'react'
 import { getUploadImagesColumns } from '../utils/columns/upload-images-columns'
@@ -26,14 +21,10 @@ import {
 import UploaderLayout from './uploader/uploader'
 
 const UploadImagesTable = () => {
-  const { data: galleryImages = [] } = useGallery()
-
+  const { data: galleryImages } = useGallery()
   const { enqueueSnackbar } = useSnackbar()
-
   const { t } = useTranslation()
-
   const queryClient = useQueryClient()
-
   const [selectedRows, setSelectedRows] = useState<string[]>([])
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([])
   const [detailRow, setDetailRow] = useState<GridRowParams>()
@@ -51,6 +42,7 @@ const UploadImagesTable = () => {
           price,
           categories,
           dimensions,
+          fullPath,
         },
         index
       ) => ({
@@ -64,6 +56,7 @@ const UploadImagesTable = () => {
         docId: id,
         categories: categories,
         dimensions: dimensions,
+        fullPath: fullPath,
       })
     ) ?? []
 
@@ -76,7 +69,6 @@ const UploadImagesTable = () => {
     const result = removeUploadedImages(selectedRows)
     if (result === '') {
       await queryClient.invalidateQueries(UPLOADED_IMAGES_KEY)
-      await queryClient.invalidateQueries(GALLERY_KEY)
       enqueueSnackbar(
         String(t(localizationKey.filesRemoved)),
         SNACKBAR_OPTIONS_SUCCESS
@@ -85,14 +77,12 @@ const UploadImagesTable = () => {
     } else {
       enqueueSnackbar(result, SNACKBAR_OPTIONS_ERROR)
     }
+    await queryClient.invalidateQueries(GALLERY_KEY)
   }
 
-  const selectionChanged = (
-    selectionModel: GridSelectionModel,
-    details: GridCallbackDetails
-  ) => {
+  const selectionChanged = (selectionModel: GridSelectionModel) => {
     setSelectionModel(selectionModel)
-    setSelectedRows(selectionModel.map((item, index) => data[index].name))
+    setSelectedRows(selectionModel.map((item) => data[item as number].fullPath))
   }
 
   const buttonText = `(${selectedRows.length}) ${String(
