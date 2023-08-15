@@ -4,13 +4,16 @@ import React from 'react'
 import Sidebar from 'screens-content/dashboard/components/sidebar/sidebar'
 import styles from './dashboard.module.scss'
 import VouchersLayout from '../../src/screens-content/dashboard/components/content/components/voucher/voucher'
+import AdminAccess from 'common/protect-route'
 
 const Vouchers = () => {
   return (
-    <div className={styles.dashboardContainer}>
-      <Sidebar />
-      <VouchersLayout />
-    </div>
+    <AdminAccess>
+      <div className={styles.dashboardContainer}>
+        <Sidebar />
+        <VouchersLayout />
+      </div>
+    </AdminAccess>
   )
 }
 
