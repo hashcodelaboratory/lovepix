@@ -7,16 +7,19 @@ import Menu from '@mui/material/Menu'
 import Container from '@mui/material/Container'
 import MenuItem from '@mui/material/MenuItem'
 import Link from 'next/link'
-import {appBarLeftItems, appBarRightItems, menuItems} from '../navigation'
-import {useTranslation} from 'next-i18next'
-import {v4 as uuidv4} from 'uuid'
+import { appBarLeftItems, appBarRightItems, menuItems } from '../navigation'
+import { useTranslation } from 'next-i18next'
+import { v4 as uuidv4 } from 'uuid'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import {Pages} from '../constants/pages/urls'
-import {Badge} from '@mui/material'
-import {useRouter} from 'next/router'
-import {useLiveQuery} from 'dexie-react-hooks'
-import {configurationsTable, orderTable} from '../../database.config'
-import {CONFIGURATION_TABLE_KEY, ORDER_TABLE_KEY,} from '../common/indexed-db/hooks/keys'
+import { Pages } from '../constants/pages/urls'
+import { Badge } from '@mui/material'
+import { useRouter } from 'next/router'
+import { useLiveQuery } from 'dexie-react-hooks'
+import { configurationsTable, orderTable } from '../../database.config'
+import {
+  CONFIGURATION_TABLE_KEY,
+  ORDER_TABLE_KEY,
+} from '../common/indexed-db/hooks/keys'
 import styles from './responsive-app-bar.module.scss'
 import SearchIcon from '@mui/icons-material/Search'
 import MenuIconComponent from './components/menu-sidebar/menu-icon/menu-icon'
@@ -26,7 +29,7 @@ import ConfiguratorComponent from './components/menu/configurator/configurator'
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
 
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   const router = useRouter()
 
@@ -55,11 +58,11 @@ const ResponsiveAppBar = () => {
   }
 
   return (
-    <AppBar position='fixed' sx={{backgroundColor: 'white'}}>
+    <AppBar position='fixed' sx={{ backgroundColor: 'white' }}>
       <Container maxWidth='lg'>
         <Toolbar disableGutters>
-          <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
-            <MenuIconComponent open={handleOpenNavMenu}/>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <MenuIconComponent open={handleOpenNavMenu} />
             <Menu
               id='menu-appbar'
               anchorEl={anchorElNav}
@@ -75,7 +78,7 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: {xs: 'block', md: 'none'},
+                display: { xs: 'block', md: 'none' },
               }}
             >
               {menuItems.map((page) => (
@@ -90,17 +93,17 @@ const ResponsiveAppBar = () => {
           <Box
             sx={{
               mr: 2,
-              display: {xs: 'flex', md: 'none'},
+              display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
             }}
           >
-            <LogoComponent navigate={navigate}/>
+            <LogoComponent navigate={navigate} />
           </Box>
 
           <Box
             sx={{
               flexGrow: 1,
-              display: {xs: 'none', md: 'flex'},
+              display: { xs: 'none', md: 'flex' },
               alignItems: 'center',
               justifyContent: 'center',
             }}
@@ -109,19 +112,23 @@ const ResponsiveAppBar = () => {
               close={handleCloseNavMenu}
               origin={configuration?.origin}
             />
-            {appBarLeftItems.map(({link, title}) => (
-              <Link key={uuidv4()} href={t(link)} onClick={handleCloseNavMenu}>
-                <p className={styles.link}>{String(t(title))}</p>
+            {appBarLeftItems.map(({ link, title }) => (
+              <Link key={uuidv4()} href={t(link)}>
+                <p className={styles.link} onClick={handleCloseNavMenu}>
+                  {String(t(title))}
+                </p>
               </Link>
             ))}
-            <LogoComponent navigate={navigate}/>
-            {appBarRightItems.map(({link, title}) => (
-              <Link key={uuidv4()} onClick={handleCloseNavMenu} href={t(link)}>
-                <p className={styles.link}>{String(t(title))}</p>
+            <LogoComponent navigate={navigate} />
+            {appBarRightItems.map(({ link, title }) => (
+              <Link key={uuidv4()} href={t(link)}>
+                <p className={styles.link} onClick={handleCloseNavMenu}>
+                  {String(t(title))}
+                </p>
               </Link>
             ))}
           </Box>
-          <Box sx={{flexGrow: 0, display: 'flex', alignItems: 'center'}}>
+          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             <SearchIcon
               sx={{
                 color: 'black',
@@ -133,10 +140,10 @@ const ResponsiveAppBar = () => {
               <Badge
                 badgeContent={BADGE_NUMBER}
                 color='error'
-                sx={{my: 2, marginRight: 2, marginLeft: 2}}
+                sx={{ my: 2, marginRight: 2, marginLeft: 2 }}
               >
                 <ShoppingCartIcon
-                  sx={{color: 'black', display: 'block', cursor: 'pointer'}}
+                  sx={{ color: 'black', display: 'block', cursor: 'pointer' }}
                 />
               </Badge>
             </Link>

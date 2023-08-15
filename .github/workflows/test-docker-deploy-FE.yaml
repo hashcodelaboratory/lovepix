@@ -77,7 +77,6 @@ jobs:
           port: 22
           script: |
             cd docker-nginx-letsencrypt-https-ec2
-            cd docker
             docker images
             touch test.txt
             docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
