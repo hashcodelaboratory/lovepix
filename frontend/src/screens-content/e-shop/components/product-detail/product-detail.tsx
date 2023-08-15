@@ -38,7 +38,7 @@ const ProductDetailLayout = ({ product, isLoading }: ProductProps) => {
   useEffect(() => {
     refetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, refetch])
+  }, [id])
 
   const productList = products?.map((product: ProductsType) => (
     <div key={product.id}>

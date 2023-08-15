@@ -18,7 +18,6 @@ const useLoggedUser = () => {
     const newUser = { ...user, isAdmin: !!admin }
     setUser(newUser)
   }
-  const callbackCheckIfAdmin = useCallback(checkIfAdmin, [admins])
 
   const getUser = async () => {
     onAuthStateChanged(auth, async (user) => {
@@ -28,15 +27,15 @@ const useLoggedUser = () => {
         return
       }
 
-      callbackCheckIfAdmin(user)
+      checkIfAdmin(user)
     })
     setFetching(false)
   }
-  const callbackGetUser = useCallback(getUser, [callbackCheckIfAdmin])
   
   useEffect(() => {
-    admins && callbackGetUser()
-  }, [admins, callbackGetUser])
+    admins && getUser()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [admins])
 
   return { user, fetching }
 }

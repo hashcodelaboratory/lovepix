@@ -51,7 +51,8 @@ const DimensionContent = ({ configuration }: DimensionContentProps) => {
     if (dimensionsHeight.find((dim) => dim === configuration?.dimensionId)) {
       setValue(1)
     }
-  }, [configuration?.dimensionId, dimensionsSquare, dimensionsWidth, dimensionsHeight])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [configuration?.dimensionId])
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue)
