@@ -1,11 +1,11 @@
 name: LOVEPIX DockerHub Deployment on ORGANIZATION TEST environment - BACKEND
-#testing
+#test
 on:
   workflow_dispatch:
 
   push:
-    branches: 
-      - test
+    # branches: 
+    #   - test
 
 defaults:
   run:
