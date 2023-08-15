@@ -1,7 +1,6 @@
 import { Backdrop, CircularProgress } from '@mui/material'
 import React from 'react'
 import useLoggedUser from 'common/api/use-logged-user'
-import { Route } from 'common/enums/routes'
 import Custom404 from '../../pages/404'
 
 const AdminAccess = ({ children }: any) => {
@@ -18,11 +17,7 @@ const AdminAccess = ({ children }: any) => {
     )
   }
 
-  if (
-    !user?.isAdmin &&
-    window.location.pathname === Route.DASHBOARD &&
-    !fetching
-  ) {
+  if (!user?.isAdmin && !fetching) {
     return <Custom404 />
   }
 
