@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from 'firebase/auth'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { auth } from '../firebase/config'
 import { User } from 'firebase/auth'
 import { useAdmins } from 'common/api/use-admins'
@@ -31,9 +31,10 @@ const useLoggedUser = () => {
     })
     setFetching(false)
   }
-
+  
   useEffect(() => {
     admins && getUser()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [admins])
 
   return { user, fetching }
