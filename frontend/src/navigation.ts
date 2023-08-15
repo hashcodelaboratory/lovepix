@@ -1,4 +1,4 @@
-import {Pages} from 'constants/pages/urls'
+import { Pages } from 'constants/pages/urls'
 import * as PagesTitles from './constants/pages/titles'
 import * as SettingsTitles from './constants/settings/titles'
 
