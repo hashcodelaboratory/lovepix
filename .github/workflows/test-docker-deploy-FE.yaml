@@ -1,10 +1,9 @@
 name: LOVEPIX DockerHub Deployment on ORGANIZATION TEST environment - FRONTEND
 on:
   workflow_dispatch:
-
-  push:
-    branches:
-      - test
+  create:
+    tags:
+      -test_*
 
 defaults:
   run:
