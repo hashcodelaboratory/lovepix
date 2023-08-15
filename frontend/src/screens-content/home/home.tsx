@@ -1,6 +1,6 @@
 import { Configuration } from '../../common/types/configuration'
 import { GalleryItem } from '../../common/types/gallery'
-import Carousel from './components/carousel/carousel'
+import CarouselDropzone from './components/carousel/carousel-with-dropzone'
 import SliderComponent from './components/slider/slider'
 import Newsletter from './components/newsletter/newsletter'
 import ReviewsSection from './components/reviews-section/reviews-section'
@@ -14,7 +14,7 @@ type HomeLayoutProps = {
 
 const HomeLayout = ({ galleryData }: HomeLayoutProps) => (
   <div>
-    <Carousel />
+    <CarouselDropzone />
     <GallerySection galleryData={galleryData} />
     <ProductsSection />
     <ReviewsSection />
