@@ -2,7 +2,13 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { AddressService } from './address.service';
 import { AddressDto } from './dto/address.dto';
 import { PartialType } from '@nestjs/mapped-types';
+import {
+    ApiBadRequestResponse,
+    ApiCreatedResponse,
+    ApiTags,
+  } from '@nestjs/swagger';
 
+@ApiTags('Addresses')
 @Controller('addresses')
 export class AddressController {
     constructor(private readonly addressService: AddressService) {

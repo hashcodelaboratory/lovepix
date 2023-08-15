@@ -8,7 +8,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      'http://localhost:4000'
+      'http://localhost:4000',
     ],
     //methods: ["GET", "POST"],
     //credentials: true,
@@ -18,7 +18,6 @@ async function bootstrap() {
   .setTitle('Lovepix Backend documentation')
   .setDescription('The LOVEPIX API description')
   .setVersion('1.0')
-  .addTag('lovepix')
   .build();
 const document = SwaggerModule.createDocument(app, config);
 SwaggerModule.setup('api-lovepix', app, document);
