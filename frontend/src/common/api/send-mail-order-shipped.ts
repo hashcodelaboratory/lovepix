@@ -7,14 +7,12 @@ export type OrderStateMail = {
 export const sendMailOrderShipped = async (
   orderId: string,
   email: string,
-  text: string,
-  pdf?: string
+  text: string
 ) => {
   const body = {
     id: orderId,
     dest: email,
     text: text,
-    pdfInvoice: pdf,
   }
   return await fetch('/api/email/order/shipped', {
     method: 'POST',

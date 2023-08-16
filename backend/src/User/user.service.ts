@@ -1,69 +1,41 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
-import { UserDto } from "./dto/user.dto";
+import {Injectable} from "@nestjs/common";
+import {UserDto} from "./dto/user.dto";
+import {findById} from "../utils/query";
+import {BaseService} from "../base.service";
 
 @Injectable()
-export class UserService {
-    constructor(private readonly prismaService: PrismaService) {}
+export class UserService extends BaseService {
+  create = (data: UserDto) => this.prismaService.user.create({
+    data
+  })
 
-    async create(createData: UserDto) {
-        return this.prismaService.user.create({
-            data: createData
-        })
+  createMany = (data: UserDto[]) =>
+    this.prismaService.user.createMany({
+      data
+    })
+
+  findAll = () => this.prismaService.user.findMany({
+    include: {
+      orders: true
     }
+  });
 
-    async createMany(createData: UserDto[]) {
-        return this.prismaService.user.createMany({
-            data: createData
-        })
+
+  findOne = (id: string) => this.prismaService.user.findUnique(findById(id));
+
+  findOrders = (id: string) => this.prismaService.user.findUnique({
+    ...findById(id),
+    include: {
+      orders: true
     }
+  });
 
-    findAll() {
-        return this.prismaService.user.findMany({
-            include: {
-                orders: true
-            }
-        });
-    }
+  update = (id: string, data: Partial<UserDto>) => this.prismaService.user.update({
+    ...findById(id),
+    data
+  });
 
+  remove = (id: string) => this.prismaService.user.delete(findById(id));
 
-    async findOne(id: string) {
-        return await this.prismaService.user.findUnique({
-            where: {
-                id: id
-            }
-        });
-    }
-
-    async update(id: string, updateData: Partial<UserDto>) {
-        return await this.prismaService.user.update({
-            where: {
-                id: id
-            },
-            data: updateData
-        });
-    }
-
-    async remove(id: string) {
-        return await this.prismaService.user.delete({
-            where: {
-                id: id
-            }
-        });
-    }
-
-    async findOrders(id: string) {
-        return await this.prismaService.user.findUnique({
-            where: {
-                id: id
-            },
-            include: {
-                orders: true
-            }
-        });
-    }
-
-    async removeAll() {
-        return await this.prismaService.user.deleteMany({});
-    }
+  removeAll = () => this.prismaService.user.deleteMany();
 }

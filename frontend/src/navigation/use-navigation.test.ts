@@ -1,12 +1,12 @@
-import {renderHook} from "@testing-library/react";
-import {Pages} from "constants/pages/urls";
-import useNavigation from "./use-navigation";
+import { renderHook } from '@testing-library/react'
+import { Pages } from '../constants/pages/urls'
+import useNavigation from './use-navigation'
 
 const mockedPush = jest.fn()
-jest.mock("next/router", () => ({
+jest.mock('next/router', () => ({
   useRouter: () => ({
-    push: (route: string) => mockedPush(route)
-  })
+    push: (route: string) => mockedPush(route),
+  }),
 }))
 
 describe('src/navigation/use-navigation.ts', () => {
@@ -15,7 +15,11 @@ describe('src/navigation/use-navigation.ts', () => {
   describe('useNavigation', () => {
     describe('navigateToConfigurator', () => {
       it('should invoke `useRouter` `push` with configurator route identifier', () => {
-        const {result: {current: {navigateToConfigurator}}} = renderHook(() => useNavigation())
+        const {
+          result: {
+            current: { navigateToConfigurator },
+          },
+        } = renderHook(() => useNavigation())
 
         navigateToConfigurator()
 

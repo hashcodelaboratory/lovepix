@@ -1,4 +1,4 @@
-import { Pages } from 'constants/pages/urls'
+import { Pages } from './constants/pages/urls'
 import * as PagesTitles from './constants/pages/titles'
 import * as SettingsTitles from './constants/settings/titles'
 
@@ -23,7 +23,8 @@ const menuItems = [
   { title: PagesTitles.CONFIGURATOR, link: Pages.CONFIGURATOR },
   { title: PagesTitles.GALLERY, link: Pages.GALLERY },
   { title: PagesTitles.ESHOP, link: Pages.ESHOP },
-  { title: PagesTitles.MATERIALS, link: Pages.MATERIALS },
+  // TODO: uncomment in future usage
+  // { title: PagesTitles.MATERIALS, link: Pages.MATERIALS },
   { title: PagesTitles.ABOUT_US, link: Pages.ABOUT_US },
   { title: PagesTitles.CONTACT, link: Pages.CONTACT },
 ]

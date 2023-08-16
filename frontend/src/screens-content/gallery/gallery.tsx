@@ -56,7 +56,7 @@ const GalleryLayout = (): JSX.Element => {
 
   const add = async (path: string, id: string) => {
     await addFileFromGallery(path, id)
-    await router.push(Pages.CONFIGURATOR)
+    await router.push(t(Pages.CONFIGURATOR))
   }
 
   return (

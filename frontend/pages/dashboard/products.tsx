@@ -4,13 +4,16 @@ import React from 'react'
 import ProductsLayout from '../../src/screens-content/dashboard/components/content/components/products/products'
 import Sidebar from 'screens-content/dashboard/components/sidebar/sidebar'
 import styles from './dashboard.module.scss'
+import AdminAccess from 'common/protect-route'
 
 const Products = () => {
   return (
-    <div className={styles.dashboardContainer}>
-      <Sidebar />
-      <ProductsLayout />
-    </div>
+    <AdminAccess>
+      <div className={styles.dashboardContainer}>
+        <Sidebar />
+        <ProductsLayout />
+      </div>
+    </AdminAccess>
   )
 }
 

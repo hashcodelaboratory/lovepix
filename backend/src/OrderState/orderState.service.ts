@@ -1,49 +1,28 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
-import { OrderStateDto } from "./dto/orderState.dto";
+import {Injectable} from "@nestjs/common";
+import {OrderStateDto} from "./dto/orderState.dto";
+import {findById} from "../utils/query";
+import {BaseService} from "../base.service";
 
 @Injectable()
-export class OrderStateService {
-    constructor(private readonly prismaService: PrismaService) {}
+export class OrderStateService extends BaseService {
+  create = (data: OrderStateDto) => this.prismaService.orderState.create({
+    data
+  })
 
-    async create(createData: OrderStateDto) {
-        return this.prismaService.orderState.create({
-            data: createData
-        })
-    }
+  createMany = (data: OrderStateDto[]) => this.prismaService.orderState.createMany({
+    data
+  })
 
-    async createMany(createData: OrderStateDto[]) {
-        return this.prismaService.orderState.createMany({
-            data: createData
-        })
-    }
+  findAll = () => this.prismaService.orderState.findMany();
 
-    findAll() {
-        return this.prismaService.orderState.findMany();
-    }
+  findOne = (id: string) => this.prismaService.orderState.findUnique(findById(id));
 
-    async findOne(id: string) {
-        return await this.prismaService.orderState.findUnique({
-            where: {
-                id: id
-            }
-        });
-    }
+  update = (id: string, data: Partial<OrderStateDto>) => this.prismaService.orderState.update({
+    ...findById(id),
+    data
+  });
 
-    async update(id: string, updateData: Partial<OrderStateDto>) {
-        return await this.prismaService.orderState.update({
-            where: {
-                id: id
-            },
-            data: updateData
-        });
-    }
+  remove = (id: string) => this.prismaService.orderState.delete(findById(id));
 
-    async remove(id: string) {
-        return await this.prismaService.orderState.delete({
-            where: {
-                id: id
-            }
-        });
-    }
+  removeAll = () => this.prismaService.orderState.deleteMany();
 }

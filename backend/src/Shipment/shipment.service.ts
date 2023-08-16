@@ -1,49 +1,28 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
-import { ShipmentDto } from "./dto/shipment.dto";
+import {Injectable} from "@nestjs/common";
+import {ShipmentDto} from "./dto/shipment.dto";
+import {findById} from "../utils/query";
+import {BaseService} from "../base.service";
 
 @Injectable()
-export class ShipmentService {
-    constructor(private readonly prismaService: PrismaService) {}
+export class ShipmentService extends BaseService {
+  create = (data: ShipmentDto) => this.prismaService.shipment.create({
+    data
+  })
 
-    async create(createData: ShipmentDto) {
-        return this.prismaService.shipment.create({
-            data: createData
-        })
-    }
+  createMany = (data: ShipmentDto[]) => this.prismaService.shipment.createMany({
+    data
+  })
 
-    async createMany(createData: ShipmentDto[]) {
-        return this.prismaService.shipment.createMany({
-            data: createData
-        })
-    }
+  findAll = () => this.prismaService.shipment.findMany();
 
-    findAll() {
-        return this.prismaService.shipment.findMany();
-    }
+  findOne = (id: string) => this.prismaService.shipment.findUnique(findById(id));
 
-    async findOne(id: string) {
-        return await this.prismaService.shipment.findUnique({
-            where: {
-                id: id
-            }
-        });
-    }
+  update = (id: string, data: Partial<ShipmentDto>) => this.prismaService.shipment.update({
+    ...findById(id),
+    data
+  });
 
-    async update(id: string, updateData: Partial<ShipmentDto>) {
-        return await this.prismaService.shipment.update({
-            where: {
-                id: id
-            },
-            data: updateData
-        });
-    }
+  remove = (id: string) => this.prismaService.shipment.delete(findById(id));
 
-    async remove(id: string) {
-        return await this.prismaService.shipment.delete({
-            where: {
-                id: id
-            }
-        });
-    }
+  removeAll = () => this.prismaService.shipment.deleteMany();
 }

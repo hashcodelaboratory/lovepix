@@ -1,67 +1,75 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
-import { GalleryDto } from "./dto/gallery.dto";
+import {Injectable} from "@nestjs/common";
+import {GalleryDto} from "./dto/gallery.dto";
+import {findById} from "src/utils/query";
+import {BaseService} from "../base.service";
 
-const createGalleryQuery = (createData: GalleryDto) => ({
-    data: {
-        ...createData,
-        dimensions: {
-            connect: createData.dimensionIds.map((dimension) => ({id: dimension}))
-        },
-        galleryCategories: {
-            connect: createData.galleryCategoryIds.map((galleryCategory) => ({id: galleryCategory}))
-        }
+const findByGalleryId = (id: string) => ({
+  where: {
+    galleries: {
+      some: {
+        id
+      }
     }
+  }
+})
+
+const updateRelationsQueryOnGalleryDelete = (id: string, galleryIds: string[]) => ({
+  galleryIds: {
+    set: galleryIds.filter((gallery) => gallery !== id)
+  }
+})
+
+const findAllGalleriesQueryWithOrders = {
+  include: {
+    orders: true
+  }
+}
+
+const createGalleryQuery = (data: GalleryDto) => ({
+  data: {
+    ...data,
+    dimensions: {
+      connect: data.dimensionIds.map((dimension) => ({id: dimension}))
+    },
+    galleryCategories: {
+      connect: data.galleryCategoryIds.map((galleryCategory) => ({id: galleryCategory}))
+    }
+  }
 })
 
 @Injectable()
-export class GalleryService {
-    constructor(private readonly prismaService: PrismaService) {}
+export class GalleryService extends BaseService {
+  create = (data: GalleryDto) => this.prismaService.gallery.create(createGalleryQuery(data))
 
-    async create(createData: GalleryDto) {
-        return this.prismaService.gallery.create(createGalleryQuery(createData))
-    }
+  createMany = (data: GalleryDto[]) => this.prismaService.$transaction(data.map(this.create))
 
-    async createMany(createData: GalleryDto[]) {
-        return this.prismaService.$transaction([
-            ...createData.map((gallery) => this.prismaService.gallery.create(createGalleryQuery(gallery)))
-        ])
-    }
+  findAll = () => this.prismaService.gallery.findMany(findAllGalleriesQueryWithOrders);
 
-    findAll() {
-        return this.prismaService.gallery.findMany({
-            include: {
-                orders: true,
-            }
-        });
-    }
+  findOne = (id: string) => this.prismaService.gallery.findUnique(findById(id));
 
-    async findOne(id: string) {
-        return await this.prismaService.gallery.findUnique({
-            where: {
-                id: id
-            }
-        });
-    }
+  update = (id: string, data: Partial<GalleryDto>) =>
+    this.prismaService.gallery.update({
+      ...findById(id),
+      data
+    });
 
-    async update(id: string, updateData: Partial<GalleryDto>) {
-        return await this.prismaService.gallery.update({
-            where: {
-                id: id
-            },
-            data: updateData
-        });
-    }
+  remove = async (id: string) => {
+    const dimensions = await this.prismaService.dimension.findMany(findByGalleryId(id));
+    const galleryCategories = await this.prismaService.galleryCategory.findMany(findByGalleryId(id));
 
-    async remove(id: string) {
-        return await this.prismaService.gallery.delete({
-            where: {
-                id: id
-            }
-        });
-    }
+    await this.prismaService.$transaction([
+      ...dimensions.map((dimension) => this.prismaService.dimension.update({
+        ...findById(dimension.id),
+        data: updateRelationsQueryOnGalleryDelete(id, dimension.galleryIds)
+      })),
+      ...galleryCategories.map((galleryCategory) => this.prismaService.galleryCategory.update({
+        ...findById(galleryCategory.id),
+        data: updateRelationsQueryOnGalleryDelete(id, galleryCategory.galleryIds)
+      })),
+    ])
 
-    async removeAll() {
-        return await this.prismaService.gallery.deleteMany({});
-    }
+    return this.prismaService.gallery.delete(findById(id));
+  }
+
+  removeAll = () => this.prismaService.gallery.deleteMany();
 }

@@ -83,7 +83,7 @@ const Button = () => {
 
     configurationsTable.clear()
 
-    await router.push(`${Pages.SHOPPING_CART}`)
+    await router.push(`${t(Pages.SHOPPING_CART)}`)
   }
 
   const disabled =
@@ -97,7 +97,9 @@ const Button = () => {
         disabled={disabled}
       >
         <ShoppingCart />
-        <p className={styles.buttonTitle}>{String(t(localizationKey.toCart))}</p>
+        <p className={styles.buttonTitle}>
+          {String(t(localizationKey.toCart))}
+        </p>
       </button>
     </div>
   )
