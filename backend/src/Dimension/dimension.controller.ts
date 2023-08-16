@@ -1,8 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { UseGuards, Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { DimensionService } from './dimension.service';
 import { DimensionDto } from './dto/dimension.dto';
+import { PartialType } from '@nestjs/mapped-types';
+import {
+    ApiBadRequestResponse,
+    ApiCreatedResponse,
+    ApiTags,
+    ApiSecurity
+  } from '@nestjs/swagger';
+import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
 
-
+@ApiTags('Dimension')
+@UseGuards(ApikeyAuthGuard)
+@ApiSecurity('API-KEY')
 @Controller('dimensions')
 export class DimensionController {
     constructor(private readonly dimensionService: DimensionService) {
