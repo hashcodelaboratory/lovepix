@@ -1,6 +1,6 @@
 import styles from '../../../shopping-cart.module.scss'
 import { localizationKey } from '../../../../../localization/localization-key'
-import { Link } from '@mui/material'
+import { Link, styled } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import {
   getDeliveryMessage,
@@ -23,6 +23,11 @@ type TotalSectionProps = {
   setSubscription: () => void
   voucher?: VoucherType
 }
+
+const AddButton = styled('button')({
+  width: '100%',
+  margin: '1rem auto 0 auto',
+})
 
 const TotalSection = ({
   isSubscription,
@@ -109,14 +114,13 @@ const TotalSection = ({
           message={localizationKey.agreeWithNewsletter}
         />
       </div>
-      <button
+      <AddButton
         type='submit'
         className={styles.defaultButton}
         disabled={!bussinessCondition}
-        style={{ width: '100%', margin: '1rem auto 0 auto' }}
       >
         {String(t(localizationKey.orderWithPayment))}
-      </button>
+      </AddButton>
     </div>
   )
 }
