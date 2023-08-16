@@ -1,7 +1,10 @@
 import styles from '../../footer.module.scss'
 import Container from '@mui/material/Container'
 import { localizationKey } from '../../../../localization/localization-key'
-import { useCategories } from '../../../../common/api/use-categories'
+import {
+  CategoryType,
+  useCategories,
+} from '../../../../common/api/use-categories'
 import { FOR_PARTNERS } from '../../../../constants/pages/titles'
 import { Link as MUILink } from '@mui/material'
 import { useTranslation } from 'next-i18next'
@@ -9,6 +12,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Pages } from '../../../../constants/pages/urls'
 import { composeUrlWithQuery } from './util'
+import { TFunction } from 'react-i18next'
 import { materialSectionId } from 'common/types/url-id'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -17,100 +21,99 @@ type Link = {
   href: string | undefined
 }
 
-const serviceLinks: Link[] = [
+const getServiceLinks = (t: TFunction<'translation', undefined>): Link[] => [
   {
     label: localizationKey.ourContacts,
-    href: Pages.CONTACT,
+    href: t(Pages.CONTACT),
   },
   {
     label: localizationKey.satisfaction,
-    // TODO: TBD
-    href: Pages.SATISFACTION,
+    href: t(Pages.SATISFACTION),
   },
   {
     label: localizationKey.possibilities,
-    // TODO: TBD
-    href: Pages.POSSIBILITIES,
+    href: t(Pages.POSSIBILITIES),
   },
   {
     label: localizationKey.creatingTime,
-    // TODO: TBD
-    href: Pages.PRODUCTION_TIME,
+    href: t(Pages.PRODUCTION_TIME),
   },
   {
     label: localizationKey.complaint,
-    // TODO: TBD
-    href: Pages.COMPLAINT,
+    href: t(Pages.COMPLAINT),
   },
 ]
 
-const fromPhotoLinks: Link[] = [
+const getFromPhotoLinks = (t: TFunction<'translation', undefined>): Link[] => [
   {
     label: localizationKey.canvasPhoto,
     // TODO: TBD
-    href: `${Pages.MATERIALS}#${materialSectionId.canvas}`,
+    href: `${t(Pages.MATERIALS)}#${materialSectionId.canvas}`,
   },
   {
     label: localizationKey.acrylPhoto,
     // TODO: TBD
-    href: `${Pages.MATERIALS}#${materialSectionId.acryl}`,
+    href: `${t(Pages.MATERIALS)}#${materialSectionId.acryl}`,
   },
   {
     label: localizationKey.dibondPhoto,
     // TODO: TBD
-    href: `${Pages.MATERIALS}#${materialSectionId.dibond}`,
+    href: `${t(Pages.MATERIALS)}#${materialSectionId.dibond}`,
   },
 ]
 
-const lovePixLinks: Link[] = [
+const getLovePixLinks = (t: TFunction<'translation', undefined>): Link[] => [
   {
     label: localizationKey.materials,
-    href: Pages.MATERIALS,
+    href: t(Pages.MATERIALS),
   },
   {
     label: localizationKey.story,
-    href: Pages.ABOUT_US,
+    href: t(Pages.ABOUT_US),
   },
   {
     label: FOR_PARTNERS,
-    href: Pages.FOR_PARTNERS,
+    href: t(Pages.FOR_PARTNERS),
   },
   {
     label: localizationKey.download,
-    // TODO: TBD
-    href: Pages.DOWNLOAD,
+    href: t(Pages.DOWNLOAD),
   },
   {
     label: localizationKey.blog,
-    // TODO: TBD
-    href: Pages.BLOG,
+    href: t(Pages.BLOG),
   },
 ]
 
+const getGalleryLinks = (
+  t: TFunction<'translation', undefined>,
+  categories: CategoryType[] | undefined
+): Link[] =>
+  (categories ?? []).map(({ name }) => ({
+    label: name,
+    href: composeUrlWithQuery(t(Pages.GALLERY), { category: name }),
+  }))
+
 const FooterLinks = (): JSX.Element => {
   const { data: categories } = useCategories()
-
-  const galleryLinks: Link[] = (categories ?? []).map(({ name }) => ({
-    label: name,
-    href: composeUrlWithQuery(Pages.GALLERY, { category: name }),
-  }))
+  const { t } = useTranslation()
 
   const footerColumns: { title: string; links: Link[] }[] = [
     {
       title: localizationKey.service,
-      links: serviceLinks,
+      links: getServiceLinks(t),
     },
     {
       title: localizationKey.fromPhoto,
-      links: fromPhotoLinks,
+      links: getFromPhotoLinks(t),
     },
     {
       title: localizationKey.gallery,
-      links: galleryLinks,
+      links: getGalleryLinks(t, categories),
     },
     {
       title: 'Lovepix', // TODO: extract this to one general place
-      links: lovePixLinks,
+      links: getLovePixLinks(t),
     },
   ]
 

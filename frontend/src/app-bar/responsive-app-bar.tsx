@@ -84,7 +84,7 @@ const ResponsiveAppBar = () => {
               {menuItems.map((page) => (
                 <MenuItem key={uuidv4()} onClick={handleCloseNavMenu}>
                   <Typography textAlign='center'>
-                    <Link href={page.link}>{t(page.title)}</Link>
+                    <Link href={t(page.link)}>{t(page.title)}</Link>
                   </Typography>
                 </MenuItem>
               ))}
@@ -113,7 +113,7 @@ const ResponsiveAppBar = () => {
               origin={configuration?.origin}
             />
             {appBarLeftItems.map(({ link, title }) => (
-              <Link key={uuidv4()} href={link}>
+              <Link key={uuidv4()} href={t(link)}>
                 <p className={styles.link} onClick={handleCloseNavMenu}>
                   {String(t(title))}
                 </p>
@@ -121,7 +121,7 @@ const ResponsiveAppBar = () => {
             ))}
             <LogoComponent navigate={navigate} />
             {appBarRightItems.map(({ link, title }) => (
-              <Link key={uuidv4()} href={link}>
+              <Link key={uuidv4()} href={t(link)}>
                 <p className={styles.link} onClick={handleCloseNavMenu}>
                   {String(t(title))}
                 </p>
@@ -136,7 +136,7 @@ const ResponsiveAppBar = () => {
                 cursor: 'pointer',
               }}
             />
-            <Link href={Pages.SHOPPING_CART}>
+            <Link href={t(Pages.SHOPPING_CART)}>
               <Badge
                 badgeContent={BADGE_NUMBER}
                 color='error'

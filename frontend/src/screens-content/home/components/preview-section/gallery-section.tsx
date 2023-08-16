@@ -4,19 +4,21 @@ import { GalleryItem } from '../../../../common/types/gallery'
 import { Pages } from 'constants/pages/urls'
 import PreviewCard from './components/preview-row/components/preview-card/preview-card'
 import { localizationKey } from 'localization/localization-key'
+import { useTranslation } from 'next-i18next'
 
 type PreviewSectionProps = {
   galleryData?: GalleryItem[]
 }
 
 const GallerySection = ({ galleryData }: PreviewSectionProps): JSX.Element => {
+  const { t } = useTranslation()
   const cards = galleryData?.map((item) => (
     <PreviewCard key={item.id} item={item} />
   ))
 
   return (
     <Container style={{ marginBottom: 30 }}>
-      <PreviewRow route={Pages.GALLERY} title={localizationKey.gallery}>
+      <PreviewRow route={t(Pages.GALLERY)} title={t(localizationKey.gallery)}>
         <div style={{ display: 'flex', overflow: 'auto', marginTop: 20 }}>
           {cards}
         </div>
