@@ -12,6 +12,11 @@ export class GalleryController {
         return this.galleryService.create(createData);
     }
 
+    @Post('many')
+    createMany(@Body() createData: GalleryDto[]) {
+        return this.galleryService.createMany(createData);
+    }
+
     @Get()
     findAll() {
         return this.galleryService.findAll();

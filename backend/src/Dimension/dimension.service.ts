@@ -1,7 +1,7 @@
 import {Injectable} from "@nestjs/common";
-import {PrismaService} from "../prisma/prisma.service";
 import {DimensionDto} from "./dto/dimension.dto";
 import {findById} from "../utils/query";
+import {BaseService} from "../base.service";
 
 const findAllGalleriesQueryWithThatDimension = (id: string) => ({
   where: {
@@ -20,45 +20,35 @@ const updateRelationsQueryOnDimensionDelete = (id: string, dimensionIds: string[
 })
 
 @Injectable()
-export class DimensionService {
-  constructor(private readonly prismaService: PrismaService) {
-  }
+export class DimensionService extends BaseService {
+  create = (data: DimensionDto) => this.prismaService.dimension.create({
+    data
+  })
 
-  async create(createData: DimensionDto) {
-    return this.prismaService.dimension.create({
-      data: createData
-    })
-  }
+  createMany = (data: DimensionDto[]) => this.prismaService.dimension.createMany({
+    data
+  })
 
-  findAll() {
-    return this.prismaService.dimension.findMany();
-  }
+  findAll = () => this.prismaService.dimension.findMany();
 
-  async findOne(id: string) {
-    return this.prismaService.dimension.findUnique(findById(id));
-  }
+  findOne = (id: string) => this.prismaService.dimension.findUnique(findById(id));
 
-  async update(id: string, updateData: Partial<DimensionDto>) {
-    return this.prismaService.dimension.update({
-      ...findById(id),
-      data: updateData
-    });
-  }
+  update = (id: string, data: Partial<DimensionDto>) => this.prismaService.dimension.update({
+    ...findById(id),
+    data
+  });
 
-  async remove(id: string) {
+  remove = async (id: string) => {
     const galleries = await this.prismaService.gallery.findMany(findAllGalleriesQueryWithThatDimension(id));
 
-    await this.prismaService.$transaction([
-      ...galleries.map((gallery) => this.prismaService.gallery.update({
+    await this.prismaService.$transaction(galleries.map((gallery) => this.prismaService.gallery.update({
         ...findById(gallery.id),
         data: updateRelationsQueryOnDimensionDelete(id, gallery.dimensionIds)
       }))
-    ])
+    )
 
     return this.prismaService.dimension.delete(findById(id));
   }
 
-  async removeAll() {
-    return this.prismaService.dimension.deleteMany();
-  }
+  removeAll = () => this.prismaService.dimension.deleteMany();
 }

@@ -1,7 +1,7 @@
 import {Injectable} from "@nestjs/common";
-import {PrismaService} from "../prisma/prisma.service";
 import {CategoryDto} from "./dto/category.dto";
 import {findById} from "../utils/query";
+import {BaseService} from "../base.service";
 
 const findAllProductsQueryWithThatCategory = (id: string) => ({
   where: {
@@ -20,41 +20,35 @@ const updateRelationsQueryOnCategoryDelete = (id: string, categoryIds: string[])
 })
 
 @Injectable()
-export class CategoryService {
-  constructor(private readonly prismaService: PrismaService) {
-  }
+export class CategoryService extends BaseService {
+  create = (data: CategoryDto) => this.prismaService.category.create({
+    data
+  })
 
-  async create(createData: CategoryDto) {
-    return this.prismaService.category.create({
-      data: createData
-    })
-  }
+  createMany = (data: CategoryDto[]) => this.prismaService.category.createMany({
+    data
+  })
 
-  findAll() {
-    return this.prismaService.category.findMany({});
-  }
+  findAll = () => this.prismaService.category.findMany();
 
-  async findOne(id: string) {
-    return this.prismaService.category.findUnique(findById(id));
-  }
+  findOne = (id: string) => this.prismaService.category.findUnique(findById(id));
 
-  async update(id: string, updateData: Partial<CategoryDto>) {
-    return this.prismaService.category.update({
-      ...findById(id),
-      data: updateData
-    });
-  }
+  update = (id: string, data: Partial<CategoryDto>) => this.prismaService.category.update({
+    ...findById(id),
+    data
+  });
 
-  async remove(id: string) {
+  remove = async (id: string) => {
     const products = await this.prismaService.product.findMany(findAllProductsQueryWithThatCategory(id));
 
-    await this.prismaService.$transaction([
-      ...products.map((product) => this.prismaService.product.update({
+    await this.prismaService.$transaction(products.map((product) => this.prismaService.product.update({
         ...findById(product.id),
         data: updateRelationsQueryOnCategoryDelete(id, product.categoryIds)
       })),
-    ])
+    )
 
     return this.prismaService.category.delete(findById(id));
   }
+
+  removeAll = () => this.prismaService.category.deleteMany();
 }

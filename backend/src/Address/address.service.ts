@@ -1,50 +1,28 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
-import { AddressDto } from "./dto/address.dto";
+import {Injectable} from "@nestjs/common";
+import {AddressDto} from "./dto/address.dto";
+import {findById} from "../utils/query";
+import {BaseService} from "../base.service";
 
 @Injectable()
-export class AddressService {
-    constructor(private readonly prismaService: PrismaService) {}
+export class AddressService extends BaseService {
+  create = (data: AddressDto) => this.prismaService.address.create({
+    data
+  });
 
-    async create(createData: AddressDto) {
-        if(Array.isArray(createData)){
-            return await this.prismaService.address.createMany({
-                data: createData
-            })
-        }
-        else{
-            return await this.prismaService.address.create({
-                data: createData
-            });
-        }
-    }
+  createMany = (data: AddressDto[]) => this.prismaService.address.createMany({
+    data
+  })
 
-    findAll() {
-        return this.prismaService.address.findMany();
-    }
+  findAll = () => this.prismaService.address.findMany();
 
-    async findOne(id: string) {
-        return await this.prismaService.address.findUnique({
-            where: {
-                id: id
-            }
-        });
-    }
+  findOne = (id: string) => this.prismaService.address.findUnique(findById(id));
 
-    async update(id: string, updateData: Partial<AddressDto>) {
-        return await this.prismaService.address.update({
-            where: {
-                id: id
-            },
-            data: updateData
-        });
-    }
+  update = (id: string, data: Partial<AddressDto>) => this.prismaService.address.update({
+    ...findById(id),
+    data
+  });
 
-    async remove(id: string) {
-        return await this.prismaService.address.delete({
-            where: {
-                id: id
-            }
-        });
-    }
+  remove = (id: string) => this.prismaService.address.delete(findById(id));
+
+  removeAll = () => this.prismaService.address.deleteMany();
 }
