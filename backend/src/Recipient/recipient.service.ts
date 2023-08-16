@@ -1,47 +1,32 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
-import { RecipientDto } from "./dto/recipient.dto";
+import {Injectable} from "@nestjs/common";
+import {RecipientDto} from "./dto/recipient.dto";
+import {findById} from "../utils/query";
+import {BaseService} from "../base.service";
 
 @Injectable()
-export class RecipientService {
-    constructor(private readonly prismaService: PrismaService) {}
+export class RecipientService extends BaseService {
+  create = (data: RecipientDto) => this.prismaService.recipient.create({
+    data
+  })
 
-    async create(createData: RecipientDto) {
-        return await this.prismaService.recipient.create({
-            data: createData
-        })
-    }
+  createMany = (data: RecipientDto[]) => this.prismaService.recipient.createMany({
+    data
+  })
 
-    findAll() {
-        return this.prismaService.recipient.findMany({
-            include: {
-                orders: true
-            }
-        });
+  findAll = () => this.prismaService.recipient.findMany({
+    include: {
+      orders: true
     }
+  });
 
-    async findOne(id: string) {
-        return await this.prismaService.recipient.findUnique({
-            where: {
-                id: id
-            }
-        });
-    }
+  findOne = (id: string) => this.prismaService.recipient.findUnique(findById(id));
 
-    async update(id: string, updateData: Partial<RecipientDto>) {
-        return await this.prismaService.recipient.update({
-            where: {
-                id: id
-            },
-            data: updateData
-        });
-    }
+  update = (id: string, data: Partial<RecipientDto>) => this.prismaService.recipient.update({
+    ...findById(id),
+    data
+  });
 
-    async remove(id: string) {
-        return await this.prismaService.recipient.delete({
-            where: {
-                id: id
-            }
-        });
-    }
+  remove = (id: string) => this.prismaService.recipient.delete(findById(id));
+
+  removeAll = () => this.prismaService.recipient.deleteMany();
 }
