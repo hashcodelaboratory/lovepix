@@ -3,12 +3,6 @@ import { PrismaService } from "../prisma/prisma.service";
 import { CategoryDto } from "./dto/category.dto";
 import {findById} from "../utils/query";
 
-// const findAllCategoriesQueryWithProducts = {
-//     include: {
-//         products: true
-//     }
-// }
-
 const findAllProductsQueryWithThatCategory = (id: string) => ({
     where: {
         categories: {
