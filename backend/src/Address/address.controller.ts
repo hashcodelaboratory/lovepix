@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { UseGuards, Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { AddressService } from './address.service';
 import { AddressDto } from './dto/address.dto';
 import { PartialType } from '@nestjs/mapped-types';
@@ -7,8 +7,11 @@ import {
     ApiCreatedResponse,
     ApiTags,
   } from '@nestjs/swagger';
+import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
+
 
 @ApiTags('Addresses')
+@UseGuards(ApikeyAuthGuard)
 @Controller('addresses')
 export class AddressController {
     constructor(private readonly addressService: AddressService) {
