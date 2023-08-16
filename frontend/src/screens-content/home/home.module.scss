@@ -189,6 +189,7 @@
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
+  padding: 16px;
 }
 
 .carouselTitle {
@@ -204,12 +205,9 @@
 }
 
 .carouselButton {
-  background-color: white;
-  color: black;
   max-width: 300px;
   border: none;
-  padding: 1rem 1.5rem;
-  margin: 1rem 0 0 1rem;
+  padding: 16px;
   text-transform: uppercase;
   font-weight: 600;
   font-size: 0.75rem;

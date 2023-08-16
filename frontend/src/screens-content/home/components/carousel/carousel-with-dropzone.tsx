@@ -50,31 +50,7 @@ const CarouselDropzone = (): JSX.Element => {
     router.push(Pages.CONFIGURATOR)
   }
 
-  return (
-    <div className={styles.carousel}>
-      <Dropzone
-        activateOnClick={true}
-        className={styles.carouselContainer}
-        onDrop={(files) => onDrop(files)}
-        onReject={(files) => onReject(files)}
-        accept={{
-          'image/*': [],
-        }}
-        multiple={false}
-        maxSize={10000000}
-        sx={{
-          border: 0,
-          ':hover': {
-            backgroundColor: 'black',
-          },
-          backgroundColor: 'black',
-          cursor: 'default',
-        }}
-      >
-        <Carousel />
-      </Dropzone>
-    </div>
-  )
+  return <Carousel />
 }
 
 export default CarouselDropzone
