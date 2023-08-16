@@ -6,12 +6,14 @@ import {
     ApiBadRequestResponse,
     ApiCreatedResponse,
     ApiTags,
+    ApiSecurity
   } from '@nestjs/swagger';
 import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
 
 
 @ApiTags('Addresses')
 @UseGuards(ApikeyAuthGuard)
+@ApiSecurity('API-KEY')
 @Controller('addresses')
 export class AddressController {
     constructor(private readonly addressService: AddressService) {

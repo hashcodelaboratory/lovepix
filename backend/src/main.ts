@@ -8,14 +8,15 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      'http://localhost:4000',
+      'http://localhost:4000'
     ],
     //methods: ["GET", "POST"],
     //credentials: true,
   });
 
-  const config = new DocumentBuilder()
+const config = new DocumentBuilder()
   .setTitle('Lovepix Backend documentation')
+  .addApiKey({type: 'apiKey', name: 'API-KEY', in: 'header'}, 'API-KEY')
   .setDescription('The LOVEPIX API description')
   .setVersion('1.0')
   .build();
