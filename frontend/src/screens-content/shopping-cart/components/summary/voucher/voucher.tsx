@@ -1,12 +1,19 @@
 import styles from '../../../shopping-cart.module.scss'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from '../../../../../localization/localization-key'
-import { TextField } from '@mui/material'
+import { styled, TextField } from '@mui/material'
 import { useVoucherDetail } from '../../../../../common/api/use-voucher'
 import { ChangeEvent, useState } from 'react'
 import { orderTable } from '../../../../../../database.config'
 import { ORDER_TABLE_KEY } from '../../../../../common/indexed-db/hooks/keys'
 import { VoucherType } from '../../../../../common/types/order'
+
+const AddButton = styled('button', {
+  shouldForwardProp: (prop) => prop !== 'error',
+})<{ error: string | undefined; color?: string }>(({ theme, error }) => ({
+  marginBottom: !!error ? 24 : 0,
+  marginLeft: '0.5em',
+}))
 
 type VoucherProps = {
   voucher?: VoucherType
@@ -76,14 +83,14 @@ const Voucher = ({ voucher }: VoucherProps) => {
           helperText={error}
           color={isSuccess ? 'success' : 'primary'}
         />
-        <button
+        <AddButton
+          error={error}
           onClick={getVoucherDetail}
           disabled={isSuccess}
           className={styles.defaultButton}
-          style={{ marginBottom: error ? 24 : 0, marginLeft: '0.5em' }}
         >
           {String(t(localizationKey.add))}
-        </button>
+        </AddButton>
       </div>
     </div>
   )

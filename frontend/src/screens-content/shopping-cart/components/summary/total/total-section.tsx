@@ -24,7 +24,7 @@ type TotalSectionProps = {
   voucher?: VoucherType
 }
 
-const AddButton = styled('button')({
+const SubmitButton = styled('button')({
   width: '100%',
   margin: '1rem auto 0 auto',
 })
@@ -114,13 +114,13 @@ const TotalSection = ({
           message={localizationKey.agreeWithNewsletter}
         />
       </div>
-      <AddButton
+      <SubmitButton
         type='submit'
         className={styles.defaultButton}
         disabled={!bussinessCondition}
       >
         {String(t(localizationKey.orderWithPayment))}
-      </AddButton>
+      </SubmitButton>
     </div>
   )
 }
