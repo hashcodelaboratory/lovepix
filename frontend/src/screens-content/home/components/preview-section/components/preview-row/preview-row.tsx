@@ -30,7 +30,7 @@ const PreviewRow = ({
   )
 
   const redirect = async () => {
-    await router.push(route)
+    await router.push(t(route))
   }
 
   const content = (

@@ -5,9 +5,11 @@ import Product from 'screens-content/e-shop/components/product/product'
 import { Pages } from 'constants/pages/urls'
 import PreviewRow from '../preview-section/components/preview-row/preview-row'
 import { localizationKey } from 'localization/localization-key'
+import { useTranslation } from 'next-i18next'
 
 const ProductsSection = () => {
   const { data: products } = useProducts()
+  const { t } = useTranslation()
 
   const productList = products?.map((products: ProductsType) => (
     <Product key={products.id} product={{ ...products }} />
@@ -15,7 +17,7 @@ const ProductsSection = () => {
 
   return (
     <Container style={{ marginBottom: 30 }}>
-      <PreviewRow title={localizationKey.products} route={Pages.ESHOP}>
+      <PreviewRow title={t(localizationKey.products)} route={t(Pages.ESHOP)}>
         <div style={{ display: 'flex', overflow: 'auto', marginTop: 20 }}>
           {productList}
         </div>

@@ -112,7 +112,7 @@ const FooterIcons = (): JSX.Element => {
           </p>
           <Link
             className={styles.footerBottomContainerRowTextLink}
-            href={Pages.CONDITIONS}
+            href={t(Pages.CONDITIONS)}
             target='_blank'
           >
             {t(localizationKey.conditions)}
@@ -120,7 +120,7 @@ const FooterIcons = (): JSX.Element => {
           <p className={styles.footerDivider}>/</p>
           <Link
             className={styles.footerBottomContainerRowTextLink}
-            href={Pages.PRIVACY_POLICY}
+            href={t(Pages.PRIVACY_POLICY)}
             target='_blank'
           >
             {t(localizationKey.privacyPolicy)}
@@ -128,7 +128,7 @@ const FooterIcons = (): JSX.Element => {
           <p className={styles.footerDivider}>/</p>
           <Link
             className={styles.footerBottomContainerRowTextLink}
-            href={Pages.COOKIES}
+            href={t(Pages.COOKIES)}
             target='_blank'
           >
             {t(localizationKey.cookies)}

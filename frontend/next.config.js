@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const { i18n } = require('./next-i18next.config')
+const { rewrites } = require('./rewrites-next.config')
 
 const nextConfig = {
   reactStrictMode: true,
@@ -18,8 +19,9 @@ const nextConfig = {
   i18n,
   output: 'standalone',
   env: {
-    smartEmailingHost: '<smart-emailing-host>'
-  }
+    smartEmailingHost: '<smart-emailing-host>',
+  },
+  rewrites,
 }
 
 module.exports = nextConfig

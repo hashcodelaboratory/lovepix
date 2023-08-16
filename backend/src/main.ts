@@ -14,11 +14,11 @@ async function bootstrap() {
     //credentials: true,
   });
 
-  const config = new DocumentBuilder()
+const config = new DocumentBuilder()
   .setTitle('Lovepix Backend documentation')
+  .addApiKey({type: 'apiKey', name: 'API-KEY', in: 'header'}, 'API-KEY')
   .setDescription('The LOVEPIX API description')
   .setVersion('1.0')
-  .addTag('lovepix')
   .build();
 const document = SwaggerModule.createDocument(app, config);
 SwaggerModule.setup('api-lovepix', app, document);
