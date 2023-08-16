@@ -1,7 +1,7 @@
 import styles from '../../../shopping-cart.module.scss'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from '../../../../../localization/localization-key'
-import { Button, TextField } from '@mui/material'
+import { TextField } from '@mui/material'
 import { useVoucherDetail } from '../../../../../common/api/use-voucher'
 import { ChangeEvent, useState } from 'react'
 import { orderTable } from '../../../../../../database.config'
@@ -76,14 +76,14 @@ const Voucher = ({ voucher }: VoucherProps) => {
           helperText={error}
           color={isSuccess ? 'success' : 'primary'}
         />
-        <Button
-          variant='contained'
+        <button
           onClick={getVoucherDetail}
           disabled={isSuccess}
-          style={{ marginBottom: error ? 24 : 0 }}
+          className={styles.checkoutButton}
+          style={{ marginBottom: error ? 24 : 0, marginLeft: '0.5em' }}
         >
           {String(t(localizationKey.add))}
-        </Button>
+        </button>
       </div>
     </div>
   )

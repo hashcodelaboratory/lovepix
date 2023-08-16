@@ -113,6 +113,7 @@ const TotalSection = ({
         type='submit'
         className={styles.checkoutButton}
         disabled={!bussinessCondition}
+        style={{ width: '100%', margin: '1rem auto 0 auto' }}
       >
         {String(t(localizationKey.orderWithPayment))}
       </button>
