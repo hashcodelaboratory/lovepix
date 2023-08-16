@@ -18,7 +18,7 @@ const Product = ({ product }: ProductContent) => {
       <img
         src={image}
         alt={title}
-        style={{ maxWidth: 300, height: 300 }}
+        style={{maxWidth:300, objectFit: 'cover'}}
         className={styles.image}
         onClick={goTo}
       />
