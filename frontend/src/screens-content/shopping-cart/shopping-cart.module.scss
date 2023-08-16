@@ -166,7 +166,7 @@ $delivery-container-width: 370px;
   text-transform: uppercase;
 }
 
-.checkoutButton {
+.defaultButton {
   border-radius: 0.25rem;
   border: none;
   padding: 0.75rem;
@@ -176,11 +176,11 @@ $delivery-container-width: 370px;
   text-transform: uppercase;
 }
 
-.checkoutButton:hover:not([disabled]) {
+.defaultButton:hover:not([disabled]) {
   background-color: #606060;
 }
 
-.checkoutButton:disabled {
+.defaultButton:disabled {
   cursor: default;
   background-color: #b2b2b2;
 }

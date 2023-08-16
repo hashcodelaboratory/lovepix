@@ -111,7 +111,7 @@ const TotalSection = ({
       </div>
       <button
         type='submit'
-        className={styles.checkoutButton}
+        className={styles.defaultButton}
         disabled={!bussinessCondition}
         style={{ width: '100%', margin: '1rem auto 0 auto' }}
       >

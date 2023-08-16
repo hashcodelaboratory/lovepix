@@ -79,7 +79,7 @@ const Voucher = ({ voucher }: VoucherProps) => {
         <button
           onClick={getVoucherDetail}
           disabled={isSuccess}
-          className={styles.checkoutButton}
+          className={styles.defaultButton}
           style={{ marginBottom: error ? 24 : 0, marginLeft: '0.5em' }}
         >
           {String(t(localizationKey.add))}
