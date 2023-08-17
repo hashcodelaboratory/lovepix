@@ -10,10 +10,7 @@ import { database } from '../../../../../../../common/firebase/config'
 import { Collections } from '../../../../../../../common/firebase/enums'
 import { localizationKey } from '../../../../../../../localization/localization-key'
 import { useQueryClient } from 'react-query'
-import {
-  GALLERY_KEY,
-  useGallery,
-} from '../../../../../../../common/api/use-gallery'
+import { GALLERY_KEY } from '../../../../../../../common/api/use-gallery'
 import { useDimensions } from '../../../../../../../common/api/use-dimensions'
 import { useCategories } from '../../../../../../../common/api/use-categories'
 
