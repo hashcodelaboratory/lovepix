@@ -2,7 +2,6 @@ import styles from '../../home.module.scss'
 import Container from '@mui/material/Container'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from '../../../../localization/localization-key'
-import useNavigation from '../../../../navigation/use-navigation'
 import { Dropzone } from '@mantine/dropzone'
 import { useRouter } from 'next/router'
 import { SNACKBAR_OPTIONS_ERROR } from 'snackbar/config'
@@ -10,9 +9,10 @@ import { FileRejection } from 'react-dropzone'
 import { useSnackbar } from 'notistack'
 import { configurationsTable } from '../../../../../database.config'
 import { CONFIGURATION_TABLE_KEY } from 'common/indexed-db/hooks/keys'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { ValidationContext } from 'screens-content/validationDialog/validationDialog'
 import { Configuration } from 'common/types/configuration'
+import { Pages } from 'constants/pages/urls'
 
 export enum CarouselTestIds {
   navigateToConfiguratorButtonTestId = 'navigate_to_configurator_button_test_id',
@@ -34,11 +34,11 @@ const Carousel = ({ configuration }: { configuration: Configuration }) => {
   }
 
   const responseFunc = (isTrue: boolean) => {
-    console.log('hgiojfohio', imageData)
     if (isTrue) {
       if (!configuration)
         configurationsTable.add({ ...imageData }, CONFIGURATION_TABLE_KEY)
       else configurationsTable.update(CONFIGURATION_TABLE_KEY, { ...imageData })
+      router.push(Pages.CONFIGURATOR)
     }
     return
   }
