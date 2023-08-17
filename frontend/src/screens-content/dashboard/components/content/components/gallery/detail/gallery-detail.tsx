@@ -10,7 +10,10 @@ import { database } from '../../../../../../../common/firebase/config'
 import { Collections } from '../../../../../../../common/firebase/enums'
 import { localizationKey } from '../../../../../../../localization/localization-key'
 import { useQueryClient } from 'react-query'
-import { GALLERY_KEY } from '../../../../../../../common/api/use-gallery'
+import {
+  GALLERY_KEY,
+  useGallery,
+} from '../../../../../../../common/api/use-gallery'
 import { useDimensions } from '../../../../../../../common/api/use-dimensions'
 import { useCategories } from '../../../../../../../common/api/use-categories'
 
@@ -37,7 +40,6 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
 
   const { data: dimensions = [] } = useDimensions()
   const { data: categories = [] } = useCategories()
-
   const [price, setPrice] = useState<number>()
   const [name, setName] = useState<string>()
   const [editedDimensions, setEditedDimensions] = useState<string[]>()
@@ -169,7 +171,7 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
           </div>
         </div>
         <div className={styles.galleryDetailContainer}>
-          <Stack direction='row' spacing={1}>
+          <Stack direction='row' spacing={1} flexWrap='wrap' gap='8px'>
             {dimensions?.map(({ id, name }) => (
               <Chip
                 key={id}
@@ -178,12 +180,13 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
                 variant={getDimensionVariant(name)}
                 clickable
                 onClick={() => onClickDimension(name)}
+                className={styles.defaultChip}
               />
             ))}
           </Stack>
         </div>
         <div className={styles.galleryDetailContainer}>
-          <Stack direction='row' spacing={1}>
+          <Stack direction='row' spacing={1} flexWrap='wrap' gap='8px'>
             {categories.map(({ id, name }) => (
               <Chip
                 key={id}
@@ -192,25 +195,34 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
                 variant={getCategoryVariant(name)}
                 clickable
                 onClick={() => onClickCategory(name)}
+                className={styles.defaultChip}
               />
             ))}
           </Stack>
         </div>
-        <Button
-          className={styles.galleryDetailSave}
-          sx={{
-            ':hover': {
-              bgcolor: 'success.main', // theme.palette.primary.main
-              color: 'white',
-            },
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row-reverse',
+            padding: '0 1rem 1rem',
           }}
-          variant='outlined'
-          color='success'
-          onClick={save}
-          disabled={!price || !name}
         >
-          Save
-        </Button>
+          <Button
+            className={styles.galleryDetailSave}
+            sx={{
+              ':hover': {
+                bgcolor: 'success.main', // theme.palette.primary.main
+                color: 'white',
+              },
+            }}
+            variant='outlined'
+            color='success'
+            onClick={save}
+            disabled={!price || !name}
+          >
+            Save
+          </Button>
+        </div>
       </div>
     </>
   )
