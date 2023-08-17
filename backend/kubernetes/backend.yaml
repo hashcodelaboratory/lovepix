@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: lovepix
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - image: dominiksecka/waller:waller_be_test
+          name: backend
+          env:
+            - name: DATABASE_URL
+              value: mongodb://rooot:heslo123@mongodb:27017/lovepix?ssl=false&serverSelectionTimeoutMS=2000&authSource=admin
+          ports:
+            - name: backend
+              containerPort: 4000
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: lovepix
+spec:
+  type: NodePort
+  ports:
+    - name: backend
+      port: 4000
+      protocol: TCP
+      targetPort: 4000
+      nodePort: 30001
+  selector:
+    app: backend
+  

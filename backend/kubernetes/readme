@@ -1,0 +1,61 @@
+To run locally you need kubernetes and minikube installed.
+
+## start minikube
+
+```bash
+$ minikube start
+```
+
+## set docker env
+
+```bash
+$ eval $(minikube -p minikube docker-env)
+```
+
+## you can inspect minikube docker images with
+
+```bash
+$ minikube image ls --format table
+```
+
+## create namespace
+
+```bash
+$ kubectl create namespace lovepix
+```
+
+## create secret for docker registry
+
+```bash
+$ kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=dominiksecka --docker-password=#labRul3zz --docker-email=secka.dominik@gmail.com -n lovepix
+```
+
+## you can inspect the secret with
+
+```bash
+$ kubectl get secret regcred --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
+```
+
+
+## kubectl applly sequence
+
+```bash
+$ kubectl apply -f kubernetes/mongo-secret.yaml
+$ kubectl apply -f kubernetes/mongodb.yaml
+$ kubectl apply -f kubernetes/mongo-configmap.yaml
+$ kubectl apply -f kubernetes/mongo-express.yaml
+$ kubectl apply -f kubernetes/backend.yaml
+```
+
+## open mongo express in browser (use second terminal)
+
+```bash
+$ minikube service mongo-express-service -n lovepix
+```
+
+## upload database containers
+
+```bash
+$ kubectl exec -it  BACKEND-DEPLOYMENT_POD_NAME -n lovepix -- bash
+$ npx prisma db push
+```
