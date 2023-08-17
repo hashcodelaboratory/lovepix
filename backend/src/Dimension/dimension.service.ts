@@ -19,6 +19,19 @@ const updateRelationsQueryOnDimensionDelete = (id: string, dimensionIds: string[
   }
 })
 
+const updateRelationIdsQuery = (id: string, Ids: string[]) => ({
+  where: {
+    id: {
+      in: Ids
+    }
+  },
+  data: {
+    dimensionIds: {
+      push: id
+    }
+  }
+})
+
 @Injectable()
 export class DimensionService extends BaseService {
   create = (data: DimensionDto) => this.prismaService.dimension.create({
@@ -33,10 +46,23 @@ export class DimensionService extends BaseService {
 
   findOne = (id: string) => this.prismaService.dimension.findUnique(findById(id));
 
-  update = (id: string, data: Partial<DimensionDto>) => this.prismaService.dimension.update({
-    ...findById(id),
-    data
-  });
+  update = (id: string, data: Partial<DimensionDto>) => {
+    if(data.galleryIds) {
+      this.prismaService.gallery.findMany(findAllGalleriesQueryWithThatDimension(id))
+        .then((galleries) => this.prismaService.$transaction([
+          ...galleries.map((gallery) => this.prismaService.gallery.update({
+            ...findById(gallery.id),
+            data: updateRelationsQueryOnDimensionDelete(id, gallery.dimensionIds)
+          })),
+          this.prismaService.gallery.updateMany(updateRelationIdsQuery(id, data.galleryIds))
+        ]))
+    }
+
+    return this.prismaService.dimension.update({
+      ...findById(id),
+      data
+    });
+  }
 
   remove = async (id: string) => {
     const galleries = await this.prismaService.gallery.findMany(findAllGalleriesQueryWithThatDimension(id));

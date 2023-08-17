@@ -29,6 +29,19 @@ const createProductQuery = (data: ProductDto) => ({
   }
 })
 
+const updateRelationIdsQuery = (id: string, Ids: string[]) => ({
+  where: {
+    id: {
+      in: Ids
+    }
+  },
+  data: {
+    productIds: {
+      push: id
+    }
+  }
+})
+
 @Injectable()
 export class ProductService extends BaseService {
   create = (data: ProductDto) => this.prismaService.product.create(createProductQuery(data))
@@ -43,10 +56,22 @@ export class ProductService extends BaseService {
 
   findOne = (id: string) => this.prismaService.product.findUnique(findById(id));
 
-  update = (id: string, data: Partial<ProductDto>) => this.prismaService.product.update({
-    ...findById(id),
-    data
-  });
+  update = (id: string, data: Partial<ProductDto>) => {
+    if(data.categoryIds) {
+      this.prismaService.category.findMany(findAllCategoriesQueryWithThatProduct(id))
+        .then((categories) => this.prismaService.$transaction([
+          ...categories.map((category) => this.prismaService.category.update({
+            ...findById(category.id),
+            data: updateRelationsQueryOnProductDelete(id, category.productIds)
+          })),
+          this.prismaService.category.updateMany(updateRelationIdsQuery(id, data.categoryIds))
+        ]))
+    }
+    return this.prismaService.product.update({
+      ...findById(id),
+      data: data
+    });
+  }
 
 
   remove = async (id: string) => {
