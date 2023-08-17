@@ -69,17 +69,7 @@ const Carousel = (): JSX.Element => {
           }}
           multiple={false}
           maxSize={10000000}
-          sx={{
-            backgroundColor: 'transparent',
-            borderColor: 'black',
-            ':hover': {
-              backgroundColor: 'transparent',
-            },
-            cursor: 'default',
-            border: 'none',
-            padding: 0,
-            borderRadius: 0,
-          }}
+          className={styles.dropzoneContainer}
         >
           <h1 className={styles.carouselTitle}>{String(t(printPhoto))}</h1>
           <p className={styles.carouselSubTitle}>
@@ -94,24 +84,9 @@ const Carousel = (): JSX.Element => {
             'image/*': [],
           }}
           multiple={false}
-          sx={{
-            backgroundColor: 'transparent',
-            borderColor: 'black',
-            ':hover': {
-              backgroundColor: 'transparent',
-            },
-            border: 'none',
-            padding: 0,
-            borderRadius: 0,
-          }}
+          className={styles.dropzoneButton}
         >
-          <button
-            data-testid={CarouselTestIds.navigateToConfiguratorButtonTestId}
-            className={styles.carouselButton}
-            onClick={navigateToConfigurator}
-          >
-            {String(t(uploadPhoto))}
-          </button>
+          {String(t(uploadPhoto))}
         </Dropzone>
       </Container>
     </div>
