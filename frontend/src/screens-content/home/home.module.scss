@@ -205,9 +205,12 @@
 }
 
 .carouselButton {
+  background-color: white;
+  color: black;
   max-width: 300px;
   border: none;
-  padding: 16px;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0 0 1rem;
   text-transform: uppercase;
   font-weight: 600;
   font-size: 0.75rem;

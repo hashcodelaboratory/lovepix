@@ -70,12 +70,15 @@ const Carousel = (): JSX.Element => {
           multiple={false}
           maxSize={10000000}
           sx={{
-            border: 0,
+            backgroundColor: 'transparent',
+            borderColor: 'black',
             ':hover': {
-              backgroundColor: 'black',
+              backgroundColor: 'transparent',
             },
-            backgroundColor: 'black',
             cursor: 'default',
+            border: 'none',
+            padding: 0,
+            borderRadius: 0,
           }}
         >
           <h1 className={styles.carouselTitle}>{String(t(printPhoto))}</h1>
@@ -91,13 +94,15 @@ const Carousel = (): JSX.Element => {
             'image/*': [],
           }}
           multiple={false}
-          className={styles.carouselButton}
           sx={{
-            backgroundColor: 'black',
+            backgroundColor: 'transparent',
             borderColor: 'black',
             ':hover': {
-              backgroundColor: 'black',
+              backgroundColor: 'transparent',
             },
+            border: 'none',
+            padding: 0,
+            borderRadius: 0,
           }}
         >
           <button
