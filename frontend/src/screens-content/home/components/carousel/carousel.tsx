@@ -10,42 +10,54 @@ import { FileRejection } from 'react-dropzone'
 import { useSnackbar } from 'notistack'
 import { configurationsTable } from '../../../../../database.config'
 import { CONFIGURATION_TABLE_KEY } from 'common/indexed-db/hooks/keys'
-import check_if_full from 'screens-content/image-configurator/components/popup/check-if-full'
-import { useLiveQuery } from 'dexie-react-hooks'
+import { useContext, useState } from 'react'
+import { ValidationContext } from 'screens-content/validationDialog/validationDialog'
+import { Configuration } from 'common/types/configuration'
 
 export enum CarouselTestIds {
   navigateToConfiguratorButtonTestId = 'navigate_to_configurator_button_test_id',
 }
 
-const Carousel = (): JSX.Element => {
-  const configuration = useLiveQuery(
-    () => configurationsTable.get(CONFIGURATION_TABLE_KEY) ?? null,
-    []
-  )
+const Carousel = ({ configuration }: { configuration: Configuration }) => {
+  const validation = useContext(ValidationContext)
 
   const { t } = useTranslation()
-  const { navigateToConfigurator } = useNavigation()
   const { printPhoto, uploadPhotoSubcontent, uploadPhoto } = localizationKey
-
+  let imageData = {}
   const router = useRouter()
 
   const { enqueueSnackbar } = useSnackbar()
+  const checkFunction = () => {
+    if (!configuration) return true
+    if (!configuration.origin) return true
+    return false
+  }
+
+  const responseFunc = (isTrue: boolean) => {
+    console.log('hgiojfohio', imageData)
+    if (isTrue) {
+      if (!configuration)
+        configurationsTable.add({ ...imageData }, CONFIGURATION_TABLE_KEY)
+      else configurationsTable.update(CONFIGURATION_TABLE_KEY, { ...imageData })
+    }
+    return
+  }
 
   const onDrop = async (files: File[]) => {
     const file = files[0]
-
     const fr = new FileReader()
     fr.readAsDataURL(file)
 
     fr.onload = () => {
-      const data = {
+      let data = {
         origin: fr.result as string,
         image: undefined,
         dimensionId: undefined,
         material: undefined,
       }
-
-      check_if_full(data, configuration, router)
+      imageData = data
+      validation.validateFunction(checkFunction, responseFunc, 'Are you sure')
+      //check_if_full(data, configuration, router)
     }
   }
   const onReject = (files: FileRejection[]) => {

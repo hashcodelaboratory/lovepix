@@ -9,9 +9,6 @@ import { useReviews } from 'common/api/use-reviews'
 
 const ReviewsSection = () => {
   const { data: reviews } = useReviews()
-
-  console.log(reviews)
-
   if (!reviews?.length) {
     return null
   }

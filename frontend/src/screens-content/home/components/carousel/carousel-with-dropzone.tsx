@@ -13,11 +13,8 @@ import Carousel from './carousel'
 
 const CarouselDropzone = (): JSX.Element => {
   const { t } = useTranslation()
-
   const router = useRouter()
-
   const { enqueueSnackbar } = useSnackbar()
-
   const onDrop = async (files: File[]) => {
     const file = files[0]
 
