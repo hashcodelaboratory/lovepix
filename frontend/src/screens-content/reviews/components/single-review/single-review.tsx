@@ -42,13 +42,14 @@ const SingleReview = ({ reviewItems }: ReviewProps) => {
             </div>
           </div>
         </div>
-        <Rating
-          name='simple-controlled'
-          value={rating}
-          style={{ marginBottom: 10 }}
-          size='small'
-        />
-
+        <div className={styles.rating}>
+          <Rating
+            name='simple-controlled'
+            value={rating}
+            style={{ marginBottom: 10 }}
+            size='small'
+          />
+        </div>
         <div
           className={
             route.pathname === Pages.HOME ? styles.reviewHome : styles.review
