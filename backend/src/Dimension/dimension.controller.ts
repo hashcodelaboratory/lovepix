@@ -10,9 +10,11 @@ import {
   } from '@nestjs/swagger';
 import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
 
+const API="API-KEY"
+
 @ApiTags('Dimension')
 @UseGuards(ApikeyAuthGuard)
-@ApiSecurity('API-KEY')
+@ApiSecurity(API)
 @Controller('dimensions')
 export class DimensionController {
     constructor(private readonly dimensionService: DimensionService) {

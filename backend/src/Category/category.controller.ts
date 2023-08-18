@@ -10,9 +10,11 @@ import {
   } from '@nestjs/swagger';
 import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
 
+const API="API-KEY"
+
 @ApiTags('Category')
 @UseGuards(ApikeyAuthGuard)
-@ApiSecurity('API-KEY')
+@ApiSecurity(API)
 @Controller('categories')
 export class CategoryController {
     constructor(private readonly categoryService: CategoryService) {
