@@ -1,6 +1,6 @@
 import {Injectable} from "@nestjs/common";
 import {DimensionDto} from "./dto/dimension.dto";
-import {findById} from "../utils/query";
+import {findAllFromArray, findById} from "../utils/query";
 import {BaseService} from "../base.service";
 
 const findAllGalleriesQueryWithThatDimension = (id: string) => ({
@@ -19,15 +19,20 @@ const updateRelationsQueryOnDimensionDelete = (id: string, dimensionIds: string[
   }
 })
 
-const updateRelationIdsQuery = (id: string, Ids: string[]) => ({
-  where: {
-    id: {
-      in: Ids
-    }
-  },
+const addRelationIdsQuery = (id: string) => ({
+  ...findById(id),
   data: {
     dimensionIds: {
       push: id
+    }
+  }
+})
+
+const deleteRelationIdsQuery = (id: string, ids: string[], dimId: string) => ({
+  ...findById(id),
+  data: {
+    dimensionIds: {
+      set: ids.filter((dimIds) => dimIds !== dimId)
     }
   }
 })
@@ -46,16 +51,17 @@ export class DimensionService extends BaseService {
 
   findOne = (id: string) => this.prismaService.dimension.findUnique(findById(id));
 
-  update = (id: string, data: Partial<DimensionDto>) => {
+  update = async (id: string, data: Partial<DimensionDto>) => {
     if(data.galleryIds) {
-      this.prismaService.gallery.findMany(findAllGalleriesQueryWithThatDimension(id))
-        .then((galleries) => this.prismaService.$transaction([
-          ...galleries.map((gallery) => this.prismaService.gallery.update({
-            ...findById(gallery.id),
-            data: updateRelationsQueryOnDimensionDelete(id, gallery.dimensionIds)
-          })),
-          this.prismaService.gallery.updateMany(updateRelationIdsQuery(id, data.galleryIds))
-        ]))
+      const currentGalleryIds = (await (this.prismaService.dimension.findUnique(findById(id)))).galleryIds;
+      const toAdd = data.galleryIds.filter((gal) => !currentGalleryIds.includes(gal));
+      const toRemove = currentGalleryIds.filter((gal) => !data.galleryIds.includes(gal));
+      const galleries = await this.prismaService.gallery.findMany(findAllFromArray(toRemove));
+
+      await this.prismaService.$transaction([
+        ...toAdd.map((gal) => this.prismaService.gallery.update(addRelationIdsQuery(gal))),
+        ...galleries.map((gal) => this.prismaService.gallery.update(deleteRelationIdsQuery(gal.id, gal.dimensionIds, id)))
+      ])
     }
 
     return this.prismaService.dimension.update({

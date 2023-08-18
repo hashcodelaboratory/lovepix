@@ -3,3 +3,11 @@ export const findById = (id: string) => ({
       id
     }
   })
+
+export const findAllFromArray = (ids: string[]) => ({
+  where: {
+    id: {
+      in: ids
+    }
+  }
+})
