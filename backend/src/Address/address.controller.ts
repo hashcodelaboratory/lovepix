@@ -9,11 +9,11 @@ import {
     ApiSecurity
   } from '@nestjs/swagger';
 import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
+import {AppSettings} from "./../constants/constants";
 
-
-@ApiTags('Addresses')
+@ApiTags(AppSettings.ADDRESS)
 @UseGuards(ApikeyAuthGuard)
-@ApiSecurity('API-KEY')
+@ApiSecurity(AppSettings.API)
 @Controller('addresses')
 export class AddressController {
     constructor(private readonly addressService: AddressService) {
