@@ -13,6 +13,11 @@ export class DimensionController {
         return this.dimensionService.create(createData);
     }
 
+    @Post('many')
+    createMany(@Body() createData: DimensionDto[]) {
+        return this.dimensionService.createMany(createData);
+    }
+
     @Get()
     findAll() {
         return this.dimensionService.findAll();

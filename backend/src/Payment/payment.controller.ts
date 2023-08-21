@@ -12,6 +12,11 @@ export class PaymentController {
         return this.paymentService.create(createData);
     }
 
+    @Post('many')
+    createMany(@Body() createData: PaymentDto[]) {
+        return this.paymentService.createMany(createData);
+    }
+
     @Get()
     findAll() {
         return this.paymentService.findAll();

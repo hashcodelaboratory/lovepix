@@ -12,6 +12,11 @@ export class OrderController {
         return this.orderService.create(createData);
     }
 
+    @Post('many')
+    createMany(@Body() createData: OrderDto[]) {
+        return this.orderService.createMany(createData);
+    }
+
     @Get()
     findAll() {
         return this.orderService.findAll();

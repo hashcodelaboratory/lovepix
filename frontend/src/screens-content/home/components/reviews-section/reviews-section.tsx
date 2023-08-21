@@ -6,9 +6,12 @@ import { Pages } from 'constants/pages/urls'
 import PreviewRow from '../preview-section/components/preview-row/preview-row'
 import { localizationKey } from 'localization/localization-key'
 import { useReviews } from 'common/api/use-reviews'
+import { useTranslation } from 'next-i18next'
 
 const ReviewsSection = () => {
   const { data: reviews } = useReviews()
+  const { t } = useTranslation()
+
   if (!reviews?.length) {
     return null
   }
@@ -17,7 +20,7 @@ const ReviewsSection = () => {
     <Container style={{ marginBottom: 30 }}>
       <PreviewRow
         title={localizationKey.reviewPageYourReviews}
-        route={Pages.REVIEWS}
+        route={t(Pages.REVIEWS)}
       >
         <div className={styles.reviewContainer}>
           <ReviewList reviews={reviews} />

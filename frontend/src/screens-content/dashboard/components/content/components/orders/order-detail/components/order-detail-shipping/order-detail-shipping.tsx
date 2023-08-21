@@ -54,7 +54,7 @@ const OrderDetailShipping = ({ order }: Props): JSX.Element => {
 
   return (
     <Box className={styles.box} style={{ width: 600 }}>
-      <h4>{t(localizationKey.billingAddress)}</h4>
+      <h4>{t(localizationKey.invoiceAddress)}</h4>
       <div className={styles.boxDark}>
         {formList}
         <div className={styles.detailRow} style={{ marginTop: 20 }}>

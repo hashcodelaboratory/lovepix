@@ -1,7 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { UseGuards, Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CategoryDto } from './dto/category.dto';
+import { PartialType } from '@nestjs/mapped-types';
+import {
+    ApiBadRequestResponse,
+    ApiCreatedResponse,
+    ApiTags,
+  } from '@nestjs/swagger';
+import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
 
+@ApiTags('Category')
+@UseGuards(ApikeyAuthGuard)
 @Controller('categories')
 export class CategoryController {
     constructor(private readonly categoryService: CategoryService) {
@@ -10,6 +19,11 @@ export class CategoryController {
     @Post()
     create(@Body() createData: CategoryDto) {
         return this.categoryService.create(createData);
+    }
+
+    @Post('many')
+    createMany(@Body() createData: CategoryDto[]) {
+        return this.categoryService.createMany(createData);
     }
 
     @Get()

@@ -1,43 +1,28 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
-import { OrderItemDto } from "./dto/orderItem.dto";
+import {Injectable} from "@nestjs/common";
+import {OrderItemDto} from "./dto/orderItem.dto";
+import {findById} from "../utils/query";
+import {BaseService} from "../base.service";
 
 @Injectable()
-export class OrderItemService {
-    constructor(private readonly prismaService: PrismaService) {}
+export class OrderItemService extends BaseService {
+  create = (data: OrderItemDto) => this.prismaService.orderItem.create({
+    data
+  })
 
-    async create(createData: OrderItemDto) {
-        return await this.prismaService.orderItem.create({
-            data: createData
-        })
-    }
+  createMany = (data: OrderItemDto[]) => this.prismaService.orderItem.createMany({
+    data
+  })
 
-    findAll() {
-        return this.prismaService.orderItem.findMany();
-    }
+  findAll = () => this.prismaService.orderItem.findMany();
 
-    async findOne(id: string) {
-        return await this.prismaService.orderItem.findUnique({
-            where: {
-                id: id
-            }
-        });
-    }
+  findOne = (id: string) => this.prismaService.orderItem.findUnique(findById(id));
 
-    async update(id: string, updateData: Partial<OrderItemDto>) {
-        return await this.prismaService.orderItem.update({
-            where: {
-                id: id
-            },
-            data: updateData
-        });
-    }
+  update = (id: string, data: Partial<OrderItemDto>) => this.prismaService.orderItem.update({
+    ...findById(id),
+    data
+  });
 
-    async remove(id: string) {
-        return await this.prismaService.orderItem.delete({
-            where: {
-                id: id
-            }
-        });
-    }
+  remove = (id: string) => this.prismaService.orderItem.delete(findById(id));
+
+  removeAll = () => this.prismaService.orderItem.deleteMany();
 }

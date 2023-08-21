@@ -10,6 +10,11 @@ export class RecipientController {
     create(@Body() createData: RecipientDto) {
         return this.recipientService.create(createData);
     }
+
+    @Post('many')
+    createMany(@Body() createData: RecipientDto[]) {
+        return this.recipientService.createMany(createData);
+    }
     
     @Get()
     findAll() {

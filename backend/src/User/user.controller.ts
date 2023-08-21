@@ -12,6 +12,11 @@ export class UserController {
         return this.userService.create(createData);
     }
 
+    @Post('many')
+    createMany(@Body() createData: UserDto[]) {
+        return this.userService.createMany(createData);
+    }
+
     @Get()
     findAll() {
         return this.userService.findAll();
