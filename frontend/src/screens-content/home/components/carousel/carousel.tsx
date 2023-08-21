@@ -10,9 +10,10 @@ import { useSnackbar } from 'notistack'
 import { configurationsTable } from '../../../../../database.config'
 import { CONFIGURATION_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 import { useContext } from 'react'
-import { ValidationContext } from 'screens-content/validationDialog/validationDialog'
+import { ValidationContext } from 'screens-content/validation-provider/validationProvider'
 import { Configuration } from 'common/types/configuration'
 import { Pages } from 'constants/pages/urls'
+import { addImageToConfigurator } from 'common/utils/add-image-to-configurator'
 
 export enum CarouselTestIds {
   navigateToConfiguratorButtonTestId = 'navigate_to_configurator_button_test_id',
@@ -23,25 +24,9 @@ const Carousel = ({ configuration }: { configuration: Configuration }) => {
 
   const { t } = useTranslation()
   const { printPhoto, uploadPhotoSubcontent, uploadPhoto } = localizationKey
-  let imageData = {}
   const router = useRouter()
 
   const { enqueueSnackbar } = useSnackbar()
-  const checkFunction = () => {
-    if (!configuration) return true
-    if (!configuration.origin) return true
-    return false
-  }
-
-  const responseFunc = (isTrue: boolean) => {
-    if (isTrue) {
-      if (!configuration)
-        configurationsTable.add({ ...imageData }, CONFIGURATION_TABLE_KEY)
-      else configurationsTable.update(CONFIGURATION_TABLE_KEY, { ...imageData })
-      router.push(Pages.CONFIGURATOR)
-    }
-    return
-  }
 
   const onDrop = async (files: File[]) => {
     const file = files[0]
@@ -55,9 +40,7 @@ const Carousel = ({ configuration }: { configuration: Configuration }) => {
         dimensionId: undefined,
         material: undefined,
       }
-      imageData = data
-      validation.validateFunction(checkFunction, responseFunc, 'Are you sure')
-      //check_if_full(data, configuration, router)
+      addImageToConfigurator(configuration, data, validation, router)
     }
   }
   const onReject = (files: FileRejection[]) => {

@@ -6,7 +6,6 @@ import Newsletter from './components/newsletter/newsletter'
 import ReviewsSection from './components/reviews-section/reviews-section'
 import ProductsSection from './components/products-section/products-section'
 import GallerySection from './components/preview-section/gallery-section'
-import { ValidationDialog } from 'screens-content/validationDialog/validationDialog'
 
 type HomeLayoutProps = {
   configuration: Configuration
@@ -15,9 +14,7 @@ type HomeLayoutProps = {
 
 const HomeLayout = ({ galleryData, configuration }: HomeLayoutProps) => (
   <div>
-    <ValidationDialog>
-      <Carousel configuration={configuration} />
-    </ValidationDialog>
+    <Carousel configuration={configuration} />
     <GallerySection galleryData={galleryData} />
     <ProductsSection />
     <ReviewsSection />

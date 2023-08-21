@@ -15,7 +15,7 @@ import { configurationsTable } from '../../../../../../database.config'
 import { Configuration } from '../../../../../common/types/configuration'
 import { CONFIGURATION_TABLE_KEY } from '../../../../../common/indexed-db/hooks/keys'
 import { Pages } from 'constants/pages/urls'
-import { ValidationContext } from 'screens-content/validationDialog/validationDialog'
+import { ValidationContext } from 'screens-content/validation-provider/validationProvider'
 import { useContext } from 'react'
 
 type DropzoneContainerProps = {
@@ -30,22 +30,6 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
   const { enqueueSnackbar } = useSnackbar()
 
   const router = useRouter()
-  const checkFunction = () => {
-    if (!configuration) return true
-    if (configuration.origin === '') return true
-    return false
-  }
-
-  let data = {}
-  const responseFunc = (isTrue: boolean) => {
-    console.log('WHHAHAA')
-    if (isTrue) {
-      configurationsTable.add(data, CONFIGURATION_TABLE_KEY)
-      handleContinueConfiguration()
-      return
-    }
-    return
-  }
 
   const onDrop = async (files: File[]) => {
     const file = files[0]
@@ -53,13 +37,13 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
     const fr = new FileReader()
     fr.readAsDataURL(file)
     fr.onload = () => {
-      data = {
+      const data = {
         origin: fr.result as string,
         image: undefined,
         dimensionId: undefined,
         material: undefined,
       }
-      validation.validateFunction(checkFunction, responseFunc, 'Are you sure')
+      configurationsTable.add(data, CONFIGURATION_TABLE_KEY)
     }
   }
 

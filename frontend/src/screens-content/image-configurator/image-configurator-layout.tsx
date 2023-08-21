@@ -5,7 +5,6 @@ import CropperComponent from './components/cropper/cropper'
 import { Configuration } from '../../common/types/configuration'
 import { useState } from 'react'
 import ImageConfiguratorContext from './image-configurator-context/image-configurator-context'
-import { ValidationDialog } from 'screens-content/validationDialog/validationDialog'
 
 type ImageConfiguratorLayoutProps = {
   configuration: Configuration
