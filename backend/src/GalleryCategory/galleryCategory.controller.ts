@@ -9,10 +9,11 @@ import {
     ApiSecurity
   } from '@nestjs/swagger';
 import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
+import {AppSettings} from "./../constants/constants";
 
-@ApiTags('GalleryCategory')
+@ApiTags(AppSettings.GALLERY_CATEGORY)
 @UseGuards(ApikeyAuthGuard)
-@ApiSecurity('API-KEY')
+@ApiSecurity(AppSettings.API)
 @Controller('galleryCategories')
 export class GalleryCategoryController {
     constructor(private readonly galleryCategoryService: GalleryCategoryService) {
