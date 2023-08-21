@@ -4,7 +4,6 @@ import { useTranslation } from 'next-i18next'
 import { localizationKey } from '../../../../../../../../localization/localization-key'
 import { addFileFromGallery } from '../../../../../../../../common/utils/add-file-from-gallery'
 import { useRouter } from 'next/router'
-import { Pages } from '../../../../../../../../constants/pages/urls'
 import { Configuration } from 'common/types/configuration'
 import { ValidationContextType } from 'screens-content/validation-provider/validationProvider'
 
@@ -24,7 +23,6 @@ const PreviewCard = ({
 
   const add = async (path: string) => {
     await addFileFromGallery(path, configuration, validation, router, item?.id)
-    await router.push(t(Pages.CONFIGURATOR))
   }
 
   return (
