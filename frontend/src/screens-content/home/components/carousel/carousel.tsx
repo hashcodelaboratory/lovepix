@@ -6,20 +6,32 @@ import { Dropzone } from '@mantine/dropzone'
 import { useRouter } from 'next/router'
 import { SNACKBAR_OPTIONS_ERROR } from 'snackbar/config'
 import { FileRejection } from 'react-dropzone'
-import { useSnackbar } from 'notistack'
-import { configurationsTable } from '../../../../../database.config'
-import { CONFIGURATION_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 import { useContext } from 'react'
 import { ValidationContext } from 'screens-content/validation-provider/validationProvider'
 import { Configuration } from 'common/types/configuration'
-import { Pages } from 'constants/pages/urls'
 import { addImageToConfigurator } from 'common/utils/add-image-to-configurator'
+import { useDropzone } from 'react-dropzone'
+import { useSnackbar } from 'notistack'
 
 export enum CarouselTestIds {
   navigateToConfiguratorButtonTestId = 'navigate_to_configurator_button_test_id',
 }
 
 const Carousel = ({ configuration }: { configuration: Configuration }) => {
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop: (acceptedFiles) => {
+      onDrop(acceptedFiles)
+    },
+    onDropRejected: (fileRejections) => {
+      onReject(fileRejections)
+    },
+    multiple: false,
+    noClick: true,
+    accept: {
+      'image/*': [],
+    },
+  })
+
   const validation = useContext(ValidationContext)
 
   const { t } = useTranslation()
@@ -53,37 +65,29 @@ const Carousel = ({ configuration }: { configuration: Configuration }) => {
   }
 
   return (
-    <div className={styles.carousel}>
-      <Container className={styles.carouselContainer}>
-        <Dropzone
-          activateOnClick={false}
-          onDrop={(files) => onDrop(files)}
-          onReject={(files) => onReject(files)}
-          accept={{
-            'image/*': [],
-          }}
-          multiple={false}
-          maxSize={10000000}
-          className={styles.dropzoneContainer}
-        >
+    <div {...getRootProps({ className: 'dropzone' })}>
+      <input {...getInputProps()} />
+      <div className={styles.carousel}>
+        <Container className={styles.carouselContainer}>
           <h1 className={styles.carouselTitle}>{String(t(printPhoto))}</h1>
           <p className={styles.carouselSubTitle}>
             {String(t(uploadPhotoSubcontent))}
           </p>
-        </Dropzone>
-        <Dropzone
-          activateOnClick={true}
-          onDrop={(files) => onDrop(files)}
-          onReject={(files) => onReject(files)}
-          accept={{
-            'image/*': [],
-          }}
-          multiple={false}
-          className={styles.dropzoneButton}
-        >
-          {String(t(uploadPhoto))}
-        </Dropzone>
-      </Container>
+
+          <Dropzone
+            activateOnClick={true}
+            onDrop={(files) => onDrop(files)}
+            onReject={(files) => onReject(files)}
+            accept={{
+              'image/*': [],
+            }}
+            multiple={false}
+            className={styles.dropzoneButton}
+          >
+            {String(t(uploadPhoto))}
+          </Dropzone>
+        </Container>
+      </div>
     </div>
   )
 }
