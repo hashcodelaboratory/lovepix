@@ -8,6 +8,8 @@ import {
 } from '@mui/material'
 import { createContext, useState } from 'react'
 import { DeferredPromise } from 'common/types/deffered-promise'
+import { useTranslation } from 'next-i18next'
+import { localizationKey } from 'localization/localization-key'
 
 export type ValidationContextType = {
   validateFunction: (
@@ -31,6 +33,7 @@ type ValidationPropsType = {
 }
 
 export const ValidationProvider = ({ children }: { children: any }) => {
+  const { t } = useTranslation()
   const defaultPromise = new DeferredPromise()
   const defaultValues = {
     title: 'Are you sure?',
@@ -69,8 +72,8 @@ export const ValidationProvider = ({ children }: { children: any }) => {
   }
 
   const btnInfo = [
-    { value: false, name: 'DISAGREE' },
-    { value: true, name: 'AGREE' },
+    { value: false, name: localizationKey.validationBtnFalse },
+    { value: true, name: localizationKey.validationBtnTrue },
   ]
 
   return (
@@ -86,11 +89,11 @@ export const ValidationProvider = ({ children }: { children: any }) => {
         }
       >
         <DialogTitle id='alert-dialog-title'>
-          {validationProps.title}
+          {t(validationProps.title)}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id='alert-dialog-description'>
-            {validationProps.description}
+            {t(validationProps.description)}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -105,7 +108,7 @@ export const ValidationProvider = ({ children }: { children: any }) => {
                   : 'outlined'
               }
             >
-              {item.name}
+              {t(item.name)}
             </Button>
           ))}
         </DialogActions>

@@ -293,4 +293,8 @@ export const localizationKey = {
     sk: 'languageSwitchSlovakLanguageLabel',
     en: 'languageSwitchEnglishLanguageLabel',
   },
+  validationBtnTrue: 'validationBtnTrue',
+  validationBtnFalse: 'validationBtnFalse',
+  imageInConfiguratorTitle: 'imageInConfiguratorTitle',
+  imageInConfiguratorDescription: 'imageInConfiguratorDescription',
 }

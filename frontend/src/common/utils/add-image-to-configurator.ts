@@ -4,6 +4,7 @@ import { configurationsTable } from '../../../database.config'
 import { CONFIGURATION_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 import { NextRouter } from 'next/router'
 import { Pages } from 'constants/pages/urls'
+import { localizationKey } from 'localization/localization-key'
 
 // for this to work you need validation function from ValidationContext
 export const addImageToConfigurator = async (
@@ -16,8 +17,8 @@ export const addImageToConfigurator = async (
     if (!current) return true
     if (!current.origin) return true
     return validation.validateFunction(
-      'More than 1 image',
-      'There is already an image in the configurator\nWould you like to replace it?',
+      localizationKey.imageInConfiguratorTitle,
+      localizationKey.imageInConfiguratorDescription,
       true
     )
   }
