@@ -15,7 +15,7 @@ type HomeLayoutProps = {
 const HomeLayout = ({ galleryData, configuration }: HomeLayoutProps) => (
   <div>
     <Carousel configuration={configuration} />
-    <GallerySection galleryData={galleryData} />
+    <GallerySection configuration={configuration} galleryData={galleryData} />
     <ProductsSection />
     <ReviewsSection />
     <SliderComponent data={galleryData} />

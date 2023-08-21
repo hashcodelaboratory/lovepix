@@ -1,9 +1,17 @@
 import { getBlob, ref } from '@firebase/storage'
 import { storage } from '../firebase/config'
-import { configurationsTable } from '../../../database.config'
-import { CONFIGURATION_TABLE_KEY } from '../indexed-db/hooks/keys'
+import { addImageToConfigurator } from './add-image-to-configurator'
+import { ValidationContextType } from 'screens-content/validation-provider/validationProvider'
+import { NextRouter } from 'next/router'
+import { Configuration } from 'common/types/configuration'
 
-export const addFileFromGallery = async (path: string, id?: string) => {
+export const addFileFromGallery = async (
+  path: string,
+  configuration: Configuration,
+  validation: ValidationContextType,
+  router?: NextRouter,
+  id?: string
+) => {
   const file = await getBlob(ref(storage, path))
 
   const fr = new FileReader()
@@ -17,7 +25,6 @@ export const addFileFromGallery = async (path: string, id?: string) => {
       material: undefined,
       galleryItemId: id,
     }
-
-    configurationsTable.add(data, CONFIGURATION_TABLE_KEY)
+    addImageToConfigurator(configuration, data, validation, router)
   }
 }

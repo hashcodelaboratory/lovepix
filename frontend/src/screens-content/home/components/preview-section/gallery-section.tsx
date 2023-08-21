@@ -5,15 +5,28 @@ import { Pages } from 'constants/pages/urls'
 import PreviewCard from './components/preview-row/components/preview-card/preview-card'
 import { localizationKey } from 'localization/localization-key'
 import { useTranslation } from 'next-i18next'
+import { Configuration } from 'common/types/configuration'
+import { useContext } from 'react'
+import { ValidationContext } from 'screens-content/validation-provider/validationProvider'
 
 type PreviewSectionProps = {
+  configuration: Configuration
   galleryData?: GalleryItem[]
 }
 
-const GallerySection = ({ galleryData }: PreviewSectionProps): JSX.Element => {
+const GallerySection = ({
+  configuration,
+  galleryData,
+}: PreviewSectionProps): JSX.Element => {
+  const validation = useContext(ValidationContext)
   const { t } = useTranslation()
   const cards = galleryData?.map((item) => (
-    <PreviewCard key={item.id} item={item} />
+    <PreviewCard
+      configuration={configuration}
+      validation={validation}
+      key={item.id}
+      item={item}
+    />
   ))
 
   return (

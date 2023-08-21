@@ -5,15 +5,20 @@ import { ImageLayout } from '../home/enums/enums'
 import styles from './gallery.module.scss'
 import { useCategories } from '../../common/api/use-categories'
 import { Chip } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { localizationKey } from '../../localization/localization-key'
 import { useTranslation } from 'react-i18next'
-import { Pages } from '../../constants/pages/urls'
 import { useRouter } from 'next/router'
 import { addFileFromGallery } from '../../common/utils/add-file-from-gallery'
 import { useGalleryQuery } from './use-gallery-query'
+import { Configuration } from 'common/types/configuration'
+import { ValidationContext } from 'screens-content/validation-provider/validationProvider'
 
-const GalleryLayout = (): JSX.Element => {
+const GalleryLayout = ({
+  configuration,
+}: {
+  configuration: Configuration
+}): JSX.Element => {
   const { t } = useTranslation()
   const router = useRouter()
   const queryGallery = useGalleryQuery()
@@ -26,6 +31,8 @@ const GalleryLayout = (): JSX.Element => {
   const filtered = gallery?.filter((image) =>
     searchedCategories?.some((r) => image.categories.includes(r))
   )
+
+  const validation = useContext(ValidationContext)
 
   useEffect(() => {
     if (!queryGallery) {
@@ -55,8 +62,7 @@ const GalleryLayout = (): JSX.Element => {
   }
 
   const add = async (path: string, id: string) => {
-    await addFileFromGallery(path, id)
-    await router.push(t(Pages.CONFIGURATOR))
+    await addFileFromGallery(path, configuration, validation, router, id)
   }
 
   return (
@@ -71,7 +77,9 @@ const GalleryLayout = (): JSX.Element => {
             variant={getCategoryVariant(name)}
             clickable
             onClick={() => onClickCategory(name)}
-            className={`${styles.galleryChip} ${getCategoryVariant(name) === 'outlined' ? '' : styles.clicked}`}
+            className={`${styles.galleryChip} ${
+              getCategoryVariant(name) === 'outlined' ? '' : styles.clicked
+            }`}
           />
         ))}
       </div>
