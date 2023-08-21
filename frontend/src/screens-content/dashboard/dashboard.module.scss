@@ -322,6 +322,12 @@
   height: 3rem;
 }
 
+.galleryDetailSaveWrapper{
+  display: flex;
+  padding: 0 1rem 1rem;
+  flex-direction: row-reverse;
+}
+
 .voucherDetailBox {
   position: relative;
   background-color: white;

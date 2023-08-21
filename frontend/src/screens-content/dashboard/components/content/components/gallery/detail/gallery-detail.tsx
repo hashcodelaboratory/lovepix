@@ -197,13 +197,7 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
             ))}
           </Stack>
         </div>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row-reverse',
-            padding: '0 1rem 1rem',
-          }}
-        >
+        <div className={styles.galleryDetailSaveWrapper}>
           <Button
             className={styles.galleryDetailSave}
             sx={{
