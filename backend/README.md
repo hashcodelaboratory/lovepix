@@ -94,3 +94,6 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
+<p align="center">
+  <a href="https://swagger.io/tools/swagger-ui/" target="blank"><img src="https://logovtor.com/wp-content/uploads/2020/09/swagger-supported-by-smartbear-logo-vector.png" width="200" alt="Swagger UI Logo" /></a>
+</p>
