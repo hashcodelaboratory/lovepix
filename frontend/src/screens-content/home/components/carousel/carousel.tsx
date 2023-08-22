@@ -19,7 +19,7 @@ export enum CarouselTestIds {
 const Carousel = ({ configuration }: { configuration: Configuration }) => {
   const { getRootProps: carouselRootProps, getInputProps: carouselInputProps } =
     useDropzone({
-      onDrop: (acceptedFiles) => {
+      onDropAccepted: (acceptedFiles) => {
         onDrop(acceptedFiles)
       },
       onDropRejected: (fileRejections) => {
@@ -34,7 +34,7 @@ const Carousel = ({ configuration }: { configuration: Configuration }) => {
 
   const { getRootProps: buttonRootProps, getInputProps: buttonInputProps } =
     useDropzone({
-      onDrop: (acceptedFiles) => {
+      onDropAccepted: (acceptedFiles) => {
         onDrop(acceptedFiles)
       },
       onDropRejected: (fileRejections) => {
