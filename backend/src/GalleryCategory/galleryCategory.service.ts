@@ -20,24 +20,6 @@ const updateRelationsQueryOnDimensionDelete = (id: string, galleryCategoryIds: s
   }
 })
 
-const addRelationIdsQuery = (id: string) => ({
-  ...findById(id),
-  data: {
-    galleryCategoryIds: {
-      push: id
-    }
-  }
-})
-
-const deleteRelationIdsQuery = (id: string, ids: string[], galCatId: string) => ({
-  ...findById(id),
-  data: {
-    galleryCategoryIds: {
-      set: ids.filter((galCatIds) => galCatIds !== galCatId)
-    }
-  }
-})
-
 @Injectable()
 export class GalleryCategoryService extends BaseService {
   constructor(readonly prismaService: PrismaService) {
@@ -58,15 +40,7 @@ export class GalleryCategoryService extends BaseService {
 
   update = async (id: string, data: Partial<GalleryCategoryDto>) => {
     if(data.galleryIds) {
-      const currentGalleryIds = (await (this.prismaService.galleryCategory.findUnique(findById(id)))).galleryIds;
-      const toAdd = data.galleryIds.filter((gal) => !currentGalleryIds.includes(gal));
-      const toRemove = currentGalleryIds.filter((gal) => !data.galleryIds.includes(gal));
-      const galleries = await this.prismaService.gallery.findMany(findAllFromArray(toRemove));
-
-      await this.prismaService.$transaction([
-        ...toAdd.map((gal) => this.prismaService.gallery.update(addRelationIdsQuery(gal))),
-        ...galleries.map((gal) => this.prismaService.gallery.update(deleteRelationIdsQuery(gal.id, gal.galleryCategoryIds, id)))
-      ])
+      await this.updateRelationIds(id, data.galleryIds, 'Gallery');
     }
     return this.prismaService.galleryCategory.update({
       ...findById(id),

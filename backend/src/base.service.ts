@@ -29,9 +29,8 @@ export class BaseService {
     relationIds,
     relation: Prisma.ModelName,
   ) => {
-    console.log(id, relationIds, relation.toLowerCase() + 'Ids', this.model.toLowerCase());
-    const ids = await this.prismaService[this.model.toLowerCase()].findUnique(findById(id))[relation.toLowerCase() + 'Ids'];
-    console.log(ids);
+    //console.log(id, relationIds, relation.toLowerCase() + 'Ids', this.model.toLowerCase());
+    const ids = (await this.prismaService[this.model.toLowerCase()].findUnique(findById(id)))[relation.toLowerCase() + 'Ids'];
     const idsToAdd = relationIds.filter(
       (relationId) => !ids.includes(relationId),
     );
@@ -39,23 +38,23 @@ export class BaseService {
       (documentId) => !relationIds.includes(documentId),
     );
 
-    const toRemove = await this.prismaService[relation].findMany(
+    const toRemove = await this.prismaService[relation.toLowerCase()].findMany(
       findAllFromArray(idsToRemove),
     );
 
     await this.prismaService.$transaction([
       ...idsToAdd.map((relationId) =>
         this.prismaService[relation].update(
-          addRelationIdsQuery(relationId, id, this.modelName + 'Ids'),
+          addRelationIdsQuery(relationId, id, this.modelName.toLowerCase() + 'Ids'),
         ),
       ),
       ...toRemove.map((relationDocument) =>
-        this.prismaService[relation].update(
+        this.prismaService[relation.toLowerCase()].update(
           deleteRelationIdsQuery(
             relationDocument.id,
-            relationDocument[this.modelName + 'Ids'],
+            relationDocument[this.modelName.toLowerCase() + 'Ids'],
             id,
-            this.modelName + 'Ids',
+            this.modelName.toLowerCase() + 'Ids',
           ),
         ),
       ),

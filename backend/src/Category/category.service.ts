@@ -20,24 +20,6 @@ const updateRelationsQueryOnCategoryDelete = (id: string, categoryIds: string[])
   }
 })
 
-const adddRelationIdsQuery = (id: string, catId) => ({
-  ...findById(id),
-  data: {
-    categoryIds: {
-      push: catId
-    }
-  }
-})
-
-const deleteRelationIdsQuery = (id: string, ids: string[], catId: string) => ({
-  ...findById(id),
-  data: {
-    categoryIds: {
-      set: ids.filter((catIds) => catIds !== catId)
-    }
-  }
-})
-
 @Injectable()
 export class CategoryService extends BaseService {
   constructor(readonly prismaService: PrismaService) {
@@ -58,15 +40,7 @@ export class CategoryService extends BaseService {
 
   update = async (id: string, data: Partial<CategoryDto>) => {
     if(data.productIds) {
-      const currentProductIds = (await (this.prismaService.category.findUnique(findById(id)))).productIds;
-      const toAdd = data.productIds.filter((prod) => !currentProductIds.includes(prod));
-      const toRemove = currentProductIds.filter((prod) => !data.productIds.includes(prod));
-      const products = await this.prismaService.product.findMany(findAllFromArray(toRemove));
-      
-      await this.prismaService.$transaction([
-        ...toAdd.map((prod) => this.prismaService.product.update(adddRelationIdsQuery(prod, id))),
-        ...products.map((prod) => this.prismaService.product.update(deleteRelationIdsQuery(prod.id, prod.categoryIds, id)))
-      ])
+      await this.updateRelationIds(id, data.productIds, 'Product');
     }
 
     return this.prismaService.category.update({
