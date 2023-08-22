@@ -10,13 +10,9 @@ import { useSnackbar } from 'notistack'
 import { SNACKBAR_OPTIONS_ERROR } from '../../../../../snackbar/config'
 import { localizationKey } from '../../../../../localization/localization-key'
 import { useTranslation } from 'next-i18next'
-import { useRouter } from 'next/router'
 import { configurationsTable } from '../../../../../../database.config'
 import { Configuration } from '../../../../../common/types/configuration'
 import { CONFIGURATION_TABLE_KEY } from '../../../../../common/indexed-db/hooks/keys'
-import { Pages } from 'constants/pages/urls'
-import { ValidationContext } from 'screens-content/validation-provider/validationProvider'
-import { useContext } from 'react'
 
 type DropzoneContainerProps = {
   configuration: Configuration
@@ -26,10 +22,8 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
   const { t } = useTranslation()
 
   const { printPhoto } = localizationKey
-  const validation = useContext(ValidationContext)
-  const { enqueueSnackbar } = useSnackbar()
 
-  const router = useRouter()
+  const { enqueueSnackbar } = useSnackbar()
 
   const onDrop = async (files: File[]) => {
     const file = files[0]
@@ -54,10 +48,6 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
       }`,
       SNACKBAR_OPTIONS_ERROR
     )
-  }
-
-  const handleContinueConfiguration = () => {
-    router.push(t(Pages.CONFIGURATOR))
   }
 
   return configuration?.origin ? null : (

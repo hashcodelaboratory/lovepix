@@ -7,13 +7,13 @@
   border-radius: 0.5rem;
 }
 
-.carouselButton {
-  background-color: white;
-  color: black;
+.uploadButton {
+  background-color: black;
+  color: white;
   max-width: 300px;
   border: none;
   padding: 1rem 1.5rem;
-  margin: 1rem 0 0 1rem ;
+  margin: 0.5rem 0 1rem 0;
   text-transform: uppercase;
   font-weight: 600;
   font-size: 0.75rem;
@@ -203,29 +203,14 @@
   padding: 1rem;
   margin: 0;
 }
-.dropzoneContainer {
-  border-radius: 0;
-  border: none;
-  background-color: transparent;
-  margin: 0;
-  padding: 0;
-  cursor: default;
-}
 
-.dropzoneContainer:hover {
-  background-color: transparent;
-}
-
-.dropzoneButton {
-  border-radius: 0;
-  border: none;
-  max-width: 300px;
-  padding: 1rem 1.5rem;
-  margin: 1rem 0 0 1rem;
+.carouselButton {
   background-color: white;
   color: black;
   max-width: 300px;
   border: none;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0 0 1rem ;
   text-transform: uppercase;
   font-weight: 600;
   font-size: 0.75rem;
