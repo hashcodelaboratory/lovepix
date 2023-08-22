@@ -89,12 +89,12 @@ const Carousel = ({ configuration }: { configuration: Configuration }) => {
           <p className={styles.carouselSubTitle}>
             {String(t(uploadPhotoSubcontent))}
           </p>
-          <p className={styles.carouselButton}>
+          <button className={styles.carouselButton}>
             <div {...buttonRootProps({ className: 'dropzone' })}>
               <input {...buttonInputProps({})} />
               {String(t(uploadPhoto))}
             </div>
-          </p>
+          </button>
         </Container>
       </div>
     </div>
