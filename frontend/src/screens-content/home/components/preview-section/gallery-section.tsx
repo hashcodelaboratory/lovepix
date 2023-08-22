@@ -7,10 +7,7 @@ import { localizationKey } from 'localization/localization-key'
 import { useTranslation } from 'next-i18next'
 import { Configuration } from 'common/types/configuration'
 import { useContext } from 'react'
-import {
-  ValidationContext,
-  ValidationContextType,
-} from 'screens-content/validation-provider/validationProvider'
+import { ValidationContext } from 'screens-content/validation-provider/validationProvider'
 
 type PreviewSectionProps = {
   configuration: Configuration

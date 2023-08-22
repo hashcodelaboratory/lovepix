@@ -5,8 +5,6 @@ import { CONFIGURATION_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 import { NextRouter } from 'next/router'
 import { Pages } from 'constants/pages/urls'
 import { localizationKey } from 'localization/localization-key'
-import { TFunction } from 'next-i18next'
-import { UseTranslation } from 'next-i18next'
 
 // for this to work you need validation function from ValidationContext
 export const addImageToConfigurator = async (
