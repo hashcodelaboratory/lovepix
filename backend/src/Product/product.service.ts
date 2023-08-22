@@ -4,8 +4,6 @@ import { ProductDto } from './dto/product.dto';
 import {
   findAllFromArray,
   findById,
-  updateClass,
-  updateRelationIds,
 } from '../utils/query';
 import { BaseService } from '../base.service';
 
@@ -77,6 +75,8 @@ export class ProductService extends BaseService {
   findOne = (id: string) => this.prismaService.product.findUnique(findById(id));
 
   update = async (id: string, data: Partial<ProductDto>) => {
+    console.log((await this.prismaService.product.findUnique(findById(id))).categoryIds);
+
     if (data.categoryIds) {
       await this.updateRelationIds(id, data.categoryIds, 'Category');
     }

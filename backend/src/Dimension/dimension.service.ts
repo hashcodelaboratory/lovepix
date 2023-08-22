@@ -2,6 +2,7 @@ import {Injectable} from "@nestjs/common";
 import {DimensionDto} from "./dto/dimension.dto";
 import {findAllFromArray, findById} from "../utils/query";
 import {BaseService} from "../base.service";
+import { PrismaService } from '../prisma/prisma.service';
 
 const findAllGalleriesQueryWithThatDimension = (id: string) => ({
   where: {
@@ -39,6 +40,10 @@ const deleteRelationIdsQuery = (id: string, ids: string[], dimId: string) => ({
 
 @Injectable()
 export class DimensionService extends BaseService {
+  constructor(readonly prismaService: PrismaService) {
+    super('Dimension', prismaService);
+  }
+
   create = (data: DimensionDto) => this.prismaService.dimension.create({
     data
   })

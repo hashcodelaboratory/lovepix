@@ -13,10 +13,10 @@ export class BaseService {
   private readonly model!: Prisma.ModelName;
 
   constructor(
-    private readonly modelMame: Prisma.ModelName,
+    private readonly modelName: Prisma.ModelName,
     readonly prismaService: PrismaService,
   ) {
-    this.model = modelMame;
+    this.model = modelName;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -29,9 +29,9 @@ export class BaseService {
     relationIds,
     relation: Prisma.ModelName,
   ) => {
-    const ids = this.prismaService[this.model].findUnique(findById(id))[
-      relation + 'Ids'
-    ];
+    console.log(id, relationIds, relation.toLowerCase() + 'Ids', this.model.toLowerCase());
+    const ids = await this.prismaService[this.model.toLowerCase()].findUnique(findById(id))[relation.toLowerCase() + 'Ids'];
+    console.log(ids);
     const idsToAdd = relationIds.filter(
       (relationId) => !ids.includes(relationId),
     );
@@ -39,22 +39,23 @@ export class BaseService {
       (documentId) => !relationIds.includes(documentId),
     );
 
-    const toRemove = await this.prismaService.category.findMany(
+    const toRemove = await this.prismaService[relation].findMany(
       findAllFromArray(idsToRemove),
     );
 
     await this.prismaService.$transaction([
       ...idsToAdd.map((relationId) =>
         this.prismaService[relation].update(
-          addRelationIdsQuery(relationId, id),
+          addRelationIdsQuery(relationId, id, this.modelName + 'Ids'),
         ),
       ),
       ...toRemove.map((relationDocument) =>
         this.prismaService[relation].update(
           deleteRelationIdsQuery(
             relationDocument.id,
-            relationDocument.productIds,
+            relationDocument[this.modelName + 'Ids'],
             id,
+            this.modelName + 'Ids',
           ),
         ),
       ),

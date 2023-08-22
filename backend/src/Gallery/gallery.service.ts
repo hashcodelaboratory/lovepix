@@ -3,6 +3,7 @@ import {GalleryDto} from "./dto/gallery.dto";
 import {findById} from "src/utils/query";
 import {findAllFromArray} from "../utils/query";
 import {BaseService} from "../base.service";
+import { PrismaService } from '../prisma/prisma.service';
 
 const findByGalleryId = (id: string) => ({
   where: {
@@ -59,6 +60,10 @@ const deleteRelationIdsQuery = (id: string, ids: string[], galId: string) => ({
 
 @Injectable()
 export class GalleryService extends BaseService {
+  constructor(readonly prismaService: PrismaService) {
+    super('Gallery', prismaService);
+  }
+
   create = (data: GalleryDto) => this.prismaService.gallery.create(createGalleryQuery(data))
 
   createMany = (data: GalleryDto[]) => this.prismaService.$transaction(data.map(this.create))

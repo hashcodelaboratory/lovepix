@@ -2,6 +2,7 @@ import {Injectable} from "@nestjs/common";
 import {GalleryCategoryDto} from "./dto/galleryCategory.dto";
 import {findAllFromArray, findById} from "../utils/query";
 import {BaseService} from "../base.service";
+import { PrismaService } from '../prisma/prisma.service';
 
 const findAllGalleriesQueryWithThatGalleryCategory = (id: string) => ({
   where: {
@@ -39,6 +40,10 @@ const deleteRelationIdsQuery = (id: string, ids: string[], galCatId: string) => 
 
 @Injectable()
 export class GalleryCategoryService extends BaseService {
+  constructor(readonly prismaService: PrismaService) {
+    super('GalleryCategory', prismaService);
+  }
+
   create = (data: GalleryCategoryDto) => this.prismaService.galleryCategory.create({
     data
   })

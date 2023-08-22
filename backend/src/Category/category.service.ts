@@ -2,6 +2,7 @@ import {Injectable} from "@nestjs/common";
 import {CategoryDto} from "./dto/category.dto";
 import {findAllFromArray, findById} from "../utils/query";
 import {BaseService} from "../base.service";
+import { PrismaService } from '../prisma/prisma.service';
 
 const findAllProductsQueryWithThatCategory = (id: string) => ({
   where: {
@@ -39,6 +40,10 @@ const deleteRelationIdsQuery = (id: string, ids: string[], catId: string) => ({
 
 @Injectable()
 export class CategoryService extends BaseService {
+  constructor(readonly prismaService: PrismaService) {
+    super('Category', prismaService);
+  }
+
   create = (data: CategoryDto) => this.prismaService.category.create({
     data
   })

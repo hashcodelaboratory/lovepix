@@ -2,9 +2,14 @@ import {Injectable} from "@nestjs/common";
 import {AddressDto} from "./dto/address.dto";
 import {findById} from "../utils/query";
 import {BaseService} from "../base.service";
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class AddressService extends BaseService {
+  constructor(readonly prismaService: PrismaService) {
+    super('Address', prismaService);
+  }
+
   create = (data: AddressDto) => this.prismaService.address.create({
     data
   });

@@ -2,9 +2,14 @@ import {Injectable} from "@nestjs/common";
 import {ShipmentDto} from "./dto/shipment.dto";
 import {findById} from "../utils/query";
 import {BaseService} from "../base.service";
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class ShipmentService extends BaseService {
+  constructor(readonly prismaService: PrismaService) {
+    super('Shipment', prismaService);
+  }
+
   create = (data: ShipmentDto) => this.prismaService.shipment.create({
     data
   })
