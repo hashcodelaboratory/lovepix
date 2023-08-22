@@ -18,19 +18,35 @@ export enum CarouselTestIds {
 }
 
 const Carousel = ({ configuration }: { configuration: Configuration }) => {
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop: (acceptedFiles) => {
-      onDrop(acceptedFiles)
-    },
-    onDropRejected: (fileRejections) => {
-      onReject(fileRejections)
-    },
-    multiple: false,
-    noClick: true,
-    accept: {
-      'image/*': [],
-    },
-  })
+  const { getRootProps: carouselRootProps, getInputProps: carouselInputProps } =
+    useDropzone({
+      onDrop: (acceptedFiles) => {
+        onDrop(acceptedFiles)
+      },
+      onDropRejected: (fileRejections) => {
+        onReject(fileRejections)
+      },
+      multiple: false,
+      noClick: true,
+      accept: {
+        'image/*': [],
+      },
+    })
+
+  const { getRootProps: buttonRootProps, getInputProps: buttonInputProps } =
+    useDropzone({
+      onDrop: (acceptedFiles) => {
+        onDrop(acceptedFiles)
+      },
+      onDropRejected: (fileRejections) => {
+        onReject(fileRejections)
+      },
+      multiple: false,
+      noClick: false,
+      accept: {
+        'image/*': [],
+      },
+    })
 
   const validation = useContext(ValidationContext)
 
@@ -65,27 +81,20 @@ const Carousel = ({ configuration }: { configuration: Configuration }) => {
   }
 
   return (
-    <div {...getRootProps({ className: 'dropzone' })}>
-      <input {...getInputProps()} />
+    <div {...carouselRootProps({ className: 'dropzone', noClick: true })}>
+      <input {...carouselInputProps()} />
       <div className={styles.carousel}>
         <Container className={styles.carouselContainer}>
           <h1 className={styles.carouselTitle}>{String(t(printPhoto))}</h1>
           <p className={styles.carouselSubTitle}>
             {String(t(uploadPhotoSubcontent))}
           </p>
-
-          <Dropzone
-            activateOnClick={true}
-            onDrop={(files) => onDrop(files)}
-            onReject={(files) => onReject(files)}
-            accept={{
-              'image/*': [],
-            }}
-            multiple={false}
-            className={styles.dropzoneButton}
-          >
-            {String(t(uploadPhoto))}
-          </Dropzone>
+          <p className={styles.carouselButton}>
+            <div {...buttonRootProps({ className: 'dropzone' })}>
+              <input {...buttonInputProps({})} />
+              {String(t(uploadPhoto))}
+            </div>
+          </p>
         </Container>
       </div>
     </div>
