@@ -1,47 +1,47 @@
-.reviewBlock{
-    padding: 20px;
-    height: auto;
-    height: calc(100% - 15px);
-    margin-bottom: 20px;
-    border-radius: 4px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+.reviewBlock {
+  padding: 20px;
+  height: auto;
+  height: calc(100% - 15px);
+  margin-bottom: 20px;
+  border-radius: 4px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-    background-color: white;
+  background-color: white;
 }
 .reviewer {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-  }
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
 
-.reviewDates{
-    font-size: 12px;
-    display: flex;
-    flex-direction: row;
-    margin: 0px;
+.reviewDates {
+  font-size: 12px;
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
 }
-.date{
-    width:30%;
-    margin-top: 0px;
-    height:20px;
-    padding-top: 0px;
-    margin-right: 5px;
+.date {
+  width: 30%;
+  margin-top: 0px;
+  height: 20px;
+  padding-top: 0px;
+  margin-right: 5px;
 }
-.reviewerName{
-    width: 80%;
+.reviewerName {
+  width: 80%;
 }
 .reviewHome {
-    font-size: 0.85rem;
-    word-wrap: break-word;
-    overflow: hidden;
-    max-height: 3.6em; /* (Number of lines you want visible) * (line-height) */
-    line-height: 1.2em;
-    text-align: justify;
-    -webkit-line-clamp: 2; /* number of lines to show */
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* number of lines to show */
-    -webkit-box-orient: vertical;
-  }
+  font-size: 0.85rem;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.6em; /* (Number of lines you want visible) * (line-height) */
+  line-height: 1.2em;
+  text-align: justify;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
