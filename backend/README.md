@@ -102,18 +102,20 @@ $ yarn run start:prod
 
 [SWAGGER](https://swagger.io/tools/swagger-ui/) Open Source documentation.
 
-## Installation of Prisma globally
+## Run Backend of application
 
 ```bash
-$ npm install -g prisma
-```
-
-## Installation dependencies
-
-```bash
-$ yarn install
+$ yarn start:dev
 
 OR
 
-$ yarn
+$ yarn start:be
 ```
+
+## Use endpoint /api-lovepix to start SWAGGER UI documentation
+
+```bash
+$ http://localhost:4000/api-lovepix
+```
+
+## !!! For authorize your controllers you need to use value of API-KEY from new-lovpix channgel like pinned message. !!!
