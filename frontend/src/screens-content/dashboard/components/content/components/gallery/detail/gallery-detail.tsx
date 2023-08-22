@@ -200,12 +200,6 @@ const GalleryDetail = ({ row }: GalleryDetailProps): JSX.Element => {
         <div className={styles.galleryDetailSaveWrapper}>
           <Button
             className={styles.galleryDetailSave}
-            sx={{
-              ':hover': {
-                bgcolor: 'success.main', // theme.palette.primary.main
-                color: 'white',
-              },
-            }}
             variant='outlined'
             color='success'
             onClick={save}

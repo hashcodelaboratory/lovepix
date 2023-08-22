@@ -328,6 +328,12 @@
   flex-direction: row-reverse;
 }
 
+.galleryDetailSave:hover {
+  background-color: #2e7d32; // mui success.main color
+  color: white;
+  border-color: transparent;
+}
+
 .voucherDetailBox {
   position: relative;
   background-color: white;
