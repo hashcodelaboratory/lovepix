@@ -4,11 +4,14 @@ import { addImageToConfigurator } from './add-image-to-configurator'
 import { ValidationContextType } from 'screens-content/validation-provider/validationProvider'
 import { NextRouter } from 'next/router'
 import { Configuration } from 'common/types/configuration'
+import { Pages } from 'constants/pages/urls'
+import { TFunction } from 'next-i18next'
 
 export const addFileFromGallery = async (
   path: string,
   configuration: Configuration,
   validation: ValidationContextType,
+  t?: any,
   router?: NextRouter,
   id?: string
 ) => {
@@ -25,6 +28,7 @@ export const addFileFromGallery = async (
       material: undefined,
       galleryItemId: id,
     }
-    addImageToConfigurator(configuration, data, validation, router)
+
+    addImageToConfigurator(configuration, data, validation, t, router)
   }
 }

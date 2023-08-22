@@ -7,7 +7,10 @@ import { localizationKey } from 'localization/localization-key'
 import { useTranslation } from 'next-i18next'
 import { Configuration } from 'common/types/configuration'
 import { useContext } from 'react'
-import { ValidationContext } from 'screens-content/validation-provider/validationProvider'
+import {
+  ValidationContext,
+  ValidationContextType,
+} from 'screens-content/validation-provider/validationProvider'
 
 type PreviewSectionProps = {
   configuration: Configuration
@@ -31,7 +34,12 @@ const GallerySection = ({
 
   return (
     <Container style={{ marginBottom: 30 }}>
-      <PreviewRow route={t(Pages.GALLERY)} title={t(localizationKey.gallery)}>
+      <PreviewRow
+        route={t(Pages.GALLERY)}
+        title={t(localizationKey.gallery)}
+        configuration={configuration}
+        validation={validation}
+      >
         <div style={{ display: 'flex', overflow: 'auto', marginTop: 20 }}>
           {cards}
         </div>

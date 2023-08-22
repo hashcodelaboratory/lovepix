@@ -5,27 +5,33 @@ import { GalleryItem } from '../../../../../../common/types/gallery'
 import { useTranslation } from 'react-i18next'
 import { localizationKey } from '../../../../../../localization/localization-key'
 import { useRouter } from 'next/router'
+import { Configuration } from 'common/types/configuration'
+import { ValidationContextType } from 'screens-content/validation-provider/validationProvider'
 
 type PreviewRowProps = {
   galleryData?: GalleryItem[]
   title: string
   route: string
   children: React.ReactNode
+  configuration: Configuration
+  validation: ValidationContextType
 }
 
 const PreviewRow = ({
   title,
   children,
   route,
+  configuration,
+  validation,
 }: PreviewRowProps): JSX.Element => {
   const { t } = useTranslation()
   const router = useRouter()
 
   const dummy = (
     <>
-      <PreviewCard />
-      <PreviewCard />
-      <PreviewCard />
+      <PreviewCard configuration={configuration} validation={validation} />
+      <PreviewCard configuration={configuration} validation={validation} />
+      <PreviewCard configuration={configuration} validation={validation} />
     </>
   )
 

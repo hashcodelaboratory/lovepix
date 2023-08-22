@@ -62,7 +62,7 @@ const GalleryLayout = ({
   }
 
   const add = async (path: string, id: string) => {
-    await addFileFromGallery(path, configuration, validation, router, id)
+    await addFileFromGallery(path, configuration, validation, t, router, id)
   }
 
   return (

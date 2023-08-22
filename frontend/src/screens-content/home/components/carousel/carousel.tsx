@@ -68,7 +68,7 @@ const Carousel = ({ configuration }: { configuration: Configuration }) => {
         dimensionId: undefined,
         material: undefined,
       }
-      addImageToConfigurator(configuration, data, validation, router)
+      addImageToConfigurator(configuration, data, validation, t, router)
     }
   }
   const onReject = (files: FileRejection[]) => {

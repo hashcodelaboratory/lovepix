@@ -5,12 +5,15 @@ import { CONFIGURATION_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 import { NextRouter } from 'next/router'
 import { Pages } from 'constants/pages/urls'
 import { localizationKey } from 'localization/localization-key'
+import { TFunction } from 'next-i18next'
+import { UseTranslation } from 'next-i18next'
 
 // for this to work you need validation function from ValidationContext
 export const addImageToConfigurator = async (
   current: Configuration | undefined,
   imageData: object,
   validation: ValidationContextType,
+  t?: any,
   router?: NextRouter
 ) => {
   const checkFunction = async () => {
@@ -26,5 +29,5 @@ export const addImageToConfigurator = async (
   if (!check) return
   if (!current) configurationsTable.add(imageData, CONFIGURATION_TABLE_KEY)
   else configurationsTable.update(CONFIGURATION_TABLE_KEY, imageData)
-  router?.push(Pages.CONFIGURATOR)
+  router?.push(t(Pages.CONFIGURATOR))
 }

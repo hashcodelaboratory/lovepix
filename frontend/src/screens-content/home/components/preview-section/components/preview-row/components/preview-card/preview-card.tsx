@@ -22,7 +22,14 @@ const PreviewCard = ({
   const router = useRouter()
 
   const add = async (path: string) => {
-    await addFileFromGallery(path, configuration, validation, router, item?.id)
+    await addFileFromGallery(
+      path,
+      configuration,
+      validation,
+      t,
+      router,
+      item?.id
+    )
   }
 
   return (
