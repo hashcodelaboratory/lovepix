@@ -1,7 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { UseGuards, Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { PaymentService } from './payment.service';
 import { PaymentDto } from './dto/payment.dto';
+import { PartialType } from '@nestjs/mapped-types';
+import {
+    ApiBadRequestResponse,
+    ApiCreatedResponse,
+    ApiTags,
+    ApiSecurity
+  } from '@nestjs/swagger';
+import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
+import {AppSettings} from "./../constants/constants";
 
+@ApiTags(AppSettings.PAYMENT)
+@UseGuards(ApikeyAuthGuard)
+@ApiSecurity(AppSettings.API)
 @Controller('payments')
 export class PaymentController {
     constructor(private readonly paymentService: PaymentService) {

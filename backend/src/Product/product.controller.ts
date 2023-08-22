@@ -1,7 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { UseGuards, Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { ProductDto } from './dto/product.dto';
+import { PartialType } from '@nestjs/mapped-types';
+import {
+    ApiBadRequestResponse,
+    ApiCreatedResponse,
+    ApiTags,
+    ApiSecurity
+  } from '@nestjs/swagger';
+import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
+import {AppSettings} from "./../constants/constants";
 
+@ApiTags(AppSettings.PRODUCT)
+@UseGuards(ApikeyAuthGuard)
+@ApiSecurity(AppSettings.API)
 @Controller('products')
 export class ProductController {
     constructor(private readonly productService: ProductService) {

@@ -1,7 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { UseGuards, Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { RecipientService } from './recipient.service';
 import { RecipientDto } from './dto/recipient.dto';
+import { PartialType } from '@nestjs/mapped-types';
+import {
+    ApiBadRequestResponse,
+    ApiCreatedResponse,
+    ApiTags,
+    ApiSecurity
+  } from '@nestjs/swagger';
+import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
+import {AppSettings} from "./../constants/constants";
 
+@ApiTags(AppSettings.RECIPIENT)
+@UseGuards(ApikeyAuthGuard)
+@ApiSecurity(AppSettings.API)
 @Controller('recipients')
 export class RecipientController {
     constructor(private readonly recipientService: RecipientService) {}
