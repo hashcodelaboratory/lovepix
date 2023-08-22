@@ -12,7 +12,7 @@ import FooterLayout from "../src/screens-content/footer/footer";
 const Home: NextPage = () => {
   const configuration = useLiveQuery(() => configurationsTable.get(CONFIGURATION_TABLE_KEY), []);
 
-  const {data: galleryData} = useGallery();
+  const {data: galleryData, isLoading} = useGallery();
 
   return (
     <div className={styles.container}>
@@ -21,7 +21,7 @@ const Home: NextPage = () => {
       </header>
 
       <main className={styles.main}>
-        <HomeLayout configuration={configuration} galleryData={galleryData}/>
+        <HomeLayout configuration={configuration} galleryData={galleryData} loading={isLoading}/>
       </main>
 
       <footer>
