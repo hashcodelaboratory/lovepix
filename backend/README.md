@@ -113,9 +113,9 @@ $ yarn start:be
 ```
 
 ## Use endpoint /api-lovepix to start SWAGGER UI documentation
-
+[http://localhost:4000/api-lovepix](http://localhost:4000/api-lovepix)
 ```bash
 $ http://localhost:4000/api-lovepix
 ```
 
-## !!! For authorize your controllers you need to use value of API-KEY from new-lovpix channgel like pinned message. !!!
+## !!! For authorize your controllers you need to use value of API-KEY from new-lovpix channel like pinned message. !!!
