@@ -5,6 +5,11 @@ import { BaseService } from '../base.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
+enum relationNames {
+  galleries = 'galleries',
+  galleryIds = 'galleryIds'
+}
+
 const findAllGalleriesQueryWithThatGalleryCategory = (id: string) => ({
   where: {
     galleryCategories: {
@@ -31,14 +36,14 @@ export class GalleryCategoryService extends BaseService {
   }
 
   create = (data: GalleryCategoryDto) =>
-    this.prismaService.galleryCategory.create({
-      data
-    });
+    this.manyToManyCreate(
+      data,
+      relationNames.galleries,
+      relationNames.galleryIds
+    );
 
   createMany = (data: GalleryCategoryDto[]) =>
-    this.prismaService.galleryCategory.createMany({
-      data
-    });
+    this.prismaService.$transaction(data.map(this.create));
 
   findAll = () => this.prismaService.galleryCategory.findMany({});
 
