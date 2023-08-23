@@ -40,7 +40,7 @@ export class ProductService extends BaseService {
   }
 
   create = (data: ProductDto) =>
-    this.prismaService.product.create(createProductQuery(data));
+    this.manyToManyCreate(data, 'categories', 'categoryIds');
 
   createMany = (data: ProductDto[]) =>
     this.prismaService.$transaction(data.map(this.create));

@@ -25,6 +25,17 @@ export class BaseService {
     throw new Error('Create has not been implemented!');
   }
 
+  manyToManyCreate = async (data, relationName: string, arrayName: string) => {
+    this.prismaService[this.model.toLowerCase()].create({
+      data: {
+        ...data,
+        [relationName]: {
+          connect: data[arrayName].map((item) => ({ id: item }))
+        }
+      }
+    });
+  };
+
   updateRelationIds = async (
     id: string,
     relationIds,
