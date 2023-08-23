@@ -5,7 +5,7 @@ import {
   addRelationIdsQuery,
   deleteRelationIdsQuery,
   findAllFromArray,
-  findById,
+  findById
 } from './utils/query';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class BaseService {
 
   constructor(
     private readonly modelName: Prisma.ModelName,
-    readonly prismaService: PrismaService,
+    readonly prismaService: PrismaService
   ) {
     this.model = modelName;
   }
@@ -27,37 +27,44 @@ export class BaseService {
   updateRelationIds = async (
     id: string,
     relationIds,
-    relation: Prisma.ModelName,
+    relationModelName: Prisma.ModelName
   ) => {
-    //console.log(id, relationIds, relation.toLowerCase() + 'Ids', this.model.toLowerCase());
-    const ids = (await this.prismaService[this.model.toLowerCase()].findUnique(findById(id)))[relation.toLowerCase() + 'Ids'];
+    const ids = (
+      await this.prismaService[this.model.toLowerCase()].findUnique(
+        findById(id)
+      )
+    )[relationModelName.toLowerCase() + 'Ids'];
     const idsToAdd = relationIds.filter(
-      (relationId) => !ids.includes(relationId),
+      (relationId) => !ids.includes(relationId)
     );
     const idsToRemove = ids.filter(
-      (documentId) => !relationIds.includes(documentId),
+      (documentId) => !relationIds.includes(documentId)
     );
 
-    const toRemove = await this.prismaService[relation.toLowerCase()].findMany(
-      findAllFromArray(idsToRemove),
-    );
+    const toRemove = await this.prismaService[
+      relationModelName.toLowerCase()
+    ].findMany(findAllFromArray(idsToRemove));
 
     await this.prismaService.$transaction([
       ...idsToAdd.map((relationId) =>
-        this.prismaService[relation].update(
-          addRelationIdsQuery(relationId, id, this.modelName.toLowerCase() + 'Ids'),
-        ),
+        this.prismaService[relationModelName].update(
+          addRelationIdsQuery(
+            relationId,
+            id,
+            this.modelName.toLowerCase() + 'Ids'
+          )
+        )
       ),
       ...toRemove.map((relationDocument) =>
-        this.prismaService[relation.toLowerCase()].update(
+        this.prismaService[relationModelName.toLowerCase()].update(
           deleteRelationIdsQuery(
             relationDocument.id,
             relationDocument[this.modelName.toLowerCase() + 'Ids'],
             id,
-            this.modelName.toLowerCase() + 'Ids',
-          ),
-        ),
-      ),
+            this.modelName.toLowerCase() + 'Ids'
+          )
+        )
+      )
     ]);
   };
 }
