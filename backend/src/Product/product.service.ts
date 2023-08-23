@@ -5,14 +5,10 @@ import { findAllFromArray, findById } from '../utils/query';
 import { BaseService } from '../base.service';
 import { Prisma } from '@prisma/client';
 
-const createProductQuery = (data: ProductDto) => ({
-  data: {
-    ...data,
-    categories: {
-      connect: data.categoryIds.map((category) => ({ id: category }))
-    }
-  }
-});
+enum relationNames {
+  categories = 'categories',
+  categoryIds = 'categoryIds'
+}
 
 const findAllCategoriesQueryWithThatProduct = (id: string) => ({
   where: {
@@ -40,8 +36,11 @@ export class ProductService extends BaseService {
   }
 
   create = (data: ProductDto) =>
-    this.prismaService.product.create(createProductQuery(data));
-  //this.manyToManyCreate(data, 'categories', 'categoryIds');
+    this.manyToManyCreate(
+      data,
+      relationNames.categories,
+      relationNames.categoryIds
+    );
 
   createMany = (data: ProductDto[]) =>
     this.prismaService.$transaction(data.map(this.create));

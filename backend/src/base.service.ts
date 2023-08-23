@@ -8,6 +8,7 @@ import {
   findById
 } from './utils/query';
 import { idsReference } from './utils/reference';
+import { ProductDto } from './Product/dto/product.dto';
 
 @Injectable()
 export class BaseService {
@@ -25,8 +26,8 @@ export class BaseService {
     throw new Error('Create has not been implemented!');
   }
 
-  manyToManyCreate = async (data, relationName: string, arrayName: string) => {
-    this.prismaService[this.model.toLowerCase()].create({
+  manyToManyCreate = (data: any, relationName: string, arrayName: string) => {
+    return this.prismaService[this.model.toLowerCase()].create({
       data: {
         ...data,
         [relationName]: {
