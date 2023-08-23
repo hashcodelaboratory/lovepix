@@ -297,4 +297,5 @@ export const localizationKey = {
   validationBtnFalse: 'validationBtnFalse',
   imageInConfiguratorTitle: 'imageInConfiguratorTitle',
   imageInConfiguratorDescription: 'imageInConfiguratorDescription',
+  imageInConfiguratorLink: 'imageInConfiguratorLink',
 }

@@ -8,10 +8,12 @@ import {
 } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from 'localization/localization-key'
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
+import styles from './validation.module.scss'
 
 export type validationPromptProps = {
-  title: string
-  description: string
+  title: string | ReactJSXElement
+  description: string | ReactJSXElement
   callback: (value: boolean) => void
   canDismiss?: boolean
   defaultReturn?: boolean
@@ -45,11 +47,12 @@ export const ValidationPrompt = ({
       aria-labelledby='alert-dialog-title'
       aria-describedby='alert-dialog-description'
       onClose={canDismiss ? handleClose(!!defaultReturn) : undefined}
+      PaperProps={{ className: styles.validationDialog }}
     >
-      <DialogTitle id='alert-dialog-title'>{t(title)}</DialogTitle>
+      <DialogTitle id='alert-dialog-title'>{title}</DialogTitle>
       <DialogContent>
         <DialogContentText id='alert-dialog-description'>
-          {t(description)}
+          {description}
         </DialogContentText>
       </DialogContent>
       <DialogActions>

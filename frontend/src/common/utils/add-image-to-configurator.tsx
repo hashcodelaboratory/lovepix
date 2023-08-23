@@ -7,6 +7,7 @@ import { configurationsTable } from '../../../database.config'
 import { CONFIGURATION_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 import { Pages } from 'constants/pages/urls'
 import { localizationKey } from 'localization/localization-key'
+import Link from 'next/link'
 
 export const useAddImageToConfigurator = (
   configuratorData: Configuration | undefined
@@ -40,8 +41,15 @@ export const useAddImageToConfigurator = (
         break
       case 'FULL':
         validation.validateFunction(
-          localizationKey.imageInConfiguratorTitle,
-          localizationKey.imageInConfiguratorDescription,
+          t(localizationKey.imageInConfiguratorTitle),
+          <>
+            {t(localizationKey.imageInConfiguratorDescription)}
+            {
+              <Link href={t(Pages.CONFIGURATOR)}>
+                {t(localizationKey.imageInConfiguratorLink)}
+              </Link>
+            }
+          </>,
           callback,
           true
         )

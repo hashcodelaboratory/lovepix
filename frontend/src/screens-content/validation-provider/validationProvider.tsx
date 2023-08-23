@@ -1,11 +1,12 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { ValidationPrompt } from './validationPrompt'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
+import { useRouter } from 'next/router'
 
 export type ValidationContextType = {
   validateFunction: (
-    title: string,
-    description: string,
+    title: string | ReactJSXElement,
+    description: string | ReactJSXElement,
     callback: (value: boolean) => void,
     defaultReturn?: boolean,
     canDismiss?: boolean
@@ -22,17 +23,21 @@ export const ValidationProvider = ({
   children: ReactJSXElement | ReactJSXElement[]
 }) => {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false)
-  const [dialogTitle, setDialogTitle] = useState<string>('')
-  const [dialogDescription, setDialogDescription] = useState<string>('')
+  const [dialogTitle, setDialogTitle] = useState<string | ReactJSXElement>('')
+  const [dialogDescription, setDialogDescription] = useState<
+    string | ReactJSXElement
+  >('')
   const [defaultReturn, setDefaultReturn] = useState<boolean>(false)
   const [canDismiss, setCanDismiss] = useState<boolean>(false)
   const [callbackFunction, setCallbackFunction] = useState<
     () => (value: boolean) => void
   >(() => () => {})
 
+  const router = useRouter()
+
   const validateFunction = (
-    title: string,
-    description: string,
+    title: string | ReactJSXElement,
+    description: string | ReactJSXElement,
     callback: (value: boolean) => void,
     defaultReturn: boolean = false,
     canDismiss: boolean = false
@@ -44,6 +49,10 @@ export const ValidationProvider = ({
     setDefaultReturn(defaultReturn)
     setDialogOpen(true)
   }
+
+  useEffect(() => {
+    setDialogOpen(false)
+  }, [router])
 
   return (
     <>

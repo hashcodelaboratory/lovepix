@@ -298,6 +298,7 @@
   "languageSwitchEnglishLanguageLabel": "English",
   "imageInConfiguratorTitle": "More than 1 image in configurator",
   "imageInConfiguratorDescription": "There is already an image in the configurator. Would you like to replace it?",
+  "imageInConfiguratorLink": "Image configurator.",
   "validationBtnTrue": "Yes",
   "validationBtnFalse": "No",
   "/gallery": "/en/gallery",
