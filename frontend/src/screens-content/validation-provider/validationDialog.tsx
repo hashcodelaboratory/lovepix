@@ -11,7 +11,7 @@ import { localizationKey } from 'localization/localization-key'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 import styles from './validation.module.scss'
 
-export type validationPromptProps = {
+export type validationDialogProps = {
   title: string | ReactJSXElement
   description: string | ReactJSXElement
   callback: (value: boolean) => void
@@ -21,7 +21,7 @@ export type validationPromptProps = {
   closeDialog: () => void
 }
 
-export const ValidationPrompt = ({
+export const ValidationDialog = ({
   title,
   description,
   callback,
@@ -29,7 +29,7 @@ export const ValidationPrompt = ({
   defaultReturn,
   open,
   closeDialog,
-}: validationPromptProps) => {
+}: validationDialogProps) => {
   const { t } = useTranslation()
   const actionButtons = [
     { value: false, name: localizationKey.validationBtnFalse },

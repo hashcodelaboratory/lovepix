@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
-import { ValidationPrompt } from './validationPrompt'
+import { ValidationDialog } from './validationDialog'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 import { useRouter } from 'next/router'
 
@@ -56,7 +56,7 @@ export const ValidationProvider = ({
 
   return (
     <>
-      <ValidationPrompt
+      <ValidationDialog
         title={dialogTitle}
         description={dialogDescription}
         defaultReturn={defaultReturn}
