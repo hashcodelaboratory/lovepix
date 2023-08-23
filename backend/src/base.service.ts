@@ -7,6 +7,7 @@ import {
   findAllFromArray,
   findById
 } from './utils/query';
+import { idsReference } from './utils/reference';
 
 @Injectable()
 export class BaseService {
@@ -33,7 +34,7 @@ export class BaseService {
       await this.prismaService[this.model.toLowerCase()].findUnique(
         findById(id)
       )
-    )[relationModelName.toLowerCase() + 'Ids'];
+    )[idsReference(relationModelName)];
     const idsToAdd = relationIds.filter(
       (relationId) => !ids.includes(relationId)
     );
@@ -48,20 +49,16 @@ export class BaseService {
     await this.prismaService.$transaction([
       ...idsToAdd.map((relationId) =>
         this.prismaService[relationModelName].update(
-          addRelationIdsQuery(
-            relationId,
-            id,
-            this.modelName.toLowerCase() + 'Ids'
-          )
+          addRelationIdsQuery(relationId, id, idsReference(this.modelName))
         )
       ),
       ...toRemove.map((relationDocument) =>
         this.prismaService[relationModelName.toLowerCase()].update(
           deleteRelationIdsQuery(
             relationDocument.id,
-            relationDocument[this.modelName.toLowerCase() + 'Ids'],
+            relationDocument[idsReference(this.modelName)],
             id,
-            this.modelName.toLowerCase() + 'Ids'
+            idsReference(this.modelName)
           )
         )
       )
