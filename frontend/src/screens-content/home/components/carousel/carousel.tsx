@@ -55,13 +55,13 @@ const Carousel = ({ configuration }: { configuration: Configuration }) => {
     fr.readAsDataURL(file)
 
     fr.onload = () => {
-      let data = {
+      let imageData = {
         origin: fr.result as string,
         image: undefined,
         dimensionId: undefined,
         material: undefined,
       }
-      addImage(data)
+      addImage(imageData)
     }
   }
   const onReject = (files: FileRejection[]) => {

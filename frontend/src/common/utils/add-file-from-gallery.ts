@@ -11,7 +11,7 @@ export const useAddFileFromGallery = (configuration: Configuration) => {
     fr.readAsDataURL(file)
 
     fr.onload = () => {
-      const data = {
+      const imageData = {
         origin: fr.result as string,
         image: undefined,
         dimensionId: undefined,
@@ -19,7 +19,7 @@ export const useAddFileFromGallery = (configuration: Configuration) => {
         galleryItemId: id,
       }
 
-      addImage(data)
+      addImage(imageData)
     }
   }
 

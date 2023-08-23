@@ -9,15 +9,15 @@ import { Pages } from 'constants/pages/urls'
 import { localizationKey } from 'localization/localization-key'
 
 export const useAddImageToConfigurator = (
-  current: Configuration | undefined
+  configuratorData: Configuration | undefined
 ) => {
   const { t } = useTranslation()
   const router = useRouter()
   const validation = useContext(ValidationContext)
 
   let state: string = ''
-  if (!current) state = 'NO_CONFIG'
-  else if (!current.origin) state = 'NO_IMAGE'
+  if (!configuratorData) state = 'NO_CONFIG'
+  else if (!configuratorData.origin) state = 'NO_IMAGE'
   else state = 'FULL'
 
   const addImage = (imageData: object) => {
