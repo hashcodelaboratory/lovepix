@@ -16,7 +16,7 @@ const HomeLayout = ({ galleryData, configuration }: HomeLayoutProps) => (
   <div>
     <Carousel configuration={configuration} />
     <GallerySection configuration={configuration} galleryData={galleryData} />
-    <ProductsSection />
+    <ProductsSection configuration={configuration} />
     <ReviewsSection />
     <SliderComponent data={galleryData} />
     <Newsletter />

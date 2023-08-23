@@ -6,8 +6,13 @@ import { Pages } from 'constants/pages/urls'
 import PreviewRow from '../preview-section/components/preview-row/preview-row'
 import { localizationKey } from 'localization/localization-key'
 import { useTranslation } from 'next-i18next'
+import { Configuration } from 'common/types/configuration'
 
-const ProductsSection = () => {
+const ProductsSection = ({
+  configuration,
+}: {
+  configuration: Configuration
+}) => {
   const { data: products } = useProducts()
   const { t } = useTranslation()
 
@@ -17,7 +22,11 @@ const ProductsSection = () => {
 
   return (
     <Container style={{ marginBottom: 30 }}>
-      <PreviewRow title={t(localizationKey.products)} route={t(Pages.ESHOP)}>
+      <PreviewRow
+        title={t(localizationKey.products)}
+        route={t(Pages.ESHOP)}
+        configuration={configuration}
+      >
         <div style={{ display: 'flex', overflow: 'auto', marginTop: 20 }}>
           {productList}
         </div>
