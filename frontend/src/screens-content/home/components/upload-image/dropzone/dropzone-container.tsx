@@ -31,13 +31,13 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
     const fr = new FileReader()
     fr.readAsDataURL(file)
     fr.onload = () => {
-      const data = {
+      const imageData = {
         origin: fr.result as string,
         image: undefined,
         dimensionId: undefined,
         material: undefined,
       }
-      configurationsTable.add(data, CONFIGURATION_TABLE_KEY)
+      configurationsTable.add(imageData, CONFIGURATION_TABLE_KEY)
     }
   }
 

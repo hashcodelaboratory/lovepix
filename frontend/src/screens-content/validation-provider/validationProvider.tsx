@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react'
-import { ValidationPrompt, validationPromptProps } from './validationPrompt'
+import { ValidationPrompt } from './validationPrompt'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 
 export type ValidationContextType = {
