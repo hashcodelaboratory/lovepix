@@ -1,8 +1,9 @@
-import {Injectable} from "@nestjs/common";
-import {GalleryCategoryDto} from "./dto/galleryCategory.dto";
-import {findAllFromArray, findById} from "../utils/query";
-import {BaseService} from "../base.service";
+import { Injectable } from '@nestjs/common';
+import { GalleryCategoryDto } from './dto/galleryCategory.dto';
+import { findAllFromArray, findById } from '../utils/query';
+import { BaseService } from '../base.service';
 import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 
 const findAllGalleriesQueryWithThatGalleryCategory = (id: string) => ({
   where: {
@@ -12,51 +13,69 @@ const findAllGalleriesQueryWithThatGalleryCategory = (id: string) => ({
       }
     }
   }
-})
+});
 
-const updateRelationsQueryOnDimensionDelete = (id: string, galleryCategoryIds: string[]) => ({
+const updateRelationsQueryOnDimensionDelete = (
+  id: string,
+  galleryCategoryIds: string[]
+) => ({
   galleryCategoryIds: {
     set: galleryCategoryIds.filter((galleryCategory) => galleryCategory !== id)
   }
-})
+});
 
 @Injectable()
 export class GalleryCategoryService extends BaseService {
   constructor(readonly prismaService: PrismaService) {
-    super('GalleryCategory', prismaService);
+    super(Prisma.ModelName.GalleryCategory, prismaService);
   }
 
-  create = (data: GalleryCategoryDto) => this.prismaService.galleryCategory.create({
-    data
-  })
+  create = (data: GalleryCategoryDto) =>
+    this.prismaService.galleryCategory.create({
+      data
+    });
 
-  createMany = (data: GalleryCategoryDto[]) => this.prismaService.galleryCategory.createMany({
-    data
-  })
+  createMany = (data: GalleryCategoryDto[]) =>
+    this.prismaService.galleryCategory.createMany({
+      data
+    });
 
   findAll = () => this.prismaService.galleryCategory.findMany({});
 
-  findOne = (id: string) => this.prismaService.galleryCategory.findUnique(findById(id));
+  findOne = (id: string) =>
+    this.prismaService.galleryCategory.findUnique(findById(id));
 
   update = async (id: string, data: Partial<GalleryCategoryDto>) => {
-    if(data.galleryIds) {
-      await this.updateRelationIds(id, data.galleryIds, 'Gallery');
+    if (data.galleryIds) {
+      await this.updateRelationIds(
+        id,
+        data.galleryIds,
+        Prisma.ModelName.Gallery
+      );
     }
     return this.prismaService.galleryCategory.update({
       ...findById(id),
       data
     });
-  }
+  };
 
   remove = async (id: string) => {
-    const galleries = await this.prismaService.gallery.findMany(findAllGalleriesQueryWithThatGalleryCategory(id));
+    const galleries = await this.prismaService.gallery.findMany(
+      findAllGalleriesQueryWithThatGalleryCategory(id)
+    );
 
-    await this.prismaService.$transaction(galleries.map((gallery) => this.prismaService.gallery.update({
-        ...findById(gallery.id),
-        data: updateRelationsQueryOnDimensionDelete(id, gallery.galleryCategoryIds)
-      }))
-    )
-  }
+    await this.prismaService.$transaction(
+      galleries.map((gallery) =>
+        this.prismaService.gallery.update({
+          ...findById(gallery.id),
+          data: updateRelationsQueryOnDimensionDelete(
+            id,
+            gallery.galleryCategoryIds
+          )
+        })
+      )
+    );
+  };
 
-  removeAll = () => this.prismaService.gallery.deleteMany()
+  removeAll = () => this.prismaService.gallery.deleteMany();
 }
