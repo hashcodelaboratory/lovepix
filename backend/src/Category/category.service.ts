@@ -5,6 +5,11 @@ import { BaseService } from '../base.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
+enum relationNames {
+  products = 'products',
+  productIds = 'productIds'
+}
+
 const findAllProductsQueryWithThatCategory = (id: string) => ({
   where: {
     categories: {
@@ -31,14 +36,14 @@ export class CategoryService extends BaseService {
   }
 
   create = (data: CategoryDto) =>
-    this.prismaService.category.create({
-      data
-    });
+    this.manyToManyCreate(
+      data,
+      relationNames.products,
+      relationNames.productIds
+    );
 
   createMany = (data: CategoryDto[]) =>
-    this.prismaService.category.createMany({
-      data
-    });
+    this.prismaService.$transaction(data.map(this.create));
 
   findAll = () => this.prismaService.category.findMany();
 
