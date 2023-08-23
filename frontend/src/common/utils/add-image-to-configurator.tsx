@@ -49,6 +49,7 @@ export const useAddImageToConfigurator = (
                 {t(localizationKey.imageInConfiguratorLink)}
               </Link>
             }
+            .
           </>,
           callback,
           true
