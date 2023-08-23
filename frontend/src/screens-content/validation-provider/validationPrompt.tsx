@@ -15,21 +15,20 @@ export type validationPromptProps = {
   callback: (value: boolean) => void
   canDismiss?: boolean
   defaultReturn?: boolean
+  open: boolean
+  closeDialog: () => void
 }
 
 export const ValidationPrompt = ({
-  promptProps,
+  title,
+  description,
+  callback,
+  canDismiss,
+  defaultReturn,
   open,
   closeDialog,
-}: {
-  promptProps: validationPromptProps
-  open: boolean
-  closeDialog: () => void
-}) => {
+}: validationPromptProps) => {
   const { t } = useTranslation()
-  const { title, description, canDismiss, defaultReturn, callback } =
-    promptProps
-
   const actionButtons = [
     { value: false, name: localizationKey.validationBtnFalse },
     { value: true, name: localizationKey.validationBtnTrue },

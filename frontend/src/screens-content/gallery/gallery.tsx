@@ -9,7 +9,7 @@ import { useContext, useEffect, useState } from 'react'
 import { localizationKey } from '../../localization/localization-key'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
-import { addFileFromGallery } from '../../common/utils/add-file-from-gallery'
+import { useAddFileFromGallery } from '../../common/utils/add-file-from-gallery'
 import { useGalleryQuery } from './use-gallery-query'
 import { Configuration } from 'common/types/configuration'
 import { ValidationContext } from 'screens-content/validation-provider/validationProvider'
@@ -22,7 +22,7 @@ const GalleryLayout = ({
   const { t } = useTranslation()
   const router = useRouter()
   const queryGallery = useGalleryQuery()
-
+  const { addToGallery } = useAddFileFromGallery(configuration)
   const { data: gallery } = useGallery()
   const { data: categories } = useCategories()
 
@@ -62,7 +62,7 @@ const GalleryLayout = ({
   }
 
   const add = async (path: string, id: string) => {
-    await addFileFromGallery(path, configuration, validation, t, router, id)
+    await addToGallery(path, id)
   }
 
   return (

@@ -2,34 +2,23 @@ import styles from '../../../../../../home.module.scss'
 import { GalleryItem } from '../../../../../../../../common/types/gallery'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from '../../../../../../../../localization/localization-key'
-import { addFileFromGallery } from '../../../../../../../../common/utils/add-file-from-gallery'
-import { useRouter } from 'next/router'
+import { useAddFileFromGallery } from '../../../../../../../../common/utils/add-file-from-gallery'
 import { Configuration } from 'common/types/configuration'
-import { ValidationContextType } from 'screens-content/validation-provider/validationProvider'
 
 type PreviewCardProps = {
   configuration: Configuration
-  validation: ValidationContextType
   item?: GalleryItem
 }
 
 const PreviewCard = ({
   configuration,
-  validation,
   item,
 }: PreviewCardProps): JSX.Element => {
   const { t } = useTranslation()
-  const router = useRouter()
+  const { addToGallery } = useAddFileFromGallery(configuration)
 
   const add = async (path: string) => {
-    await addFileFromGallery(
-      path,
-      configuration,
-      validation,
-      t,
-      router,
-      item?.id
-    )
+    await addToGallery(path, item?.id)
   }
 
   return (

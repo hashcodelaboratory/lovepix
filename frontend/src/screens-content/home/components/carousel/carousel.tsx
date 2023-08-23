@@ -2,15 +2,12 @@ import styles from '../../home.module.scss'
 import Container from '@mui/material/Container'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from '../../../../localization/localization-key'
-import { useRouter } from 'next/router'
 import { SNACKBAR_OPTIONS_ERROR } from 'snackbar/config'
 import { FileRejection } from 'react-dropzone'
-import { useContext } from 'react'
-import { ValidationContext } from 'screens-content/validation-provider/validationProvider'
 import { Configuration } from 'common/types/configuration'
-import { addImageToConfigurator } from 'common/utils/add-image-to-configurator'
 import { useDropzone } from 'react-dropzone'
 import { useSnackbar } from 'notistack'
+import { useAddImageToConfigurator } from 'common/utils/add-image-to-configurator'
 
 export enum CarouselTestIds {
   navigateToConfiguratorButtonTestId = 'navigate_to_configurator_button_test_id',
@@ -47,12 +44,9 @@ const Carousel = ({ configuration }: { configuration: Configuration }) => {
       },
     })
 
-  const validation = useContext(ValidationContext)
-
   const { t } = useTranslation()
   const { printPhoto, uploadPhotoSubcontent, uploadPhoto } = localizationKey
-  const router = useRouter()
-
+  const { addImage } = useAddImageToConfigurator(configuration)
   const { enqueueSnackbar } = useSnackbar()
 
   const onDrop = async (files: File[]) => {
@@ -67,7 +61,7 @@ const Carousel = ({ configuration }: { configuration: Configuration }) => {
         dimensionId: undefined,
         material: undefined,
       }
-      addImageToConfigurator(configuration, data, validation, t, router)
+      addImage(data)
     }
   }
   const onReject = (files: FileRejection[]) => {

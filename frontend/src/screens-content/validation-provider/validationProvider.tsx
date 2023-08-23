@@ -1,5 +1,4 @@
 import { createContext, useState } from 'react'
-import { DeferredPromise } from 'common/types/deffered-promise'
 import { ValidationPrompt, validationPromptProps } from './validationPrompt'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 
@@ -7,9 +6,9 @@ export type ValidationContextType = {
   validateFunction: (
     title: string,
     description: string,
+    callback: (value: boolean) => void,
     defaultReturn?: boolean,
-    canDismiss?: boolean,
-    callback?: (value: boolean) => void
+    canDismiss?: boolean
   ) => void
 }
 
@@ -23,38 +22,37 @@ export const ValidationProvider = ({
   children: ReactJSXElement | ReactJSXElement[]
 }) => {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false)
-  const [promptProps, setPromptProps] = useState<validationPromptProps>({
-    title: '',
-    description: '',
-    canDismiss: false,
-    defaultReturn: true,
-    callback: () => {},
-  })
+  const [dialogTitle, setDialogTitle] = useState<string>('')
+  const [dialogDescription, setDialogDescription] = useState<string>('')
+  const [defaultReturn, setDefaultReturn] = useState<boolean>(false)
+  const [canDismiss, setCanDismiss] = useState<boolean>(false)
+  const [callbackFunction, setCallbackFunction] = useState<
+    () => (value: boolean) => void
+  >(() => () => {})
 
   const validateFunction = (
     title: string,
     description: string,
+    callback: (value: boolean) => void,
     defaultReturn: boolean = false,
-    canDismiss: boolean = false,
-    callback?: (value: boolean) => void
+    canDismiss: boolean = false
   ) => {
-    const deffered = new DeferredPromise()
-    const props = {
-      description: description,
-      title: title,
-      canDismiss: canDismiss,
-      defaultReturn: defaultReturn,
-      callback: callback ?? deffered.resolve,
-    }
-    setPromptProps(props)
+    setDialogDescription(description)
+    setDialogTitle(title)
+    setCallbackFunction(() => callback)
+    setCanDismiss(canDismiss)
+    setDefaultReturn(defaultReturn)
     setDialogOpen(true)
-    return deffered.promise
   }
 
   return (
     <>
       <ValidationPrompt
-        promptProps={promptProps}
+        title={dialogTitle}
+        description={dialogDescription}
+        defaultReturn={defaultReturn}
+        canDismiss={canDismiss}
+        callback={callbackFunction}
         open={dialogOpen}
         closeDialog={() => {
           setDialogOpen(false)
