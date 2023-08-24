@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from 'react'
-import { ValidationDialog } from './validationDialog'
+import { ConfirmationDialog } from './confirmationDialog'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 import { useRouter } from 'next/router'
 
-export type ValidationContextType = {
-  validateFunction: (
+export type ConfirmationDialogContextType = {
+  confirmFunction: (
     title: string | ReactJSXElement,
     description: string | ReactJSXElement,
     callback: (value: boolean) => void,
@@ -13,11 +13,12 @@ export type ValidationContextType = {
   ) => void
 }
 
-export const ValidationContext = createContext<ValidationContextType>(
-  {} as ValidationContextType
-)
+export const ConfirmationDialogContext =
+  createContext<ConfirmationDialogContextType>(
+    {} as ConfirmationDialogContextType
+  )
 
-export const ValidationProvider = ({
+export const ConfirmationDialogProvider = ({
   children,
 }: {
   children: ReactJSXElement | ReactJSXElement[]
@@ -35,7 +36,7 @@ export const ValidationProvider = ({
 
   const router = useRouter()
 
-  const validateFunction = (
+  const confirmFunction = (
     title: string | ReactJSXElement,
     description: string | ReactJSXElement,
     callback: (value: boolean) => void,
@@ -56,7 +57,7 @@ export const ValidationProvider = ({
 
   return (
     <>
-      <ValidationDialog
+      <ConfirmationDialog
         title={dialogTitle}
         description={dialogDescription}
         defaultReturn={defaultReturn}
@@ -67,9 +68,9 @@ export const ValidationProvider = ({
           setDialogOpen(false)
         }}
       />
-      <ValidationContext.Provider value={{ validateFunction }}>
+      <ConfirmationDialogContext.Provider value={{ confirmFunction }}>
         {children}
-      </ValidationContext.Provider>
+      </ConfirmationDialogContext.Provider>
     </>
   )
 }

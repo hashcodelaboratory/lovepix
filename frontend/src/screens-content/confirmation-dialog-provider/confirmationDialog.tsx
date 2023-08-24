@@ -9,9 +9,9 @@ import {
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from 'localization/localization-key'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
-import styles from './validation.module.scss'
+import styles from './confirmationDialog.module.scss'
 
-export type validationDialogProps = {
+export type confirmationDialogProps = {
   title: string | ReactJSXElement
   description: string | ReactJSXElement
   callback: (value: boolean) => void
@@ -21,7 +21,7 @@ export type validationDialogProps = {
   closeDialog: () => void
 }
 
-export const ValidationDialog = ({
+export const ConfirmationDialog = ({
   title,
   description,
   callback,
@@ -29,11 +29,12 @@ export const ValidationDialog = ({
   defaultReturn,
   open,
   closeDialog,
-}: validationDialogProps) => {
+}: confirmationDialogProps) => {
   const { t } = useTranslation()
+
   const actionButtons = [
-    { value: false, name: localizationKey.validationBtnFalse },
-    { value: true, name: localizationKey.validationBtnTrue },
+    { value: false, name: localizationKey.confirmationBtnFalse },
+    { value: true, name: localizationKey.confirmationBtnTrue },
   ]
 
   const handleClose = (value: boolean) => () => {

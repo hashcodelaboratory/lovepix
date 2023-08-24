@@ -5,14 +5,13 @@ import { ImageLayout } from '../home/enums/enums'
 import styles from './gallery.module.scss'
 import { useCategories } from '../../common/api/use-categories'
 import { Chip } from '@mui/material'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { localizationKey } from '../../localization/localization-key'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 import { useAddFileFromGallery } from '../../common/utils/add-file-from-gallery'
 import { useGalleryQuery } from './use-gallery-query'
 import { Configuration } from 'common/types/configuration'
-import { ValidationContext } from 'screens-content/validation-provider/validationProvider'
 
 const GalleryLayout = ({
   configuration,
@@ -31,8 +30,6 @@ const GalleryLayout = ({
   const filtered = gallery?.filter((image) =>
     searchedCategories?.some((r) => image.categories.includes(r))
   )
-
-  const validation = useContext(ValidationContext)
 
   useEffect(() => {
     if (!queryGallery) {
