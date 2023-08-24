@@ -1,10 +1,10 @@
-import { PrismaService } from "src/prisma/prisma.service";
+import { PrismaService } from 'src/prisma/prisma.service';
 
 export const findById = (id: string) => ({
-    where: {
-      id
-    }
-  })
+  where: {
+    id
+  }
+});
 
 export const findAllFromArray = (ids: string[]) => ({
   where: {
@@ -12,22 +12,31 @@ export const findAllFromArray = (ids: string[]) => ({
       in: ids
     }
   }
-})
+});
 
-export const addRelationIdsQuery = (id: string, addId: string, relation: string) => ({
+export const addRelationIdsQuery = (
+  id: string,
+  addId: string,
+  relationModelName: string
+) => ({
   ...findById(id),
   data: {
-    [relation]: {
+    [relationModelName]: {
       push: addId
     }
   }
-})
+});
 
-export const deleteRelationIdsQuery = (id: string, ids: string[], deleteId: string, relation: string) => ({
+export const deleteRelationIdsQuery = (
+  id: string,
+  ids: string[],
+  deleteId: string,
+  relationModelName: string
+) => ({
   ...findById(id),
   data: {
-    [relation]: {
+    [relationModelName]: {
       set: ids.filter((Ids) => Ids !== deleteId)
     }
   }
-})
+});
