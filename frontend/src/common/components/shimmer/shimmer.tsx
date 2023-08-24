@@ -31,7 +31,7 @@ const Shimmer: FC<ShimmerProps> = ({
 
   if (isLoading) {
     return (
-      <div style={{ display: 'flex', overflow: 'auto', marginTop: 20 }}>
+      <div style={{ display: 'flex', overflow: 'auto' }}>
         {[...Array(count)].map((index) => getSkeletonComponent(index))}
       </div>
     )

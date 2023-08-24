@@ -23,9 +23,7 @@ const ReviewsSection = () => {
           route={t(Pages.REVIEWS)}
         >
           <Shimmer isLoading={isLoading} skeleton={SkeletonEnum.REVIEW}>
-            <div className={styles.reviewContainer}>
-              <ReviewList reviews={reviews} />
-            </div>
+            <ReviewList reviews={reviews} />
           </Shimmer>
         </PreviewRow>
       </Container>

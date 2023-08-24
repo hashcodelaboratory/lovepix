@@ -24,11 +24,7 @@ const GallerySection = ({
   return (
     <Container style={{ marginBottom: 30 }}>
       <PreviewRow route={t(Pages.GALLERY)} title={t(localizationKey.gallery)}>
-        <Shimmer isLoading={loading}>
-          <div style={{ display: 'flex', overflow: 'auto', marginTop: 20 }}>
-            {cards}
-          </div>
-        </Shimmer>
+        <Shimmer isLoading={loading}>{cards}</Shimmer>
       </PreviewRow>
     </Container>
   )
