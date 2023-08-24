@@ -1,7 +1,6 @@
 import { Container } from '@mui/material'
 import React from 'react'
 import ReviewList from 'screens-content/reviews/components/review-list/review-list'
-import styles from './review-section.module.scss'
 import { Pages } from 'constants/pages/urls'
 import PreviewRow from '../preview-section/components/preview-row/preview-row'
 import { localizationKey } from 'localization/localization-key'
@@ -15,21 +14,6 @@ const ReviewsSection = () => {
   const { data: reviews, isLoading } = useReviews()
   const { t } = useTranslation()
 
-  if (isLoading) {
-    return (
-      <Container style={{ marginBottom: 30 }}>
-        <PreviewRow
-          title={localizationKey.reviewPageYourReviews}
-          route={t(Pages.REVIEWS)}
-        >
-          <Shimmer isLoading={isLoading} skeleton={SkeletonEnum.REVIEW}>
-            <ReviewList reviews={reviews} />
-          </Shimmer>
-        </PreviewRow>
-      </Container>
-    )
-  }
-
   if (!reviews?.length && !isLoading) {
     return null
   }
@@ -40,9 +24,9 @@ const ReviewsSection = () => {
         title={localizationKey.reviewPageYourReviews}
         route={t(Pages.REVIEWS)}
       >
-        <div className={styles.reviewContainer}>
+        <Shimmer isLoading={isLoading} skeleton={SkeletonEnum.REVIEW}>
           <ReviewList reviews={reviews} />
-        </div>
+        </Shimmer>
       </PreviewRow>
     </Container>
   )
