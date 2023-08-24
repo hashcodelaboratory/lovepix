@@ -10,6 +10,7 @@
   "or": "or",
   "no": "No",
   "yes": "Yes",
+  "availability": "Availability",
   "changeValidation": "Do you want to save changes?",
   "uploadNewPicture": "upload new picture",
   "uploadPhoto": "Upload photo / create image",

@@ -20,8 +20,8 @@ const Material = ({ configuration }: MaterialProps) => {
   const { t } = useTranslation()
   const { data: materials } = useMaterials()
 
-  const unavailable = materials?.filter((item) => item.availability == false)
-  const titles = unavailable?.map((item) => item.id)
+  const unavailableMaterials = materials?.filter((item) => item.availability == false)
+  const unavailableMaterialsIds = unavailableMaterials?.map((item) => item.id)
 
   const changeMaterial = (id: string) => {
     if (materials?.find((item) => item.id == id)?.availability) {
@@ -52,7 +52,7 @@ const Material = ({ configuration }: MaterialProps) => {
         <div
           className={
             styles[
-              titles?.includes(material.id) ? 'imageBlur' : 'relativeContainer'
+              unavailableMaterialsIds?.includes(material.id) ? 'imageBlur' : 'relativeContainer'
             ]
           }
         >

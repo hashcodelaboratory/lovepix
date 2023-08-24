@@ -34,7 +34,7 @@ const MaterialsLayout = (): JSX.Element => {
   const { data: materials = [] } = useMaterials()
 
   const availableMaterials = materials
-    .filter((material) => material.availability == true)
+    .filter((material) => material.availability)
     .map((material) => material.id)
 
   const { mutate: editMaterial } = useEditMaterial({

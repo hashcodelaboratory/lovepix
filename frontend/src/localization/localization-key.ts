@@ -6,6 +6,7 @@ export const localizationKey = {
   or: 'or',
   no: 'no',
   yes: 'yes',
+  availability: 'availability',
   changeValidation: 'changeValidation',
   uploadNewPicture: 'uploadNewPicture',
   uploadPhoto: 'uploadPhoto',
