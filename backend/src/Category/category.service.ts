@@ -35,15 +35,16 @@ export class CategoryService extends BaseService {
     super(Prisma.ModelName.Category, prismaService);
   }
 
-  create = (data: CategoryDto) =>
-    this.manyToManyCreate(
-      data,
+  create = async (data: CategoryDto) => {
+    const cat = await this.prismaService.category.create({ data });
+    return this.manyToManyRelationConnect(
+      cat,
       relationNames.products,
       relationNames.productIds
     );
+  };
 
-  createMany = (data: CategoryDto[]) =>
-    this.prismaService.$transaction(data.map(this.create));
+  createMany = (data: CategoryDto[]) => data.map(this.create);
 
   findAll = () => this.prismaService.category.findMany();
 

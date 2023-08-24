@@ -35,15 +35,16 @@ export class DimensionService extends BaseService {
     super(Prisma.ModelName.Dimension, prismaService);
   }
 
-  create = (data: DimensionDto) =>
-    this.manyToManyCreate(
-      data,
+  create = async (data: DimensionDto) => {
+    const dim = await this.prismaService.dimension.create({ data });
+    return this.manyToManyRelationConnect(
+      dim,
       relationNames.galleries,
       relationNames.galleryIds
     );
+  };
 
-  createMany = (data: DimensionDto[]) =>
-    this.prismaService.$transaction(data.map(this.create));
+  createMany = (data: DimensionDto[]) => data.map(this.create);
 
   findAll = () => this.prismaService.dimension.findMany();
 

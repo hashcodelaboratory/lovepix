@@ -5,11 +5,10 @@ import {
   addRelationIdsQuery,
   deleteRelationIdsQuery,
   findAllFromArray,
-  findById
+  findById,
+  lowerCase
 } from './utils/query';
 import { idsReference } from './utils/reference';
-import { ProductDto } from './Product/dto/product.dto';
-
 @Injectable()
 export class BaseService {
   private readonly model!: Prisma.ModelName;
@@ -26,10 +25,10 @@ export class BaseService {
     throw new Error('Create has not been implemented!');
   }
 
-  manyToManyCreate = (data: any, relationName: string, arrayName: string) => {
-    return this.prismaService[this.model.toLowerCase()].create({
+  manyToManyRelationConnect = (data: any, relationName: string, arrayName) => {
+    return this.prismaService[lowerCase(this.modelName)].update({
+      ...findById(data.id),
       data: {
-        ...data,
         [relationName]: {
           connect: data[arrayName].map((item) => ({ id: item }))
         }
@@ -43,7 +42,7 @@ export class BaseService {
     relationModelName: Prisma.ModelName
   ) => {
     const ids = (
-      await this.prismaService[this.model.toLowerCase()].findUnique(
+      await this.prismaService[lowerCase(this.modelName)].findUnique(
         findById(id)
       )
     )[idsReference(relationModelName)];
@@ -55,7 +54,7 @@ export class BaseService {
     );
 
     const toRemove = await this.prismaService[
-      relationModelName.toLowerCase()
+      lowerCase(relationModelName)
     ].findMany(findAllFromArray(idsToRemove));
 
     await this.prismaService.$transaction([
@@ -65,7 +64,7 @@ export class BaseService {
         )
       ),
       ...toRemove.map((relationDocument) =>
-        this.prismaService[relationModelName.toLowerCase()].update(
+        this.prismaService[lowerCase(relationModelName)].update(
           deleteRelationIdsQuery(
             relationDocument.id,
             relationDocument[idsReference(this.modelName)],

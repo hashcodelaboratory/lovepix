@@ -6,6 +6,22 @@ export const findById = (id: string) => ({
   }
 });
 
+export const findByName = (name: string) => ({
+  where: {
+    name
+  }
+});
+
+export const findByTitle = (title: string) => ({
+  where: {
+    title
+  }
+});
+
+export const lowerCase = (str: string): string => {
+  return str.charAt(0).toLowerCase() + str.slice(1);
+};
+
 export const findAllFromArray = (ids: string[]) => ({
   where: {
     id: {

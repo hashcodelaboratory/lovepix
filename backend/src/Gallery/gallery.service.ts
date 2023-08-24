@@ -6,6 +6,13 @@ import { BaseService } from '../base.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
+enum RelationNames {
+  dimensions = 'dimensions',
+  dimensionIds = 'dimensionIds',
+  galleryCategories = 'galleryCategories',
+  galleryCategoryIds = 'galleryCategoryIds'
+}
+
 const findByGalleryId = (id: string) => ({
   where: {
     galleries: {
@@ -31,31 +38,27 @@ const findAllGalleriesQueryWithOrders = {
   }
 };
 
-const createGalleryQuery = (data: GalleryDto) => ({
-  data: {
-    ...data,
-    dimensions: {
-      connect: data.dimensionIds.map((dimension) => ({ id: dimension }))
-    },
-    galleryCategories: {
-      connect: data.galleryCategoryIds.map((galleryCategory) => ({
-        id: galleryCategory
-      }))
-    }
-  }
-});
-
 @Injectable()
 export class GalleryService extends BaseService {
   constructor(readonly prismaService: PrismaService) {
     super(Prisma.ModelName.Gallery, prismaService);
   }
 
-  create = (data: GalleryDto) =>
-    this.prismaService.gallery.create(createGalleryQuery(data));
+  create = async (data: GalleryDto) => {
+    const gal = await this.prismaService.gallery.create({ data });
+    await this.manyToManyRelationConnect(
+      gal,
+      RelationNames.dimensions,
+      RelationNames.dimensionIds
+    );
+    await this.manyToManyRelationConnect(
+      gal,
+      RelationNames.galleryCategories,
+      RelationNames.galleryCategoryIds
+    );
+  };
 
-  createMany = (data: GalleryDto[]) =>
-    this.prismaService.$transaction(data.map(this.create));
+  createMany = (data: GalleryDto[]) => data.map(this.create);
 
   findAll = () =>
     this.prismaService.gallery.findMany(findAllGalleriesQueryWithOrders);

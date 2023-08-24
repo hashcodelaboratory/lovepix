@@ -35,15 +35,15 @@ export class GalleryCategoryService extends BaseService {
     super(Prisma.ModelName.GalleryCategory, prismaService);
   }
 
-  create = (data: GalleryCategoryDto) =>
-    this.manyToManyCreate(
-      data,
+  create = async (data: GalleryCategoryDto) => {
+    const galCat = await this.prismaService.galleryCategory.create({ data });
+    return this.manyToManyRelationConnect(
+      galCat,
       relationNames.galleries,
       relationNames.galleryIds
     );
-
-  createMany = (data: GalleryCategoryDto[]) =>
-    this.prismaService.$transaction(data.map(this.create));
+  };
+  createMany = (data: GalleryCategoryDto[]) => data.map(this.create);
 
   findAll = () => this.prismaService.galleryCategory.findMany({});
 
@@ -80,6 +80,8 @@ export class GalleryCategoryService extends BaseService {
         })
       )
     );
+
+    return this.prismaService.galleryCategory.delete(findById(id));
   };
 
   removeAll = () => this.prismaService.gallery.deleteMany();
