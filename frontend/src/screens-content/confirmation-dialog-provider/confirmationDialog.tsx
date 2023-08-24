@@ -10,6 +10,7 @@ import { useTranslation } from 'next-i18next'
 import { localizationKey } from 'localization/localization-key'
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 import styles from './confirmationDialog.module.scss'
+import { v4 as uuidv4 } from 'uuid'
 
 export type confirmationDialogProps = {
   title: string | ReactJSXElement
@@ -59,6 +60,7 @@ export const ConfirmationDialog = ({
       <DialogActions>
         {actionButtons.map(({ value, name }) => (
           <Button
+            key={uuidv4()}
             onClick={handleClose(value)}
             variant={defaultReturn === value ? 'contained' : 'outlined'}
           >

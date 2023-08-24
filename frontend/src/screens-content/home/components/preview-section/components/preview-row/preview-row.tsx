@@ -5,24 +5,28 @@ import { GalleryItem } from '../../../../../../common/types/gallery'
 import { useTranslation } from 'react-i18next'
 import { localizationKey } from '../../../../../../localization/localization-key'
 import { useRouter } from 'next/router'
-import { Configuration } from 'common/types/configuration'
+import { CONFIGURATION_TABLE_KEY } from 'common/indexed-db/hooks/keys'
+import { configurationsTable } from '../../../../../../../database.config'
+import { useLiveQuery } from 'dexie-react-hooks'
 
 type PreviewRowProps = {
   galleryData?: GalleryItem[]
   title: string
   route: string
   children: React.ReactNode
-  configuration: Configuration
 }
 
 const PreviewRow = ({
   title,
   children,
   route,
-  configuration,
 }: PreviewRowProps): JSX.Element => {
   const { t } = useTranslation()
   const router = useRouter()
+  const configuration = useLiveQuery(
+    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
+    []
+  )
 
   const dummy = (
     <>

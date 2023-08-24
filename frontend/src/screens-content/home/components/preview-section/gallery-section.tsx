@@ -23,11 +23,7 @@ const GallerySection = ({
 
   return (
     <Container style={{ marginBottom: 30 }}>
-      <PreviewRow
-        route={t(Pages.GALLERY)}
-        title={t(localizationKey.gallery)}
-        configuration={configuration}
-      >
+      <PreviewRow route={t(Pages.GALLERY)} title={t(localizationKey.gallery)}>
         <div style={{ display: 'flex', overflow: 'auto', marginTop: 20 }}>
           {cards}
         </div>
