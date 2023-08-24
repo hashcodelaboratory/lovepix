@@ -46,7 +46,6 @@ const MaterialsLayout = (): JSX.Element => {
           String(t(localizationKey.added)),
           SNACKBAR_OPTIONS_SUCCESS
         )
-        toggleButton()
         queryClient.invalidateQueries(MATERIALS_KEY)
       }
     },
