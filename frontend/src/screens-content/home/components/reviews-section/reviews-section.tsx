@@ -8,6 +8,9 @@ import { localizationKey } from 'localization/localization-key'
 import { useReviews } from 'common/api/use-reviews'
 import { useTranslation } from 'next-i18next'
 import ReviewSkeleton from 'screens-content/home/review-skeleton/review-skeleton'
+import Shimmer, {
+  SkeletonEnum,
+} from '../../../../common/components/shimmer/shimmer'
 
 const ReviewsSection = () => {
   const { data: reviews, isLoading } = useReviews()
@@ -17,16 +20,16 @@ const ReviewsSection = () => {
     <ReviewSkeleton key={index} />
   ))
 
-  if(isLoading){
-    return(
+  if (isLoading) {
+    return (
       <Container style={{ marginBottom: 30 }}>
         <PreviewRow
           title={localizationKey.reviewPageYourReviews}
           route={t(Pages.REVIEWS)}
         >
-          <div className={styles.reviewContainer}>
+          <Shimmer isLoading={isLoading} skeleton={SkeletonEnum.REVIEW}>
             {shimmers}
-          </div>
+          </Shimmer>
         </PreviewRow>
       </Container>
     )
