@@ -3,7 +3,6 @@ import styles from '../../../../dashboard.module.scss'
 import {
   DataGrid,
   GridCallbackDetails,
-  GridRowParams,
   GridSelectionModel,
 } from '@mui/x-data-grid'
 import { useTranslation } from 'next-i18next'
@@ -15,15 +14,17 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import Button from '@mui/material/Button'
-import { doc, updateDoc } from '@firebase/firestore'
-import { database } from '../../../../../../common/firebase/config'
-import { Collections } from '../../../../../../common/firebase/enums'
 import { useSnackbar } from 'notistack'
 import {
   MATERIALS_KEY,
   MaterialType,
   useMaterials,
 } from 'common/api/use-materials'
+import {
+  SNACKBAR_OPTIONS_ERROR,
+  SNACKBAR_OPTIONS_SUCCESS,
+} from '../../../../../../snackbar/config'
+import { useEditMaterial } from '../../../../api/materials/edit-material'
 
 const MaterialsLayout = (): JSX.Element => {
   const { t } = useTranslation()
@@ -35,6 +36,21 @@ const MaterialsLayout = (): JSX.Element => {
   const availableMaterials = materials
     .filter((material) => material.availability == true)
     .map((material) => material.id)
+
+  const { mutate: editMaterial } = useEditMaterial({
+    onSuccess: (res) => {
+      if (res.error) {
+        enqueueSnackbar(res.error, SNACKBAR_OPTIONS_ERROR)
+      } else {
+        enqueueSnackbar(
+          String(t(localizationKey.added)),
+          SNACKBAR_OPTIONS_SUCCESS
+        )
+        toggleButton()
+        queryClient.invalidateQueries(MATERIALS_KEY)
+      }
+    },
+  })
 
   const [selectedRows, setSelectedRows] = useState<string[]>([])
   const [selectionModel, setSelectionModel] =
@@ -59,14 +75,10 @@ const MaterialsLayout = (): JSX.Element => {
     setSelectedRows(selectionModel.map((item, index) => data[index].title))
   }
 
-  const toggleButton = () => setDialogStatus(!dialogStatus)
+  const toggleButton = () => setDialogStatus((prevState) => !prevState)
 
   const uploadToFirestore = async (item: MaterialType, available: boolean) => {
-    await updateDoc(doc(database, Collections.MATERIALS, item.id), {
-      availability: available,
-    })
-    queryClient.invalidateQueries(MATERIALS_KEY)
-    toggleButton()
+    editMaterial({ id: item.id, availability: available })
   }
   const saveChanges = () => {
     data.map((item) =>
@@ -81,7 +93,7 @@ const MaterialsLayout = (): JSX.Element => {
     if (selectionModel.length == 0) {
       setSelectionModel(availableMaterials)
     }
-  }, [availableMaterials])
+  }, [availableMaterials, selectionModel.length])
 
   return (
     <div className={styles.contentContainer}>
@@ -89,7 +101,7 @@ const MaterialsLayout = (): JSX.Element => {
         <DataGrid
           className={styles.contentTable}
           rows={data}
-          columns={getMaterialsColumns(t(localizationKey.materials))}
+          columns={getMaterialsColumns(t)}
           pageSize={10}
           rowsPerPageOptions={[5]}
           checkboxSelection

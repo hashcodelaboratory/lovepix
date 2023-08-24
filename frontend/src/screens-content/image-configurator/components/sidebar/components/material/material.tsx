@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import { v4 as uuidv4 } from 'uuid'
 import { ImageLayout } from 'screens-content/home/enums/enums'
-import { materials } from 'screens-content/home/utils/configuration'
+import { MATERIALS_TEMPLATE } from 'screens-content/home/utils/configuration'
 import { configurationsTable } from '../../../../../../../database.config'
 import { CONFIGURATION_TABLE_KEY } from '../../../../../../common/indexed-db/hooks/keys'
 import { Configuration } from '../../../../../../common/types/configuration'
@@ -18,22 +18,20 @@ type MaterialProps = {
 
 const Material = ({ configuration }: MaterialProps) => {
   const { t } = useTranslation()
-  const { data: materialsdata } = useMaterials()
+  const { data: materials } = useMaterials()
 
-  const unavailable = materialsdata?.filter(
-    (item) => item.availability == false
-  )
+  const unavailable = materials?.filter((item) => item.availability == false)
   const titles = unavailable?.map((item) => item.id)
 
   const changeMaterial = (id: string) => {
-    if (materialsdata?.find((item) => item.id == id)?.availability) {
+    if (materials?.find((item) => item.id == id)?.availability) {
       configurationsTable.update(CONFIGURATION_TABLE_KEY, {
         material: id,
       })
     }
   }
 
-  const materialItems = materials.map((material) => (
+  const materialItems = MATERIALS_TEMPLATE.map((material) => (
     <div
       key={material.id}
       style={{
@@ -44,16 +42,18 @@ const Material = ({ configuration }: MaterialProps) => {
     >
       <div
         className={
-          material.id === configuration?.material
-            ? styles.imageWrapper
-            : styles.relativeContainer
+          styles[
+            material.id === configuration?.material
+              ? 'imageWrapper'
+              : 'relativeContainer'
+          ]
         }
       >
         <div
           className={
-            titles?.includes(material.id)
-              ? styles.imageBlur
-              : styles.relativeContainer
+            styles[
+              titles?.includes(material.id) ? 'imageBlur' : 'relativeContainer'
+            ]
           }
         >
           <Image

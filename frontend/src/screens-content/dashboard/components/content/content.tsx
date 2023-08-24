@@ -6,7 +6,6 @@ import DashboardContext from '../../context/dashboard-context'
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks'
 import InventoryIcon from '@mui/icons-material/Inventory'
 import { DashboardRoutes } from '../../../../common/enums/routes'
-import { materials } from 'screens-content/home/utils/configuration'
 
 type Props = {
   isFetching: boolean

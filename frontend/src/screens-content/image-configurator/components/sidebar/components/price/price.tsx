@@ -1,6 +1,6 @@
 import styles from '../../../../image-configurator-layout.module.scss'
 import { getPrice } from './utils/generator'
-import { materials } from '../../../../../home/utils/configuration'
+import { MATERIALS_TEMPLATE } from '../../../../../home/utils/configuration'
 import { Configuration } from '../../../../../../common/types/configuration'
 import { splitDimension } from '../../../../../../common/utils/split-dimension'
 
@@ -19,8 +19,9 @@ const Price = ({ configuration }: PriceProps) => {
       ? getPrice(
           width,
           height,
-          materials.find((material) => material.id === configuration?.material)
-            ?.name
+          MATERIALS_TEMPLATE.find(
+            (material) => material.id === configuration?.material
+          )?.name
         )
       : '-'
 

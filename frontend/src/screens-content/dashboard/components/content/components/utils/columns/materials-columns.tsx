@@ -1,15 +1,20 @@
-import { GridColDef } from '@mui/x-data-grid'
 import { GRID_CHECKBOX_SELECTION_COL_DEF } from '@mui/x-data-grid'
+import { localizationKey } from '../../../../../../../localization/localization-key'
 
-export const getMaterialsColumns = (title: string): GridColDef[] => [
+// TODO: fix any
+export const getMaterialsColumns = (t: any): any => [
   {
     field: 'title',
-    headerName: title,
+    headerName: t(localizationKey.materials),
     width: 200,
     editable: false,
   },
   {
     headerName: 'Available',
     ...GRID_CHECKBOX_SELECTION_COL_DEF,
+    renderHeader: () => (
+      <div style={{ textAlign: 'center' }}>{t('Availability')}</div>
+    ),
+    width: 100,
   },
 ]
