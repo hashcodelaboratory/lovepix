@@ -1,7 +1,7 @@
 import { OmitType } from "@nestjs/mapped-types";
 import { GalleryEntity } from "../entities/gallery.entity";
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, Length, Matches } from 'class-validator';
+import { IsEmail, IsNotEmpty, Length, Matches, IsOptional } from 'class-validator';
 
 export class GalleryDto extends OmitType(GalleryEntity, ['id', 'galleryCategories', 'dimensions', 'orders']) {
     @ApiProperty({
