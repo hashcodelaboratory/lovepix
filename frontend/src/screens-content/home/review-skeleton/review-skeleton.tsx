@@ -33,7 +33,7 @@ const ReviewSkeleton = () => {
           />
         </Skeleton>
         <div className={styles.reviewHome}>
-          <Skeleton></Skeleton>
+          <Skeleton/>
         </div>
       </div>
     </div>

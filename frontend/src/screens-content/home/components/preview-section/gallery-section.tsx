@@ -9,7 +9,7 @@ import ItemSkeleton from 'screens-content/home/item-skeleton/item-skeleton'
 
 type PreviewSectionProps = {
   galleryData?: GalleryItem[]
-  loading: boolean
+  loading?: boolean
 }
 
 const GallerySection = ({ galleryData, loading }: PreviewSectionProps): JSX.Element => {
