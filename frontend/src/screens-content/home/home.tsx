@@ -10,12 +10,21 @@ import GallerySection from './components/preview-section/gallery-section'
 type HomeLayoutProps = {
   configuration: Configuration
   galleryData?: GalleryItem[]
+  loading: boolean
 }
 
-const HomeLayout = ({ galleryData, configuration }: HomeLayoutProps) => (
+const HomeLayout = ({
+  galleryData,
+  configuration,
+  loading,
+}: HomeLayoutProps) => (
   <div>
     <Carousel configuration={configuration} />
-    <GallerySection configuration={configuration} galleryData={galleryData} />
+    <GallerySection
+      configuration={configuration}
+      galleryData={galleryData}
+      loading={loading}
+    />
     <ProductsSection />
     <ReviewsSection />
     <SliderComponent data={galleryData} />
