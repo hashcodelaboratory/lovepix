@@ -58,8 +58,6 @@ const Carousel = ({ configuration }: { configuration: Configuration }) => {
       let imageData = {
         origin: fr.result as string,
         image: undefined,
-        dimensionId: undefined,
-        material: undefined,
       }
       addImage(imageData)
     }

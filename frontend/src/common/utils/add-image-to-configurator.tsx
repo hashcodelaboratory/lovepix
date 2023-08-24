@@ -20,10 +20,9 @@ export const useAddImageToConfigurator = (
   if (!configuratorData) state = 'NO_CONFIG'
   else if (!configuratorData.origin) state = 'NO_IMAGE'
   else state = 'FULL'
-  console.log(configuratorData)
+
   const addImage = (imageData: object) => {
     const callback = (value: boolean) => {
-      console.log(value)
       if (value) {
         configurationsTable.update(CONFIGURATION_TABLE_KEY, imageData)
         router.push(t(Pages.CONFIGURATOR))

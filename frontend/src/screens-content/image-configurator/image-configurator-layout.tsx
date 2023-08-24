@@ -22,7 +22,6 @@ const ImageConfiguratorLayout = ({
       setCropper,
     },
   }
-  console.log(configuration)
 
   return (
     <ImageConfiguratorContext.Provider value={value}>

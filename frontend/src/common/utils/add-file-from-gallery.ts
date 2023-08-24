@@ -14,8 +14,6 @@ export const useAddFileFromGallery = (configuration: Configuration) => {
       const imageData = {
         origin: fr.result as string,
         image: undefined,
-        dimensionId: undefined,
-        material: undefined,
         galleryItemId: id,
       }
 
