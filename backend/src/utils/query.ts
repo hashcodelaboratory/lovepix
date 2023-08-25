@@ -1,6 +1,3 @@
-import { find } from 'rxjs';
-import { PrismaService } from 'src/prisma/prisma.service';
-
 export const findById = (id: string) => ({
   where: {
     id
