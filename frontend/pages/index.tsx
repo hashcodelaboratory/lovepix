@@ -10,7 +10,7 @@ import {useGallery} from "../src/common/api/use-gallery";
 import FooterLayout from "../src/screens-content/footer/footer";
 import ReactGA from 'react-ga';
 
-const TRACKING_ID = "ADD-ID"; // YOUR_OWN_TRACKING_ID
+const TRACKING_ID = "G-5MY5R156V9";
 ReactGA.initialize(TRACKING_ID);
 
 const Home: NextPage = () => {
