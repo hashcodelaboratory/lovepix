@@ -7,7 +7,8 @@ import { Prisma } from '@prisma/client';
 
 enum relationNames {
   galleries = 'galleries',
-  galleryIds = 'galleryIds'
+  galleryIds = 'galleryIds',
+  dimensions = 'dimensions'
 }
 
 const findAllGalleriesQueryWithThatDimension = (id: string) => ({
@@ -63,18 +64,24 @@ export class DimensionService extends BaseService {
   };
 
   remove = async (id: string) => {
-    const galleries = await this.prismaService.gallery.findMany(
-      findAllGalleriesQueryWithThatDimension(id)
+    await this.manyToMayRelationDelete(
+      id,
+      Prisma.ModelName.Gallery,
+      relationNames.dimensions
     );
 
-    await this.prismaService.$transaction(
-      galleries.map((gallery) =>
-        this.prismaService.gallery.update({
-          ...findById(gallery.id),
-          data: updateRelationsQueryOnDimensionDelete(id, gallery.dimensionIds)
-        })
-      )
-    );
+    // const galleries = await this.prismaService.gallery.findMany(
+    //   findAllGalleriesQueryWithThatDimension(id)
+    // );
+
+    // await this.prismaService.$transaction(
+    //   galleries.map((gallery) =>
+    //     this.prismaService.gallery.update({
+    //       ...findById(gallery.id),
+    //       data: updateRelationsQueryOnDimensionDelete(id, gallery.dimensionIds)
+    //     })
+    //   )
+    // );
 
     return this.prismaService.dimension.delete(findById(id));
   };

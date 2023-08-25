@@ -9,6 +9,7 @@ import {
   lowerCase
 } from './utils/query';
 import { idsReference } from './utils/reference';
+import { async } from 'rxjs';
 @Injectable()
 export class BaseService {
   private readonly model!: Prisma.ModelName;
@@ -34,6 +35,39 @@ export class BaseService {
         }
       }
     });
+  };
+
+  manyToMayRelationDelete = async (
+    id: string,
+    relationModelName: string,
+    model: string
+  ) => {
+    const relationDocuments = await this.prismaService[
+      lowerCase(relationModelName)
+    ].findMany({
+      where: {
+        [model]: {
+          some: {
+            id
+          }
+        }
+      }
+    });
+
+    await this.prismaService.$transaction([
+      relationDocuments.map((relationDocument) =>
+        this.prismaService[lowerCase(relationModelName)].update({
+          ...findById(relationDocument.id),
+          data: {
+            [idsReference(this.model)]: {
+              set: relationDocument[idsReference(this.model)].filter(
+                (id) => id !== id
+              )
+            }
+          }
+        })
+      )
+    ]);
   };
 
   updateRelationIds = async (
