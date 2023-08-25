@@ -20,6 +20,7 @@ export const lowerCase = (str: string): string => {
   return str.charAt(0).toLowerCase() + str.slice(1);
 };
 
+
 export const findAllFromArray = (ids: string[]) => ({
   where: {
     id: {

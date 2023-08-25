@@ -6,9 +6,10 @@ import { Pages } from 'constants/pages/urls'
 import PreviewRow from '../preview-section/components/preview-row/preview-row'
 import { localizationKey } from 'localization/localization-key'
 import { useTranslation } from 'next-i18next'
+import Shimmer from '../../../../common/components/shimmer/shimmer'
 
 const ProductsSection = () => {
-  const { data: products } = useProducts()
+  const { data: products, isLoading } = useProducts()
   const { t } = useTranslation()
 
   const productList = products?.map((products: ProductsType) => (
@@ -18,9 +19,7 @@ const ProductsSection = () => {
   return (
     <Container style={{ marginBottom: 30 }}>
       <PreviewRow title={t(localizationKey.products)} route={t(Pages.ESHOP)}>
-        <div style={{ display: 'flex', overflow: 'auto', marginTop: 20 }}>
-          {productList}
-        </div>
+        <Shimmer isLoading={isLoading}>{productList}</Shimmer>
       </PreviewRow>
     </Container>
   )
