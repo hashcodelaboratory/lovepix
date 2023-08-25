@@ -42,7 +42,7 @@ OR
 $ yarn
 ```
 
-## Create .env file for local development (variables are in .env.template or new-lovepix ORG slack channel in pinned message), note: need to modify DATABASE_URL - mongo_username and mongo_password too
+## Create .env file for local development (variables are in .env.template or new-lovepix ORG slack channel in pinned message), NOTE: need to modify DATABASE_URL - mongo_username and mongo_password too
 ```bash
 MONGO_INITDB_ROOT_USERNAME=
 MONGO_INITDB_ROOT_PASSWORD=
@@ -54,6 +54,12 @@ BASICAUTH_USERNAME=
 BASICAUTH_PASSWORD=
 MONGO_REPLICA_HOST=
 MONGO_REPLICA_PORT=
+API_KEY=
+JWT_SECRET=
+DATABASE_URL=
+```
+## Create .env file for local development (variables are in .env.template or new-lovepix ORG slack channel in pinned message), NOTE: need to modify DATABASE_URL - remote access to MONGO DB  
+```bash
 API_KEY=
 JWT_SECRET=
 DATABASE_URL=
