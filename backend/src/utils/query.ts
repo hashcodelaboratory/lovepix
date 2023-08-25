@@ -1,3 +1,4 @@
+import { find } from 'rxjs';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 export const findById = (id: string) => ({
@@ -26,6 +27,29 @@ export const findAllFromArray = (ids: string[]) => ({
   where: {
     id: {
       in: ids
+    }
+  }
+});
+
+export const findAllWithId = (id: string, modelName: string) => ({
+  where: {
+    [modelName]: {
+      some: {
+        id
+      }
+    }
+  }
+});
+
+export const relationConnect = (
+  data: any,
+  relationModelName: string,
+  arrayName: string
+) => ({
+  ...findById(data.id),
+  data: {
+    [relationModelName]: {
+      connect: data[arrayName].map((item) => ({ id: item }))
     }
   }
 });

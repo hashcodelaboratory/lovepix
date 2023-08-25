@@ -8,29 +8,9 @@ import { Prisma } from '@prisma/client';
 
 enum RelationNames {
   dimensions = 'dimensions',
-  dimensionIds = 'dimensionIds',
   galleryCategories = 'galleryCategories',
-  galleryCategoryIds = 'galleryCategoryIds'
+  galleries = 'galleries'
 }
-
-const findByGalleryId = (id: string) => ({
-  where: {
-    galleries: {
-      some: {
-        id
-      }
-    }
-  }
-});
-
-const updateRelationsQueryOnGalleryDelete = (
-  id: string,
-  galleryIds: string[]
-) => ({
-  galleryIds: {
-    set: galleryIds.filter((gallery) => gallery !== id)
-  }
-});
 
 const findAllGalleriesQueryWithOrders = {
   include: {
@@ -49,12 +29,12 @@ export class GalleryService extends BaseService {
     await this.manyToManyRelationConnect(
       gal,
       RelationNames.dimensions,
-      RelationNames.dimensionIds
+      Prisma.ModelName.Dimension
     );
     await this.manyToManyRelationConnect(
       gal,
       RelationNames.galleryCategories,
-      RelationNames.galleryCategoryIds
+      Prisma.ModelName.GalleryCategory
     );
   };
 
@@ -88,30 +68,17 @@ export class GalleryService extends BaseService {
   };
 
   remove = async (id: string) => {
-    const dimensions = await this.prismaService.dimension.findMany(
-      findByGalleryId(id)
-    );
-    const galleryCategories = await this.prismaService.galleryCategory.findMany(
-      findByGalleryId(id)
+    this.manyToMayRelationDelete(
+      id,
+      Prisma.ModelName.Dimension,
+      RelationNames.galleries
     );
 
-    await this.prismaService.$transaction([
-      ...dimensions.map((dimension) =>
-        this.prismaService.dimension.update({
-          ...findById(dimension.id),
-          data: updateRelationsQueryOnGalleryDelete(id, dimension.galleryIds)
-        })
-      ),
-      ...galleryCategories.map((galleryCategory) =>
-        this.prismaService.galleryCategory.update({
-          ...findById(galleryCategory.id),
-          data: updateRelationsQueryOnGalleryDelete(
-            id,
-            galleryCategory.galleryIds
-          )
-        })
-      )
-    ]);
+    this.manyToMayRelationDelete(
+      id,
+      Prisma.ModelName.GalleryCategory,
+      RelationNames.galleries
+    );
 
     return this.prismaService.gallery.delete(findById(id));
   };

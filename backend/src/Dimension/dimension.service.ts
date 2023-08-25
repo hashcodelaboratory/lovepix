@@ -7,28 +7,8 @@ import { Prisma } from '@prisma/client';
 
 enum relationNames {
   galleries = 'galleries',
-  galleryIds = 'galleryIds',
   dimensions = 'dimensions'
 }
-
-const findAllGalleriesQueryWithThatDimension = (id: string) => ({
-  where: {
-    dimensions: {
-      some: {
-        id
-      }
-    }
-  }
-});
-
-const updateRelationsQueryOnDimensionDelete = (
-  id: string,
-  dimensionIds: string[]
-) => ({
-  dimensionIds: {
-    set: dimensionIds.filter((dimensionId) => dimensionId !== id)
-  }
-});
 
 @Injectable()
 export class DimensionService extends BaseService {
@@ -41,7 +21,7 @@ export class DimensionService extends BaseService {
     return this.manyToManyRelationConnect(
       dim,
       relationNames.galleries,
-      relationNames.galleryIds
+      Prisma.ModelName.Gallery
     );
   };
 
@@ -64,24 +44,11 @@ export class DimensionService extends BaseService {
   };
 
   remove = async (id: string) => {
-    await this.manyToMayRelationDelete(
+    this.manyToMayRelationDelete(
       id,
       Prisma.ModelName.Gallery,
       relationNames.dimensions
     );
-
-    // const galleries = await this.prismaService.gallery.findMany(
-    //   findAllGalleriesQueryWithThatDimension(id)
-    // );
-
-    // await this.prismaService.$transaction(
-    //   galleries.map((gallery) =>
-    //     this.prismaService.gallery.update({
-    //       ...findById(gallery.id),
-    //       data: updateRelationsQueryOnDimensionDelete(id, gallery.dimensionIds)
-    //     })
-    //   )
-    // );
 
     return this.prismaService.dimension.delete(findById(id));
   };

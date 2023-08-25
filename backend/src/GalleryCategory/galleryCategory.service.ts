@@ -7,28 +7,8 @@ import { Prisma } from '@prisma/client';
 
 enum relationNames {
   galleries = 'galleries',
-  galleryIds = 'galleryIds'
+  galleryCategories = 'galleryCategories'
 }
-
-const findAllGalleriesQueryWithThatGalleryCategory = (id: string) => ({
-  where: {
-    galleryCategories: {
-      some: {
-        id
-      }
-    }
-  }
-});
-
-const updateRelationsQueryOnDimensionDelete = (
-  id: string,
-  galleryCategoryIds: string[]
-) => ({
-  galleryCategoryIds: {
-    set: galleryCategoryIds.filter((galleryCategory) => galleryCategory !== id)
-  }
-});
-
 @Injectable()
 export class GalleryCategoryService extends BaseService {
   constructor(readonly prismaService: PrismaService) {
@@ -40,7 +20,7 @@ export class GalleryCategoryService extends BaseService {
     return this.manyToManyRelationConnect(
       galCat,
       relationNames.galleries,
-      relationNames.galleryIds
+      Prisma.ModelName.Gallery
     );
   };
   createMany = (data: GalleryCategoryDto[]) => data.map(this.create);
@@ -65,20 +45,10 @@ export class GalleryCategoryService extends BaseService {
   };
 
   remove = async (id: string) => {
-    const galleries = await this.prismaService.gallery.findMany(
-      findAllGalleriesQueryWithThatGalleryCategory(id)
-    );
-
-    await this.prismaService.$transaction(
-      galleries.map((gallery) =>
-        this.prismaService.gallery.update({
-          ...findById(gallery.id),
-          data: updateRelationsQueryOnDimensionDelete(
-            id,
-            gallery.galleryCategoryIds
-          )
-        })
-      )
+    this.manyToMayRelationDelete(
+      id,
+      Prisma.ModelName.Gallery,
+      relationNames.galleryCategories
     );
 
     return this.prismaService.galleryCategory.delete(findById(id));

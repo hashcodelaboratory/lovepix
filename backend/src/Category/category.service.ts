@@ -7,28 +7,8 @@ import { Prisma } from '@prisma/client';
 
 enum relationNames {
   products = 'products',
-  productIds = 'productIds'
+  categories = 'categories'
 }
-
-const findAllProductsQueryWithThatCategory = (id: string) => ({
-  where: {
-    categories: {
-      some: {
-        id
-      }
-    }
-  }
-});
-
-const updateRelationsQueryOnCategoryDelete = (
-  id: string,
-  categoryIds: string[]
-) => ({
-  categoryIds: {
-    set: categoryIds.filter((categoryId) => categoryId !== id)
-  }
-});
-
 @Injectable()
 export class CategoryService extends BaseService {
   constructor(readonly prismaService: PrismaService) {
@@ -40,7 +20,7 @@ export class CategoryService extends BaseService {
     return this.manyToManyRelationConnect(
       cat,
       relationNames.products,
-      relationNames.productIds
+      Prisma.ModelName.Product
     );
   };
 
@@ -67,17 +47,10 @@ export class CategoryService extends BaseService {
   };
 
   remove = async (id: string) => {
-    const products = await this.prismaService.product.findMany(
-      findAllProductsQueryWithThatCategory(id)
-    );
-
-    await this.prismaService.$transaction(
-      products.map((product) =>
-        this.prismaService.product.update({
-          ...findById(product.id),
-          data: updateRelationsQueryOnCategoryDelete(id, product.categoryIds)
-        })
-      )
+    this.manyToMayRelationDelete(
+      id,
+      Prisma.ModelName.Product,
+      relationNames.categories
     );
 
     return this.prismaService.category.delete(findById(id));

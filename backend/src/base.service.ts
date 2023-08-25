@@ -5,11 +5,12 @@ import {
   addRelationIdsQuery,
   deleteRelationIdsQuery,
   findAllFromArray,
+  findAllWithId,
   findById,
-  lowerCase
+  lowerCase,
+  relationConnect
 } from './utils/query';
 import { idsReference } from './utils/reference';
-import { async } from 'rxjs';
 @Injectable()
 export class BaseService {
   private readonly model!: Prisma.ModelName;
@@ -26,15 +27,14 @@ export class BaseService {
     throw new Error('Create has not been implemented!');
   }
 
-  manyToManyRelationConnect = (data: any, relationName: string, arrayName) => {
-    return this.prismaService[lowerCase(this.modelName)].update({
-      ...findById(data.id),
-      data: {
-        [relationName]: {
-          connect: data[arrayName].map((item) => ({ id: item }))
-        }
-      }
-    });
+  manyToManyRelationConnect = (
+    data: any,
+    relationModelName: string,
+    arrayName: Prisma.ModelName
+  ) => {
+    return this.prismaService[lowerCase(this.modelName)].update(
+      relationConnect(data, relationModelName, idsReference(arrayName))
+    );
   };
 
   manyToMayRelationDelete = async (
@@ -44,28 +44,18 @@ export class BaseService {
   ) => {
     const relationDocuments = await this.prismaService[
       lowerCase(relationModelName)
-    ].findMany({
-      where: {
-        [model]: {
-          some: {
-            id
-          }
-        }
-      }
-    });
+    ].findMany(findAllWithId(id, model));
 
     await this.prismaService.$transaction([
-      relationDocuments.map((relationDocument) =>
-        this.prismaService[lowerCase(relationModelName)].update({
-          ...findById(relationDocument.id),
-          data: {
-            [idsReference(this.model)]: {
-              set: relationDocument[idsReference(this.model)].filter(
-                (id) => id !== id
-              )
-            }
-          }
-        })
+      ...relationDocuments.map((relationDocument) =>
+        this.prismaService[lowerCase(relationModelName)].update(
+          deleteRelationIdsQuery(
+            relationDocument.id,
+            relationDocument[idsReference(this.modelName)],
+            id,
+            idsReference(this.modelName)
+          )
+        )
       )
     ]);
   };
