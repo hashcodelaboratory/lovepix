@@ -12,8 +12,8 @@ model Gallery {
   fullPath           String
   price              Float
   size               Float
-  timeCreated        DateTime
-  updatedAt          DateTime
+  timeCreated        DateTime          
+  updatedAt          DateTime          
   url                String
   name               String
   image              String

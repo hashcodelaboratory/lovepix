@@ -42,7 +42,7 @@ OR
 $ yarn
 ```
 
-## Create .env file for local development (variables are in .env.template or new-lovepix ORG slack channel in pinned message), note: need to modify DATABASE_URL - mongo_username and mongo_password too
+## Create .env file for local development (variables are in .env.template or new-lovepix ORG slack channel in pinned message), NOTE: need to modify DATABASE_URL - mongo_username and mongo_password too
 ```bash
 MONGO_INITDB_ROOT_USERNAME=
 MONGO_INITDB_ROOT_PASSWORD=
@@ -54,6 +54,12 @@ BASICAUTH_USERNAME=
 BASICAUTH_PASSWORD=
 MONGO_REPLICA_HOST=
 MONGO_REPLICA_PORT=
+API_KEY=
+JWT_SECRET=
+DATABASE_URL=
+```
+## Create .env file for local development (variables are in .env.template or new-lovepix ORG slack channel in pinned message), NOTE: need to modify DATABASE_URL - remote access to MONGO DB  
+```bash
 API_KEY=
 JWT_SECRET=
 DATABASE_URL=
@@ -94,3 +100,28 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
+<p align="center">
+  <a href="https://swagger.io/tools/swagger-ui/" target="blank"><img src="https://logovtor.com/wp-content/uploads/2020/09/swagger-supported-by-smartbear-logo-vector.png" width="400" alt="Swagger UI Logo" /></a>
+</p>
+
+## Description
+
+[SWAGGER](https://swagger.io/tools/swagger-ui/) Open Source documentation.
+
+## Run Backend of application
+
+```bash
+$ yarn start:dev
+
+OR
+
+$ yarn start:be
+```
+
+## Use endpoint /api-lovepix to start SWAGGER UI documentation
+[http://localhost:4000/api-lovepix](http://localhost:4000/api-lovepix)
+```bash
+$ http://localhost:4000/api-lovepix
+```
+
+## !!! For authorize your controllers you need to use value of API-KEY from new-lovpix channel like pinned message. !!!

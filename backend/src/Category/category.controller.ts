@@ -6,11 +6,14 @@ import {
     ApiBadRequestResponse,
     ApiCreatedResponse,
     ApiTags,
+    ApiSecurity
   } from '@nestjs/swagger';
 import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
+import {AppSettings} from "./../constants/constants";
 
-@ApiTags('Category')
+@ApiTags(AppSettings.CATEGORY)
 @UseGuards(ApikeyAuthGuard)
+@ApiSecurity(AppSettings.API)
 @Controller('categories')
 export class CategoryController {
     constructor(private readonly categoryService: CategoryService) {
