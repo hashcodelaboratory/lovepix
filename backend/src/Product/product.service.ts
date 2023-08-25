@@ -1,8 +1,18 @@
-import {Injectable} from "@nestjs/common";
-import {PrismaService} from "../prisma/prisma.service";
-import {ProductDto} from "./dto/product.dto";
-import {findById} from "../utils/query";
-import {BaseService} from "../base.service";
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { ProductDto } from './dto/product.dto';
+import { findAllFromArray, findById } from '../utils/query';
+import { BaseService } from '../base.service';
+import { Prisma } from '@prisma/client';
+
+const createProductQuery = (data: ProductDto) => ({
+  data: {
+    ...data,
+    categories: {
+      connect: data.categoryIds.map((category) => ({ id: category }))
+    }
+  }
+});
 
 const findAllCategoriesQueryWithThatProduct = (id: string) => ({
   where: {
@@ -12,55 +22,68 @@ const findAllCategoriesQueryWithThatProduct = (id: string) => ({
       }
     }
   }
-})
+});
 
-const updateRelationsQueryOnProductDelete = (id: string, productIds: string[]) => ({
+const updateRelationsQueryOnProductDelete = (
+  id: string,
+  productIds: string[]
+) => ({
   productIds: {
     set: productIds.filter((product) => product !== id)
   }
-})
-
-const createProductQuery = (data: ProductDto) => ({
-  data: {
-    ...data,
-    categories: {
-      connect: data.categoryIds.map((category) => ({id: category}))
-    },
-  }
-})
+});
 
 @Injectable()
 export class ProductService extends BaseService {
-  create = (data: ProductDto) => this.prismaService.product.create(createProductQuery(data))
+  constructor(readonly prismaService: PrismaService) {
+    super(Prisma.ModelName.Product, prismaService);
+  }
 
-  createMany = (data: ProductDto[]) => this.prismaService.$transaction(data.map(this.create))
+  create = (data: ProductDto) =>
+    this.prismaService.product.create(createProductQuery(data));
 
-  findAll = () => this.prismaService.product.findMany({
-    include: {
-      orders: true,
-    }
-  });
+  createMany = (data: ProductDto[]) =>
+    this.prismaService.$transaction(data.map(this.create));
+
+  findAll = () =>
+    this.prismaService.product.findMany({
+      include: {
+        orders: true
+      }
+    });
 
   findOne = (id: string) => this.prismaService.product.findUnique(findById(id));
 
-  update = (id: string, data: Partial<ProductDto>) => this.prismaService.product.update({
-    ...findById(id),
-    data
-  });
+  update = async (id: string, data: Partial<ProductDto>) => {
+    if (data.categoryIds) {
+      await this.updateRelationIds(
+        id,
+        data.categoryIds,
+        Prisma.ModelName.Category
+      );
+    }
 
+    return this.prismaService.product.update({
+      ...findById(id),
+      data: data
+    });
+  };
 
   remove = async (id: string) => {
-    const categories = await this.prismaService.category.findMany(findAllCategoriesQueryWithThatProduct(id));
+    const categories = await this.prismaService.category.findMany(
+      findAllCategoriesQueryWithThatProduct(id)
+    );
 
     return this.prismaService.$transaction([
-        ...categories.map((category) => this.prismaService.category.update({
+      ...categories.map((category) =>
+        this.prismaService.category.update({
           ...findById(category.id),
           data: updateRelationsQueryOnProductDelete(id, category.productIds)
-        })),
-        this.prismaService.product.delete(findById(id))
-      ]
-    )
-  }
+        })
+      ),
+      this.prismaService.product.delete(findById(id))
+    ]);
+  };
 
   removeAll = () => this.prismaService.product.deleteMany();
 }
