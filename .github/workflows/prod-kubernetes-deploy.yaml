@@ -81,6 +81,6 @@ jobs:
            docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
            docker rmi $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
            docker pull $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
-           kubectl delete deployments lovepix -n staging
+           kubectl delete statefulset lovepix -n staging
            kubectl apply -f k8s_lovepix/frontend/stage.yaml
 
