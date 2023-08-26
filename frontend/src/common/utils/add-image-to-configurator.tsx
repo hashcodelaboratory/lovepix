@@ -9,6 +9,12 @@ import { Pages } from 'constants/pages/urls'
 import { localizationKey } from 'localization/localization-key'
 import Link from 'next/link'
 
+enum CONFIG_STATE {
+  NO_CONFIG,
+  NO_IMAGE,
+  FULL,
+}
+
 export const useAddImageToConfigurator = (
   configuratorData: Configuration | undefined
 ) => {
@@ -16,10 +22,14 @@ export const useAddImageToConfigurator = (
   const router = useRouter()
   const confirmation = useContext(ConfirmationDialogContext)
 
-  let state: string = ''
-  if (!configuratorData) state = 'NO_CONFIG'
-  else if (!configuratorData.origin) state = 'NO_IMAGE'
-  else state = 'FULL'
+  let configState: CONFIG_STATE
+  if (!configuratorData) {
+    configState = CONFIG_STATE.NO_CONFIG
+  } else if (!configuratorData.origin) {
+    configState = CONFIG_STATE.NO_IMAGE
+  } else {
+    configState = CONFIG_STATE.FULL
+  }
 
   const addImage = (imageData: object) => {
     const callback = (value: boolean) => {
@@ -29,16 +39,16 @@ export const useAddImageToConfigurator = (
       }
     }
 
-    switch (state) {
-      case 'NO_CONFIG':
+    switch (configState) {
+      case CONFIG_STATE.NO_CONFIG:
         configurationsTable.add(imageData, CONFIGURATION_TABLE_KEY)
         router.push(t(Pages.CONFIGURATOR))
         break
-      case 'NO_IMAGE':
+      case CONFIG_STATE.NO_IMAGE:
         configurationsTable.update(CONFIGURATION_TABLE_KEY, imageData)
         router.push(t(Pages.CONFIGURATOR))
         break
-      case 'FULL':
+      case CONFIG_STATE.FULL:
         confirmation.confirmFunction(
           t(localizationKey.imageInConfiguratorTitle),
           <>

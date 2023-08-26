@@ -1,7 +1,7 @@
 import { getBlob, ref } from '@firebase/storage'
 import { storage } from '../firebase/config'
 import { useAddImageToConfigurator } from './add-image-to-configurator'
-import { Configuration } from 'common/types/configuration'
+import { Configuration, ImageUpdateType } from 'common/types/configuration'
 
 export const useAddFileFromGallery = (configuration: Configuration) => {
   const { addImage } = useAddImageToConfigurator(configuration)
@@ -11,9 +11,8 @@ export const useAddFileFromGallery = (configuration: Configuration) => {
     fr.readAsDataURL(file)
 
     fr.onload = () => {
-      const imageData = {
+      const imageData: ImageUpdateType = {
         origin: fr.result as string,
-        image: undefined,
         galleryItemId: id,
       }
 

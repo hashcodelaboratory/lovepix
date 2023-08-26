@@ -7,3 +7,8 @@ export type Configuration = {
   origin: string
   galleryItemId?: string
 }
+
+export type ImageUpdateType = {
+  origin: string,
+  galleryItemId?: string
+}

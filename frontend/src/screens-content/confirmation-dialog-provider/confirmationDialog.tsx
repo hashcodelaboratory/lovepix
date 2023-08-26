@@ -8,18 +8,18 @@ import {
 } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from 'localization/localization-key'
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 import styles from './confirmationDialog.module.scss'
 import { v4 as uuidv4 } from 'uuid'
 
 export type confirmationDialogProps = {
-  title: string | ReactJSXElement
-  description: string | ReactJSXElement
+  title: string | JSX.Element
+  description: string | JSX.Element
   callback: (value: boolean) => void
   canDismiss?: boolean
   defaultReturn?: boolean
   open: boolean
   closeDialog: () => void
+  children: JSX.Element
 }
 
 export const ConfirmationDialog = ({
@@ -30,6 +30,7 @@ export const ConfirmationDialog = ({
   defaultReturn,
   open,
   closeDialog,
+  children,
 }: confirmationDialogProps) => {
   const { t } = useTranslation()
 
@@ -44,30 +45,33 @@ export const ConfirmationDialog = ({
   }
 
   return (
-    <Dialog
-      open={open}
-      aria-labelledby='alert-dialog-title'
-      aria-describedby='alert-dialog-description'
-      onClose={canDismiss ? handleClose(!!defaultReturn) : undefined}
-      PaperProps={{ className: styles.validationDialog }}
-    >
-      <DialogTitle id='alert-dialog-title'>{title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText id='alert-dialog-description'>
-          {description}
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        {actionButtons.map(({ value, name }) => (
-          <Button
-            key={uuidv4()}
-            onClick={handleClose(value)}
-            variant={defaultReturn === value ? 'contained' : 'outlined'}
-          >
-            {t(name)}
-          </Button>
-        ))}
-      </DialogActions>
-    </Dialog>
+    <>
+      <Dialog
+        open={open}
+        aria-labelledby='alert-dialog-title'
+        aria-describedby='alert-dialog-description'
+        onClose={canDismiss ? handleClose(!!defaultReturn) : undefined}
+        PaperProps={{ className: styles.validationDialog }}
+      >
+        <DialogTitle id='alert-dialog-title'>{title}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id='alert-dialog-description'>
+            {description}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          {actionButtons.map(({ value, name }) => (
+            <Button
+              key={uuidv4()}
+              onClick={handleClose(value)}
+              variant={defaultReturn === value ? 'contained' : 'outlined'}
+            >
+              {t(name)}
+            </Button>
+          ))}
+        </DialogActions>
+      </Dialog>
+      {children}
+    </>
   )
 }

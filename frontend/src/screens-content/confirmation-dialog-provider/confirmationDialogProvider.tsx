@@ -1,12 +1,11 @@
 import { createContext, useEffect, useState } from 'react'
 import { ConfirmationDialog } from './confirmationDialog'
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace'
 import { useRouter } from 'next/router'
 
 export type ConfirmationDialogContextType = {
   confirmFunction: (
-    title: string | ReactJSXElement,
-    description: string | ReactJSXElement,
+    title: string | JSX.Element,
+    description: string | JSX.Element,
     callback: (value: boolean) => void,
     defaultReturn?: boolean,
     canDismiss?: boolean
@@ -21,12 +20,12 @@ export const ConfirmationDialogContext =
 export const ConfirmationDialogProvider = ({
   children,
 }: {
-  children: ReactJSXElement | ReactJSXElement[]
+  children: JSX.Element
 }) => {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false)
-  const [dialogTitle, setDialogTitle] = useState<string | ReactJSXElement>('')
+  const [dialogTitle, setDialogTitle] = useState<string | JSX.Element>('')
   const [dialogDescription, setDialogDescription] = useState<
-    string | ReactJSXElement
+    string | JSX.Element
   >('')
   const [defaultReturn, setDefaultReturn] = useState<boolean>(false)
   const [canDismiss, setCanDismiss] = useState<boolean>(false)
@@ -37,8 +36,8 @@ export const ConfirmationDialogProvider = ({
   const router = useRouter()
 
   const confirmFunction = (
-    title: string | ReactJSXElement,
-    description: string | ReactJSXElement,
+    title: string | JSX.Element,
+    description: string | JSX.Element,
     callback: (value: boolean) => void,
     defaultReturn: boolean = false,
     canDismiss: boolean = false
@@ -57,19 +56,20 @@ export const ConfirmationDialogProvider = ({
 
   return (
     <>
-      <ConfirmationDialog
-        title={dialogTitle}
-        description={dialogDescription}
-        defaultReturn={defaultReturn}
-        canDismiss={canDismiss}
-        callback={callbackFunction}
-        open={dialogOpen}
-        closeDialog={() => {
-          setDialogOpen(false)
-        }}
-      />
       <ConfirmationDialogContext.Provider value={{ confirmFunction }}>
-        {children}
+        <ConfirmationDialog
+          title={dialogTitle}
+          description={dialogDescription}
+          defaultReturn={defaultReturn}
+          canDismiss={canDismiss}
+          callback={callbackFunction}
+          open={dialogOpen}
+          closeDialog={() => {
+            setDialogOpen(false)
+          }}
+        >
+          {children}
+        </ConfirmationDialog>
       </ConfirmationDialogContext.Provider>
     </>
   )
