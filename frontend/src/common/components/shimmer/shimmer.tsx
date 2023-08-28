@@ -31,13 +31,17 @@ const Shimmer: FC<ShimmerProps> = ({
 
   if (isLoading) {
     return (
-      <div style={{ display: 'flex', overflow: 'auto' }}>
+      <div style={{ display: 'flex', overflow: 'auto', padding: 10 }}>
         {[...Array(count)].map((index) => getSkeletonComponent(index))}
       </div>
     )
   }
 
-  return <div style={{ display: 'flex', overflow: 'auto' }}>{children}</div>
+  return (
+    <div style={{ display: 'flex', overflow: 'auto', padding: 10 }}>
+      {children}
+    </div>
+  )
 }
 
 export default Shimmer
