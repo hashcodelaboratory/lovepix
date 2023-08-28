@@ -1,4 +1,5 @@
 import { Configuration } from 'common/types/configuration'
+import { ImageData } from 'common/types/Imagedata'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
@@ -31,7 +32,7 @@ export const useAddImageToConfigurator = (
     configState = CONFIG_STATE.FULL
   }
 
-  const addImage = (imageData: object) => {
+  const addImage = (imageData: ImageData) => {
     const callback = (value: boolean) => {
       if (value) {
         configurationsTable.update(CONFIGURATION_TABLE_KEY, imageData)
