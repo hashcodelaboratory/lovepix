@@ -1,51 +1,37 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
-import { CreateAddressDto } from "./dto/create-address.dto";
-import { UpdateAddressDto } from "./dto/update-address.dto";
+import { Injectable } from '@nestjs/common';
+import { AddressDto } from './dto/address.dto';
+import { findById } from '../utils/query';
+import { BaseService } from '../base.service';
+import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
-export class AddressService {
-    constructor(private readonly prismaService: PrismaService) {}
+export class AddressService extends BaseService {
+  constructor(readonly prismaService: PrismaService) {
+    super(Prisma.ModelName.Address, prismaService);
+  }
 
-    async create(createAddressDto: CreateAddressDto) {
-        if(Array.isArray(createAddressDto)){
-            return await this.prismaService.address.createMany({
-                data: createAddressDto
-            })
-        }
-        else{
-            return await this.prismaService.address.create({
-                data: createAddressDto
-            });
-        }
-    }
+  create = (data: AddressDto) =>
+    this.prismaService.address.create({
+      data
+    });
 
-    findAll() {
-        return this.prismaService.address.findMany();
-    }
+  createMany = (data: AddressDto[]) =>
+    this.prismaService.address.createMany({
+      data
+    });
 
-    async findOne(id: string) {
-        return await this.prismaService.address.findUnique({
-            where: {
-                id: id
-            }
-        });
-    }
+  findAll = () => this.prismaService.address.findMany();
 
-    async update(id: string, updateAddressDto: UpdateAddressDto) {
-        return await this.prismaService.address.update({
-            where: {
-                id: id
-            },
-            data: updateAddressDto
-        });
-    }
+  findOne = (id: string) => this.prismaService.address.findUnique(findById(id));
 
-    async remove(id: string) {
-        return await this.prismaService.address.delete({
-            where: {
-                id: id
-            }
-        });
-    }
+  update = (id: string, data: Partial<AddressDto>) =>
+    this.prismaService.address.update({
+      ...findById(id),
+      data
+    });
+
+  remove = (id: string) => this.prismaService.address.delete(findById(id));
+
+  removeAll = () => this.prismaService.address.deleteMany();
 }

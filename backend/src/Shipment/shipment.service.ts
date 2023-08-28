@@ -1,44 +1,38 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
-import { CreateShipmentDto } from "./dto/create-shipment.dto";
-import { UpdateShipmentDto } from "./dto/update-shipment.dto";
+import { Injectable } from '@nestjs/common';
+import { ShipmentDto } from './dto/shipment.dto';
+import { findById } from '../utils/query';
+import { BaseService } from '../base.service';
+import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
-export class ShipmentService {
-    constructor(private readonly prismaService: PrismaService) {}
+export class ShipmentService extends BaseService {
+  constructor(readonly prismaService: PrismaService) {
+    super(Prisma.ModelName.Shipment, prismaService);
+  }
 
-    async create(createShipmentDto: CreateShipmentDto) {
-        return await this.prismaService.shipment.create({
-            data: createShipmentDto
-        })
-    }
+  create = (data: ShipmentDto) =>
+    this.prismaService.shipment.create({
+      data
+    });
 
-    findAll() {
-        return this.prismaService.shipment.findMany();
-    }
+  createMany = (data: ShipmentDto[]) =>
+    this.prismaService.shipment.createMany({
+      data
+    });
 
-    async findOne(id: string) {
-        return await this.prismaService.shipment.findUnique({
-            where: {
-                id: id
-            }
-        });
-    }
+  findAll = () => this.prismaService.shipment.findMany();
 
-    async update(id: string, updateShipmentDto: UpdateShipmentDto) {
-        return await this.prismaService.shipment.update({
-            where: {
-                id: id
-            },
-            data: updateShipmentDto
-        });
-    }
+  findOne = (id: string) =>
+    this.prismaService.shipment.findUnique(findById(id));
 
-    async remove(id: string) {
-        return await this.prismaService.shipment.delete({
-            where: {
-                id: id
-            }
-        });
-    }
+  update = (id: string, data: Partial<ShipmentDto>) =>
+    this.prismaService.shipment.update({
+      ...findById(id),
+      data
+    });
+
+  remove = (id: string) => this.prismaService.shipment.delete(findById(id));
+
+  removeAll = () => this.prismaService.shipment.deleteMany();
 }

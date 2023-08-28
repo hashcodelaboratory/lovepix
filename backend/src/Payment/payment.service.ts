@@ -1,44 +1,37 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
-import { CreatePaymentDto } from "./dto/create-payment.dto";
-import { UpdatePaymentDto } from "./dto/update-payment.dto";
+import { Injectable } from '@nestjs/common';
+import { PaymentDto } from './dto/payment.dto';
+import { findById } from '../utils/query';
+import { BaseService } from '../base.service';
+import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
-export class PaymentService {
-    constructor(private readonly prismaService: PrismaService) {}
+export class PaymentService extends BaseService {
+  constructor(readonly prismaService: PrismaService) {
+    super(Prisma.ModelName.Payment, prismaService);
+  }
 
-    async create(createPaymentDto: CreatePaymentDto) {
-        return await this.prismaService.payment.create({
-            data: createPaymentDto
-        })
-    }
+  create = (data: PaymentDto) =>
+    this.prismaService.payment.create({
+      data
+    });
 
-    findAll() {
-        return this.prismaService.payment.findMany();
-    }
+  createMany = (data: PaymentDto[]) =>
+    this.prismaService.payment.createMany({
+      data
+    });
 
-    async findOne(id: string) {
-        return await this.prismaService.payment.findUnique({
-            where: {
-                id: id
-            }
-        });
-    }
+  findAll = () => this.prismaService.payment.findMany();
 
-    async update(id: string, updatePaymentDto: UpdatePaymentDto) {
-        return await this.prismaService.payment.update({
-            where: {
-                id: id
-            },
-            data: updatePaymentDto
-        });
-    }
+  findOne = (id: string) => this.prismaService.payment.findUnique(findById(id));
 
-    async remove(id: string) {
-        return await this.prismaService.payment.delete({
-            where: {
-                id: id
-            }
-        });
-    }
+  update = (id: string, data: Partial<PaymentDto>) =>
+    this.prismaService.payment.update({
+      ...findById(id),
+      data
+    });
+
+  remove = (id: string) => this.prismaService.payment.delete(findById(id));
+
+  removeAll = () => this.prismaService.payment.deleteMany();
 }

@@ -1,26 +1,19 @@
-import { Typography } from '@mui/material'
-import { ReviewType, useReviews } from 'common/api/use-reviews'
+import { ReviewType } from 'common/api/use-reviews'
 import React from 'react'
-import { localizationKey } from 'localization/localization-key'
-import { useTranslation } from 'next-i18next'
 import SingleReview from '../single-review/single-review'
 
-const ReviewList = () => {
-  const { t } = useTranslation()
-  const { data: reviews } = useReviews()
+type ReviewList = {
+  reviews: ReviewType[] | undefined
+}
 
-  const reviewBlock = reviews
+const ReviewList = ({ reviews }: ReviewList) => {
+  const reviewList = reviews
     ?.sort((a: ReviewType, b: ReviewType) => (a.date < b.date ? 1 : -1))
-    .map((item) => <SingleReview key={item.id} reviewItems={item} />)
+    .map((item: ReviewType) => (
+      <SingleReview key={item.id} reviewItems={item} />
+    ))
 
-  return (
-    <div>
-      <Typography variant='h5'>
-        {t(localizationKey.reviewPageYourReviews)}
-      </Typography>
-      {reviewBlock}
-    </div>
-  )
+  return <>{reviewList}</>
 }
 
 export default ReviewList

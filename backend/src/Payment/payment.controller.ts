@@ -1,16 +1,32 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { UseGuards, Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { PaymentService } from './payment.service';
-import { CreatePaymentDto } from './dto/create-payment.dto';
-import { UpdatePaymentDto } from './dto/update-payment.dto';
+import { PaymentDto } from './dto/payment.dto';
+import { PartialType } from '@nestjs/mapped-types';
+import {
+    ApiBadRequestResponse,
+    ApiCreatedResponse,
+    ApiTags,
+    ApiSecurity
+  } from '@nestjs/swagger';
+import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
+import {AppSettings} from "./../constants/constants";
 
+@ApiTags(AppSettings.PAYMENT)
+@UseGuards(ApikeyAuthGuard)
+@ApiSecurity(AppSettings.API)
 @Controller('payments')
 export class PaymentController {
     constructor(private readonly paymentService: PaymentService) {
     }
 
     @Post()
-    create(@Body() createPaymentDto: CreatePaymentDto) {
-        return this.paymentService.create(createPaymentDto);
+    create(@Body() createData: PaymentDto) {
+        return this.paymentService.create(createData);
+    }
+
+    @Post('many')
+    createMany(@Body() createData: PaymentDto[]) {
+        return this.paymentService.createMany(createData);
     }
 
     @Get()
@@ -24,8 +40,8 @@ export class PaymentController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updatePaymentDto: UpdatePaymentDto) {
-        return this.paymentService.update(id, updatePaymentDto);
+    update(@Param('id') id: string, @Body() updateData: Partial<PaymentDto>) {
+        return this.paymentService.update(id, updateData);
     }
 
     @Delete(':id')

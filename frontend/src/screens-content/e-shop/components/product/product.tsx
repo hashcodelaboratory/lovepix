@@ -14,17 +14,18 @@ const Product = ({ product }: ProductContent) => {
   const goTo = () => router.push(`/${id}`)
 
   return (
-    <div className={styles.productCart}>
+    <div className={styles.previewProduct}> 
       <img
         src={image}
         alt={title}
-        style={{ maxWidth: 300 }}
+        style={{maxWidth:300, objectFit: 'cover'}}
         className={styles.image}
         onClick={goTo}
       />
-      <span className={styles.title}>{title}</span>
-      <span className={styles.description}>{description}</span>
-      <span className={styles.price}>{price?.toFixed(2) ?? '-'} €</span>
+      <div className={styles.previewImageDescription}>
+        <p className={styles.productTitle}>{title}</p>
+        <p className={styles.price}>{price?.toFixed(2) ?? '-'} €</p>
+      </div>
     </div>
   )
 }

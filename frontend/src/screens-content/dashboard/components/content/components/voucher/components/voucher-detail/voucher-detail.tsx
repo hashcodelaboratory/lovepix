@@ -82,6 +82,7 @@ const VoucherDetail = ({ tableReset, detail }: VoucherDetailProps) => {
     if (detail) {
       getVoucherDetail({ code: detail.code })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [detail])
 
   const {

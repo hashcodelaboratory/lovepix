@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete'
-import styles from '../review-list/review-list.module.scss'
+import styles from '../review-list/review-block.module.scss'
 import Avatar from '@icons/avatar'
 import { ReviewType } from 'common/api/use-reviews'
 import { Rating } from '@mui/material'
 import RemoveReviewModal from '../remove-review/remove-review-modal'
 import useLoggedUser from 'common/api/use-logged-user'
+import { useRouter } from 'next/router'
+import { Pages } from 'constants/pages/urls'
 
 type ReviewProps = {
   reviewItems: ReviewType
 }
 
 const SingleReview = ({ reviewItems }: ReviewProps) => {
+  const route = useRouter()
   const { user } = useLoggedUser()
   const { name, date, rating, review, id } = reviewItems
   const [open, setOpen] = useState(false)
@@ -19,7 +22,7 @@ const SingleReview = ({ reviewItems }: ReviewProps) => {
   const toggleModal = () => setOpen((prevState) => !prevState)
 
   return (
-    <div style={{ marginTop: 20 }}>
+    <div style={{ marginTop: 20, minWidth: 300, margin: 5 }}>
       {user?.isAdmin && (
         <DeleteIcon
           className={styles.removeIcon}
@@ -39,13 +42,20 @@ const SingleReview = ({ reviewItems }: ReviewProps) => {
             </div>
           </div>
         </div>
-        <Rating
-          name='simple-controlled'
-          value={rating}
-          style={{ marginBottom: 10 }}
-          size='small'
-        />
-        <div className={styles.review}>{review}</div>
+          <Rating
+            name='simple-controlled'
+            value={rating}
+            style={{ marginBottom: 10 }}
+            size='small'
+            readOnly
+          />
+        <div
+          className={
+            route.pathname === Pages.HOME ? styles.reviewHome : styles.review
+          }
+        >
+          {review}
+        </div>
       </div>
       <RemoveReviewModal
         open={open}

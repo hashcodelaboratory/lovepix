@@ -13,5 +13,5 @@ export const useGalleryQuery = () => {
     const {category} = query as { category: string | undefined }
 
     return category
-  }, [router.query])
+  }, [router])
 }

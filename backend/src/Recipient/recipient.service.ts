@@ -1,48 +1,43 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
-import { CreateRecipientDto } from "./dto/create-recipient.dto";
-import { UpdateRecipientDto } from "./dto/update-recipient.dto";
+import { Injectable } from '@nestjs/common';
+import { RecipientDto } from './dto/recipient.dto';
+import { findById } from '../utils/query';
+import { BaseService } from '../base.service';
+import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
-export class RecipientService {
-    constructor(private readonly prismaService: PrismaService) {}
+export class RecipientService extends BaseService {
+  constructor(readonly prismaService: PrismaService) {
+    super(Prisma.ModelName.Recipient, prismaService);
+  }
 
-    async create(createRecipientDto: CreateRecipientDto) {
-        return await this.prismaService.recipient.create({
-            data: createRecipientDto
-        })
-    }
+  create = (data: RecipientDto) =>
+    this.prismaService.recipient.create({
+      data
+    });
 
-    findAll() {
-        return this.prismaService.recipient.findMany({
-            include: {
-                orders: true
-            }
-        });
-    }
+  createMany = (data: RecipientDto[]) =>
+    this.prismaService.recipient.createMany({
+      data
+    });
 
-    async findOne(id: string) {
-        return await this.prismaService.recipient.findUnique({
-            where: {
-                id: id
-            }
-        });
-    }
+  findAll = () =>
+    this.prismaService.recipient.findMany({
+      include: {
+        orders: true
+      }
+    });
 
-    async update(id: string, updateRecipientDto: UpdateRecipientDto) {
-        return await this.prismaService.recipient.update({
-            where: {
-                id: id
-            },
-            data: updateRecipientDto
-        });
-    }
+  findOne = (id: string) =>
+    this.prismaService.recipient.findUnique(findById(id));
 
-    async remove(id: string) {
-        return await this.prismaService.recipient.delete({
-            where: {
-                id: id
-            }
-        });
-    }
+  update = (id: string, data: Partial<RecipientDto>) =>
+    this.prismaService.recipient.update({
+      ...findById(id),
+      data
+    });
+
+  remove = (id: string) => this.prismaService.recipient.delete(findById(id));
+
+  removeAll = () => this.prismaService.recipient.deleteMany();
 }

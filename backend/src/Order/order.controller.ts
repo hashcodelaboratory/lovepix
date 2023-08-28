@@ -1,16 +1,33 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { UseGuards, Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { OrderService } from './order.service';
-import { CreateOrderDto } from './dto/create-order.dto';
-import { UpdateOrderDto } from './dto/update-order.dto';
+import { OrderDto } from './dto/order.dto';
+import { PartialType } from '@nestjs/mapped-types';
+import {
+    ApiBadRequestResponse,
+    ApiCreatedResponse,
+    ApiTags,
+    ApiSecurity
+  } from '@nestjs/swagger';
+import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
+import {AppSettings} from "./../constants/constants";
 
+
+@ApiTags(AppSettings.ORDER)
+@UseGuards(ApikeyAuthGuard)
+@ApiSecurity(AppSettings.API)
 @Controller('orders')
 export class OrderController {
     constructor(private readonly orderService: OrderService) {
     }
 
     @Post()
-    create(@Body() createOrderDto: CreateOrderDto) {
-        return this.orderService.create(createOrderDto);
+    create(@Body() createData: OrderDto) {
+        return this.orderService.create(createData);
+    }
+
+    @Post('many')
+    createMany(@Body() createData: OrderDto[]) {
+        return this.orderService.createMany(createData);
     }
 
     @Get()
@@ -24,8 +41,8 @@ export class OrderController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
-        return this.orderService.update(id, updateOrderDto);
+    update(@Param('id') id: string, @Body() UpdateData: Partial<OrderDto>) {
+        return this.orderService.update(id, UpdateData);
     }
 
     @Delete(':id')

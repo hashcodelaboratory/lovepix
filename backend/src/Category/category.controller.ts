@@ -1,16 +1,32 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { UseGuards, Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { CategoryService } from './category.service';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
+import { CategoryDto } from './dto/category.dto';
+import { PartialType } from '@nestjs/mapped-types';
+import {
+    ApiBadRequestResponse,
+    ApiCreatedResponse,
+    ApiTags,
+    ApiSecurity
+  } from '@nestjs/swagger';
+import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
+import {AppSettings} from "./../constants/constants";
 
+@ApiTags(AppSettings.CATEGORY)
+@UseGuards(ApikeyAuthGuard)
+@ApiSecurity(AppSettings.API)
 @Controller('categories')
 export class CategoryController {
     constructor(private readonly categoryService: CategoryService) {
     }
 
     @Post()
-    create(@Body() createCategoryDto: CreateCategoryDto) {
-        return this.categoryService.create(createCategoryDto);
+    create(@Body() createData: CategoryDto) {
+        return this.categoryService.create(createData);
+    }
+
+    @Post('many')
+    createMany(@Body() createData: CategoryDto[]) {
+        return this.categoryService.createMany(createData);
     }
 
     @Get()
@@ -24,8 +40,8 @@ export class CategoryController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
-        return this.categoryService.update(id, updateCategoryDto);
+    update(@Param('id') id: string, @Body() updateData: Partial<CategoryDto>) {
+        return this.categoryService.update(id, updateData);
     }
 
     @Delete(':id')

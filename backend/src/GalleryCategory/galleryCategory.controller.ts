@@ -1,16 +1,32 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { UseGuards, Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { GalleryCategoryService } from './galleryCategory.service';
-import { CreateGalleryCategoryDto } from './dto/create-galleryCategory.dto';
-import { UpdateGalleryCategoryDto } from './dto/update-galleryCategory.dto';
+import { GalleryCategoryDto } from './dto/galleryCategory.dto';
+import { PartialType } from '@nestjs/mapped-types';
+import {
+    ApiBadRequestResponse,
+    ApiCreatedResponse,
+    ApiTags,
+    ApiSecurity
+  } from '@nestjs/swagger';
+import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
+import {AppSettings} from "./../constants/constants";
 
+@ApiTags(AppSettings.GALLERY_CATEGORY)
+@UseGuards(ApikeyAuthGuard)
+@ApiSecurity(AppSettings.API)
 @Controller('galleryCategories')
 export class GalleryCategoryController {
     constructor(private readonly galleryCategoryService: GalleryCategoryService) {
     }
 
     @Post()
-    create(@Body() createGalleryCategoryDto: CreateGalleryCategoryDto) {
-        return this.galleryCategoryService.create(createGalleryCategoryDto);
+    create(@Body() createData: GalleryCategoryDto) {
+        return this.galleryCategoryService.create(createData);
+    }
+
+    @Post('many')
+    createMany(@Body() createData: GalleryCategoryDto[]) {
+        return this.galleryCategoryService.createMany(createData);
     }
 
     @Get()
@@ -24,8 +40,8 @@ export class GalleryCategoryController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateGalleryCategoryDto: UpdateGalleryCategoryDto) {
-        return this.galleryCategoryService.update(id, updateGalleryCategoryDto);
+    update(@Param('id') id: string, @Body() updateData: Partial<GalleryCategoryDto>) {
+        return this.galleryCategoryService.update(id, updateData);
     }
 
     @Delete(':id')

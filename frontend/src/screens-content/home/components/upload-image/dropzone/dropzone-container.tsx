@@ -54,7 +54,7 @@ const DropzoneContainer = ({configuration}: DropzoneContainerProps) => {
   };
 
   const handleContinueConfiguration = () => {
-    router.push(Pages.CONFIGURATOR);
+    router.push(t(Pages.CONFIGURATOR));
   };
 
   return configuration?.origin ? null : (

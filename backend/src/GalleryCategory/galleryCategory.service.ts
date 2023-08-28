@@ -1,51 +1,81 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
-import { CreateGalleryCategoryDto } from "./dto/create-galleryCategory.dto";
-import { UpdateGalleryCategoryDto } from "./dto/update-galleryCategory.dto";
+import { Injectable } from '@nestjs/common';
+import { GalleryCategoryDto } from './dto/galleryCategory.dto';
+import { findAllFromArray, findById } from '../utils/query';
+import { BaseService } from '../base.service';
+import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
+
+const findAllGalleriesQueryWithThatGalleryCategory = (id: string) => ({
+  where: {
+    galleryCategories: {
+      some: {
+        id
+      }
+    }
+  }
+});
+
+const updateRelationsQueryOnDimensionDelete = (
+  id: string,
+  galleryCategoryIds: string[]
+) => ({
+  galleryCategoryIds: {
+    set: galleryCategoryIds.filter((galleryCategory) => galleryCategory !== id)
+  }
+});
 
 @Injectable()
-export class GalleryCategoryService {
-    constructor(private readonly prismaService: PrismaService) {}
+export class GalleryCategoryService extends BaseService {
+  constructor(readonly prismaService: PrismaService) {
+    super(Prisma.ModelName.GalleryCategory, prismaService);
+  }
 
-    async create(createGalleryCategoryDto: CreateGalleryCategoryDto) {
-        return await this.prismaService.galleryCategory.create({
-            data: createGalleryCategoryDto
+  create = (data: GalleryCategoryDto) =>
+    this.prismaService.galleryCategory.create({
+      data
+    });
+
+  createMany = (data: GalleryCategoryDto[]) =>
+    this.prismaService.galleryCategory.createMany({
+      data
+    });
+
+  findAll = () => this.prismaService.galleryCategory.findMany({});
+
+  findOne = (id: string) =>
+    this.prismaService.galleryCategory.findUnique(findById(id));
+
+  update = async (id: string, data: Partial<GalleryCategoryDto>) => {
+    if (data.galleryIds) {
+      await this.updateRelationIds(
+        id,
+        data.galleryIds,
+        Prisma.ModelName.Gallery
+      );
+    }
+    return this.prismaService.galleryCategory.update({
+      ...findById(id),
+      data
+    });
+  };
+
+  remove = async (id: string) => {
+    const galleries = await this.prismaService.gallery.findMany(
+      findAllGalleriesQueryWithThatGalleryCategory(id)
+    );
+
+    await this.prismaService.$transaction(
+      galleries.map((gallery) =>
+        this.prismaService.gallery.update({
+          ...findById(gallery.id),
+          data: updateRelationsQueryOnDimensionDelete(
+            id,
+            gallery.galleryCategoryIds
+          )
         })
-    }
+      )
+    );
+  };
 
-    findAll() {
-        return this.prismaService.galleryCategory.findMany({
-            include: {
-                galleries: true
-            }
-        });
-    }
-
-    async findOne(id: string) {
-        return await this.prismaService.galleryCategory.findUnique({
-            where: {
-                id: id
-            },
-            include: {
-                galleries: true
-            }
-        });
-    }
-
-    async update(id: string, updateGalleryCategoryDto: UpdateGalleryCategoryDto) {
-        return await this.prismaService.galleryCategory.update({
-            where: {
-                id: id
-            },
-            data: updateGalleryCategoryDto
-        });
-    }
-
-    async remove(id: string) {
-        return await this.prismaService.galleryCategory.delete({
-            where: {
-                id: id
-            }
-        });
-    }
+  removeAll = () => this.prismaService.gallery.deleteMany();
 }

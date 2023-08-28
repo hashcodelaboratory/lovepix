@@ -4,13 +4,16 @@ import React from 'react'
 import Sidebar from 'screens-content/dashboard/components/sidebar/sidebar'
 import styles from './dashboard.module.scss'
 import CategoriesLayout from '../../src/screens-content/dashboard/components/content/components/categories/categories'
+import AdminAccess from 'common/protect-route'
 
 const Categories = () => {
   return (
-    <div className={styles.dashboardContainer}>
-      <Sidebar />
-      <CategoriesLayout />
-    </div>
+    <AdminAccess>
+      <div className={styles.dashboardContainer}>
+        <Sidebar />
+        <CategoriesLayout />
+      </div>
+    </AdminAccess>
   )
 }
 

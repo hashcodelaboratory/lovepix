@@ -1,44 +1,38 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../prisma/prisma.service";
-import { CreateOrderItemDto } from "./dto/create-orderItem.dto";
-import { UpdateOrderItemDto } from "./dto/update-orderItem.dto";
+import { Injectable } from '@nestjs/common';
+import { OrderItemDto } from './dto/orderItem.dto';
+import { findById } from '../utils/query';
+import { BaseService } from '../base.service';
+import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
-export class OrderItemService {
-    constructor(private readonly prismaService: PrismaService) {}
+export class OrderItemService extends BaseService {
+  constructor(readonly prismaService: PrismaService) {
+    super(Prisma.ModelName.OrderItem, prismaService);
+  }
 
-    async create(createOrderItemDto: CreateOrderItemDto) {
-        return await this.prismaService.orderItem.create({
-            data: createOrderItemDto
-        })
-    }
+  create = (data: OrderItemDto) =>
+    this.prismaService.orderItem.create({
+      data
+    });
 
-    findAll() {
-        return this.prismaService.orderItem.findMany();
-    }
+  createMany = (data: OrderItemDto[]) =>
+    this.prismaService.orderItem.createMany({
+      data
+    });
 
-    async findOne(id: string) {
-        return await this.prismaService.orderItem.findUnique({
-            where: {
-                id: id
-            }
-        });
-    }
+  findAll = () => this.prismaService.orderItem.findMany();
 
-    async update(id: string, updateOrderItemDto: UpdateOrderItemDto) {
-        return await this.prismaService.orderItem.update({
-            where: {
-                id: id
-            },
-            data: updateOrderItemDto
-        });
-    }
+  findOne = (id: string) =>
+    this.prismaService.orderItem.findUnique(findById(id));
 
-    async remove(id: string) {
-        return await this.prismaService.orderItem.delete({
-            where: {
-                id: id
-            }
-        });
-    }
+  update = (id: string, data: Partial<OrderItemDto>) =>
+    this.prismaService.orderItem.update({
+      ...findById(id),
+      data
+    });
+
+  remove = (id: string) => this.prismaService.orderItem.delete(findById(id));
+
+  removeAll = () => this.prismaService.orderItem.deleteMany();
 }
