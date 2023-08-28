@@ -33,6 +33,8 @@ export const useAddImageToConfigurator = (
   }
 
   const addImage = (imageData: ImageData) => {
+    // if imageData doesnt have property galleryItem, then define property galleryItem as undefined
+    imageData.galleryItemId = imageData.galleryItemId
     const callback = (value: boolean) => {
       if (value) {
         configurationsTable.update(CONFIGURATION_TABLE_KEY, imageData)
