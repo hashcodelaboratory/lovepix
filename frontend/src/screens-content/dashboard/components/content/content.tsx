@@ -22,6 +22,7 @@ const Content = ({ isFetching }: Props) => {
       categories,
       vouchers,
       categoriesEshop,
+      materials,
     },
   } = useContext(DashboardContext)
 
@@ -111,6 +112,18 @@ const Content = ({ isFetching }: Props) => {
             text: t(localizationKey.thanLastWeek),
           }}
           link={DashboardRoutes.GALLERY}
+        />
+        <Card
+          header={{
+            title: localizationKey.materials,
+            count: isFetching ? '-' : String(materials?.length),
+            icon: <InventoryIcon />,
+          }}
+          footer={{
+            value: '+ 35 %',
+            text: localizationKey.thanLastWeek,
+          }}
+          link={DashboardRoutes.MATERIALS}
         />
       </div>
     </div>

@@ -10,7 +10,7 @@ import {
   orderTable,
 } from '../../../../../../../database.config'
 import { getPrice } from '../price/utils/generator'
-import { materials } from '../../../../../home/utils/configuration'
+import { MATERIALS_TEMPLATE } from '../../../../../home/utils/configuration'
 import {
   CONFIGURATION_TABLE_KEY,
   ORDER_TABLE_KEY,
@@ -41,7 +41,7 @@ const Button = () => {
       height: 0,
     }
 
-    const material = materials.find(
+    const material = MATERIALS_TEMPLATE.find(
       (material) => material.id === configuration?.material
     )?.name
 

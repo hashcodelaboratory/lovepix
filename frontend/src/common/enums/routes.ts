@@ -11,4 +11,5 @@ export const DashboardRoutes = {
   CATEGORIES: `${Route.DASHBOARD}/categories`,
   DIMENSIONS: `${Route.DASHBOARD}/dimensions`,
   GALLERY: `${Route.DASHBOARD}/gallery`,
+  MATERIALS: `${Route.DASHBOARD}/materials`,
 }

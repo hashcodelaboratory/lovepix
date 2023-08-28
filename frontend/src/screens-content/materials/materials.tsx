@@ -1,6 +1,7 @@
 import { Material, materialSection } from './components/section'
 import { useTranslations } from '../../common/translations/useTranslations'
 import { useTranslation } from 'next-i18next'
+import { useMaterials } from 'common/api/use-materials'
 import { materialSectionId } from 'common/types/url-id'
 
 const CustomMaterials = () => {
@@ -35,7 +36,13 @@ const CustomMaterials = () => {
     },
   ]
 
-  return <>{materials.map(materialSection)}</>
+  const { data: materialsdata } = useMaterials()
+  const visible = materialsdata?.filter((item) => item.availability == true)
+
+  const visibleMaterials = materials.filter((item) =>
+    visible?.map((item) => item.title)?.includes(item.title)
+  )
+  return <>{visibleMaterials.map(materialSection)}</>
 }
 
 export default CustomMaterials
