@@ -1,4 +1,4 @@
-version: '4.0'
+version: '3.8'
 services:
   mongo:
     build: ./mongodb_rs
@@ -36,23 +36,6 @@ services:
       timeout: 10s
       retries: 3
     restart: unless-stopped
-  server-backend:
-    container_name: server-backend
-    image: lovepix-be:1.0.0
-    build:
-      context: .
-      dockerfile: ./Dockerfile.local
-    networks:
-      - server-network
-    #depends_on:
-    #  - nginx
-    ports:
-      - "4000:4000"
-    restart: unless-stopped
-    # environment:
-    #   MONGO_URI: mongo
-    # env_file:
-    #   - ./.env
 
 volumes:
   backend_data:

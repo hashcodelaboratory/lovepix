@@ -1,7 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { UseGuards, Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { GalleryService } from './gallery.service';
 import { GalleryDto } from './dto/gallery.dto';
+import { PartialType } from '@nestjs/mapped-types';
+import {
+    ApiBadRequestResponse,
+    ApiCreatedResponse,
+    ApiTags,
+    ApiSecurity
+  } from '@nestjs/swagger';
+import {ApikeyAuthGuard} from "./../auth/guard/apikey-auth.guard";
+import {AppSettings} from "./../constants/constants";
 
+@ApiTags(AppSettings.GALLERY)
+@UseGuards(ApikeyAuthGuard)
+@ApiSecurity(AppSettings.API)
 @Controller('galleries')
 export class GalleryController {
     constructor(private readonly galleryService: GalleryService) {

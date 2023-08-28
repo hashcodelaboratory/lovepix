@@ -9,6 +9,7 @@ export enum Collections {
   REVIEWS = 'reviews',
   CATEGORIES_ESHOP = 'categories-eshop',
   VOUCHERS = 'vouchers',
+  MATERIALS = 'materials',
 }
 
 export enum Languages {
