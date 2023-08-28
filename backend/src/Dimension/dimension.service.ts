@@ -25,7 +25,12 @@ export class DimensionService extends BaseService {
     );
   };
 
-  createMany = (data: DimensionDto[]) => data.map(this.create);
+  createMany = async (data: DimensionDto[]) =>
+    this.manyToManyRelationCreateMany(
+      data,
+      relationNames.galleries,
+      Prisma.ModelName.Gallery
+    );
 
   findAll = () => this.prismaService.dimension.findMany();
 

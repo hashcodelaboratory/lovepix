@@ -37,6 +37,37 @@ export class BaseService {
     );
   };
 
+  manyToManyRelationCreateMany = async (
+    data: any,
+    relationModelName: string,
+    arrayName: Prisma.ModelName
+  ) => {
+    const collections = await this.prismaService.$transaction(
+      data.map((collection) =>
+        this.prismaService[lowerCase(this.model)].create({ data: collection })
+      )
+    );
+    await this.prismaService.$transaction(
+      collections.map((col) =>
+        this.manyToManyRelationConnect(col, relationModelName, arrayName)
+      )
+    );
+
+    if (this.model === Prisma.ModelName.Gallery) {
+      await this.prismaService.$transaction(
+        collections.map((col) =>
+          this.manyToManyRelationConnect(
+            col,
+            'galleryCategories',
+            Prisma.ModelName.GalleryCategory
+          )
+        )
+      );
+    }
+
+    return collections;
+  };
+
   manyToMayRelationDelete = async (
     id: string,
     relationModelName: string,

@@ -38,7 +38,12 @@ export class GalleryService extends BaseService {
     );
   };
 
-  createMany = (data: GalleryDto[]) => data.map(this.create);
+  createMany = async (data: GalleryDto[]) =>
+    this.manyToManyRelationCreateMany(
+      data,
+      RelationNames.dimensions,
+      Prisma.ModelName.Dimension
+    );
 
   findAll = () =>
     this.prismaService.gallery.findMany(findAllGalleriesQueryWithOrders);

@@ -24,7 +24,12 @@ export class ProductService extends BaseService {
     );
   };
 
-  createMany = (data: ProductDto[]) => data.map(this.create);
+  createMany = async (data: ProductDto[]) =>
+    this.manyToManyRelationCreateMany(
+      data,
+      relationNames.categories,
+      Prisma.ModelName.Category
+    );
 
   findAll = () =>
     this.prismaService.product.findMany({

@@ -15,15 +15,30 @@ export class GalleryCategoryService extends BaseService {
     super(Prisma.ModelName.GalleryCategory, prismaService);
   }
 
-  create = async (data: GalleryCategoryDto) => {
-    const galCat = await this.prismaService.galleryCategory.create({ data });
-    return this.manyToManyRelationConnect(
-      galCat,
+  create = async (data: GalleryCategoryDto) =>
+    this.manyToManyRelationCreateMany(
+      data,
       relationNames.galleries,
       Prisma.ModelName.Gallery
     );
+
+  createMany = async (data: GalleryCategoryDto[]) => {
+    const galleryCategories = await this.prismaService.$transaction(
+      data.map((galleryCategory) =>
+        this.prismaService.galleryCategory.create({ data: galleryCategory })
+      )
+    );
+    await this.prismaService.$transaction(
+      galleryCategories.map((galCat) =>
+        this.manyToManyRelationConnect(
+          galCat,
+          relationNames.galleries,
+          Prisma.ModelName.Gallery
+        )
+      )
+    );
+    return galleryCategories;
   };
-  createMany = (data: GalleryCategoryDto[]) => data.map(this.create);
 
   findAll = () => this.prismaService.galleryCategory.findMany({});
 
