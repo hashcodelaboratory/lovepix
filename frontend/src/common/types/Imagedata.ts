@@ -1,9 +1,9 @@
 import { Material } from '../enums/material'
 
 export type ImageData = {
-  dimensionId: string
-  image: string
-  material: Material
   origin: string
+  dimensionId?: string
+  image?: string
+  material?: Material
   galleryItemId?: string
 }
