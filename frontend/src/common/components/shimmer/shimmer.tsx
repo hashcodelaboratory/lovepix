@@ -37,7 +37,7 @@ const Shimmer: FC<ShimmerProps> = ({
     )
   }
 
-  return <>{children}</>
+  return <div style={{ display: 'flex', overflow: 'auto' }}>{children}</div>
 }
 
 export default Shimmer
