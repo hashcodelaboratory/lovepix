@@ -20,7 +20,9 @@ const Material = ({ configuration }: MaterialProps) => {
   const { t } = useTranslation()
   const { data: materials } = useMaterials()
 
-  const unavailableMaterials = materials?.filter((item) => item.availability == false)
+  const unavailableMaterials = materials?.filter(
+    (item) => item.availability == false
+  )
   const unavailableMaterialsIds = unavailableMaterials?.map((item) => item.id)
 
   const changeMaterial = (id: string) => {
@@ -52,7 +54,9 @@ const Material = ({ configuration }: MaterialProps) => {
         <div
           className={
             styles[
-              unavailableMaterialsIds?.includes(material.id) ? 'imageBlur' : 'relativeContainer'
+              unavailableMaterialsIds?.includes(material.id)
+                ? 'imageBlur'
+                : 'relativeContainer'
             ]
           }
         >
@@ -66,7 +70,9 @@ const Material = ({ configuration }: MaterialProps) => {
             layout={ImageLayout.INTRINSIC}
             objectFit='cover'
             style={{
-              cursor: 'pointer',
+              cursor: unavailableMaterialsIds?.includes(material.id)
+                ? 'not-allowed'
+                : 'pointer',
             }}
           />
         </div>
