@@ -18,7 +18,6 @@ export const addImageFromGallery = async (path: string, id?: string) => {
       origin: fr.result as string,
       galleryItemId: id,
     }
-    console.log(imageData)
     addImageToConfigurator(imageData)
   }
 }

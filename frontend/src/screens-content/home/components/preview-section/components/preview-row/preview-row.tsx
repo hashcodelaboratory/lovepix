@@ -1,13 +1,9 @@
 import styles from '../../../../home.module.scss'
-import PreviewCard from './components/preview-card/preview-card'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import { GalleryItem } from '../../../../../../common/types/gallery'
 import { useTranslation } from 'react-i18next'
 import { localizationKey } from '../../../../../../localization/localization-key'
 import { useRouter } from 'next/router'
-import { CONFIGURATION_TABLE_KEY } from 'common/indexed-db/hooks/keys'
-import { configurationsTable } from '../../../../../../../database.config'
-import { useLiveQuery } from 'dexie-react-hooks'
 
 type PreviewRowProps = {
   galleryData?: GalleryItem[]
@@ -23,18 +19,6 @@ const PreviewRow = ({
 }: PreviewRowProps): JSX.Element => {
   const { t } = useTranslation()
   const router = useRouter()
-  const configuration = useLiveQuery(
-    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
-    []
-  )
-
-  const dummy = (
-    <>
-      <PreviewCard configuration={configuration} />
-      <PreviewCard configuration={configuration} />
-      <PreviewCard configuration={configuration} />
-    </>
-  )
 
   const redirect = async () => {
     await router.push(t(route))
@@ -52,7 +36,7 @@ const PreviewRow = ({
         </button>
       </div>
       <hr />
-      <div className={styles.previewImageRow}>{children ?? dummy}</div>
+      <div className={styles.previewImageRow}>{children}</div>
     </div>
   )
 
