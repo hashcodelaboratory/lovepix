@@ -219,3 +219,41 @@
   -webkit-box-shadow: -20px 10px 52px 0px rgba(0, 0, 0, 0.39);
   -moz-box-shadow: -20px 10px 52px 0px rgba(0, 0, 0, 0.39);
 }
+
+.dropzoneGroup {
+  min-height: 120px;
+  pointer-events: none;
+}
+
+.dropzoneGroupFaked {
+  flex-direction: column;
+  display: flex;
+  border: 2px dashed #ced4da;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.uploadButton {
+  background-color: black;
+  color: white;
+  max-width: 300px;
+  border: none;
+  padding: 1rem 1.5rem;
+  margin: 0.5rem 0 1rem 0;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.uploadPhotoSubcontent {
+  font-size: 1.25rem;
+  font-weight: 200;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.containerTitle {
+  text-align: center;
+}
