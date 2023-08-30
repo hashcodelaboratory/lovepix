@@ -34,7 +34,7 @@ const OrderDetailShipping = ({ order }: Props): JSX.Element => {
     { title: localizationKey.address, value: address },
     { title: localizationKey.city, value: city },
     { title: localizationKey.postalCode, value: postalCode },
-    { title: localizationKey.note, value: note },
+    { title: localizationKey.note, value: order?.note },
   ]
 
   const formList = formular.map((item, index) => (
