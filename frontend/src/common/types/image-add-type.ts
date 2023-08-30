@@ -1,6 +1,6 @@
 import { Material } from '../enums/material'
 
-export type ImageData = {
+export type ImageAddType = {
   origin: string
   dimensionId?: string
   image?: string

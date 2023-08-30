@@ -15,7 +15,6 @@ import { withMetadata } from '../src/metadata/with-metadata'
 import { withFavicon } from '../src/favicon/with-favicon'
 import { orderTable } from '../database.config'
 import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
-import { ConfirmationDialogProvider } from 'screens-content/confirmation-dialog-provider/confirmationDialogProvider'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
@@ -41,9 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           }}
           maxSnack={3}
         >
-          <ConfirmationDialogProvider>
-            <Component {...pageProps} />
-          </ConfirmationDialogProvider>
+          <Component {...pageProps} />
         </SnackbarProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

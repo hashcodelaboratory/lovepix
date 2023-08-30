@@ -1,19 +1,31 @@
 import styles from '../../home.module.scss'
 import Container from '@mui/material/Container'
-import { useTranslation } from 'next-i18next'
 import { localizationKey } from '../../../../localization/localization-key'
 import { SNACKBAR_OPTIONS_ERROR } from 'snackbar/config'
 import { FileRejection } from 'react-dropzone'
 import { Configuration } from 'common/types/configuration'
 import { useDropzone } from 'react-dropzone'
 import { useSnackbar } from 'notistack'
-import { useAddImageToConfigurator } from 'common/utils/add-image-to-configurator'
+import {
+  addImageToConfigurator,
+  canAddImage,
+} from 'common/utils/add-image-to-configurator'
+import { useState } from 'react'
+import { ImageAddType } from 'common/types/image-add-type'
+import { ConfirmationModal } from 'screens-content/confirmation-modal/confirmation-modal'
+import { useTranslation } from 'next-i18next'
+import { Pages } from 'constants/pages/urls'
+import { useRouter } from 'next/router'
 
 export enum CarouselTestIds {
   navigateToConfiguratorButtonTestId = 'navigate_to_configurator_button_test_id',
 }
 
-const Carousel = ({ configuration }: { configuration: Configuration }) => {
+type CarouselProps = {
+  configuration: Configuration
+}
+
+const Carousel = ({ configuration }: CarouselProps) => {
   const { getRootProps: carouselRootProps, getInputProps: carouselInputProps } =
     useDropzone({
       onDropAccepted: (acceptedFiles) => {
@@ -44,9 +56,10 @@ const Carousel = ({ configuration }: { configuration: Configuration }) => {
       },
     })
 
+  const router = useRouter()
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
+  const [imageData, setImageData] = useState<ImageAddType>()
   const { t } = useTranslation()
-  const { printPhoto, uploadPhotoSubcontent, uploadPhoto } = localizationKey
-  const { addImage } = useAddImageToConfigurator(configuration)
   const { enqueueSnackbar } = useSnackbar()
 
   const onDrop = async (files: File[]) => {
@@ -55,13 +68,14 @@ const Carousel = ({ configuration }: { configuration: Configuration }) => {
     fr.readAsDataURL(file)
 
     fr.onload = () => {
-      let imageData = {
+      const image: ImageAddType = {
         origin: fr.result as string,
         image: undefined,
       }
-      addImage(imageData)
+      handleImageFlowTest(image)
     }
   }
+
   const onReject = (files: FileRejection[]) => {
     enqueueSnackbar(
       `${String(t(localizationKey.fileRejected))} - ${
@@ -70,24 +84,57 @@ const Carousel = ({ configuration }: { configuration: Configuration }) => {
       SNACKBAR_OPTIONS_ERROR
     )
   }
+  const modalActionTrue = () => {
+    setModalOpen(false)
+    if (!imageData?.origin) return
+    addImageToConfigurator(imageData)
+    router.push(t(Pages.CONFIGURATOR))
+  }
+
+  const modalActionFalse = () => {
+    setModalOpen(false)
+  }
+  const handleImageFlowTest = (image: ImageAddType) => {
+    if (canAddImage(configuration)) {
+      addImageToConfigurator(image)
+      router.push(t(Pages.CONFIGURATOR))
+      return
+    }
+    setImageData(image)
+    setModalOpen(true)
+  }
 
   return (
     <div {...carouselRootProps({ className: 'dropzone', noClick: true })}>
       <input {...carouselInputProps()} />
       <div className={styles.carousel}>
         <Container className={styles.carouselContainer}>
-          <h1 className={styles.carouselTitle}>{String(t(printPhoto))}</h1>
+          <h1 className={styles.carouselTitle}>
+            {String(t(localizationKey.printPhoto))}
+          </h1>
           <p className={styles.carouselSubTitle}>
-            {String(t(uploadPhotoSubcontent))}
+            {String(t(localizationKey.uploadPhotoSubcontent))}
           </p>
           <button className={styles.carouselButton}>
             <div {...buttonRootProps({ className: 'dropzone' })}>
               <input {...buttonInputProps({})} />
-              {String(t(uploadPhoto))}
+              {String(t(localizationKey.uploadPhoto))}
             </div>
           </button>
         </Container>
       </div>
+      <ConfirmationModal
+        title={t(localizationKey.imageInConfiguratorTitle)}
+        description={t(localizationKey.imageInConfiguratorDescription)}
+        link={{
+          href: t(Pages.CONFIGURATOR),
+          text: t(localizationKey.imageInConfiguratorLink),
+        }}
+        actionTrue={modalActionTrue}
+        actionFalse={modalActionFalse}
+        defaultReturn={true}
+        open={modalOpen}
+      />
     </div>
   )
 }

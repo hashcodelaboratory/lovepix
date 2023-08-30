@@ -9,9 +9,15 @@ import { useEffect, useState } from 'react'
 import { localizationKey } from '../../localization/localization-key'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
-import { useAddFileFromGallery } from '../../common/utils/add-file-from-gallery'
+import {
+  addGalleryType,
+  addImageFromGallery,
+} from '../../common/utils/add-file-from-gallery'
 import { useGalleryQuery } from './use-gallery-query'
 import { Configuration } from 'common/types/configuration'
+import { canAddImage } from 'common/utils/add-image-to-configurator'
+import { ConfirmationModal } from 'screens-content/confirmation-modal/confirmation-modal'
+import { Pages } from 'constants/pages/urls'
 
 const GalleryLayout = ({
   configuration,
@@ -19,12 +25,12 @@ const GalleryLayout = ({
   configuration: Configuration
 }): JSX.Element => {
   const { t } = useTranslation()
-  const router = useRouter()
   const queryGallery = useGalleryQuery()
-  const { addToGallery } = useAddFileFromGallery(configuration)
   const { data: gallery } = useGallery()
   const { data: categories } = useCategories()
-
+  const router = useRouter()
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
+  const [imageData, setImageData] = useState<addGalleryType>()
   const [searchedCategories, setSearchedCategories] = useState<string[]>([])
 
   const filtered = gallery?.filter((image) =>
@@ -59,7 +65,24 @@ const GalleryLayout = ({
   }
 
   const add = async (path: string, id: string) => {
-    await addToGallery(path, id)
+    if (canAddImage(configuration)) {
+      await addImageFromGallery(path, id)
+      router.push(t(Pages.CONFIGURATOR))
+    }
+    setModalOpen(true)
+    setImageData({ path: path, id: id })
+  }
+
+  const modalActionTrue = async () => {
+    setModalOpen(false)
+    if (!!imageData) {
+      await addImageFromGallery(imageData.path, imageData.id)
+      router.push(t(Pages.CONFIGURATOR))
+    }
+  }
+
+  const modalActionFalse = () => {
+    setModalOpen(false)
   }
 
   return (
@@ -101,6 +124,18 @@ const GalleryLayout = ({
           </div>
         ))}
       </div>
+      <ConfirmationModal
+        title={t(localizationKey.imageInConfiguratorTitle)}
+        description={t(localizationKey.imageInConfiguratorDescription)}
+        link={{
+          href: t(Pages.CONFIGURATOR),
+          text: t(localizationKey.imageInConfiguratorLink),
+        }}
+        defaultReturn={true}
+        actionTrue={modalActionTrue}
+        actionFalse={modalActionFalse}
+        open={modalOpen}
+      />
     </Container>
   )
 }
