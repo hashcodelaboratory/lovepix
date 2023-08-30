@@ -5,6 +5,19 @@ import { BaseService } from '../base.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
+enum findArguments {
+  orders = 'orders',
+  user = 'user'
+}
+
+const findAdresses = (id: string) => ({
+  ...findById(id),
+  select: {
+    billingAddress: true,
+    shippingAddress: true
+  }
+});
+
 @Injectable()
 export class RecipientService extends BaseService {
   constructor(readonly prismaService: PrismaService) {
@@ -21,15 +34,17 @@ export class RecipientService extends BaseService {
       data
     });
 
-  findAll = () =>
-    this.prismaService.recipient.findMany({
-      include: {
-        orders: true
-      }
-    });
+  findAll = () => this.prismaService.recipient.findMany();
 
   findOne = (id: string) =>
     this.prismaService.recipient.findUnique(findById(id));
+
+  findOrders = (id: string) => this.findRelation(id, findArguments.orders);
+
+  findAddresses = (id: string) =>
+    this.prismaService.recipient.findUnique(findAdresses(id));
+
+  findUser = (id: string) => this.findRelation(id, findArguments.user);
 
   update = (id: string, data: Partial<RecipientDto>) =>
     this.prismaService.recipient.update({
