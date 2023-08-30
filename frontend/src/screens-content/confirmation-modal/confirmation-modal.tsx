@@ -41,9 +41,9 @@ export const ConfirmationModal = ({
         onClose={actionDismiss}
         PaperProps={{ className: styles.confirmationModal }}
       >
-        <DialogTitle id='alert-dialog-title'>{title}</DialogTitle>
+        <DialogTitle>{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText id='alert-dialog-description'>
+          <DialogContentText>
             {description}
             {link ? <Link href={link.href}>{link.text}</Link> : undefined}
           </DialogContentText>
