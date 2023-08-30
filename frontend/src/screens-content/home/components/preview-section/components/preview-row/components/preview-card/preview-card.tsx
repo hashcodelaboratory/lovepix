@@ -3,7 +3,7 @@ import { GalleryItem } from '../../../../../../../../common/types/gallery'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from '../../../../../../../../localization/localization-key'
 import {
-  addGalleryType,
+  AddGalleryType,
   addImageFromGallery,
 } from '../../../../../../../../common/utils/add-file-from-gallery'
 import { Configuration } from 'common/types/configuration'
@@ -25,23 +25,22 @@ const PreviewCard = ({
   const { t } = useTranslation()
   const router = useRouter()
   const [modalOpen, setModalOpen] = useState(false)
-  const [imageData, setImageData] = useState<addGalleryType>()
+  const [imageData, setImageData] = useState<AddGalleryType>()
 
   const add = async (path: string, id?: string) => {
     if (canAddImage(configuration)) {
       await addImageFromGallery(path, id)
-      return router.push(t(Pages.CONFIGURATOR))
+      router.push(t(Pages.CONFIGURATOR))
+    } else {
+      setModalOpen(true)
+      setImageData({ path: path, id: id })
     }
-    setModalOpen(true)
-    setImageData({ path: path, id: id })
   }
 
   const modalButtonTrue = async () => {
     setModalOpen(false)
-    if (!!imageData) {
-      await addImageFromGallery(imageData.path, imageData.id)
-      return router.push(t(Pages.CONFIGURATOR))
-    }
+    await addImageFromGallery(imageData!.path, imageData!.id)
+    router.push(t(Pages.CONFIGURATOR))
   }
 
   const modalButtonFalse = () => {

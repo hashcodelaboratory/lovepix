@@ -86,21 +86,22 @@ const Carousel = ({ configuration }: CarouselProps) => {
   }
   const modalButtonTrue = () => {
     setModalOpen(false)
-    if (!imageData?.origin) return
-    addImageToConfigurator(imageData)
-    return router.push(t(Pages.CONFIGURATOR))
+    addImageToConfigurator(imageData!)
+    router.push(t(Pages.CONFIGURATOR))
   }
 
   const modalButtonFalse = () => {
     setModalOpen(false)
   }
+
   const handleImageFlowTest = (image: ImageAddType) => {
     if (canAddImage(configuration)) {
       addImageToConfigurator(image)
-      return router.push(t(Pages.CONFIGURATOR))
+      router.push(t(Pages.CONFIGURATOR))
+    } else {
+      setImageData(image)
+      setModalOpen(true)
     }
-    setImageData(image)
-    setModalOpen(true)
   }
 
   return (

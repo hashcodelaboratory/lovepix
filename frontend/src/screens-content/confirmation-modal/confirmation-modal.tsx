@@ -11,10 +11,15 @@ import { localizationKey } from 'localization/localization-key'
 import styles from './confirmation-modal.module.scss'
 import Link from 'next/link'
 
-export type confirmationModalProps = {
+export type LinkPropsType = {
+  href: string,
+  text: string
+}
+
+export type ConfirmationModalProps = {
   title: string
   description: string
-  link?: { href: string; text: string }
+  link?: LinkPropsType
   buttonTrue: () => void
   buttonFalse: () => void
   onClose?: () => void
@@ -31,7 +36,7 @@ export const ConfirmationModal = ({
   onClose,
   defaultReturn,
   open,
-}: confirmationModalProps) => {
+}: ConfirmationModalProps) => {
   const { t } = useTranslation()
 
   return (
@@ -45,7 +50,7 @@ export const ConfirmationModal = ({
         <DialogContent>
           <DialogContentText>
             {description}
-            {link ? <Link href={link.href}>{link.text}</Link> : undefined}
+            {link && <Link href={link.href}>{link.text}</Link>}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

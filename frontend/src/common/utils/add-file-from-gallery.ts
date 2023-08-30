@@ -3,7 +3,7 @@ import { storage } from '../firebase/config'
 import { ImageAddType } from 'common/types/image-add-type'
 import { addImageToConfigurator } from './add-image-to-configurator'
 
-export type addGalleryType = {
+export type AddGalleryType = {
   path: string
   id?: string
 }

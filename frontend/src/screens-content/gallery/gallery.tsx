@@ -10,7 +10,7 @@ import { localizationKey } from '../../localization/localization-key'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 import {
-  addGalleryType,
+  AddGalleryType,
   addImageFromGallery,
 } from '../../common/utils/add-file-from-gallery'
 import { useGalleryQuery } from './use-gallery-query'
@@ -30,7 +30,7 @@ const GalleryLayout = ({
   const { data: categories } = useCategories()
   const router = useRouter()
   const [modalOpen, setModalOpen] = useState(false)
-  const [imageData, setImageData] = useState<addGalleryType>()
+  const [imageData, setImageData] = useState<AddGalleryType>()
   const [searchedCategories, setSearchedCategories] = useState<string[]>([])
 
   const filtered = gallery?.filter((image) =>
@@ -40,7 +40,6 @@ const GalleryLayout = ({
   useEffect(() => {
     if (!queryGallery) {
       setSearchedCategories((categories ?? []).map(({ name }) => name))
-
       return
     }
 
@@ -48,8 +47,7 @@ const GalleryLayout = ({
   }, [queryGallery, categories])
 
   const onClickCategory = (name: string) => {
-    const variant = getCategoryVariant(name)
-    if (variant === 'filled') {
+    if (isPartOfFilter(name)) {
       setSearchedCategories(
         searchedCategories.filter((category) => category !== name)
       )
@@ -58,27 +56,24 @@ const GalleryLayout = ({
     }
   }
 
-  const getCategoryVariant = (name: string) => {
-    const isPartOfFilter = searchedCategories?.includes(name) ?? false
-
-    return isPartOfFilter ? 'filled' : 'outlined'
+  const isPartOfFilter = (name: string) => {
+    return searchedCategories?.includes(name) ?? false
   }
 
   const add = async (path: string, id: string) => {
     if (canAddImage(configuration)) {
       await addImageFromGallery(path, id)
-      return router.push(t(Pages.CONFIGURATOR))
+      router.push(t(Pages.CONFIGURATOR))
+    } else {
+      setModalOpen(true)
+      setImageData({ path: path, id: id })
     }
-    setModalOpen(true)
-    setImageData({ path: path, id: id })
   }
 
   const modalButtonTrue = async () => {
     setModalOpen(false)
-    if (!!imageData) {
-      await addImageFromGallery(imageData.path, imageData.id)
-      return router.push(t(Pages.CONFIGURATOR))
-    }
+    await addImageFromGallery(imageData!.path, imageData!.id)
+    router.push(t(Pages.CONFIGURATOR))
   }
 
   const modalButtonFalse = () => {
@@ -94,11 +89,11 @@ const GalleryLayout = ({
           <Chip
             key={id}
             label={name}
-            variant={getCategoryVariant(name)}
+            variant={isPartOfFilter(name) ? 'filled' : 'outlined'}
             clickable
             onClick={() => onClickCategory(name)}
             className={`${styles.galleryChip} ${
-              getCategoryVariant(name) === 'outlined' ? '' : styles.clicked
+              isPartOfFilter(name) ? styles.clicked : ''
             }`}
           />
         ))}
