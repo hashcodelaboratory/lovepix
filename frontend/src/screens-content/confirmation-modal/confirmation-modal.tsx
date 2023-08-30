@@ -15,9 +15,9 @@ export type confirmationModalProps = {
   title: string
   description: string
   link?: { href: string; text: string }
-  actionTrue: () => void
-  actionFalse: () => void
-  actionDismiss?: () => void
+  buttonTrue: () => void
+  buttonFalse: () => void
+  onClose?: () => void
   defaultReturn?: boolean
   open: boolean
 }
@@ -26,9 +26,9 @@ export const ConfirmationModal = ({
   title,
   description,
   link,
-  actionTrue,
-  actionFalse,
-  actionDismiss,
+  buttonTrue,
+  buttonFalse,
+  onClose,
   defaultReturn,
   open,
 }: confirmationModalProps) => {
@@ -38,7 +38,7 @@ export const ConfirmationModal = ({
     <>
       <Dialog
         open={open}
-        onClose={actionDismiss}
+        onClose={onClose}
         PaperProps={{ className: styles.confirmationModal }}
       >
         <DialogTitle>{title}</DialogTitle>
@@ -50,14 +50,14 @@ export const ConfirmationModal = ({
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={() => actionFalse()}
-            variant={!defaultReturn ? 'contained' : 'outlined'}
+            onClick={() => buttonFalse()}
+            variant={defaultReturn ? 'outlined' : 'contained'}
           >
             {t(localizationKey.confirmationBtnFalse)}
           </Button>
           <Button
-            onClick={() => actionTrue()}
-            variant={defaultReturn ? 'contained' : 'outlined'}
+            onClick={() => buttonTrue()}
+            variant={!defaultReturn ? 'outlined' : 'contained'}
           >
             {t(localizationKey.confirmationBtnTrue)}
           </Button>

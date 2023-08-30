@@ -84,14 +84,14 @@ const Carousel = ({ configuration }: CarouselProps) => {
       SNACKBAR_OPTIONS_ERROR
     )
   }
-  const modalActionTrue = () => {
+  const modalButtonTrue = () => {
     setModalOpen(false)
     if (!imageData?.origin) return
     addImageToConfigurator(imageData)
     return router.push(t(Pages.CONFIGURATOR))
   }
 
-  const modalActionFalse = () => {
+  const modalButtonFalse = () => {
     setModalOpen(false)
   }
   const handleImageFlowTest = (image: ImageAddType) => {
@@ -129,8 +129,8 @@ const Carousel = ({ configuration }: CarouselProps) => {
           href: t(Pages.CONFIGURATOR),
           text: t(localizationKey.imageInConfiguratorLink),
         }}
-        actionTrue={modalActionTrue}
-        actionFalse={modalActionFalse}
+        buttonTrue={modalButtonTrue}
+        buttonFalse={modalButtonFalse}
         defaultReturn={true}
         open={modalOpen}
       />

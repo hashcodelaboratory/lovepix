@@ -36,7 +36,7 @@ const PreviewCard = ({
     setImageData({ path: path, id: id })
   }
 
-  const modalActionTrue = async () => {
+  const modalButtonTrue = async () => {
     setModalOpen(false)
     if (!!imageData) {
       await addImageFromGallery(imageData.path, imageData.id)
@@ -44,7 +44,7 @@ const PreviewCard = ({
     }
   }
 
-  const modalActionFalse = () => {
+  const modalButtonFalse = () => {
     setModalOpen(false)
   }
   return (
@@ -78,8 +78,8 @@ const PreviewCard = ({
           text: t(localizationKey.imageInConfiguratorLink),
         }}
         defaultReturn={true}
-        actionTrue={modalActionTrue}
-        actionFalse={modalActionFalse}
+        buttonTrue={modalButtonTrue}
+        buttonFalse={modalButtonFalse}
         open={modalOpen}
       />
     </div>
