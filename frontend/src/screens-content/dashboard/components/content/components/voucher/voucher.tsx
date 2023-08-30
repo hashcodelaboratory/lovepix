@@ -30,8 +30,6 @@ const VoucherLayout = (): JSX.Element => {
   const queryClient = useQueryClient()
   const { data: vouchers } = useVouchers()
 
-  console.log(vouchers)
-
   const { mutate: removeVouchers } = useRemoveVouchers({
     onSuccess: () => {
       enqueueSnackbar(

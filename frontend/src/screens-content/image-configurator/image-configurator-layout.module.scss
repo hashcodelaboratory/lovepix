@@ -97,7 +97,8 @@
   z-index: 1;
 }
 .imageBlur {
-  filter: blur(0.15rem);
+  filter: blur(0.15rem) grayscale(1);
+  cursor: not-allowed;
 }
 
 .relativeContainer {
