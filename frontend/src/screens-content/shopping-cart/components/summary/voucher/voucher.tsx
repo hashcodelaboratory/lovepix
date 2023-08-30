@@ -84,6 +84,7 @@ const Voucher = ({ voucher }: VoucherProps) => {
           color={isSuccess ? 'success' : 'primary'}
         />
         <AddButton
+          type='button'
           error={error}
           onClick={getVoucherDetail}
           disabled={isSuccess}
