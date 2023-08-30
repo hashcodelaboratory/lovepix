@@ -38,8 +38,6 @@ export const ConfirmationModal = ({
     <>
       <Dialog
         open={open}
-        aria-labelledby='alert-dialog-title'
-        aria-describedby='alert-dialog-description'
         onClose={actionDismiss}
         PaperProps={{ className: styles.confirmationModal }}
       >
