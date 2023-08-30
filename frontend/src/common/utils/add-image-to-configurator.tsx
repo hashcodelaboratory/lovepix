@@ -5,9 +5,9 @@ import { CONFIGURATION_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 
 export const canAddImage = (configuration: Configuration | undefined) => {
   if (!configuration || !configuration.origin) {
-    return false
+    return true
   }
-  return true
+  return false
 }
 
 export const addImageToConfigurator = (imageData: ImageAddType) => {
