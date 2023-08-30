@@ -68,6 +68,7 @@ const GalleryLayout = ({
     if (canAddImage(configuration)) {
       await addImageFromGallery(path, id)
       router.push(t(Pages.CONFIGURATOR))
+      return
     }
     setModalOpen(true)
     setImageData({ path: path, id: id })
