@@ -5,16 +5,39 @@ import { BaseService } from '../base.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
-const findPrice = (id: string, realtionName: string) => ({
+const getAllPricesQuery = (id: string) => ({
   ...findById(id),
   select: {
-    [realtionName]: {
-      select: {
-        price: true
+    orderItems: {
+      include: {
+        product: true,
+        image: true
       }
-    }
+    },
+    shipment: true,
+    payment: true
   }
 });
+
+const getOrderInfoQuery = {
+  select: {
+    id: true,
+    orderDate: true,
+    orderState: true,
+    recipient: {
+      select: {
+        user: true,
+        shippingAddress: true,
+        billingAddress: true,
+        ico: true,
+        dic: true
+      }
+    },
+    orderItems: true,
+    shipment: true,
+    payment: true
+  }
+};
 
 @Injectable()
 export class OrderService extends BaseService {
@@ -32,34 +55,31 @@ export class OrderService extends BaseService {
       data
     });
 
-  findAll = () =>
-    this.prismaService.order.findMany({
-      include: {
-        orderItems: true
-      }
-    });
+  findAll = () => this.prismaService.order.findMany(getOrderInfoQuery);
 
-  findOne = (id: string) => this.prismaService.order.findUnique(findById(id));
+  getOrderedByDate = () => {
+    return this.prismaService.order.findMany({
+      orderBy: {
+        orderDate: 'desc'
+      },
+      ...getOrderInfoQuery
+    });
+  };
+
+  findOne = (id: string) =>
+    this.prismaService.order.findUnique({
+      ...findById(id),
+      ...getOrderInfoQuery
+    });
 
   getPrice = async (id: string) => {
-    const order = await this.prismaService.order.findUnique({
-      ...findById(id),
-      select: {
-        orderItems: {
-          include: {
-            product: true,
-            image: true
-          }
-        },
-        shipment: true,
-        payment: true
-      }
-    });
+    const order = await this.prismaService.order.findUnique(
+      getAllPricesQuery(id)
+    );
     let images: number[] = [];
     let products: number[] = [];
     order.orderItems.map((item) => {
       if (item.productId) products.push(item.product.price * item.quantity);
-
       if (item.imageId) images.push(item.image.price * item.quantity);
     });
     return (

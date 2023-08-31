@@ -42,6 +42,11 @@ export class OrderController {
     return this.orderService.findAll();
   }
 
+  @Get('orderedByDate')
+  getOrderedByDate() {
+    return this.orderService.getOrderedByDate();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.orderService.findOne(id);
