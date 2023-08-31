@@ -37,6 +37,10 @@ export const ConfirmationModal = ({
 }: ConfirmationModalProps) => {
   const { t } = useTranslation()
 
+  const onCloseButton = () => onClose()
+
+  const onConfirmButton = () => onConfirm()
+
   return (
     <Dialog open={open} PaperProps={{ className: styles.confirmationModal }}>
       <DialogTitle>{title}</DialogTitle>
@@ -48,13 +52,13 @@ export const ConfirmationModal = ({
       </DialogContent>
       <DialogActions>
         <Button
-          onClick={() => onClose()}
+          onClick={onCloseButton}
           variant={defaultReturn ? 'outlined' : 'contained'}
         >
           {t(localizationKey.confirmationBtnFalse)}
         </Button>
         <Button
-          onClick={() => onConfirm()}
+          onClick={onConfirmButton}
           variant={defaultReturn ? 'contained' : 'outlined'}
         >
           {t(localizationKey.confirmationBtnTrue)}

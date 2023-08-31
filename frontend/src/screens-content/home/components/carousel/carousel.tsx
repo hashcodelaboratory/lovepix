@@ -27,7 +27,7 @@ type CarouselProps = {
 
 const Carousel = ({ configuration }: CarouselProps) => {
   const router = useRouter()
-  const [modalOpen, setModalOpen] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
   const [imageData, setImageData] = useState<ImageAddType>()
   const { t } = useTranslation()
   const { enqueueSnackbar } = useSnackbar()
@@ -72,15 +72,16 @@ const Carousel = ({ configuration }: CarouselProps) => {
       SNACKBAR_OPTIONS_ERROR
     )
   }
+
+  const toggleModal = () => setOpenModal(!openModal)
+
   const onConfirm = () => {
-    setModalOpen(false)
+    toggleModal()
     addImageToConfigurator(imageData!)
     router.push(t(Pages.CONFIGURATOR))
   }
 
-  const onClose = () => {
-    setModalOpen(false)
-  }
+  const onClose = () => toggleModal()
 
   const handleImageFlowTest = (image: ImageAddType) => {
     if (canAddImage(configuration)) {
@@ -88,7 +89,7 @@ const Carousel = ({ configuration }: CarouselProps) => {
       router.push(t(Pages.CONFIGURATOR))
     } else {
       setImageData(image)
-      setModalOpen(true)
+      setOpenModal(true)
     }
   }
 
@@ -117,7 +118,7 @@ const Carousel = ({ configuration }: CarouselProps) => {
         }}
         onConfirm={onConfirm}
         onClose={onClose}
-        open={modalOpen}
+        open={openModal}
       />
     </div>
   )

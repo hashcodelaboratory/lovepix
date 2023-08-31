@@ -29,7 +29,7 @@ const GalleryLayout = ({ configuration }: GalleryLayoutProps): JSX.Element => {
   const { data: gallery } = useGallery()
   const { data: categories } = useCategories()
   const router = useRouter()
-  const [modalOpen, setModalOpen] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
   const [imageData, setImageData] = useState<AddGalleryType>()
   const [searchedCategories, setSearchedCategories] = useState<string[]>([])
 
@@ -55,29 +55,28 @@ const GalleryLayout = ({ configuration }: GalleryLayoutProps): JSX.Element => {
     }
   }
 
-  const isPartOfFilter = (name: string) => {
-    return searchedCategories?.includes(name) ?? false
-  }
+  const isPartOfFilter = (name: string) =>
+    searchedCategories?.includes(name) ?? false
 
   const add = async (path: string, id: string) => {
     if (canAddImage(configuration)) {
       await addImageFromGallery(path, id)
       router.push(t(Pages.CONFIGURATOR))
     } else {
-      setModalOpen(true)
+      toggleModal()
       setImageData({ path: path, id: id })
     }
   }
 
+  const toggleModal = () => setOpenModal(!openModal)
+
   const onConfirm = async () => {
-    setModalOpen(false)
+    toggleModal()
     await addImageFromGallery(imageData!.path, imageData!.id)
     router.push(t(Pages.CONFIGURATOR))
   }
 
-  const onClose = () => {
-    setModalOpen(false)
-  }
+  const onClose = () => toggleModal()
 
   return (
     <Container>
@@ -127,7 +126,7 @@ const GalleryLayout = ({ configuration }: GalleryLayoutProps): JSX.Element => {
         }}
         onConfirm={onConfirm}
         onClose={onClose}
-        open={modalOpen}
+        open={openModal}
       />
     </Container>
   )

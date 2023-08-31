@@ -24,7 +24,7 @@ const PreviewCard = ({
 }: PreviewCardProps): JSX.Element => {
   const { t } = useTranslation()
   const router = useRouter()
-  const [modalOpen, setModalOpen] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
   const [imageData, setImageData] = useState<AddGalleryType>()
 
   const add = async (path: string, id?: string) => {
@@ -32,20 +32,21 @@ const PreviewCard = ({
       await addImageFromGallery(path, id)
       router.push(t(Pages.CONFIGURATOR))
     } else {
-      setModalOpen(true)
+      toggleModal()
       setImageData({ path: path, id: id })
     }
   }
 
+  const toggleModal = () => setOpenModal(!openModal)
+
   const onConfirm = async () => {
-    setModalOpen(false)
+    toggleModal()
     await addImageFromGallery(imageData!.path, imageData!.id)
     router.push(t(Pages.CONFIGURATOR))
   }
 
-  const onClose = () => {
-    setModalOpen(false)
-  }
+  const onClose = () => toggleModal()
+
   return (
     <div className={styles.previewCard}>
       {item ? (
@@ -78,7 +79,7 @@ const PreviewCard = ({
         }}
         onConfirm={onConfirm}
         onClose={onClose}
-        open={modalOpen}
+        open={openModal}
       />
     </div>
   )
