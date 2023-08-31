@@ -51,29 +51,27 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
   }
 
   return configuration?.origin ? null : (
-    <>
-      <Dropzone
-        onDrop={(files) => onDrop(files)}
-        onReject={(files) => onReject(files)}
-        accept={{
-          'image/*': [],
-        }}
-        sx={DROPZONE_STYLE}
-        multiple={false}
-        maxSize={10000000}
-      >
-        <Group position='center' spacing='xl' className={styles.dropzoneGroup}>
-          <h1 className={styles.containerTitle}>{String(t(printPhoto))}</h1>
-          <Dropzone.Accept>
-            <Icon icon={IconType.UPLOAD_PHOTO} />
-          </Dropzone.Accept>
-          <Dropzone.Reject>
-            <Icon icon={IconType.UPLOAD_PHOTO} />
-          </Dropzone.Reject>
-          <DropzoneIdle />
-        </Group>
-      </Dropzone>
-    </>
+    <Dropzone
+      onDrop={(files) => onDrop(files)}
+      onReject={(files) => onReject(files)}
+      accept={{
+        'image/*': [],
+      }}
+      sx={DROPZONE_STYLE}
+      multiple={false}
+      maxSize={10000000}
+    >
+      <Group position='center' spacing='xl' className={styles.dropzoneGroup}>
+        <h1 className={styles.containerTitle}>{String(t(printPhoto))}</h1>
+        <Dropzone.Accept>
+          <Icon icon={IconType.UPLOAD_PHOTO} />
+        </Dropzone.Accept>
+        <Dropzone.Reject>
+          <Icon icon={IconType.UPLOAD_PHOTO} />
+        </Dropzone.Reject>
+        <DropzoneIdle />
+      </Group>
+    </Dropzone>
   )
 }
 

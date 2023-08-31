@@ -38,12 +38,11 @@ const GalleryLayout = ({
   )
 
   useEffect(() => {
-    if (!queryGallery) {
-      setSearchedCategories((categories ?? []).map(({ name }) => name))
-      return
-    }
+    const query = !queryGallery
+      ? (categories ?? []).map(({ name }) => name)
+      : [queryGallery]
 
-    setSearchedCategories([queryGallery])
+    setSearchedCategories(query)
   }, [queryGallery, categories])
 
   const onClickCategory = (name: string) => {

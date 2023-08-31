@@ -3,12 +3,8 @@ import { ImageAddType } from 'common/types/image-add-type'
 import { configurationsTable } from '../../../database.config'
 import { CONFIGURATION_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 
-export const canAddImage = (configuration: Configuration | undefined) => {
-  if (!configuration || !configuration.origin) {
-    return true
-  }
-  return false
-}
+export const canAddImage = (configuration?: Configuration) =>
+  !!(!configuration || !configuration.origin)
 
 export const addImageToConfigurator = (imageData: ImageAddType) => {
   configurationsTable.clear()
