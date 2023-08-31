@@ -69,13 +69,13 @@ const GalleryLayout = ({
     }
   }
 
-  const modalButtonTrue = async () => {
+  const onConfirm = async () => {
     setModalOpen(false)
     await addImageFromGallery(imageData!.path, imageData!.id)
     router.push(t(Pages.CONFIGURATOR))
   }
 
-  const modalButtonFalse = () => {
+  const onClose = () => {
     setModalOpen(false)
   }
 
@@ -125,9 +125,8 @@ const GalleryLayout = ({
           href: t(Pages.CONFIGURATOR),
           text: t(localizationKey.imageInConfiguratorLink),
         }}
-        defaultReturn={true}
-        buttonTrue={modalButtonTrue}
-        buttonFalse={modalButtonFalse}
+        onConfirm={onConfirm}
+        onClose={onClose}
         open={modalOpen}
       />
     </Container>

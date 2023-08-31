@@ -72,13 +72,13 @@ const Carousel = ({ configuration }: CarouselProps) => {
       SNACKBAR_OPTIONS_ERROR
     )
   }
-  const modalButtonTrue = () => {
+  const onConfirm = () => {
     setModalOpen(false)
     addImageToConfigurator(imageData!)
     router.push(t(Pages.CONFIGURATOR))
   }
 
-  const modalButtonFalse = () => {
+  const onClose = () => {
     setModalOpen(false)
   }
 
@@ -115,9 +115,8 @@ const Carousel = ({ configuration }: CarouselProps) => {
           href: t(Pages.CONFIGURATOR),
           text: t(localizationKey.imageInConfiguratorLink),
         }}
-        buttonTrue={modalButtonTrue}
-        buttonFalse={modalButtonFalse}
-        defaultReturn={true}
+        onConfirm={onConfirm}
+        onClose={onClose}
         open={modalOpen}
       />
     </div>
