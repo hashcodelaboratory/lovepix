@@ -19,11 +19,11 @@ import { canAddImage } from 'common/utils/add-image-to-configurator'
 import { ConfirmationModal } from 'screens-content/confirmation-modal/confirmation-modal'
 import { Pages } from 'constants/pages/urls'
 
-const GalleryLayout = ({
-  configuration,
-}: {
+type GalleryLayoutProps = {
   configuration: Configuration
-}): JSX.Element => {
+}
+
+const GalleryLayout = ({ configuration }: GalleryLayoutProps): JSX.Element => {
   const { t } = useTranslation()
   const queryGallery = useGalleryQuery()
   const { data: gallery } = useGallery()
