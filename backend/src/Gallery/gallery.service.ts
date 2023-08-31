@@ -25,14 +25,14 @@ export class GalleryService extends BaseService {
   }
 
   create = async (data: GalleryDto) => {
-    const gal = await this.prismaService.gallery.create({ data });
+    const gallery = await this.prismaService.gallery.create({ data });
     await this.manyToManyRelationConnect(
-      gal,
+      gallery,
       RelationNames.dimensions,
       Prisma.ModelName.Dimension
     );
     await this.manyToManyRelationConnect(
-      gal,
+      gallery,
       RelationNames.galleryCategories,
       Prisma.ModelName.GalleryCategory
     );
