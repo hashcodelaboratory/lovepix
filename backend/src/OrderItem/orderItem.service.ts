@@ -5,6 +5,18 @@ import { BaseService } from '../base.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
+const getOrderItemInfoQuery = {
+  select: {
+    id: true,
+    orderId: true,
+    product: true,
+    image: true,
+    quantity: true,
+    material: true,
+    dimension: true
+  }
+};
+
 @Injectable()
 export class OrderItemService extends BaseService {
   constructor(readonly prismaService: PrismaService) {
@@ -21,10 +33,13 @@ export class OrderItemService extends BaseService {
       data
     });
 
-  findAll = () => this.prismaService.orderItem.findMany();
+  findAll = () => this.prismaService.orderItem.findMany(getOrderItemInfoQuery);
 
   findOne = (id: string) =>
-    this.prismaService.orderItem.findUnique(findById(id));
+    this.prismaService.orderItem.findUnique({
+      ...findById(id),
+      ...getOrderItemInfoQuery
+    });
 
   update = (id: string, data: Partial<OrderItemDto>) =>
     this.prismaService.orderItem.update({
