@@ -47,21 +47,6 @@ export class RecipientController {
     return this.recipientService.findOne(id);
   }
 
-  @Get(':id/orders')
-  findOrders(@Param('id') id: string) {
-    return this.recipientService.findOrders(id);
-  }
-
-  @Get(':id/addresses')
-  findAddresses(@Param('id') id: string) {
-    return this.recipientService.findAddresses(id);
-  }
-
-  @Get(':id/user')
-  findUser(@Param('id') id: string) {
-    return this.recipientService.findUser(id);
-  }
-
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateData: Partial<RecipientDto>) {
     return this.recipientService.update(id, updateData);
