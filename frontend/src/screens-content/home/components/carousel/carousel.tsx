@@ -105,7 +105,7 @@ const Carousel = ({ configuration }: CarouselProps) => {
   }
 
   return (
-    <div {...carouselRootProps({ className: 'dropzone', noClick: true })}>
+    <div {...carouselRootProps({ className: 'dropzone'})}>
       <input {...carouselInputProps()} />
       <div className={styles.carousel}>
         <Container className={styles.carouselContainer}>
