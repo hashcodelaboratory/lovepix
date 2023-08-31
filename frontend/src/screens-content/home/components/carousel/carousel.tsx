@@ -26,41 +26,29 @@ type CarouselProps = {
 }
 
 const Carousel = ({ configuration }: CarouselProps) => {
-  const { getRootProps: carouselRootProps, getInputProps: carouselInputProps } =
-    useDropzone({
-      onDropAccepted: (acceptedFiles) => {
-        onDrop(acceptedFiles)
-      },
-      onDropRejected: (fileRejections) => {
-        onReject(fileRejections)
-      },
-      multiple: false,
-      noClick: true,
-      accept: {
-        'image/*': [],
-      },
-    })
-
-  const { getRootProps: buttonRootProps, getInputProps: buttonInputProps } =
-    useDropzone({
-      onDropAccepted: (acceptedFiles) => {
-        onDrop(acceptedFiles)
-      },
-      onDropRejected: (fileRejections) => {
-        onReject(fileRejections)
-      },
-      multiple: false,
-      noClick: false,
-      accept: {
-        'image/*': [],
-      },
-    })
-
   const router = useRouter()
   const [modalOpen, setModalOpen] = useState(false)
   const [imageData, setImageData] = useState<ImageAddType>()
   const { t } = useTranslation()
   const { enqueueSnackbar } = useSnackbar()
+
+  const {
+    getRootProps: carouselRootProps,
+    getInputProps: carouselInputProps,
+    open,
+  } = useDropzone({
+    onDropAccepted: (acceptedFiles) => {
+      onDrop(acceptedFiles)
+    },
+    onDropRejected: (fileRejections) => {
+      onReject(fileRejections)
+    },
+    multiple: false,
+    noClick: true,
+    accept: {
+      'image/*': [],
+    },
+  })
 
   const onDrop = async (files: File[]) => {
     const file = files[0]
@@ -105,7 +93,7 @@ const Carousel = ({ configuration }: CarouselProps) => {
   }
 
   return (
-    <div {...carouselRootProps({ className: 'dropzone'})}>
+    <div {...carouselRootProps({ className: 'dropzone' })}>
       <input {...carouselInputProps()} />
       <div className={styles.carousel}>
         <Container className={styles.carouselContainer}>
@@ -115,11 +103,8 @@ const Carousel = ({ configuration }: CarouselProps) => {
           <p className={styles.carouselSubTitle}>
             {String(t(localizationKey.uploadPhotoSubcontent))}
           </p>
-          <button className={styles.carouselButton}>
-            <div {...buttonRootProps({ className: 'dropzone' })}>
-              <input {...buttonInputProps({})} />
-              {String(t(localizationKey.uploadPhoto))}
-            </div>
+          <button className={styles.carouselButton} onClick={open}>
+            {String(t(localizationKey.uploadPhoto))}
           </button>
         </Container>
       </div>

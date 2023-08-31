@@ -12,7 +12,7 @@ import styles from './confirmation-modal.module.scss'
 import Link from 'next/link'
 
 export type LinkPropsType = {
-  href: string,
+  href: string
   text: string
 }
 
