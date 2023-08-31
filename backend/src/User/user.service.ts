@@ -4,10 +4,6 @@ import { findById } from '../utils/query';
 import { BaseService } from '../base.service';
 import { PrismaService } from '../prisma/prisma.service';
 
-enum findArguments {
-  orders = 'orders'
-}
-
 const findOrders = (id: string) => ({
   ...findById(id),
   select: {
@@ -15,10 +11,12 @@ const findOrders = (id: string) => ({
       select: {
         orders: {
           select: {
+            id: true,
+            orderDate: true,
+            orderState: true,
             orderItems: true,
             shipment: true,
-            payment: true,
-            orderState: true
+            payment: true
           }
         }
       }
