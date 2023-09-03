@@ -80,7 +80,7 @@ const TotalSection = ({
             {t(localizationKey.code)}
             {voucher && <>: {voucher.code}</>}
           </span>
-          <span>- {voucher.value} €</span>
+          <span>- {voucher.value} %</span>
         </div>
       )}
       <hr />
