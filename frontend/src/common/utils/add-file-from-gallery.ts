@@ -18,6 +18,6 @@ export const addFileFromGallery = async (path: string, id?: string) => {
       galleryItemId: id,
     }
 
-    configurationsTable.add(data, CONFIGURATION_TABLE_KEY)
+    configurationsTable.put(data, CONFIGURATION_TABLE_KEY)
   }
 }
