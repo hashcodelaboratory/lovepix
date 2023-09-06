@@ -16,6 +16,7 @@ import { ConfirmationModal } from 'screens-content/confirmation-modal/confirmati
 import { useTranslation } from 'next-i18next'
 import { Pages } from 'constants/pages/urls'
 import { useRouter } from 'next/router'
+import { Backdrop, CircularProgress } from '@mui/material'
 
 export enum CarouselTestIds {
   navigateToConfiguratorButtonTestId = 'navigate_to_configurator_button_test_id',
@@ -27,6 +28,8 @@ type CarouselProps = {
 
 const Carousel = ({ configuration }: CarouselProps) => {
   const router = useRouter()
+
+  const [isComputing, setIsComputing] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const [imageData, setImageData] = useState<ImageAddType>()
   const { t } = useTranslation()
@@ -51,6 +54,8 @@ const Carousel = ({ configuration }: CarouselProps) => {
   })
 
   const onDrop = async (files: File[]) => {
+    setIsComputing(true)
+
     const file = files[0]
     const fr = new FileReader()
     fr.readAsDataURL(file)
@@ -65,6 +70,7 @@ const Carousel = ({ configuration }: CarouselProps) => {
   }
 
   const onReject = (files: FileRejection[]) => {
+    setIsComputing(false)
     enqueueSnackbar(
       `${String(t(localizationKey.fileRejected))} - ${
         files[0].errors[0].message
@@ -96,17 +102,22 @@ const Carousel = ({ configuration }: CarouselProps) => {
   return (
     <div {...carouselRootProps({ className: 'dropzone' })}>
       <input {...carouselInputProps()} />
+      <Container className={styles.carouselContainer}>
+        <h1 className={styles.carouselTitle}>
+          {String(t(localizationKey.printPhoto))}
+        </h1>
+        <p className={styles.carouselSubTitle}>
+          {String(t(localizationKey.uploadPhotoSubcontent))}
+        </p>
+      </Container>
       <div className={styles.carousel}>
-        <Container className={styles.carouselContainer}>
-          <h1 className={styles.carouselTitle}>
-            {String(t(localizationKey.printPhoto))}
-          </h1>
-          <p className={styles.carouselSubTitle}>
-            {String(t(localizationKey.uploadPhotoSubcontent))}
-          </p>
-          <button className={styles.carouselButton} onClick={open}>
-            {String(t(localizationKey.uploadPhoto))}
-          </button>
+        <Container className={styles.carouselContainerImage}>
+          <div className={styles.carouselButton} onClick={open}>
+            <div className={styles.carouselButtonIcon} />
+            <p className={styles.carouselButtonText}>
+              {String(t(localizationKey.uploadPhoto))}
+            </p>
+          </div>
         </Container>
       </div>
       <ConfirmationModal
@@ -120,6 +131,12 @@ const Carousel = ({ configuration }: CarouselProps) => {
         onClose={onClose}
         open={openModal}
       />
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isComputing}
+      >
+        <CircularProgress color='inherit' />
+      </Backdrop>
     </div>
   )
 }
