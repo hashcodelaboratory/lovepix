@@ -13,10 +13,18 @@ type HomeLayoutProps = {
   loading: boolean
 }
 
-const HomeLayout = ({ galleryData, loading }: HomeLayoutProps) => (
+const HomeLayout = ({
+  galleryData,
+  configuration,
+  loading,
+}: HomeLayoutProps) => (
   <div>
-    <Carousel />
-    <GallerySection galleryData={galleryData} loading={loading} />
+    <Carousel configuration={configuration} />
+    <GallerySection
+      configuration={configuration}
+      galleryData={galleryData}
+      loading={loading}
+    />
     <ProductsSection />
     <ReviewsSection />
     <SliderComponent data={galleryData} />
