@@ -15,5 +15,6 @@ model Order {
   shipment     Shipment    @relation(fields: [shipmentId], references: [id])
   shipmentId   String      @db.ObjectId
   orderItems   OrderItem[]
-  orderDate    DateTime
+  createDate    DateTime   @default(now())
+  updateDate    DateTime   @updatedAt 
 }

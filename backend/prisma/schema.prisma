@@ -47,8 +47,8 @@ model Gallery {
   fullPath           String
   price              Float
   size               Float
-  timeCreated        DateTime
-  updatedAt          DateTime
+  timeCreated        DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
   url                String
   name               String
   image              String
@@ -74,7 +74,8 @@ model Order {
   shipment     Shipment    @relation(fields: [shipmentId], references: [id])
   shipmentId   String      @db.ObjectId
   orderItems   OrderItem[]
-  orderDate    DateTime
+  createDate   DateTime    @default(now())
+  updateDate   DateTime    @updatedAt
 }
 
 model OrderItem {
@@ -92,9 +93,8 @@ model OrderItem {
 }
 
 model OrderState {
-  id     String   @id @default(auto()) @map("_id") @db.ObjectId
-  title  String   @unique
-  date   DateTime
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  title  String  @unique
   orders Order[]
 }
 

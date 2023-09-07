@@ -8,6 +8,9 @@ import {configurationsTable} from "../database.config";
 import {CONFIGURATION_TABLE_KEY} from "../src/common/indexed-db/hooks/keys";
 import {useGallery} from "../src/common/api/use-gallery";
 import FooterLayout from "../src/screens-content/footer/footer";
+import ReactGA from 'react-ga';
+
+ReactGA.initialize(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS || '');
 
 const Home: NextPage = () => {
   const configuration = useLiveQuery(() => configurationsTable.get(CONFIGURATION_TABLE_KEY), []);

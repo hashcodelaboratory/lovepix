@@ -7,25 +7,6 @@
   border-radius: 0.5rem;
 }
 
-.uploadButton {
-  background-color: black;
-  color: white;
-  max-width: 300px;
-  border: none;
-  padding: 1rem 1.5rem;
-  margin: 0.5rem 0 1rem 0;
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 0.75rem;
-  cursor: pointer;
-}
-
-.uploadPhotoSubcontent {
-  font-size: 1.25rem;
-  font-weight: 200;
-  margin: 1rem 0 0.5rem 0;
-}
-
 .horizontalContainer {
   display: flex;
   width: 100%;
@@ -77,28 +58,10 @@
   border-radius: 0.5rem;
 }
 
-.dropzoneGroup {
-  min-height: 120px;
-  pointer-events: none;
-}
-
-.dropzoneGroupFaked {
-  flex-direction: column;
-  display: flex;
-  border: 2px dashed #ced4da;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  justify-content: center;
-  min-height: 300px;
-}
-
 .imagePreview {
   border-radius: 10px;
 }
 
-.imageInDropzone {
-  border-radius: 1rem;
-}
 .card {
   //position: relative;
   border-radius: 10px;
@@ -143,11 +106,11 @@
 
   background: rgba(255, 255, 255, 0.13);
   background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0.13) 0%,
-    rgba(255, 255, 255, 0.13) 77%,
-    rgba(255, 255, 255, 0.5) 92%,
-    rgba(255, 255, 255, 0) 100%
+                  to right,
+                  rgba(255, 255, 255, 0.13) 0%,
+                  rgba(255, 255, 255, 0.13) 77%,
+                  rgba(255, 255, 255, 0.5) 92%,
+                  rgba(255, 255, 255, 0) 100%
   );
 }
 
@@ -168,27 +131,31 @@
   opacity: 0;
 }
 
-.imageInDropzone {
-  border-radius: 1rem;
-}
-
-.containerTitle {
-  text-align: center;
-}
-
 .carousel {
+  position: relative;
   width: 100%;
-  height: 50vh;
-  background-color: black;
+  height: 43vh !important;
+  background-image: url('../../assets/mask_group.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
   color: white;
   margin-bottom: 2rem;
 }
 
 .carouselContainer {
-  height: 100% !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
+  padding: 4rem 1rem 5rem 1rem;
+  text-align: center;
+}
+
+.carouselContainerImage {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding: 1rem;
+  text-align: center;
 }
 
 .carouselTitle {
@@ -204,21 +171,41 @@
 }
 
 .carouselButton {
+  position: absolute;
+  top: -70px; // Known issue -> due to UI design
+  left: 0;
+  right: 0;
   background-color: white;
-  color: black;
   max-width: 300px;
-  border: none;
   padding: 1rem 1.5rem;
-  margin: 1rem 0 0 1rem;
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 0.75rem;
+  margin: 1rem auto;
   cursor: pointer;
+  border: 2px dashed #45D9FF;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.carouselButtonText {
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-weight: 200 !important;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.carouselButtonIcon {
+  margin: auto;
+  width: 4rem;
+  height: 4rem;
+  background-image: url("../../assets/upload_icon.svg");
+  background-repeat: no-repeat;
 }
 
 .previewRow {
   padding: 1rem;
 }
+
 .previewTitleRow {
   display: flex;
   justify-content: space-between;

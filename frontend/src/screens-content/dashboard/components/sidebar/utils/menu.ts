@@ -37,4 +37,8 @@ export const SIDEBAR_MENU_LIST: {
     title: localizationKey.code,
     link: DashboardRoutes.VOUCHERS,
   },
+  {
+    title: localizationKey.materials,
+    link: DashboardRoutes.MATERIALS,
+  },
 ]

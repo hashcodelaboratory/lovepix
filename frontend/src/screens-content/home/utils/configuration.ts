@@ -24,7 +24,7 @@ export const dimensionsByHeight = [
 
 export const dimensionsBySquare = ['50 x 50', '80 x 80', '100 x 100', '20 x 20']
 
-export const materials = [
+export const MATERIALS_TEMPLATE = [
   {
     id: 'm1',
     image:
