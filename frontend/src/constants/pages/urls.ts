@@ -7,18 +7,24 @@ export enum Pages {
   SHOPPING_CART = '/shopping-cart',
   CONFIGURATOR = '/configurator',
   ESHOP = '/e-shop',
-  THANKS = '/dakujeme',
-  OUR_CONTACTS = '/our-contacts',
+  THANKS = '/thanks',
   COOKIES = '/cookies',
+  CONTACT = '/contact',
   PRIVACY_POLICY = '/privacy-policy',
   CONDITIONS = '/conditions',
-  CONTACT = '/contact',
   PROFILE = '/profile',
   ACCOUNT = '/account',
+  REVIEWS = '/reviews',
+  BLOG = '/blog',
+  DOWNLOAD = '/download',
+  SATISFACTION = '/satisfaction',
+  POSSIBILITIES = '/possibilities',
+  PRODUCTION_TIME = '/production-time',
+  COMPLAINT = '/complaint',
   DASHBOARD = '/dashboard',
-  DEBUG = '/debug'
+  DEBUG = '/debug',
 }
 
-export const FACEBOOK = "https://www.facebook.com/lovepix.sk/"
-export const INSTAGRAM = "https://www.instagram.com/lovepix.eu/"
-export const TIKTOK = "https://www.tiktok.com/"
+export const FACEBOOK = 'https://www.facebook.com/lovepix.sk/'
+export const INSTAGRAM = 'https://www.instagram.com/lovepix.eu/'
+export const TIKTOK = 'https://www.tiktok.com/'

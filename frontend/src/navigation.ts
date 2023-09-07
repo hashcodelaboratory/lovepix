@@ -1,4 +1,4 @@
-import { Pages } from 'constants/pages/urls'
+import { Pages } from './constants/pages/urls'
 import * as PagesTitles from './constants/pages/titles'
 import * as SettingsTitles from './constants/settings/titles'
 
@@ -16,14 +16,15 @@ const settings = [
   // { title: SettingsTitles.PROFILE, link: Pages.PROFILE },
   // { title: SettingsTitles.ACCOUNT, link: Pages.ACCOUNT },
   { title: SettingsTitles.DASHBOARD, link: Pages.DASHBOARD },
-  { title: SettingsTitles.LOGOUT, link: '', callBack: true },
+  { title: SettingsTitles.LOGOUT, link: undefined, callBack: true },
 ]
 
 const menuItems = [
   { title: PagesTitles.CONFIGURATOR, link: Pages.CONFIGURATOR },
   { title: PagesTitles.GALLERY, link: Pages.GALLERY },
   { title: PagesTitles.ESHOP, link: Pages.ESHOP },
-  { title: PagesTitles.MATERIALS, link: Pages.MATERIALS },
+  // TODO: uncomment in future usage
+  // { title: PagesTitles.MATERIALS, link: Pages.MATERIALS },
   { title: PagesTitles.ABOUT_US, link: Pages.ABOUT_US },
   { title: PagesTitles.CONTACT, link: Pages.CONTACT },
 ]

@@ -26,17 +26,72 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Installation of Prisma globally
+
+```bash
+$ npm install -g prisma
+```
+
+## Installation dependencies
 
 ```bash
 $ yarn install
+
+OR
+
+$ yarn
 ```
 
-## Running the app
+## Create .env file for local development (variables are in .env.template or new-lovepix ORG slack channel in pinned message), NOTE: need to modify DATABASE_URL - mongo_username and mongo_password too
+```bash
+MONGO_INITDB_ROOT_USERNAME=
+MONGO_INITDB_ROOT_PASSWORD=
+MONGODB_SERVER=
+MONGODB_ENABLE_ADMIN=
+MONGODB_ADMINUSERNAME=
+MONGODB_ADMINPASSWORD=
+BASICAUTH_USERNAME=
+BASICAUTH_PASSWORD=
+MONGO_REPLICA_HOST=
+MONGO_REPLICA_PORT=
+API_KEY=
+JWT_SECRET=
+DATABASE_URL=
+```
+## Create .env file for local development (variables are in .env.template or new-lovepix ORG slack channel in pinned message), NOTE: need to modify DATABASE_URL - remote access to MONGO DB  
+```bash
+API_KEY=
+JWT_SECRET=
+DATABASE_URL=
+```
+
+## Run docker-compose.yaml (docker start MongoDB instance and Mongo-Express instance) 
+```bash
+$ cd backend
+$ docker-compose up -d      (run docker-compose yaml file)
+```
+### Optional Docker commands
+```bash
+$ docker-compose down       (exit all containers which are in docker-compose.yaml file)
+$ docker ps -a              (list of docker running docker containers)
+```
+
+## Init Prisma and MongoDB in local development
 
 ```bash
-# development
-$ yarn run start
+# prisma init
+$ prisma init
+
+# prisma generate
+$ prisma generate
+
+# push all collections to the MongoDB
+$ prisma db push
+```
+## Running the app (inicialization with packages)
+```bash
+# development (command from package.json)
+$ yarn start:be
 
 # watch mode
 $ yarn run start:dev
@@ -45,29 +100,28 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
-## Test
+<p align="center">
+  <a href="https://swagger.io/tools/swagger-ui/" target="blank"><img src="https://logovtor.com/wp-content/uploads/2020/09/swagger-supported-by-smartbear-logo-vector.png" width="400" alt="Swagger UI Logo" /></a>
+</p>
+
+## Description
+
+[SWAGGER](https://swagger.io/tools/swagger-ui/) Open Source documentation.
+
+## Run Backend of application
 
 ```bash
-# unit tests
-$ yarn run test
+$ yarn start:dev
 
-# e2e tests
-$ yarn run test:e2e
+OR
 
-# test coverage
-$ yarn run test:cov
+$ yarn start:be
 ```
 
-## Support
+## Use endpoint /api-lovepix to start SWAGGER UI documentation
+[http://localhost:4000/api-lovepix](http://localhost:4000/api-lovepix)
+```bash
+$ http://localhost:4000/api-lovepix
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+## !!! For authorize your controllers you need to use value of API-KEY from new-lovpix channel like pinned message. !!!

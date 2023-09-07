@@ -1,7 +1,7 @@
 import Cropper from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 import React, { useContext, useEffect, useRef } from 'react'
-import DropzoneContainer from 'screens-content/home/components/upload-image/dropzone/dropzone-container'
+import DropzoneContainer from 'screens-content/image-configurator/components/dropzone/dropzone-container'
 import { Configuration } from '../../../../common/types/configuration'
 import styles from '../../image-configurator-layout.module.scss'
 import ImageConfiguratorContext from '../../image-configurator-context/image-configurator-context'
@@ -24,6 +24,7 @@ const CropperComponent = ({ configuration }: CropperComponentProps) => {
   useEffect(() => {
     cropperRef?.current?.cropper?.setAspectRatio(aspectRatio)
     stateAction.setCropper(cropperRef)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cropperRef, aspectRatio])
 
   if (!configuration?.origin)

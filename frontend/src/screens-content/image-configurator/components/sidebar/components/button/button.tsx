@@ -10,7 +10,7 @@ import {
   orderTable,
 } from '../../../../../../../database.config'
 import { getPrice } from '../price/utils/generator'
-import { materials } from '../../../../../home/utils/configuration'
+import { MATERIALS_TEMPLATE } from '../../../../../home/utils/configuration'
 import {
   CONFIGURATION_TABLE_KEY,
   ORDER_TABLE_KEY,
@@ -41,7 +41,7 @@ const Button = () => {
       height: 0,
     }
 
-    const material = materials.find(
+    const material = MATERIALS_TEMPLATE.find(
       (material) => material.id === configuration?.material
     )?.name
 
@@ -83,7 +83,7 @@ const Button = () => {
 
     configurationsTable.clear()
 
-    await router.push(`${Pages.SHOPPING_CART}`)
+    await router.push(`${t(Pages.SHOPPING_CART)}`)
   }
 
   const disabled =
@@ -97,7 +97,9 @@ const Button = () => {
         disabled={disabled}
       >
         <ShoppingCart />
-        <p className={styles.buttonTitle}>{String(t(localizationKey.toCart))}</p>
+        <p className={styles.buttonTitle}>
+          {String(t(localizationKey.toCart))}
+        </p>
       </button>
     </div>
   )

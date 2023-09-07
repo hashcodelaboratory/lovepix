@@ -1,23 +1,8 @@
+import { CreateOrderRequest } from 'common/api/create-order'
 import { Delivery } from 'common/enums/delivery'
-import { Payment } from 'common/enums/payment'
-import { FormInputs } from 'common/types/form'
-import { Image } from 'common/types/image'
 import { Order } from 'common/types/order'
-import { Product } from 'common/types/product'
 import { InvoiceItem, SFInvoice } from 'common/types/superfaktura'
 import dayjs from 'dayjs'
-
-type CreateOrderRequest = {
-  form: FormInputs
-  date: number
-  shoppingCart: {
-    images?: Image[]
-    products?: Product[]
-  }
-  totalPrice: number
-  delivery: Delivery
-  payment: Payment
-}
 
 const invoiceItems = (data: CreateOrderRequest | Order) => {
   let newItems: InvoiceItem[] = []
@@ -66,6 +51,7 @@ export const invoice = (
       created: createdDate,
       delivery: createdDate,
       due: dueDate,
+      discount: data?.voucher?.value,
     },
     InvoiceItem: invoiceItems(data),
     Client: {

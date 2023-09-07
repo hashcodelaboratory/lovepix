@@ -10,6 +10,7 @@ import styles from '../../../../../dashboard.module.scss'
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile'
 import { useDimensions } from '../../../../../../../common/api/use-dimensions'
 import { useCategories } from '../../../../../../../common/api/use-categories'
+import { GALLERY_KEY } from 'common/api/use-gallery'
 
 const UploaderLayout = (): JSX.Element => {
   const { data: dimensions = [] } = useDimensions()
@@ -31,8 +32,9 @@ const UploaderLayout = (): JSX.Element => {
         [...cat]
       )
       await queryClient.invalidateQueries(UPLOADED_IMAGES_KEY)
-      e.target.value = ''
+      await queryClient.invalidateQueries(GALLERY_KEY)
     }
+    e.target.value = ''
   }
 
   return (

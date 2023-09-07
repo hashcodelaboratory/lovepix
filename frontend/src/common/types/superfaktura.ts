@@ -3,6 +3,7 @@ type Invoice = {
   created: string
   delivery: string
   due: string
+  discount: number | undefined
 }
 
 export type InvoiceItem = {

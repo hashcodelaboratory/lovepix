@@ -1,7 +1,8 @@
-import { Pages } from 'constants/pages/urls'
+import { Pages } from '../../../../constants/pages/urls'
 import { IndexableType, Table } from 'dexie'
 import { NextRouter } from 'next/router'
-import { CONFIGURATION_TABLE_KEY } from "../../../../common/indexed-db/hooks/keys";
+import { CONFIGURATION_TABLE_KEY } from '../../../../common/indexed-db/hooks/keys'
+import { useTranslation } from 'next-i18next'
 
 const imageSource = (sourceUrl: string) =>
   `${sourceUrl}?w=248&fit=crop&auto=format`
@@ -23,6 +24,8 @@ const handleDB =
 
     const fr = new FileReader()
 
+    const { t } = useTranslation()
+
     fr.readAsDataURL(file)
 
     fr.onload = () => {
@@ -39,7 +42,7 @@ const handleDB =
     }
 
     router.push({
-      pathname: Pages.CONFIGURATOR,
+      pathname: t(Pages.CONFIGURATOR),
     })
   }
 
