@@ -17,12 +17,19 @@ export enum Pages {
   REVIEWS = '/reviews',
   BLOG = '/blog',
   DOWNLOAD = '/download',
-  SATISFACTION = '/satisfaction',
-  POSSIBILITIES = '/possibilities',
   PRODUCTION_TIME = '/production-time',
-  COMPLAINT = '/complaint',
   DASHBOARD = '/dashboard',
   DEBUG = '/debug',
+  ACRYLIC_PHOTO = '/acrylic-photo',
+  COMPLAINTS_AND_RETURNS = '/complaints-and-returns',
+  DELIVERY_OPTIONS_AND_PRICES = '/delivery-options-and-prices',
+  FOR_DOWNLOAD = '/for-download',
+  ORDER_AND_PAYMENT_OPTIONS = '/order-and-payment-options',
+  OUR_STORY = '/our-story',
+  PHOTO_ON_CANVAS = '/photo-on-canvas',
+  POSTER_PHOTO = '/poster-photo',
+  PRICING = '/pricing',
+  SATISFACTION_GUARANTEE = '/satisfaction-guarantee',
 }
 
 export const FACEBOOK = 'https://www.facebook.com/lovepix.sk/'
