@@ -5,10 +5,12 @@ import {
   addRelationIdsQuery,
   deleteRelationIdsQuery,
   findAllFromArray,
-  findById
+  findAllWithId,
+  findById,
+  lowerCase,
+  relationConnect
 } from './utils/query';
 import { idsReference } from './utils/reference';
-
 @Injectable()
 export class BaseService {
   private readonly model!: Prisma.ModelName;
@@ -25,13 +27,78 @@ export class BaseService {
     throw new Error('Create has not been implemented!');
   }
 
+  //TODO deal with "data: any"
+  manyToManyRelationConnect = (
+    data: any,
+    relationModelName: string,
+    arrayName: Prisma.ModelName
+  ) => {
+    return this.prismaService[lowerCase(this.modelName)].update(
+      relationConnect(data, relationModelName, idsReference(arrayName))
+    );
+  };
+
+  manyToManyRelationCreateMany = async (
+    data: any,
+    relationModelName: string,
+    arrayName: Prisma.ModelName
+  ) => {
+    const collections = await this.prismaService.$transaction(
+      data.map((collection) =>
+        this.prismaService[lowerCase(this.model)].create({ data: collection })
+      )
+    );
+    await this.prismaService.$transaction(
+      collections.map((col) =>
+        this.manyToManyRelationConnect(col, relationModelName, arrayName)
+      )
+    );
+
+    if (this.model === Prisma.ModelName.Gallery) {
+      await this.prismaService.$transaction(
+        collections.map((col) =>
+          this.manyToManyRelationConnect(
+            col,
+            'galleryCategories',
+            Prisma.ModelName.GalleryCategory
+          )
+        )
+      );
+    }
+
+    return collections;
+  };
+
+  manyToMayRelationDelete = async (
+    id: string,
+    relationModelName: string,
+    model: string
+  ) => {
+    const relationDocuments = await this.prismaService[
+      lowerCase(relationModelName)
+    ].findMany(findAllWithId(id, model));
+
+    await this.prismaService.$transaction([
+      ...relationDocuments.map((relationDocument) =>
+        this.prismaService[lowerCase(relationModelName)].update(
+          deleteRelationIdsQuery(
+            relationDocument.id,
+            relationDocument[idsReference(this.modelName)],
+            id,
+            idsReference(this.modelName)
+          )
+        )
+      )
+    ]);
+  };
+
   updateRelationIds = async (
     id: string,
     relationIds,
     relationModelName: Prisma.ModelName
   ) => {
     const ids = (
-      await this.prismaService[this.model.toLowerCase()].findUnique(
+      await this.prismaService[lowerCase(this.modelName)].findUnique(
         findById(id)
       )
     )[idsReference(relationModelName)];
@@ -43,7 +110,7 @@ export class BaseService {
     );
 
     const toRemove = await this.prismaService[
-      relationModelName.toLowerCase()
+      lowerCase(relationModelName)
     ].findMany(findAllFromArray(idsToRemove));
 
     await this.prismaService.$transaction([
@@ -53,7 +120,7 @@ export class BaseService {
         )
       ),
       ...toRemove.map((relationDocument) =>
-        this.prismaService[relationModelName.toLowerCase()].update(
+        this.prismaService[lowerCase(relationModelName)].update(
           deleteRelationIdsQuery(
             relationDocument.id,
             relationDocument[idsReference(this.modelName)],

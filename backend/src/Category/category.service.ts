@@ -5,40 +5,31 @@ import { BaseService } from '../base.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
-const findAllProductsQueryWithThatCategory = (id: string) => ({
-  where: {
-    categories: {
-      some: {
-        id
-      }
-    }
-  }
-});
-
-const updateRelationsQueryOnCategoryDelete = (
-  id: string,
-  categoryIds: string[]
-) => ({
-  categoryIds: {
-    set: categoryIds.filter((categoryId) => categoryId !== id)
-  }
-});
-
+enum RelationNames {
+  products = 'products',
+  categories = 'categories'
+}
 @Injectable()
 export class CategoryService extends BaseService {
   constructor(readonly prismaService: PrismaService) {
     super(Prisma.ModelName.Category, prismaService);
   }
 
-  create = (data: CategoryDto) =>
-    this.prismaService.category.create({
-      data
-    });
+  create = async (data: CategoryDto) => {
+    const category = await this.prismaService.category.create({ data });
+    return this.manyToManyRelationConnect(
+      category,
+      RelationNames.products,
+      Prisma.ModelName.Product
+    );
+  };
 
-  createMany = (data: CategoryDto[]) =>
-    this.prismaService.category.createMany({
-      data
-    });
+  createMany = async (data: CategoryDto[]) =>
+    this.manyToManyRelationCreateMany(
+      data,
+      RelationNames.products,
+      Prisma.ModelName.Product
+    );
 
   findAll = () => this.prismaService.category.findMany();
 
@@ -61,17 +52,10 @@ export class CategoryService extends BaseService {
   };
 
   remove = async (id: string) => {
-    const products = await this.prismaService.product.findMany(
-      findAllProductsQueryWithThatCategory(id)
-    );
-
-    await this.prismaService.$transaction(
-      products.map((product) =>
-        this.prismaService.product.update({
-          ...findById(product.id),
-          data: updateRelationsQueryOnCategoryDelete(id, product.categoryIds)
-        })
-      )
+    this.manyToMayRelationDelete(
+      id,
+      Prisma.ModelName.Product,
+      RelationNames.categories
     );
 
     return this.prismaService.category.delete(findById(id));

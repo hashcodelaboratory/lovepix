@@ -1,15 +1,53 @@
-import { PrismaService } from 'src/prisma/prisma.service';
-
 export const findById = (id: string) => ({
   where: {
     id
   }
 });
 
+export const findByName = (name: string) => ({
+  where: {
+    name
+  }
+});
+
+export const findByTitle = (title: string) => ({
+  where: {
+    title
+  }
+});
+
+export const lowerCase = (str: string): string => {
+  return str.charAt(0).toLowerCase() + str.slice(1);
+};
+
+
 export const findAllFromArray = (ids: string[]) => ({
   where: {
     id: {
       in: ids
+    }
+  }
+});
+
+export const findAllWithId = (id: string, modelName: string) => ({
+  where: {
+    [modelName]: {
+      some: {
+        id
+      }
+    }
+  }
+});
+
+export const relationConnect = (
+  data: any,
+  relationModelName: string,
+  arrayName: string
+) => ({
+  ...findById(data.id),
+  data: {
+    [relationModelName]: {
+      connect: data[arrayName].map((item) => ({ id: item }))
     }
   }
 });

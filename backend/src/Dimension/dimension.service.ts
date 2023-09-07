@@ -5,24 +5,10 @@ import { BaseService } from '../base.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
-const findAllGalleriesQueryWithThatDimension = (id: string) => ({
-  where: {
-    dimensions: {
-      some: {
-        id
-      }
-    }
-  }
-});
-
-const updateRelationsQueryOnDimensionDelete = (
-  id: string,
-  dimensionIds: string[]
-) => ({
-  dimensionIds: {
-    set: dimensionIds.filter((dimensionId) => dimensionId !== id)
-  }
-});
+enum RelationNames {
+  galleries = 'galleries',
+  dimensions = 'dimensions'
+}
 
 @Injectable()
 export class DimensionService extends BaseService {
@@ -30,15 +16,21 @@ export class DimensionService extends BaseService {
     super(Prisma.ModelName.Dimension, prismaService);
   }
 
-  create = (data: DimensionDto) =>
-    this.prismaService.dimension.create({
-      data
-    });
+  create = async (data: DimensionDto) => {
+    const dimension = await this.prismaService.dimension.create({ data });
+    return this.manyToManyRelationConnect(
+      dimension,
+      RelationNames.galleries,
+      Prisma.ModelName.Gallery
+    );
+  };
 
-  createMany = (data: DimensionDto[]) =>
-    this.prismaService.dimension.createMany({
-      data
-    });
+  createMany = async (data: DimensionDto[]) =>
+    this.manyToManyRelationCreateMany(
+      data,
+      RelationNames.galleries,
+      Prisma.ModelName.Gallery
+    );
 
   findAll = () => this.prismaService.dimension.findMany();
 
@@ -57,17 +49,10 @@ export class DimensionService extends BaseService {
   };
 
   remove = async (id: string) => {
-    const galleries = await this.prismaService.gallery.findMany(
-      findAllGalleriesQueryWithThatDimension(id)
-    );
-
-    await this.prismaService.$transaction(
-      galleries.map((gallery) =>
-        this.prismaService.gallery.update({
-          ...findById(gallery.id),
-          data: updateRelationsQueryOnDimensionDelete(id, gallery.dimensionIds)
-        })
-      )
+    this.manyToMayRelationDelete(
+      id,
+      Prisma.ModelName.Gallery,
+      RelationNames.dimensions
     );
 
     return this.prismaService.dimension.delete(findById(id));

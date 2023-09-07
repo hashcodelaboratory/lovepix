@@ -1,4 +1,4 @@
-//🧩Don't Edit this file.✨Generated in Mon Aug 28 2023 10:48:40 GMT+0200 (Central European Summer Time)✨
+//🧩Don't Edit this file.✨Generated in Mon Aug 28 2023 11:37:56 GMT+0200 (Central European Summer Time)✨
 
 model Address {
   id              String      @id @default(auto()) @map("_id") @db.ObjectId

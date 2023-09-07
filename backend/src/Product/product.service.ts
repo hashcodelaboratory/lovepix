@@ -5,45 +5,31 @@ import { findAllFromArray, findById } from '../utils/query';
 import { BaseService } from '../base.service';
 import { Prisma } from '@prisma/client';
 
-const createProductQuery = (data: ProductDto) => ({
-  data: {
-    ...data,
-    categories: {
-      connect: data.categoryIds.map((category) => ({ id: category }))
-    }
-  }
-});
-
-const findAllCategoriesQueryWithThatProduct = (id: string) => ({
-  where: {
-    products: {
-      some: {
-        id
-      }
-    }
-  }
-});
-
-const updateRelationsQueryOnProductDelete = (
-  id: string,
-  productIds: string[]
-) => ({
-  productIds: {
-    set: productIds.filter((product) => product !== id)
-  }
-});
-
+enum RelationNames {
+  categories = 'categories',
+  products = 'products'
+}
 @Injectable()
 export class ProductService extends BaseService {
   constructor(readonly prismaService: PrismaService) {
     super(Prisma.ModelName.Product, prismaService);
   }
 
-  create = (data: ProductDto) =>
-    this.prismaService.product.create(createProductQuery(data));
+  create = async (data: ProductDto) => {
+    const product = await this.prismaService.product.create({ data });
+    return this.manyToManyRelationConnect(
+      product,
+      RelationNames.categories,
+      Prisma.ModelName.Category
+    );
+  };
 
-  createMany = (data: ProductDto[]) =>
-    this.prismaService.$transaction(data.map(this.create));
+  createMany = async (data: ProductDto[]) =>
+    this.manyToManyRelationCreateMany(
+      data,
+      RelationNames.categories,
+      Prisma.ModelName.Category
+    );
 
   findAll = () =>
     this.prismaService.product.findMany({
@@ -70,19 +56,13 @@ export class ProductService extends BaseService {
   };
 
   remove = async (id: string) => {
-    const categories = await this.prismaService.category.findMany(
-      findAllCategoriesQueryWithThatProduct(id)
+    this.manyToMayRelationDelete(
+      id,
+      Prisma.ModelName.Category,
+      RelationNames.products
     );
 
-    return this.prismaService.$transaction([
-      ...categories.map((category) =>
-        this.prismaService.category.update({
-          ...findById(category.id),
-          data: updateRelationsQueryOnProductDelete(id, category.productIds)
-        })
-      ),
-      this.prismaService.product.delete(findById(id))
-    ]);
+    return this.prismaService.product.delete(findById(id));
   };
 
   removeAll = () => this.prismaService.product.deleteMany();

@@ -1,4 +1,5 @@
 import { Prisma } from '@prisma/client';
+import { lowerCase } from './query';
 
 export const idsReference = (model: Prisma.ModelName) =>
-  model.toLowerCase() + 'Ids';
+  lowerCase(model) + 'Ids';
