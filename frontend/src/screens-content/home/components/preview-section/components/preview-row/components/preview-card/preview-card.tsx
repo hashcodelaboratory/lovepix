@@ -55,6 +55,7 @@ const PreviewCard = ({
           onClick={() => add(item?.fullPath ?? '', item?.id)}
         >
           <img
+            className={styles.previewImageFromUrl}
             alt={item?.name}
             src={item?.url ?? ''}
             style={{ width: 300, height: 300, objectFit: 'cover' }}
