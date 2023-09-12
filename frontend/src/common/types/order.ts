@@ -31,4 +31,6 @@ export type Order = {
   orderState: OrderState[]
   voucher: VoucherType
   note: string
+  localizationDelivery: string
+  localizationPayment: string
 }

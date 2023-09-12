@@ -32,6 +32,8 @@ export type CreateOrderRequest = {
   totalPrice: number
   delivery: Delivery
   payment: Payment
+  localizationDelivery: string
+  localizationPayment: string
   stripe: Stripe | null
   voucher: VoucherType | null
 }

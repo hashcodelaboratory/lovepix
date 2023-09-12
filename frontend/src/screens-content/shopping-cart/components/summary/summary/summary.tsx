@@ -25,12 +25,15 @@ import { Payment as PaymentEnum } from '../../../../../common/enums/payment'
 import { OrderState } from 'common/enums/order-states'
 import { addContactToNewsletter } from 'common/api/add-contact-newsletter'
 import { createOrder } from '../../../../../common/api/create-order'
+import { useTranslation } from 'next-i18next'
+import { Route } from 'common/enums/routes'
 
 type SummaryProps = {
   order: Order
 }
 
 const Summary = ({ order }: SummaryProps) => {
+  const { t } = useTranslation()
   const router = useRouter()
   const stripe = useStripe()
   const [isLoading, setIsLoading] = useState(false)
@@ -92,6 +95,8 @@ const Summary = ({ order }: SummaryProps) => {
       totalPrice: finalPrice,
       delivery: data.delivery!,
       payment: data.payment!,
+      localizationDelivery: t(`${data.delivery?.toLowerCase()}`),
+      localizationPayment: t(`${data.payment?.toLowerCase()}`),
       stripe: stripe ?? null,
       voucher: order?.voucher ?? null,
     }
@@ -118,7 +123,7 @@ const Summary = ({ order }: SummaryProps) => {
     if (payment !== PaymentEnum.ONLINE) {
       await clearIndexedDb()
       await router.push({
-        pathname: '/thanks',
+        pathname: Route.THANKS,
         query: { success: 'true' },
       })
     }
