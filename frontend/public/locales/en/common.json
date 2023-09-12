@@ -105,6 +105,8 @@
   "free": "Free",
   "orderWithPayment": "Order with payment obligation",
   "saveChanges": "Save changes",
+  "preview": "Preview",
+  "edit": "Edit",
   "change": "Change",
   "chooseCrop": "Choose crop",
   "invoiceAddress": "Invoice address",
@@ -324,6 +326,6 @@
   "/account": "/en/account",
   "/reviews": "/en/reviews",
   "/blog": "/en/blog",
-  "/download": "/en/download",
+  "/for-download": "/en/for-download",
   "/production-time": "/en/production-time"
 }

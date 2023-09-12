@@ -65,7 +65,7 @@ const rewrites_sk = [
   },
   {
     source: '/na-stiahnutie',
-    destination: '/download',
+    destination: '/for-download',
   },
   {
     source: '/casy-vyroby',

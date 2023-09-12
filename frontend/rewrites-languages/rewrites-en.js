@@ -80,11 +80,6 @@ const rewrites_en = [
     locale: false,
   },
   {
-    source: '/en/download',
-    destination: '/en/download',
-    locale: false,
-  },
-  {
     source: '/en/production-time',
     destination: '/en/production-time',
     locale: false,

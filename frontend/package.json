@@ -12,6 +12,8 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@uiw/react-md-editor": "3.6.0",
+    "next-remove-imports": "1.0.12",
     "@emotion/react": "11.10.0",
     "@emotion/styled": "11.9.3",
     "@hookform/resolvers": "2.9.8",

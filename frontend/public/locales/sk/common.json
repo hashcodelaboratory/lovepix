@@ -105,6 +105,8 @@
   "free": "Zadarmo",
   "orderWithPayment": "Objednať s povinnosťou platby",
   "saveChanges": "Uložiť zmeny",
+  "preview": "Náhľad",
+  "edit": "Upraviť",
   "change": "Zmeniť",
   "chooseCrop": "Vyberte výrez",
   "invoiceAddress": "Fakturačná adresa",
@@ -330,6 +332,6 @@
   "/account": "/ucet",
   "/reviews": "/recenzie",
   "/blog": "/blog",
-  "/download": "/na-stiahnutie",
+  "/for-download": "/na-stiahnutie",
   "/production-time": "/casy-vyroby"
 }

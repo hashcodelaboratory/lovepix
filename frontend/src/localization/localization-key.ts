@@ -103,6 +103,8 @@ export const localizationKey = {
   transaction: 'transaction',
   free: 'free',
   saveChanges: 'saveChanges',
+  preview: 'preview',
+  edit: 'edit',
   change: 'change',
   chooseCrop: 'chooseCrop',
   invoiceAddress: 'invoiceAddress',

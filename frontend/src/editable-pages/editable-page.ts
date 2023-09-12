@@ -1,6 +1,7 @@
 import { Pages } from '../constants/pages/urls'
 
 export enum EditablePage {
+  Blog = Pages.BLOG,
   AcrylicPhoto = Pages.ACRYLIC_PHOTO,
   ComplaintsAndReturns = Pages.COMPLAINTS_AND_RETURNS,
   DeliveryOptionsAndPrices = Pages.DELIVERY_OPTIONS_AND_PRICES,

@@ -16,7 +16,6 @@ export enum Pages {
   ACCOUNT = '/account',
   REVIEWS = '/reviews',
   BLOG = '/blog',
-  DOWNLOAD = '/download',
   PRODUCTION_TIME = '/production-time',
   DASHBOARD = '/dashboard',
   DEBUG = '/debug',

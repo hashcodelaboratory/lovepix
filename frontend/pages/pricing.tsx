@@ -4,6 +4,9 @@ import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import FooterLayout from '../src/screens-content/footer/footer'
+import { Container } from '@mui/system'
+import { EditableContent } from '../src/editable-content/editable-content'
+import { EditablePage } from '../src/editable-pages/editable-page'
 
 const Pricing: NextPage = () => {
   return (
@@ -11,7 +14,11 @@ const Pricing: NextPage = () => {
       <header>
         <ResponsiveAppBar />
       </header>
-      <main className={styles.main} />
+      <main className={styles.main}>
+        <Container className={styles.container}>
+          <EditableContent identifier={EditablePage.Pricing} />
+        </Container>
+      </main>
       <footer>
         <FooterLayout />
       </footer>
