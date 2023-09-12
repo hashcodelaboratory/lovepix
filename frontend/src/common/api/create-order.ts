@@ -30,8 +30,10 @@ export type CreateOrderRequest = {
   }
   pdf?: string
   totalPrice: number
-  delivery: Delivery | string
-  payment: Payment | string
+  delivery: Delivery
+  payment: Payment
+  localizationDelivery: string
+  localizationPayment: string
   stripe: Stripe | null
   voucher: VoucherType | null
 }

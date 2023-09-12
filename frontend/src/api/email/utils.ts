@@ -10,6 +10,8 @@ export const emailTemplateUser = ({
   totalPrice,
   payment,
   shipment,
+  localizationPayment,
+  localizationShipment,
   formData,
   images,
   products,
@@ -164,11 +166,11 @@ export const emailTemplateUser = ({
                             )}
                             <tr style="border-top: 1px dotted #d3d3d3;">
                                 <td style="text-align: left;padding: 10px;color: #000;">Doručenie</td>
-                                <td style="text-align: right;padding: 10px;color: #000;" colspan="2">${shipment}</td>
+                                <td style="text-align: right;padding: 10px;color: #000;" colspan="2">${localizationShipment}</td>
                             </tr>
                             <tr style="border-top: 1px dotted #d3d3d3;">
                                 <td style="text-align: left;padding: 10px;color: #000;">Spôsob platby</td>
-                                <td style="text-align: right;padding: 10px;color: #000;" colspan="2">${payment}</td>
+                                <td style="text-align: right;padding: 10px;color: #000;" colspan="2">${localizationPayment}</td>
                                 </tr>
                                 ${
                                   payment === 'TRANSACTION'

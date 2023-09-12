@@ -14,6 +14,8 @@ export type UserMail = {
   images: Image[]
   payment: string | undefined
   shipment: string | undefined
+  localizationPayment: string
+  localizationShipment: string
   formData: FormInputs
   voucher?: VoucherType
 }
@@ -51,8 +53,8 @@ export const sendOrderMail = async (
     country: 'SK',
     date: new Date().toLocaleDateString(),
     totalPrice: data.totalPrice,
-    payment: data.payment,
-    shipment: data.delivery,
+    payment: data.localizationPayment,
+    shipment: data.localizationDelivery,
     formData: data.form,
     images: newImgArr,
     products: newProdArr,
