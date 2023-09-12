@@ -75,10 +75,6 @@ export const metadata: Record<Pages, Metadata> = {
     titleKey: localizationKey.metaTitleContact,
     descriptionKey: localizationKey.metaDescriptionContact,
   },
-  [Pages.DOWNLOAD]: {
-    titleKey: localizationKey.metaTitleDownload,
-    descriptionKey: localizationKey.metaDescriptionDownload,
-  },
   [Pages.BLOG]: {
     titleKey: localizationKey.metaTitleBlog,
     descriptionKey: localizationKey.metaDescriptionBlog,
