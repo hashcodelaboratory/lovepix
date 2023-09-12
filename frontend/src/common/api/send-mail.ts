@@ -15,7 +15,7 @@ export type UserMail = {
   payment: string | undefined
   shipment: string | undefined
   localizationPayment: string
-  localizationShipment: string
+  localizationDelivery: string
   formData: FormInputs
   voucher?: VoucherType
 }
