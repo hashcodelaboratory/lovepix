@@ -27,20 +27,20 @@ const getServiceLinks = (t: TFunction<'translation', undefined>): Link[] => [
     href: t(Pages.CONTACT),
   },
   {
-    label: localizationKey.satisfaction,
-    href: t(Pages.SATISFACTION),
+    label: localizationKey.satisfactionGuarantee,
+    href: t(Pages.SATISFACTION_GUARANTEE),
   },
   {
-    label: localizationKey.possibilities,
-    href: t(Pages.POSSIBILITIES),
+    label: localizationKey.deliveryOptionsAndPrices,
+    href: t(Pages.DELIVERY_OPTIONS_AND_PRICES),
   },
   {
     label: localizationKey.creatingTime,
     href: t(Pages.PRODUCTION_TIME),
   },
   {
-    label: localizationKey.complaint,
-    href: t(Pages.COMPLAINT),
+    label: localizationKey.complaintsAndReturns,
+    href: t(Pages.COMPLAINTS_AND_RETURNS),
   },
 ]
 
@@ -76,8 +76,8 @@ const getLovePixLinks = (t: TFunction<'translation', undefined>): Link[] => [
     href: t(Pages.FOR_PARTNERS),
   },
   {
-    label: localizationKey.download,
-    href: t(Pages.DOWNLOAD),
+    label: localizationKey.forDownload,
+    href: t(Pages.FOR_DOWNLOAD),
   },
   {
     label: localizationKey.blog,

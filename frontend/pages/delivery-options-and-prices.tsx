@@ -6,9 +6,9 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import FooterLayout from '../src/screens-content/footer/footer'
 import { Container } from '@mui/system'
 import { EditableContent } from '../src/editable-content/editable-content'
-import { EditablePage } from 'editable-pages/editable-page'
+import { EditablePage } from '../src/editable-pages/editable-page'
 
-const ProductionTime: NextPage = () => {
+const DeliveryOptionsAndPrices: NextPage = () => {
   return (
     <div className={styles.container}>
       <header>
@@ -16,7 +16,7 @@ const ProductionTime: NextPage = () => {
       </header>
       <main className={styles.main}>
         <Container className={styles.container}>
-          <EditableContent identifier={EditablePage.ProductionTime} />
+          <EditableContent identifier={EditablePage.DeliveryOptionsAndPrices} />
         </Container>
       </main>
       <footer>
@@ -26,7 +26,7 @@ const ProductionTime: NextPage = () => {
   )
 }
 
-export default ProductionTime
+export default DeliveryOptionsAndPrices
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {

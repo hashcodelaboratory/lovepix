@@ -2,8 +2,9 @@
 
 const { i18n } = require('./next-i18next.config')
 const { rewrites } = require('./rewrites-next.config')
+const removeImports = require('next-remove-imports')()
 
-const nextConfig = {
+const nextConfig = removeImports({
   reactStrictMode: true,
   swcMinify: true,
   images: {
@@ -22,6 +23,6 @@ const nextConfig = {
     smartEmailingHost: '<smart-emailing-host>',
   },
   rewrites,
-}
+})
 
 module.exports = nextConfig

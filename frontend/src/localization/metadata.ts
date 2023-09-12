@@ -73,34 +73,58 @@ export const metadata: Record<Pages, Metadata> = {
   },
   [Pages.CONTACT]: {
     titleKey: localizationKey.metaTitleContact,
-    descriptionKey: localizationKey.metaDescriptionContact
-  },
-  [Pages.DOWNLOAD]: {
-    titleKey: localizationKey.metaTitleDownload,
-    descriptionKey: localizationKey.metaDescriptionDownload
+    descriptionKey: localizationKey.metaDescriptionContact,
   },
   [Pages.BLOG]: {
     titleKey: localizationKey.metaTitleBlog,
-    descriptionKey: localizationKey.metaDescriptionBlog
-  },
-  [Pages.SATISFACTION]: {
-    titleKey: localizationKey.metaTitleSatisfaction,
-    descriptionKey: localizationKey.metaDescriptionSatisfaction
-  },
-  [Pages.POSSIBILITIES]: {
-    titleKey: localizationKey.metaTitlePossibilities,
-    descriptionKey: localizationKey.metaDescriptionPossibilities
+    descriptionKey: localizationKey.metaDescriptionBlog,
   },
   [Pages.PRODUCTION_TIME]: {
     titleKey: localizationKey.metaTitleProductionTime,
-    descriptionKey: localizationKey.metaDescriptionProductionTime
-  },
-  [Pages.COMPLAINT]: {
-    titleKey: localizationKey.metaTitleComplaint,
-    descriptionKey: localizationKey.metaDescriptionComplaint
+    descriptionKey: localizationKey.metaDescriptionProductionTime,
   },
   [Pages.REVIEWS]: {
     titleKey: localizationKey.metaTitleReview,
     descriptionKey: localizationKey.metaDescriptionReview,
+  },
+  [Pages.ACRYLIC_PHOTO]: {
+    titleKey: localizationKey.metaTitleAcrylicPhoto,
+    descriptionKey: localizationKey.metaDescriptionAcrylicPhoto,
+  },
+  [Pages.COMPLAINTS_AND_RETURNS]: {
+    titleKey: localizationKey.metaTitleComplaintsAndReturns,
+    descriptionKey: localizationKey.metaDescriptionComplaintsAndReturns,
+  },
+  [Pages.DELIVERY_OPTIONS_AND_PRICES]: {
+    titleKey: localizationKey.metaTitleDeliveryOptionsAndPrices,
+    descriptionKey: localizationKey.metaDescriptionDeliveryOptionsAndPrices,
+  },
+  [Pages.FOR_DOWNLOAD]: {
+    titleKey: localizationKey.metaTitleForDownload,
+    descriptionKey: localizationKey.metaDescriptionForDownload,
+  },
+  [Pages.ORDER_AND_PAYMENT_OPTIONS]: {
+    titleKey: localizationKey.metaTitleOrderAndPaymentOptions,
+    descriptionKey: localizationKey.metaDescriptionOrderAndPaymentOptions,
+  },
+  [Pages.OUR_STORY]: {
+    titleKey: localizationKey.metaTitleOurStory,
+    descriptionKey: localizationKey.metaDescriptionOurStory,
+  },
+  [Pages.PHOTO_ON_CANVAS]: {
+    titleKey: localizationKey.metaTitlePhotoOnCanvas,
+    descriptionKey: localizationKey.metaDescriptionPhotoOnCanvas,
+  },
+  [Pages.POSTER_PHOTO]: {
+    titleKey: localizationKey.metaTitlePosterPhoto,
+    descriptionKey: localizationKey.metaDescriptionPosterPhoto,
+  },
+  [Pages.PRICING]: {
+    titleKey: localizationKey.metaTitlePricing,
+    descriptionKey: localizationKey.metaDescriptionPricing,
+  },
+  [Pages.SATISFACTION_GUARANTEE]: {
+    titleKey: localizationKey.metaTitleSatisfactionGuarantee,
+    descriptionKey: localizationKey.metaDescriptionSatisfactionGuarantee,
   },
 }
