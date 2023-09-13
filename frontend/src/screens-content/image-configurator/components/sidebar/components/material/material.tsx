@@ -6,34 +6,35 @@ import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import { v4 as uuidv4 } from 'uuid'
 import { ImageLayout } from 'screens-content/home/enums/enums'
-import { MATERIALS_TEMPLATE } from 'screens-content/home/utils/configuration'
 import { configurationsTable } from '../../../../../../../database.config'
 import { CONFIGURATION_TABLE_KEY } from '../../../../../../common/indexed-db/hooks/keys'
 import { Configuration } from '../../../../../../common/types/configuration'
-import { useMaterials } from 'common/api/use-materials'
+import { MaterialType } from 'common/api/use-materials'
+import { Material as TypeOfMaterial } from '../../../../../../common/enums/material'
+
+export const DEFAULT_MATERIAL: TypeOfMaterial = TypeOfMaterial.CANVAS
 
 type MaterialProps = {
   configuration: Configuration
+  materials: MaterialType[]
 }
 
-const Material = ({ configuration }: MaterialProps) => {
+const Material = ({ configuration, materials }: MaterialProps) => {
   const { t } = useTranslation()
-  const { data: materials } = useMaterials()
-
-  const unavailableMaterials = materials?.filter(
+  const unavailableMaterials = materials.filter(
     (item) => item.availability == false
   )
   const unavailableMaterialsIds = unavailableMaterials?.map((item) => item.id)
 
-  const changeMaterial = (id: string) => {
-    if (materials?.find((item) => item.id == id)?.availability) {
+  const changeMaterial = (type: TypeOfMaterial) => () => {
+    if (materials.find((item) => item.type === type)?.availability) {
       configurationsTable.update(CONFIGURATION_TABLE_KEY, {
-        material: id,
+        material: type,
       })
     }
   }
 
-  const materialItems = MATERIALS_TEMPLATE.map((material) => (
+  const materialItems = materials.map((material) => (
     <div
       key={material.id}
       style={{
@@ -45,7 +46,7 @@ const Material = ({ configuration }: MaterialProps) => {
       <div
         className={
           styles[
-            material.id === configuration?.material
+            material.type === configuration?.material ?? DEFAULT_MATERIAL
               ? 'imageWrapper'
               : 'relativeContainer'
           ]
@@ -61,7 +62,7 @@ const Material = ({ configuration }: MaterialProps) => {
           }
         >
           <Image
-            onClick={() => changeMaterial(material.id)}
+            onClick={changeMaterial(material.type)}
             alt={material.id}
             key={uuidv4()}
             src={material?.image ?? ''}
@@ -77,22 +78,31 @@ const Material = ({ configuration }: MaterialProps) => {
           />
         </div>
       </div>
-      <p className={styles.materialCardTitle}>{material.name}</p>
+      <p
+        className={
+          unavailableMaterialsIds?.includes(material.id)
+            ? styles.disabledMaterialCardTitle
+            : styles.materialCardTitle
+        }
+      >
+        {material.title}
+      </p>
     </div>
   ))
 
-  const icon = configuration?.material ? (
-    <CheckCircle color='success' />
-  ) : (
-    <Filter3 />
-  )
+  const icon =
+    configuration?.material ?? DEFAULT_MATERIAL ? (
+      <CheckCircle color='success' />
+    ) : (
+      <Filter3 />
+    )
 
   return (
     <div className={styles.containerPadding}>
       <Header
         icon={icon}
         title={String(t(localizationKey.chooseMaterial))}
-        success={!!configuration?.material}
+        success={!!(configuration?.material ?? DEFAULT_MATERIAL)}
       />
       <div
         style={{

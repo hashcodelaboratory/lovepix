@@ -13,6 +13,7 @@ import { useTranslation } from 'next-i18next'
 import { configurationsTable } from '../../../../../database.config'
 import { Configuration } from '../../../../common/types/configuration'
 import { CONFIGURATION_TABLE_KEY } from '../../../../common/indexed-db/hooks/keys'
+import { Material } from '../../../../common/enums/material'
 
 type DropzoneContainerProps = {
   configuration: Configuration
@@ -35,9 +36,9 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
         origin: fr.result as string,
         image: undefined,
         dimensionId: undefined,
-        material: undefined,
+        material: Material.CANVAS,
       }
-      configurationsTable.add(imageData, CONFIGURATION_TABLE_KEY)
+      configurationsTable.update(CONFIGURATION_TABLE_KEY, imageData)
     }
   }
 
