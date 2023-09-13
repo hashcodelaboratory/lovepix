@@ -15,4 +15,7 @@ export enum EditablePage {
   Pricing = Pages.PRICING,
   ProductionTime = Pages.PRODUCTION_TIME,
   SatisfactionGuarantee = Pages.SATISFACTION_GUARANTEE,
+  Cookies = Pages.COOKIES,
+  GeneralTermsAndConditions = Pages.GENERAL_TERMS_AND_CONDITIONS,
+  PersonalDataProtectionPrinciples = Pages.PERSONAL_DATA_PROTECTION_PRINCIPLES,
 }

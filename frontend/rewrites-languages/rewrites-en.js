@@ -50,13 +50,13 @@ const rewrites_en = [
     locale: false,
   },
   {
-    source: '/en/privacy-policy',
-    destination: '/en/privacy-policy',
+    source: '/en/personal-data-protection-principles',
+    destination: '/en/personal-data-protection-principles',
     locale: false,
   },
   {
-    source: '/en/conditions',
-    destination: '/en/conditions',
+    source: '/en/general-terms-and-conditions',
+    destination: '/en/general-terms-and-conditions',
     locale: false,
   },
   {
