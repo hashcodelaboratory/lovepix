@@ -22,8 +22,10 @@ export const addProduct = async (params: AddProductType) => {
     image: url,
     path: name,
   }
+
   const documentId = data.title
     .replace(/\s+/g, '-')
+    .replace(/-+/, '-')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
