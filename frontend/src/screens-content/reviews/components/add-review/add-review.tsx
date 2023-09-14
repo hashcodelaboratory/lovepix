@@ -39,6 +39,11 @@ const AddReview = () => {
   } = useForm<FormReview>({
     resolver: yupResolver(FORM_SCHEMA_REVIEW),
     reValidateMode: 'onChange',
+    defaultValues: {
+      name: '',
+      email: '',
+      review: '',
+    },
   })
   const queryClient = useQueryClient()
   const { enqueueSnackbar } = useSnackbar()
@@ -81,7 +86,7 @@ const AddReview = () => {
       </Typography>
       <form id='my-form' onSubmit={handleSubmit(onSubmit)}>
         <InputReview
-          name={'name'}
+          name='name'
           label={localizationKey.name}
           register={register}
           control={control}
@@ -89,7 +94,7 @@ const AddReview = () => {
           placeholder={localizationKey.name}
         />
         <InputReview
-          name={'email'}
+          name='email'
           label={localizationKey.email}
           register={register}
           control={control}
@@ -108,8 +113,8 @@ const AddReview = () => {
           />
         </div>
         <InputReview
-          name={'review'}
-          label={'Recenzia'}
+          name='review'
+          label='Recenzia'
           register={register}
           control={control}
           errors={errors.review?.message}
