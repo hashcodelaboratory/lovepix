@@ -1,5 +1,9 @@
 import { Container } from '@mui/material'
-import { ProductsType, useProducts } from 'common/api/use-products'
+import {
+  ProductsType,
+  useFrontPageProducts,
+  useProducts,
+} from 'common/api/use-products'
 import React from 'react'
 import Product from 'screens-content/e-shop/components/product/product'
 import { Pages } from 'constants/pages/urls'
@@ -9,7 +13,7 @@ import { useTranslation } from 'next-i18next'
 import Shimmer from '../../../../common/components/shimmer/shimmer'
 
 const ProductsSection = () => {
-  const { data: products, isLoading } = useProducts()
+  const { data: products, isLoading } = useFrontPageProducts()
   const { t } = useTranslation()
 
   const productList = products?.map((products: ProductsType) => (
