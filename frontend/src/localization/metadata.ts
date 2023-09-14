@@ -63,13 +63,14 @@ export const metadata: Record<Pages, Metadata> = {
     titleKey: localizationKey.metaTitleCookies,
     descriptionKey: localizationKey.metaDescriptionCookies,
   },
-  [Pages.PRIVACY_POLICY]: {
-    titleKey: localizationKey.metaTitlePrivacyPolicy,
-    descriptionKey: localizationKey.metaDescriptionPrivacyPolicy,
+  [Pages.PERSONAL_DATA_PROTECTION_PRINCIPLES]: {
+    titleKey: localizationKey.metaTitlePersonalDataProtectionPrinciples,
+    descriptionKey:
+      localizationKey.metaDescriptionPersonalDataProtectionPrinciples,
   },
-  [Pages.CONDITIONS]: {
-    titleKey: localizationKey.metaTitleConditions,
-    descriptionKey: localizationKey.metaDescriptionConditions,
+  [Pages.GENERAL_TERMS_AND_CONDITIONS]: {
+    titleKey: localizationKey.metaTitleGeneralTermsAndConditions,
+    descriptionKey: localizationKey.metaDescriptionGeneralTermsAndConditions,
   },
   [Pages.CONTACT]: {
     titleKey: localizationKey.metaTitleContact,

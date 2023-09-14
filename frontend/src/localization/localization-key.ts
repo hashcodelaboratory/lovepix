@@ -225,10 +225,13 @@ export const localizationKey = {
   metaTitleContact: 'metaTitleContact',
   metaDescriptionCookies: 'metaDescriptionCookies',
   metaTitleCookies: 'metaTitleCookies',
-  metaDescriptionPrivacyPolicy: 'metaDescriptionPrivacyPolicy',
-  metaTitlePrivacyPolicy: 'metaTitlePrivacyPolicy',
-  metaDescriptionConditions: 'metaDescriptionConditions',
-  metaTitleConditions: 'metaTitleConditions',
+  metaDescriptionPersonalDataProtectionPrinciples:
+    'metaDescriptionPersonalDataProtectionPrinciples',
+  metaTitlePersonalDataProtectionPrinciples:
+    'metaTitlePersonalDataProtectionPrinciples',
+  metaDescriptionGeneralTermsAndConditions:
+    'metaDescriptionGeneralTermsAndConditions',
+  metaTitleGeneralTermsAndConditions: 'metaTitleGeneralTermsAndConditions',
   metaTitleBlog: 'metaTitleBlog',
   metaDescriptionBlog: 'metaDescriptionBlog',
   metaTitleProductionTime: 'metaTitleProductionTime',

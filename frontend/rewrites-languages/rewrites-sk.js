@@ -41,11 +41,11 @@ const rewrites_sk = [
   },
   {
     source: '/zasady-ochrany-osobnych-udajov',
-    destination: '/privacy-policy',
+    destination: '/personal-data-protection-principles',
   },
   {
     source: '/vseobecne-obchodne-podmienky',
-    destination: '/conditions',
+    destination: '/general-terms-and-conditions',
   },
   {
     source: '/profil',
