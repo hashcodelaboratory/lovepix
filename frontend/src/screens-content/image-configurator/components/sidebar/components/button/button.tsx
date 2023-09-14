@@ -10,7 +10,6 @@ import {
   orderTable,
 } from '../../../../../../../database.config'
 import { getPrice } from '../price/utils/generator'
-import { MATERIALS_TEMPLATE } from '../../../../../home/utils/configuration'
 import {
   CONFIGURATION_TABLE_KEY,
   ORDER_TABLE_KEY,
@@ -20,8 +19,13 @@ import { useContext } from 'react'
 import ImageConfiguratorContext from '../../../../image-configurator-context/image-configurator-context'
 import { splitDimension } from '../../../../../../common/utils/split-dimension'
 import { StorageFileType } from '../../../../../../common/firebase/storage/enums'
+import { MaterialType } from '../../../../../../common/api/use-materials'
 
-const Button = () => {
+type ButtonProps = {
+  materials: MaterialType[]
+}
+
+const Button = ({ materials }: ButtonProps) => {
   const { t } = useTranslation()
 
   const router = useRouter()
@@ -41,9 +45,9 @@ const Button = () => {
       height: 0,
     }
 
-    const material = MATERIALS_TEMPLATE.find(
+    const material = materials.find(
       (material) => material.id === configuration?.material
-    )?.name
+    )?.type
 
     const price =
       dim.width > 0 && dim.height > 0

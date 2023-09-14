@@ -1,5 +1,5 @@
 export enum Material {
   CANVAS = 'CANVAS',
-  AKRYL = 'AKRYL',
+  ACRYLIC = 'ACRYLIC',
   DIBOND = 'DIBOND',
 }
