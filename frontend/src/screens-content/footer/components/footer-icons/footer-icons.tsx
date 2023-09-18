@@ -112,7 +112,6 @@ const FooterIcons = (): JSX.Element => {
           <Link
             className={styles.footerBottomContainerRowTextLink}
             href={t(Pages.GENERAL_TERMS_AND_CONDITIONS)}
-            target='_blank'
           >
             {t(localizationKey.conditions)}
           </Link>
@@ -120,7 +119,6 @@ const FooterIcons = (): JSX.Element => {
           <Link
             className={styles.footerBottomContainerRowTextLink}
             href={t(Pages.PERSONAL_DATA_PROTECTION_PRINCIPLES)}
-            target='_blank'
           >
             {t(localizationKey.privacyPolicy)}
           </Link>
