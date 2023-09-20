@@ -12,14 +12,13 @@ const SidebarContent = () => {
 
   return (
     <div className={styles.sidebarContent}>
-      {SIDEBAR_MENU_LIST.map(({ title, link }) => (
-        <p
-          key={uuidv4()}
-          className={styles.sidebarContentTitle}
-          onClick={() => goTo(link)}
-        >
-          {String(t(title))}
-        </p>
+      {SIDEBAR_MENU_LIST.map(({ title, link, count }) => (
+        <div className={styles.sidebarRow} key={uuidv4()}>
+          <p className={styles.sidebarRowTitle} onClick={() => goTo(link)}>
+            {String(t(title))}
+          </p>
+          {count && <p className={styles.sidebarRowSubtitle}>{`(${count})`}</p>}
+        </div>
       ))}
     </div>
   )

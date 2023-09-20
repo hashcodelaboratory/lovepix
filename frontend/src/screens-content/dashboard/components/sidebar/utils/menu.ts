@@ -4,6 +4,7 @@ import { localizationKey } from '../../../../../localization/localization-key'
 export const SIDEBAR_MENU_LIST: {
   title: string
   link: string
+  count?: number
 }[] = [
   {
     title: localizationKey.home,
@@ -12,6 +13,7 @@ export const SIDEBAR_MENU_LIST: {
   {
     title: localizationKey.orders,
     link: DashboardRoutes.ORDERS,
+    count: 10,
   },
   {
     title: localizationKey.products,
