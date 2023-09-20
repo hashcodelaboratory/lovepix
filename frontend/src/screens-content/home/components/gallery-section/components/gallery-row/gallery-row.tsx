@@ -12,7 +12,7 @@ type PreviewRowProps = {
   children: React.ReactNode
 }
 
-const PreviewRow = ({
+const GalleryRow = ({
   title,
   children,
   route,
@@ -43,4 +43,4 @@ const PreviewRow = ({
   return content
 }
 
-export default PreviewRow
+export default GalleryRow

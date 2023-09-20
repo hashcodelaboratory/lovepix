@@ -38,7 +38,7 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
         dimensionId: undefined,
         material: Material.CANVAS,
       }
-      configurationsTable.update(CONFIGURATION_TABLE_KEY, imageData)
+      configurationsTable.add(imageData, CONFIGURATION_TABLE_KEY)
     }
   }
 

@@ -21,11 +21,8 @@ type MaterialProps = {
 
 const Material = ({ configuration, materials }: MaterialProps) => {
   const { t } = useTranslation()
-  const unavailableMaterials = materials.filter(
-    (item) => item.availability == false
-  )
+  const unavailableMaterials = materials.filter((item) => !item.availability)
   const unavailableMaterialsIds = unavailableMaterials?.map((item) => item.id)
-
   const changeMaterial = (type: TypeOfMaterial) => () => {
     if (materials.find((item) => item.type === type)?.availability) {
       configurationsTable.update(CONFIGURATION_TABLE_KEY, {
@@ -90,19 +87,18 @@ const Material = ({ configuration, materials }: MaterialProps) => {
     </div>
   ))
 
-  const icon =
-    configuration?.material ?? DEFAULT_MATERIAL ? (
-      <CheckCircle color='success' />
-    ) : (
-      <Filter3 />
-    )
+  const icon = configuration?.material ? (
+    <CheckCircle color='success' />
+  ) : (
+    <Filter3 />
+  )
 
   return (
     <div className={styles.containerPadding}>
       <Header
         icon={icon}
         title={String(t(localizationKey.chooseMaterial))}
-        success={!!(configuration?.material ?? DEFAULT_MATERIAL)}
+        success={!!configuration?.material}
       />
       <div
         style={{

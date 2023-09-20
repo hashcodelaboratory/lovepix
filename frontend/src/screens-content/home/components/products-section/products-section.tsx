@@ -7,7 +7,7 @@ import {
 import React from 'react'
 import Product from 'screens-content/e-shop/components/product/product'
 import { Pages } from 'constants/pages/urls'
-import PreviewRow from '../preview-section/components/preview-row/preview-row'
+import GalleryRow from '../gallery-section/components/gallery-row/gallery-row'
 import { localizationKey } from 'localization/localization-key'
 import { useTranslation } from 'next-i18next'
 import Shimmer from '../../../../common/components/shimmer/shimmer'
@@ -22,9 +22,9 @@ const ProductsSection = () => {
 
   return (
     <Container style={{ marginBottom: 30 }}>
-      <PreviewRow title={t(localizationKey.products)} route={t(Pages.ESHOP)}>
+      <GalleryRow title={t(localizationKey.products)} route={t(Pages.ESHOP)}>
         <Shimmer isLoading={isLoading}>{productList}</Shimmer>
-      </PreviewRow>
+      </GalleryRow>
     </Container>
   )
 }

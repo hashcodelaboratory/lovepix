@@ -18,7 +18,7 @@ type PreviewCardProps = {
   item?: GalleryItem
 }
 
-const PreviewCard = ({
+const GalleryCard = ({
   configuration,
   item,
 }: PreviewCardProps): JSX.Element => {
@@ -29,8 +29,9 @@ const PreviewCard = ({
 
   const add = async (path: string, id?: string) => {
     if (canAddImage(configuration)) {
+      console.log(path)
       await addImageFromGallery(path, id)
-      router.push(t(Pages.CONFIGURATOR))
+      await router.push(t(Pages.CONFIGURATOR))
     } else {
       toggleModal()
       setImageData({ path: path, id: id })
@@ -42,7 +43,7 @@ const PreviewCard = ({
   const onConfirm = async () => {
     toggleModal()
     await addImageFromGallery(imageData!.path, imageData!.id)
-    router.push(t(Pages.CONFIGURATOR))
+    await router.push(t(Pages.CONFIGURATOR))
   }
 
   const onClose = () => toggleModal()
@@ -86,4 +87,4 @@ const PreviewCard = ({
   )
 }
 
-export default PreviewCard
+export default GalleryCard

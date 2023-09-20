@@ -5,27 +5,11 @@ import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
 import ImageConfiguratorLayout from '../src/screens-content/image-configurator/image-configurator-layout'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useLiveQuery } from 'dexie-react-hooks'
-import { configurationsTable, orderTable } from '../database.config'
-import {
-  CONFIGURATION_TABLE_KEY,
-  ORDER_TABLE_KEY,
-} from '../src/common/indexed-db/hooks/keys'
+import { configurationsTable } from '../database.config'
+import { CONFIGURATION_TABLE_KEY } from '../src/common/indexed-db/hooks/keys'
 import FooterLayout from '../src/screens-content/footer/footer'
-import { Material } from '../src/common/enums/material'
-import { useEffect } from 'react'
-
-const addInitialConfiguration = async () =>
-  (await configurationsTable.count()) === 0 &&
-  configurationsTable.add(
-    { material: Material.CANVAS },
-    CONFIGURATION_TABLE_KEY
-  )
 
 const Configurator: NextPage = () => {
-  useEffect(() => {
-    addInitialConfiguration()
-  }, [])
-
   const configuration = useLiveQuery(
     () => configurationsTable.get(CONFIGURATION_TABLE_KEY) ?? null,
     []

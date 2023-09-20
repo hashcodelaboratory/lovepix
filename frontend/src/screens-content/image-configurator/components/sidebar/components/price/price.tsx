@@ -25,12 +25,14 @@ const Price = ({ materials, configuration }: PriceProps) => {
       ? getPrice(
           width,
           height,
-          materials.find((material) => material.id === configuration?.material)
-            ?.type
+          materials.find(
+            (material) => material.type === configuration?.material
+          )?.type
         )
       : '-'
 
   const noTaxPrice = computedPrice !== '-' ? computedPrice * 0.8 : '-'
+
   return (
     <div className={styles.containerPadding}>
       <div className={styles.price}>
