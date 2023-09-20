@@ -46,7 +46,7 @@ const Button = ({ materials }: ButtonProps) => {
     }
 
     const material = materials.find(
-      (material) => material.id === configuration?.material
+      (material) => material.type === configuration?.material
     )?.type
 
     const price =
