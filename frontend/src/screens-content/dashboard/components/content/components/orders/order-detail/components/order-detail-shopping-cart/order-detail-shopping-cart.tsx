@@ -15,9 +15,10 @@ const OrderDetailShoppingCart = ({ order }: Props): JSX.Element => {
 
   return (
     <Box className={styles.box} style={{ width: '100%' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <h4>{t(localizationKey.shoppingCart)}</h4>
-        <h4>{Number(order?.totalPrice).toFixed(2)} €</h4>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <p className={styles.orderDetailShoppingTitle}>
+          {t(localizationKey.shoppingCart)}
+        </p>
       </div>
       {order?.shoppingCart?.images?.map((image, index) => (
         <OrderDetailRow key={index} index={index} image={image} order={order} />
@@ -30,6 +31,15 @@ const OrderDetailShoppingCart = ({ order }: Props): JSX.Element => {
           order={order}
         />
       ))}
+      <div style={{ float: 'right', textAlign: 'right' }}>
+        <p className={styles.orderDetailVoucher}>
+          {t(localizationKey.voucherCode)}:{' '}
+          <b>{order?.voucher?.code ?? 'bez kuponu'}</b>
+        </p>
+        <p className={styles.orderDetailTotal}>
+          Spolu: <b>{Number(order?.totalPrice).toFixed(2)} €</b>
+        </p>
+      </div>
     </Box>
   )
 }

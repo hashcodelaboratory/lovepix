@@ -21,7 +21,7 @@ export const getPrice = (
   material?: Material
 ) => {
   switch (material) {
-    case Material.AKRYL:
+    case Material.ACRYLIC:
       return getAkrylPrice(width, height)
     case Material.CANVAS:
       return getCanvasPrice(width, height)

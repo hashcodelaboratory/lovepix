@@ -4,13 +4,16 @@ import React from 'react'
 import Sidebar from 'screens-content/dashboard/components/sidebar/sidebar'
 import styles from './dashboard.module.scss'
 import OrdersTable from '../../src/screens-content/dashboard/components/content/components/orders/orders-table'
+import AdminAccess from 'common/protect-route'
 
 const Orders = () => {
   return (
-    <div className={styles.dashboardContainer}>
-      <Sidebar />
-      <OrdersTable />
-    </div>
+    <AdminAccess>
+      <div className={styles.dashboardContainer}>
+        <Sidebar />
+        <OrdersTable />
+      </div>
+    </AdminAccess>
   )
 }
 

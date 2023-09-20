@@ -16,18 +16,20 @@ import { withFavicon } from '../src/favicon/with-favicon'
 import { orderTable } from '../database.config'
 import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 
+const addInitialShoppingCart = async () =>
+  (await orderTable.count()) === 0 &&
+  orderTable.add(
+    {
+      shoppingCart: { images: [], products: [], totalPrice: 0 },
+    },
+    ORDER_TABLE_KEY
+  )
+
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
 
-  const addIntialShoppingCart = async () =>
-    (await orderTable.count()) === 0 &&
-    orderTable.add(
-      { shoppingCart: { images: [], products: [], totalPrice: 0 } },
-      ORDER_TABLE_KEY
-    )
-
   useEffect(() => {
-    addIntialShoppingCart()
+    addInitialShoppingCart()
   }, [])
 
   return (

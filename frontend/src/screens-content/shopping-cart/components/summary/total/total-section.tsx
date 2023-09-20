@@ -1,13 +1,12 @@
 import styles from '../../../shopping-cart.module.scss'
 import { localizationKey } from '../../../../../localization/localization-key'
-import { Checkbox, FormControlLabel, Link } from '@mui/material'
+import { Link, styled } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import {
   getDeliveryMessage,
   getPaymentMessage,
   getPriceForDelivery,
   getPriceForPayment,
-  getPriceWithVoucher,
 } from './utils'
 import { Delivery } from '../../../../../common/enums/delivery'
 import { Payment } from '../../../../../common/enums/payment'
@@ -24,6 +23,11 @@ type TotalSectionProps = {
   setSubscription: () => void
   voucher?: VoucherType
 }
+
+const SubmitButton = styled('button')({
+  width: '100%',
+  margin: '1rem auto 0 auto',
+})
 
 const TotalSection = ({
   isSubscription,
@@ -76,7 +80,7 @@ const TotalSection = ({
             {t(localizationKey.code)}
             {voucher && <>: {voucher.code}</>}
           </span>
-          <span>- {voucher.value} €</span>
+          <span>- {voucher.value} %</span>
         </div>
       )}
       <hr />
@@ -110,13 +114,13 @@ const TotalSection = ({
           message={localizationKey.agreeWithNewsletter}
         />
       </div>
-      <button
+      <SubmitButton
         type='submit'
-        className={styles.checkoutButton}
+        className={styles.defaultButton}
         disabled={!bussinessCondition}
       >
         {String(t(localizationKey.orderWithPayment))}
-      </button>
+      </SubmitButton>
     </div>
   )
 }

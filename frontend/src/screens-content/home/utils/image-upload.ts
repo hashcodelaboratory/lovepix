@@ -2,7 +2,7 @@ export const UPLOAD_IMG_GRID_STYLE = {
   display: { xs: 'none', sm: 'block', md: 'block', lg: 'block', xl: 'block' },
 }
 
-export const WALLER_IMAGE_LIST: {
+export const LOVEPIX_IMAGE_LIST: {
   sourceUrl: string
   title: string
 }[] = [

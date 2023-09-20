@@ -1,0 +1,8 @@
+import { Gallery } from "./gallery"
+
+model Dimension {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  title      String    @unique
+  galleryIds String[]  @db.ObjectId
+  galleries  Gallery[] @relation(fields: [galleryIds], references: [id])
+}

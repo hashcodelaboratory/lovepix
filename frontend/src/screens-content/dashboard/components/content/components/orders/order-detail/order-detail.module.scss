@@ -12,6 +12,7 @@
   background-color: white;
   margin: 0.5rem;
   padding: 1rem;
+  overflow-y: auto;
 
   h4 {
     margin-top: 0;
@@ -107,4 +108,27 @@
   display: flex;
   align-items: center;
   font-size: 12px;
+}
+
+.orderDetailTitle {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 200;
+}
+
+.orderDetailShoppingTitle {
+  margin: 0;
+  color: gray;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+
+.orderDetailVoucher {
+  font-size: 0.8rem;
+  font-weight: 200;
+}
+
+.orderDetailTotal {
+  font-weight: 200;
 }

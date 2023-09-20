@@ -1,0 +1,22 @@
+import { GalleryCategory } from "./galleryCategory"
+import { Dimension } from "./dimension"
+import { OrderItem } from "./orderItem"
+
+model Gallery {
+  id                 String            @id @default(auto()) @map("_id") @db.ObjectId
+  galleryCategories  GalleryCategory[] @relation(fields: [galleryCategoryIds], references: [id])
+  galleryCategoryIds String[]          @db.ObjectId
+  dimensions         Dimension[]       @relation(fields: [dimensionIds], references: [id])
+  dimensionIds       String[]          @db.ObjectId
+  bucket             String
+  fullPath           String
+  price              Float
+  size               Float
+  timeCreated        DateTime         @default(now())         
+  updatedAt          DateTime         @updatedAt
+  url                String
+  name               String
+  image              String
+  material           String?
+  orders             OrderItem[]
+}

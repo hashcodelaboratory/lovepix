@@ -1,26 +1,36 @@
 import Container from '@mui/material/Container'
-import {useGallery} from '../../common/api/use-gallery'
+import { useGallery } from '../../common/api/use-gallery'
 import Image from 'next/image'
-import {ImageLayout} from '../home/enums/enums'
+import { ImageLayout } from '../home/enums/enums'
 import styles from './gallery.module.scss'
-import {useCategories} from '../../common/api/use-categories'
-import {Chip} from '@mui/material'
-import {useEffect, useState} from 'react'
-import {localizationKey} from '../../localization/localization-key'
-import {useTranslation} from 'react-i18next'
-import {Pages} from "../../constants/pages/urls";
-import {useRouter} from 'next/router'
-import {addFileFromGallery} from '../../common/utils/add-file-from-gallery'
-import {useGalleryQuery} from "./use-gallery-query";
+import { useCategories } from '../../common/api/use-categories'
+import { Chip } from '@mui/material'
+import { useEffect, useState } from 'react'
+import { localizationKey } from '../../localization/localization-key'
+import { useTranslation } from 'react-i18next'
+import { useRouter } from 'next/router'
+import {
+  AddGalleryType,
+  addImageFromGallery,
+} from '../../common/utils/add-file-from-gallery'
+import { useGalleryQuery } from './use-gallery-query'
+import { Configuration } from 'common/types/configuration'
+import { canAddImage } from 'common/utils/add-image-to-configurator'
+import { ConfirmationModal } from 'screens-content/confirmation-modal/confirmation-modal'
+import { Pages } from 'constants/pages/urls'
 
-const GalleryLayout = (): JSX.Element => {
-  const {t} = useTranslation()
-  const router = useRouter()
+type GalleryLayoutProps = {
+  configuration: Configuration
+}
+
+const GalleryLayout = ({ configuration }: GalleryLayoutProps): JSX.Element => {
+  const { t } = useTranslation()
   const queryGallery = useGalleryQuery()
-
-  const {data: gallery} = useGallery()
-  const {data: categories} = useCategories()
-
+  const { data: gallery } = useGallery()
+  const { data: categories } = useCategories()
+  const router = useRouter()
+  const [openModal, setOpenModal] = useState(false)
+  const [imageData, setImageData] = useState<AddGalleryType>()
   const [searchedCategories, setSearchedCategories] = useState<string[]>([])
 
   const filtered = gallery?.filter((image) =>
@@ -28,18 +38,15 @@ const GalleryLayout = (): JSX.Element => {
   )
 
   useEffect(() => {
-    if (!queryGallery) {
-      setSearchedCategories((categories ?? []).map(({name}) => name))
+    const query = !queryGallery
+      ? (categories ?? []).map(({ name }) => name)
+      : [queryGallery]
 
-      return
-    }
-
-    setSearchedCategories([queryGallery])
+    setSearchedCategories(query)
   }, [queryGallery, categories])
 
   const onClickCategory = (name: string) => {
-    const variant = getCategoryVariant(name)
-    if (variant === 'filled') {
+    if (isPartOfFilter(name)) {
       setSearchedCategories(
         searchedCategories.filter((category) => category !== name)
       )
@@ -48,29 +55,44 @@ const GalleryLayout = (): JSX.Element => {
     }
   }
 
-  const getCategoryVariant = (name: string) => {
-    const isPartOfFilter = searchedCategories?.includes(name) ?? false
-
-    return isPartOfFilter ? 'filled' : 'outlined'
-  }
+  const isPartOfFilter = (name: string) =>
+    searchedCategories?.includes(name) ?? false
 
   const add = async (path: string, id: string) => {
-    await addFileFromGallery(path, id)
-    await router.push(Pages.CONFIGURATOR)
+    if (canAddImage(configuration)) {
+      await addImageFromGallery(path, id)
+      router.push(t(Pages.CONFIGURATOR))
+    } else {
+      toggleModal()
+      setImageData({ path: path, id: id })
+    }
   }
+
+  const toggleModal = () => setOpenModal(!openModal)
+
+  const onConfirm = async () => {
+    toggleModal()
+    await addImageFromGallery(imageData!.path, imageData!.id)
+    router.push(t(Pages.CONFIGURATOR))
+  }
+
+  const onClose = () => toggleModal()
 
   return (
     <Container>
+      <h1 className={styles.galleryTitle}>Galéria</h1>
+      <p className={styles.gallerySubtitle}>{t(localizationKey.galleryInfo)}</p>
       <div className={styles.galleryCategoryRow}>
-        {categories?.map(({id, name}) => (
+        {categories?.map(({ id, name }) => (
           <Chip
             key={id}
             label={name}
-            color='primary'
-            variant={getCategoryVariant(name)}
+            variant={isPartOfFilter(name) ? 'filled' : 'outlined'}
             clickable
             onClick={() => onClickCategory(name)}
-            className={styles.galleryChip}
+            className={`${styles.galleryChip} ${
+              isPartOfFilter(name) ? styles.clicked : ''
+            }`}
           />
         ))}
       </div>
@@ -95,6 +117,17 @@ const GalleryLayout = (): JSX.Element => {
           </div>
         ))}
       </div>
+      <ConfirmationModal
+        title={t(localizationKey.imageInConfiguratorTitle)}
+        description={t(localizationKey.imageInConfiguratorDescription)}
+        link={{
+          href: t(Pages.CONFIGURATOR),
+          text: t(localizationKey.imageInConfiguratorLink),
+        }}
+        onConfirm={onConfirm}
+        onClose={onClose}
+        open={openModal}
+      />
     </Container>
   )
 }

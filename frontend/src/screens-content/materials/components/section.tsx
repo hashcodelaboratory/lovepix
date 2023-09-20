@@ -4,10 +4,11 @@ import Image from 'next/image'
 import { v4 as uuidv4 } from 'uuid'
 
 export type Material = {
-  title?: string
+  title: string
   subtitle?: string
   description?: string
   illustration?: string
+  id?: string
 }
 
 export const materialSection = (material: Material, index: number) => {
@@ -22,6 +23,7 @@ export const materialSection = (material: Material, index: number) => {
       columnSpacing={4}
       direction={direction}
       alignItems='center'
+      id={material.id}
     >
       <Grid item xs={12} md={3}>
         <Image

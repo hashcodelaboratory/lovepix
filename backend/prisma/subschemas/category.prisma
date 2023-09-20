@@ -1,0 +1,8 @@
+import { Product } from "./product"
+
+model Category {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  title      String    @unique
+  products   Product[] @relation(fields: [productIds], references: [id])
+  productIds String[]  @db.ObjectId
+}

@@ -1,0 +1,80 @@
+name: LOVEPIX DockerHub Deployment on ORGANIZATION TEST environment - BACKEND
+#test
+on:
+  workflow_dispatch:
+  create:
+    tags:
+      - test_*
+
+defaults:
+  run:
+    working-directory: ./backend
+
+env:
+  DOCKER_HUB_USER: ${{secrets.DOCKER_HUB_USERNAME}}
+  DOCKER_HUB_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
+  DOCKER_TAG_WALLER_BE: ${{secrets.DOCKER_TAG_WALLER_BE}}
+  DOCKER_TAG_MONGO_RS: ${{secrets.DOCKER_TAG_MONGO_RS}}
+  MONGO_INITDB_ROOT_USERNAME: ${{secrets.MONGO_INITDB_ROOT_USERNAME}}
+  MONGO_INITDB_ROOT_PASSWORD: ${{secrets.MONGO_INITDB_ROOT_PASSWORD}}
+  MONGODB_SERVER: ${{secrets.MONGODB_SERVER}}
+  MONGODB_ENABLE_ADMIN: ${{secrets.MONGODB_ENABLE_ADMIN}}
+  MONGODB_ADMINUSERNAME: ${{secrets.MONGODB_ADMINUSERNAME}}
+  MONGODB_ADMINPASSWORD: ${{secrets.MONGODB_ADMINPASSWORD}}
+  MONGODB_BASICAUTH_USERNAME: ${{secrets.MONGODB_BASICAUTH_USERNAME}}
+  MONGODB_BASICAUTH_PASSWORD: ${{secrets.MONGODB_BASICAUTH_PASSWORD}}
+  DATABASE_URL: ${{secrets.DATABASE_URL}}
+  MONGO_REPLICA_HOST: ${{secrets.MONGO_REPLICA_HOST}}
+  MONGO_REPLICA_PORT: ${{secrets.MONGO_REPLICA_PORT}}
+  API_KEY: ${{secrets.API_KEY}}
+  JWT_SECRET: ${{secrets.JWT_SECRET}}
+
+jobs:
+  push-lovepix-backend-image-on-dockerhub:  
+    runs-on: ubuntu-latest 
+    environment: Test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build docker LOVEPIX backend image
+        run: time DOCKER_BUILDKIT=1 docker build -t lovepix-be:latest --build-arg MONGO_INITDB_ROOT_USERNAME --build-arg MONGO_INITDB_ROOT_PASSWORD --build-arg MONGODB_SERVER --build-arg MONGODB_ENABLE_ADMIN --build-arg MONGODB_ADMINUSERNAME --build-arg MONGODB_ADMINPASSWORD --build-arg MONGODB_BASICAUTH_USERNAME --build-arg MONGODB_BASICAUTH_PASSWORD --build-arg DATABASE_URL --build-arg MONGO_REPLICA_HOST --build-arg MONGO_REPLICA_PORT --build-arg API_KEY --build-arg JWT_SECRET .
+      - name: Docker images 
+        run: docker images
+      - name: Tag the image of LOVEPIX-be
+        run: docker tag lovepix-be:latest $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_BE
+      - name: Docker images 
+        run: docker images
+      - name: DOCKER LOGIN
+        run: | 
+          docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD  
+      - name: Docker Push of LOVEPIX-be image
+        run: docker push $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_BE
+
+
+  deploy:
+    name: Deploy on EC2
+    needs: push-lovepix-backend-image-on-dockerhub
+    runs-on: ubuntu-latest
+    environment: Test
+    steps:
+      - name: deploying on ec2 and rebuild docker-compose with nginX
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          envs: DOCKER_HUB_USER, DOCKER_HUB_PASSWORD, DOCKER_TAG_WALLER_BE, MONGO_INITDB_ROOT_USERNAME, MONGO_INITDB_ROOT_PASSWORD, MONGODB_SERVER, MONGODB_ENABLE_ADMIN, MONGODB_ADMINUSERNAME, MONGODB_ADMINPASSWORD, MONGODB_BASICAUTH_USERNAME, MONGODB_BASICAUTH_PASSWORD, DATABASE_URL, API_KEY, JWT_SECRET
+          host: ${{ secrets.NEW_ORG_AWS_TEST_HOST }}
+          username: ec2-user
+          key: ${{ secrets.NEW_ORG_AWS_TEST_PEM }}
+          port: 22
+          script: |
+            cd docker-nginx-letsencrypt-https-ec2
+            docker images
+            touch test.txt
+            docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
+            containerId_backend=$( docker container ls -a | grep server-backend | awk '{ print $1 }' )
+            docker stop $containerId_backend
+            docker rm $containerId_backend
+            docker rmi $DOCKER_HUB_USER/$DOCKER_TAG_ENV
+            docker pull $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_BE
+            docker images | grep none | awk '{ print $3; }' | xargs docker rmi
+            docker-compose up -d --no-deps --build nginx
+            docker-compose -f docker-compose-backend.yaml up -d server-backend
