@@ -80,7 +80,7 @@ const rewrites_sk = [
     destination: '/complaints-and-returns',
   },
   {
-    source: '/moznosti-ceny-a-dorucenia',
+    source: '/moznosti-dopravy-a-platby',
     destination: '/delivery-options-and-prices',
   },
   {
