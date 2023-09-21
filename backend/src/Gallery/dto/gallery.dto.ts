@@ -47,20 +47,6 @@ export class GalleryDto extends OmitType(GalleryEntity, ['id', 'galleryCategorie
     size: number;
 
     @ApiProperty({
-        description: 'Date of created',
-        example: '2022-02-14T13:15:03-08:00',
-    })
-    @IsNotEmpty()
-    timeCreated: Date;
-
-    @ApiProperty({
-        description: 'Date of updated',
-        example: '2022-02-14T13:15:03-08:00',
-    })
-    @IsNotEmpty()
-    updatedAt: Date;
-
-    @ApiProperty({
         description: 'Url of image',
         example: 'Image url',
     })
