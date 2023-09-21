@@ -9,7 +9,7 @@ type ReviewList = {
 const ReviewList = ({ reviews }: ReviewList) => {
   const reviewList = reviews
     ?.sort((a: ReviewType, b: ReviewType) => (a.date < b.date ? 1 : -1))
-    .map((item: ReviewType) => (
+    .map((item: ReviewType, index) => (
       <SingleReview key={item.id} reviewItems={item} />
     ))
 
