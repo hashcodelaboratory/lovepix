@@ -60,7 +60,7 @@ export class OrderService extends BaseService {
   getOrderedByDate = () => {
     return this.prismaService.order.findMany({
       orderBy: {
-        orderDate: 'desc'
+        createDate: 'desc'
       },
       ...getOrderInfoQuery
     });

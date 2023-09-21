@@ -10,11 +10,4 @@ export class OrderStateDto extends OmitType(OrderStateEntity, ['id', 'orders']) 
     })
     @IsNotEmpty()
     title: string;
-
-    @ApiProperty({
-        description: 'Date format',
-        example: 'Date example - 2023-07-15T21:12:01.000Z',
-    })
-    @IsNotEmpty()
-    date: Date;
 }
