@@ -46,7 +46,7 @@ const ProductDetailLayout = ({ product, isLoading }: ProductProps) => {
     </div>
   ))
 
-  const payloadAddtoCart = () => {
+  const payloadAddToCart = () => {
     const { products } = order?.shoppingCart || []
 
     const foundIndex: number = products?.findIndex(
@@ -97,8 +97,8 @@ const ProductDetailLayout = ({ product, isLoading }: ProductProps) => {
     }
 
     order?.shoppingCart
-      ? orderTable.update(ORDER_TABLE_KEY, payloadAddtoCart())
-      : orderTable.add(payloadAddtoCart(), ORDER_TABLE_KEY)
+      ? orderTable.update(ORDER_TABLE_KEY, payloadAddToCart())
+      : orderTable.add(payloadAddToCart(), ORDER_TABLE_KEY)
     enqueueSnackbar(
       String(t(localizationKey.productAddedToCart)),
       SNACKBAR_OPTIONS_SUCCESS

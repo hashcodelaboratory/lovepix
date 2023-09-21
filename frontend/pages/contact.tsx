@@ -10,12 +10,6 @@ import FooterLayout from "../src/screens-content/footer/footer";
 const Contact: NextPage = () => {
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Contacts</title>
-        <meta name='Contact' content='Contact page' />
-        <link rel='icon' href='/favicon/favicon-16x16.png' />
-      </Head>
-
       <header>
         <ResponsiveAppBar />
       </header>

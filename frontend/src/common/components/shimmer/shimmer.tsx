@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import ItemSkeleton from '../../../screens-content/home/item-skeleton/item-skeleton'
 import ReviewSkeleton from '../../../screens-content/home/review-skeleton/review-skeleton'
+import { styled } from '@mui/material'
 
 export enum SkeletonEnum {
   ITEM = 'ITEM',
@@ -13,6 +14,12 @@ type ShimmerProps = {
   isLoading?: boolean
   children?: JSX.Element | JSX.Element[]
 }
+
+const ScrollBarContaier = styled('div')({
+  display: 'flex',
+  overflow: 'auto',
+  padding: 10,
+})
 
 const Shimmer: FC<ShimmerProps> = ({
   count = 4,
@@ -31,13 +38,13 @@ const Shimmer: FC<ShimmerProps> = ({
 
   if (isLoading) {
     return (
-      <div style={{ display: 'flex', overflow: 'auto' }}>
+      <ScrollBarContaier>
         {[...Array(count)].map((index) => getSkeletonComponent(index))}
-      </div>
+      </ScrollBarContaier>
     )
   }
 
-  return <>{children}</>
+  return <ScrollBarContaier>{children}</ScrollBarContaier>
 }
 
 export default Shimmer

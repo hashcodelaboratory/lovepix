@@ -15,8 +15,7 @@ const useLoggedUser = () => {
 
   const checkIfAdmin = (user: User) => {
     const admin = admins?.find((item) => item.email === user.email)
-    const newUser = { ...user, isAdmin: !!admin }
-    setUser(newUser)
+    admin && setUser({ ...user, isAdmin: !!admin })
   }
 
   const getUser = async () => {
@@ -31,7 +30,7 @@ const useLoggedUser = () => {
     })
     setFetching(false)
   }
-  
+
   useEffect(() => {
     admins && getUser()
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -3,6 +3,7 @@ import {
   DataGrid,
   GridCallbackDetails,
   GridCellParams,
+  GridRowParams,
   GridSelectionModel,
 } from '@mui/x-data-grid'
 import styles from '../../../../dashboard.module.scss'
@@ -73,7 +74,7 @@ const OrdersTable = () => {
     }
   }
 
-  const changeOrderId = (e: GridCellParams) => {
+  const changeOrderId = (e: GridRowParams) => {
     setOrder(orders.find(({ id }) => id === e.id.toString()))
   }
 
@@ -96,12 +97,12 @@ const OrdersTable = () => {
             rows={data ?? []}
             columns={getOrdersColumns(t)}
             autoPageSize
-            onCellClick={changeOrderId}
             checkboxSelection
             selectionModel={selectionModel}
             onSelectionModelChange={selectionChanged}
             disableSelectionOnClick
             sx={dataGridStyle}
+            onRowClick={changeOrderId}
           />
         </Box>
         <Box className={styles.ordersTableMainpanel}>

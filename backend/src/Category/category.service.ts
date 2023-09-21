@@ -5,7 +5,7 @@ import { BaseService } from '../base.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
-enum relationNames {
+enum RelationNames {
   products = 'products',
   categories = 'categories'
 }
@@ -16,10 +16,10 @@ export class CategoryService extends BaseService {
   }
 
   create = async (data: CategoryDto) => {
-    const cat = await this.prismaService.category.create({ data });
+    const category = await this.prismaService.category.create({ data });
     return this.manyToManyRelationConnect(
-      cat,
-      relationNames.products,
+      category,
+      RelationNames.products,
       Prisma.ModelName.Product
     );
   };
@@ -27,7 +27,7 @@ export class CategoryService extends BaseService {
   createMany = async (data: CategoryDto[]) =>
     this.manyToManyRelationCreateMany(
       data,
-      relationNames.products,
+      RelationNames.products,
       Prisma.ModelName.Product
     );
 
@@ -55,7 +55,7 @@ export class CategoryService extends BaseService {
     this.manyToMayRelationDelete(
       id,
       Prisma.ModelName.Product,
-      relationNames.categories
+      RelationNames.categories
     );
 
     return this.prismaService.category.delete(findById(id));

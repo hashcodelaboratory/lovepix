@@ -1,15 +1,19 @@
 import { Container } from '@mui/material'
-import { ProductsType, useProducts } from 'common/api/use-products'
+import {
+  ProductsType,
+  useFrontPageProducts,
+  useProducts,
+} from 'common/api/use-products'
 import React from 'react'
 import Product from 'screens-content/e-shop/components/product/product'
 import { Pages } from 'constants/pages/urls'
-import PreviewRow from '../preview-section/components/preview-row/preview-row'
+import GalleryRow from '../gallery-section/components/gallery-row/gallery-row'
 import { localizationKey } from 'localization/localization-key'
 import { useTranslation } from 'next-i18next'
 import Shimmer from '../../../../common/components/shimmer/shimmer'
 
 const ProductsSection = () => {
-  const { data: products, isLoading } = useProducts()
+  const { data: products, isLoading } = useFrontPageProducts()
   const { t } = useTranslation()
 
   const productList = products?.map((products: ProductsType) => (
@@ -18,9 +22,9 @@ const ProductsSection = () => {
 
   return (
     <Container style={{ marginBottom: 30 }}>
-      <PreviewRow title={t(localizationKey.products)} route={t(Pages.ESHOP)}>
+      <GalleryRow title={t(localizationKey.products)} route={t(Pages.ESHOP)}>
         <Shimmer isLoading={isLoading}>{productList}</Shimmer>
-      </PreviewRow>
+      </GalleryRow>
     </Container>
   )
 }

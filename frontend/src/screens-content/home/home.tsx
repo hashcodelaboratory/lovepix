@@ -5,7 +5,7 @@ import SliderComponent from './components/slider/slider'
 import Newsletter from './components/newsletter/newsletter'
 import ReviewsSection from './components/reviews-section/reviews-section'
 import ProductsSection from './components/products-section/products-section'
-import GallerySection from './components/preview-section/gallery-section'
+import GallerySection from './components/gallery-section/gallery-section'
 
 type HomeLayoutProps = {
   configuration: Configuration
@@ -13,10 +13,18 @@ type HomeLayoutProps = {
   loading: boolean
 }
 
-const HomeLayout = ({ galleryData, loading }: HomeLayoutProps) => (
+const HomeLayout = ({
+  galleryData,
+  configuration,
+  loading,
+}: HomeLayoutProps) => (
   <div>
-    <Carousel />
-    <GallerySection galleryData={galleryData} loading={loading} />
+    <Carousel configuration={configuration} />
+    <GallerySection
+      configuration={configuration}
+      galleryData={galleryData}
+      loading={loading}
+    />
     <ProductsSection />
     <ReviewsSection />
     <SliderComponent data={galleryData} />

@@ -1,23 +1,23 @@
 import { getBlob, ref } from '@firebase/storage'
 import { storage } from '../firebase/config'
-import { configurationsTable } from '../../../database.config'
-import { CONFIGURATION_TABLE_KEY } from '../indexed-db/hooks/keys'
+import { ImageAddType } from 'common/types/image-add-type'
+import { addImageToConfigurator } from './add-image-to-configurator'
 
-export const addFileFromGallery = async (path: string, id?: string) => {
+export type AddGalleryType = {
+  path: string
+  id?: string
+}
+
+export const addImageFromGallery = async (path: string, id?: string) => {
   const file = await getBlob(ref(storage, path))
-
   const fr = new FileReader()
   fr.readAsDataURL(file)
 
   fr.onload = () => {
-    const data = {
+    const imageData: ImageAddType = {
       origin: fr.result as string,
-      image: undefined,
-      dimensionId: undefined,
-      material: undefined,
       galleryItemId: id,
     }
-
-    configurationsTable.add(data, CONFIGURATION_TABLE_KEY)
+    addImageToConfigurator(imageData)
   }
 }

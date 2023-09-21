@@ -5,6 +5,7 @@ import { GalleryItem } from '../../../common/types/gallery'
 import { DimensionType } from '../../../common/api/use-dimensions'
 import { CategoryType } from '../../../common/api/use-categories'
 import { VoucherType } from '../../../common/api/use-vouchers'
+import { MaterialType } from 'common/api/use-materials'
 
 type DashboardContextProps = {
   state: {
@@ -15,6 +16,7 @@ type DashboardContextProps = {
     categories: CategoryType[]
     categoriesEshop: CategoryType[]
     vouchers: VoucherType[]
+    materials: MaterialType[]
   }
 }
 

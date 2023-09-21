@@ -1,6 +1,6 @@
-import styles from '../../../home.module.scss'
+import styles from '../../image-configurator-layout.module.scss'
 import { useTranslation } from 'next-i18next'
-import { localizationKey } from '../../../../../localization/localization-key'
+import { localizationKey } from '../../../../localization/localization-key'
 
 const DropzoneIdle = () => {
   const { t } = useTranslation()

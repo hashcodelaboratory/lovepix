@@ -7,7 +7,7 @@ const pluginConfig: UserConfig = {
   // delay: 0,                               // default: 0
   // auto_language: null                     // default: null; could also be 'browser' or 'document'
   // autorun: true,                          // default: true
-  // force_consent: false,                   // default: false
+  force_consent: true, // default: false
   // hide_from_bots: false,                  // default: false
   // remove_cookie_tables: false             // default: false
   // cookie_name: 'cc_cookie',               // default: 'cc_cookie'
@@ -19,11 +19,25 @@ const pluginConfig: UserConfig = {
   // use_rfc_cookie: false,                  // default: false
   // revision: 0,                            // default: 0
 
+  gui_options: {
+    consent_modal: {
+      layout: 'box', // box/cloud/bar
+      position: 'middle center', // bottom/middle/top + left/right/center
+      transition: 'zoom', // zoom/slide
+      swap_buttons: true, // enable to invert buttons
+    },
+    settings_modal: {
+      layout: 'box', // box/bar
+      position: 'left', // left/right
+      transition: 'zoom', // zoom/slide
+    },
+  },
+
   onFirstAction: function (user_preferences, cookie) {
     // callback triggered only once
     // @ts-ignore
-    const analyticsEnabled = window.CC.allowedCategory('analytics');
-    console.log(`analytics ${analyticsEnabled ? 'enabled' : 'disabled'}`);
+    const analyticsEnabled = window.CC.allowedCategory('analytics')
+    console.log(`analytics ${analyticsEnabled ? 'enabled' : 'disabled'}`)
   },
 
   onAccept: function (cookie) {
@@ -206,8 +220,8 @@ const pluginConfig: UserConfig = {
           },
         ],
       },
-    }
+    },
   },
-};
+}
 
-export default pluginConfig;
+export default pluginConfig

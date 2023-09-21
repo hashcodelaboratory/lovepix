@@ -46,7 +46,7 @@ const Login = () => {
           <Avatar
             alt={!!user ? user.displayName || '' : undefined}
             src={userProfile}
-            imgProps={{referrerPolicy: "no-referrer"}}
+            imgProps={{ referrerPolicy: 'no-referrer' }}
           />
         </IconButton>
       </Tooltip>

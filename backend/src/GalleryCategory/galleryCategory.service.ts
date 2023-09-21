@@ -5,7 +5,7 @@ import { BaseService } from '../base.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
-enum relationNames {
+enum RelationNames {
   galleries = 'galleries',
   galleryCategories = 'galleryCategories'
 }
@@ -15,30 +15,23 @@ export class GalleryCategoryService extends BaseService {
     super(Prisma.ModelName.GalleryCategory, prismaService);
   }
 
-  create = async (data: GalleryCategoryDto) =>
-    this.manyToManyRelationCreateMany(
-      data,
-      relationNames.galleries,
+  create = async (data: GalleryCategoryDto) => {
+    const galleryCategory = await this.prismaService.galleryCategory.create({
+      data
+    });
+    return this.manyToManyRelationConnect(
+      galleryCategory,
+      RelationNames.galleries,
       Prisma.ModelName.Gallery
     );
-
-  createMany = async (data: GalleryCategoryDto[]) => {
-    const galleryCategories = await this.prismaService.$transaction(
-      data.map((galleryCategory) =>
-        this.prismaService.galleryCategory.create({ data: galleryCategory })
-      )
-    );
-    await this.prismaService.$transaction(
-      galleryCategories.map((galCat) =>
-        this.manyToManyRelationConnect(
-          galCat,
-          relationNames.galleries,
-          Prisma.ModelName.Gallery
-        )
-      )
-    );
-    return galleryCategories;
   };
+
+  createMany = async (data: GalleryCategoryDto[]) =>
+    this.manyToManyRelationCreateMany(
+      data,
+      RelationNames.galleries,
+      Prisma.ModelName.Gallery
+    );
 
   findAll = () => this.prismaService.galleryCategory.findMany({});
 
@@ -63,7 +56,7 @@ export class GalleryCategoryService extends BaseService {
     this.manyToMayRelationDelete(
       id,
       Prisma.ModelName.Gallery,
-      relationNames.galleryCategories
+      RelationNames.galleryCategories
     );
 
     return this.prismaService.galleryCategory.delete(findById(id));

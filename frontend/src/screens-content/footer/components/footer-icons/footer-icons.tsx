@@ -15,7 +15,6 @@ import {
   TIKTOK,
 } from '../../../../constants/pages/urls'
 import Login from 'login/login'
-import LanguageSwitch from '../language-switch/language-switch'
 
 const FooterIcons = (): JSX.Element => {
   const { t } = useTranslation()
@@ -112,16 +111,14 @@ const FooterIcons = (): JSX.Element => {
           </p>
           <Link
             className={styles.footerBottomContainerRowTextLink}
-            href={t(Pages.CONDITIONS)}
-            target='_blank'
+            href={t(Pages.GENERAL_TERMS_AND_CONDITIONS)}
           >
             {t(localizationKey.conditions)}
           </Link>
           <p className={styles.footerDivider}>/</p>
           <Link
             className={styles.footerBottomContainerRowTextLink}
-            href={t(Pages.PRIVACY_POLICY)}
-            target='_blank'
+            href={t(Pages.PERSONAL_DATA_PROTECTION_PRINCIPLES)}
           >
             {t(localizationKey.privacyPolicy)}
           </Link>

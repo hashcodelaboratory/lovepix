@@ -1,6 +1,6 @@
 import { BAD_REQUEST_ERROR_MESSAGE } from '../../../src/api/email/utils'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
+import { addDoc, collection } from 'firebase/firestore'
 import { database } from 'common/firebase/config'
 import { Collections } from 'common/firebase/enums'
 

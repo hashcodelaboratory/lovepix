@@ -5,7 +5,7 @@ import { BaseService } from '../base.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
-enum relationNames {
+enum RelationNames {
   galleries = 'galleries',
   dimensions = 'dimensions'
 }
@@ -17,10 +17,10 @@ export class DimensionService extends BaseService {
   }
 
   create = async (data: DimensionDto) => {
-    const dim = await this.prismaService.dimension.create({ data });
+    const dimension = await this.prismaService.dimension.create({ data });
     return this.manyToManyRelationConnect(
-      dim,
-      relationNames.galleries,
+      dimension,
+      RelationNames.galleries,
       Prisma.ModelName.Gallery
     );
   };
@@ -28,7 +28,7 @@ export class DimensionService extends BaseService {
   createMany = async (data: DimensionDto[]) =>
     this.manyToManyRelationCreateMany(
       data,
-      relationNames.galleries,
+      RelationNames.galleries,
       Prisma.ModelName.Gallery
     );
 
@@ -52,7 +52,7 @@ export class DimensionService extends BaseService {
     this.manyToMayRelationDelete(
       id,
       Prisma.ModelName.Gallery,
-      relationNames.dimensions
+      RelationNames.dimensions
     );
 
     return this.prismaService.dimension.delete(findById(id));

@@ -1,17 +1,18 @@
 import styles from '../../../../image-configurator-layout.module.scss'
 import { getPrice } from './utils/generator'
-import { materials } from '../../../../../home/utils/configuration'
 import { Configuration } from '../../../../../../common/types/configuration'
 import { splitDimension } from '../../../../../../common/utils/split-dimension'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from 'localization/localization-key'
 import { formatPrice } from 'common/utils/priceFormatting'
+import { MaterialType } from '../../../../../../common/api/use-materials'
 
 type PriceProps = {
   configuration: Configuration
+  materials: MaterialType[]
 }
 
-const Price = ({ configuration }: PriceProps) => {
+const Price = ({ materials, configuration }: PriceProps) => {
   const { t, i18n } = useTranslation()
 
   const { width, height } = splitDimension(configuration?.dimensionId) ?? {
@@ -24,12 +25,14 @@ const Price = ({ configuration }: PriceProps) => {
       ? getPrice(
           width,
           height,
-          materials.find((material) => material.id === configuration?.material)
-            ?.name
+          materials.find(
+            (material) => material.type === configuration?.material
+          )?.type
         )
       : '-'
 
   const noTaxPrice = computedPrice !== '-' ? computedPrice * 0.8 : '-'
+
   return (
     <div className={styles.containerPadding}>
       <div className={styles.price}>
