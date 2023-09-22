@@ -23,6 +23,7 @@ const Content = ({ isFetching }: Props) => {
       vouchers,
       categoriesEshop,
       materials,
+      products,
     },
   } = useContext(DashboardContext)
 
@@ -44,7 +45,7 @@ const Content = ({ isFetching }: Props) => {
         <Card
           header={{
             title: t(localizationKey.products),
-            count: isFetching ? '-' : orders?.length.toString(),
+            count: isFetching ? '-' : products?.length.toString(),
             icon: <LibraryBooksIcon />,
           }}
           footer={{
