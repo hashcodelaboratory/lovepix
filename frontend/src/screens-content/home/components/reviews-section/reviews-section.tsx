@@ -18,13 +18,21 @@ const ReviewsSection = () => {
     return null
   }
 
+  const DURATION = 5000 * 2 * (reviews?.length ?? 0)
+
   return (
     <Container style={{ marginBottom: 30 }}>
       <GalleryRow
         title={localizationKey.reviewPageYourReviews}
         route={t(Pages.REVIEWS)}
       >
-        <Shimmer isLoading={isLoading} skeleton={SkeletonEnum.REVIEW}>
+        <Shimmer
+          duration={DURATION}
+          animate
+          withoutScrollbar
+          isLoading={isLoading}
+          skeleton={SkeletonEnum.REVIEW}
+        >
           <ReviewList reviews={reviews} />
         </Shimmer>
       </GalleryRow>

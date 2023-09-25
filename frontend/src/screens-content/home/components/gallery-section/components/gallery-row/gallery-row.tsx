@@ -24,7 +24,7 @@ const GalleryRow = ({
     await router.push(t(route))
   }
 
-  const content = (
+  return (
     <div>
       <div className={styles.previewTitleRow}>
         <h3>{t(title)}</h3>
@@ -39,8 +39,6 @@ const GalleryRow = ({
       <div className={styles.previewImageRow}>{children}</div>
     </div>
   )
-
-  return content
 }
 
 export default GalleryRow
