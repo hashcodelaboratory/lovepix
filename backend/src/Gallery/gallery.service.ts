@@ -11,13 +11,6 @@ enum RelationNames {
   galleryCategories = 'galleryCategories',
   galleries = 'galleries'
 }
-
-const findAllGalleriesQueryWithOrders = {
-  include: {
-    orders: true
-  }
-};
-
 @Injectable()
 export class GalleryService extends BaseService {
   constructor(readonly prismaService: PrismaService) {
@@ -45,8 +38,7 @@ export class GalleryService extends BaseService {
       Prisma.ModelName.Dimension
     );
 
-  findAll = () =>
-    this.prismaService.gallery.findMany(findAllGalleriesQueryWithOrders);
+  findAll = () => this.prismaService.gallery.findMany();
 
   findOne = (id: string) => this.prismaService.gallery.findUnique(findById(id));
 

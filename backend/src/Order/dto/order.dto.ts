@@ -31,11 +31,4 @@ export class OrderDto extends OmitType(OrderEntity, ['id', 'orderState', 'paymen
     })
     @IsNotEmpty()
     shipmentId: string;
-
-    @ApiProperty({
-        description: 'Input of order date',
-        example: "2023-07-15T21:12:01.000Z",
-    })
-    @IsNotEmpty()
-    orderDate: Date;
 }

@@ -131,4 +131,13 @@ export class BaseService {
       )
     ]);
   };
+
+  findRelation = (id: string, relation: string) => {
+    return this.prismaService[lowerCase(this.modelName)].findUnique({
+      ...findById(id),
+      select: {
+        [relation]: true
+      }
+    });
+  };
 }

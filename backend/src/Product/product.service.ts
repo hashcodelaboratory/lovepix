@@ -9,6 +9,7 @@ enum RelationNames {
   categories = 'categories',
   products = 'products'
 }
+
 @Injectable()
 export class ProductService extends BaseService {
   constructor(readonly prismaService: PrismaService) {
@@ -31,12 +32,7 @@ export class ProductService extends BaseService {
       Prisma.ModelName.Category
     );
 
-  findAll = () =>
-    this.prismaService.product.findMany({
-      include: {
-        orders: true
-      }
-    });
+  findAll = () => this.prismaService.product.findMany();
 
   findOne = (id: string) => this.prismaService.product.findUnique(findById(id));
 

@@ -6,14 +6,14 @@ import { IsEmail, IsNotEmpty, Length, Matches, IsOptional } from 'class-validato
 export class GalleryDto extends OmitType(GalleryEntity, ['id', 'galleryCategories', 'dimensions', 'orders']) {
     @ApiProperty({
         description: 'Input for gallery category Ids',
-        example: 'Number of ID some gallery Category',
+        example: '["Number of ID some gallery Category","Number of ID some gallery Category"]',
     })
     @IsNotEmpty()
     galleryCategoryIds: string[];
 
     @ApiProperty({
         description: 'Input for dimension Ids',
-        example: 'Number of ID some dimension',
+        example: '["Number of ID some dimension","Number of ID some dimension"]',
     })
     @IsNotEmpty()
     dimensionIds: string[];
@@ -45,20 +45,6 @@ export class GalleryDto extends OmitType(GalleryEntity, ['id', 'galleryCategorie
     })
     @IsNotEmpty()
     size: number;
-
-    @ApiProperty({
-        description: 'Date of created',
-        example: 'Date of created',
-    })
-    @IsNotEmpty()
-    timeCreated: Date;
-
-    @ApiProperty({
-        description: 'Date of updated',
-        example: 'Date of updated',
-    })
-    @IsNotEmpty()
-    updatedAt: Date;
 
     @ApiProperty({
         description: 'Url of image',

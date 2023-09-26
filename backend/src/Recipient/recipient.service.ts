@@ -5,6 +5,17 @@ import { BaseService } from '../base.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
+const getRecipientInfoQuery = {
+  select: {
+    id: true,
+    user: true,
+    billingAddress: true,
+    shippingAddress: true,
+    ico: true,
+    dic: true,
+    orders: true
+  }
+};
 @Injectable()
 export class RecipientService extends BaseService {
   constructor(readonly prismaService: PrismaService) {
@@ -21,15 +32,13 @@ export class RecipientService extends BaseService {
       data
     });
 
-  findAll = () =>
-    this.prismaService.recipient.findMany({
-      include: {
-        orders: true
-      }
-    });
+  findAll = () => this.prismaService.recipient.findMany(getRecipientInfoQuery);
 
   findOne = (id: string) =>
-    this.prismaService.recipient.findUnique(findById(id));
+    this.prismaService.recipient.findUnique({
+      ...findById(id),
+      ...getRecipientInfoQuery
+    });
 
   update = (id: string, data: Partial<RecipientDto>) =>
     this.prismaService.recipient.update({
