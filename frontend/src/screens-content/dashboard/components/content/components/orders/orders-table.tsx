@@ -2,7 +2,6 @@ import Box from '@mui/material/Box'
 import {
   DataGrid,
   GridCallbackDetails,
-  GridCellParams,
   GridRowParams,
   GridSelectionModel,
 } from '@mui/x-data-grid'
@@ -21,7 +20,7 @@ import { getOrdersColumns } from '../utils/columns/orders-columns'
 import { removeOrders } from '../../../../api/orders/remove-orders'
 import OrderDetail from './order-detail/order-detail'
 import { Order } from '../../../../../../common/types/order'
-import { useOrders } from '../../../../api/orders/useOrders'
+import { useOrders } from '../../../../api/orders/use-orders'
 
 export const dataGridStyle = {
   boxShadow: 2,

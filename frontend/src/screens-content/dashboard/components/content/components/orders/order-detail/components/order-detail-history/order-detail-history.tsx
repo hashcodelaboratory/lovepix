@@ -3,7 +3,7 @@ import { localizationKey } from '../../../../../../../../../localization/localiz
 import { Box } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import { Order } from '../../../../../../../../../common/types/order'
-import OrderState from './order-state'
+import OrderState from './components/order-state'
 import InventoryIcon from '@mui/icons-material/Inventory'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import LocalShippingIcon from '@mui/icons-material/LocalShipping'
@@ -19,7 +19,7 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
   const { t } = useTranslation()
 
   const iconStyle = (state: string) => {
-    const item = order?.orderState?.find((item) => item.state === state)
+    const item = order?.orderState?.map((item) => item.state === state)
     return item ? styles.shippingIcon : styles.shippingIconDisable
   }
 

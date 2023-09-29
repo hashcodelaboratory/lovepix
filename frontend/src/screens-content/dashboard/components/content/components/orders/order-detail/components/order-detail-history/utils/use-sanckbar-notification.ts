@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
-} from 'snackbar/config'
+} from '../../../../../../../../../../snackbar/config'
 
 export const useSnackBarNotification = () => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()

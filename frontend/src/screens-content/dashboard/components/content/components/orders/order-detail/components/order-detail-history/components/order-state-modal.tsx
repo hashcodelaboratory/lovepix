@@ -1,5 +1,5 @@
 import { Box, Button, Modal, Typography } from '@mui/material'
-import { localizationKey } from '../../../../../../../../../localization/localization-key'
+import { localizationKey } from '../../../../../../../../../../localization/localization-key'
 import { useTranslation } from 'next-i18next'
 import React from 'react'
 
