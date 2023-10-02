@@ -61,6 +61,7 @@ const ResponsiveAppBar = () => {
     <AppBar position='fixed' sx={{ backgroundColor: 'white' }}>
       <Container maxWidth='lg'>
         <Toolbar disableGutters>
+          {/*// @ts-ignore*/}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <MenuIconComponent open={handleOpenNavMenu} />
             <Menu

@@ -3,6 +3,15 @@
 const { i18n } = require('./next-i18next.config')
 const { rewrites } = require('./rewrites-next.config')
 const removeImports = require('next-remove-imports')()
+// const withTM = require('next-transpile-modules')(
+//   [
+//     '@zappar/zappar-react-three-fiber',
+//     '@zappar/zappar-threejs',
+//     '@zappar/zappar',
+//     '@zappar/zappar-cv',
+//   ],
+//   { debug: true }
+// )
 
 const nextConfig = removeImports({
   reactStrictMode: true,
