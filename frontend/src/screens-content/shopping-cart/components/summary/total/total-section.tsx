@@ -107,6 +107,7 @@ const TotalSection = ({
           value={bussinessCondition}
           setValue={handleChangeBussinessCondition}
           message={localizationKey.agreeWithBussinessCondition}
+          labelLink={'./vseobecne-obchodne-podmienky'}
         />
         <CheckboxShoppingCart
           value={isSubscription}
