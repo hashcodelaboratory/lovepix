@@ -1,13 +1,14 @@
-import styles from "../../home.module.scss";
-import Slider from "react-slick";
-import { GalleryItem } from "../../../../common/types/gallery";
+import styles from '../../home.module.scss'
+import Slider from 'react-slick'
+import { GalleryItem } from '../../../../common/types/gallery'
 
 type SliderComponentProps = {
-  data?: GalleryItem[];
+  data?: GalleryItem[]
 }
 
 const SliderComponent = ({ data }: SliderComponentProps): JSX.Element => {
   return (
+    // @ts-ignore
     <Slider
       dots={true}
       slidesToShow={1}
@@ -24,37 +25,37 @@ const SliderComponent = ({ data }: SliderComponentProps): JSX.Element => {
         {
           breakpoint: 3000,
           settings: {
-            centerPadding: "30%",
+            centerPadding: '30%',
           },
         },
         {
           breakpoint: 2500,
           settings: {
-            centerPadding: "25%",
+            centerPadding: '25%',
           },
         },
         {
           breakpoint: 1920,
           settings: {
-            centerPadding: "20%",
+            centerPadding: '20%',
           },
-        }]}
+        },
+      ]}
     >
-      {
-        data?.map((item) => (
-          <div key={item.id}>
-            <div
-              className={styles.sliderImage}
-              style={{ backgroundImage: `url("${item?.url}")`, filter: "none" }}
-            />
-          </div>
-        )) ??
+      {data?.map((item) => (
+        <div key={item.id}>
+          <div
+            className={styles.sliderImage}
+            style={{ backgroundImage: `url("${item?.url}")`, filter: 'none' }}
+          />
+        </div>
+      )) ?? (
         <div>
           <div className={styles.sliderImage} />
         </div>
-      }
+      )}
     </Slider>
-  );
-};
+  )
+}
 
-export default SliderComponent;
+export default SliderComponent

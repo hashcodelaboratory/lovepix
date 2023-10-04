@@ -16,5 +16,6 @@ export const Markdown = ({ editMode, value, onValueChange }: MarkdownProps) => {
     return value ? <ReactMarkdown>{value}</ReactMarkdown> : null
   }
 
+  // @ts-ignore
   return <MDEditor height={600} value={value} onChange={onValueChange} />
 }
