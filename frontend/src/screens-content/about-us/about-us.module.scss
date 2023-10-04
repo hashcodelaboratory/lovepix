@@ -1,18 +1,71 @@
 .container {
+  padding: 2rem 0;
+}
+
+.fullWidthContainer {
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/waller-development.appspot.com/o/about-us%2FKo%CC%81pia%20su%CC%81boru%20IMG_5411_stitch1-1%20(1).JPG?alt=media&token=c70cdebc-d53d-4f3c-9347-db9276380bc1&_gl=1*3l1bp2*_ga*ODM1NDA4ODQ3LjE2OTQ1MzYxNjE.*_ga_CW55HF8NVT*MTY5NjQxODM5Mi4xNS4xLjE2OTY0MTg1MzUuNDcuMC4w");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 50vw;
+  height: 50vw;
+  max-height: 600px;
+  margin-top: -8px;
+  position: relative;
+}
+
+.fullWidthTextContainer {
+  position: absolute;
+  bottom: 4vw;
+}
+
+.logoContainer {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
   padding: 2rem 1rem;
+}
+
+.logoText {
   font-weight: 100;
-  font-size: 1.25rem;
+  max-width: 60vh;
+}
+
+.fullWidthText {
+  color: white;
+  margin: 0;
+  font-weight: 400;
+  font-size: 5vw;
 }
 
 .miniTitle {
   text-transform: uppercase;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 400;
   text-align: center;
   padding-bottom: 0;
 }
 
 .title {
-  font-weight: bold;
+  width: 100%;
+  max-width: 600px;
   text-align: center;
+  font-weight: bold;
+  font-size: 5vh;
+  margin: auto;
+  padding: 0 1rem;
+  padding-bottom: 7vh;
+}
+
+.proudContainer {
+  background-color: #ff8459;
+  color: white;
+  padding: 2rem 0;
+  position: relative;
+}
+
+.proudImage {
+  text-align: center;
+  margin-top: -3rem;
+  margin-bottom: 2rem;
 }
