@@ -19,7 +19,7 @@
 }
 
 .logoContainer {
-  display: flex;
+  display: flex !important;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
