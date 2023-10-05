@@ -38,7 +38,7 @@ const Login = () => {
     setting.link && router.push(setting.link)
   }
 
-  const userProfile = user?.photoURL ?? '/static/images/avatar/2.jpg'
+  const userProfile = user?.photoURL ?? undefined
   return (
     <div>
       <Tooltip title='Open settings'>
