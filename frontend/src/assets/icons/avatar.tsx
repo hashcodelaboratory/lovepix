@@ -7,553 +7,553 @@ const Avatar = () => (
     viewBox='0 0 375 375'
   >
     <defs>
-      <clipPath id='d'>
+      <clipPath>
         <path d='M.535.535h303.93v303.93H.535Zm0 0' />
       </clipPath>
-      <clipPath id='e'>
+      <clipPath>
         <path d='M152.5.535C68.57.535.535 68.57.535 152.5S68.57 304.465 152.5 304.465 304.465 236.43 304.465 152.5 236.43.535 152.5.535' />
       </clipPath>
-      <clipPath id='c'>
+      <clipPath>
         <path d='M0 0h305v305H0z' />
       </clipPath>
-      <clipPath id='f'>
+      <clipPath>
         <path d='M88 88h199v201H88Zm0 0' />
       </clipPath>
-      <clipPath id='g'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='h'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='i'>
+      <clipPath>
         <path d='M86.914 92.066 283.11 86.02l6.176 200.433L93.09 292.5Zm0 0' />
       </clipPath>
-      <clipPath id='j'>
+      <clipPath>
         <path d='M86.914 92.066 281.82 86.06l6.075 197.14-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='k'>
+      <clipPath>
         <path d='M203 189h12v26h-12Zm0 0' />
       </clipPath>
-      <clipPath id='l'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='m'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='n'>
+      <clipPath>
         <path d='M86.914 92.066 283.11 86.02l6.176 200.433L93.09 292.5Zm0 0' />
       </clipPath>
-      <clipPath id='o'>
+      <clipPath>
         <path d='M86.914 92.066 281.82 86.06l6.075 197.14-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='p'>
+      <clipPath>
         <path d='M193 212h22v20h-22Zm0 0' />
       </clipPath>
-      <clipPath id='q'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='r'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='s'>
+      <clipPath>
         <path d='M86.914 92.066 283.11 86.02l6.176 200.433L93.09 292.5Zm0 0' />
       </clipPath>
-      <clipPath id='t'>
+      <clipPath>
         <path d='M86.914 92.066 281.82 86.06l6.075 197.14-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='u'>
+      <clipPath>
         <path d='M177 221h24v16h-24Zm0 0' />
       </clipPath>
-      <clipPath id='v'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='w'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='x'>
+      <clipPath>
         <path d='M86.914 92.066 283.11 86.02l6.176 200.433L93.09 292.5Zm0 0' />
       </clipPath>
-      <clipPath id='y'>
+      <clipPath>
         <path d='M86.914 92.066 281.82 86.06l6.075 197.14-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='z'>
+      <clipPath>
         <path d='M163 206h12v27h-12Zm0 0' />
       </clipPath>
-      <clipPath id='A'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='B'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='C'>
+      <clipPath>
         <path d='M86.914 92.066 283.11 86.02l6.176 200.433L93.09 292.5Zm0 0' />
       </clipPath>
-      <clipPath id='D'>
+      <clipPath>
         <path d='M86.914 92.066 281.82 86.06l6.075 197.14-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='E'>
+      <clipPath>
         <path d='M163 189h22v20h-22Zm0 0' />
       </clipPath>
-      <clipPath id='F'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='G'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='H'>
+      <clipPath>
         <path d='M86.914 92.066 283.11 86.02l6.176 200.433L93.09 292.5Zm0 0' />
       </clipPath>
-      <clipPath id='I'>
+      <clipPath>
         <path d='M86.914 92.066 281.82 86.06l6.075 197.14-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='J'>
+      <clipPath>
         <path d='M177 184h24v16h-24Zm0 0' />
       </clipPath>
-      <clipPath id='K'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='L'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='M'>
+      <clipPath>
         <path d='M86.914 92.066 283.11 86.02l6.176 200.433L93.09 292.5Zm0 0' />
       </clipPath>
-      <clipPath id='N'>
+      <clipPath>
         <path d='M86.914 92.066 281.82 86.06l6.075 197.14-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='O'>
+      <clipPath>
         <path d='M243 124h22v21h-22Zm0 0' />
       </clipPath>
-      <clipPath id='P'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='Q'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='R'>
+      <clipPath>
         <path d='M86.914 92.066 283.11 86.02l6.176 200.433L93.09 292.5Zm0 0' />
       </clipPath>
-      <clipPath id='S'>
+      <clipPath>
         <path d='M86.914 92.066 281.82 86.06l6.075 197.14-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='T'>
+      <clipPath>
         <path d='M112 144h151v113H112Zm0 0' />
       </clipPath>
-      <clipPath id='U'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='V'>
+      <clipPath>
         <path d='M86.914 92.059 281.82 86.05l6.075 197.156-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='W'>
+      <clipPath>
         <path d='M86.914 92.066 283.11 86.02l6.176 200.433L93.09 292.5Zm0 0' />
       </clipPath>
-      <clipPath id='X'>
+      <clipPath>
         <path d='M86.914 92.066 281.82 86.06l6.075 197.14-194.907 6.008Zm0 0' />
       </clipPath>
-      <clipPath id='Y'>
+      <clipPath>
         <path d='M125 261h6v7h-6Zm0 0' />
       </clipPath>
-      <clipPath id='Z'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aa'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='ab'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='ac'>
+      <clipPath>
         <path d='M132 261h6v7h-6Zm0 0' />
       </clipPath>
-      <clipPath id='ad'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='ae'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='af'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='ag'>
+      <clipPath>
         <path d='M137 261h6v7h-6Zm0 0' />
       </clipPath>
-      <clipPath id='ah'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='ai'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aj'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='ak'>
+      <clipPath>
         <path d='M143 261h6v7h-6Zm0 0' />
       </clipPath>
-      <clipPath id='al'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='am'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='an'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='ao'>
+      <clipPath>
         <path d='M150 261h3v7h-3Zm0 0' />
       </clipPath>
-      <clipPath id='ap'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aq'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='ar'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='as'>
+      <clipPath>
         <path d='M153 261h6v6h-6Zm0 0' />
       </clipPath>
-      <clipPath id='at'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='au'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='av'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aw'>
+      <clipPath>
         <path d='M160 261h6v6h-6Zm0 0' />
       </clipPath>
-      <clipPath id='ax'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='ay'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='az'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aA'>
+      <clipPath>
         <path d='M166 258h7v9h-7Zm0 0' />
       </clipPath>
-      <clipPath id='aB'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aC'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aD'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aE'>
+      <clipPath>
         <path d='M174 258h2v9h-2Zm0 0' />
       </clipPath>
-      <clipPath id='aF'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aG'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aH'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aI'>
+      <clipPath>
         <path d='M177 260h6v7h-6Zm0 0' />
       </clipPath>
-      <clipPath id='aJ'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aK'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aL'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aM'>
+      <clipPath>
         <path d='M183 260h6v9h-6Zm0 0' />
       </clipPath>
-      <clipPath id='aN'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aO'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aP'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aQ'>
+      <clipPath>
         <path d='M197 260h10v7h-10Zm0 0' />
       </clipPath>
-      <clipPath id='aR'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aS'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aT'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aU'>
+      <clipPath>
         <path d='M207 260h7v6h-7Zm0 0' />
       </clipPath>
-      <clipPath id='aV'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aW'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aX'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='aY'>
+      <clipPath>
         <path d='M214 259h11v7h-11Zm0 0' />
       </clipPath>
-      <clipPath id='aZ'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='ba'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bb'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bc'>
+      <clipPath>
         <path d='M225 259h6v7h-6Zm0 0' />
       </clipPath>
-      <clipPath id='bd'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='be'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bf'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bg'>
+      <clipPath>
         <path d='M232 259h6v7h-6Zm0 0' />
       </clipPath>
-      <clipPath id='bh'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bi'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bj'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bk'>
+      <clipPath>
         <path d='M238 258h5v8h-5Zm0 0' />
       </clipPath>
-      <clipPath id='bl'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bm'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bn'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bo'>
+      <clipPath>
         <path d='M242 259h5v7h-5Zm0 0' />
       </clipPath>
-      <clipPath id='bp'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bq'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='br'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bs'>
+      <clipPath>
         <path d='M125 234h12v20h-12Zm0 0' />
       </clipPath>
-      <clipPath id='bt'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bu'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bv'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bw'>
+      <clipPath>
         <path d='M142 233h15v21h-15Zm0 0' />
       </clipPath>
-      <clipPath id='bx'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='by'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bz'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bA'>
+      <clipPath>
         <path d='M162 233h15v20h-15Zm0 0' />
       </clipPath>
-      <clipPath id='bB'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bC'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bD'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bE'>
+      <clipPath>
         <path d='M183 232h12v21h-12Zm0 0' />
       </clipPath>
-      <clipPath id='bF'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bG'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bH'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bI'>
+      <clipPath>
         <path d='M202 232h13v20h-13Zm0 0' />
       </clipPath>
-      <clipPath id='bJ'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bK'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bL'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bM'>
+      <clipPath>
         <path d='M220 232h6v20h-6Zm0 0' />
       </clipPath>
-      <clipPath id='bN'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bO'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bP'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bQ'>
+      <clipPath>
         <path d='M232 231h15v21h-15Zm0 0' />
       </clipPath>
-      <clipPath id='bR'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bS'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bT'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bU'>
+      <clipPath>
         <path d='M194 170h10v21h-10Zm0 0' />
       </clipPath>
-      <clipPath id='bV'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bW'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bX'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='bY'>
+      <clipPath>
         <path d='M186 188h18v16h-18Zm0 0' />
       </clipPath>
-      <clipPath id='bZ'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='ca'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='cb'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='cc'>
+      <clipPath>
         <path d='M174 195h19v12h-19Zm0 0' />
       </clipPath>
-      <clipPath id='cd'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='ce'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='cf'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='cg'>
+      <clipPath>
         <path d='M163 183h10v21h-10Zm0 0' />
       </clipPath>
-      <clipPath id='ch'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='ci'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='cj'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='ck'>
+      <clipPath>
         <path d='M163 170h18v16h-18Zm0 0' />
       </clipPath>
-      <clipPath id='cl'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='cm'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='cn'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='co'>
+      <clipPath>
         <path d='M174 167h19v12h-19Zm0 0' />
       </clipPath>
-      <clipPath id='cp'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='cq'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='cr'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='cs'>
+      <clipPath>
         <path d='M235 121h15v15h-15Zm0 0' />
       </clipPath>
-      <clipPath id='ct'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='cu'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='cv'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='cw'>
+      <clipPath>
         <path d='M124 136h117v86H124Zm0 0' />
       </clipPath>
-      <clipPath id='cx'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='cy'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <clipPath id='cz'>
+      <clipPath>
         <path d='m123.008 123.531 125.972-2.57 2.989 146.219-125.977 2.57Zm0 0' />
       </clipPath>
-      <filter id='a' width='100%' height='100%' x='0%' y='0%'>
+      <filter>
         <feColorMatrix
           colorInterpolationFilters='sRGB'
           values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'
         />
       </filter>
-      <mask id='b'>
+      <mask>
         <g filter='url(#a)'>
           <path fillOpacity={0.2} d='M-37.5-37.5h450v450h-450z' />
         </g>
