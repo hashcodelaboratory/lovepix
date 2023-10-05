@@ -8,15 +8,18 @@ type ProgressiveImageProps = {
 
 const ProgressiveImage = ({ image, placeholder }: ProgressiveImageProps) => {
   return (
-    <Image
-      placeholder='blur'
-      src={image ?? ''}
-      blurDataURL={placeholder ?? ''}
-      alt='image'
-      layout='fixed'
-      width={300}
-      height={300}
-    />
+    <div style={{ width: 300, height: 300 }}>
+      <Image
+        placeholder='blur'
+        src={image ?? ''}
+        blurDataURL={placeholder ?? ''}
+        alt='image'
+        layout='fixed'
+        objectFit='cover'
+        width={300}
+        height={300}
+      />
+    </div>
   )
 }
 
