@@ -280,18 +280,6 @@
   display: none;
 }
 
-.loading {
-  border-radius: 10px;
-  filter: blur(10px);
-  clip-path: inset(0);
-}
-
-.loaded {
-  border-radius: 10px;
-  filter: blur(0px);
-  transition: filter 0.5s linear;
-}
-
 .previewImageContainer:hover {
   cursor: pointer;
 

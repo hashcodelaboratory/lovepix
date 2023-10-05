@@ -1,6 +1,5 @@
-import { default as ReactProgressiveGracefulImage } from 'react-progressive-graceful-image'
 import React from 'react'
-import styles from '../../screens-content/home/home.module.scss'
+import Image from 'next/image'
 
 type ProgressiveImageProps = {
   image?: string
@@ -9,20 +8,15 @@ type ProgressiveImageProps = {
 
 const ProgressiveImage = ({ image, placeholder }: ProgressiveImageProps) => {
   return (
-    // @ts-ignore*/
-    <ReactProgressiveGracefulImage
+    <Image
+      placeholder='blur'
       src={image ?? ''}
-      placeholder={placeholder ?? ''}
-    >
-      {(src, loading) => (
-        <img
-          className={loading ? styles.loading : styles.loaded}
-          src={src}
-          alt='icon'
-          style={{ width: 300, height: 300, objectFit: 'cover' }}
-        />
-      )}
-    </ReactProgressiveGracefulImage>
+      blurDataURL={placeholder ?? ''}
+      alt='image'
+      layout='fixed'
+      width={300}
+      height={300}
+    />
   )
 }
 
