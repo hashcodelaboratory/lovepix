@@ -256,7 +256,8 @@
 }
 
 .previewCard {
-  margin-right: 0.5rem;
+  margin-right: 1rem;
+  border-radius: 10px;
 }
 
 .previewImage {
@@ -280,11 +281,13 @@
 }
 
 .loading {
+  border-radius: 10px;
   filter: blur(10px);
   clip-path: inset(0);
 }
 
 .loaded {
+  border-radius: 10px;
   filter: blur(0px);
   transition: filter 0.5s linear;
 }
@@ -323,7 +326,7 @@
 
 .previewPrice {
   font-size: 12px;
-  font-weight: 100;
+  font-weight: 300;
   margin: 0;
 }
 
