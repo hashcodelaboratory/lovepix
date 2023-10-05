@@ -67,7 +67,12 @@ const FooterIcons = (): JSX.Element => {
           {/* TODO: enable when internationalization will be requested as new feature*/}
           {/*<LanguageSwitch/>*/}
           <div className={styles.footerBottomIcon}>
-            <Link href={FACEBOOK} rel='noreferrer' target='_blank'>
+            <Link
+              href={FACEBOOK}
+              aria-label='Facebook'
+              rel='noreferrer'
+              target='_blank'
+            >
               <Image
                 src={facebookIcon}
                 layout={ImageLayout.FIXED}
@@ -78,7 +83,12 @@ const FooterIcons = (): JSX.Element => {
             </Link>
           </div>
           <div className={styles.footerBottomIcon}>
-            <Link href={INSTAGRAM} rel='noreferrer' target='_blank'>
+            <Link
+              href={INSTAGRAM}
+              aria-label='Instagram'
+              rel='noreferrer'
+              target='_blank'
+            >
               <Image
                 src={instagramIcon}
                 layout={ImageLayout.FIXED}
@@ -89,7 +99,12 @@ const FooterIcons = (): JSX.Element => {
             </Link>
           </div>
           <div className={styles.footerBottomIcon}>
-            <Link href={TIKTOK} rel='noreferrer' target='_blank'>
+            <Link
+              href={TIKTOK}
+              aria-label='Tiktok'
+              rel='noreferrer'
+              target='_blank'
+            >
               <Image
                 src={tiktokIcon}
                 layout={ImageLayout.FIXED}
