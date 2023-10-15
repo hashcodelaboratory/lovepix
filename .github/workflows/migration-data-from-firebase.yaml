@@ -1,17 +1,17 @@
 name: Data migration from Firebase to Mongo DB - Lovepix
 on:
   workflow_dispatch:
-  inputs:
-    collections:
-    description: "Which collections you want migrate?
-    admins
-    categories-eshop
-    categories
-    contents
-    dimensions
-    gallery
-    "
-    type: "string"
+    inputs:
+      collections:
+      description: "Which collections you want migrate?
+      admins
+      categories-eshop
+      categories
+      contents
+      dimensions
+      gallery
+      "
+      type: "string"
 
 jobs:
   migrate-to-mongodb:
