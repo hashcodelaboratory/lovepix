@@ -3,15 +3,15 @@ on:
   workflow_dispatch:
     inputs:
       collections:
-      description: "Which collections you want migrate?
-      admins
-      categories-eshop
-      categories
-      contents
-      dimensions
-      gallery
-      "
-      type: "string"
+        description: "Which collections you want migrate?
+        admins
+        categories-eshop
+        categories
+        contents
+        dimensions
+        gallery
+        "
+        type: "string"
 
 jobs:
   migrate-to-mongodb:
