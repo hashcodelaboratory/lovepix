@@ -57,9 +57,7 @@ const TotalSection = ({
     setBussinessConditon((prevState) => !prevState)
   }
 
-  const goTo = () => {
-    router.push(Pages.PERSONAL_DATA_PROTECTION_PRINCIPLES)
-  }
+  const goTo = () => router.push(Pages.PERSONAL_DATA_PROTECTION_PRINCIPLES)
 
   return (
     <div className={styles.cartContainer}>
