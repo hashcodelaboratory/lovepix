@@ -10,6 +10,7 @@ type CheckboxProps = {
   setValue: () => void
   message: string
   labelLink?: string
+  linkTitle?: string
 }
 
 const CheckboxShoppingCart = ({
@@ -17,6 +18,7 @@ const CheckboxShoppingCart = ({
   setValue,
   message,
   labelLink,
+  linkTitle,
 }: CheckboxProps) => {
   const { t } = useTranslation()
   const router = useRouter()
@@ -45,9 +47,14 @@ const CheckboxShoppingCart = ({
         />
       }
       label={
-        <div className={styles.checkboxLabel} onClick={(e) => goTo(e)}>
-          {t(message)}
-        </div>
+        <>
+          <div className={styles.checkboxLabel}>{t(message)}</div>
+          {labelLink && (
+            <div className={styles.checkboxLabellink} onClick={(e) => goTo(e)}>
+              {linkTitle}
+            </div>
+          )}
+        </>
       }
     />
   )

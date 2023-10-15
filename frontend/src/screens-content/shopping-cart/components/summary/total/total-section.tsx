@@ -13,6 +13,7 @@ import { Payment } from '../../../../../common/enums/payment'
 import { useState } from 'react'
 import CheckboxShoppingCart from '../checkbox-component'
 import { VoucherType } from '../../../../../common/types/order'
+import { Pages } from 'constants/pages/urls'
 
 type TotalSectionProps = {
   delivery?: Delivery
@@ -107,7 +108,8 @@ const TotalSection = ({
           value={bussinessCondition}
           setValue={handleChangeBussinessCondition}
           message={localizationKey.agreeWithBussinessCondition}
-          labelLink={'./vseobecne-obchodne-podmienky'}
+          labelLink={Pages.PERSONAL_DATA_PROTECTION_PRINCIPLES}
+          linkTitle={localizationKey.metaTitleGeneralTermsAndConditions}
         />
         <CheckboxShoppingCart
           value={isSubscription}
