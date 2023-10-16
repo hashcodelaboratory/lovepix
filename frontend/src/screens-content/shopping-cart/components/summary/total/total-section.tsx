@@ -113,7 +113,7 @@ const TotalSection = ({
           message={localizationKey.agreeWithBussinessCondition}
         />
         <div className={styles.checkboxLabellink} onClick={goTo}>
-          {localizationKey.metaTitleGeneralTermsAndConditions}
+          {t(localizationKey.conditions)}
         </div>
         <CheckboxShoppingCart
           value={isSubscription}
