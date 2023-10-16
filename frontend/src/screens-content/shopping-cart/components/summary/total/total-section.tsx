@@ -111,8 +111,6 @@ const TotalSection = ({
           value={bussinessCondition}
           setValue={handleChangeBussinessCondition}
           message={localizationKey.agreeWithBussinessCondition}
-          labelLink={Pages.PERSONAL_DATA_PROTECTION_PRINCIPLES}
-          linkTitle={localizationKey.metaTitleGeneralTermsAndConditions}
         />
         <div className={styles.checkboxLabellink} onClick={goTo}>
           {localizationKey.metaTitleGeneralTermsAndConditions}
