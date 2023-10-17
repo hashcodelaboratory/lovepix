@@ -13,6 +13,8 @@ import { Payment } from '../../../../../common/enums/payment'
 import { useState } from 'react'
 import CheckboxShoppingCart from '../checkbox-component'
 import { VoucherType } from '../../../../../common/types/order'
+import { Pages } from 'constants/pages/urls'
+import { useRouter } from 'next/router'
 
 type TotalSectionProps = {
   delivery?: Delivery
@@ -39,7 +41,7 @@ const TotalSection = ({
   voucher,
 }: TotalSectionProps): JSX.Element => {
   const { t } = useTranslation()
-
+  const router = useRouter()
   const priceWithoutTax = price ? Number(finalPrice * 0.8).toFixed(2) : '-'
   const taxFromPrice = price ? Number(finalPrice * 0.2).toFixed(2) : '-'
   const _finalPrice = finalPrice.toFixed(2)
@@ -54,6 +56,8 @@ const TotalSection = ({
   const handleChangeBussinessCondition = () => {
     setBussinessConditon((prevState) => !prevState)
   }
+
+  const goTo = () => router.push(Pages.PERSONAL_DATA_PROTECTION_PRINCIPLES)
 
   return (
     <div className={styles.cartContainer}>
@@ -108,6 +112,9 @@ const TotalSection = ({
           setValue={handleChangeBussinessCondition}
           message={localizationKey.agreeWithBussinessCondition}
         />
+        <div className={styles.checkboxLabellink} onClick={goTo}>
+          {t(localizationKey.conditions)}
+        </div>
         <CheckboxShoppingCart
           value={isSubscription}
           setValue={setSubscription}

@@ -7,10 +7,13 @@ type CheckboxProps = {
   value: boolean
   setValue: () => void
   message: string
+  labelLink?: string
+  linkTitle?: string
 }
 
 const CheckboxShoppingCart = ({ value, setValue, message }: CheckboxProps) => {
   const { t } = useTranslation()
+
   return (
     <FormControlLabel
       control={
