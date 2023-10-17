@@ -7,9 +7,10 @@
 }
 
 .previewProduct {
-  margin-right: 0.5rem;
+  margin-right: 1rem;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .previewImageDescription {
@@ -32,7 +33,7 @@
 
 .price {
   font-size: 12px;
-  font-weight: 100;
+  font-weight: 300;
   margin: 0;
 }
 

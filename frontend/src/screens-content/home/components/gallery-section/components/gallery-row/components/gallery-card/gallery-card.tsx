@@ -12,6 +12,7 @@ import { Pages } from 'constants/pages/urls'
 import { useState } from 'react'
 import { canAddImage } from 'common/utils/add-image-to-configurator'
 import { useRouter } from 'next/router'
+import ProgressiveImage from '../../../../../../../../common/components/progressive-image'
 
 type PreviewCardProps = {
   configuration: Configuration
@@ -55,11 +56,9 @@ const GalleryCard = ({
           className={styles.previewImageContainer}
           onClick={() => add(item?.fullPath ?? '', item?.id)}
         >
-          <img
-            className={styles.previewImageFromUrl}
-            alt={item?.name}
-            src={item?.url ?? ''}
-            style={{ width: 300, height: 300, objectFit: 'cover' }}
+          <ProgressiveImage
+            image={item.webpHighEndImageUrl ?? ''}
+            placeholder={item.webp1kbHighEndImageUrl ?? ''}
           />
           <button className={styles.previewImageLink}>
             {t(localizationKey.add)}

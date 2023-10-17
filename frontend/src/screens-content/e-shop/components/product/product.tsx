@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import styles from './product.module.scss'
 import { ProductsType } from 'common/api/use-products'
+import ProgressiveImage from '../../../../common/components/progressive-image'
 
 type ProductContent = {
   product: ProductsType
@@ -9,18 +10,16 @@ type ProductContent = {
 
 const Product = ({ product }: ProductContent) => {
   const router = useRouter()
-  const { id, title, price, image, description } = product
+  const { id, title, price, webp1kbHighEndImageUrl, webpHighEndImageUrl } =
+    product
 
   const goTo = () => router.push(`/${id}`)
 
   return (
-    <div className={styles.previewProduct}> 
-      <img
-        src={image}
-        alt={title}
-        style={{maxWidth:300, objectFit: 'cover'}}
-        className={styles.image}
-        onClick={goTo}
+    <div className={styles.previewProduct} onClick={goTo}>
+      <ProgressiveImage
+        image={webpHighEndImageUrl ?? ''}
+        placeholder={webp1kbHighEndImageUrl ?? ''}
       />
       <div className={styles.previewImageDescription}>
         <p className={styles.productTitle}>{title}</p>

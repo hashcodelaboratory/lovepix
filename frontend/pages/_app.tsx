@@ -35,6 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <QueryClientProvider client={queryClient}>
+        {/*// @ts-ignore*/}
         <SnackbarProvider
           anchorOrigin={{
             vertical: 'bottom',
@@ -42,6 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           }}
           maxSnack={3}
         >
+          {/*// @ts-ignore*/}
           <Component {...pageProps} />
         </SnackbarProvider>
         <ReactQueryDevtools initialIsOpen={false} />

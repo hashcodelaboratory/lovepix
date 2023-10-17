@@ -9,6 +9,7 @@ const nextConfig = removeImports({
   swcMinify: true,
   images: {
     domains: [
+      'lovepix.s3.eu-central-1.amazonaws.com',
       'picsum.photos',
       'us.123rf.com',
       'firebasestorage.googleapis.com',

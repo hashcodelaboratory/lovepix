@@ -1,6 +1,5 @@
-import { ref, deleteObject } from '@firebase/storage'
+import { deleteObject, ref } from '@firebase/storage'
 import { database, storage } from '../../../../common/firebase/config'
-import { StorageFolder } from '../../../../common/firebase/storage/enums'
 import {
   collection,
   deleteDoc,

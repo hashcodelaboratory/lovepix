@@ -3,6 +3,7 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html>
+        {/*// @ts-ignore*/}
         <Head>
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
@@ -24,6 +25,7 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
+          {/*// @ts-ignore*/}
           <NextScript />
         </body>
       </Html>

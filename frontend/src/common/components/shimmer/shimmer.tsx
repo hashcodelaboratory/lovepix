@@ -4,6 +4,7 @@ import ReviewSkeleton from '../../../screens-content/home/review-skeleton/review
 import { styled } from '@mui/material'
 import Box from '@mui/material/Box'
 import styles from '../../../screens-content/home/home.module.scss'
+import { v4 as uuidv4 } from 'uuid'
 
 export enum SkeletonEnum {
   ITEM = 'ITEM',
@@ -44,9 +45,9 @@ const Shimmer: FC<ShimmerProps> = ({
   const getSkeletonComponent = (key: number) => {
     switch (skeleton) {
       case SkeletonEnum.ITEM:
-        return <ItemSkeleton key={key} />
+        return <ItemSkeleton key={`${key}_${uuidv4()}`} />
       case SkeletonEnum.REVIEW:
-        return <ReviewSkeleton key={key} />
+        return <ReviewSkeleton key={`${key}_${uuidv4()}`} />
     }
   }
 

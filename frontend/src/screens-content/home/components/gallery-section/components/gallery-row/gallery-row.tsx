@@ -27,7 +27,7 @@ const GalleryRow = ({
   return (
     <div>
       <div className={styles.previewTitleRow}>
-        <h3>{t(title)}</h3>
+        <h2>{t(title)}</h2>
         <button className={styles.previewTitleRowButton} onClick={redirect}>
           <p className={styles.previewTitleRowButtonText}>
             {t(localizationKey.showMore)}

@@ -10,6 +10,8 @@ export type ProductsType = {
   id: string
   title: string
   image: string
+  webp1kbHighEndImageUrl: string | null
+  webpHighEndImageUrl: string | null
   price: number
   description: string
   count: number
