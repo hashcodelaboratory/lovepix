@@ -21,13 +21,14 @@ type MaterialProps = {
 
 const Material = ({ configuration, materials }: MaterialProps) => {
   const { t } = useTranslation()
-  const unavailableMaterials = materials.filter((item) => !item.availability)
-  const unavailableMaterialsIds = unavailableMaterials?.map((item) => item.id)
+
   const changeMaterial = (type: TypeOfMaterial) => () => {
-    if (materials.find((item) => item.type === type)?.availability) {
+    const selectedMaterial = materials.find(item => item.type === type);
+
+    if (selectedMaterial) {
       configurationsTable.update(CONFIGURATION_TABLE_KEY, {
         material: type,
-      })
+      });
     }
   }
 
@@ -49,15 +50,7 @@ const Material = ({ configuration, materials }: MaterialProps) => {
           ]
         }
       >
-        <div
-          className={
-            styles[
-              unavailableMaterialsIds?.includes(material.id)
-                ? 'imageBlur'
-                : 'relativeContainer'
-            ]
-          }
-        >
+        <div className={styles.relativeContainer}> 
           <Image
             onClick={changeMaterial(material.type)}
             alt={material.id}
@@ -68,16 +61,14 @@ const Material = ({ configuration, materials }: MaterialProps) => {
             layout={ImageLayout.INTRINSIC}
             objectFit='cover'
             style={{
-              cursor: unavailableMaterialsIds?.includes(material.id)
-                ? 'not-allowed'
-                : 'pointer',
+              cursor: 'pointer',
             }}
           />
         </div>
       </div>
       <p
         className={
-          unavailableMaterialsIds?.includes(material.id)
+          material.availability
             ? styles.disabledMaterialCardTitle
             : styles.materialCardTitle
         }
