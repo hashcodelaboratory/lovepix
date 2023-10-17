@@ -2252,16 +2252,16 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@stripe/react-stripe-js@^2.1.1":
+"@stripe/react-stripe-js@2.1.1":
   version "2.1.1"
-  resolved "https://registry.npmjs.org/@stripe/react-stripe-js/-/react-stripe-js-2.1.1.tgz"
+  resolved "https://registry.yarnpkg.com/@stripe/react-stripe-js/-/react-stripe-js-2.1.1.tgz#92fe1498bc9db4e0b51d63df3849214cc8021c55"
   integrity sha512-aHm6cWOqmOyq3eKKlR42hgvrcZhzc9ijL+BeXJ5H3uaWUKKcooSsBys0tiKl0gLxYQHUjUCvrRSX8fYaPBmAKg==
   dependencies:
     prop-types "^15.7.2"
 
-"@stripe/stripe-js@^1.54.1":
+"@stripe/stripe-js@1.54.1":
   version "1.54.1"
-  resolved "https://registry.npmjs.org/@stripe/stripe-js/-/stripe-js-1.54.1.tgz"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.54.1.tgz#e298b80c2963d9e622ea355db6c35df48e08cd89"
   integrity sha512-smEXPu1GKMcAj9g2luT16+oXfg2jAwyc68t2Dm5wdtYl3p8PqQaZEiI8tQmboaQAjgF8pIGma6byz1T1vgmpbA==
 
 "@swc/helpers@0.4.3":
@@ -2535,9 +2535,9 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.3.1.tgz#e8a83f1aa8b649377bb1fb5d7bac5cb90e784dfe"
   integrity sha512-EhcH/wvidPy1WeML3TtYFGR83UzjxeWRen9V402T8aUGYsCHOmfoisV3ZSg03gAFIbLq8TnWOJ0f4cALtnSEUg==
 
-"@types/nodemailer@^6.4.8":
+"@types/nodemailer@6.4.8":
   version "6.4.8"
-  resolved "https://registry.npmjs.org/@types/nodemailer/-/nodemailer-6.4.8.tgz"
+  resolved "https://registry.yarnpkg.com/@types/nodemailer/-/nodemailer-6.4.8.tgz#f06c661e9b201fc2acc3a00a0fded42ba7eaca9d"
   integrity sha512-oVsJSCkqViCn8/pEu2hfjwVO+Gb3e+eTWjg3PcjeFKRItfKpKwHphQqbYmPQrlMk+op7pNNWPbsJIEthpFN/OQ==
   dependencies:
     "@types/node" "*"
@@ -2655,7 +2655,7 @@
   resolved "https://registry.npmjs.org/@types/stack-utils/-/stack-utils-2.0.1.tgz"
   integrity sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==
 
-"@types/stripe@^8.0.417":
+"@types/stripe@8.0.417":
   version "8.0.417"
   resolved "https://registry.yarnpkg.com/@types/stripe/-/stripe-8.0.417.tgz#b651677a9fc33be8ce8fd5bceadd7ca077214244"
   integrity sha512-PTuqskh9YKNENnOHGVJBm4sM0zE8B1jZw1JIskuGAPkMB+OH236QeN8scclhYGPA4nG6zTtPXgwpXdp+HPDTVw==
@@ -4531,7 +4531,7 @@ find-up@^6.3.0:
     locate-path "^7.1.0"
     path-exists "^5.0.0"
 
-firebase-functions@^4.4.1:
+firebase-functions@4.4.1:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/firebase-functions/-/firebase-functions-4.4.1.tgz#209fa3a157476722382e71782fe3375b78a529ff"
   integrity sha512-3no53Lg12ToNlPSgLZtAFLQAz6si7ilHvzO8NC3/2EybyUwegpj5YhHwNiCw839lmAWp3znjATJDTvADFiZMrg==
@@ -4543,7 +4543,7 @@ firebase-functions@^4.4.1:
     node-fetch "^2.6.7"
     protobufjs "^7.2.2"
 
-firebase@^10.1.0:
+firebase@10.1.0:
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/firebase/-/firebase-10.1.0.tgz#07281ac2fe4bcf3886eeddcea8903ad17f1aec67"
   integrity sha512-ghcdCe2G9DeGmLOrBgR7XPswuc9BFUfjnU93ABopIisMfbJFzoqpSp4emwNiZt+vVGZV1ifeU3DLfhxlujxhCg==
@@ -6867,9 +6867,9 @@ node@19.8.1:
   dependencies:
     node-bin-setup "^1.0.0"
 
-nodemailer@^6.9.3:
+nodemailer@6.9.3:
   version "6.9.3"
-  resolved "https://registry.npmjs.org/nodemailer/-/nodemailer-6.9.3.tgz"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.9.3.tgz#e4425b85f05d83c43c5cd81bf84ab968f8ef5cbe"
   integrity sha512-fy9v3NgTzBngrMFkDsKEj0r02U7jm6XfC3b52eoNV+GCrGj+s8pt5OqhiJdWKuw51zCTdiNR/IUD1z33LIIGpg==
 
 normalize-path@^3.0.0, normalize-path@~3.0.0:
@@ -7546,7 +7546,7 @@ react-dropzone@14.2.1:
     file-selector "^0.6.0"
     prop-types "^15.8.1"
 
-react-ga@^3.3.1:
+react-ga@3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-3.3.1.tgz#d8e1f4e05ec55ed6ff944dcb14b99011dfaf9504"
   integrity sha512-4Vc0W5EvXAXUN/wWyxvsAKDLLgtJ3oLmhYYssx+YzphJpejtOst6cbIHCIyF50Fdxuf5DDKqRYny24yJ2y7GFQ==
@@ -8353,10 +8353,18 @@ strip-json-comments@~2.0.1:
   resolved "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-2.0.1.tgz"
   integrity sha512-4gB8na07fecVVkOI6Rs4e7T6NOTki5EmL7TUduTs6bu3EdnSycntVJ4re8kgZA+wx9IueI2Y11bfbgwtzuE0KQ==
 
-stripe@*, stripe@^12.10.0:
+stripe@*:
   version "12.11.0"
   resolved "https://registry.npmjs.org/stripe/-/stripe-12.11.0.tgz"
   integrity sha512-nyVumI9TXqr+B32397lLHF8VPbTWNvCF/rdY6oLXHLZr+7S8q2PJzo2TUvfowD0eSNz5Hz0O0I2kw9Qb2EyGQA==
+  dependencies:
+    "@types/node" ">=8.1.0"
+    qs "^6.11.0"
+
+stripe@12.10.0:
+  version "12.10.0"
+  resolved "https://registry.yarnpkg.com/stripe/-/stripe-12.10.0.tgz#e8ab454bc3c9808b1e6796f117e6a2d344170224"
+  integrity sha512-JJS4Bzx4LAzS8cTy26wqCdRQmhUtyV2XjFXfFTXa+W+Won2PXEWu85RpROi1ZN6pNFcWH7xrhXVW0OfCxUmwwA==
   dependencies:
     "@types/node" ">=8.1.0"
     qs "^6.11.0"
