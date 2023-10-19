@@ -2,25 +2,18 @@ FROM node:18-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
-ARG NPM_GITHUB_TOKEN
-ENV NPM_GITHUB_TOKEN $NPM_GITHUB_TOKEN
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
-COPY .npmrc package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN echo //npm.pkg.github.com/:_authToken=$NPM_GITHUB_TOKEN >> ~/.npmrc
-RUN echo @hashcodelaboratory:registry=https://npm.pkg.github.com/ >> ~/.npmrc
-
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
-  if [ -f yarn.lock ]; then --mount=type=secret,id=npmrc,target=/root/.npmrc yarn --frozen-lockfile ; \
+  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
   elif [ -f package-lock.json ]; then npm ci; \
   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
-
-RUN echo > ~/.npmrc
 
 
 # Rebuild the source code only when needed
