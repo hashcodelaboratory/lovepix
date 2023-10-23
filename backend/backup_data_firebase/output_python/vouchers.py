@@ -1,7 +1,9 @@
 import json
 import re
-
+from functions import process_json
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # vouchers.json 
+
+file_path="/home/ec2-user/docker-nginx-letsencrypt-https-ec2/backup_data_firebase/new_format_data/vouchers.json"
 
 with open("/home/ec2-user/docker-nginx-letsencrypt-https-ec2/backup_data_firebase/vouchers.json", "r") as f:   
     keys = json.load(f)
@@ -20,24 +22,9 @@ for key, value in keys.items():
     output.append(item)
 
 for item in output:
-    with open("/home/ec2-user/docker-nginx-letsencrypt-https-ec2/backup_data_firebase/new_format_data/vouchers.json", "w") as output_file:
+    with open(file_path, "w") as output_file:
         json.dump(output, output_file, indent=2)
 
-print("Data has been written to")
+print("Data has been written to vouchers")
 
-with open("/home/ec2-user/docker-nginx-letsencrypt-https-ec2/backup_data_firebase/new_format_data/vouchers.json", "r") as g:    
-    output_vouchers = json.load(g)
-
-
-output_string=str(output_vouchers)
-print(output_string)
-
-json_data = re.sub(r'^\[|\]$', '', output_string)
-
-final_output = json_data.replace('}, {', '}{')
-new_string = final_output.replace("'", "\"")
-false_word= new_string.replace("False", "false")
-true_word= false_word.replace("True", "true")
-
-with open("/home/ec2-user/docker-nginx-letsencrypt-https-ec2/backup_data_firebase/new_format_data/vouchers.json", 'w') as h:
-    h.write(true_word)
+process_json(file_path)
