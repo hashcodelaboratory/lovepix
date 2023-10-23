@@ -15,6 +15,7 @@ on:
         reviews
         translations
         vouchers
+        all
         "
         type: "string"
 
