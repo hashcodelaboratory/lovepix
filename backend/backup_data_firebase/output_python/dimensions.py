@@ -14,7 +14,6 @@ output = []
 for key, value in keys.items():
     item = {
         "title": value["name"],
-        # "galleryIds": value["galleryIds"]
     }
     output.append(item)
 
