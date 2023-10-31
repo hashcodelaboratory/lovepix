@@ -10,7 +10,6 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { useTranslation } from 'next-i18next'
 import { useState } from 'react'
 import {
-  DIMENSIONS_KEY,
   DimensionType,
   useDimensions,
 } from '../../../../../../common/api/use-dimensions'
@@ -22,17 +21,8 @@ import { useSnackbar } from 'notistack'
 import { useQueryClient } from 'react-query'
 import { getDimensionsColumns } from '../utils/columns/dimensions-columns'
 import { AddCircle } from '@mui/icons-material'
-import TextField from '@mui/material/TextField'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
-import Button from '@mui/material/Button'
-import { doc, setDoc } from '@firebase/firestore'
-import { database } from '../../../../../../common/firebase/config'
-import { Collections } from '../../../../../../common/firebase/enums'
 import { removeDimensions } from '../../../../api/dimensions/removeDimensions'
+import AddDimensionModal from './components/modal/add-dimension-modal'
 
 const DimensionsLayout = (): JSX.Element => {
   const { t } = useTranslation()
@@ -46,7 +36,6 @@ const DimensionsLayout = (): JSX.Element => {
   const [detailRow, setDetailRow] = useState<GridRowParams>()
 
   const [open, setOpen] = useState(false)
-  const [dimensionLabel, setDimensionLabel] = useState<string>()
 
   const data =
     dimensions?.map(
@@ -57,10 +46,9 @@ const DimensionsLayout = (): JSX.Element => {
           [`price${localizationKey.photoCanvasTitle}`]: 0,
           [`price${localizationKey.photoAcrylicTitle}`]: 0,
           [`price${localizationKey.photoAluminumTitle}`]: 0,
+          [`price${localizationKey.photoPosterTitle}`]: 0,
         } as DimensionType)
     ) ?? []
-
-  console.log(data)
 
   const reset = () => {
     setSelectionModel([])
@@ -104,19 +92,6 @@ const DimensionsLayout = (): JSX.Element => {
     setOpen(false)
   }
 
-  const uploadToFirestore = async () => {
-    await setDoc(
-      doc(database, Collections.DIMENSIONS, `DIM-${dimensionLabel?.trim()}`),
-      {
-        name: dimensionLabel,
-      }
-    )
-    queryClient.invalidateQueries(DIMENSIONS_KEY)
-    handleClose()
-  }
-
-  console.log(data)
-
   return (
     <div className={styles.contentContainer}>
       <h3>{t(localizationKey.dimensions)}</h3>
@@ -149,35 +124,11 @@ const DimensionsLayout = (): JSX.Element => {
           onClick={handleClickOpen}
           // disabled={selectedRows.length === 0}
         >
-          ADD
+          Pridať
           <AddCircle sx={{ marginLeft: 1 }} />
         </button>
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>{t(localizationKey.dimensions)}</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Pridajte rozmer, ktory chcete pouzivat v aplikacii
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin='dense'
-              id='name'
-              label='Rozmer'
-              value={dimensionLabel}
-              type='text'
-              fullWidth
-              variant='standard'
-              onChange={(e) => {
-                setDimensionLabel(e.target.value)
-              }}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={uploadToFirestore}>Add</Button>
-          </DialogActions>
-        </Dialog>
       </div>
+      <AddDimensionModal isOpen={open} close={handleClose} />
     </div>
   )
 }
