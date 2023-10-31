@@ -21,7 +21,7 @@ import { useSnackbar } from 'notistack'
 import { useQueryClient } from 'react-query'
 import { getDimensionsColumns } from '../utils/columns/dimensions-columns'
 import { AddCircle } from '@mui/icons-material'
-import { removeDimensions } from '../../../../api/dimensions/removeDimensions'
+import { removeDimensions } from '../../../../api/dimensions/remove-dimensions'
 import AddDimensionModal from './components/modal/add-dimension-modal'
 
 const DimensionsLayout = (): JSX.Element => {

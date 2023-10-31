@@ -7,12 +7,15 @@ import TextField from '@mui/material/TextField'
 import DialogActions from '@mui/material/DialogActions'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
-import { doc, setDoc } from '@firebase/firestore'
-import { database } from '../../../../../../../../common/firebase/config'
-import { Collections } from '../../../../../../../../common/firebase/enums'
 import { DIMENSIONS_KEY } from '../../../../../../../../common/api/use-dimensions'
 import { useTranslation } from 'next-i18next'
 import { useQueryClient } from 'react-query'
+import { useAddMaterial } from '../../../../../../api/dimensions/add-dimension'
+import {
+  SNACKBAR_OPTIONS_ERROR,
+  SNACKBAR_OPTIONS_SUCCESS,
+} from '../../../../../../../../snackbar/config'
+import { useSnackbar } from 'notistack'
 
 type AddDimensionModalProps = {
   isOpen: boolean
@@ -22,19 +25,24 @@ type AddDimensionModalProps = {
 const AddDimensionModal: FC<AddDimensionModalProps> = ({ isOpen, close }) => {
   const { t } = useTranslation()
   const queryClient = useQueryClient()
+  const { enqueueSnackbar } = useSnackbar()
 
-  const [dimensionLabel, setDimensionLabel] = useState<string>()
+  const [dimensionLabel, setDimensionLabel] = useState<string>('empty')
 
-  const uploadToFirestore = async () => {
-    await setDoc(
-      doc(database, Collections.DIMENSIONS, `DIM-${dimensionLabel?.trim()}`),
-      {
-        name: dimensionLabel,
+  const { mutate: addDimension } = useAddMaterial({
+    onSuccess: (res) => {
+      if (res.error) {
+        enqueueSnackbar(res.error, SNACKBAR_OPTIONS_ERROR)
+      } else {
+        enqueueSnackbar(
+          String(t(localizationKey.added)),
+          SNACKBAR_OPTIONS_SUCCESS
+        )
+        queryClient.invalidateQueries(DIMENSIONS_KEY)
+        close()
       }
-    )
-    queryClient.invalidateQueries(DIMENSIONS_KEY)
-    close()
-  }
+    },
+  })
 
   return (
     <Dialog open={isOpen} onClose={close}>
@@ -59,7 +67,16 @@ const AddDimensionModal: FC<AddDimensionModalProps> = ({ isOpen, close }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={close}>Cancel</Button>
-        <Button onClick={uploadToFirestore}>Add</Button>
+        <Button
+          onClick={() =>
+            addDimension({
+              id: `DIM-${dimensionLabel?.trim()}`,
+              name: dimensionLabel,
+            })
+          }
+        >
+          Add
+        </Button>
       </DialogActions>
     </Dialog>
   )
