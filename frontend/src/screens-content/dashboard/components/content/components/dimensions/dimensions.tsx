@@ -54,8 +54,13 @@ const DimensionsLayout = (): JSX.Element => {
         ({
           id: id,
           name: name,
+          [`price${localizationKey.photoCanvasTitle}`]: 0,
+          [`price${localizationKey.photoAcrylicTitle}`]: 0,
+          [`price${localizationKey.photoAluminumTitle}`]: 0,
         } as DimensionType)
     ) ?? []
+
+  console.log(data)
 
   const reset = () => {
     setSelectionModel([])
@@ -110,13 +115,16 @@ const DimensionsLayout = (): JSX.Element => {
     handleClose()
   }
 
+  console.log(data)
+
   return (
     <div className={styles.contentContainer}>
+      <h3>{t(localizationKey.dimensions)}</h3>
       <div className={styles.rowContainer}>
         <DataGrid
           className={styles.contentTable}
           rows={data}
-          columns={getDimensionsColumns()}
+          columns={getDimensionsColumns(t)}
           pageSize={10}
           rowsPerPageOptions={[5]}
           checkboxSelection

@@ -9,66 +9,54 @@ import { StorageFolder } from '../../../../../../../common/firebase/storage/enum
 
 const getX = (material: Material) => {
   switch (material) {
-    case Material.ACRYLIC:
-      return 0
     case Material.CANVAS:
       return 5
-    case Material.DIBOND:
+    default:
       return 0
   }
 }
 
 const getY = (material: Material) => {
   switch (material) {
-    case Material.ACRYLIC:
-      return 0
     case Material.CANVAS:
       return 5
-    case Material.DIBOND:
+    default:
       return 0
   }
 }
 
 const formatX = (material: Material, width: number) => {
   switch (material) {
-    case Material.ACRYLIC:
-      return width + 1
     case Material.CANVAS:
       return width + 10
-    case Material.DIBOND:
+    default:
       return width + 1
   }
 }
 
 const formatY = (material: Material, height: number) => {
   switch (material) {
-    case Material.ACRYLIC:
-      return height + 1
     case Material.CANVAS:
       return height + 10
-    case Material.DIBOND:
+    default:
       return height + 1
   }
 }
 
 const getWidth = (material: Material, width: number) => {
   switch (material) {
-    case Material.ACRYLIC:
-      return width + 1
     case Material.CANVAS:
       return width
-    case Material.DIBOND:
+    default:
       return width + 1
   }
 }
 
 const getHeight = (material: Material, height: number) => {
   switch (material) {
-    case Material.ACRYLIC:
-      return height + 1
     case Material.CANVAS:
       return height
-    case Material.DIBOND:
+    default:
       return height + 1
   }
 }
