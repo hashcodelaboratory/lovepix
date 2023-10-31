@@ -16,6 +16,8 @@ import {
   SNACKBAR_OPTIONS_SUCCESS,
 } from '../../../../../../../../snackbar/config'
 import { useSnackbar } from 'notistack'
+import { MATERIALS } from '../../../../../../../home/utils/materials'
+import { Material } from '../../../../../../../../common/enums/material'
 
 type AddDimensionModalProps = {
   isOpen: boolean
@@ -28,6 +30,10 @@ const AddDimensionModal: FC<AddDimensionModalProps> = ({ isOpen, close }) => {
   const { enqueueSnackbar } = useSnackbar()
 
   const [dimensionLabel, setDimensionLabel] = useState<string>('empty')
+  const [priceDibond, setPriceDibond] = useState<number>()
+  const [priceAcrylic, setPriceAcrylic] = useState<number>()
+  const [priceCanvas, setPriceCanvas] = useState<number>()
+  const [pricePoster, setPricePoster] = useState<number>()
 
   const { mutate: addDimension } = useAddMaterial({
     onSuccess: (res) => {
@@ -43,6 +49,19 @@ const AddDimensionModal: FC<AddDimensionModalProps> = ({ isOpen, close }) => {
       }
     },
   })
+
+  const handleAddDimension = () => {
+    addDimension({
+      id: `DIM-${dimensionLabel?.trim()}`,
+      name: dimensionLabel,
+      price: {
+        [Material.DIBOND]: Number(priceDibond),
+        [Material.ACRYLIC]: Number(priceAcrylic),
+        [Material.POSTER]: Number(pricePoster),
+        [Material.CANVAS]: Number(priceCanvas),
+      },
+    })
+  }
 
   return (
     <Dialog open={isOpen} onClose={close}>
@@ -64,19 +83,62 @@ const AddDimensionModal: FC<AddDimensionModalProps> = ({ isOpen, close }) => {
             setDimensionLabel(e.target.value)
           }}
         />
+        <TextField
+          autoFocus
+          margin='dense'
+          id={localizationKey.photoCanvasTitle}
+          label={`Cena za ${t(localizationKey.photoCanvasTitle)}`}
+          value={priceCanvas}
+          fullWidth
+          type='number'
+          variant='standard'
+          onChange={(e) => {
+            setPriceCanvas(Number(e.target.value))
+          }}
+        />
+        <TextField
+          autoFocus
+          margin='dense'
+          id={localizationKey.photoAcrylicTitle}
+          label={`Cena za ${t(localizationKey.photoAcrylicTitle)}`}
+          value={priceAcrylic}
+          type='number'
+          fullWidth
+          variant='standard'
+          onChange={(e) => {
+            setPriceAcrylic(Number(e.target.value))
+          }}
+        />
+        <TextField
+          autoFocus
+          margin='dense'
+          id={localizationKey.photoAluminumTitle}
+          label={`Cena za ${t(localizationKey.photoAluminumTitle)}`}
+          value={priceDibond}
+          type='number'
+          fullWidth
+          variant='standard'
+          onChange={(e) => {
+            setPriceDibond(Number(e.target.value))
+          }}
+        />
+        <TextField
+          autoFocus
+          margin='dense'
+          id={localizationKey.photoPosterTitle}
+          label={`Cena za ${t(localizationKey.photoPosterTitle)}`}
+          value={pricePoster}
+          type='number'
+          fullWidth
+          variant='standard'
+          onChange={(e) => {
+            setPricePoster(Number(e.target.value))
+          }}
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={close}>Cancel</Button>
-        <Button
-          onClick={() =>
-            addDimension({
-              id: `DIM-${dimensionLabel?.trim()}`,
-              name: dimensionLabel,
-            })
-          }
-        >
-          Add
-        </Button>
+        <Button onClick={handleAddDimension}>Pridať</Button>
       </DialogActions>
     </Dialog>
   )

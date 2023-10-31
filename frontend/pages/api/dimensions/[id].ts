@@ -1,6 +1,6 @@
 import { doc, setDoc } from '@firebase/firestore'
-import { database } from '../../../../src/common/firebase/config'
-import { Collections } from '../../../../src/common/firebase/enums'
+import { database } from '../../../src/common/firebase/config'
+import { Collections } from '../../../src/common/firebase/enums'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
@@ -35,16 +35,14 @@ const addDimension = async (req: NextApiRequest, res: NextApiResponse) => {
       })
     }
 
-    const { content } = body
-
-    if (!content) {
+    if (!body) {
       return res.status(400).json({
         error: BAD_REQUEST_ERROR_MESSAGE,
       })
     }
 
     await setDoc(doc(database, Collections.DIMENSIONS, id), {
-      content,
+      ...body,
     })
 
     return res.status(200).json({

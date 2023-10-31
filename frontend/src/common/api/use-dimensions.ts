@@ -2,13 +2,21 @@ import { useQuery, UseQueryResult } from 'react-query'
 import { collection, getDocs } from '@firebase/firestore'
 import { database } from '../firebase/config'
 import { Collections } from '../firebase/enums'
+import { Material } from '../enums/material'
 
 export const DIMENSIONS_KEY = 'DIMENSIONS'
+
+export type DimensionPrice = {
+  [Material.DIBOND]: number
+  [Material.ACRYLIC]: number
+  [Material.POSTER]: number
+  [Material.CANVAS]: number
+}
 
 export type DimensionType = {
   id: string
   name: string
-  price?: number
+  price: DimensionPrice
 }
 
 const getDimensions = async (): Promise<DimensionType[]> => {

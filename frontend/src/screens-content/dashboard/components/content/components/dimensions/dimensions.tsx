@@ -23,6 +23,7 @@ import { getDimensionsColumns } from '../utils/columns/dimensions-columns'
 import { AddCircle } from '@mui/icons-material'
 import { removeDimensions } from '../../../../api/dimensions/remove-dimensions'
 import AddDimensionModal from './components/modal/add-dimension-modal'
+import { Material } from '../../../../../../common/enums/material'
 
 const DimensionsLayout = (): JSX.Element => {
   const { t } = useTranslation()
@@ -37,18 +38,7 @@ const DimensionsLayout = (): JSX.Element => {
 
   const [open, setOpen] = useState(false)
 
-  const data =
-    dimensions?.map(
-      ({ id, name }) =>
-        ({
-          id: id,
-          name: name,
-          [`price${localizationKey.photoCanvasTitle}`]: 0,
-          [`price${localizationKey.photoAcrylicTitle}`]: 0,
-          [`price${localizationKey.photoAluminumTitle}`]: 0,
-          [`price${localizationKey.photoPosterTitle}`]: 0,
-        } as DimensionType)
-    ) ?? []
+  console.log(dimensions)
 
   const reset = () => {
     setSelectionModel([])
@@ -73,7 +63,7 @@ const DimensionsLayout = (): JSX.Element => {
     details: GridCallbackDetails
   ) => {
     setSelectionModel(selectionModel)
-    setSelectedRows(selectionModel.map((item, index) => data[index].name))
+    setSelectedRows(selectionModel.map((item, index) => dimensions[index].name))
   }
 
   const onRowClick = (details: GridRowParams) => {
@@ -98,7 +88,7 @@ const DimensionsLayout = (): JSX.Element => {
       <div className={styles.rowContainer}>
         <DataGrid
           className={styles.contentTable}
-          rows={data}
+          rows={dimensions}
           columns={getDimensionsColumns(t)}
           pageSize={10}
           rowsPerPageOptions={[5]}

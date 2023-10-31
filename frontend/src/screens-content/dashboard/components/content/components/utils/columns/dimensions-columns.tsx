@@ -12,10 +12,10 @@ export const getDimensionsColumns = (
     editable: false,
   },
   ...MATERIALS.map((material) => ({
-    key: material.title,
-    field: `price${material.title}`,
+    field: `price.${material.type}`,
     headerName: `Cena za ${t(material.title)}`,
     width: 300,
-    editable: false,
+    editable: true,
+    renderCell: (a: any) => <div>{a.row.price[material.type]}</div>,
   })),
 ]

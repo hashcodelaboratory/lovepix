@@ -1,8 +1,10 @@
 import { MutationOptions, useMutation, UseMutationResult } from 'react-query'
+import { DimensionPrice } from '../../../../common/api/use-dimensions'
 
 export type AddDimensionRequest = {
   id: string
   name: string
+  price: DimensionPrice
 }
 
 const addDimension = async (data: AddDimensionRequest) => {
