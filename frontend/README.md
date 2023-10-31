@@ -2,6 +2,14 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+### GITHUB NPM Registry setup
+- to your `~/.npmrc` add follow:
+```bash
+//npm.pkg.github.com/:_authToken=<github_token>
+@hashcodelaboratory:registry=https://npm.pkg.github.com
+```
+- note replace `<github_token>` with your token - you can generate one: https://docs.github.com/en/enterprise-server@3.6/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+
 First, run the development server:
 
 ```bash
