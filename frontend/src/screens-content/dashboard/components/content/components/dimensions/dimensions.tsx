@@ -9,7 +9,10 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useTranslation } from 'next-i18next'
 import { useState } from 'react'
-import { useDimensions } from '../../../../../../common/api/use-dimensions'
+import {
+  DIMENSIONS_KEY,
+  useDimensions,
+} from '../../../../../../common/api/use-dimensions'
 import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
@@ -20,6 +23,7 @@ import { getDimensionsColumns } from '../utils/columns/dimensions-columns'
 import { AddCircle } from '@mui/icons-material'
 import { removeDimensions } from '../../../../api/dimensions/remove-dimensions'
 import AddDimensionModal from './components/modal/add-dimension-modal'
+import { useUpdateDimension } from '../../../../api/dimensions/update-dimension'
 
 const DimensionsLayout = (): JSX.Element => {
   const { t } = useTranslation()
@@ -27,6 +31,20 @@ const DimensionsLayout = (): JSX.Element => {
   const queryClient = useQueryClient()
 
   const { data: dimensions = [] } = useDimensions()
+  const { mutate: updateDimension } = useUpdateDimension({
+    onSuccess: (res) => {
+      if (res.error) {
+        enqueueSnackbar(res.error, SNACKBAR_OPTIONS_ERROR)
+      } else {
+        enqueueSnackbar(
+          String(t(localizationKey.added)),
+          SNACKBAR_OPTIONS_SUCCESS
+        )
+        queryClient.invalidateQueries(DIMENSIONS_KEY)
+        close()
+      }
+    },
+  })
 
   const [selectedRows, setSelectedRows] = useState<string[]>([])
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([])
@@ -76,6 +94,17 @@ const DimensionsLayout = (): JSX.Element => {
     setOpen(false)
   }
 
+  const onCellEditCommit = (params: any) => {
+    console.log(params)
+    updateDimension({
+      id: params.id.toString(),
+      price: {
+        ...params.row.price,
+        [params.field.replace('price.', '')]: params.value,
+      },
+    })
+  }
+
   return (
     <div className={styles.contentContainer}>
       <h3>{t(localizationKey.dimensions)}</h3>
@@ -90,6 +119,7 @@ const DimensionsLayout = (): JSX.Element => {
           disableSelectionOnClick
           selectionModel={selectionModel}
           onSelectionModelChange={selectionChanged}
+          onCellEditCommit={onCellEditCommit}
           onRowClick={onRowClick}
           autoHeight
         />

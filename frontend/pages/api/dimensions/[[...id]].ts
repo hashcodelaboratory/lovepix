@@ -55,7 +55,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(200).json({
           status: 'success',
         })
-      case 'PUT':
+      case 'PATCH':
         if (!body || !computedId) {
           return res.status(400).json({
             error: BAD_REQUEST_ERROR_MESSAGE,
