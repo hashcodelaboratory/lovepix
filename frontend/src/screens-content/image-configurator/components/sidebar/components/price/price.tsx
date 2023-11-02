@@ -6,7 +6,8 @@ import { localizationKey } from 'localization/localization-key'
 import { formatPrice } from 'common/utils/priceFormatting'
 import { MaterialType } from '../../../../../../common/api/use-materials'
 import { useDimension } from '../../../../../../common/api/use-dimension'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
+import { Material } from '../../../../../../common/enums/material'
 
 type PriceProps = {
   configuration: Configuration
@@ -16,29 +17,34 @@ type PriceProps = {
 const Price = ({ materials, configuration }: PriceProps) => {
   const { t, i18n } = useTranslation()
 
-  const { width, height } = splitDimension(configuration?.dimensionId) ?? {
-    width: 0,
-    height: 0,
-  }
+  const { width, height } = splitDimension(configuration?.dimensionId)
 
-  const { data: dimensionDetail, refetch } = useDimension(
-    `DIM-${width}x${height}`
+  const dimensionId = useMemo(() => `DIM-${width}x${height}`, [width, height])
+
+  const { data: dimensionDetail, refetch: fetchDimensionDetail } =
+    useDimension(dimensionId)
+
+  const computedMaterial = useMemo(
+    () =>
+      materials.find((material) => material.type === configuration?.material)
+        ?.type,
+    [configuration?.material, materials]
   )
 
-  const computedMaterial = materials.find(
-    (material) => material.type === configuration?.material
-  )?.type
-
-  const computedPrice =
-    dimensionDetail && computedMaterial
-      ? dimensionDetail?.price?.[computedMaterial]
-      : '-'
-
-  useEffect(() => {
-    refetch()
-  }, [width, height])
+  const computedPrice = useMemo(() => {
+    if (dimensionDetail && computedMaterial) {
+      return dimensionDetail?.price?.[computedMaterial]
+    } else {
+      return '-'
+    }
+  }, [dimensionDetail, computedMaterial])
 
   const noTaxPrice = computedPrice !== '-' ? computedPrice * 0.8 : '-'
+
+  useEffect(() => {
+    console.log(dimensionId)
+    dimensionId && fetchDimensionDetail()
+  }, [dimensionId])
 
   return (
     <div className={styles.containerPadding}>
