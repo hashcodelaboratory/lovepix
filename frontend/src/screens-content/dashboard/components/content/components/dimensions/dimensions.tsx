@@ -95,12 +95,11 @@ const DimensionsLayout = (): JSX.Element => {
   }
 
   const onCellEditCommit = (params: any) => {
-    console.log(params)
     updateDimension({
       id: params.id.toString(),
       price: {
         ...params.row.price,
-        [params.field.replace('price.', '')]: params.value,
+        [params.field.replace('price.', '')]: Number(params.value),
       },
     })
   }
