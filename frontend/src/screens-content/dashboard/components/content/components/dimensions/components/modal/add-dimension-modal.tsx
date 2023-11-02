@@ -16,7 +16,6 @@ import {
   SNACKBAR_OPTIONS_SUCCESS,
 } from '../../../../../../../../snackbar/config'
 import { useSnackbar } from 'notistack'
-import { MATERIALS } from '../../../../../../../home/utils/materials'
 import { Material } from '../../../../../../../../common/enums/material'
 
 type AddDimensionModalProps = {
@@ -29,7 +28,7 @@ const AddDimensionModal: FC<AddDimensionModalProps> = ({ isOpen, close }) => {
   const queryClient = useQueryClient()
   const { enqueueSnackbar } = useSnackbar()
 
-  const [dimensionLabel, setDimensionLabel] = useState<string>('empty')
+  const [dimensionLabel, setDimensionLabel] = useState<string>()
   const [priceDibond, setPriceDibond] = useState<number>()
   const [priceAcrylic, setPriceAcrylic] = useState<number>()
   const [priceCanvas, setPriceCanvas] = useState<number>()
@@ -51,16 +50,18 @@ const AddDimensionModal: FC<AddDimensionModalProps> = ({ isOpen, close }) => {
   })
 
   const handleAddDimension = () => {
-    addDimension({
-      id: `DIM-${dimensionLabel?.trim()}`,
-      name: dimensionLabel,
-      price: {
-        [Material.DIBOND]: Number(priceDibond),
-        [Material.ACRYLIC]: Number(priceAcrylic),
-        [Material.POSTER]: Number(pricePoster),
-        [Material.CANVAS]: Number(priceCanvas),
-      },
-    })
+    if (dimensionLabel) {
+      addDimension({
+        id: `DIM-${dimensionLabel?.trim()}`,
+        name: dimensionLabel,
+        price: {
+          [Material.DIBOND]: Number(priceDibond),
+          [Material.ACRYLIC]: Number(priceAcrylic),
+          [Material.POSTER]: Number(pricePoster),
+          [Material.CANVAS]: Number(priceCanvas),
+        },
+      })
+    }
   }
 
   return (
@@ -82,12 +83,15 @@ const AddDimensionModal: FC<AddDimensionModalProps> = ({ isOpen, close }) => {
           onChange={(e) => {
             setDimensionLabel(e.target.value)
           }}
+          placeholder={t(localizationKey.dimension)}
         />
         <TextField
           autoFocus
           margin='dense'
           id={localizationKey.photoCanvasTitle}
-          label={`Cena za ${t(localizationKey.photoCanvasTitle)}`}
+          label={`${
+            t(localizationKey.priceFor) + t(localizationKey.photoCanvasTitle)
+          }`}
           value={priceCanvas}
           fullWidth
           type='number'
@@ -100,7 +104,9 @@ const AddDimensionModal: FC<AddDimensionModalProps> = ({ isOpen, close }) => {
           autoFocus
           margin='dense'
           id={localizationKey.photoAcrylicTitle}
-          label={`Cena za ${t(localizationKey.photoAcrylicTitle)}`}
+          label={`${
+            t(localizationKey.priceFor) + t(localizationKey.photoAcrylicTitle)
+          }`}
           value={priceAcrylic}
           type='number'
           fullWidth
@@ -113,7 +119,9 @@ const AddDimensionModal: FC<AddDimensionModalProps> = ({ isOpen, close }) => {
           autoFocus
           margin='dense'
           id={localizationKey.photoAluminumTitle}
-          label={`Cena za ${t(localizationKey.photoAluminumTitle)}`}
+          label={`${
+            t(localizationKey.priceFor) + t(localizationKey.photoAluminumTitle)
+          }`}
           value={priceDibond}
           type='number'
           fullWidth
@@ -126,7 +134,9 @@ const AddDimensionModal: FC<AddDimensionModalProps> = ({ isOpen, close }) => {
           autoFocus
           margin='dense'
           id={localizationKey.photoPosterTitle}
-          label={`Cena za ${t(localizationKey.photoPosterTitle)}`}
+          label={`${
+            t(localizationKey.priceFor) + t(localizationKey.photoPosterTitle)
+          }`}
           value={pricePoster}
           type='number'
           fullWidth
@@ -138,7 +148,7 @@ const AddDimensionModal: FC<AddDimensionModalProps> = ({ isOpen, close }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={close}>Cancel</Button>
-        <Button onClick={handleAddDimension}>Pridať</Button>
+        <Button onClick={handleAddDimension}>{t(localizationKey.add)}</Button>
       </DialogActions>
     </Dialog>
   )

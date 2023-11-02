@@ -30,7 +30,6 @@ const GalleryCard = ({
 
   const add = async (path: string, id?: string) => {
     if (canAddImage(configuration)) {
-      console.log(path)
       await addImageFromGallery(path, id)
       await router.push(t(Pages.CONFIGURATOR))
     } else {

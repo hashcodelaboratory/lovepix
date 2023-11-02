@@ -9,10 +9,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useTranslation } from 'next-i18next'
 import { useState } from 'react'
-import {
-  DimensionType,
-  useDimensions,
-} from '../../../../../../common/api/use-dimensions'
+import { useDimensions } from '../../../../../../common/api/use-dimensions'
 import {
   SNACKBAR_OPTIONS_ERROR,
   SNACKBAR_OPTIONS_SUCCESS,
@@ -23,7 +20,6 @@ import { getDimensionsColumns } from '../utils/columns/dimensions-columns'
 import { AddCircle } from '@mui/icons-material'
 import { removeDimensions } from '../../../../api/dimensions/remove-dimensions'
 import AddDimensionModal from './components/modal/add-dimension-modal'
-import { Material } from '../../../../../../common/enums/material'
 
 const DimensionsLayout = (): JSX.Element => {
   const { t } = useTranslation()
@@ -37,8 +33,6 @@ const DimensionsLayout = (): JSX.Element => {
   const [detailRow, setDetailRow] = useState<GridRowParams>()
 
   const [open, setOpen] = useState(false)
-
-  console.log(dimensions)
 
   const reset = () => {
     setSelectionModel([])
@@ -109,12 +103,8 @@ const DimensionsLayout = (): JSX.Element => {
           {buttonText}
           <DeleteIcon sx={{ marginLeft: 1 }} />
         </button>
-        <button
-          className={styles.removeButton}
-          onClick={handleClickOpen}
-          // disabled={selectedRows.length === 0}
-        >
-          Pridať
+        <button className={styles.removeButton} onClick={handleClickOpen}>
+          {t(localizationKey.add)}
           <AddCircle sx={{ marginLeft: 1 }} />
         </button>
       </div>
