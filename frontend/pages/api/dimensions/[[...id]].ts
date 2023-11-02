@@ -16,9 +16,9 @@ const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { id = [''] } = req.query
+    const { id } = req.query
     const computedId = id?.[0]
-    const body = await JSON.parse(req.body)
+    const body = req.body ? await JSON.parse(req.body) : undefined
 
     switch (req.method) {
       case 'GET':
@@ -42,7 +42,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           return res.status(200).json(data.data())
         }
       case 'POST':
-        if (!body) {
+        if (!body || !computedId) {
           return res.status(400).json({
             error: BAD_REQUEST_ERROR_MESSAGE,
           })
@@ -56,7 +56,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           status: 'success',
         })
       case 'PUT':
-        if (!body) {
+        if (!body || !computedId) {
           return res.status(400).json({
             error: BAD_REQUEST_ERROR_MESSAGE,
           })
