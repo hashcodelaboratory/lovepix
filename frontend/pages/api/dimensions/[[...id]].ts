@@ -1,5 +1,6 @@
 import {
   collection,
+  deleteDoc,
   doc,
   getDocs,
   setDoc,
@@ -15,50 +16,38 @@ const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { id } = req.query
+    const { id = [''] } = req.query
+    const computedId = id?.[0]
+    const body = await JSON.parse(req.body)
 
-    if (!id) {
-      if (req.method === 'GET') {
-        const querySnapshot = await getDocs(
-          collection(database, Collections.DIMENSIONS)
-        )
+    switch (req.method) {
+      case 'GET':
+        if (!computedId) {
+          const querySnapshot = await getDocs(
+            collection(database, Collections.DIMENSIONS)
+          )
 
-        return res
-          .status(200)
-          .json([
-            ...querySnapshot.docs.map(
-              (doc) => ({ id: doc.id, ...doc.data() } as DimensionType)
-            ),
-          ])
-      }
-    } else {
-      const body = await JSON.parse(req.body)
+          return res
+            .status(200)
+            .json([
+              ...querySnapshot.docs.map(
+                (doc) => ({ id: doc.id, ...doc.data() } as DimensionType)
+              ),
+            ])
+        } else {
+          const data = await getDoc(
+            doc(database, Collections.DIMENSIONS, computedId)
+          )
 
-      const computedId = id.length ? id[0] : id
+          return res.status(200).json(data.data())
+        }
+      case 'POST':
+        if (!body) {
+          return res.status(400).json({
+            error: BAD_REQUEST_ERROR_MESSAGE,
+          })
+        }
 
-      if (typeof computedId !== 'string') {
-        return res.status(400).json({
-          error: BAD_REQUEST_ERROR_MESSAGE,
-        })
-      }
-
-      if (!body) {
-        return res.status(400).json({
-          error: BAD_REQUEST_ERROR_MESSAGE,
-        })
-      }
-
-      // DETAIL
-      if (req.method === 'GET') {
-        const data = await getDoc(
-          doc(database, Collections.DIMENSIONS, computedId)
-        )
-
-        return res.status(200).json(data.data())
-      }
-
-      // CREATE
-      if (req.method === 'POST') {
         await setDoc(doc(database, Collections.DIMENSIONS, computedId), {
           ...body,
         })
@@ -66,10 +55,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(200).json({
           status: 'success',
         })
-      }
+      case 'PUT':
+        if (!body) {
+          return res.status(400).json({
+            error: BAD_REQUEST_ERROR_MESSAGE,
+          })
+        }
 
-      // UPDATE
-      if (req.method === 'PUT') {
         await updateDoc(doc(database, Collections.DIMENSIONS, computedId), {
           ...body,
         })
@@ -77,7 +69,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(200).json({
           status: 'success',
         })
-      }
+      case 'DELETE':
+        if (!computedId) {
+          return res.status(400).json({
+            error: BAD_REQUEST_ERROR_MESSAGE,
+          })
+        } else {
+          await deleteDoc(doc(database, Collections.DIMENSIONS, computedId))
+
+          return res.status(200).json({
+            status: 'success',
+          })
+        }
     }
   } catch (error) {
     res.status(500).json({ error: (error as Error).message })
