@@ -1,37 +1,76 @@
 import styles from '../../../../image-configurator-layout.module.scss'
-import { getPrice } from './utils/generator'
 import { Configuration } from '../../../../../../common/types/configuration'
-import { splitDimension } from '../../../../../../common/utils/split-dimension'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from 'localization/localization-key'
 import { formatPrice } from 'common/utils/priceFormatting'
-import { MaterialType } from '../../../../../../common/api/use-materials'
+import {
+  DimensionType,
+  useDimension,
+} from '../../../../../../common/api/use-dimension'
+import { useEffect, useMemo, useState } from 'react'
+import { useGalleryDetail } from '../../../../../../common/api/use-gallery-detail'
+
+type GalleryDetailType = {
+  price: number
+}
 
 type PriceProps = {
   configuration: Configuration
-  materials: MaterialType[]
 }
 
-const Price = ({ materials, configuration }: PriceProps) => {
+const Price = ({ configuration }: PriceProps) => {
   const { t, i18n } = useTranslation()
 
-  const { width, height } = splitDimension(configuration?.dimensionId) ?? {
-    width: 0,
-    height: 0,
-  }
+  const { material, dimensionId, galleryItemId } =
+    configuration ?? ({} as Configuration)
 
-  const computedPrice =
-    width > 0 && height > 0
-      ? getPrice(
-          width,
-          height,
-          materials.find(
-            (material) => material.type === configuration?.material
-          )?.type
-        )
-      : '-'
+  const [galleryDetail, setGalleryDetail] = useState<GalleryDetailType>()
+  const [dimensionDetail, setDimensionDetail] = useState<DimensionType>()
 
-  const noTaxPrice = computedPrice !== '-' ? computedPrice * 0.8 : '-'
+  const { refetch: fetchGalleryDetail } = useGalleryDetail(galleryItemId, {
+    enabled: !!galleryItemId,
+    onSuccess: (res) => {
+      setGalleryDetail(res)
+    },
+  })
+
+  const galleryDetailPrice = galleryDetail?.price ?? 0
+
+  const { refetch } = useDimension(`DIM-${dimensionId}`, {
+    enabled: !!dimensionId,
+    onSuccess: (res) => {
+      setDimensionDetail(res)
+    },
+  })
+
+  const computedPrice = useMemo(() => {
+    if (dimensionDetail && material) {
+      return dimensionDetail?.price?.[material] + galleryDetailPrice
+    } else {
+      return '-'
+    }
+  }, [material, dimensionDetail])
+
+  const noTaxPrice = useMemo(
+    () => (computedPrice !== '-' ? (computedPrice as number) * 0.8 : '-'),
+    [computedPrice]
+  )
+
+  useEffect(() => {
+    if (dimensionId) {
+      refetch()
+    } else {
+      setDimensionDetail(undefined)
+    }
+  }, [dimensionId])
+
+  useEffect(() => {
+    if (galleryItemId) {
+      fetchGalleryDetail()
+    } else {
+      setGalleryDetail(undefined)
+    }
+  }, [galleryItemId])
 
   return (
     <div className={styles.containerPadding}>

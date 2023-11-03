@@ -6,16 +6,12 @@ import TabPanel from './components/tab-panel'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from '../../../../../../../../localization/localization-key'
 import TabPanelBox from './components/tab-panel-box'
-import {
-  dimensionsByHeight,
-  dimensionsBySquare,
-  dimensionsByWidth,
-} from 'screens-content/home/utils/configuration'
 import { configurationsTable } from '../../../../../../../../../database.config'
 import { CONFIGURATION_TABLE_KEY } from '../../../../../../../../common/indexed-db/hooks/keys'
 import { Configuration } from '../../../../../../../../common/types/configuration'
 import { useGalleryDetail } from '../../../../../../../../common/api/use-gallery-detail'
 import { splitDimensions } from './utils/split-dimensions'
+import { useDimensions } from '../../../../../../../../common/api/use-dimensions'
 
 type DimensionContentProps = {
   configuration: Configuration
@@ -24,20 +20,36 @@ type DimensionContentProps = {
 const DimensionContent = ({ configuration }: DimensionContentProps) => {
   const { t } = useTranslation()
 
-  const { data: galleryDetail } = useGalleryDetail(configuration?.galleryItemId)
+  const { data: galleryDetail } = useGalleryDetail(
+    configuration?.galleryItemId,
+    { enabled: !!configuration?.galleryItemId }
+  )
+
   const galleryDimensions: string[] = galleryDetail?.dimensions
 
   const { byWidth, byHeight, bySquare } = splitDimensions(galleryDimensions)
 
+  const { data: dimensions = [] } = useDimensions()
+
+  const dimensionsNamesDefault: string[] = dimensions?.map(
+    (dimension) => dimension.name
+  )
+
+  const {
+    byWidth: defaultByWidth,
+    byHeight: defaultByHeight,
+    bySquare: defaultBySquare,
+  } = splitDimensions(dimensionsNamesDefault)
+
   const dimensionsSquare = configuration?.galleryItemId
     ? bySquare
-    : dimensionsBySquare
+    : defaultBySquare
   const dimensionsWidth = configuration?.galleryItemId
     ? byWidth
-    : dimensionsByWidth
+    : defaultByWidth
   const dimensionsHeight = configuration?.galleryItemId
     ? byHeight
-    : dimensionsByHeight
+    : defaultByHeight
 
   const [value, setValue] = useState(0)
 
