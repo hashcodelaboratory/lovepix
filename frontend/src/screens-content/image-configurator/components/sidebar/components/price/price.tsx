@@ -3,8 +3,16 @@ import { Configuration } from '../../../../../../common/types/configuration'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from 'localization/localization-key'
 import { formatPrice } from 'common/utils/priceFormatting'
-import { useDimension } from '../../../../../../common/api/use-dimension'
-import { useEffect, useMemo } from 'react'
+import {
+  DimensionType,
+  useDimension,
+} from '../../../../../../common/api/use-dimension'
+import { useEffect, useMemo, useState } from 'react'
+import { useGalleryDetail } from '../../../../../../common/api/use-gallery-detail'
+
+type GalleryDetailType = {
+  price: number
+}
 
 type PriceProps = {
   configuration: Configuration
@@ -13,18 +21,31 @@ type PriceProps = {
 const Price = ({ configuration }: PriceProps) => {
   const { t, i18n } = useTranslation()
 
-  const { material, dimensionId } = configuration ?? ({} as Configuration)
+  const { material, dimensionId, galleryItemId } =
+    configuration ?? ({} as Configuration)
 
-  const { data: dimensionDetail, refetch } = useDimension(
-    `DIM-${dimensionId}`,
-    {
-      enabled: !!dimensionId,
-    }
-  )
+  const [galleryDetail, setGalleryDetail] = useState<GalleryDetailType>()
+  const [dimensionDetail, setDimensionDetail] = useState<DimensionType>()
+
+  const { refetch: fetchGalleryDetail } = useGalleryDetail(galleryItemId, {
+    enabled: !!galleryItemId,
+    onSuccess: (res) => {
+      setGalleryDetail(res)
+    },
+  })
+
+  const galleryDetailPrice = galleryDetail?.price ?? 0
+
+  const { refetch } = useDimension(`DIM-${dimensionId}`, {
+    enabled: !!dimensionId,
+    onSuccess: (res) => {
+      setDimensionDetail(res)
+    },
+  })
 
   const computedPrice = useMemo(() => {
     if (dimensionDetail && material) {
-      return dimensionDetail?.price?.[material]
+      return dimensionDetail?.price?.[material] + galleryDetailPrice
     } else {
       return '-'
     }
@@ -36,8 +57,20 @@ const Price = ({ configuration }: PriceProps) => {
   )
 
   useEffect(() => {
-    dimensionId && refetch()
+    if (dimensionId) {
+      refetch()
+    } else {
+      setDimensionDetail(undefined)
+    }
   }, [dimensionId])
+
+  useEffect(() => {
+    if (galleryItemId) {
+      fetchGalleryDetail()
+    } else {
+      setGalleryDetail(undefined)
+    }
+  }, [galleryItemId])
 
   return (
     <div className={styles.containerPadding}>

@@ -20,7 +20,10 @@ type DimensionContentProps = {
 const DimensionContent = ({ configuration }: DimensionContentProps) => {
   const { t } = useTranslation()
 
-  const { data: galleryDetail } = useGalleryDetail(configuration?.galleryItemId)
+  const { data: galleryDetail } = useGalleryDetail(
+    configuration?.galleryItemId,
+    { enabled: !!configuration?.galleryItemId }
+  )
 
   const galleryDimensions: string[] = galleryDetail?.dimensions
 
