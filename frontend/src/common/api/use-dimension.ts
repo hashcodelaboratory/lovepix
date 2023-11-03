@@ -1,4 +1,4 @@
-import { useQuery, UseQueryResult } from 'react-query'
+import { useQuery, UseQueryOptions, UseQueryResult } from 'react-query'
 import { Material } from '../enums/material'
 
 export const DIMENSION_KEY = 'DIMENSION'
@@ -16,11 +16,20 @@ export type DimensionType = {
   price: DimensionPrice
 }
 
-const getDimensionById = async (id: string): Promise<DimensionType[]> => {
-  const res = await fetch(`/api/dimensions/${id}`)
+const getDimensionById = async (
+  id?: string
+): Promise<DimensionType[] | any> => {
+  if (id) {
+    const res = await fetch(`/api/dimensions/${id}`)
 
-  return res.json()
+    return res.json()
+  } else {
+    return new Response(null, { status: 400, statusText: 'Bad request' }).json()
+  }
 }
 
-export const useDimension = (id: string): UseQueryResult<DimensionType> =>
-  useQuery([DIMENSION_KEY], () => getDimensionById(id))
+export const useDimension = (
+  id?: string,
+  options?: UseQueryOptions<any, any, any, any>
+): UseQueryResult<DimensionType> =>
+  useQuery([DIMENSION_KEY], () => getDimensionById(id), options)

@@ -1,49 +1,42 @@
 import styles from '../../../../image-configurator-layout.module.scss'
 import { Configuration } from '../../../../../../common/types/configuration'
-import { splitDimension } from '../../../../../../common/utils/split-dimension'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from 'localization/localization-key'
 import { formatPrice } from 'common/utils/priceFormatting'
-import { MaterialType } from '../../../../../../common/api/use-materials'
 import { useDimension } from '../../../../../../common/api/use-dimension'
 import { useEffect, useMemo } from 'react'
-import { Material } from '../../../../../../common/enums/material'
 
 type PriceProps = {
   configuration: Configuration
-  materials: MaterialType[]
 }
 
-const Price = ({ materials, configuration }: PriceProps) => {
+const Price = ({ configuration }: PriceProps) => {
   const { t, i18n } = useTranslation()
 
-  const { width, height } = splitDimension(configuration?.dimensionId)
+  const { material, dimensionId } = configuration ?? ({} as Configuration)
 
-  const dimensionId = useMemo(() => `DIM-${width}x${height}`, [width, height])
-
-  const { data: dimensionDetail, refetch: fetchDimensionDetail } =
-    useDimension(dimensionId)
-
-  const computedMaterial = useMemo(
-    () =>
-      materials.find((material) => material.type === configuration?.material)
-        ?.type,
-    [configuration?.material, materials]
+  const { data: dimensionDetail, refetch } = useDimension(
+    `DIM-${dimensionId}`,
+    {
+      enabled: !!dimensionId,
+    }
   )
 
   const computedPrice = useMemo(() => {
-    if (dimensionDetail && computedMaterial) {
-      return dimensionDetail?.price?.[computedMaterial]
+    if (dimensionDetail && material) {
+      return dimensionDetail?.price?.[material]
     } else {
       return '-'
     }
-  }, [dimensionDetail, computedMaterial])
+  }, [material, dimensionDetail])
 
-  const noTaxPrice = computedPrice !== '-' ? computedPrice * 0.8 : '-'
+  const noTaxPrice = useMemo(
+    () => (computedPrice !== '-' ? (computedPrice as number) * 0.8 : '-'),
+    [computedPrice]
+  )
 
   useEffect(() => {
-    console.log(dimensionId)
-    dimensionId && fetchDimensionDetail()
+    dimensionId && refetch()
   }, [dimensionId])
 
   return (
