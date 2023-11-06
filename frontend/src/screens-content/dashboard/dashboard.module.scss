@@ -235,6 +235,13 @@
   color: silver;
 }
 
+.statusError {
+  border: 1px solid red;
+  border-radius: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  color: red;
+}
+
 .tableHeader {
   color: black;
   font-weight: bold;
