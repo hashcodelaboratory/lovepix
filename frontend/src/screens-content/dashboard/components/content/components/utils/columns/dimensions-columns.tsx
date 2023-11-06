@@ -7,6 +7,12 @@ export const getDimensionsColumns = (
   t: TFunction<'translation'>
 ): GridColDef[] => [
   {
+    field: 'id',
+    headerName: 'ID',
+    width: 200,
+    editable: false,
+  },
+  {
     field: 'name',
     headerName: t(localizationKey.dimension),
     width: 200,
