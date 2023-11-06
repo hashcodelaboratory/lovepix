@@ -1,3 +1,1 @@
-export const isEmpty = (param: any[]): boolean => {
-  return param?.length <= 0
-}
+export const isEmpty = <T extends object>(param: T[]): boolean => !param?.length
