@@ -96,14 +96,12 @@ const VoucherDetail = ({ tableReset, detail }: VoucherDetailProps) => {
     reValidateMode: 'onChange',
   })
 
-  const [sidePanel, setSidePanel] = useState<SidePanelEnum>(
-    SidePanelEnum.GENERAL
-  )
+  const [sidePanel, setSidePanel] = useState<SidePanelEnum>()
 
-  const fullReset = () => {
+  const fullReset = async () => {
     reset(EMPTY_OBJECT)
     tableReset()
-    queryClient.invalidateQueries(VOUCHERS_KEY)
+    await queryClient.invalidateQueries(VOUCHERS_KEY)
   }
 
   const { mutate: addVoucher } = useAddVoucher({
