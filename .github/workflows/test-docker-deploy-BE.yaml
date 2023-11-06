@@ -1,5 +1,4 @@
 name: LOVEPIX DockerHub Deployment on ORGANIZATION TEST environment - BACKEND
-#test
 on:
   workflow_dispatch:
   push:
