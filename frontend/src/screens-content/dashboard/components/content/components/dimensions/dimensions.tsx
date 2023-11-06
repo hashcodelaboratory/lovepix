@@ -62,16 +62,16 @@ const DimensionsLayout = (): JSX.Element => {
     setSelectedRows([])
   }
 
-  const removeData = () => {
-    const result = removeDimensions(selectedRows, queryClient)
-    if (result === '') {
+  const removeData = async () => {
+    try {
+      await removeDimensions(selectedRows, queryClient)
       enqueueSnackbar(
         String(t(localizationKey.filesRemoved)),
         SNACKBAR_OPTIONS_SUCCESS
       )
       reset()
-    } else {
-      enqueueSnackbar(result, SNACKBAR_OPTIONS_ERROR)
+    } catch (error) {
+      enqueueSnackbar((error as Error).message, SNACKBAR_OPTIONS_ERROR)
     }
   }
 

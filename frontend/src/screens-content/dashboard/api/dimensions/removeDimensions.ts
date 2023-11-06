@@ -1,21 +1,24 @@
-import { QueryClient } from "react-query";
-import { database } from "../../../../common/firebase/config";
-import { collection, deleteDoc, doc, getDocs, query, where } from "@firebase/firestore";
-import { Collections } from "../../../../common/firebase/enums";
-import { DIMENSIONS_KEY } from "../../../../common/api/use-dimensions";
+import { QueryClient } from 'react-query'
+import { database } from '../../../../common/firebase/config'
+import { deleteDoc, doc } from '@firebase/firestore'
+import { Collections } from '../../../../common/firebase/enums'
+import { DIMENSIONS_KEY } from '../../../../common/api/use-dimensions'
 
-export const removeDimensions = (
+export const removeDimensions = async (
   selectedRows: string[],
-  queryClient: QueryClient,
-): string => {
-  selectedRows.forEach(async (row) => {
-    const q = query(collection(database, Collections.DIMENSIONS), where("name", "==", row));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach(async (_doc) => {
-      await deleteDoc(doc(database, Collections.DIMENSIONS, _doc.id ));
-    });
+  queryClient: QueryClient
+) => {
+  for (const row of selectedRows) {
+  }
 
-    queryClient.invalidateQueries(DIMENSIONS_KEY);
-  });
-  return "";
-};
+  const promises: Promise<void>[] = selectedRows.reduce(
+    (acc: Promise<void>[], name: string) => [
+      ...acc,
+      ...[deleteDoc(doc(database, Collections.DIMENSIONS, `DIM-${name}`))],
+    ],
+    []
+  )
+
+  await Promise.all(promises)
+  await queryClient.invalidateQueries(DIMENSIONS_KEY)
+}
