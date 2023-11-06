@@ -1,10 +1,11 @@
 name: LOVEPIX DockerHub Deployment on ORGANIZATION TEST environment - BACKEND
-#test
 on:
   workflow_dispatch:
   push:
     tags:
       - test_*
+    branches:
+      - test
 
 defaults:
   run:
@@ -23,7 +24,7 @@ env:
   MONGODB_ADMINPASSWORD: ${{secrets.MONGODB_ADMINPASSWORD}}
   MONGODB_BASICAUTH_USERNAME: ${{secrets.MONGODB_BASICAUTH_USERNAME}}
   MONGODB_BASICAUTH_PASSWORD: ${{secrets.MONGODB_BASICAUTH_PASSWORD}}
-  DATABASE_URL: ${{secrets.DATABASE_URL}}
+  MONGODB_URL: ${{secrets.MONGODB_URL}}
   MONGO_REPLICA_HOST: ${{secrets.MONGO_REPLICA_HOST}}
   MONGO_REPLICA_PORT: ${{secrets.MONGO_REPLICA_PORT}}
   API_KEY: ${{secrets.API_KEY}}
@@ -37,7 +38,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build docker LOVEPIX backend image
-        run: time DOCKER_BUILDKIT=1 docker build -t lovepix-be:latest --build-arg MONGO_INITDB_ROOT_USERNAME --build-arg MONGO_INITDB_ROOT_PASSWORD --build-arg MONGODB_SERVER --build-arg MONGODB_ENABLE_ADMIN --build-arg MONGODB_ADMINUSERNAME --build-arg MONGODB_ADMINPASSWORD --build-arg MONGODB_BASICAUTH_USERNAME --build-arg MONGODB_BASICAUTH_PASSWORD --build-arg DATABASE_URL --build-arg MONGO_REPLICA_HOST --build-arg MONGO_REPLICA_PORT --build-arg API_KEY --build-arg JWT_SECRET .
+        run: time DOCKER_BUILDKIT=1 docker build -t lovepix-be:latest --build-arg MONGO_INITDB_ROOT_USERNAME --build-arg MONGO_INITDB_ROOT_PASSWORD --build-arg MONGODB_SERVER --build-arg MONGODB_ENABLE_ADMIN --build-arg MONGODB_ADMINUSERNAME --build-arg MONGODB_ADMINPASSWORD --build-arg MONGODB_BASICAUTH_USERNAME --build-arg MONGODB_BASICAUTH_PASSWORD --build-arg MONGODB_URL --build-arg MONGO_REPLICA_HOST --build-arg MONGO_REPLICA_PORT --build-arg API_KEY --build-arg JWT_SECRET .
       - name: Docker images 
         run: docker images
       - name: Tag the image of LOVEPIX-be
@@ -60,7 +61,7 @@ jobs:
       - name: deploying on ec2 and rebuild docker-compose with nginX
         uses: appleboy/ssh-action@v0.1.7
         with:
-          envs: DOCKER_HUB_USER, DOCKER_HUB_PASSWORD, DOCKER_TAG_WALLER_BE, MONGO_INITDB_ROOT_USERNAME, MONGO_INITDB_ROOT_PASSWORD, MONGODB_SERVER, MONGODB_ENABLE_ADMIN, MONGODB_ADMINUSERNAME, MONGODB_ADMINPASSWORD, MONGODB_BASICAUTH_USERNAME, MONGODB_BASICAUTH_PASSWORD, DATABASE_URL, API_KEY, JWT_SECRET
+          envs: DOCKER_HUB_USER, DOCKER_HUB_PASSWORD, DOCKER_TAG_WALLER_BE, MONGO_INITDB_ROOT_USERNAME, MONGO_INITDB_ROOT_PASSWORD, MONGODB_SERVER, MONGODB_ENABLE_ADMIN, MONGODB_ADMINUSERNAME, MONGODB_ADMINPASSWORD, MONGODB_BASICAUTH_USERNAME, MONGODB_BASICAUTH_PASSWORD, MONGODB_URL, API_KEY, JWT_SECRET
           host: ${{ secrets.NEW_ORG_AWS_TEST_HOST }}
           username: ec2-user
           key: ${{ secrets.NEW_ORG_AWS_TEST_PEM }}
