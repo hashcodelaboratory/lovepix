@@ -16,6 +16,8 @@ import { CONFIGURATION_TABLE_KEY } from '../../../../../../../../common/indexed-
 import { Configuration } from '../../../../../../../../common/types/configuration'
 import { useGalleryDetail } from '../../../../../../../../common/api/use-gallery-detail'
 import { splitDimensions } from './utils/split-dimensions'
+import { useDimensions } from '../../../../../../../../common/api/use-dimensions'
+import { isEmpty } from '../../../../../../../../common/utils/is-empty'
 
 type DimensionContentProps = {
   configuration: Configuration
@@ -74,9 +76,21 @@ const DimensionContent = ({ configuration }: DimensionContentProps) => {
           variant='fullWidth'
           visibleScrollbar
         >
-          <Tab label={String(t(localizationKey.byWidth))} {...a11yProps(0)} />
-          <Tab label={String(t(localizationKey.byHeight))} {...a11yProps(1)} />
-          <Tab label={String(t(localizationKey.square))} {...a11yProps(2)} />
+          <Tab
+            disabled={isEmpty(dimensionsWidth)}
+            label={String(t(localizationKey.byWidth))}
+            {...a11yProps(0)}
+          />
+          <Tab
+            disabled={isEmpty(dimensionsHeight)}
+            label={String(t(localizationKey.byHeight))}
+            {...a11yProps(1)}
+          />
+          <Tab
+            disabled={isEmpty(dimensionsSquare)}
+            label={String(t(localizationKey.square))}
+            {...a11yProps(2)}
+          />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
