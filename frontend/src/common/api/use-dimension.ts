@@ -16,9 +16,7 @@ export type DimensionType = {
   price: DimensionPrice
 }
 
-const getDimensionById = async (
-  id?: string
-): Promise<DimensionType[] | any> => {
+const getDimensionById = async (id?: string): Promise<DimensionType | any> => {
   if (id) {
     const res = await fetch(`/api/dimensions/${id}`)
 

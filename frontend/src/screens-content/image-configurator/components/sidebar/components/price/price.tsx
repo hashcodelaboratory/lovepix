@@ -9,6 +9,11 @@ import {
 } from '../../../../../../common/api/use-dimension'
 import { useEffect, useMemo, useState } from 'react'
 import { useGalleryDetail } from '../../../../../../common/api/use-gallery-detail'
+import {
+  MaterialType,
+  useMaterial,
+} from '../../../../../../common/api/use-material'
+import { getMaterialId } from '../../../../../../common/utils/get-material-id'
 
 type GalleryDetailType = {
   price: number
@@ -26,6 +31,7 @@ const Price = ({ configuration }: PriceProps) => {
 
   const [galleryDetail, setGalleryDetail] = useState<GalleryDetailType>()
   const [dimensionDetail, setDimensionDetail] = useState<DimensionType>()
+  const [materialDetail, setMaterialDetail] = useState<MaterialType>()
 
   const { refetch: fetchGalleryDetail } = useGalleryDetail(galleryItemId, {
     enabled: !!galleryItemId,
@@ -42,6 +48,16 @@ const Price = ({ configuration }: PriceProps) => {
       setDimensionDetail(res)
     },
   })
+
+  const { refetch: fetchMaterialDetail } = useMaterial(
+    getMaterialId(material),
+    {
+      enabled: !!material,
+      onSuccess: (res) => {
+        setMaterialDetail(res)
+      },
+    }
+  )
 
   const computedPrice = useMemo(() => {
     if (dimensionDetail && material) {
@@ -72,11 +88,21 @@ const Price = ({ configuration }: PriceProps) => {
     }
   }, [galleryItemId])
 
+  useEffect(() => {
+    if (material) {
+      fetchMaterialDetail()
+    } else {
+      setMaterialDetail(undefined)
+    }
+  }, [material])
+
   return (
     <div className={styles.containerPadding}>
       <div className={styles.price}>
-        <div>Doručenie:</div>
-        <div>aaa</div>
+        <div className={styles.deliveryPriceText}>Doručenie:</div>
+        <div className={styles.deliveryPriceTextSecondary}>
+          {materialDetail?.delivery}
+        </div>
       </div>
       <div className={styles.price}>
         <h4>
