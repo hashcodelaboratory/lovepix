@@ -2,8 +2,14 @@ import { GridColDef } from "@mui/x-data-grid";
 
 export const getDimensionsColumns = (): GridColDef[] => [
   {
-    field: "name",
-    headerName: "Name",
+    field: 'id',
+    headerName: 'ID',
+    width: 200,
+    editable: false,
+  },
+  {
+    field: 'name',
+    headerName: t(localizationKey.dimension),
     width: 200,
     editable: false,
   },

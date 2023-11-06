@@ -8,13 +8,10 @@ export const removeDimensions = async (
   selectedRows: string[],
   queryClient: QueryClient
 ) => {
-  for (const row of selectedRows) {
-  }
-
   const promises: Promise<void>[] = selectedRows.reduce(
-    (acc: Promise<void>[], name: string) => [
+    (acc: Promise<void>[], id: string) => [
       ...acc,
-      ...[deleteDoc(doc(database, Collections.DIMENSIONS, `DIM-${name}`))],
+      ...[deleteDoc(doc(database, Collections.DIMENSIONS, id))],
     ],
     []
   )
