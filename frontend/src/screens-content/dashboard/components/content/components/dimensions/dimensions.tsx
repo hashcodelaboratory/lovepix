@@ -99,15 +99,14 @@ const DimensionsLayout = (): JSX.Element => {
     setOpen(false)
   }
 
-  const uploadToFirestore = async () => {
-    await setDoc(
-      doc(database, Collections.DIMENSIONS, `DIM-${dimensionLabel?.trim()}`),
-      {
-        name: dimensionLabel,
-      }
-    )
-    queryClient.invalidateQueries(DIMENSIONS_KEY)
-    handleClose()
+  const onCellEditCommit = async (params: any) => {
+    await updateDimension({
+      id: params.id.toString(),
+      price: {
+        ...params.row.price,
+        [params.field.replace('price.', '')]: Number(params.value),
+      },
+    })
   }
 
   return (

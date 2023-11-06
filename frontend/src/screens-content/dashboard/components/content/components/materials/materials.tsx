@@ -59,10 +59,11 @@ const MaterialsLayout = (): JSX.Element => {
 
   const data =
     materials?.map(
-      ({ id, title }) =>
+      ({ id, title, delivery }) =>
         ({
           id: id,
           title: title,
+          delivery: delivery,
         } as MaterialType)
     ) ?? []
 
@@ -77,7 +78,11 @@ const MaterialsLayout = (): JSX.Element => {
   const toggleButton = () => setDialogStatus((prevState) => !prevState)
 
   const uploadToFirestore = async (item: MaterialType, available: boolean) => {
-    editMaterial({ id: item.id, availability: available })
+    await editMaterial({
+      id: item.id,
+      availability: available,
+      delivery: item.delivery ?? '',
+    })
   }
   const saveChanges = () => {
     data.map((item) =>
@@ -94,6 +99,14 @@ const MaterialsLayout = (): JSX.Element => {
     }
   }, [availableMaterials, selectionModel.length])
 
+  const onCellEditCommit = async (params: any) => {
+    await editMaterial({
+      id: params.id.toString(),
+      availability: params.availability,
+      delivery: params.value,
+    })
+  }
+
   return (
     <div className={styles.contentContainer}>
       <div className={styles.rowContainer}>
@@ -107,6 +120,7 @@ const MaterialsLayout = (): JSX.Element => {
           disableSelectionOnClick
           selectionModel={selectionModel}
           onSelectionModelChange={selectionChanged}
+          onCellEditCommit={onCellEditCommit}
           autoHeight
         />
       </div>

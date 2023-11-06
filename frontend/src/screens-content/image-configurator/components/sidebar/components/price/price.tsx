@@ -36,6 +36,10 @@ const Price = ({ materials, configuration }: PriceProps) => {
   return (
     <div className={styles.containerPadding}>
       <div className={styles.price}>
+        <div>Doručenie:</div>
+        <div>aaa</div>
+      </div>
+      <div className={styles.price}>
         <h4>
           <b>{t(localizationKey.price)}</b>
         </h4>
