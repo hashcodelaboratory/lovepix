@@ -7,6 +7,8 @@ export const getDeliveryMessage = (param?: DeliveryOptions) => {
   switch (param) {
     case DeliveryOptions.COURIER:
       return localizationKey.courier
+    case DeliveryOptions.FREE_DELIVERY:
+      return 'Máte nárok na dopravu zdarma'
     default:
       return localizationKey.personalCollect
   }
