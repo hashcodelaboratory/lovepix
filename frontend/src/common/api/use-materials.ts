@@ -14,6 +14,7 @@ export type MaterialType = {
   description: string
   availability: boolean
   type: Material
+  delivery?: string
 }
 
 const getMaterials = async (): Promise<MaterialType[]> => {

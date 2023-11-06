@@ -3,6 +3,7 @@ import { MutationOptions, useMutation, UseMutationResult } from 'react-query'
 export type EditMaterialRequest = {
   id: string
   availability: boolean
+  delivery: string
 }
 
 const editMaterial = async (data: EditMaterialRequest) => {
