@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - test_*
+      - release_*
     branches:
-      - test
+      - main
 
 defaults:
   run:
