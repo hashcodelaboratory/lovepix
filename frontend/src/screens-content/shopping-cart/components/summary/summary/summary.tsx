@@ -50,11 +50,15 @@ const Summary = ({ order }: SummaryProps) => {
     handleSubmit,
     control,
     reset,
+    setValue,
   } = useForm<FormInputs>({
     resolver: yupResolver(FORM_SCHEMA),
     reValidateMode: 'onChange',
   })
   const { delivery, payment } = watch()
+
+  console.log(delivery)
+
   const finalPrice = useMemo(
     () =>
       Number(order?.totalPrice) +
@@ -144,7 +148,12 @@ const Summary = ({ order }: SummaryProps) => {
               errors={errors}
               control={control}
             />
-            <Delivery control={control} message={errors.delivery?.message} />
+            <Delivery
+              control={control}
+              message={errors.delivery?.message}
+              freeDelivery={order?.voucher?.freeDelivery}
+              setValue={setValue}
+            />
             <Payment control={control} message={errors.payment?.message} />
           </div>
         </div>

@@ -13,6 +13,14 @@ export const getColumns = (): GridColDef[] => [
     headerName: 'Expiration',
     width: 160,
     editable: false,
-    renderCell: ({ value }) => <div className={styles.status}>{value}</div>,
+    renderCell: ({ value }) => {
+      const isValid = new Date(value).getTime() > Date.now()
+
+      return (
+        <div className={styles[isValid ? 'status' : 'statusError']}>
+          {value}
+        </div>
+      )
+    },
   },
 ]
