@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - test_*
+    branches:
+      - test
 
 defaults:
   run:
