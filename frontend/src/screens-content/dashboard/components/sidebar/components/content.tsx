@@ -55,10 +55,12 @@ const SidebarContent = () => {
   }
 
   const list = SIDEBAR_MENU_LIST.map(({ title, link }) => (
-    <div className={styles.sidebarRow} key={uuidv4()}>
-      <p className={styles.sidebarRowTitle} onClick={() => goTo(link)}>
-        {String(t(title))}
-      </p>
+    <div
+      className={styles.sidebarRow}
+      key={uuidv4()}
+      onClick={() => goTo(link)}
+    >
+      <p className={styles.sidebarRowTitle}>{String(t(title))}</p>
       {countMapper[title]?.count && (
         <p
           className={styles.sidebarRowSubtitle}

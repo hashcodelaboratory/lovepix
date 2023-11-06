@@ -96,6 +96,7 @@
   transform: scale(1.12);
   z-index: 1;
 }
+
 .imageBlur {
   filter: blur(0.15rem) grayscale(1);
   cursor: not-allowed;
@@ -268,4 +269,16 @@
 
 .containerTitle {
   text-align: center;
+}
+
+.deliveryPriceText {
+  margin-top: .5rem;
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.deliveryPriceTextSecondary {
+  margin-top: .5rem;
+  font-size: .9rem;
+  font-weight: 200;
 }

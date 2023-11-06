@@ -27,6 +27,8 @@ export const getPrice = (
       return getCanvasPrice(width, height)
     case Material.DIBOND:
       return getDibondPrice(width, height)
+    case Material.POSTER:
+      return getPosterPrice(width, height)
     default:
       return '-'
   }
@@ -92,6 +94,29 @@ const getDibondPrice = (width: number, height: number) => {
   } else {
     return (
       DIBOND_PRICES_BY_HEIGHT.find(
+        (item) => item.width === width && item.height === height
+      )?.price ?? '-'
+    )
+  }
+}
+
+// TODO: update in future with prices
+const getPosterPrice = (width: number, height: number) => {
+  if (width > height) {
+    return (
+      CANVAS_PRICES_BY_WIDTH.find(
+        (item) => item.width === width && item.height === height
+      )?.price ?? '-'
+    )
+  } else if (width === height) {
+    return (
+      CANVAS_PRICES_SQUARE.find(
+        (item) => item.width === width && item.height === height
+      )?.price ?? '-'
+    )
+  } else {
+    return (
+      CANVAS_PRICES_BY_HEIGHT.find(
         (item) => item.width === width && item.height === height
       )?.price ?? '-'
     )

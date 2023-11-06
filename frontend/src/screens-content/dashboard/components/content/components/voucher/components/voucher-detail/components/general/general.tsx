@@ -86,7 +86,13 @@ const General = ({ control, register, errors }: GeneralProps) => {
             <FormControlLabel
               {...field}
               {...register('freeDelivery', { required: true })}
-              control={<Checkbox sx={{ ml: 1 }} />}
+              control={
+                <Checkbox
+                  sx={{ ml: 1 }}
+                  checked={field.value}
+                  onChange={field.onChange}
+                />
+              }
               label={t(localizationKey.deliveryFree)}
             />
           )}

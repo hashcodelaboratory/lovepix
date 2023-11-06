@@ -3,11 +3,12 @@ import { MutationOptions, useMutation, UseMutationResult } from 'react-query'
 export type EditMaterialRequest = {
   id: string
   availability: boolean
+  delivery: string
 }
 
 const editMaterial = async (data: EditMaterialRequest) => {
-  const res = await fetch('/api/materials/edit', {
-    method: 'POST',
+  const res = await fetch(`/api/materials/${data.id}`, {
+    method: 'PATCH',
     body: JSON.stringify({
       ...data,
     }),

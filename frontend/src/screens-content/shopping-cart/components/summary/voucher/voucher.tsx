@@ -45,6 +45,7 @@ const Voucher = ({ voucher }: VoucherProps) => {
               code: res.code,
               value: res.value,
               saleType: res.saleType,
+              freeDelivery: res.freeDelivery,
             } as VoucherType,
           })
         } else {
