@@ -1,6 +1,11 @@
-import { GridColDef } from "@mui/x-data-grid";
+import { GridColDef } from '@mui/x-data-grid'
+import { MATERIALS } from '../../../../../../home/utils/materials'
+import { TFunction } from 'react-i18next'
+import { localizationKey } from '../../../../../../../localization/localization-key'
 
-export const getDimensionsColumns = (): GridColDef[] => [
+export const getDimensionsColumns = (
+  t: TFunction<'translation'>
+): GridColDef[] => [
   {
     field: 'id',
     headerName: 'ID',

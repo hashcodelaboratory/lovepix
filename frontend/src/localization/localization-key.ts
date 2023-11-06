@@ -18,9 +18,11 @@ export const localizationKey = {
   photoCanvasTitle: 'photoCanvasTitle',
   photoAcrylicTitle: 'photoAcrylicTitle',
   photoAluminumTitle: 'photoAluminumTitle',
+  photoPosterTitle: 'photoPosterTitle',
   photoCanvasText: 'photoCanvasText',
   photoAcrylicText: 'photoAcrylicText',
   photoAluminumText: 'photoAluminumText',
+  photoPosterText: 'photoPosterText',
   pickOneOfOurPhotos: 'pickOneOfOurPhotos',
   noPhoto: 'noPhoto',
   lookAtOurGallery: 'lookAtOurGallery',
@@ -310,4 +312,6 @@ export const localizationKey = {
   imageInConfiguratorTitle: 'imageInConfiguratorTitle',
   imageInConfiguratorDescription: 'imageInConfiguratorDescription',
   imageInConfiguratorLink: 'imageInConfiguratorLink',
+  priceFor: 'priceFor',
+  dimension: 'dimension',
 }

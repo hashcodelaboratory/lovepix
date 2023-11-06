@@ -1,7 +1,5 @@
 import styles from '../../../../image-configurator-layout.module.scss'
-import { getPrice } from './utils/generator'
 import { Configuration } from '../../../../../../common/types/configuration'
-import { splitDimension } from '../../../../../../common/utils/split-dimension'
 import { useTranslation } from 'next-i18next'
 import { localizationKey } from 'localization/localization-key'
 import { formatPrice } from 'common/utils/priceFormatting'
@@ -23,16 +21,13 @@ type GalleryDetailType = {
 
 type PriceProps = {
   configuration: Configuration
-  materials: MaterialType[]
 }
 
-const Price = ({ materials, configuration }: PriceProps) => {
+const Price = ({ configuration }: PriceProps) => {
   const { t, i18n } = useTranslation()
 
-  const { width, height } = splitDimension(configuration?.dimensionId) ?? {
-    width: 0,
-    height: 0,
-  }
+  const { material, dimensionId, galleryItemId } =
+    configuration ?? ({} as Configuration)
 
   const [galleryDetail, setGalleryDetail] = useState<GalleryDetailType>()
   const [dimensionDetail, setDimensionDetail] = useState<DimensionType>()
