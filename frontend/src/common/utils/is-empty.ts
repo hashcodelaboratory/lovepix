@@ -1,1 +1,1 @@
-export const isEmpty = <T extends object>(param: T[]): boolean => !param?.length
+export const isEmpty = <T>(param: T[]): boolean => !param?.length
