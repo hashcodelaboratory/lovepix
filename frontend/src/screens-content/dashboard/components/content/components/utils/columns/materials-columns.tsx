@@ -13,8 +13,16 @@ export const getMaterialsColumns = (t: any): any => [
     headerName: 'Available',
     ...GRID_CHECKBOX_SELECTION_COL_DEF,
     renderHeader: () => (
-      <div style={{ textAlign: 'center' }}>{t(localizationKey.availability)}</div>
+      <div style={{ textAlign: 'center' }}>
+        {t(localizationKey.availability)}
+      </div>
     ),
     width: 100,
+  },
+  {
+    field: 'delivery',
+    headerName: 'Doručenie',
+    width: 500,
+    editable: true,
   },
 ]
