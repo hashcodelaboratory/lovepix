@@ -24,11 +24,9 @@
   "photoCanvasTitle": "Foto na plátno",
   "photoAcrylicTitle": "Foto na akryl (plexisklo)",
   "photoAluminumTitle": "Foto na hliníkové dosky",
-  "photoPosterTitle": "Foto na plagátový papier",
   "photoCanvasText": "Zväčšnite svoje spomienky obrazom na plátne. Plátno je natiahnuté na kvalitnom drevenom ráme. Tento materiál sa hodí do každého interiéru.",
   "photoAcrylicText": "Vytvorte si obraz s moderným, vysokolesklým vzhľadom. Akryl (plexisklo) sa hodí do moderne zariadených interiérov. Odporúčame odsadiť od steny.",
   "photoAluminumText": "Krásny, moderný a veľmi trvácny materiál. Potlačené plochy pôsobia matným dojmom s jemnou štruktúrou. Pre lepší efekt odporúčame odsadiť, prípadne zarámovať.",
-  "photoPosterText": "Empty",
   "pickOneOfOurPhotos": "Vyberte si z našich fotiek",
   "noPhoto": "Nemáte vhodnú fotku na obraz ?",
   "lookAtOurGallery": "Vyberte si z našej galérie.",
@@ -331,7 +329,5 @@
   "/reviews": "/recenzie",
   "/blog": "/blog",
   "/for-download": "/na-stiahnutie",
-  "/production-time": "/casy-vyroby",
-  "priceFor": "Cena za ",
-  "dimension": "Rozmer"
+  "/production-time": "/casy-vyroby"
 }

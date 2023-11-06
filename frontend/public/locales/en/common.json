@@ -24,11 +24,9 @@
   "photoCanvasTitle": "Photo on canvas",
   "photoAcrylicTitle": "Photo on acrylic (plexiglass)",
   "photoAluminumTitle": "Photo on aluminum plates",
-  "photoPosterTitle": "Photo on poster",
   "photoCanvasText": "Magnify your memories with an image on the canvas. The canvas is stretched on a quality wooden frame. This material fits into any interior.",
   "photoAcrylicText": "Create an image with a modern, high-gloss look. Acrylic (plexiglass) is suitable for modern interiors. We recommend indenting from the wall.",
   "photoAluminumText": "Beautiful, modern and very durable material. The printed surfaces give a matt impression with a fine structure. For a better effect, we recommend indenting or framing.",
-  "photoPosterText": "Empty",
   "pickOneOfOurPhotos": "Pick one of our photos",
   "noPhoto": "No photo to choose ?",
   "lookAtOurGallery": "Look at our gallery.",
@@ -327,7 +325,5 @@
   "/reviews": "/en/reviews",
   "/blog": "/en/blog",
   "/for-download": "/en/for-download",
-  "/production-time": "/en/production-time",
-  "priceFor": "Price for ",
-  "dimension": "Rozmer"
+  "/production-time": "/en/production-time"
 }

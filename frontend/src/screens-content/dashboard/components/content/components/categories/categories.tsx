@@ -116,7 +116,7 @@ const CategoriesLayout = (): JSX.Element => {
         <DataGrid
           className={styles.contentTable}
           rows={data}
-          columns={getDimensionsColumns(t)}
+          columns={getDimensionsColumns()}
           pageSize={10}
           rowsPerPageOptions={[5]}
           checkboxSelection

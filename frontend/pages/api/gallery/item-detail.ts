@@ -5,11 +5,9 @@ import { doc, getDoc } from 'firebase/firestore'
 
 const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const itemDetail = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { id } = req.query
-
-    if (req.method !== 'GET') {
+    if (req.method !== 'POST') {
       res.status(400).json({
         error: BAD_REQUEST_ERROR_MESSAGE,
       })
@@ -17,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return
     }
 
-    if (!id) {
+    if (!req.body) {
       res.status(400).json({
         error: BAD_REQUEST_ERROR_MESSAGE,
       })
@@ -25,7 +23,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return
     }
 
-    const docSnapshot = await getDoc(doc(database, Collections.GALLERY, id[0]))
+    const _body = await JSON.parse(req.body)
+
+    if (!_body) {
+      res.status(400).json({
+        error: BAD_REQUEST_ERROR_MESSAGE,
+      })
+
+      return
+    }
+
+    const docSnapshot = await getDoc(
+      doc(database, Collections.GALLERY, _body.id)
+    )
 
     if (docSnapshot.exists()) {
       return res.status(200).json(docSnapshot.data())
@@ -41,4 +51,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default handler
+export default itemDetail

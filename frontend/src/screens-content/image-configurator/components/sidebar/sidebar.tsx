@@ -19,7 +19,7 @@ const Sidebar = ({ configuration }: SidebarProps) => {
       <Preview configuration={configuration} />
       <Dimension configuration={configuration} />
       <Material configuration={configuration} materials={materials ?? []} />
-      <Price configuration={configuration} />
+      <Price configuration={configuration} materials={materials ?? []} />
       <Button materials={materials ?? []} />
     </div>
   )
