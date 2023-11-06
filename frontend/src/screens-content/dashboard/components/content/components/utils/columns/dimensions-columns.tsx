@@ -17,6 +17,6 @@ export const getDimensionsColumns = (
     headerName: `${t(localizationKey.priceFor) + t(material.title)}`,
     width: 300,
     editable: true,
-    renderCell: (a: any) => <div>{a.row.price[material.type]}</div>,
+    renderCell: (a: any) => <div>{a.row.price?.[material.type] ?? '-'}</div>,
   })),
 ]
