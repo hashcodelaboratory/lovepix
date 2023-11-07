@@ -11,7 +11,12 @@ import General from './components/general/general'
 import Strict from './components/strict/strict'
 import Limit from './components/limit/limit'
 import { VOUCHERS_KEY } from '../../../../../../../../common/api/use-vouchers'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import {
+  Controller,
+  FormProvider,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { SaleTypeEnum } from '../../../../../../../../common/voucher/utils/enums'
 import { FORM_SCHEMA } from '../../utils/schema'
@@ -61,6 +66,8 @@ const EMPTY_OBJECT = {
   value: 0,
   freeDelivery: false,
   expiration: '',
+  limit: 0,
+  limitUser: 0,
 }
 
 const VoucherDetail = ({ tableReset, detail }: VoucherDetailProps) => {
@@ -85,16 +92,17 @@ const VoucherDetail = ({ tableReset, detail }: VoucherDetailProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [detail])
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    control,
-    reset,
-  } = useForm<FormInputs>({
+  const formReturn = useForm<FormInputs>({
     resolver: yupResolver(FORM_SCHEMA),
     reValidateMode: 'onChange',
   })
+  const {
+    reset,
+    handleSubmit,
+    control,
+    register,
+    formState: { errors },
+  } = formReturn
 
   const [sidePanel, setSidePanel] = useState<SidePanelEnum>()
 
@@ -135,13 +143,13 @@ const VoucherDetail = ({ tableReset, detail }: VoucherDetailProps) => {
   const detailLayout = useMemo(() => {
     switch (sidePanel) {
       case SidePanelEnum.GENERAL:
-        return <General control={control} register={register} errors={errors} />
+        return <General />
       case SidePanelEnum.STRICT:
-        return <Strict control={control} register={register} errors={errors} />
+        return <Strict />
       case SidePanelEnum.LIMIT:
-        return <Limit control={control} register={register} errors={errors} />
+        return <Limit />
     }
-  }, [control, errors, register, sidePanel])
+  }, [sidePanel, detail])
 
   const changeSidePanel = (param: SidePanelEnum) => {
     setSidePanel(param)
@@ -153,98 +161,106 @@ const VoucherDetail = ({ tableReset, detail }: VoucherDetailProps) => {
 
   return (
     <div className={styles.voucherDetailBox}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <p className={styles.voucherDetailInputText}>
-            {t(localizationKey.voucherCode)}
-          </p>
+      <FormProvider {...formReturn}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div>
+            <p className={styles.voucherDetailInputText}>
+              {t(localizationKey.voucherCode)}
+            </p>
+            <div>
+              <Controller
+                key={'code'}
+                name={'code'}
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    {...register('code', { required: true })}
+                    error={!!errors.code?.message}
+                    helperText={errors.code?.message}
+                    size='small'
+                    sx={{ mr: 1 }}
+                    placeholder='LOVEPIX10'
+                  />
+                )}
+              />
+              <Button variant='contained'>
+                {t(localizationKey.generateVoucherCode)}
+              </Button>
+            </div>
+            <p
+              className={styles.voucherDetailInputText}
+              style={{ marginTop: 8 }}
+            >
+              {t(localizationKey.voucherCodeDesc)}
+            </p>
             <Controller
-              key={'code'}
-              name={'code'}
+              key={'description'}
+              name={'description'}
               control={control}
               render={({ field }) => (
                 <TextField
                   {...field}
-                  {...register('code', { required: true })}
-                  error={!!errors.code?.message}
-                  helperText={errors.code?.message}
+                  {...register('description', { required: true })}
+                  error={!!errors.description?.message}
+                  helperText={errors.description?.message}
                   size='small'
-                  sx={{ mr: 1 }}
-                  placeholder='LOVEPIX10'
+                  multiline
+                  fullWidth
+                  rows={3}
+                  placeholder={t(localizationKey.voucherCodeDesc)}
                 />
               )}
             />
-            <Button variant='contained'>
-              {t(localizationKey.generateVoucherCode)}
-            </Button>
           </div>
-          <p className={styles.voucherDetailInputText} style={{ marginTop: 8 }}>
-            {t(localizationKey.voucherCodeDesc)}
-          </p>
-          <Controller
-            key={'description'}
-            name={'description'}
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                {...register('description', { required: true })}
-                error={!!errors.description?.message}
-                helperText={errors.description?.message}
-                size='small'
-                multiline
-                fullWidth
-                rows={3}
-                placeholder={t(localizationKey.voucherCodeDesc)}
-              />
-            )}
-          />
-        </div>
-        <div>
-          <p className={styles.voucherDetailInputText} style={{ marginTop: 8 }}>
-            {t(localizationKey.voucherCodeData)}
-          </p>
-          <div className={styles.voucherDetailSidepanelRow}>
-            <div style={{ backgroundColor: 'whitesmoke' }}>
-              <div
-                className={styles.voucherDetailListRow}
-                onClick={() => changeSidePanel(SidePanelEnum.GENERAL)}
-              >
-                <SettingsIcon sx={{ mr: 1 }} />
-                <p>{t(localizationKey.general)}</p>
+          <div>
+            <p
+              className={styles.voucherDetailInputText}
+              style={{ marginTop: 8 }}
+            >
+              {t(localizationKey.voucherCodeData)}
+            </p>
+            <div className={styles.voucherDetailSidepanelRow}>
+              <div style={{ backgroundColor: 'whitesmoke' }}>
+                <div
+                  className={styles.voucherDetailListRow}
+                  onClick={() => changeSidePanel(SidePanelEnum.GENERAL)}
+                >
+                  <SettingsIcon sx={{ mr: 1 }} />
+                  <p>{t(localizationKey.general)}</p>
+                </div>
+                <div
+                  className={styles.voucherDetailListRow}
+                  onClick={() => changeSidePanel(SidePanelEnum.STRICT)}
+                >
+                  <HideSourceIcon sx={{ mr: 1 }} />
+                  <p>{t(localizationKey.strict)}</p>
+                </div>
+                <div
+                  className={styles.voucherDetailListRow}
+                  onClick={() => changeSidePanel(SidePanelEnum.LIMIT)}
+                >
+                  <MultipleStopIcon sx={{ mr: 1 }} />
+                  <p>{t(localizationKey.limit)}</p>
+                </div>
               </div>
-              <div
-                className={styles.voucherDetailListRow}
-                onClick={() => changeSidePanel(SidePanelEnum.STRICT)}
-              >
-                <HideSourceIcon sx={{ mr: 1 }} />
-                <p>{t(localizationKey.strict)}</p>
-              </div>
-              <div
-                className={styles.voucherDetailListRow}
-                onClick={() => changeSidePanel(SidePanelEnum.LIMIT)}
-              >
-                <MultipleStopIcon sx={{ mr: 1 }} />
-                <p>{t(localizationKey.limit)}</p>
+              <div className={styles.voucherDetailSidepanelContent}>
+                {detailLayout}
               </div>
             </div>
-            <div className={styles.voucherDetailSidepanelContent}>
-              {detailLayout}
+          </div>
+          <div>
+            <div className={styles.voucherFooterRow}>
+              <Button variant='outlined' onClick={fullReset}>
+                Reset
+              </Button>
+              <Button type='submit' variant='contained' sx={{ ml: 1 }}>
+                Save
+              </Button>
             </div>
           </div>
-        </div>
-        <div>
-          <div className={styles.voucherFooterRow}>
-            <Button variant='outlined' onClick={fullReset}>
-              Reset
-            </Button>
-            <Button type='submit' variant='contained' sx={{ ml: 1 }}>
-              Save
-            </Button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </FormProvider>
     </div>
   )
 }
