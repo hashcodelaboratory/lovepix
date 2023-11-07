@@ -1,18 +1,7 @@
 import { useQuery, UseQueryOptions, UseQueryResult } from 'react-query'
-import { Material } from '../enums/material'
+import { MaterialType } from './use-materials'
 
 export const MATERIAL_KEY = 'MATERIAL'
-
-export type MaterialType = {
-  id: string
-  title: string
-  image: string
-  subtitle: string
-  description: string
-  availability: boolean
-  type: Material
-  delivery?: string
-}
 
 const getMaterialById = async (id?: string): Promise<MaterialType> => {
   if (id) {
