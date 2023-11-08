@@ -9,7 +9,7 @@ export const FORM_SCHEMA = yup
     freeDelivery: yup.boolean().required('freeDeliveryValidation'),
     expiration: yup.string().required('expirationValidation'),
     // minimalValue: yup.string().notRequired(),
-    // limit: yup.string().notRequired(),
-    // limitUser: yup.string().notRequired(),
+    limit: yup.string().notRequired(),
+    limitUser: yup.string().notRequired(),
   })
   .required()

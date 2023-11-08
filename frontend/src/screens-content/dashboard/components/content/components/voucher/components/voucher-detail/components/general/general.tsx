@@ -4,16 +4,17 @@ import { useTranslation } from 'react-i18next'
 import { localizationKey } from '../../../../../../../../../../localization/localization-key'
 import MenuItem from '@mui/material/MenuItem'
 import { SaleTypeEnum } from '../../../../../../../../../../common/voucher/utils/enums'
-import { Controller, Control, UseFormRegister } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import { FormInputs } from '../../voucher-detail'
 
-type GeneralProps = {
-  control: Control<FormInputs>
-  register: UseFormRegister<FormInputs>
-  errors: any
-}
-const General = ({ control, register, errors }: GeneralProps) => {
+const General = () => {
   const { t } = useTranslation()
+
+  const {
+    control,
+    register,
+    formState: { errors },
+  } = useFormContext<FormInputs>()
 
   return (
     <div>
