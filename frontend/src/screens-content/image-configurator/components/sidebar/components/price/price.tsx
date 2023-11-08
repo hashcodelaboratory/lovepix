@@ -9,11 +9,9 @@ import {
 } from '../../../../../../common/api/use-dimension'
 import { useEffect, useMemo, useState } from 'react'
 import { useGalleryDetail } from '../../../../../../common/api/use-gallery-detail'
-import {
-  MaterialType,
-  useMaterial,
-} from '../../../../../../common/api/use-material'
+import { useMaterial } from '../../../../../../common/api/use-material'
 import { getMaterialId } from '../../../../../../common/utils/get-material-id'
+import { MaterialType } from '../../../../../../common/api/use-materials'
 
 type GalleryDetailType = {
   price: number

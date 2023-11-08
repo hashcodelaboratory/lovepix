@@ -38,7 +38,7 @@ const CropperComponent = ({ configuration }: CropperComponentProps) => {
     <div className={styles.dropzoneBox}>
       <Cropper
         src={configuration?.origin ?? ''}
-        style={{ height: 400, width: '100%' }}
+        style={{ height: '100%', width: '100%' }}
         initialAspectRatio={3 / 2}
         aspectRatio={aspectRatio}
         guides={true}
