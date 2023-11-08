@@ -29,6 +29,8 @@ export const getPrice = (
       return getDibondPrice(width, height)
     case Material.POSTER:
       return getPosterPrice(width, height)
+    case Material.FOAM:
+      return getPosterPrice(width, height)
     default:
       return '-'
   }

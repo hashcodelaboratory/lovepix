@@ -1,14 +1,7 @@
 import { useQuery, UseQueryOptions, UseQueryResult } from 'react-query'
-import { Material } from '../enums/material'
+import { DimensionPrice } from './use-dimensions'
 
 export const DIMENSION_KEY = 'DIMENSION'
-
-export type DimensionPrice = {
-  [Material.DIBOND]: number
-  [Material.ACRYLIC]: number
-  [Material.POSTER]: number
-  [Material.CANVAS]: number
-}
 
 export type DimensionType = {
   id: string

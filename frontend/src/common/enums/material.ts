@@ -3,4 +3,5 @@ export enum Material {
   ACRYLIC = 'ACRYLIC',
   DIBOND = 'DIBOND',
   POSTER = 'POSTER',
+  FOAM = 'FOAM',
 }

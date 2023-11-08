@@ -314,4 +314,6 @@ export const localizationKey = {
   imageInConfiguratorLink: 'imageInConfiguratorLink',
   priceFor: 'priceFor',
   dimension: 'dimension',
+  photoFoamTitle: 'photoFoamTitle',
+  photoFoamText: 'photoFoamText',
 }
