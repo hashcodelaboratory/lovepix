@@ -8,6 +8,7 @@ export type DimensionPrice = {
   [Material.ACRYLIC]: number
   [Material.POSTER]: number
   [Material.CANVAS]: number
+  [Material.FOAM]: number
 }
 
 export type DimensionType = {

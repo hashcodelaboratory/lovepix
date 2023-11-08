@@ -329,5 +329,7 @@
   "/for-download": "/en/for-download",
   "/production-time": "/en/production-time",
   "priceFor": "Price for ",
-  "dimension": "Rozmer"
+  "dimension": "Rozmer",
+  "photoFoamTitle": "Foam board",
+  "photoFoamText": "Empty"
 }
