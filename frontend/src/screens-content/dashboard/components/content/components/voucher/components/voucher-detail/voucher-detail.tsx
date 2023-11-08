@@ -66,6 +66,7 @@ const EMPTY_OBJECT = {
   value: 0,
   freeDelivery: false,
   expiration: '',
+  minimalValue: 0,
   limit: 0,
   limitUser: 0,
 }
@@ -80,7 +81,7 @@ const VoucherDetail = ({ tableReset, detail }: VoucherDetailProps) => {
       if (data.error) {
         enqueueSnackbar(data.error, SNACKBAR_OPTIONS_ERROR)
       } else {
-        reset(data)
+        reset({ ...EMPTY_OBJECT, ...data })
       }
     },
   })
