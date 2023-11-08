@@ -13,7 +13,7 @@ import { useMaterial } from '../../../../../../common/api/use-material'
 import { getMaterialId } from '../../../../../../common/utils/get-material-id'
 import { MaterialType } from '../../../../../../common/api/use-materials'
 
-type GalleryDetailType = {
+export type GalleryDetailType = {
   price: number
 }
 

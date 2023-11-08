@@ -57,8 +57,6 @@ const Summary = ({ order }: SummaryProps) => {
   })
   const { delivery, payment } = watch()
 
-  console.log(delivery)
-
   const finalPrice = useMemo(
     () =>
       Number(order?.totalPrice) +
