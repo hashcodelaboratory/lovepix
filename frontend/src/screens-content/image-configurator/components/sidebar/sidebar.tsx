@@ -20,7 +20,7 @@ const Sidebar = ({ configuration }: SidebarProps) => {
       <Dimension configuration={configuration} />
       <Material configuration={configuration} materials={materials ?? []} />
       <Price configuration={configuration} />
-      <Button materials={materials ?? []} />
+      <Button configuration={configuration} materials={materials ?? []} />
     </div>
   )
 }
