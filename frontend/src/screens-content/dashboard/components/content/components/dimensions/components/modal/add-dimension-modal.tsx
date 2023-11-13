@@ -33,6 +33,7 @@ const AddDimensionModal: FC<AddDimensionModalProps> = ({ isOpen, close }) => {
   const [priceAcrylic, setPriceAcrylic] = useState<number>()
   const [priceCanvas, setPriceCanvas] = useState<number>()
   const [pricePoster, setPricePoster] = useState<number>()
+  const [priceFoam, setPriceFoam] = useState<number>()
 
   const { mutate: addDimension } = useAddMaterial({
     onSuccess: (res) => {
@@ -59,6 +60,7 @@ const AddDimensionModal: FC<AddDimensionModalProps> = ({ isOpen, close }) => {
           [Material.ACRYLIC]: Number(priceAcrylic),
           [Material.POSTER]: Number(pricePoster),
           [Material.CANVAS]: Number(priceCanvas),
+          [Material.FOAM]: Number(priceCanvas),
         },
       })
     }
@@ -143,6 +145,21 @@ const AddDimensionModal: FC<AddDimensionModalProps> = ({ isOpen, close }) => {
           variant='standard'
           onChange={(e) => {
             setPricePoster(Number(e.target.value))
+          }}
+        />
+        <TextField
+          autoFocus
+          margin='dense'
+          id={localizationKey.photoFoamTitle}
+          label={`${
+            t(localizationKey.priceFor) + t(localizationKey.photoFoamTitle)
+          }`}
+          value={priceFoam}
+          type='number'
+          fullWidth
+          variant='standard'
+          onChange={(e) => {
+            setPriceFoam(Number(e.target.value))
           }}
         />
       </DialogContent>

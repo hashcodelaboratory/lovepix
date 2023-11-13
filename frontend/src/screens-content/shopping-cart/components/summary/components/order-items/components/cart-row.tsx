@@ -5,6 +5,8 @@ import { Close } from '@mui/icons-material'
 import { Order } from '../../../../../../../common/types/order'
 import { Image } from '../../../../../../../common/types/image'
 import { removeImage, updateQuantity, UpdateQuantityWay } from '../utils/utils'
+import { formatPrice } from '../../../../../../../common/utils/priceFormatting'
+import { useTranslation } from 'next-i18next'
 
 type CartRowProps = {
   order: Order
@@ -13,6 +15,8 @@ type CartRowProps = {
 }
 
 const CartRow = ({ image, order, index }: CartRowProps): JSX.Element => {
+  const { i18n } = useTranslation()
+
   return (
     <div className={styles.cartRow} key={image.origin}>
       <div className={styles.cartRowThumbnailContainer}>
@@ -50,7 +54,7 @@ const CartRow = ({ image, order, index }: CartRowProps): JSX.Element => {
         </div>
       </div>
       <div className={styles.cartRowPrice}>
-        {Number(image?.qty * image?.price).toFixed(2)} €
+        {formatPrice(image?.qty * image?.price, i18n.language)}
       </div>
       <Close
         className={styles.cartRowClose}

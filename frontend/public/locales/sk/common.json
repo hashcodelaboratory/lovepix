@@ -333,5 +333,7 @@
   "/for-download": "/na-stiahnutie",
   "/production-time": "/casy-vyroby",
   "priceFor": "Cena za ",
-  "dimension": "Rozmer"
+  "dimension": "Rozmer",
+  "photoFoamTitle": "Penová doska",
+  "photoFoamText": "Empty"
 }

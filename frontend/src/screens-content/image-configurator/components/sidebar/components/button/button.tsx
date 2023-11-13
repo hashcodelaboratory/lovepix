@@ -9,56 +9,97 @@ import {
   configurationsTable,
   orderTable,
 } from '../../../../../../../database.config'
-import { getPrice } from '../price/utils/generator'
-import {
-  CONFIGURATION_TABLE_KEY,
-  ORDER_TABLE_KEY,
-} from '../../../../../../common/indexed-db/hooks/keys'
+import { ORDER_TABLE_KEY } from '../../../../../../common/indexed-db/hooks/keys'
 import { Image } from '../../../../../../common/types/image'
-import { useContext } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import ImageConfiguratorContext from '../../../../image-configurator-context/image-configurator-context'
 import { splitDimension } from '../../../../../../common/utils/split-dimension'
 import { StorageFileType } from '../../../../../../common/firebase/storage/enums'
 import { MaterialType } from '../../../../../../common/api/use-materials'
+import { Configuration } from '../../../../../../common/types/configuration'
+import {
+  DimensionType,
+  useDimension,
+} from '../../../../../../common/api/use-dimension'
+import { GalleryDetailType } from '../price/price'
+import { useGalleryDetail } from '../../../../../../common/api/use-gallery-detail'
 
 type ButtonProps = {
+  configuration: Configuration
   materials: MaterialType[]
 }
 
-const Button = ({ materials }: ButtonProps) => {
+const Button = ({ materials, configuration }: ButtonProps) => {
   const { t } = useTranslation()
 
   const router = useRouter()
 
-  const configuration = useLiveQuery(
-    () => configurationsTable.get(CONFIGURATION_TABLE_KEY),
-    []
-  )
+  const { material, dimensionId, galleryItemId } =
+    configuration ?? ({} as Configuration)
 
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
 
   const { state } = useContext(ImageConfiguratorContext)
 
+  const [galleryDetail, setGalleryDetail] = useState<GalleryDetailType>()
+  const [dimensionDetail, setDimensionDetail] = useState<DimensionType>()
+
+  const { refetch: fetchGalleryDetail } = useGalleryDetail(galleryItemId, {
+    enabled: !!galleryItemId,
+    onSuccess: (res) => {
+      setGalleryDetail(res)
+    },
+  })
+
+  const galleryDetailPrice = galleryDetail?.price ?? 0
+
+  const { refetch } = useDimension(`DIM-${dimensionId}`, {
+    enabled: !!dimensionId,
+    onSuccess: (res) => {
+      setDimensionDetail(res)
+    },
+  })
+
+  const computedPrice = useMemo(() => {
+    if (dimensionDetail && material) {
+      return Number(dimensionDetail?.price?.[material] + galleryDetailPrice)
+    } else {
+      return 0
+    }
+  }, [dimensionDetail, material, galleryDetailPrice])
+
+  const materialType = useMemo(
+    () => materials.find((_material) => _material.type === material)?.type,
+    [configuration, materials]
+  )
+
+  useEffect(() => {
+    if (dimensionId) {
+      refetch()
+    } else {
+      setDimensionDetail(undefined)
+    }
+  }, [dimensionId])
+
+  useEffect(() => {
+    if (galleryItemId) {
+      fetchGalleryDetail()
+    } else {
+      setGalleryDetail(undefined)
+    }
+  }, [galleryItemId])
+
   const handleUpdateOrder = async () => {
-    const dim = splitDimension(configuration?.dimensionId) ?? {
+    const dim = splitDimension(dimensionId) ?? {
       width: 0,
       height: 0,
     }
-
-    const material = materials.find(
-      (material) => material.type === configuration?.material
-    )?.type
-
-    const price =
-      dim.width > 0 && dim.height > 0
-        ? getPrice(dim.width, dim.height, material)
-        : 0
 
     let totalPrice: number = 0
     order?.shoppingCart?.images?.forEach((image: Image) => {
       totalPrice += image.price * image.qty
     })
-    totalPrice += Number(price)
+    totalPrice += Number(computedPrice)
 
     const payload = {
       shoppingCart: {
@@ -69,11 +110,11 @@ const Button = ({ materials }: ButtonProps) => {
               .getCroppedCanvas()
               ?.toDataURL(StorageFileType.JPEG),
             qty: 1,
-            origin: configuration?.origin,
+            origin: origin,
             width: dim.width,
             height: dim.height,
-            material,
-            price: Number(Number(price).toFixed(2)),
+            material: materialType,
+            price: Number(computedPrice).toFixed(2),
           },
         ],
         products: order?.shoppingCart?.products ?? [],
@@ -90,8 +131,7 @@ const Button = ({ materials }: ButtonProps) => {
     await router.push(`${t(Pages.SHOPPING_CART)}`)
   }
 
-  const disabled =
-    !state.cropper || !configuration?.dimensionId || !configuration?.material
+  const disabled = !state.cropper || !dimensionId || !material
 
   return (
     <div className={styles.containerPadding}>

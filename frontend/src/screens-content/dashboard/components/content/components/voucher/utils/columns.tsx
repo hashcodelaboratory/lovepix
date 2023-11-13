@@ -4,13 +4,13 @@ import styles from '../../../../../dashboard.module.scss'
 export const getColumns = (): GridColDef[] => [
   {
     field: 'code',
-    headerName: 'Code',
+    headerName: 'Kód',
     width: 120,
     editable: false,
   },
   {
     field: 'expiration',
-    headerName: 'Expiration',
+    headerName: 'Dátum expirácie',
     width: 160,
     editable: false,
     renderCell: ({ value }) => {

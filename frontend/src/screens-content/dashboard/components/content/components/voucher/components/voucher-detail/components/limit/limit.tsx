@@ -2,20 +2,17 @@ import styles from '../../../../../../../../dashboard.module.scss'
 import { localizationKey } from '../../../../../../../../../../localization/localization-key'
 import { TextField } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
-import { Control, UseFormRegister } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import { FormInputs } from '../../voucher-detail'
 
-type LimitProps = {
-  control: Control<FormInputs>
-  register: UseFormRegister<FormInputs>
-  errors: any
-}
-
-const Limit = ({ control, register, errors }: LimitProps) => {
+const Limit = () => {
   const { t } = useTranslation()
 
-  const [value, setValue] = useState<number>()
+  const {
+    control,
+    register,
+    formState: { errors },
+  } = useFormContext<FormInputs>()
 
   return (
     <div>
@@ -23,24 +20,44 @@ const Limit = ({ control, register, errors }: LimitProps) => {
         <p className={styles.voucherGeneralText}>
           {t(localizationKey.voucherLimit)}
         </p>
-        <TextField
-          type='number'
-          size='small'
-          sx={{ ml: 1, width: 300 }}
-          placeholder={t(localizationKey.noLimit)}
-          onChange={(e) => setValue(Number(e.target.value))}
+        <Controller
+          key={'limit'}
+          name={'limit'}
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              {...register('limit', { required: false })}
+              error={!!errors.limit?.message}
+              helperText={errors.limit?.message}
+              type='number'
+              size='small'
+              placeholder={t(localizationKey.noLimit)}
+              sx={{ ml: 1, width: 300 }}
+            />
+          )}
         />
       </div>
       <div className={styles.voucherGeneralRow}>
         <p className={styles.voucherGeneralText}>
           {t(localizationKey.voucherLimitUser)}
         </p>
-        <TextField
-          type='number'
-          size='small'
-          sx={{ ml: 1, width: 300 }}
-          placeholder={t(localizationKey.noLimit)}
-          onChange={(e) => setValue(Number(e.target.value))}
+        <Controller
+          key={'limitUser'}
+          name={'limitUser'}
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              {...register('limitUser', { required: false })}
+              error={!!errors.limitUser?.message}
+              helperText={errors.limitUser?.message}
+              type='number'
+              size='small'
+              placeholder={t(localizationKey.noLimit)}
+              sx={{ ml: 1, width: 300 }}
+            />
+          )}
         />
       </div>
     </div>

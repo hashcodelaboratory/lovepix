@@ -10,5 +10,7 @@ export const getMaterialId = (param: Material) => {
       return 'm1'
     case Material.ACRYLIC:
       return 'm3'
+    case Material.FOAM:
+      return 'm5'
   }
 }

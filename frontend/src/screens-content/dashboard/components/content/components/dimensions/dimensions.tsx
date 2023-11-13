@@ -94,8 +94,8 @@ const DimensionsLayout = (): JSX.Element => {
     setOpen(false)
   }
 
-  const onCellEditCommit = (params: any) => {
-    updateDimension({
+  const onCellEditCommit = async (params: any) => {
+    await updateDimension({
       id: params.id.toString(),
       price: {
         ...params.row.price,
