@@ -33,7 +33,7 @@ env:
 jobs:
   push-lovepix-backend-image-on-dockerhub:  
     runs-on: ubuntu-latest 
-    environment: Test
+    environment: Production
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -50,32 +50,3 @@ jobs:
           docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD  
       - name: Docker Push of LOVEPIX-be image
         run: docker push $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_BE
-
-
-  deploy:
-    name: Deploy on EC2
-    needs: push-lovepix-backend-image-on-dockerhub
-    runs-on: ubuntu-latest
-    environment: Test
-    steps:
-      - name: deploying on ec2 and rebuild docker-compose with nginX
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          envs: DOCKER_HUB_USER, DOCKER_HUB_PASSWORD, DOCKER_TAG_WALLER_BE, MONGO_INITDB_ROOT_USERNAME, MONGO_INITDB_ROOT_PASSWORD, MONGODB_SERVER, MONGODB_ENABLE_ADMIN, MONGODB_ADMINUSERNAME, MONGODB_ADMINPASSWORD, MONGODB_BASICAUTH_USERNAME, MONGODB_BASICAUTH_PASSWORD, DATABASE_URL, API_KEY, JWT_SECRET
-          host: ${{ secrets.NEW_ORG_AWS_TEST_HOST }}
-          username: ec2-user
-          key: ${{ secrets.NEW_ORG_AWS_TEST_PEM }}
-          port: 22
-          script: |
-            cd docker-nginx-letsencrypt-https-ec2
-            docker images
-            touch test.txt
-            docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
-            containerId_backend=$( docker container ls -a | grep server-backend | awk '{ print $1 }' )
-            docker stop $containerId_backend
-            docker rm $containerId_backend
-            docker rmi $DOCKER_HUB_USER/$DOCKER_TAG_ENV
-            docker pull $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_BE
-            docker images | grep none | awk '{ print $3; }' | xargs docker rmi
-            docker-compose up -d --no-deps --build nginx
-            docker-compose -f docker-compose-backend.yaml up -d server-backend
