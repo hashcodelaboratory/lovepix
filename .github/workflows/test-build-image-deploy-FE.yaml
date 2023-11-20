@@ -1,4 +1,4 @@
-name: LOVEPIX DockerHub Deployment on ORGANIZATION TEST K8s environment - FRONTEND
+name: LOVEPIX DockerHub build pipeline on ORGANIZATION TEST K8s environment - FRONTEND
 on:
   workflow_dispatch:
   push:
