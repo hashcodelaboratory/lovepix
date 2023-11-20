@@ -114,7 +114,7 @@ const Button = ({ materials, configuration }: ButtonProps) => {
             width: dim.width,
             height: dim.height,
             material: materialType,
-            price: Number(computedPrice).toFixed(2),
+            price: Number(Number(computedPrice).toFixed(2)),
           },
         ],
         products: order?.shoppingCart?.products ?? [],

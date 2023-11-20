@@ -40,7 +40,7 @@ const OrderDetailRow = ({ image, index, order }: Props): JSX.Element => {
       <div>
         {width}x{height}
       </div>
-      <div>{price.toFixed(2)} €</div>
+      <div>{Number(price).toFixed(2)} €</div>
       {pdf ? (
         <a target='_blank' href={image.pdf} rel='noopener noreferrer'>
           <PictureAsPdfIcon color='error' />
