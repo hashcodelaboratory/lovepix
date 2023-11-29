@@ -36,8 +36,6 @@ export const getPriceForDelivery = (param?: DeliveryOptions) => {
 
 export const getPriceForPayment = (param?: PaymentEnum) => {
   switch (param) {
-    case PaymentEnum.PERSONAL_DELIVERY:
-      return 2
     default:
       return 0
   }
