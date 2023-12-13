@@ -9,6 +9,7 @@ import TemporaryDrawer from './drawer'
 import CategoriesSidebar from './categories-sidebar'
 import { localizationKey } from 'localization/localization-key'
 import { ProductsType, useProducts } from 'common/api/use-products'
+import { ImageLayout } from '../../../home/enums/enums'
 
 const ProductList = () => {
   const { t } = useTranslation()
@@ -19,7 +20,13 @@ const ProductList = () => {
   const mobile = useMediaQuery('(max-width:580px)')
 
   const productList = products?.map((products: ProductsType) => (
-    <Product key={products.id} product={{ ...products }} />
+    <Product
+      key={products.id}
+      product={{ ...products }}
+      width={272}
+      height={272}
+      layout={ImageLayout.INTRINSIC}
+    />
   ))
 
   const categoryTitle = category ?? t(localizationKey.allProducts)
@@ -33,7 +40,7 @@ const ProductList = () => {
       {tablet && <TemporaryDrawer />}
       {!tablet && <CategoriesSidebar />}
       <div className={mobile ? styles.pContainerMobile : styles.pContainer}>
-        <Typography variant='h5' className={styles.categoryTitle}>
+        <Typography variant='h6' className={styles.categoryTitle}>
           {categoryTitle}
         </Typography>
         <div

@@ -1,23 +1,33 @@
 import React from 'react'
 import Image from 'next/image'
+import { ImageLayout } from '../../screens-content/home/enums/enums'
 
 type ProgressiveImageProps = {
   image?: string
   placeholder?: string
+  width?: number
+  height?: number
+  layout?: ImageLayout
 }
 
-const ProgressiveImage = ({ image, placeholder }: ProgressiveImageProps) => {
+const ProgressiveImage = ({
+  image,
+  placeholder,
+  width = 300,
+  height = 300,
+  layout = ImageLayout.FIXED,
+}: ProgressiveImageProps) => {
   return (
-    <div style={{ width: 300, height: 300 }}>
+    <div style={{ width, height }}>
       <Image
         placeholder='blur'
         src={image ?? ''}
         blurDataURL={placeholder ?? ''}
         alt='image'
-        layout='fixed'
+        layout={layout}
         objectFit='cover'
-        width={300}
-        height={300}
+        width={width}
+        height={height}
       />
     </div>
   )
