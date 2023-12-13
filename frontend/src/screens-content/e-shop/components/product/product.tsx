@@ -3,12 +3,16 @@ import React from 'react'
 import styles from './product.module.scss'
 import { ProductsType } from 'common/api/use-products'
 import ProgressiveImage from '../../../../common/components/progressive-image'
+import { ImageLayout } from '../../../home/enums/enums'
 
 type ProductContent = {
   product: ProductsType
+  width?: number
+  height?: number
+  layout?: ImageLayout
 }
 
-const Product = ({ product }: ProductContent) => {
+const Product = ({ product, width, height, layout }: ProductContent) => {
   const router = useRouter()
   const { id, title, price, webp1kbHighEndImageUrl, webpHighEndImageUrl } =
     product
@@ -20,6 +24,9 @@ const Product = ({ product }: ProductContent) => {
       <ProgressiveImage
         image={webpHighEndImageUrl ?? ''}
         placeholder={webp1kbHighEndImageUrl ?? ''}
+        width={width}
+        height={height}
+        layout={layout}
       />
       <div className={styles.previewImageDescription}>
         <p className={styles.productTitle}>{title}</p>

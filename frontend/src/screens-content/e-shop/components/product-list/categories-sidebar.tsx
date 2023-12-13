@@ -43,7 +43,7 @@ const CategoriesSidebar = () => {
 
   return (
     <div className={styles.categoriesContainer}>
-      <Typography variant='h5' className={styles.categoryTitle}>
+      <Typography variant='h6' className={styles.categoryTitle}>
         {t(localizationKey.categories)}
       </Typography>
       <div onClick={showAllProducts} className={categoryStyle}>
