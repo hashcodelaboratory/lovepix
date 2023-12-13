@@ -6,7 +6,7 @@ export type AdminEmail = {
 export const sendOrderMailtoAdmin = async (orderId: string) => {
   const body = {
     id: orderId,
-    dest: ['davidbednarik07@gmail.com'],
+    dest: ['davidbednarik07@gmail.com', 'info@lovepix.sk'],
   }
   return await fetch('/api/email/send-to-admin', {
     method: 'POST',
