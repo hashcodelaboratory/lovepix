@@ -21,10 +21,13 @@ import {
   ORDER_TABLE_KEY,
 } from '../common/indexed-db/hooks/keys'
 import styles from './responsive-app-bar.module.scss'
-import SearchIcon from '@mui/icons-material/Search'
+import PersonIcon from '@mui/icons-material/Person'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import MenuIconComponent from './components/menu-sidebar/menu-icon/menu-icon'
 import LogoComponent from './components/menu-sidebar/logo/logo'
 import ConfiguratorComponent from './components/menu/configurator/configurator'
+import Button from '@mui/material/Button'
+import useLoggedUser from '../common/api/use-logged-user'
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
@@ -32,6 +35,8 @@ const ResponsiveAppBar = () => {
   const { t } = useTranslation()
 
   const router = useRouter()
+
+  const { user } = useLoggedUser()
 
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
   const configuration = useLiveQuery(
@@ -129,13 +134,25 @@ const ResponsiveAppBar = () => {
             ))}
           </Box>
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-            <SearchIcon
-              sx={{
-                color: 'black',
-                display: 'block',
-                cursor: 'pointer',
-              }}
-            />
+            {user ? (
+              <Button>
+                <div className={styles.accountRow}>
+                  <PersonIcon style={{ color: 'black', marginRight: 8 }} />
+                  <p className={styles.accountTextLogged}>Meno Priezvisko</p>
+                  <KeyboardArrowDownIcon style={{ color: 'gray' }} />
+                </div>
+              </Button>
+            ) : (
+              <Button>
+                <div className={styles.accountRow}>
+                  <PersonIcon style={{ color: 'gray', marginRight: 8 }} />
+                  <div className={styles.accountCol}>
+                    <p className={styles.accountTitle}>Môj Lovepix</p>
+                    <p className={styles.accountText}>Prihlásiť sa</p>
+                  </div>
+                </div>
+              </Button>
+            )}
             <Link href={t(Pages.SHOPPING_CART)}>
               <Badge
                 badgeContent={BADGE_NUMBER}
