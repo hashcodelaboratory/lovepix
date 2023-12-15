@@ -1,0 +1,36 @@
+name: Data migration from Firebase to Mongo DB - Lovepix
+on:
+  workflow_dispatch:
+    inputs:
+      collections:
+        description: "Which collections you want migrate?
+        admins
+        categories-eshop
+        categories
+        contents
+        dimensions
+        gallery
+        materials
+        products
+        reviews
+        translations
+        vouchers
+        all
+        "
+        type: "string"
+
+jobs:
+  migrate-to-mongodb:
+    runs-on: ubuntu-latest
+    environment: Test
+    steps:
+      - name: migrate from firebase to mongoDB
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.NEW_ORG_AWS_TEST_HOST }}
+          username: ec2-user
+          key: ${{ secrets.NEW_ORG_AWS_TEST_PEM }}
+          port: 22
+          script: |
+            cd docker-nginx-letsencrypt-https-ec2/backup_data_firebase/output_python
+            sh export-data-from-firebase-to-mongo-kubernetes-${{inputs.collections}}.sh
