@@ -33,4 +33,4 @@ jobs:
           port: 22
           script: |
             cd docker-nginx-letsencrypt-https-ec2/backup_data_firebase/output_python
-            sh export-data-from-firebase-to-mongo-kubernetes-${{inputs.collections}}.sh
+            sh migration-data-from-firebase-to-mongo-kubernetes-${{inputs.collections}}.sh
