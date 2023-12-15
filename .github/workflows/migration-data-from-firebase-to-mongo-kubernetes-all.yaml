@@ -1,4 +1,4 @@
-name: Data migration from Firebase to Mongo DB - Lovepix
+name: Data migration from Firebase to KUBERNETES Mongo DB - Lovepix
 on:
   workflow_dispatch:
     inputs:
