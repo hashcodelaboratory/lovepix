@@ -12,7 +12,7 @@ import { useTranslation } from 'next-i18next'
 import { v4 as uuidv4 } from 'uuid'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import { Pages } from '../constants/pages/urls'
-import { Badge } from '@mui/material'
+import { Avatar, Badge } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { configurationsTable, orderTable } from '../../database.config'
@@ -28,9 +28,11 @@ import LogoComponent from './components/menu-sidebar/logo/logo'
 import ConfiguratorComponent from './components/menu/configurator/configurator'
 import Button from '@mui/material/Button'
 import useLoggedUser from '../common/api/use-logged-user'
+import { logOut } from '../auth'
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 
   const { t } = useTranslation()
 
@@ -60,6 +62,19 @@ const ResponsiveAppBar = () => {
 
   const navigate = () => {
     router.push('/')
+  }
+
+  const open = Boolean(anchorEl)
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const handleLogout = () => {
+    logOut()
+    handleClose()
   }
 
   return (
@@ -135,15 +150,58 @@ const ResponsiveAppBar = () => {
           </Box>
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             {user ? (
-              <Button>
-                <div className={styles.accountRow}>
-                  <PersonIcon style={{ color: 'black', marginRight: 8 }} />
-                  <p className={styles.accountTextLogged}>Meno Priezvisko</p>
-                  <KeyboardArrowDownIcon style={{ color: 'gray' }} />
-                </div>
-              </Button>
+              <div>
+                <Button onClick={handleClick}>
+                  <div className={styles.accountRow}>
+                    <Avatar
+                      alt={!!user ? user.displayName || '' : undefined}
+                      src={user?.photoURL ?? ''}
+                      imgProps={{ referrerPolicy: 'no-referrer' }}
+                      sx={{ width: 30, height: 30, marginRight: 1 }}
+                    />
+                    <p className={styles.accountTextLogged}>
+                      {user.displayName}
+                    </p>
+                    <KeyboardArrowDownIcon style={{ color: 'gray' }} />
+                  </div>
+                </Button>
+                <Menu
+                  id='basic-menu'
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                  }}
+                >
+                  <MenuItem onClick={handleClose}>
+                    <p className={styles.menuText}>Objednávky</p>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <p className={styles.menuText}>Môj profil</p>
+                  </MenuItem>
+                  {user?.isAdmin && (
+                    <MenuItem
+                      onClick={() => {
+                        router.push(Pages.DASHBOARD)
+                      }}
+                    >
+                      <p className={styles.menuText}>Dashboard</p>
+                    </MenuItem>
+                  )}
+                  <MenuItem onClick={handleLogout}>
+                    <p className={styles.menuText}>
+                      <b>Odhlásiť sa</b>
+                    </p>
+                  </MenuItem>
+                </Menu>
+              </div>
             ) : (
-              <Button>
+              <Button
+                onClick={() => {
+                  router.push('/login')
+                }}
+              >
                 <div className={styles.accountRow}>
                   <PersonIcon style={{ color: 'gray', marginRight: 8 }} />
                   <div className={styles.accountCol}>
@@ -164,59 +222,6 @@ const ResponsiveAppBar = () => {
                 />
               </Badge>
             </Link>
-            {/*<Tooltip title='Open settings'>*/}
-            {/*  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>*/}
-            {/*    <Avatar*/}
-            {/*      alt={!!user ? user.displayName || '' : undefined}*/}
-            {/*      src='/static/images/avatar/2.jpg'*/}
-            {/*    />*/}
-            {/*  </IconButton>*/}
-            {/*</Tooltip>*/}
-            {/*<Menu*/}
-            {/*  sx={{ mt: '45px' }}*/}
-            {/*  id='menu-sidebar-appbar'*/}
-            {/*  anchorEl={anchorElUser}*/}
-            {/*  anchorOrigin={{*/}
-            {/*    vertical: 'top',*/}
-            {/*    horizontal: 'right',*/}
-            {/*  }}*/}
-            {/*  keepMounted*/}
-            {/*  transformOrigin={{*/}
-            {/*    vertical: 'top',*/}
-            {/*    horizontal: 'right',*/}
-            {/*  }}*/}
-            {/*  open={Boolean(anchorElUser)}*/}
-            {/*  onClose={handleCloseUserMenu}*/}
-            {/*>*/}
-            {/*  {user ? (*/}
-            {/*    settings.map((setting) => {*/}
-            {/*      const menuItem = (*/}
-            {/*        <MenuItem*/}
-            {/*          key={setting.title}*/}
-            {/*          onClick={() => setting.callBack && handleLogout()}*/}
-            {/*        >*/}
-            {/*          <Typography textAlign='center'>*/}
-            {/*            {setting.title}*/}
-            {/*          </Typography>*/}
-            {/*        </MenuItem>*/}
-            {/*      )*/}
-
-            {/*      if (setting.callBack) {*/}
-            {/*        return menuItem*/}
-            {/*      } else {*/}
-            {/*        return (*/}
-            {/*          <Link key={uuidv4()} href={setting.link}>*/}
-            {/*            {menuItem}*/}
-            {/*          </Link>*/}
-            {/*        )*/}
-            {/*      }*/}
-            {/*    })*/}
-            {/*  ) : (*/}
-            {/*    <MenuItem onClick={logIn}>*/}
-            {/*      <Typography textAlign='center'>Login</Typography>*/}
-            {/*    </MenuItem>*/}
-            {/*  )}*/}
-            {/*</Menu>*/}
           </Box>
         </Toolbar>
       </Container>
