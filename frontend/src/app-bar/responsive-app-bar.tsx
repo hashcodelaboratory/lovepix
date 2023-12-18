@@ -77,6 +77,8 @@ const ResponsiveAppBar = () => {
     handleClose()
   }
 
+  console.log(user)
+
   return (
     <AppBar position='fixed' sx={{ backgroundColor: 'white' }}>
       <Container maxWidth='lg'>

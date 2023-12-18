@@ -3,15 +3,17 @@ import styles from './profile.module.scss'
 import { useState } from 'react'
 import Info from './info/info'
 import Address from './address/address'
+import Orders from './orders/orders'
 
 enum ActiveLayout {
   INFO = 'INFO',
   ADDRESS = 'ADDRESS',
+  ORDERS = 'ORDERS',
 }
 
 const ProfileLayout = () => {
   const [activeLayout, setActiveLayout] = useState<ActiveLayout>(
-    ActiveLayout.INFO
+    ActiveLayout.ORDERS
   )
 
   const changeLayout = (param: ActiveLayout) => {
@@ -30,6 +32,8 @@ const ProfileLayout = () => {
         return <Info />
       case ActiveLayout.ADDRESS:
         return <Address />
+      case ActiveLayout.ORDERS:
+        return <Orders />
     }
   }
 
@@ -37,6 +41,12 @@ const ProfileLayout = () => {
     <Container className={styles.container}>
       <h2>Môj profil</h2>
       <div className={styles.rowMenu}>
+        <Button
+          className={getButtonStyle(ActiveLayout.ORDERS)}
+          onClick={() => changeLayout(ActiveLayout.ORDERS)}
+        >
+          Objednávky
+        </Button>
         <Button
           className={getButtonStyle(ActiveLayout.INFO)}
           onClick={() => changeLayout(ActiveLayout.INFO)}
