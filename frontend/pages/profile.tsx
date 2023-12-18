@@ -1,19 +1,22 @@
-import type {NextPage} from 'next'
+import type { NextPage } from 'next'
 import styles from '../styles/Home.module.css'
 import ResponsiveAppBar from '../src/app-bar/responsive-app-bar'
-import FooterLayout from "../src/screens-content/footer/footer";
+import FooterLayout from '../src/screens-content/footer/footer'
+import ProfileLayout from '../src/screens-content/profile/profile'
 
 const Profile: NextPage = () => {
   return (
     <div className={styles.container}>
       <header>
-        <ResponsiveAppBar/>
+        <ResponsiveAppBar />
       </header>
 
-      <main className={styles.main}></main>
+      <main className={styles.main}>
+        <ProfileLayout />
+      </main>
 
       <footer>
-        <FooterLayout/>
+        <FooterLayout />
       </footer>
     </div>
   )
