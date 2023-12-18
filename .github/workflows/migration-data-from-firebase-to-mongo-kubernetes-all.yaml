@@ -45,6 +45,7 @@ jobs:
       - name: migrate from firebase to mongoDB
         uses: appleboy/ssh-action@v0.1.7
         with:
+          envs: MONGODB_ADMINUSERNAME, MONGODB_ADMINPASSWORD
           host: ${{ secrets.NEW_ORG_AWS_TEST_HOST }}
           username: ec2-user
           key: ${{ secrets.NEW_ORG_AWS_TEST_PEM }}
