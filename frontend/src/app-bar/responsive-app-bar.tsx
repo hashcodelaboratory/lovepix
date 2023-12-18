@@ -177,7 +177,11 @@ const ResponsiveAppBar = () => {
                   <MenuItem onClick={handleClose}>
                     <p className={styles.menuText}>Objednávky</p>
                   </MenuItem>
-                  <MenuItem onClick={handleClose}>
+                  <MenuItem
+                    onClick={() => {
+                      router.push(Pages.PROFILE)
+                    }}
+                  >
                     <p className={styles.menuText}>Môj profil</p>
                   </MenuItem>
                   {user?.isAdmin && (
