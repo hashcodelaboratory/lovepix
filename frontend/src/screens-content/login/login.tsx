@@ -8,6 +8,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, TextField } from '@mui/material'
 import { useTranslation } from 'next-i18next'
 import { logIn } from '../../auth'
+import { signInWithEmailAndPassword } from '@firebase/auth'
+import { getAuth } from 'firebase/auth'
+import { useState } from 'react'
+import Registration from './components/registration/registration'
 
 type LoginForm = {
   email: string
@@ -47,6 +51,9 @@ const LoginLayout = () => {
     resolver: yupResolver(LOGIN_FORM_SCHEMA),
     defaultValues: DEFAULT_VALUES,
   })
+
+  const [isNewRegistrationEnabled, setIsNewRegistrationEnabled] =
+    useState(false)
 
   const FIELDS: ControllerFieldType[] = [
     {
@@ -98,8 +105,17 @@ const LoginLayout = () => {
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     if (data) {
-      // TODO: login with userename & password via firebase
-      reset()
+      const { email, password } = data
+      try {
+        const auth = getAuth()
+        await signInWithEmailAndPassword(auth, email, password)
+        await router.push('/')
+        reset()
+      } catch (error: any) {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log(errorCode + errorMessage)
+      }
     }
   }
 
@@ -133,7 +149,28 @@ const LoginLayout = () => {
             <Button className={styles.googleButton} onClick={googleLogin} />
           </div>
           <div>
-            <p className={styles.registration}>Nová registrácia</p>
+            {isNewRegistrationEnabled ? (
+              <>
+                <Registration />
+                <p
+                  onClick={() => {
+                    setIsNewRegistrationEnabled(false)
+                  }}
+                  className={styles.registration}
+                >
+                  Zrušiť registráciu
+                </p>
+              </>
+            ) : (
+              <p
+                onClick={() => {
+                  setIsNewRegistrationEnabled(true)
+                }}
+                className={styles.registration}
+              >
+                Nová registrácia
+              </p>
+            )}
           </div>
         </div>
       </div>
