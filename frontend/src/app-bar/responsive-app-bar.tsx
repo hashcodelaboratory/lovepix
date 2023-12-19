@@ -77,8 +77,6 @@ const ResponsiveAppBar = () => {
     handleClose()
   }
 
-  console.log(user)
-
   return (
     <AppBar position='fixed' sx={{ backgroundColor: 'white' }}>
       <Container maxWidth='lg'>
@@ -162,7 +160,7 @@ const ResponsiveAppBar = () => {
                       sx={{ width: 30, height: 30, marginRight: 1 }}
                     />
                     <p className={styles.accountTextLogged}>
-                      {user.displayName}
+                      {user.displayName ?? user.email}
                     </p>
                     <KeyboardArrowDownIcon style={{ color: 'gray' }} />
                   </div>
