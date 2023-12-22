@@ -1,4 +1,4 @@
-name: LOVEPIX DockerHub Deployment on ORGANIZATION k8s PROD environment - BACKEND
+name: LOVEPIX DockerHub Deployment on ORGANIZATION k8s TEST K8S environment - BACKEND
 on:
   workflow_dispatch:
   push:
