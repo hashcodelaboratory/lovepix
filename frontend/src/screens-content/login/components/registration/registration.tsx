@@ -100,9 +100,8 @@ const Registration = () => {
         reset()
         await router.push('/')
       } catch (error: any) {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log(errorCode + errorMessage)
+        const { code, message } = error
+        console.log(code + message)
       }
     }
   }

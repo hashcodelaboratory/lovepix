@@ -76,6 +76,7 @@
   "postalCode": "Postal code",
   "phone": "Phone",
   "email": "E-mail",
+  "password": "Password",
   "deliveryValidation": "Delivery field is required.",
   "paymentValidation": "Payment field is required.",
   "firstNameValidation": "First name field is required.",

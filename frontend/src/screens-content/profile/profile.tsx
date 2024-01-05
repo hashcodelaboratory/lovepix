@@ -4,6 +4,11 @@ import { useState } from 'react'
 import Info from './info/info'
 import Address from './address/address'
 import Orders from './orders/orders'
+import useLoggedUser from '../../common/api/use-logged-user'
+import { useOrders } from '../../common/api/use-orders'
+import { OrderState as OrderStateEnum } from '../../common/enums/order-states'
+import { localizationKey } from '../../localization/localization-key'
+import { useTranslation } from 'next-i18next'
 
 enum ActiveLayout {
   INFO = 'INFO',
@@ -12,9 +17,38 @@ enum ActiveLayout {
 }
 
 const ProfileLayout = () => {
+  const { t } = useTranslation()
+
+  const { user } = useLoggedUser()
+  //const { data: orders } = useOrders(user?.email)
+  const { data: orders } = useOrders('a@a.sk')
+
   const [activeLayout, setActiveLayout] = useState<ActiveLayout>(
     ActiveLayout.ORDERS
   )
+
+  const states = {
+    [OrderStateEnum.CREATED]: t(localizationKey.orderCreated),
+    [OrderStateEnum.DELIVERED]: t(localizationKey.accepted),
+    [OrderStateEnum.PACKED]: t(localizationKey.packed),
+    [OrderStateEnum.PICKED]: t(localizationKey.shipped),
+    [OrderStateEnum.SHIPPED]: t(localizationKey.finished),
+  }
+
+  const orderData =
+    orders?.map(({ id, date, totalPrice, orderState }) => ({
+      id: id,
+      date: new Date(date).toLocaleDateString() ?? '',
+      totalPrice: totalPrice,
+      state: orderState
+        ? states[orderState[orderState.length - 1].state as OrderStateEnum]
+        : '-',
+    })) ?? []
+
+  const addressData =
+    orders?.map(({ form }) => ({
+      form: form,
+    })) ?? []
 
   const changeLayout = (param: ActiveLayout) => {
     setActiveLayout(param)
@@ -31,9 +65,17 @@ const ProfileLayout = () => {
       case ActiveLayout.INFO:
         return <Info />
       case ActiveLayout.ADDRESS:
-        return <Address />
+        return (
+          <Address
+            data={
+              addressData.filter(
+                (item, index) => addressData.indexOf(item) === index
+              ) ?? []
+            }
+          />
+        )
       case ActiveLayout.ORDERS:
-        return <Orders />
+        return <Orders data={orderData} />
     }
   }
 

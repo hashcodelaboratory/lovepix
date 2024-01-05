@@ -1,15 +1,24 @@
 import styles from '../profile.module.scss'
-import { getDimensionsColumns } from '../../dashboard/components/content/components/utils/columns/dimensions-columns'
 import { DataGrid } from '@mui/x-data-grid'
 import { getColumns } from './components/columns/columns'
 
-const Orders = () => {
+type OrderDetail = {
+  id: string
+  date: string
+  totalPrice: number
+  state: string
+}
+
+type OrdersProps = {
+  data?: OrderDetail[]
+}
+const Orders = ({ data = [] }: OrdersProps) => {
   return (
     <>
       <h4>Už vybavené objednávky</h4>
       <DataGrid
         className={styles.contentTable}
-        rows={[]}
+        rows={data}
         columns={getColumns()}
         pageSize={10}
         rowsPerPageOptions={[5]}

@@ -174,7 +174,11 @@ const ResponsiveAppBar = () => {
                     'aria-labelledby': 'basic-button',
                   }}
                 >
-                  <MenuItem onClick={handleClose}>
+                  <MenuItem
+                    onClick={() => {
+                      router.push(Pages.PROFILE)
+                    }}
+                  >
                     <p className={styles.menuText}>Objednávky</p>
                   </MenuItem>
                   <MenuItem
