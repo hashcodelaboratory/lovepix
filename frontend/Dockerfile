@@ -14,6 +14,8 @@ RUN echo //npm.pkg.github.com/:_authToken=$NPM_GITHUB_TOKEN >> ~/.npmrc
 RUN echo @hashcodelaboratory:registry=https://npm.pkg.github.com/ >> ~/.npmrc
 
 RUN \
+  ls -la ; \
+  pwd ; \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile ; \
   elif [ -f package-lock.json ]; then npm ci; \
   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
