@@ -12,3 +12,5 @@ export const SATISFACTION = 'Satisfaction'
 export const POSSIBILITIES = 'Possibilities'
 export const PRODUCTION_TIME = 'Production time'
 export const COMPLAINT = 'Complaint'
+
+export const PROFILE = 'Profile'

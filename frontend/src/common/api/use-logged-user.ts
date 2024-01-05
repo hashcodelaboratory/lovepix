@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from 'firebase/auth'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { auth } from '../firebase/config'
 import { User } from 'firebase/auth'
 import { useAdmins } from 'common/api/use-admins'
@@ -15,7 +15,7 @@ const useLoggedUser = () => {
 
   const checkIfAdmin = (user: User) => {
     const admin = admins?.find((item) => item.email === user.email)
-    admin && setUser({ ...user, isAdmin: !!admin })
+    setUser({ ...user, isAdmin: !!admin })
   }
 
   const getUser = async () => {
