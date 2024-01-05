@@ -1,0 +1,95 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(#fff 0, #e0a7b0 350px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.headerTitle {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.card {
+  width: 100%;
+  max-width: 390px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 5px;
+  background-color: white;
+  padding: 2rem;
+  margin: 0 1rem;
+}
+
+.cardTitle {
+  margin-top: 0;
+}
+
+.cardText {
+  margin-bottom: 2rem;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.input {
+  margin-bottom: 2rem;
+}
+
+.button {
+  width: 100%;
+  background-color: #E71A3D !important;
+  color: white !important;
+  padding: 1rem;
+}
+
+.button:hover {
+  background-color: #a1132b !important;
+}
+
+.form {
+  border-bottom: 1px solid silver;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.rowCenter {
+  display: flex;
+  justify-content: center;
+}
+
+.googleButton {
+  margin: auto;
+  width: 55px;
+  height: 42px;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+  background-color: white !important;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('https://identity.alza.cz/img/external-login-providers/google.svg');
+}
+
+.googleButton:hover {
+  box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.15);
+}
+
+.registration {
+  margin-bottom: 0;
+  font-weight: 500;
+  color: #E71A3D;
+  text-decoration: underline;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.registrationContainer {
+  margin-top: 2rem;
+}
