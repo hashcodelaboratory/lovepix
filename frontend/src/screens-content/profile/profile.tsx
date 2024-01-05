@@ -20,8 +20,7 @@ const ProfileLayout = () => {
   const { t } = useTranslation()
 
   const { user } = useLoggedUser()
-  //const { data: orders } = useOrders(user?.email)
-  const { data: orders } = useOrders('a@a.sk')
+  const { data: orders } = useOrders(user?.email)
 
   const [activeLayout, setActiveLayout] = useState<ActiveLayout>(
     ActiveLayout.ORDERS
