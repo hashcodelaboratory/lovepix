@@ -28,6 +28,7 @@ const Orders = ({ data = [] }: OrdersProps) => {
         // onSelectionModelChange={selectionChanged}
         // onRowClick={onRowClick}
         autoHeight
+        localeText={{ noRowsLabel: 'Žiadne objednávky.' }}
       />
     </>
   )
