@@ -20,8 +20,9 @@ const ProfileLayout = () => {
   const { t } = useTranslation()
 
   const { user } = useLoggedUser()
-  //const { data: orders } = useOrders(user?.email)
-  const { data: orders } = useOrders('a@a.sk')
+  const { data: orders } = useOrders(user?.email, {
+    enabled: !!user?.email,
+  })
 
   const [activeLayout, setActiveLayout] = useState<ActiveLayout>(
     ActiveLayout.ORDERS
@@ -46,9 +47,19 @@ const ProfileLayout = () => {
     })) ?? []
 
   const addressData =
-    orders?.map(({ form }) => ({
-      form: form,
-    })) ?? []
+    orders
+      ?.map(({ form }) => ({
+        form: form,
+      }))
+      .filter(
+        (value, index, self) =>
+          index ===
+          self.findIndex(
+            (t) =>
+              t.form.address === value.form.address &&
+              t.form.city === value.form.city
+          )
+      ) ?? []
 
   const changeLayout = (param: ActiveLayout) => {
     setActiveLayout(param)
@@ -65,15 +76,7 @@ const ProfileLayout = () => {
       case ActiveLayout.INFO:
         return <Info />
       case ActiveLayout.ADDRESS:
-        return (
-          <Address
-            data={
-              addressData.filter(
-                (item, index) => addressData.indexOf(item) === index
-              ) ?? []
-            }
-          />
-        )
+        return <Address data={Array.from(new Set(addressData))} />
       case ActiveLayout.ORDERS:
         return <Orders data={orderData} />
     }

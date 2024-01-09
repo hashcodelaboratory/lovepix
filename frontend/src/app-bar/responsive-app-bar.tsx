@@ -72,9 +72,10 @@ const ResponsiveAppBar = () => {
     setAnchorEl(null)
   }
 
-  const handleLogout = () => {
-    logOut()
+  const handleLogout = async () => {
+    await logOut()
     handleClose()
+    await router.push('/')
   }
 
   return (
