@@ -34,7 +34,7 @@ const Button = ({ materials, configuration }: ButtonProps) => {
 
   const router = useRouter()
 
-  const { material, dimensionId, galleryItemId } =
+  const { material, dimensionId, galleryItemId, origin } =
     configuration ?? ({} as Configuration)
 
   const order = useLiveQuery(() => orderTable.get(ORDER_TABLE_KEY), [])
