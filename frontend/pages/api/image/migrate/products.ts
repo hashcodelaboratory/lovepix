@@ -1,9 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { processImage } from '@hashcodelaboratory/imagination'
 import { collection, getDocs } from '@firebase/firestore'
 import { database } from 'common/firebase/config'
 import { Collections } from 'common/firebase/enums'
-import { GalleryItem } from '../../../../src/common/types/gallery'
 import { doc, updateDoc } from 'firebase/firestore'
 import { ProductsType } from '../../../../src/common/api/use-products'
 
@@ -46,13 +44,12 @@ const migrateProducts = async (
     )
 
     const output: Output[] = await Promise.all(
-      products.map(({ id, image }) =>
-        processImage({
-          url: image,
-          bucketName: BUCKET_NAME,
-          objectKey: id,
-        })
-      )
+      products.map(({ id, image }) => ({
+        objectKey: '',
+        originImageUrl: '',
+        webp1kbHighEndImageUrl: '',
+        webpHighEndImageUrl: '',
+      }))
     )
 
     await Promise.all(
