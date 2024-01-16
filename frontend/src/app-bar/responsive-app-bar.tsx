@@ -115,7 +115,7 @@ const ResponsiveAppBar = () => {
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
+              flexGrow: 3,
             }}
           >
             <LogoComponent navigate={navigate} />
@@ -149,7 +149,7 @@ const ResponsiveAppBar = () => {
               </Link>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
+          <Box className={styles.navbarRow}>
             {user ? (
               <div>
                 <Button onClick={handleClick}>

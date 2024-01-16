@@ -1,10 +1,11 @@
 import { GridColDef } from '@mui/x-data-grid'
-import styles from '../../../../dashboard/dashboard.module.scss'
+import styles from '../../../profile.module.scss'
 
 export const getColumns = (): GridColDef[] => [
   {
     field: 'date',
     headerName: 'Dátum',
+    headerClassName: 'hideRightSeparator',
     width: 120,
     editable: false,
     renderCell: ({ value }) => <div style={{ color: 'silver' }}>{value}</div>,
@@ -13,6 +14,7 @@ export const getColumns = (): GridColDef[] => [
   {
     field: 'id',
     headerName: 'ID objednávky',
+    headerClassName: 'hideRightSeparator',
     width: 160,
     editable: false,
     renderCell: ({ value }) => <div style={{ fontWeight: 200 }}>{value}</div>,
@@ -21,6 +23,7 @@ export const getColumns = (): GridColDef[] => [
   {
     field: 'totalPrice',
     headerName: 'Cena',
+    headerClassName: 'hideRightSeparator',
     width: 100,
     editable: false,
     renderCell: ({ value }) => (
@@ -31,6 +34,7 @@ export const getColumns = (): GridColDef[] => [
   {
     field: 'state',
     headerName: 'Stav',
+    headerClassName: 'hideRightSeparator',
     width: 220,
     editable: false,
     disableColumnMenu: true,
