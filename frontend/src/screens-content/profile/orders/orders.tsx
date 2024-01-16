@@ -29,6 +29,16 @@ const Orders = ({ data = [] }: OrdersProps) => {
         // onRowClick={onRowClick}
         autoHeight
         localeText={{ noRowsLabel: 'Žiadne objednávky.' }}
+        sx={{
+          '& .hideRightSeparator > .MuiDataGrid-columnSeparator': {
+            display: 'none',
+          },
+          '.hideRightSeparator': {
+            backgroundColor: '#E81A40',
+            color: 'white',
+            fontWeight: 'bold',
+          },
+        }}
       />
     </>
   )
