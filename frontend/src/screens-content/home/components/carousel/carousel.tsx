@@ -52,6 +52,7 @@ const Carousel = ({ configuration }: CarouselProps) => {
     accept: {
       'image/*': [],
     },
+    maxSize: 20000000,
   })
 
   const onDrop = async (files: File[]) => {
