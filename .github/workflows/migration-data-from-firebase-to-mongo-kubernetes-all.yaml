@@ -1,0 +1,55 @@
+name: Data migration from Firebase to KUBERNETES Mongo DB - Lovepix
+on:
+  workflow_dispatch:
+    inputs:
+      collections:
+        description: "Which collections you want migrate?
+        admins
+        categories-eshop
+        categories
+        contents
+        dimensions
+        gallery
+        materials
+        products
+        reviews
+        translations
+        vouchers
+        all
+        "
+        type: "string"
+env:
+  DOCKER_HUB_USER: ${{secrets.DOCKER_HUB_USERNAME}}
+  DOCKER_HUB_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
+  DOCKER_TAG_WALLER_BE: ${{secrets.DOCKER_TAG_WALLER_BE}}
+  DOCKER_TAG_MONGO_RS: ${{secrets.DOCKER_TAG_MONGO_RS}}
+  MONGO_INITDB_ROOT_USERNAME: ${{secrets.MONGO_INITDB_ROOT_USERNAME}}
+  MONGO_INITDB_ROOT_PASSWORD: ${{secrets.MONGO_INITDB_ROOT_PASSWORD}}
+  MONGODB_SERVER: ${{secrets.MONGODB_SERVER}}
+  MONGODB_ENABLE_ADMIN: ${{secrets.MONGODB_ENABLE_ADMIN}}
+  MONGODB_ADMINUSERNAME: ${{secrets.MONGODB_ADMINUSERNAME}}
+  MONGODB_ADMINPASSWORD: ${{secrets.MONGODB_ADMINPASSWORD}}
+  MONGODB_BASICAUTH_USERNAME: ${{secrets.MONGODB_BASICAUTH_USERNAME}}
+  MONGODB_BASICAUTH_PASSWORD: ${{secrets.MONGODB_BASICAUTH_PASSWORD}}
+  DATABASE_URL: ${{secrets.DATABASE_URL}}
+  MONGO_REPLICA_HOST: ${{secrets.MONGO_REPLICA_HOST}}
+  MONGO_REPLICA_PORT: ${{secrets.MONGO_REPLICA_PORT}}
+  API_KEY: ${{secrets.API_KEY}}
+  JWT_SECRET: ${{secrets.JWT_SECRET}}
+  
+jobs:
+  migrate-to-mongodb:
+    runs-on: ubuntu-latest
+    environment: Test
+    steps:
+      - name: migrate from firebase to mongoDB
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          envs: MONGODB_ADMINUSERNAME, MONGODB_ADMINPASSWORD
+          host: ${{ secrets.NEW_ORG_AWS_TEST_HOST }}
+          username: ec2-user
+          key: ${{ secrets.NEW_ORG_AWS_TEST_PEM }}
+          port: 22
+          script: |
+            cd docker-nginx-letsencrypt-https-ec2/backup_data_firebase/output_python
+            sh migration-data-from-firebase-to-mongo-kubernetes-${{inputs.collections}}.sh

@@ -103,7 +103,7 @@ const TotalSection = ({
         <span className={styles.price}>{_finalPrice} €</span>
       </div>
       <p className={styles.text}>{String(t(localizationKey.personalData))}</p>
-      <Link className={styles.text} style={{ cursor: 'pointer' }}>
+      <Link className={styles.text} style={{ cursor: 'text' }}>
         <b>{String(t(localizationKey.privacy))}</b>
       </Link>
       <div style={{ marginTop: 10 }}>
