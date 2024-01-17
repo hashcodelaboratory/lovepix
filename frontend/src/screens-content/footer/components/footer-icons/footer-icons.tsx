@@ -22,7 +22,6 @@ const FooterIcons = (): JSX.Element => {
   // TODO: change tiktok link
   return (
     <Container>
-      <Login />
       <hr />
       <div className={styles.footerIconsRow}>
         <Image
