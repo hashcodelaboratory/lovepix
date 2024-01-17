@@ -17,6 +17,7 @@ import { useTranslation } from 'next-i18next'
 import { Pages } from 'constants/pages/urls'
 import { useRouter } from 'next/router'
 import { Backdrop, CircularProgress } from '@mui/material'
+import { Material } from '../../../../common/enums/material'
 
 export enum CarouselTestIds {
   navigateToConfiguratorButtonTestId = 'navigate_to_configurator_button_test_id',
@@ -64,6 +65,8 @@ const Carousel = ({ configuration }: CarouselProps) => {
       const image: ImageAddType = {
         origin: fr.result as string,
         image: undefined,
+        dimensionId: undefined,
+        material: Material.CANVAS,
       }
       handleImageFlowTest(image)
     }
@@ -81,18 +84,20 @@ const Carousel = ({ configuration }: CarouselProps) => {
 
   const toggleModal = () => setOpenModal(!openModal)
 
-  const onConfirm = () => {
-    toggleModal()
-    addImageToConfigurator(imageData!)
-    router.push(t(Pages.CONFIGURATOR))
+  const onConfirm = async () => {
+    if (imageData) {
+      toggleModal()
+      addImageToConfigurator(imageData)
+      await router.push(t(Pages.CONFIGURATOR))
+    }
   }
 
   const onClose = () => toggleModal()
 
-  const handleImageFlowTest = (image: ImageAddType) => {
+  const handleImageFlowTest = async (image: ImageAddType) => {
     if (canAddImage(configuration)) {
       addImageToConfigurator(image)
-      router.push(t(Pages.CONFIGURATOR))
+      await router.push(t(Pages.CONFIGURATOR))
     } else {
       setImageData(image)
       setOpenModal(true)
