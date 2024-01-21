@@ -7,9 +7,9 @@ import { writeFileSync } from 'fs'
 
 const formidableConfig = {
   keepExtensions: true,
-  maxFileSize: 10_000_000,
-  maxFieldsSize: 10_000_000,
-  maxFields: 7,
+  maxFileSize: 20_000_000,
+  maxFieldsSize: 20_000_000,
+  maxFields: 14,
   allowEmptyFiles: false,
   multiples: false,
 }
@@ -26,11 +26,11 @@ const FTP_CONFIGURATION = {
   },
 }
 
-function formidablePromise(
+const formidablePromise = (
   req: NextApiRequest,
   opts?: Parameters<typeof formidable>[0]
-): Promise<{ fields: formidable.Fields; files: formidable.Files }> {
-  return new Promise((accept, reject) => {
+): Promise<{ fields: formidable.Fields; files: formidable.Files }> =>
+  new Promise((accept, reject) => {
     const form = formidable(opts)
 
     form.parse(req, (err, fields, files) => {
@@ -40,7 +40,6 @@ function formidablePromise(
       return accept({ fields, files })
     })
   })
-}
 
 const fileConsumer = <T = unknown>(acc: T[]) =>
   new Writable({
