@@ -11,7 +11,7 @@ class SentryService {
   captureMessage = (
     message: string,
     captureContext?: CaptureContext | Severity | SeverityLevel
-  ) => Sentry.captureMessage(message)
+  ) => Sentry.captureMessage(message, captureContext)
 }
 
 export const sentryService = new SentryService()
