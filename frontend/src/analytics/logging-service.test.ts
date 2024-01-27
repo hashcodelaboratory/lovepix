@@ -11,14 +11,11 @@ describe('LoggingService', () => {
     it('should integrate sentryService.captureMessage with expected parameters', () => {
       const { loggingService } = jest.requireActual('./logging-service')
 
-      loggingService.logEvent(
-        LovepixEvent.EXAMPLE_EVENT,
-        'info' as SeverityLevel
-      )
+      loggingService.logEvent(LovepixEvent.ADD_COUPON, 'info' as SeverityLevel)
 
       expect(sentryService.captureMessage).toHaveBeenCalledTimes(1)
       expect(sentryService.captureMessage).toHaveBeenCalledWith(
-        'example_event',
+        'add_coupon',
         'info'
       )
     })
