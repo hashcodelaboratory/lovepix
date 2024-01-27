@@ -10,7 +10,7 @@ class SentryService {
 
   captureMessage = (
     message: string,
-    captureContext?: CaptureContext | Severity | SeverityLevel
+    captureContext?: CaptureContext | SeverityLevel
   ) => Sentry.captureMessage(message, captureContext)
 }
 
