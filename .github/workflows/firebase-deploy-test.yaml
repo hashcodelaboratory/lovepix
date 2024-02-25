@@ -1,0 +1,42 @@
+name: Deploy to Firebase - TEST ENV
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - firebase-deploy_*
+    branches:
+      - firebase-deploy
+
+defaults:
+  run:
+    working-directory: ./frontend 
+
+env:
+  FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: Test
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.6.2'
+
+      - name: Install Dependencies
+        run: yarn 
+
+      - name: Build
+        run: yarn build
+
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@v2
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
