@@ -1,5 +1,7 @@
 {
   "projects": {
     "default": "waller-development"
-  }
+  },
+  "targets": {},
+  "etags": {}
 }
