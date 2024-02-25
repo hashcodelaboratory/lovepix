@@ -8,9 +8,9 @@ on:
     branches:
       - firebase-deploy
 
-# defaults:
-#   run:
-#     working-directory: ./frontend 
+defaults:
+  run:
+    working-directory: ./frontend 
 env:
   FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
   NPM_GITHUB_TOKEN: ${{secrets.NPM_GITHUB_TOKEN}}
@@ -55,6 +55,7 @@ jobs:
       - name: Build
         run: yarn build
       - name: Deploy to Firebase
+        working-directory: ./frontend 
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
