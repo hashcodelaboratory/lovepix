@@ -55,7 +55,7 @@ jobs:
       - name: Build
         run: yarn build
       - name: Deploy to Firebase
-        working-directory: ./frontend 
+        # working-directory: ./frontend 
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
