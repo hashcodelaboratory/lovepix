@@ -53,7 +53,7 @@ jobs:
       - name: Reauthentification user
         uses: w9jds/firebase-action@master
         with:
-          args: login --reauth
+          args: login:ci --interactive
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
