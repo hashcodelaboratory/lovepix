@@ -12,6 +12,7 @@
   },
   "functions": [
     {
+      "runtime": "nodejs18",
       "source": ".",
       "codebase": "default",
       "ignore": [
@@ -20,7 +21,6 @@
         "firebase-debug.log",
         "firebase-debug.*.log"
       ],
-      "runtime": "nodejs18",
       "predeploy": [
         "npm --prefix \"$RESOURCE_DIR\" run lint",
         "npm --prefix \"$RESOURCE_DIR\" run build"
