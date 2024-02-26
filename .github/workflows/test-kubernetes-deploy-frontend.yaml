@@ -42,6 +42,7 @@ env:
   NEXT_PUBLIC_GOOGLE_ANALYTICS: ${{secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS}}
   SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
 
+
 jobs:
   push-lovepix-image-on-dockerhub:  
     runs-on: ubuntu-latest
