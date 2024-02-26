@@ -1,4 +1,12 @@
-import { collection, doc, getDocs, setDoc } from '@firebase/firestore'
+import {
+  collection,
+  doc,
+  getDocs,
+  setDoc,
+  updateDoc,
+  query,
+  where,
+} from '@firebase/firestore'
 import { database, storage } from '../firebase/config'
 import { Collections } from '../firebase/enums'
 import { Delivery } from '../enums/delivery'
@@ -48,6 +56,17 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
     }
     const newOrderRef = doc(database, Collections.ORDERS, orderId)
     await setDoc(newOrderRef, { ...data, shoppingCart: cart, stripe: '' })
+
+    if (data.voucher?.limit) {
+      const q = query(
+        collection(database, Collections.VOUCHERS),
+        where('capital', '==', true)
+      )
+      const querySnapshot = await getDocs(q)
+      querySnapshot.forEach((doc) => {
+        updateDoc(doc.ref, { limit: data.voucher?.limit })
+      })
+    }
   }
 
   const promises: Promise<void>[] = images?.map(async (image, index) => {

@@ -37,7 +37,13 @@ const Voucher = ({ voucher }: VoucherProps) => {
 
         const currentDate = new Date()
         const givenDate = new Date(res.expiration)
-        const isValid = currentDate < givenDate
+        const isDateValid = currentDate < givenDate
+
+        const limit = Number(res.limit)
+        const isLimitValid = limit > 0
+
+        const isValid = isLimitValid && isDateValid
+
         if (isValid) {
           setIsSuccess(true)
           orderTable.update(ORDER_TABLE_KEY, {
@@ -46,10 +52,12 @@ const Voucher = ({ voucher }: VoucherProps) => {
               value: res.value,
               saleType: res.saleType,
               freeDelivery: res.freeDelivery,
+              limit: limit - 1,
             } as VoucherType,
           })
         } else {
           setIsSuccess(false)
+          setError('Invalid voucher!')
         }
       }
     },
