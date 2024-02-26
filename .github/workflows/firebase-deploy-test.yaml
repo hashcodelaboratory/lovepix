@@ -1,4 +1,4 @@
-name: Deploy to Firebase - TEST ENV
+name: Deploy to Firebase - TEST ENV Firebase
 
 on:
   workflow_dispatch:
@@ -39,7 +39,6 @@ env:
   FIREBASE_RC_CONTENT: ${{secrets.FIREBASE_RC_CONTENT}}
   NEXT_PUBLIC_GOOGLE_ANALYTICS: ${{secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS}}
   SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
-
 
 jobs:
   deploy:
