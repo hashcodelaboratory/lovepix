@@ -58,10 +58,10 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
     await setDoc(newOrderRef, { ...data, shoppingCart: cart, stripe: '' })
   }
 
-  if (data.voucher?.limit) {
+  if ((data.voucher?.limit ?? 0) >= 0) {
     const q = query(
       collection(database, Collections.VOUCHERS),
-      where('code', '==', data.voucher.code)
+      where('code', '==', data.voucher?.code)
     )
     const querySnapshot = await getDocs(q)
     querySnapshot.forEach((doc) => {
