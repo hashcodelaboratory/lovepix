@@ -60,7 +60,7 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
       }}
       sx={DROPZONE_STYLE}
       multiple={false}
-      maxSize={10000000}
+      maxSize={20000000}
     >
       <Group position='center' spacing='xl' className={styles.dropzoneGroup}>
         <h1 className={styles.containerTitle}>{String(t(printPhoto))}</h1>

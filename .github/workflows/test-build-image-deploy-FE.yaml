@@ -1,15 +1,15 @@
-name: LOVEPIX DockerHub Deployment on ORGANIZATION K8s TEST environment - FRONTEND
+name: LOVEPIX DockerHub build pipeline on ORGANIZATION TEST K8s environment - FRONTEND
 on:
   workflow_dispatch:
   push:
     tags:
-      - release_*
+      - test_*
     branches:
       - test
 
 defaults:
   run:
-    working-directory: ./frontend  
+    working-directory: ./frontend 
 
 env:
   NPM_GITHUB_TOKEN: ${{secrets.NPM_GITHUB_TOKEN}}
@@ -40,18 +40,16 @@ env:
   NEXT_PUBLIC_NODE_FIREBASE_MEASUREMENT_ID: ${{secrets.NEXT_PUBLIC_NODE_FIREBASE_MEASUREMENT_ID}}
   FIREBASE_RC_CONTENT: ${{secrets.FIREBASE_RC_CONTENT}}
   NEXT_PUBLIC_GOOGLE_ANALYTICS: ${{secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS}}
-  SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
-
 
 jobs:
   push-lovepix-image-on-dockerhub:  
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
     environment: Test
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Build docker LOVEPIX frontend test image
-        run: time DOCKER_BUILDKIT=1 docker build -t lovepix-fe:latest --build-arg NPM_GITHUB_TOKEN --build-arg NEXT_PUBLIC_GOOGLE_ANALYTICS --build-arg FIREBASE_RC_CONTENT --build-arg NEXT_PUBLIC_NODE_FIREBASE_MEASUREMENT_ID --build-arg NEXT_PUBLIC_NODE_FIREBASE_APP_ID --build-arg NEXT_PUBLIC_NODE_FIREBASE_STORAGE_MESSAGING_SENDER_ID --build-arg NEXT_PUBLIC_NODE_FIREBASE_STORAGE_BUCKET --build-arg NEXT_PUBLIC_NODE_FIREBASE_PROJECT_ID --build-arg NEXT_PUBLIC_NODE_FIREBASE_AUTH_DOMAIN --build-arg NEXT_PUBLIC_NODE_FIREBASE_API_KEY --build-arg NEXT_PUBLIC_SMART_EMAILING_HOST --build-arg NEXT_PUBLIC_SMART_EMAILING_TOKEN --build-arg NEXT_PUBLIC_SMART_EMAILING_CONTACT_LIST_ID --build-arg NEXT_PUBLIC_SUPERFAKTURA_EMAIL --build-arg NEXT_PUBLIC_SUPERFAKTURA_API_KEY --build-arg NEXT_PUBLIC_SUPERFAKTURA_COMPANY_ID --build-arg NEXT_PUBLIC_SUPERFAKTURA_MODULE --build-arg NEXT_PUBLIC_STRIPE_PUBLIC_KEY --build-arg NEXT_PUBLIC_STRIPE_SECRET_KEY --build-arg NEXT_PUBLIC_NODE_MAILER_SERVICE --build-arg NEXT_PUBLIC_NODE_MAILER_HOST --build-arg NEXT_PUBLIC_NODE_MAILER_SECURE --build-arg NEXT_PUBLIC_NODE_MAILER_PORT --build-arg NEXT_PUBLIC_NODE_MAILER_USER --build-arg NEXT_PUBLIC_NODE_MAILER_PASSWORD --build-arg SENTRY_AUTH_TOKEN .
+      - name: Build docker LOVEPIX frontend image
+        run: time DOCKER_BUILDKIT=1 docker build -t lovepix-fe:latest --build-arg NPM_GITHUB_TOKEN --build-arg NEXT_PUBLIC_GOOGLE_ANALYTICS --build-arg FIREBASE_RC_CONTENT --build-arg NEXT_PUBLIC_NODE_FIREBASE_MEASUREMENT_ID --build-arg NEXT_PUBLIC_NODE_FIREBASE_APP_ID --build-arg NEXT_PUBLIC_NODE_FIREBASE_STORAGE_MESSAGING_SENDER_ID --build-arg NEXT_PUBLIC_NODE_FIREBASE_STORAGE_BUCKET --build-arg NEXT_PUBLIC_NODE_FIREBASE_PROJECT_ID --build-arg NEXT_PUBLIC_NODE_FIREBASE_AUTH_DOMAIN --build-arg NEXT_PUBLIC_NODE_FIREBASE_API_KEY --build-arg NEXT_PUBLIC_SMART_EMAILING_HOST --build-arg NEXT_PUBLIC_SMART_EMAILING_TOKEN --build-arg NEXT_PUBLIC_SMART_EMAILING_CONTACT_LIST_ID --build-arg NEXT_PUBLIC_SUPERFAKTURA_EMAIL --build-arg NEXT_PUBLIC_SUPERFAKTURA_API_KEY --build-arg NEXT_PUBLIC_SUPERFAKTURA_COMPANY_ID --build-arg NEXT_PUBLIC_SUPERFAKTURA_MODULE --build-arg NEXT_PUBLIC_STRIPE_PUBLIC_KEY --build-arg NEXT_PUBLIC_STRIPE_SECRET_KEY --build-arg NEXT_PUBLIC_NODE_MAILER_SERVICE --build-arg NEXT_PUBLIC_NODE_MAILER_HOST --build-arg NEXT_PUBLIC_NODE_MAILER_SECURE --build-arg NEXT_PUBLIC_NODE_MAILER_PORT --build-arg NEXT_PUBLIC_NODE_MAILER_USER --build-arg NEXT_PUBLIC_NODE_MAILER_PASSWORD .
       - name: Docker images 
         run: docker images
       - name: Tag the image of LOVEPIX-fe
@@ -63,26 +61,3 @@ jobs:
           docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD  
       - name: Docker Push of LOVEPIX-fe image
         run: docker push $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
-
-  deploy:
-    name: Deploy on EC2 and on Workers Node TEST Kubernetes - LOVEPIX
-    needs: push-lovepix-image-on-dockerhub
-    runs-on: ubuntu-latest
-    environment: Test
-    steps:
-    - name: deploying on ec2 and rebuild TEST kubernetes pods
-      uses: appleboy/ssh-action@v0.1.7
-      with:
-        envs: DOCKER_HUB_USER, DOCKER_HUB_PASSWORD, DOCKER_TAG_WALLER_FE
-        host: ${{ secrets.NEW_ORG_AWS_TEST_HOST }}
-        username: ec2-user
-        key: ${{ secrets.NEW_ORG_AWS_TEST_PEM }}
-        port: 22
-        script: |
-           cd docker-nginx-letsencrypt-https-ec2
-           kubectl get pods -n staging
-           docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
-           docker rmi $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
-           docker pull $DOCKER_HUB_USER/$DOCKER_TAG_WALLER_FE
-           kubectl delete statefulset lovepix-frontend -n staging
-           kubectl apply -f k8s_lovepix/frontend/stage.yaml

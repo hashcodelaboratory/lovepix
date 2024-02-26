@@ -21,12 +21,14 @@
 .galleryCategoryRow {
   margin-top: 2rem;
   display: flex;
+  flex-wrap: wrap;
   color: white;
 }
 
 .galleryChip {
+  width: 200px;
   margin-right: 0.5rem !important;
-  margin: 0;
+  margin: 5px;
   background-color: white !important;
   border: none;
   border-radius: 0.5rem !important;

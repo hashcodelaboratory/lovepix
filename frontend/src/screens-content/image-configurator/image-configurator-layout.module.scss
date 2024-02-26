@@ -275,19 +275,20 @@
 }
 
 .deliveryPriceText {
-  margin-top: .5rem;
-  font-size: .7rem;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
   font-weight: 600;
 }
 
 .deliveryPriceTextSecondary {
-  margin-top: .5rem;
-  font-size: .7rem;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
   font-weight: 200;
 }
 
 .materialItemRow {
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 20px;
   justify-content: space-between;
 }
@@ -296,4 +297,3 @@
   width: 76px;
   text-align: center;
 }
-

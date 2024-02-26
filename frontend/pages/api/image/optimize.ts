@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-//import { processImage } from '@hashcodelaboratory/imagination'
 
 const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
 
@@ -46,7 +45,7 @@ const optimize = async (req: NextApiRequest, res: NextApiResponse<unknown>) => {
 
     const item = body as Image
 
-    const output: Output = await {
+    const output: Output = {
       objectKey: '',
       originImageUrl: '',
       webp1kbHighEndImageUrl: '',

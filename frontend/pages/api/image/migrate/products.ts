@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-//import { processImage } from '@hashcodelaboratory/imagination'
 import { collection, getDocs } from '@firebase/firestore'
 import { database } from 'common/firebase/config'
 import { Collections } from 'common/firebase/enums'
