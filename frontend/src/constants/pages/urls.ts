@@ -18,7 +18,7 @@ export enum Pages {
   BLOG = '/blog',
   PRODUCTION_TIME = '/production-time',
   DASHBOARD = '/dashboard',
-  DEBUG = '/sk/debug',
+  DEBUG = '/debug',
   ACRYLIC_PHOTO = '/acrylic-photo',
   COMPLAINTS_AND_RETURNS = '/complaints-and-returns',
   DELIVERY_OPTIONS_AND_PRICES = '/delivery-options-and-prices',
