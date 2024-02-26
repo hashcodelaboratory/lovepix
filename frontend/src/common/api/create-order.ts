@@ -60,7 +60,7 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
     if (data.voucher?.limit) {
       const q = query(
         collection(database, Collections.VOUCHERS),
-        where('capital', '==', true)
+        where('code', '==', data.voucher.code)
       )
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach((doc) => {
