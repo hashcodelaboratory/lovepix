@@ -64,7 +64,7 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
       )
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach((doc) => {
-        updateDoc(doc.ref, { limit: data.voucher?.limit })
+        updateDoc(doc.ref, { limit: data.voucher?.limit.toString() })
       })
     }
   }
