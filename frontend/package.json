@@ -34,7 +34,7 @@
     "dayjs": "1.11.8",
     "dexie": "3.2.2",
     "dexie-react-hooks": "1.1.1",
-    "firebase-functions": "4.4.1",
+    "firebase-functions": "4.7.0",
     "formidable": "3.5.1",
     "framer-motion": "10.16.4",
     "jspdf": "2.5.1",

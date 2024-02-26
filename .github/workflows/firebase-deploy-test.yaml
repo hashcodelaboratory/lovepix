@@ -30,12 +30,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Install Dependencies
-        run: yarn 
-      - name: Build
-        run: yarn build
+        run: yarn
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: $FIREBASE_TOKEN
+          PROJECT_PATH: ./frontend
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
