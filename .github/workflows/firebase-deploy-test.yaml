@@ -51,6 +51,7 @@ jobs:
       - name: Install Dependencies
         run: yarn
       - name: Reauthentification user
+        uses: w9jds/firebase-action@master
         run: firebase login --reauth
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
