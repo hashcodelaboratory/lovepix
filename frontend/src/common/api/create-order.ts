@@ -56,17 +56,17 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
     }
     const newOrderRef = doc(database, Collections.ORDERS, orderId)
     await setDoc(newOrderRef, { ...data, shoppingCart: cart, stripe: '' })
+  }
 
-    if (data.voucher?.limit) {
-      const q = query(
-        collection(database, Collections.VOUCHERS),
-        where('code', '==', data.voucher.code)
-      )
-      const querySnapshot = await getDocs(q)
-      querySnapshot.forEach((doc) => {
-        updateDoc(doc.ref, { limit: data.voucher?.limit.toString() })
-      })
-    }
+  if (data.voucher?.limit) {
+    const q = query(
+      collection(database, Collections.VOUCHERS),
+      where('code', '==', data.voucher.code)
+    )
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach((doc) => {
+      updateDoc(doc.ref, { limit: data.voucher?.limit.toString() })
+    })
   }
 
   const promises: Promise<void>[] = images?.map(async (image, index) => {
