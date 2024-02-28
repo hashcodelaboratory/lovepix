@@ -1,6 +1,5 @@
 import lovepixIcon from '../../../../assets/logo_gray.svg'
 import facebookIcon from '../../../../assets/facebook.svg'
-import tiktokIcon from '../../../../assets/tiktok.svg'
 import instagramIcon from '../../../../assets/instagram.svg'
 import styles from '../../footer.module.scss'
 import { Container, Link } from '@mui/material'
@@ -8,20 +7,13 @@ import Image from 'next/image'
 import { ImageLayout } from '../../../home/enums/enums'
 import { useTranslation } from 'react-i18next'
 import { localizationKey } from '../../../../localization/localization-key'
-import {
-  FACEBOOK,
-  INSTAGRAM,
-  Pages,
-  TIKTOK,
-} from '../../../../constants/pages/urls'
-import Login from 'login/login'
+import { FACEBOOK, INSTAGRAM, Pages } from '../../../../constants/pages/urls'
 
 const CURRENT_YEAR = new Date().getFullYear()
 
 const FooterIcons = (): JSX.Element => {
   const { t } = useTranslation()
 
-  // TODO: change tiktok link
   return (
     <Container>
       <hr />
@@ -95,23 +87,6 @@ const FooterIcons = (): JSX.Element => {
                 layout={ImageLayout.FIXED}
                 width={22}
                 height={22}
-                alt=''
-              />
-            </Link>
-          </div>
-          <div className={styles.footerBottomIcon}>
-            <Link
-              href={TIKTOK}
-              aria-label='Tiktok'
-              rel='noreferrer'
-              target='_blank'
-            >
-              <Image
-                src={tiktokIcon}
-                layout={ImageLayout.FIXED}
-                width={22}
-                height={22}
-                className={styles.footerBottomIcon}
                 alt=''
               />
             </Link>
