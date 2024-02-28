@@ -23,4 +23,10 @@ export const getColumns = (): GridColDef[] => [
       )
     },
   },
+  {
+    field: 'limit',
+    headerName: 'Limit použitia',
+    width: 120,
+    editable: false,
+  },
 ]
