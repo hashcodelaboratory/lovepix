@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { ImageLayout } from '../../../home/enums/enums'
 import { useTranslation } from 'react-i18next'
 import { localizationKey } from '../../../../localization/localization-key'
+import { CURRENT_VERSION } from '../../../../../version'
 import { FACEBOOK, INSTAGRAM, Pages } from '../../../../constants/pages/urls'
 
 const CURRENT_YEAR = new Date().getFullYear()
@@ -98,7 +99,10 @@ const FooterIcons = (): JSX.Element => {
             className={styles.footerBottomContainerRowText}
             style={{ marginRight: 36 }}
           >
-            {t(localizationKey.copyright, { year: CURRENT_YEAR })}
+            {t(localizationKey.copyright, {
+              year: CURRENT_YEAR,
+              version: CURRENT_VERSION,
+            })}
           </p>
           <Link
             className={styles.footerBottomContainerRowTextLink}
