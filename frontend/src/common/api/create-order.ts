@@ -18,7 +18,7 @@ import { Stripe } from '@stripe/stripe-js'
 import { OrderState, VoucherType } from 'common/types/order'
 import { orderTable } from '../../../database.config'
 import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
-import VoucherService from '../services/voucher'
+import { voucherService } from '../services/voucher'
 
 export type CreateOrderRequest = {
   id?: string
@@ -51,7 +51,7 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
     await setDoc(newOrderRef, { ...data, shoppingCart: cart, stripe: '' })
   }
 
-  await VoucherService.updateLimit(data.voucher?.limit, data.voucher?.code)
+  await voucherService.updateLimit(data.voucher?.limit, data.voucher?.code)
 
   const promises: Promise<void>[] = images?.map(async (image, index) => {
     const uploadURL = `${StorageFolder.ORDERS}/${orderId}/images/`

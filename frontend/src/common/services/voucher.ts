@@ -8,8 +8,8 @@ import {
 import { database } from '../firebase/config'
 import { Collections } from '../firebase/enums'
 
-const VoucherService = {
-  updateLimit: async (limit?: number, code?: string) => {
+class VoucherService {
+  public updateLimit = async (limit?: number, code?: string) => {
     if (limit && code && (limit ?? 0) >= 0) {
       const q = query(
         collection(database, Collections.VOUCHERS),
@@ -20,7 +20,7 @@ const VoucherService = {
         updateDoc(doc.ref, { limit: limit.toString() })
       })
     }
-  },
+  }
 }
 
-export default VoucherService
+export const voucherService = new VoucherService()
