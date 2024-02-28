@@ -33,4 +33,3 @@ export enum Pages {
 
 export const FACEBOOK = 'https://www.facebook.com/lovepix.sk/'
 export const INSTAGRAM = 'https://www.instagram.com/lovepix.eu/'
-export const TIKTOK = 'https://www.tiktok.com/'
