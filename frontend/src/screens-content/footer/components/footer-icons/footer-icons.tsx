@@ -16,6 +16,8 @@ import {
 } from '../../../../constants/pages/urls'
 import Login from 'login/login'
 
+const CURRENT_YEAR = new Date().getFullYear()
+
 const FooterIcons = (): JSX.Element => {
   const { t } = useTranslation()
 
@@ -121,7 +123,7 @@ const FooterIcons = (): JSX.Element => {
             className={styles.footerBottomContainerRowText}
             style={{ marginRight: 36 }}
           >
-            {t(localizationKey.copyright)}
+            {t(localizationKey.copyright, { year: CURRENT_YEAR })}
           </p>
           <Link
             className={styles.footerBottomContainerRowTextLink}
