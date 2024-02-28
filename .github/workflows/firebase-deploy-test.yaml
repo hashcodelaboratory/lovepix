@@ -1,4 +1,4 @@
-name: Deploy to Firebase - TEST ENV Firebase
+name: Deploy to Firebase - TEST ENV Firebase env
 
 on:
   workflow_dispatch:
