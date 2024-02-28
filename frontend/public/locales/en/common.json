@@ -119,7 +119,7 @@
   "showMore": "Show more",
   "service": "Service",
   "ourContacts": "Our contacts",
-  "copyright": "Copyright © {{year}} Lovepix. All rights reserved",
+  "copyright": "Copyright © {{year}} Lovepix v{{version}}. All rights reserved",
   "cookies": "Cookies",
   "privacyPolicy": "Privacy policy",
   "conditions": "Terms and Conditions",

@@ -121,7 +121,7 @@
   "showMore": "Zobraziť viac",
   "service": "Zákaznícky servis",
   "ourContacts": "Naše kontakty",
-  "copyright": "Copyright © {{year}} Lovepix. Všetky práva vyhradené.",
+  "copyright": "Copyright © {{year}} Lovepix v{{version}}. Všetky práva vyhradené.",
   "cookies": "Cookies",
   "privacyPolicy": "Zásady ochrany osobných údajov",
   "conditions": "Všeobecné obchodné podmienky",

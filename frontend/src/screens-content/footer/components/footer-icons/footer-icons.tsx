@@ -14,7 +14,7 @@ import {
   Pages,
   TIKTOK,
 } from '../../../../constants/pages/urls'
-import Login from 'login/login'
+import { CURRENT_VERSION } from '../../../../../version'
 
 const CURRENT_YEAR = new Date().getFullYear()
 
@@ -123,7 +123,10 @@ const FooterIcons = (): JSX.Element => {
             className={styles.footerBottomContainerRowText}
             style={{ marginRight: 36 }}
           >
-            {t(localizationKey.copyright, { year: CURRENT_YEAR })}
+            {t(localizationKey.copyright, {
+              year: CURRENT_YEAR,
+              version: CURRENT_VERSION,
+            })}
           </p>
           <Link
             className={styles.footerBottomContainerRowTextLink}
