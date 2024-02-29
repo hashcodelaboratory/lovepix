@@ -52,7 +52,7 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }}
+          args: deploy --only hosting --project ${{ secrets.FIREBASE_PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
         env:
           PROJECT_PATH: ./frontend
           FIREBASE_CLI_EXPERIMENTS: webframeworks
