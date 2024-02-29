@@ -6,7 +6,7 @@ on:
     tags:
       - release_*
     branches:
-      - test
+      - firebase-deploy
 
 defaults:
   run:
