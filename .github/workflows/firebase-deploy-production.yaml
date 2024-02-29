@@ -1,4 +1,4 @@
-name: Deploy to Firebase - TEST ENV Firebase env
+name: Deploy to Firebase - PROD ENV Firebase env
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     tags:
       - release_*
     branches:
-      - firebase-deploy
+      - main
 
 defaults:
   run:
@@ -43,7 +43,7 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: Test
+    environment: Production
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -52,7 +52,7 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting --project ${{ secrets.FIREBASE_PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
+          args: deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }}
         env:
           PROJECT_PATH: ./frontend
           FIREBASE_CLI_EXPERIMENTS: webframeworks
