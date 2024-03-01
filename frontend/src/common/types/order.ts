@@ -15,6 +15,7 @@ export type VoucherType = {
   value: number
   saleType: SaleTypeEnum
   freeDelivery: boolean
+  limit: number
 }
 
 export type Order = {

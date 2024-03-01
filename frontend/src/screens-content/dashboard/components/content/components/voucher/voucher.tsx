@@ -50,11 +50,12 @@ const VoucherLayout = (): JSX.Element => {
 
   const data =
     vouchers?.map(
-      ({ code, id, expiration }) =>
+      ({ code, id, expiration, limit }) =>
         ({
           id,
           code,
           expiration,
+          limit,
         } as VoucherType)
     ) ?? []
 
