@@ -13,6 +13,8 @@ import { useGalleryDetail } from '../../../../../../../../common/api/use-gallery
 import { splitDimensions } from './utils/split-dimensions'
 import { useDimensions } from '../../../../../../../../common/api/use-dimensions'
 import { isEmpty } from '../../../../../../../../common/utils/is-empty'
+import { loggingService } from '../../../../../../../../analytics/logging-service'
+import { LovepixEvent } from '../../../../../../../../analytics/lovepix-event'
 
 type DimensionContentProps = {
   configuration: Configuration
@@ -72,6 +74,10 @@ const DimensionContent = ({ configuration }: DimensionContentProps) => {
   }
 
   const changeDimension = (id: string) => {
+    loggingService.logEvent(LovepixEvent.SELECT_DIMENSION, {
+      extra: { selectedDimensionId: id },
+    })
+
     configurationsTable.update(CONFIGURATION_TABLE_KEY, {
       dimensionId: id,
     })
