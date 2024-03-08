@@ -7,6 +7,8 @@ import { ChangeEvent, useState } from 'react'
 import { orderTable } from '../../../../../../database.config'
 import { ORDER_TABLE_KEY } from '../../../../../common/indexed-db/hooks/keys'
 import { VoucherType } from '../../../../../common/types/order'
+import { loggingService } from '../../../../../analytics/logging-service'
+import { LovepixEvent } from '../../../../../analytics/lovepix-event'
 
 const AddButton = styled('button', {
   shouldForwardProp: (prop) => prop !== 'error',
@@ -64,6 +66,10 @@ const Voucher = ({ voucher }: VoucherProps) => {
   })
 
   const getVoucherDetail = () => {
+    loggingService.logEvent(LovepixEvent.ADD_COUPON, {
+      extra: { code: voucherInput },
+    })
+
     getDetail({ code: voucherInput })
   }
 
