@@ -11,7 +11,9 @@ import {
 import { Delivery as DeliveryOptions } from '../../../../../common/enums/delivery'
 import { Control, Controller, UseFormSetValue } from 'react-hook-form'
 import { FormInputs } from '../../../../../common/types/form'
-import { useMemo } from 'react'
+import { ChangeEvent, useMemo } from 'react'
+import { loggingService } from '../../../../../analytics/logging-service'
+import { LovepixEvent } from '../../../../../analytics/lovepix-event'
 
 type DeliverySectionProps = {
   message?: string
@@ -49,68 +51,76 @@ const Delivery = ({
         name='delivery'
         control={control}
         rules={{ required: true }}
-        render={({ field }) => (
-          <FormControl fullWidth error={!!message}>
-            <RadioGroup
-              {...field}
-              onChange={field.onChange}
-              value={field.value}
-            >
-              {!isFreeDeliveryAvailable && (
-                <FormControlLabel
-                  value={DeliveryOptions.COURIER}
-                  control={<Radio />}
-                  label={
-                    <div className={styles.radioGroupLabel}>
-                      <p className={styles.priceBox}>5.00 €</p>
-                      <div className={styles.deliveryLightText}>
-                        {String(t(localizationKey.courier))}
+        render={({ field }) => {
+          const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+            loggingService.logEvent(LovepixEvent.SELECT_DELIVERY, {
+              extra: {
+                deliveryOption: event.target.value,
+              },
+            })
+
+            field.onChange(event)
+          }
+
+          return (
+            <FormControl fullWidth error={!!message}>
+              <RadioGroup {...field} onChange={onChange} value={field.value}>
+                {!isFreeDeliveryAvailable && (
+                  <FormControlLabel
+                    value={DeliveryOptions.COURIER}
+                    control={<Radio />}
+                    label={
+                      <div className={styles.radioGroupLabel}>
+                        <p className={styles.priceBox}>5.00 €</p>
+                        <div className={styles.deliveryLightText}>
+                          {String(t(localizationKey.courier))}
+                        </div>
                       </div>
-                    </div>
-                  }
-                  className={styles.deliveryField}
-                />
-              )}
-              {!isFreeDeliveryAvailable && (
-                <FormControlLabel
-                  value={DeliveryOptions.PERSONAL_COLLECT}
-                  control={<Radio />}
-                  label={
-                    <div className={styles.radioGroupLabel}>
-                      <p className={styles.priceBox}>
-                        {String(t(localizationKey.free))}
-                      </p>
-                      <div className={styles.deliveryLightText}>
-                        {String(t(localizationKey.personalCollect))}
+                    }
+                    className={styles.deliveryField}
+                  />
+                )}
+                {!isFreeDeliveryAvailable && (
+                  <FormControlLabel
+                    value={DeliveryOptions.PERSONAL_COLLECT}
+                    control={<Radio />}
+                    label={
+                      <div className={styles.radioGroupLabel}>
+                        <p className={styles.priceBox}>
+                          {String(t(localizationKey.free))}
+                        </p>
+                        <div className={styles.deliveryLightText}>
+                          {String(t(localizationKey.personalCollect))}
+                        </div>
                       </div>
-                    </div>
-                  }
-                  className={styles.deliveryField}
-                />
-              )}
-              {isFreeDeliveryAvailable && (
-                <FormControlLabel
-                  value={DeliveryOptions.FREE_DELIVERY}
-                  control={<Radio checked />}
-                  label={
-                    <div className={styles.radioGroupLabel}>
-                      <p className={styles.priceBox}>
-                        {String(t(localizationKey.free))}
-                      </p>
-                      <div className={styles.deliveryLightText}>
-                        {'Máte nárok na dopravu zdarma'}
+                    }
+                    className={styles.deliveryField}
+                  />
+                )}
+                {isFreeDeliveryAvailable && (
+                  <FormControlLabel
+                    value={DeliveryOptions.FREE_DELIVERY}
+                    control={<Radio checked />}
+                    label={
+                      <div className={styles.radioGroupLabel}>
+                        <p className={styles.priceBox}>
+                          {String(t(localizationKey.free))}
+                        </p>
+                        <div className={styles.deliveryLightText}>
+                          {'Máte nárok na dopravu zdarma'}
+                        </div>
                       </div>
-                    </div>
-                  }
-                  className={styles.deliveryField}
-                />
+                    }
+                    className={styles.deliveryField}
+                  />
+                )}
+              </RadioGroup>
+              {message && (
+                <FormHelperText error>{String(t(message))}</FormHelperText>
               )}
-            </RadioGroup>
-            {message && (
-              <FormHelperText error>{String(t(message))}</FormHelperText>
-            )}
-          </FormControl>
-        )}
+            </FormControl>
+          )
+        }}
       />
     </div>
   )
