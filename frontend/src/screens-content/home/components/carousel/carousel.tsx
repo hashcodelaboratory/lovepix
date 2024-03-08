@@ -97,8 +97,6 @@ const Carousel = ({ configuration }: CarouselProps) => {
   const toggleModal = () => setOpenModal(!openModal)
 
   const onConfirm = async () => {
-    // loggingService.logEvent(LovepixEvent.UPLOAD_IMAGE_CONFIGURATOR, {
-
     if (imageData) {
       toggleModal()
       addImageToConfigurator(imageData)
