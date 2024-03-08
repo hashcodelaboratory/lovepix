@@ -18,6 +18,8 @@ import { Pages } from 'constants/pages/urls'
 import { useRouter } from 'next/router'
 import { Backdrop, CircularProgress } from '@mui/material'
 import { Material } from '../../../../common/enums/material'
+import { loggingService } from '../../../../analytics/logging-service'
+import { LovepixEvent } from '../../../../analytics/lovepix-event'
 
 export enum CarouselTestIds {
   navigateToConfiguratorButtonTestId = 'navigate_to_configurator_button_test_id',
@@ -56,6 +58,15 @@ const Carousel = ({ configuration }: CarouselProps) => {
   })
 
   const onDrop = async (files: File[]) => {
+    loggingService.logEvent(
+      LovepixEvent.UPLOAD_IMAGE_DRAG_AND_DROP_LANDING_PAGE,
+      {
+        extra: {
+          files: files.map((file) => JSON.stringify(file)),
+        },
+      }
+    )
+
     setIsComputing(true)
 
     const file = files[0]
@@ -86,6 +97,8 @@ const Carousel = ({ configuration }: CarouselProps) => {
   const toggleModal = () => setOpenModal(!openModal)
 
   const onConfirm = async () => {
+    // loggingService.logEvent(LovepixEvent.UPLOAD_IMAGE_CONFIGURATOR, {
+
     if (imageData) {
       toggleModal()
       addImageToConfigurator(imageData)
