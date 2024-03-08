@@ -9,6 +9,8 @@ import { Configuration } from '../../../../../../common/types/configuration'
 import { MaterialType } from 'common/api/use-materials'
 import { Material as TypeOfMaterial } from '../../../../../../common/enums/material'
 import MaterialItem from './components/material-item'
+import { loggingService } from '../../../../../../analytics/logging-service'
+import { LovepixEvent } from '../../../../../../analytics/lovepix-event'
 
 export const DEFAULT_MATERIAL: TypeOfMaterial = TypeOfMaterial.CANVAS
 
@@ -22,6 +24,10 @@ const Material = ({ configuration, materials }: MaterialProps) => {
   const unavailableMaterials = materials.filter((item) => !item.availability)
   const unavailableMaterialsIds = unavailableMaterials?.map((item) => item.id)
   const changeMaterial = (type: TypeOfMaterial) => {
+    loggingService.logEvent(LovepixEvent.SELECT_MATERIAL, {
+      extra: { materialType: type },
+    })
+
     if (materials.find((item) => item.type === type)?.availability) {
       configurationsTable.update(CONFIGURATION_TABLE_KEY, {
         material: type,
