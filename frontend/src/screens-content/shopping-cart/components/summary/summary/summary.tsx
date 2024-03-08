@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { FormInputs } from '../../../../../common/types/form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FORM_SCHEMA } from '../address/components/form/utils/schema'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Backdrop, CircularProgress } from '@mui/material'
 import Voucher from '../voucher/voucher'
 import Delivery from '../delivery/delivery'
@@ -58,6 +58,12 @@ const Summary = ({ order }: SummaryProps) => {
     reValidateMode: 'onChange',
   })
   const { delivery, payment } = watch()
+
+  useEffect(() => {
+    loggingService.logEvent(LovepixEvent.ORDER_VALIDATION, {
+      extra: { errors },
+    })
+  }, [errors])
 
   const finalPrice = useMemo(
     () =>
