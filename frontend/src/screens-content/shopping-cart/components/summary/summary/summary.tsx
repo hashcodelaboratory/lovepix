@@ -27,6 +27,8 @@ import { addContactToNewsletter } from 'common/api/add-contact-newsletter'
 import { createOrder } from '../../../../../common/api/create-order'
 import { useTranslation } from 'next-i18next'
 import { Route } from 'common/enums/routes'
+import { loggingService } from '../../../../../analytics/logging-service'
+import { LovepixEvent } from '../../../../../analytics/lovepix-event'
 
 type SummaryProps = {
   order: Order
@@ -120,6 +122,10 @@ const Summary = ({ order }: SummaryProps) => {
         ico: data?.ico,
         dic: data?.dic,
       })
+
+    loggingService.logEvent(LovepixEvent.SUBMIT_ORDER, {
+      extra: { order: newOrder },
+    })
 
     await createOrder(newOrder)
     if (payment !== PaymentEnum.ONLINE) {
