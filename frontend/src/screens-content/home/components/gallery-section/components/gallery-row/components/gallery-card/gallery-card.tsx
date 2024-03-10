@@ -55,10 +55,12 @@ const GalleryCard = ({
           className={styles.previewImageContainer}
           onClick={() => add(item?.fullPath ?? '', item?.id)}
         >
-          <ProgressiveImage
-            image={item.webpHighEndImageUrl ?? ''}
-            placeholder={item.webp1kbHighEndImageUrl ?? ''}
-          />
+          <div className={styles.imageWrapper}>
+            <ProgressiveImage
+              image={item.webpHighEndImageUrl ?? ''}
+              placeholder={item.webp1kbHighEndImageUrl ?? ''}
+            />
+          </div>
           <button className={styles.previewImageLink}>
             {t(localizationKey.add)}
           </button>
