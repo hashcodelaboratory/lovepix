@@ -3,6 +3,8 @@ import { FormInputs } from 'common/types/form'
 import { Image } from 'common/types/image'
 import { Order, VoucherType } from 'common/types/order'
 import { Product } from 'common/types/product'
+import { loggingService } from '../../analytics/logging-service'
+import { LovepixEvent } from '../../analytics/lovepix-event'
 
 export type UserMail = {
   id: string
@@ -62,6 +64,14 @@ export const sendOrderMail = async (
     products: newProdArr,
     voucher: data.voucher,
   }
+
+  loggingService.logEvent(LovepixEvent.NOTIFICATION_EMAILS, {
+    extra: {
+      category: 'SEND_ORDER_MAIL',
+      body,
+    },
+  })
+
   return await fetch('/api/email/send', {
     method: 'POST',
     body: JSON.stringify(body),
