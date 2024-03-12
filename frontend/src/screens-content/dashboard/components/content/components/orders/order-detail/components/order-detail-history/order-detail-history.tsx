@@ -28,7 +28,7 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
   const states = [
     {
       icon: <InventoryIcon className={iconStyle(CREATED)} />,
-      message: t(localizationKey.orderCreated),
+      message: t(localizationKey.created),
       state: CREATED,
     },
     {

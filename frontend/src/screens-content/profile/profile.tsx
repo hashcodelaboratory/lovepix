@@ -29,7 +29,7 @@ const ProfileLayout = () => {
   )
 
   const states = {
-    [OrderStateEnum.CREATED]: t(localizationKey.orderCreated),
+    [OrderStateEnum.CREATED]: t(localizationKey.created),
     [OrderStateEnum.DELIVERED]: t(localizationKey.accepted),
     [OrderStateEnum.PACKED]: t(localizationKey.packed),
     [OrderStateEnum.PICKED]: t(localizationKey.shipped),
