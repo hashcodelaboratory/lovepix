@@ -72,11 +72,23 @@ export const getOrdersColumns = (t: any): GridColDef[] => [
   {
     field: 'address',
     headerName: 'Adresa',
-    width: 400,
+    width: 300,
     editable: false,
     renderHeader: ({ field }) => (
       <div className={styles.tableHeader}>{t(field)}</div>
     ),
     renderCell: ({ value }) => <div>{value}</div>,
+  },
+  {
+    field: 'delivery',
+    headerName: 'Doprava',
+    width: 300,
+    editable: false,
+    renderHeader: ({ field }) => (
+      <div className={styles.tableHeader}>{t(field)}</div>
+    ),
+    renderCell: ({ value }) => (
+      <div className={styles.ordersTableCell}>{t(value.toLowerCase())}</div>
+    ),
   },
 ]

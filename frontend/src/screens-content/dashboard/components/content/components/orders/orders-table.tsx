@@ -21,6 +21,7 @@ import { removeOrders } from '../../../../api/orders/remove-orders'
 import OrderDetail from './order-detail/order-detail'
 import { Order } from '../../../../../../common/types/order'
 import { useOrders } from '../../../../api/orders/use-orders'
+import delivery from '../../../../../shopping-cart/components/summary/delivery/delivery'
 
 export const dataGridStyle = {
   boxShadow: 2,
@@ -48,7 +49,7 @@ const OrdersTable = () => {
 
   const data = orders
     .sort((a: Order, b: Order) => (a.date < b.date ? 1 : -1))
-    .map(({ id, date, form, payment }) => ({
+    .map(({ id, date, form, delivery, payment }) => ({
       id: id,
       date: new Date(date).toLocaleDateString() ?? '',
       name: `${form?.firstName} ${form?.lastName}`,
@@ -56,6 +57,7 @@ const OrdersTable = () => {
       phone: form?.phone,
       payment: payment,
       address: `${form?.address}, ${form?.city} ${form?.postalCode}`,
+      delivery: delivery,
     }))
 
   const [order, setOrder] = useState<Order>()

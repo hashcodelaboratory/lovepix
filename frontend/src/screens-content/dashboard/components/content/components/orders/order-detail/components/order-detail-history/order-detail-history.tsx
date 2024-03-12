@@ -23,7 +23,7 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
     return item ? styles.shippingIcon : styles.shippingIconDisable
   }
 
-  const { CREATED, DELIVERED, PACKED, PICKED, SHIPPED } = OrderStateEnum
+  const { CREATED, ACCEPTED, PACKED, FINISHED, SHIPPED } = OrderStateEnum
 
   const states = [
     {
@@ -32,9 +32,9 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
       state: CREATED,
     },
     {
-      icon: <AddShoppingCartIcon className={iconStyle(DELIVERED)} />,
+      icon: <AddShoppingCartIcon className={iconStyle(ACCEPTED)} />,
       message: t(localizationKey.accepted),
-      state: DELIVERED,
+      state: ACCEPTED,
     },
     {
       icon: <ArchiveIcon className={iconStyle(PACKED)} />,
@@ -42,14 +42,14 @@ const OrderDetailHistory = ({ order }: Props): JSX.Element => {
       state: PACKED,
     },
     {
-      icon: <LocalShippingIcon className={iconStyle(PICKED)} />,
+      icon: <LocalShippingIcon className={iconStyle(SHIPPED)} />,
       message: t(localizationKey.shipped),
-      state: PICKED,
+      state: SHIPPED,
     },
     {
-      icon: <RedeemIcon className={iconStyle(SHIPPED)} />,
+      icon: <RedeemIcon className={iconStyle(FINISHED)} />,
       message: t(localizationKey.finished),
-      state: SHIPPED,
+      state: FINISHED,
     },
   ]
 
