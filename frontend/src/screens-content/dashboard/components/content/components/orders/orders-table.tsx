@@ -48,10 +48,14 @@ const OrdersTable = () => {
 
   const data = orders
     .sort((a: Order, b: Order) => (a.date < b.date ? 1 : -1))
-    .map(({ id, date, form }) => ({
+    .map(({ id, date, form, payment }) => ({
       id: id,
       date: new Date(date).toLocaleDateString() ?? '',
       name: `${form?.firstName} ${form?.lastName}`,
+      email: form?.email,
+      phone: form?.phone,
+      payment: payment,
+      address: `${form?.address}, ${form?.city} ${form?.postalCode}`,
     }))
 
   const [order, setOrder] = useState<Order>()
@@ -88,26 +92,26 @@ const OrdersTable = () => {
   const buttonText = String(t(localizationKey.removeAll))
 
   return (
-    <div className={styles.contentContainer}>
-      <div style={{ display: 'flex' }}>
-        <Box className={styles.ordersTableSidepanel}>
-          <DataGrid
-            className={styles.contentTable}
-            rows={data ?? []}
-            columns={getOrdersColumns(t)}
-            autoPageSize
-            checkboxSelection
-            selectionModel={selectionModel}
-            onSelectionModelChange={selectionChanged}
-            disableSelectionOnClick
-            sx={dataGridStyle}
-            onRowClick={changeOrderId}
-          />
-        </Box>
-        <Box className={styles.ordersTableMainpanel}>
-          <OrderDetail order={order} />
-        </Box>
-      </div>
+    <div className={styles.ordersContainer}>
+      <h1>Objednávky</h1>
+      <Box className={styles.ordersTableSidepanel}>
+        <DataGrid
+          className={styles.ordersTable}
+          rows={data ?? []}
+          columns={getOrdersColumns(t)}
+          autoPageSize
+          checkboxSelection
+          selectionModel={selectionModel}
+          onSelectionModelChange={selectionChanged}
+          disableSelectionOnClick
+          sx={dataGridStyle}
+          onRowClick={changeOrderId}
+        />
+      </Box>
+      <h1>Detail objednávky</h1>
+      <Box className={styles.ordersTableMainpanel}>
+        <OrderDetail order={order} />
+      </Box>
       <button
         className={styles.removeButton}
         onClick={removeData}
