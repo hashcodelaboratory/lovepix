@@ -137,7 +137,7 @@ const OrderState = ({
       return
     }
 
-    if (state === OrderStateEnum.PICKED) {
+    if (state === OrderStateEnum.FINISHED) {
       sendMailOrderStateShipped()
     } else if (
       state === OrderStateEnum.SHIPPED &&

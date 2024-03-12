@@ -18,6 +18,20 @@ import MenuItem from '@mui/material/MenuItem'
 import Button from '@mui/material/Button'
 import { Payment } from '../../../../../../../../../common/enums/payment'
 import { Delivery } from '../../../../../../../../../common/enums/delivery'
+import { sendMailOrderDelivered } from '../../../../../../../../../common/api/send-mail-order-delivered'
+import { sendMailOrderShipped } from '../../../../../../../../../common/api/send-mail-order-shipped'
+import { createInvoice } from '../../../../../../../../../common/api/superfaktura'
+import { invoice } from '../../../../../../../../shopping-cart/components/summary/summary/utils'
+import { useQueryClient } from 'react-query'
+import { useSnackbar } from 'notistack'
+import { useUpdateOrderState } from '../../../../../../../api/order/use-order-state-update'
+import {
+  SNACKBAR_OPTIONS_ERROR,
+  SNACKBAR_OPTIONS_SUCCESS,
+} from '../../../../../../../../../snackbar/config'
+import { ORDERS_KEY } from '../../../../../../../api/orders/utils/keys'
+import { useSnackBarNotification } from '../order-detail-history/utils/use-sanckbar-notification'
+import { useState } from 'react'
 
 type Props = {
   order?: Order
@@ -25,6 +39,22 @@ type Props = {
 
 const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
   const { t } = useTranslation()
+  const queryClient = useQueryClient()
+  const { enqueueSnackbar } = useSnackbar()
+  const { snackBarNotification } = useSnackBarNotification()
+
+  const { mutate: editOrderState } = useUpdateOrderState({
+    onSuccess: async (res) => {
+      if (res.error) {
+        enqueueSnackbar(res.error, SNACKBAR_OPTIONS_ERROR)
+      } else {
+        enqueueSnackbar(String(res.status), SNACKBAR_OPTIONS_SUCCESS)
+      }
+      await queryClient.invalidateQueries(ORDERS_KEY)
+    },
+  })
+
+  const [selectedState, setSelectedState] = useState<string>()
 
   const iconStyle = (state: string) => {
     const item = order?.orderState?.map((item) => item.state === state)
@@ -216,19 +246,103 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
     ].filter((state) => orderStates?.find((item) => item.state !== state.state))
   }
 
+  const updateOrderState = async () => {
+    if (!order) {
+      return
+    }
+    const array = order.orderState
+    selectedState && array.push({ state: selectedState, date: Date.now() })
+    editOrderState({ orderId: order.id, orderState: array })
+  }
+
+  const sendMailStateDelivered = async (pdfInvoice: string) => {
+    if (!order) {
+      return
+    }
+    const response = await sendMailOrderDelivered(
+      order.id,
+      order.form.email,
+      t(localizationKey.yourOrderHasBeenDelivered),
+      pdfInvoice
+    )
+    snackBarNotification(
+      response,
+      localizationKey.orderStateSnackbar,
+      localizationKey.emailErrorSnackbar
+    )
+  }
+
+  const sendMailOrderStateShipped = async () => {
+    if (!order) {
+      return
+    }
+    const response = await sendMailOrderShipped(
+      order.id,
+      order.form.email,
+      t(localizationKey.yourOrderHasBeenSent)
+    )
+    if (response.ok) {
+      await updateOrderState()
+    }
+    snackBarNotification(
+      response,
+      localizationKey.orderStateSnackbar,
+      localizationKey.emailErrorSnackbar
+    )
+  }
+
+  const createSFInvoice = async () => {
+    if (!order) {
+      return
+    }
+
+    const response = await createInvoice(invoice(order.id, order))
+    snackBarNotification(
+      response,
+      localizationKey.createInvoiceSuccessMessage,
+      localizationKey.createInvoiceErrorMessage
+    )
+    if (response.ok) {
+      const res = await response.json()
+      const id = res.data?.Invoice.id
+      const token = res.data?.Invoice.token
+      const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+      await sendMailStateDelivered(pdfInvoice)
+      await updateOrderState()
+    }
+  }
+
+  const save = async () => {
+    if (!order) {
+      return
+    }
+
+    if (selectedState === OrderStateEnum.SHIPPED) {
+      await sendMailOrderStateShipped()
+    } else if (
+      selectedState === OrderStateEnum.SHIPPED &&
+      order.payment !== Payment.ONLINE
+    ) {
+      await createSFInvoice()
+    } else {
+      await updateOrderState()
+    }
+  }
+
   return (
     <VerticalTimeline>
       {orderStates?.map(({ state, date }) => (
         <VerticalTimelineElement
           key={date}
           className='vertical-timeline-element--work'
-          contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+          contentStyle={{ background: 'rgb(33, 150, 243)', color: 'white' }}
           contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
           date={new Date(date).toLocaleDateString()}
-          iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+          iconStyle={{ background: 'rgb(33, 150, 243)', color: 'white' }}
         >
           <h3 className='vertical-timeline-element-title'>{t(state)}</h3>
           <p className='vertical-timeline-element-subtitle'>Informácie:</p>
+          <p>{new Date(date).toLocaleDateString()}</p>
           <p>{new Date(date).toLocaleTimeString()}</p>
         </VerticalTimelineElement>
       ))}
@@ -238,7 +352,11 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
         iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
       >
         <h3 className='vertical-timeline-element-title'>Zmeniť stav</h3>
-        <Select defaultValue={getStates()[0]?.state}>
+        <Select
+          onChange={(e) => {
+            setSelectedState(String(e.target.value))
+          }}
+        >
           {getStates().map(({ state }) => (
             <MenuItem key={state} value={state}>
               {t(state)}
@@ -247,7 +365,9 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
         </Select>
         <p className='vertical-timeline-element-subtitle'>Informácie:</p>
         <div className={styles.timelineSave}>
-          <Button variant='contained'>Uložiť</Button>
+          <Button variant='contained' disabled={!selectedState} onClick={save}>
+            Uložiť
+          </Button>
         </div>
       </VerticalTimelineElement>
       <VerticalTimelineElement
