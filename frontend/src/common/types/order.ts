@@ -8,6 +8,9 @@ import { SaleTypeEnum } from '../voucher/utils/enums'
 export type OrderState = {
   date: number
   state: string
+  invoice?: boolean
+  email?: boolean
+  ftp?: boolean
 }
 
 export type VoucherType = {

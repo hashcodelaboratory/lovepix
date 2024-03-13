@@ -13,7 +13,7 @@ import {
   VerticalTimelineElement,
 } from 'react-vertical-timeline-component'
 import 'react-vertical-timeline-component/style.min.css'
-import { Select } from '@mui/material'
+import { Checkbox, FormControlLabel, Select } from '@mui/material'
 import MenuItem from '@mui/material/MenuItem'
 import Button from '@mui/material/Button'
 import { Payment } from '../../../../../../../../../common/enums/payment'
@@ -55,6 +55,9 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
   })
 
   const [selectedState, setSelectedState] = useState<string>()
+  const [genInvoice, setGenInvoice] = useState(false)
+  const [uploadFTP, setUploadFTP] = useState(false)
+  const [sendMail, setSendMail] = useState(false)
 
   const iconStyle = (state: string) => {
     const item = order?.orderState?.map((item) => item.state === state)
@@ -66,157 +69,6 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
   const orderStates = order?.orderState
 
   const getStates = () => {
-    if (
-      order?.payment === Payment.PERSONAL_DELIVERY &&
-      order.delivery === Delivery.PERSONAL_COLLECT
-    ) {
-      return [
-        {
-          icon: <InventoryIcon className={iconStyle(CREATED)} />,
-          message: t(localizationKey.created),
-          state: CREATED,
-        },
-        {
-          icon: <AddShoppingCartIcon className={iconStyle(ACCEPTED)} />,
-          message: t(localizationKey.accepted),
-          state: ACCEPTED,
-        },
-        {
-          icon: <ArchiveIcon className={iconStyle(PACKED)} />,
-          message: t(localizationKey.packed),
-          state: PACKED,
-        },
-        {
-          icon: <RedeemIcon className={iconStyle(SHIPPED)} />,
-          message: t(localizationKey.finished),
-          state: FINISHED,
-        },
-      ]
-    }
-
-    if (
-      order?.payment === Payment.TRANSACTION &&
-      order.delivery === Delivery.PERSONAL_COLLECT
-    ) {
-      return [
-        {
-          icon: <InventoryIcon className={iconStyle(CREATED)} />,
-          message: t(localizationKey.created),
-          state: CREATED,
-        },
-        {
-          icon: <AddShoppingCartIcon className={iconStyle(ACCEPTED)} />,
-          message: t(localizationKey.accepted),
-          state: ACCEPTED,
-        },
-        {
-          icon: <ArchiveIcon className={iconStyle(PAID)} />,
-          message: t(localizationKey.paid),
-          state: PAID,
-        },
-        {
-          icon: <ArchiveIcon className={iconStyle(PACKED)} />,
-          message: t(localizationKey.packed),
-          state: PACKED,
-        },
-
-        {
-          icon: <RedeemIcon className={iconStyle(SHIPPED)} />,
-          message: t(localizationKey.finished),
-          state: FINISHED,
-        },
-      ]
-    }
-
-    if (
-      order?.payment === Payment.ONLINE &&
-      order.delivery === Delivery.PERSONAL_COLLECT
-    ) {
-      return [
-        {
-          icon: <InventoryIcon className={iconStyle(CREATED)} />,
-          message: t(localizationKey.created),
-          state: CREATED,
-        },
-        {
-          icon: <AddShoppingCartIcon className={iconStyle(ACCEPTED)} />,
-          message: t(localizationKey.accepted),
-          state: ACCEPTED,
-        },
-        {
-          icon: <ArchiveIcon className={iconStyle(PACKED)} />,
-          message: t(localizationKey.packed),
-          state: PACKED,
-        },
-        {
-          icon: <RedeemIcon className={iconStyle(SHIPPED)} />,
-          message: t(localizationKey.finished),
-          state: FINISHED,
-        },
-      ]
-    }
-
-    if (
-      order?.payment === Payment.ONLINE &&
-      order.delivery === Delivery.COURIER
-    ) {
-      return [
-        {
-          icon: <InventoryIcon className={iconStyle(CREATED)} />,
-          message: t(localizationKey.created),
-          state: CREATED,
-        },
-        {
-          icon: <AddShoppingCartIcon className={iconStyle(ACCEPTED)} />,
-          message: t(localizationKey.accepted),
-          state: ACCEPTED,
-        },
-        {
-          icon: <ArchiveIcon className={iconStyle(PACKED)} />,
-          message: t(localizationKey.packed),
-          state: PACKED,
-        },
-        {
-          icon: <RedeemIcon className={iconStyle(SHIPPED)} />,
-          message: t(localizationKey.finished),
-          state: FINISHED,
-        },
-      ]
-    }
-
-    if (
-      order?.payment === Payment.TRANSACTION &&
-      order.delivery === Delivery.COURIER
-    ) {
-      return [
-        {
-          icon: <InventoryIcon className={iconStyle(CREATED)} />,
-          message: t(localizationKey.created),
-          state: CREATED,
-        },
-        {
-          icon: <AddShoppingCartIcon className={iconStyle(ACCEPTED)} />,
-          message: t(localizationKey.accepted),
-          state: ACCEPTED,
-        },
-        {
-          icon: <ArchiveIcon className={iconStyle(PAID)} />,
-          message: t(localizationKey.paid),
-          state: PAID,
-        },
-        {
-          icon: <ArchiveIcon className={iconStyle(PACKED)} />,
-          message: t(localizationKey.packed),
-          state: PACKED,
-        },
-        {
-          icon: <RedeemIcon className={iconStyle(SHIPPED)} />,
-          message: t(localizationKey.finished),
-          state: FINISHED,
-        },
-      ]
-    }
-
     return [
       {
         icon: <InventoryIcon className={iconStyle(CREATED)} />,
@@ -228,22 +80,34 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
         message: t(localizationKey.accepted),
         state: ACCEPTED,
       },
-      {
-        icon: <ArchiveIcon className={iconStyle(PACKED)} />,
-        message: t(localizationKey.packed),
-        state: PACKED,
-      },
-      {
-        icon: <LocalShippingIcon className={iconStyle(SHIPPED)} />,
-        message: t(localizationKey.shipped),
-        state: SHIPPED,
-      },
+      order?.payment === Payment.TRANSACTION
+        ? {
+            icon: <ArchiveIcon className={iconStyle(PAID)} />,
+            message: t(localizationKey.paid),
+            state: PAID,
+          }
+        : null,
+      order?.delivery === Delivery.COURIER
+        ? {
+            icon: <LocalShippingIcon className={iconStyle(SHIPPED)} />,
+            message: t(localizationKey.shipped),
+            state: SHIPPED,
+          }
+        : {
+            icon: <ArchiveIcon className={iconStyle(PACKED)} />,
+            message: t(localizationKey.packed),
+            state: PACKED,
+          },
       {
         icon: <RedeemIcon className={iconStyle(SHIPPED)} />,
         message: t(localizationKey.finished),
         state: FINISHED,
       },
-    ].filter((state) => orderStates?.find((item) => item.state !== state.state))
+    ]
+      .filter((state) => state !== null)
+      .filter(
+        (state) => !orderStates?.find((item) => item.state === state?.state)
+      )
   }
 
   const updateOrderState = async () => {
@@ -251,11 +115,18 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
       return
     }
     const array = order.orderState
-    selectedState && array.push({ state: selectedState, date: Date.now() })
+    selectedState &&
+      array.push({
+        state: selectedState,
+        date: Date.now(),
+        invoice: genInvoice,
+        email: sendMail,
+        ftp: uploadFTP,
+      })
     editOrderState({ orderId: order.id, orderState: array })
   }
 
-  const sendMailStateDelivered = async (pdfInvoice: string) => {
+  const sendMailDelivered = async (pdfInvoice: string) => {
     if (!order) {
       return
     }
@@ -272,7 +143,7 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
     )
   }
 
-  const sendMailOrderStateShipped = async () => {
+  const sendMailShipped = async () => {
     if (!order) {
       return
     }
@@ -307,7 +178,7 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
       const id = res.data?.Invoice.id
       const token = res.data?.Invoice.token
       const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
-      await sendMailStateDelivered(pdfInvoice)
+      await sendMailDelivered(pdfInvoice)
       await updateOrderState()
     }
   }
@@ -317,13 +188,12 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
       return
     }
 
-    if (selectedState === OrderStateEnum.SHIPPED) {
-      await sendMailOrderStateShipped()
-    } else if (
-      selectedState === OrderStateEnum.SHIPPED &&
-      order.payment !== Payment.ONLINE
-    ) {
+    if (sendMail) {
+      await sendMailShipped()
+    } else if (genInvoice) {
       await createSFInvoice()
+    } else if (uploadFTP) {
+      // TODO: implement FTP upload
     } else {
       await updateOrderState()
     }
@@ -351,19 +221,50 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
         date={new Date().toLocaleDateString()}
         iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
       >
-        <h3 className='vertical-timeline-element-title'>Zmeniť stav</h3>
+        <h3
+          className='vertical-timeline-element-title'
+          style={{ marginBottom: 8 }}
+        >
+          Zmeniť stav
+        </h3>
         <Select
           onChange={(e) => {
             setSelectedState(String(e.target.value))
           }}
+          style={{ width: 300 }}
+          size='small'
         >
-          {getStates().map(({ state }) => (
-            <MenuItem key={state} value={state}>
-              {t(state)}
+          {getStates().map((state) => (
+            <MenuItem key={state?.state} value={state?.state}>
+              {t(state?.state ?? '')}
             </MenuItem>
           ))}
         </Select>
         <p className='vertical-timeline-element-subtitle'>Informácie:</p>
+        <div>
+          <FormControlLabel
+            control={
+              <Checkbox onChange={(e) => setGenInvoice(e.target.checked)} />
+            }
+            label='Vytvoriť faktúru'
+          />
+          <FormControlLabel
+            control={
+              <Checkbox onChange={(e) => setSendMail(e.target.checked)} />
+            }
+            label='Odoslať e-mail'
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                // TODO: remove disabled
+                disabled
+                onChange={(e) => setUploadFTP(e.target.checked)}
+              />
+            }
+            label='Nahrať na FTP'
+          />
+        </div>
         <div className={styles.timelineSave}>
           <Button variant='contained' disabled={!selectedState} onClick={save}>
             Uložiť
