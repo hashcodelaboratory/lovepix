@@ -14,7 +14,6 @@ const OrderDetail = ({ order }: OrderDetailProps): JSX.Element => (
     <OrderDetailTitle id={order?.id} />
     <OrderDetailShoppingCart order={order} />
     <div className={styles.flex}>
-      <OrderDetailHistory order={order} />
       <OrderDetailTimeline order={order} />
     </div>
   </div>

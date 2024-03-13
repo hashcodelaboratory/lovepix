@@ -13,7 +13,12 @@ import {
   VerticalTimelineElement,
 } from 'react-vertical-timeline-component'
 import 'react-vertical-timeline-component/style.min.css'
-import { Checkbox, FormControlLabel, Select } from '@mui/material'
+import {
+  Checkbox,
+  FormControlLabel,
+  Select,
+  TextareaAutosize,
+} from '@mui/material'
 import MenuItem from '@mui/material/MenuItem'
 import Button from '@mui/material/Button'
 import { Payment } from '../../../../../../../../../common/enums/payment'
@@ -58,6 +63,7 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
   const [genInvoice, setGenInvoice] = useState(false)
   const [uploadFTP, setUploadFTP] = useState(false)
   const [sendMail, setSendMail] = useState(false)
+  const [sendInfo, setSendInfo] = useState<string>()
 
   const iconStyle = (state: string) => {
     const item = order?.orderState?.map((item) => item.state === state)
@@ -122,6 +128,7 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
         invoice: genInvoice,
         email: sendMail,
         ftp: uploadFTP,
+        info: sendInfo,
       })
     editOrderState({ orderId: order.id, orderState: array })
   }
@@ -201,17 +208,43 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
 
   return (
     <VerticalTimeline>
-      {orderStates?.map(({ state, date }) => (
+      {orderStates?.map(({ state, date, info, invoice, ftp, email }) => (
         <VerticalTimelineElement
           key={date}
           className='vertical-timeline-element--work'
-          contentStyle={{ background: 'rgb(33, 150, 243)', color: 'white' }}
+          contentStyle={{ background: 'rgb(206,234,255)', color: 'black' }}
           contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
           date={new Date(date).toLocaleDateString()}
-          iconStyle={{ background: 'rgb(33, 150, 243)', color: 'white' }}
+          iconStyle={{ background: 'rgb(206,234,255)', color: 'black' }}
         >
           <h3 className='vertical-timeline-element-title'>{t(state)}</h3>
           <p className='vertical-timeline-element-subtitle'>Informácie:</p>
+          <TextareaAutosize
+            minRows={5}
+            value={info}
+            style={{ width: '100%' }}
+          />
+          <div>
+            <FormControlLabel
+              control={<Checkbox disabled checked={invoice} />}
+              label='Vytvoriť faktúru'
+            />
+            <FormControlLabel
+              control={<Checkbox disabled checked={email} />}
+              label='Odoslať e-mail'
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  // TODO: remove disabled
+                  disabled
+                  checked={ftp}
+                />
+              }
+              label='Nahrať na FTP'
+            />
+          </div>
+
           <p>{new Date(date).toLocaleDateString()}</p>
           <p>{new Date(date).toLocaleTimeString()}</p>
         </VerticalTimelineElement>
@@ -241,6 +274,11 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
           ))}
         </Select>
         <p className='vertical-timeline-element-subtitle'>Informácie:</p>
+        <TextareaAutosize
+          minRows={5}
+          onChange={(e) => setSendInfo(e.target.value)}
+          style={{ width: '100%' }}
+        />
         <div>
           <FormControlLabel
             control={

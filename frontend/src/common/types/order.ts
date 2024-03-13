@@ -11,6 +11,7 @@ export type OrderState = {
   invoice?: boolean
   email?: boolean
   ftp?: boolean
+  info?: string
 }
 
 export type VoucherType = {
