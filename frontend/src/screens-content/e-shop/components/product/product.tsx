@@ -21,15 +21,13 @@ const Product = ({ product, width, height, layout }: ProductContent) => {
 
   return (
     <div className={styles.previewProduct} onClick={goTo}>
-      <div className={styles.imageWrapper}>
-        <ProgressiveImage
-          image={webpHighEndImageUrl ?? ''}
-          placeholder={webp1kbHighEndImageUrl ?? ''}
-          width={width}
-          height={height}
-          layout={layout}
-        />
-      </div>
+      <ProgressiveImage
+        image={webpHighEndImageUrl ?? ''}
+        placeholder={webp1kbHighEndImageUrl ?? ''}
+        width={width}
+        height={height}
+        layout={layout}
+      />
       <div className={styles.previewImageDescription}>
         <p className={styles.productTitle}>{title}</p>
         <p className={styles.price}>{price?.toFixed(2) ?? '-'} €</p>
