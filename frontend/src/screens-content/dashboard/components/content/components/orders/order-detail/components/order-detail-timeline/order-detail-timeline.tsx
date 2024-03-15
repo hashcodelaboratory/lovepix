@@ -35,8 +35,8 @@ import {
   SNACKBAR_OPTIONS_SUCCESS,
 } from '../../../../../../../../../snackbar/config'
 import { ORDERS_KEY } from '../../../../../../../api/orders/utils/keys'
-import { useSnackBarNotification } from '../order-detail-history/utils/use-sanckbar-notification'
 import { useState } from 'react'
+import { useSnackBarNotification } from './utils/use-sanckbar-notification'
 
 type Props = {
   order?: Order
@@ -219,11 +219,7 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
         >
           <h3 className='vertical-timeline-element-title'>{t(state)}</h3>
           <p className='vertical-timeline-element-subtitle'>Informácie:</p>
-          <TextareaAutosize
-            minRows={5}
-            value={info}
-            style={{ width: '100%' }}
-          />
+          <p className={styles.timelineInfo}>{info}</p>
           <div>
             <FormControlLabel
               control={<Checkbox disabled checked={invoice} />}
