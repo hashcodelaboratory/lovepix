@@ -1,9 +1,5 @@
 import { Container } from '@mui/material'
-import {
-  ProductsType,
-  useFrontPageProducts,
-  useProducts,
-} from 'common/api/use-products'
+import { ProductsType, useFrontPageProducts } from 'common/api/use-products'
 import React from 'react'
 import Product from 'screens-content/e-shop/components/product/product'
 import { Pages } from 'constants/pages/urls'
