@@ -19,6 +19,8 @@ import { OrderState, VoucherType } from 'common/types/order'
 import { orderTable } from '../../../database.config'
 import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
 import { voucherService } from '../services/voucher'
+import { loggingService } from '../../analytics/logging-service'
+import { LovepixEvent } from '../../analytics/lovepix-event'
 
 export type CreateOrderRequest = {
   id?: string
@@ -82,6 +84,13 @@ const uploadToStorage = async (orderId: string, data: CreateOrderRequest) => {
       const origin = await getDownloadURL(
         ref(storage, `${StorageFolder.ORDERS}/${orderId}/images/${originName}`)
       )
+
+      loggingService.logEvent(LovepixEvent.FIREBASE_IMAGE_UPLOAD, {
+        extra: {
+          url,
+          origin,
+        },
+      })
 
       payload.push({
         ...image,

@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { FormInputs } from '../../../../../common/types/form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FORM_SCHEMA } from '../address/components/form/utils/schema'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Backdrop, CircularProgress } from '@mui/material'
 import Voucher from '../voucher/voucher'
 import Delivery from '../delivery/delivery'
@@ -27,6 +27,8 @@ import { addContactToNewsletter } from 'common/api/add-contact-newsletter'
 import { createOrder } from '../../../../../common/api/create-order'
 import { useTranslation } from 'next-i18next'
 import { Route } from 'common/enums/routes'
+import { loggingService } from '../../../../../analytics/logging-service'
+import { LovepixEvent } from '../../../../../analytics/lovepix-event'
 
 type SummaryProps = {
   order: Order
@@ -56,6 +58,12 @@ const Summary = ({ order }: SummaryProps) => {
     reValidateMode: 'onChange',
   })
   const { delivery, payment } = watch()
+
+  useEffect(() => {
+    loggingService.logEvent(LovepixEvent.ORDER_VALIDATION, {
+      extra: { errors },
+    })
+  }, [errors])
 
   const finalPrice = useMemo(
     () =>
@@ -120,6 +128,10 @@ const Summary = ({ order }: SummaryProps) => {
         ico: data?.ico,
         dic: data?.dic,
       })
+
+    loggingService.logEvent(LovepixEvent.SUBMIT_ORDER, {
+      extra: { order: newOrder },
+    })
 
     await createOrder(newOrder)
     if (payment !== PaymentEnum.ONLINE) {

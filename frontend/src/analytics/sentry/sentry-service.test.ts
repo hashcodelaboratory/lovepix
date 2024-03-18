@@ -1,18 +1,17 @@
 import * as Sentry from '@sentry/nextjs'
 
-jest.mock('@sentry/nextjs')
-
 describe('SentryService', () => {
   beforeEach(jest.clearAllMocks)
 
   describe('captureException', () => {
     it('should call Sentry.captureException with expected default parameters', () => {
       const { sentryService } = jest.requireActual('./sentry-service')
+      const captureExceptionSpy = jest.spyOn(Sentry, 'captureException')
 
       sentryService.captureException(new Error('<test_exception>'))
 
-      expect(Sentry.captureException).toHaveBeenCalledTimes(1)
-      expect(Sentry.captureException).toHaveBeenCalledWith(
+      expect(captureExceptionSpy).toHaveBeenCalledTimes(1)
+      expect(captureExceptionSpy).toHaveBeenCalledWith(
         new Error('<test_exception>'),
         undefined
       )
@@ -20,6 +19,7 @@ describe('SentryService', () => {
 
     it('should call Sentry.captureException with expected additional information', () => {
       const { sentryService } = jest.requireActual('./sentry-service')
+      const captureExceptionSpy = jest.spyOn(Sentry, 'captureException')
 
       sentryService.captureException(new Error('<test_exception>'), {
         user: {
@@ -27,8 +27,8 @@ describe('SentryService', () => {
         },
       })
 
-      expect(Sentry.captureException).toHaveBeenCalledTimes(1)
-      expect(Sentry.captureException).toHaveBeenCalledWith(
+      expect(captureExceptionSpy).toHaveBeenCalledTimes(1)
+      expect(captureExceptionSpy).toHaveBeenCalledWith(
         new Error('<test_exception>'),
         {
           user: {
@@ -42,11 +42,12 @@ describe('SentryService', () => {
   describe('captureMessage', () => {
     it('should call Sentry.captureMessage with expected default parameters', () => {
       const { sentryService } = jest.requireActual('./sentry-service')
+      const captureMessageSpy = jest.spyOn(Sentry, 'captureMessage')
 
       sentryService.captureMessage('<test_message>')
 
-      expect(Sentry.captureMessage).toHaveBeenCalledTimes(1)
-      expect(Sentry.captureMessage).toHaveBeenCalledWith(
+      expect(captureMessageSpy).toHaveBeenCalledTimes(1)
+      expect(captureMessageSpy).toHaveBeenCalledWith(
         '<test_message>',
         undefined
       )
@@ -54,6 +55,7 @@ describe('SentryService', () => {
 
     it('should call Sentry.captureMessage with expected additional information', () => {
       const { sentryService } = jest.requireActual('./sentry-service')
+      const captureMessageSpy = jest.spyOn(Sentry, 'captureMessage')
 
       sentryService.captureMessage('<test_message>', {
         user: {
@@ -61,8 +63,8 @@ describe('SentryService', () => {
         },
       })
 
-      expect(Sentry.captureMessage).toHaveBeenCalledTimes(1)
-      expect(Sentry.captureMessage).toHaveBeenCalledWith('<test_message>', {
+      expect(captureMessageSpy).toHaveBeenCalledTimes(1)
+      expect(captureMessageSpy).toHaveBeenCalledWith('<test_message>', {
         user: {
           id: '<test_user_id>',
         },

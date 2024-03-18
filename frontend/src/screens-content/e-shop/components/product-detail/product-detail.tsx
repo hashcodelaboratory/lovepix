@@ -19,6 +19,8 @@ import {
   SNACKBAR_OPTIONS_SUCCESS,
 } from 'snackbar/config'
 import { ProductsType, useProducts } from 'common/api/use-products'
+import { loggingService } from '../../../../analytics/logging-service'
+import { LovepixEvent } from '../../../../analytics/lovepix-event'
 
 type ProductProps = {
   product: ProductType | undefined
@@ -87,6 +89,10 @@ const ProductDetailLayout = ({ product, isLoading }: ProductProps) => {
   const addToCart = () => {
     const { products } = order?.shoppingCart || []
     const product = products?.find((item: any) => item.id === id)
+
+    loggingService.logEvent(LovepixEvent.ADD_TO_CART_ESHOP_PRODUCT, {
+      extra: { product },
+    })
 
     if (product?.qty === count) {
       enqueueSnackbar(

@@ -1,6 +1,6 @@
 import React from 'react'
-import Image from 'next/image'
 import { ImageLayout } from '../../screens-content/home/enums/enums'
+import styles from './progressive-image.module.scss'
 
 type ProgressiveImageProps = {
   image?: string
@@ -10,24 +10,14 @@ type ProgressiveImageProps = {
   layout?: ImageLayout
 }
 
-const ProgressiveImage = ({
-  image,
-  placeholder,
-  width = 300,
-  height = 300,
-  layout = ImageLayout.FIXED,
-}: ProgressiveImageProps) => {
+const ProgressiveImage = ({ image }: ProgressiveImageProps) => {
   return (
-    <div style={{ width, height }}>
-      <Image
+    <div className={styles.imageWrapper}>
+      <img
         placeholder='blur'
         src={image ?? ''}
-        blurDataURL={placeholder ?? ''}
         alt='image'
-        layout={layout}
-        objectFit='cover'
-        width={width}
-        height={height}
+        className={styles.image}
       />
     </div>
   )

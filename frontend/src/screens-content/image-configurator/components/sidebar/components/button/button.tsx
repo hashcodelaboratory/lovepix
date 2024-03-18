@@ -23,6 +23,8 @@ import {
 } from '../../../../../../common/api/use-dimension'
 import { GalleryDetailType } from '../price/price'
 import { useGalleryDetail } from '../../../../../../common/api/use-gallery-detail'
+import { loggingService } from '../../../../../../analytics/logging-service'
+import { LovepixEvent } from '../../../../../../analytics/lovepix-event'
 
 type ButtonProps = {
   configuration: Configuration
@@ -101,22 +103,21 @@ const Button = ({ materials, configuration }: ButtonProps) => {
     })
     totalPrice += Number(computedPrice)
 
+    const image = {
+      url: state.cropper?.current?.cropper
+        .getCroppedCanvas()
+        ?.toDataURL(StorageFileType.JPEG),
+      qty: 1,
+      origin: origin,
+      width: dim.width,
+      height: dim.height,
+      material: materialType,
+      price: Number(Number(computedPrice).toFixed(2)),
+    }
+
     const payload = {
       shoppingCart: {
-        images: [
-          ...(order?.shoppingCart?.images ?? []),
-          {
-            url: state.cropper?.current?.cropper
-              .getCroppedCanvas()
-              ?.toDataURL(StorageFileType.JPEG),
-            qty: 1,
-            origin: origin,
-            width: dim.width,
-            height: dim.height,
-            material: materialType,
-            price: Number(Number(computedPrice).toFixed(2)),
-          },
-        ],
+        images: [...(order?.shoppingCart?.images ?? []), image],
         products: order?.shoppingCart?.products ?? [],
       },
       totalPrice: totalPrice.toFixed(2),
@@ -127,6 +128,10 @@ const Button = ({ materials, configuration }: ButtonProps) => {
       : orderTable.add(payload, ORDER_TABLE_KEY)
 
     configurationsTable.clear()
+
+    loggingService.logEvent(LovepixEvent.ADD_TO_CART_CONFIGURATOR, {
+      extra: image,
+    })
 
     await router.push(`${t(Pages.SHOPPING_CART)}`)
   }

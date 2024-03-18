@@ -106,11 +106,11 @@
 
   background: rgba(255, 255, 255, 0.13);
   background: linear-gradient(
-                  to right,
-                  rgba(255, 255, 255, 0.13) 0%,
-                  rgba(255, 255, 255, 0.13) 77%,
-                  rgba(255, 255, 255, 0.5) 92%,
-                  rgba(255, 255, 255, 0) 100%
+    to right,
+    rgba(255, 255, 255, 0.13) 0%,
+    rgba(255, 255, 255, 0.13) 77%,
+    rgba(255, 255, 255, 0.5) 92%,
+    rgba(255, 255, 255, 0) 100%
   );
 }
 
@@ -180,7 +180,7 @@
   padding: 1rem 1.5rem;
   margin: 1rem auto;
   cursor: pointer;
-  border: 2px dashed #45D9FF;
+  border: 2px dashed #45d9ff;
   border-radius: 1rem;
   text-align: center;
 }
@@ -198,7 +198,7 @@
   margin: auto;
   width: 4rem;
   height: 4rem;
-  background-image: url("../../assets/upload_icon.svg");
+  background-image: url('../../assets/upload_icon.svg');
   background-repeat: no-repeat;
 }
 
@@ -363,7 +363,13 @@
 
 .fade {
   pointer-events: none;
-  background: linear-gradient(90deg, #f6f6f6, transparent 16%, transparent 16%, #f6f6f6);
+  background: linear-gradient(
+    90deg,
+    #f6f6f6,
+    transparent 16%,
+    transparent 16%,
+    #f6f6f6
+  );
   position: absolute;
   inset: 0;
 }
