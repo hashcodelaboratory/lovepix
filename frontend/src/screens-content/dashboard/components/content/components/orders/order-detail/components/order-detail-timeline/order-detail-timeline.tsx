@@ -23,8 +23,6 @@ import MenuItem from '@mui/material/MenuItem'
 import Button from '@mui/material/Button'
 import { Payment } from '../../../../../../../../../common/enums/payment'
 import { Delivery } from '../../../../../../../../../common/enums/delivery'
-import { sendMailOrderDelivered } from '../../../../../../../../../common/api/send-mail-order-delivered'
-import { sendMailOrderShipped } from '../../../../../../../../../common/api/send-mail-order-shipped'
 import { useQueryClient } from 'react-query'
 import { useSnackbar } from 'notistack'
 import { useUpdateOrderState } from '../../../../../../../api/order/use-order-state-update'
@@ -36,6 +34,10 @@ import { ORDERS_KEY } from '../../../../../../../api/orders/utils/keys'
 import { useState } from 'react'
 import { useSnackBarNotification } from './utils/use-sanckbar-notification'
 import { invoiceService } from '../../../../../../../../../common/services/invoice/invoice'
+import {
+  emailService,
+  SendMailRequest,
+} from '../../../../../../../../../common/services/email/email'
 
 type Props = {
   order?: Order
@@ -132,16 +134,7 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
     editOrderState({ orderId: order.id, orderState: array })
   }
 
-  const sendMailDelivered = async (pdfInvoice: string) => {
-    if (!order) {
-      return
-    }
-    const response = await sendMailOrderDelivered(
-      order.id,
-      order.form.email,
-      t(localizationKey.yourOrderHasBeenDelivered),
-      pdfInvoice
-    )
+  const notify = async (response: Response) => {
     snackBarNotification(
       response,
       localizationKey.orderStateSnackbar,
@@ -149,23 +142,41 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
     )
   }
 
+  const sendMailDelivered = async (pdfInvoice: string) => {
+    if (!order) {
+      return
+    }
+    const data: SendMailRequest = {
+      orderId: order.id,
+      email: order.form.email,
+      text: t(localizationKey.yourOrderHasBeenDelivered),
+      pdf: pdfInvoice,
+    }
+    const response = await emailService.sendMailDelivered(data)
+
+    if (response.ok) {
+      await updateOrderState()
+      await notify(response)
+    }
+  }
+
   const sendMailShipped = async () => {
     if (!order) {
       return
     }
-    const response = await sendMailOrderShipped(
-      order.id,
-      order.form.email,
-      t(localizationKey.yourOrderHasBeenSent)
-    )
+
+    const data: SendMailRequest = {
+      orderId: order.id,
+      email: order.form.email,
+      text: t(localizationKey.yourOrderHasBeenSent),
+    }
+
+    const response = await emailService.sendMailShipped(data)
+
     if (response.ok) {
       await updateOrderState()
+      await notify(response)
     }
-    snackBarNotification(
-      response,
-      localizationKey.orderStateSnackbar,
-      localizationKey.emailErrorSnackbar
-    )
   }
 
   const createInvoice = async () => {
@@ -177,7 +188,6 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
 
     if (pdfInvoice) {
       await sendMailDelivered(pdfInvoice)
-      await updateOrderState()
     }
   }
 
