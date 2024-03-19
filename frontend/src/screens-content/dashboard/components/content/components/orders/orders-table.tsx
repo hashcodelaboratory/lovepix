@@ -22,6 +22,7 @@ import OrderDetail from './order-detail/order-detail'
 import { Order } from '../../../../../../common/types/order'
 import { useOrders } from '../../../../api/orders/use-orders'
 import delivery from '../../../../../shopping-cart/components/summary/delivery/delivery'
+import OrderDetailTimeline from './order-detail/components/order-detail-timeline/order-detail-timeline'
 
 export const dataGridStyle = {
   boxShadow: 2,
@@ -110,10 +111,6 @@ const OrdersTable = () => {
           onRowClick={changeOrderId}
         />
       </Box>
-      <h1>Detail objednávky</h1>
-      <Box className={styles.ordersTableMainpanel}>
-        <OrderDetail order={order} />
-      </Box>
       <button
         className={styles.removeButton}
         onClick={removeData}
@@ -123,6 +120,12 @@ const OrdersTable = () => {
         {buttonText}
         <DeleteIcon sx={{ marginLeft: 1 }} />
       </button>
+      <h1>Detail objednávky</h1>
+      <Box className={styles.ordersTableMainpanel}>
+        <OrderDetail order={order} />
+      </Box>
+
+      <OrderDetailTimeline order={order} />
     </div>
   )
 }
