@@ -34,6 +34,7 @@ const ProfileLayout = () => {
     [OrderStateEnum.PACKED]: t(localizationKey.packed),
     [OrderStateEnum.SHIPPED]: t(localizationKey.shipped),
     [OrderStateEnum.FINISHED]: t(localizationKey.finished),
+    [OrderStateEnum.PAID]: t(localizationKey.paid),
   }
 
   const orderData =
