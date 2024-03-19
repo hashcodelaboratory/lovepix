@@ -21,7 +21,6 @@ import { removeOrders } from '../../../../api/orders/remove-orders'
 import OrderDetail from './order-detail/order-detail'
 import { Order } from '../../../../../../common/types/order'
 import { useOrders } from '../../../../api/orders/use-orders'
-import delivery from '../../../../../shopping-cart/components/summary/delivery/delivery'
 import OrderDetailTimeline from './order-detail/components/order-detail-timeline/order-detail-timeline'
 
 export const dataGridStyle = {
@@ -124,7 +123,6 @@ const OrdersTable = () => {
       <Box className={styles.ordersTableMainpanel}>
         <OrderDetail order={order} />
       </Box>
-
       <OrderDetailTimeline order={order} />
     </div>
   )

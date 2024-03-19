@@ -8,6 +8,12 @@ export type SendMailRequest = {
   pdf?: string
 }
 
+export type OrderStateMail = {
+  id: string
+  dest: string[]
+  text: string
+}
+
 class EmailService {
   public sendMailDelivered = async (params: SendMailRequest) => {
     const { orderId, email, text, pdf } = params
