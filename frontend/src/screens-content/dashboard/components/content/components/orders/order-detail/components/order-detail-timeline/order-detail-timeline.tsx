@@ -25,8 +25,6 @@ import { Payment } from '../../../../../../../../../common/enums/payment'
 import { Delivery } from '../../../../../../../../../common/enums/delivery'
 import { sendMailOrderDelivered } from '../../../../../../../../../common/api/send-mail-order-delivered'
 import { sendMailOrderShipped } from '../../../../../../../../../common/api/send-mail-order-shipped'
-import { createInvoice } from '../../../../../../../../../common/api/superfaktura'
-import { invoice } from '../../../../../../../../shopping-cart/components/summary/summary/utils'
 import { useQueryClient } from 'react-query'
 import { useSnackbar } from 'notistack'
 import { useUpdateOrderState } from '../../../../../../../api/order/use-order-state-update'
@@ -37,6 +35,7 @@ import {
 import { ORDERS_KEY } from '../../../../../../../api/orders/utils/keys'
 import { useState } from 'react'
 import { useSnackBarNotification } from './utils/use-sanckbar-notification'
+import { invoiceService } from '../../../../../../../../../common/services/invoice/invoice'
 
 type Props = {
   order?: Order
@@ -169,22 +168,14 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
     )
   }
 
-  const createSFInvoice = async () => {
+  const createInvoice = async () => {
     if (!order) {
       return
     }
 
-    const response = await createInvoice(invoice(order.id, order))
-    snackBarNotification(
-      response,
-      localizationKey.createInvoiceSuccessMessage,
-      localizationKey.createInvoiceErrorMessage
-    )
-    if (response.ok) {
-      const res = await response.json()
-      const id = res.data?.Invoice.id
-      const token = res.data?.Invoice.token
-      const pdfInvoice = `https://moja.superfaktura.sk/slo/invoices/pdf/${id}/token:${token}/signature:1/bysquare:1`
+    const pdfInvoice = await invoiceService.createInvoice(order)
+
+    if (pdfInvoice) {
       await sendMailDelivered(pdfInvoice)
       await updateOrderState()
     }
@@ -198,7 +189,7 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
     if (sendMail) {
       await sendMailShipped()
     } else if (genInvoice) {
-      await createSFInvoice()
+      await createInvoice()
     } else if (uploadFTP) {
       // TODO: implement FTP upload
     } else {
