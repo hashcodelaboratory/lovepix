@@ -220,7 +220,7 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
         >
           <h3 className='vertical-timeline-element-title'>{t(state)}</h3>
           <p className='vertical-timeline-element-subtitle'>Informácie:</p>
-          <p className={styles.timelineInfo}>{info}</p>
+          <p className={styles.timelineInfo}>{info ?? '---'}</p>
           <div>
             <FormControlLabel
               control={<Checkbox disabled checked={invoice} />}
@@ -242,8 +242,9 @@ const OrderDetailTimeline = ({ order }: Props): JSX.Element => {
             />
           </div>
 
-          <p>{new Date(date).toLocaleDateString()}</p>
-          <p>{new Date(date).toLocaleTimeString()}</p>
+          <p className={styles.timelineTime}>
+            {new Date(date).toLocaleTimeString()}
+          </p>
         </VerticalTimelineElement>
       ))}
       <VerticalTimelineElement

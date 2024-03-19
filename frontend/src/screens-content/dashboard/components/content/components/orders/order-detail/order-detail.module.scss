@@ -140,5 +140,12 @@
 }
 
 .timelineInfo {
-  font-weight: 200;
+  font-weight: 200 !important;
+  margin-top: 0 !important;
+}
+
+.timelineTime {
+  font-weight: 200 !important;
+  color: gray;
+  font-size: .8rem !important;
 }
