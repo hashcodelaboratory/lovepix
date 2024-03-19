@@ -30,10 +30,10 @@ const ProfileLayout = () => {
 
   const states = {
     [OrderStateEnum.CREATED]: t(localizationKey.created),
-    [OrderStateEnum.DELIVERED]: t(localizationKey.accepted),
+    [OrderStateEnum.ACCEPTED]: t(localizationKey.accepted),
     [OrderStateEnum.PACKED]: t(localizationKey.packed),
-    [OrderStateEnum.PICKED]: t(localizationKey.shipped),
-    [OrderStateEnum.SHIPPED]: t(localizationKey.finished),
+    [OrderStateEnum.SHIPPED]: t(localizationKey.shipped),
+    [OrderStateEnum.FINISHED]: t(localizationKey.finished),
   }
 
   const orderData =
