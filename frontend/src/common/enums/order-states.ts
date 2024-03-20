@@ -1,7 +1,8 @@
 export enum OrderState {
   CREATED = 'created',
-  PICKED = 'picked',
+  ACCEPTED = 'accepted',
   PACKED = 'packed',
   SHIPPED = 'shipped',
-  DELIVERED = 'delivered',
+  PAID = 'paid',
+  FINISHED = 'finished',
 }

@@ -103,7 +103,7 @@
   "singleOrder": "Order",
   "orderHistory": "Order history",
   "customerDetails": "Customer details",
-  "orderCreated": "Order created",
+  "created": "Order created",
   "transaction": "Transaction",
   "free": "Free",
   "orderWithPayment": "Order with payment obligation",

@@ -1,6 +1,6 @@
 import { UserMail } from 'common/api/send-mail'
 import { AdminEmail } from 'common/api/send-mail-admins'
-import { OrderStateMail } from 'common/api/send-mail-order-shipped'
+import { OrderStateMail } from '../../common/services/email/email'
 
 export const BAD_REQUEST_ERROR_MESSAGE = 'Bad request!'
 

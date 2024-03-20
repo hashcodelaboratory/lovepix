@@ -18,7 +18,7 @@ import { Stripe } from '@stripe/stripe-js'
 import { OrderState, VoucherType } from 'common/types/order'
 import { orderTable } from '../../../database.config'
 import { ORDER_TABLE_KEY } from 'common/indexed-db/hooks/keys'
-import { voucherService } from '../services/voucher'
+import { voucherService } from '../services/voucher/voucher'
 import { loggingService } from '../../analytics/logging-service'
 import { LovepixEvent } from '../../analytics/lovepix-event'
 
