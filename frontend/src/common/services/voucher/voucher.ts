@@ -5,8 +5,8 @@ import {
   updateDoc,
   where,
 } from '@firebase/firestore'
-import { database } from '../firebase/config'
-import { Collections } from '../firebase/enums'
+import { database } from '../../firebase/config'
+import { Collections } from '../../firebase/enums'
 
 class VoucherService {
   public updateLimit = async (limit?: number, code?: string) => {

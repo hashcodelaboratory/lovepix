@@ -14,7 +14,7 @@ const OrderDetailShoppingCart = ({ order }: Props): JSX.Element => {
   const { t } = useTranslation()
 
   return (
-    <Box className={styles.box} style={{ width: '100%' }}>
+    <Box className={styles.box} style={{ width: '100%', height: 600 }}>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <p className={styles.orderDetailShoppingTitle}>
           {t(localizationKey.shoppingCart)}

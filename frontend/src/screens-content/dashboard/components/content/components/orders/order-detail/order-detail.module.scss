@@ -1,7 +1,6 @@
 .container {
   padding: 1rem;
   border-radius: 0 1rem 1rem 0;
-  height: 700px;
 }
 
 .box {
@@ -132,4 +131,21 @@
 
 .orderDetailTotal {
   font-weight: 200;
+}
+
+.timelineSave {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+.timelineInfo {
+  font-weight: 200 !important;
+  margin-top: 0 !important;
+}
+
+.timelineTime {
+  font-weight: 200 !important;
+  color: gray;
+  font-size: .8rem !important;
 }
