@@ -18,8 +18,6 @@ import { Pages } from 'constants/pages/urls'
 import { useRouter } from 'next/router'
 import { Backdrop, CircularProgress } from '@mui/material'
 import { Material } from '../../../../common/enums/material'
-import { getNormalizedFile } from '../../../../utils/get-normailized-file'
-import { isIosSafari } from '../../../../utils/is-ios-safari'
 
 export enum CarouselTestIds {
   navigateToConfiguratorButtonTestId = 'navigate_to_configurator_button_test_id',
@@ -62,15 +60,7 @@ const Carousel = ({ configuration }: CarouselProps) => {
 
     const file = files[0]
     const fr = new FileReader()
-
-    // issue reference: https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/CreatingContentforSafarioniPhone/CreatingContentforSafarioniPhone.html
-    if (isIosSafari()) {
-      const normalizedFile = await getNormalizedFile(file)
-
-      fr.readAsDataURL(normalizedFile)
-    } else {
-      fr.readAsDataURL(file)
-    }
+    fr.readAsDataURL(file)
 
     fr.onload = () => {
       const image: ImageAddType = {

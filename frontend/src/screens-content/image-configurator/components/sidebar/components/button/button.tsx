@@ -101,16 +101,14 @@ const Button = ({ materials, configuration }: ButtonProps) => {
     })
     totalPrice += Number(computedPrice)
 
-    const url = state.cropper?.current?.cropper
-      .getCroppedCanvas()
-      ?.toDataURL(StorageFileType.JPEG)
-
     const payload = {
       shoppingCart: {
         images: [
           ...(order?.shoppingCart?.images ?? []),
           {
-            url,
+            url: state.cropper?.current?.cropper
+              .getCroppedCanvas()
+              ?.toDataURL(StorageFileType.JPEG),
             qty: 1,
             origin: origin,
             width: dim.width,
