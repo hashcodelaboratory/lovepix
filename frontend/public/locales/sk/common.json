@@ -105,7 +105,7 @@
   "singleOrder": "Objednávka",
   "orderHistory": "História objednávky",
   "customerDetails": "Detail zákazníka",
-  "created": "Objednávka vytvorená",
+  "orderCreated": "Objednávka vytvorená",
   "transaction": "Prevodom",
   "free": "Zadarmo",
   "orderWithPayment": "Objednať s povinnosťou platby",

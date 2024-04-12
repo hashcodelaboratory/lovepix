@@ -101,7 +101,7 @@ export const localizationKey = {
   singleOrder: 'singleOrder',
   orderHistory: 'orderHistory',
   customerDetails: 'customerDetails',
-  created: 'created',
+  orderCreated: 'orderCreated',
   transaction: 'transaction',
   free: 'free',
   saveChanges: 'saveChanges',
@@ -316,5 +316,4 @@ export const localizationKey = {
   dimension: 'dimension',
   photoFoamTitle: 'photoFoamTitle',
   photoFoamText: 'photoFoamText',
-  paid: 'paid',
 }

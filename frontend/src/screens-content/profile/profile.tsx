@@ -29,12 +29,11 @@ const ProfileLayout = () => {
   )
 
   const states = {
-    [OrderStateEnum.CREATED]: t(localizationKey.created),
-    [OrderStateEnum.ACCEPTED]: t(localizationKey.accepted),
+    [OrderStateEnum.CREATED]: t(localizationKey.orderCreated),
+    [OrderStateEnum.DELIVERED]: t(localizationKey.accepted),
     [OrderStateEnum.PACKED]: t(localizationKey.packed),
-    [OrderStateEnum.SHIPPED]: t(localizationKey.shipped),
-    [OrderStateEnum.FINISHED]: t(localizationKey.finished),
-    [OrderStateEnum.PAID]: t(localizationKey.paid),
+    [OrderStateEnum.PICKED]: t(localizationKey.shipped),
+    [OrderStateEnum.SHIPPED]: t(localizationKey.finished),
   }
 
   const orderData =
