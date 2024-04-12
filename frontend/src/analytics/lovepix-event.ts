@@ -1,6 +1,4 @@
 export enum LovepixEvent {
-  UPLOAD_IMAGE_LANDING_PAGE = 'upload_image_landing_page',
-  UPLOAD_IMAGE_CONFIGURATOR = 'upload_image_configurator',
   UPLOAD_IMAGE_DRAG_AND_DROP_LANDING_PAGE = 'upload_image_drag_and_drop_landing_page',
   UPLOAD_IMAGE_DRAG_AND_DROP_CONFIGURATOR = 'upload_image_drag_and_drop_configurator',
   SELECT_DIMENSION = 'select_dimension',

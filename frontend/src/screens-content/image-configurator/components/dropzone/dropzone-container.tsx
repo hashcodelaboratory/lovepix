@@ -14,6 +14,8 @@ import { configurationsTable } from '../../../../../database.config'
 import { Configuration } from '../../../../common/types/configuration'
 import { CONFIGURATION_TABLE_KEY } from '../../../../common/indexed-db/hooks/keys'
 import { Material } from '../../../../common/enums/material'
+import { loggingService } from '../../../../analytics/logging-service'
+import { LovepixEvent } from '../../../../analytics/lovepix-event'
 
 type DropzoneContainerProps = {
   configuration: Configuration
@@ -27,6 +29,11 @@ const DropzoneContainer = ({ configuration }: DropzoneContainerProps) => {
   const { enqueueSnackbar } = useSnackbar()
 
   const onDrop = async (files: File[]) => {
+    loggingService.logEvent(
+      LovepixEvent.UPLOAD_IMAGE_DRAG_AND_DROP_CONFIGURATOR,
+      { extra: { files: files.map((file) => JSON.stringify(file)) } }
+    )
+
     const file = files[0]
 
     const fr = new FileReader()

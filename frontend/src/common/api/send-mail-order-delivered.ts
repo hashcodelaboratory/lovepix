@@ -1,3 +1,6 @@
+import { loggingService } from '../../analytics/logging-service'
+import { LovepixEvent } from '../../analytics/lovepix-event'
+
 export type OrderStateMail = {
   id: string
   dest: string[]
@@ -16,6 +19,14 @@ export const sendMailOrderDelivered = async (
     text: text,
     pdfInvoice: pdf,
   }
+
+  loggingService.logEvent(LovepixEvent.NOTIFICATION_EMAILS, {
+    extra: {
+      category: 'SEND_MAIL_ORDER_DELIVERED',
+      body,
+    },
+  })
+
   return await fetch('/api/email/order/delivered', {
     method: 'POST',
     body: JSON.stringify(body),
