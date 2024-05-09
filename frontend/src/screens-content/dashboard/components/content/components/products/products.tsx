@@ -14,7 +14,7 @@ const ProductsLayout = () => {
     <div className={styles.contentContainer}>
       <div className={styles.manageProductsContainer}>
         <h3>Produkty</h3>
-        <div className={styles.addProductContainer}>
+        <div>
           <DataGrid
             className={styles.contentTable}
             rows={data ?? []}

@@ -9,7 +9,7 @@ import { removeUploadedProductImage } from '../../../../../../../common/api/remo
 export const getProductsColumns = (queryClient: QueryClient): GridColDef[] => [
   {
     field: 'image',
-    headerName: 'Preview',
+    headerName: 'Ukážka',
     width: 80,
     editable: false,
     renderCell: ({ value }) => (
@@ -24,27 +24,27 @@ export const getProductsColumns = (queryClient: QueryClient): GridColDef[] => [
   },
   {
     field: 'title',
-    headerName: 'Name',
+    headerName: 'Názov',
     width: 200,
     editable: false,
   },
   {
     field: 'count',
-    headerName: 'count',
-    width: 120,
+    headerName: 'Počet',
+    width: 60,
     editable: false,
     renderCell: ({ value }) => <div>{value}</div>,
   },
   {
     field: 'price',
-    headerName: 'Price',
+    headerName: 'Cena',
     width: 80,
     editable: false,
     renderCell: ({ value }) => <div>{value} €</div>,
   },
   {
     field: 'id',
-    headerName: 'Remove',
+    headerName: 'Odstrániť',
     width: 80,
     editable: false,
     renderCell: (params) => (
