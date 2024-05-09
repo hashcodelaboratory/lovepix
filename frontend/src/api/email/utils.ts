@@ -175,7 +175,7 @@ export const emailTemplateUser = ({
                                   payment === 'TRANSACTION'
                                     ? `<tr style="border-top: 1px dotted #d3d3d3;">
                                 <td style="text-align: left;padding: 10px;color: #000; font-weight: 700">IBAN</td>
-                                <td style="text-align: right;padding: 10px;color: #000;" colspan="2" font-weight: 700">SK11 7500 0000 0040 2375 2975</td>
+                                <td style="text-align: right;padding: 10px;color: #000;" colspan="2" font-weight: 700">SK18 0200 0000 0041 5828 5251</td>
                                 </tr>
                                 `
                                     : ''
