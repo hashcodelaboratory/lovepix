@@ -29,7 +29,7 @@ const Debug: NextPage = () => {
       </header>
 
       <main>
-        <Grid container direction="column">›
+        <Grid container direction="column">
           {variable("NEXT_PUBLIC_SMART_EMAILING_HOST", process.env.NEXT_PUBLIC_SMART_EMAILING_HOST)}
           {variable("NEXT_PUBLIC_SMART_EMAILING_TOKEN", process.env.NEXT_PUBLIC_SMART_EMAILING_TOKEN)}
           {variable("NEXT_PUBLIC_SMART_EMAILING_CONTACT_LIST_ID", process.env.NEXT_PUBLIC_SMART_EMAILING_CONTACT_LIST_ID)}
