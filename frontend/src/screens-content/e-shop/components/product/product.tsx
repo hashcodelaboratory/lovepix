@@ -14,15 +14,21 @@ type ProductContent = {
 
 const Product = ({ product, width, height, layout }: ProductContent) => {
   const router = useRouter()
-  const { id, title, price, webp1kbHighEndImageUrl, webpHighEndImageUrl } =
-    product
+  const {
+    id,
+    title,
+    price,
+    webp1kbHighEndImageUrl,
+    webpHighEndImageUrl,
+    image,
+  } = product
 
   const goTo = () => router.push(`/${id}`)
 
   return (
     <div className={styles.previewProduct} onClick={goTo}>
       <ProgressiveImage
-        image={webpHighEndImageUrl ?? ''}
+        image={webpHighEndImageUrl ?? image}
         placeholder={webp1kbHighEndImageUrl ?? ''}
         width={width}
         height={height}
