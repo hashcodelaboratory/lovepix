@@ -6,7 +6,6 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
   TextField,
 } from '@mui/material'
 import { useTranslation } from 'next-i18next'
@@ -19,6 +18,7 @@ import { localizationKey } from '../../../../../../../localization/localization-
 import Image from 'next/image'
 import { FormAddProduct } from '../../../../../../../common/types/form-add-product'
 import { useCategoriesEshop } from '../../../../../../../common/api/use-categories-eshop'
+import UploadFileIcon from '@mui/icons-material/UploadFile'
 
 type ControllerFieldType = {
   name: 'title' | 'price' | 'count' | 'description' | 'category'
@@ -114,32 +114,46 @@ const AddProduct = () => {
 
   return (
     <div className={styles.addProductContainer}>
-      <input
-        type='file'
-        id='avatar'
-        name='avatar'
-        accept='image/png, image/jpeg'
-        onChange={onChange}
-        className={styles.galleryDetailDropzone}
-        ref={refImage}
-      />
-      {image && (
-        <>
+      <div className={styles.galleryDetailDropzone}>
+        {image ? (
+          <>
+            <div>
+              <Image
+                loading='lazy'
+                src={image ? URL.createObjectURL(image) : ''}
+                width={300}
+                height={300}
+                alt='img'
+                className={styles.imagePreview}
+              />
+            </div>
+            <Button variant='outlined' color='error' onClick={removeImage}>
+              {t(localizationKey.removeImage)}
+            </Button>
+          </>
+        ) : (
           <div>
-            <Image
-              loading='lazy'
-              src={image ? URL.createObjectURL(image) : ''}
-              width={300}
-              height={300}
-              alt='img'
-              className={styles.imagePreview}
+            <div>
+              <UploadFileIcon
+                sx={{
+                  fontSize: 60,
+                  marginBottom: 2,
+                }}
+                color='primary'
+              />
+            </div>
+            <input
+              type='file'
+              id='avatar'
+              name='avatar'
+              accept='image/png, image/jpeg'
+              onChange={onChange}
+              ref={refImage}
             />
           </div>
-          <Button variant='outlined' onClick={removeImage}>
-            {t(localizationKey.removeImage)}
-          </Button>
-        </>
-      )}
+        )}
+      </div>
+
       <form id='my-form' onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name={'category'}
