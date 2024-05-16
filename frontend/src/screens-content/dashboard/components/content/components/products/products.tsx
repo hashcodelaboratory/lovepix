@@ -33,12 +33,13 @@ const ProductsLayout = () => {
   })
 
   const onCellEditCommit = async (params: any) => {
-    const { row } = params
+    const { row, value, field } = params
 
     await updateProduct({
       id: row.id,
       data: {
         ...row,
+        [field.replace('data.', '')]: value,
       },
     })
   }

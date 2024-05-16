@@ -33,6 +33,7 @@ export const getProductsColumns = (queryClient: QueryClient): GridColDef[] => [
     headerName: 'Kategória',
     width: 160,
     editable: false,
+    // renderEditCell: ({  }) =>
   },
   {
     field: 'count',
