@@ -23,6 +23,7 @@ const ProductsLayout = () => {
         disableSelectionOnClick
         autoHeight
       />
+      <h3>Nový produkt</h3>
       <AddProduct />
     </div>
   )

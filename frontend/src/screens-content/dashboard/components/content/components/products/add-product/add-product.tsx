@@ -20,7 +20,7 @@ import { FormAddProduct } from '../../../../../../../common/types/form-add-produ
 import { useCategoriesEshop } from '../../../../../../../common/api/use-categories-eshop'
 import UploadFileIcon from '@mui/icons-material/UploadFile'
 
-type ControllerFieldType = {
+type ControllerTextFieldType = {
   name: 'title' | 'price' | 'count' | 'description' | 'category'
   error?: string
 }
@@ -42,7 +42,7 @@ const AddProduct = () => {
   const [image, setImage] = useState<File | undefined>()
   const { data: categories } = useCategoriesEshop()
 
-  const FIELDS: ControllerFieldType[] = [
+  const TEXT_FIELDS: ControllerTextFieldType[] = [
     {
       name: 'title',
       error: errors.title?.message,
@@ -58,7 +58,7 @@ const AddProduct = () => {
     },
   ]
 
-  const fields = FIELDS.map(({ name, error }) => (
+  const textFields = TEXT_FIELDS.map(({ name, error }) => (
     <div key={name} className={styles.input}>
       <Controller
         name={name}
@@ -187,10 +187,10 @@ const AddProduct = () => {
             </div>
           )}
         />
-        {fields}
+        {textFields}
         <Button
           type='submit'
-          variant='outlined'
+          variant='contained'
           id='my-form'
           className={styles.button}
         >
