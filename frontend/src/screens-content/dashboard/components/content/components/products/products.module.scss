@@ -1,5 +1,8 @@
 .manageProductsContainer {
-  margin: 0px 20px;
+  padding: 0 20px;
+  padding-bottom: 20px;
+  overflow: scroll;
+  width: 100%;
 }
 
 .contentTable {
@@ -8,6 +11,7 @@
   border-radius: 1rem;
   background-color: white;
   margin-bottom: 1rem;
+  width: 840px;
 }
 
 .deleteProduct {

@@ -1,8 +1,10 @@
 .addProductContainer {
   padding: 20px;
+  padding-bottom: 60px;
   background-color: white;
   box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem, rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
   border-radius: 1rem;
+  width: 600px;
 }
 
 .input {
@@ -11,6 +13,7 @@
 
 .button {
   margin-top: 10px;
+  float: right;
 }
 
 .imagePreview {

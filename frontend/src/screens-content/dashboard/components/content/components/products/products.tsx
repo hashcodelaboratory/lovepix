@@ -11,23 +11,19 @@ const ProductsLayout = () => {
   const { data } = useProducts()
 
   return (
-    <div className={styles.contentContainer}>
-      <div className={styles.manageProductsContainer}>
-        <h3>Produkty</h3>
-        <div>
-          <DataGrid
-            className={styles.contentTable}
-            rows={data ?? []}
-            columns={getProductsColumns(queryClient)}
-            pageSize={10}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-            disableSelectionOnClick
-            autoHeight
-          />
-          <AddProduct />
-        </div>
-      </div>
+    <div className={styles.manageProductsContainer}>
+      <h3>Produkty</h3>
+      <DataGrid
+        className={styles.contentTable}
+        rows={data ?? []}
+        columns={getProductsColumns(queryClient)}
+        pageSize={10}
+        rowsPerPageOptions={[5]}
+        checkboxSelection
+        disableSelectionOnClick
+        autoHeight
+      />
+      <AddProduct />
     </div>
   )
 }

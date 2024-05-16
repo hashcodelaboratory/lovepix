@@ -15,19 +15,19 @@ export const addProductValues = {
 
 export const FORM_SCHEMA = yup
   .object({
-    title: yup.string().required('titleValidation'),
+    title: yup.string().required('Názov je povinný údaj.'),
     price: yup
       .number()
       .transform((value) => (Number.isNaN(value) ? null : value))
       .nullable()
-      .required('priceValidation'),
-    description: yup.string().required('descriptionValidation'),
+      .required('Cena je povinný údaj.'),
+    description: yup.string().required('Popis je povinný údaj.'),
     count: yup
       .number()
       .transform((value) => (Number.isNaN(value) ? null : value))
       .nullable()
-      .required('countValidation'),
-    category: yup.string().required('categoryValidation'),
+      .required('Počet je povinný údaj.'),
+    category: yup.string().required('Kategória je povinný údaj.'),
   })
   .required()
 
@@ -42,7 +42,7 @@ const uploadToFirestore = async (
     url: url,
     name: name,
   }
-  addProduct(params)
+  await addProduct(params)
 }
 
 export const addPhoto = async (

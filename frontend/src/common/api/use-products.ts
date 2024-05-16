@@ -15,6 +15,7 @@ export type ProductsType = {
   price: number
   description: string
   count: number
+  category: string
 }
 
 const getProductsByCategory = async (category: string) => {

@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import {
   Button,
   FormControl,
+  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
@@ -40,11 +41,6 @@ const AddProduct = () => {
   })
   const [image, setImage] = useState<File | undefined>()
   const { data: categories } = useCategoriesEshop()
-  const [category, setCategory] = React.useState('')
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setCategory(event.target.value)
-  }
 
   const FIELDS: ControllerFieldType[] = [
     {
@@ -151,9 +147,7 @@ const AddProduct = () => {
           render={({ field }) => (
             <div>
               <FormControl fullWidth>
-                <InputLabel id='demo-multiple-name-label'>
-                  {t(localizationKey.categories)}
-                </InputLabel>
+                <InputLabel id='demo-multiple-name-label'>Kategória</InputLabel>
                 <Select
                   label='category'
                   labelId='demo-simple-select-helper-label'
@@ -161,8 +155,7 @@ const AddProduct = () => {
                   {...field}
                   {...register('category', { required: true })}
                   error={!!errors.category?.message}
-                  value={category}
-                  onChange={handleChange}
+                  value={field.value}
                   variant='outlined'
                 >
                   {categories?.map((item, index) => (
@@ -171,6 +164,11 @@ const AddProduct = () => {
                     </MenuItem>
                   ))}
                 </Select>
+                {!!errors.category?.message && (
+                  <FormHelperText error>
+                    {errors.category?.message}
+                  </FormHelperText>
+                )}
               </FormControl>
             </div>
           )}
