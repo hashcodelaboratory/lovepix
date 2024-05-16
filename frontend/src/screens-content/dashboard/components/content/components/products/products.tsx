@@ -3,7 +3,7 @@ import {
   PRODUCTS_KEY,
   useProducts,
 } from '../../../../../../common/api/use-products'
-import React from 'react'
+import React, { useState } from 'react'
 import { useQueryClient } from 'react-query'
 import AddProduct from './add-product/add-product'
 import styles from './products.module.scss'
@@ -14,11 +14,15 @@ import {
   SNACKBAR_OPTIONS_SUCCESS,
 } from '../../../../../../snackbar/config'
 import { useSnackbar } from 'notistack'
+import { useCategoriesEshop } from '../../../../../../common/api/use-categories-eshop'
 
 const ProductsLayout = () => {
   const { enqueueSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
   const { data } = useProducts()
+  const { data: categories } = useCategoriesEshop()
+
+  const [_row, setRow] = useState<any>()
 
   const { mutate: updateProduct } = useUpdateProduct({
     onSuccess: async (res) => {
@@ -35,13 +39,19 @@ const ProductsLayout = () => {
   const onCellEditCommit = async (params: any) => {
     const { row, value, field } = params
 
+    const actualRow = row ?? _row
+
     await updateProduct({
-      id: row.id,
+      id: actualRow.id,
       data: {
-        ...row,
+        ...actualRow,
         [field.replace('data.', '')]: value,
       },
     })
+  }
+
+  const onCellEditStart = (params: any) => {
+    setRow(params.row)
   }
 
   return (
@@ -50,13 +60,14 @@ const ProductsLayout = () => {
       <DataGrid
         className={styles.contentTable}
         rows={data ?? []}
-        columns={getProductsColumns(queryClient)}
+        columns={getProductsColumns(queryClient, categories)}
         pageSize={10}
         rowsPerPageOptions={[5]}
         checkboxSelection={false}
         disableSelectionOnClick
         autoHeight
         onCellEditCommit={onCellEditCommit}
+        onCellEditStart={onCellEditStart}
       />
       <h3>Nový produkt</h3>
       <AddProduct />
