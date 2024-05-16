@@ -4,11 +4,11 @@ import { deleteDoc, doc } from 'firebase/firestore'
 import { QueryClient } from 'react-query'
 import { StorageFolder } from 'common/firebase/storage/enums'
 import { ref, deleteObject } from '@firebase/storage'
-import { PRODUCT_KEY } from './use-products'
+import { PRODUCTS_KEY } from './use-products'
 
 const removeProduct = async (id: string, queryClient: QueryClient) => {
   await deleteDoc(doc(database, Collections.PRODUCTS, id))
-  queryClient.invalidateQueries(PRODUCT_KEY)
+  queryClient.invalidateQueries(PRODUCTS_KEY)
   return ''
 }
 
