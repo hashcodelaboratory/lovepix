@@ -26,7 +26,7 @@ export const getProductsColumns = (queryClient: QueryClient): GridColDef[] => [
     field: 'title',
     headerName: 'Názov',
     width: 300,
-    editable: false,
+    editable: true,
   },
   {
     field: 'category',
@@ -38,14 +38,14 @@ export const getProductsColumns = (queryClient: QueryClient): GridColDef[] => [
     field: 'count',
     headerName: 'Počet',
     width: 70,
-    editable: false,
+    editable: true,
     renderCell: ({ value }) => <div>{value} ks</div>,
   },
   {
     field: 'price',
     headerName: 'Cena',
     width: 80,
-    editable: false,
+    editable: true,
     renderCell: ({ value }) => <div>{value} €</div>,
   },
   {

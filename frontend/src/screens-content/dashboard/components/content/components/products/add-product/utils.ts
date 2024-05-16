@@ -45,7 +45,7 @@ const uploadToFirestore = async (
   await addProduct(params)
 }
 
-export const addPhoto = async (
+export const uploadProduct = async (
   data: FormAddProduct,
   image: File | undefined,
   queryClient: QueryClient

@@ -12,7 +12,7 @@ import { useTranslation } from 'next-i18next'
 import React, { ChangeEvent, useRef, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import styles from './add-product.module.scss'
-import { addPhoto, addProductValues, FORM_SCHEMA } from './utils'
+import { uploadProduct, addProductValues, FORM_SCHEMA } from './utils'
 import { useQueryClient } from 'react-query'
 import { localizationKey } from '../../../../../../../localization/localization-key'
 import Image from 'next/image'
@@ -106,7 +106,7 @@ const AddProduct = () => {
 
   const onSubmit: SubmitHandler<FormAddProduct> = async (data) => {
     if (data) {
-      await addPhoto(data, image, queryClient)
+      await uploadProduct(data, image, queryClient)
       removeImage()
       reset()
     }

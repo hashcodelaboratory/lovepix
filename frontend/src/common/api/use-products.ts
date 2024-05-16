@@ -4,7 +4,7 @@ import { database } from '../firebase/config'
 import { Collections } from '../firebase/enums'
 import { query, where } from 'firebase/firestore'
 
-export const PRODUCT_KEY = 'PRODUCTS'
+export const PRODUCTS_KEY = 'PRODUCTS'
 
 export type ProductsType = {
   id: string
@@ -58,9 +58,9 @@ const getProducts = (category: string | null | undefined) => {
 const COUNT_OF_FRONT_PRODUCTS = 6
 
 export const useFrontPageProducts = (): UseQueryResult<ProductsType[]> =>
-  useQuery([PRODUCT_KEY], () => getRandomProducts(COUNT_OF_FRONT_PRODUCTS))
+  useQuery([PRODUCTS_KEY], () => getRandomProducts(COUNT_OF_FRONT_PRODUCTS))
 
 export const useProducts = (
   category?: string | null
 ): UseQueryResult<ProductsType[]> =>
-  useQuery([PRODUCT_KEY, category], () => getProducts(category))
+  useQuery([PRODUCTS_KEY, category], () => getProducts(category))
