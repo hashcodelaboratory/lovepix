@@ -1,15 +1,17 @@
 .manageProductsContainer {
-  margin: 0px 20px;
+  padding: 0 20px;
+  padding-bottom: 20px;
+  overflow: scroll;
+  width: 100%;
 }
 
 .contentTable {
-  width: 800px;
   box-shadow: rgb(0 0 0 / 14%) 0rem 0.25rem 1.25rem 0rem,
-    rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
+  rgb(64 64 64 / 40%) 0rem 0.4375rem 0.625rem -0.3125rem;
   border-radius: 1rem;
   background-color: white;
   margin-bottom: 1rem;
-  min-width: 300px;
+  width: 840px;
 }
 
 .deleteProduct {

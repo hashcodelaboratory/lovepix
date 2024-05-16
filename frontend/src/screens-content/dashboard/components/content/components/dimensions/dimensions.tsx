@@ -32,7 +32,7 @@ const DimensionsLayout = (): JSX.Element => {
 
   const { data: dimensions = [] } = useDimensions()
   const { mutate: updateDimension } = useUpdateDimension({
-    onSuccess: (res) => {
+    onSuccess: async (res) => {
       if (res.error) {
         enqueueSnackbar(res.error, SNACKBAR_OPTIONS_ERROR)
       } else {
@@ -40,7 +40,7 @@ const DimensionsLayout = (): JSX.Element => {
           String(t(localizationKey.added)),
           SNACKBAR_OPTIONS_SUCCESS
         )
-        queryClient.invalidateQueries(DIMENSIONS_KEY)
+        await queryClient.invalidateQueries(DIMENSIONS_KEY)
         close()
       }
     },

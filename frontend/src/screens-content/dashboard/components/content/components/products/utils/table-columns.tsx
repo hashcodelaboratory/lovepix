@@ -5,11 +5,17 @@ import styles from '../products.module.scss'
 import Image from 'next/image'
 import { ImageLayout } from '../../../../../../home/enums/enums'
 import { removeUploadedProductImage } from '../../../../../../../common/api/remove-product'
+import { MenuItem, Select } from '@mui/material'
+import React from 'react'
+import { CategoryEshopType } from '../../../../../../../common/api/use-categories-eshop'
 
-export const getProductsColumns = (queryClient: QueryClient): GridColDef[] => [
+export const getProductsColumns = (
+  queryClient: QueryClient,
+  categories?: CategoryEshopType[]
+): GridColDef[] => [
   {
     field: 'image',
-    headerName: 'Preview',
+    headerName: 'Ukážka',
     width: 80,
     editable: false,
     renderCell: ({ value }) => (
@@ -24,27 +30,35 @@ export const getProductsColumns = (queryClient: QueryClient): GridColDef[] => [
   },
   {
     field: 'title',
-    headerName: 'Name',
-    width: 200,
-    editable: false,
+    headerName: 'Názov',
+    width: 300,
+    editable: true,
+  },
+  {
+    field: 'category',
+    headerName: 'Kategória',
+    width: 160,
+    editable: true,
+    type: 'singleSelect',
+    valueOptions: categories?.map(({ name }) => name),
   },
   {
     field: 'count',
-    headerName: 'count',
-    width: 120,
-    editable: false,
-    renderCell: ({ value }) => <div>{value}</div>,
+    headerName: 'Počet',
+    width: 70,
+    editable: true,
+    renderCell: ({ value }) => <div>{value} ks</div>,
   },
   {
     field: 'price',
-    headerName: 'Price',
+    headerName: 'Cena',
     width: 80,
-    editable: false,
+    editable: true,
     renderCell: ({ value }) => <div>{value} €</div>,
   },
   {
     field: 'id',
-    headerName: 'Remove',
+    headerName: 'Odstrániť',
     width: 80,
     editable: false,
     renderCell: (params) => (
