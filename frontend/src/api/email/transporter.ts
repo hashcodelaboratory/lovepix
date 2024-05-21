@@ -29,3 +29,19 @@ export const transporter = nodemailer.createTransport({
     rejectUnauthorized: false,
   },
 } as TransportOptions)
+
+export const transporter_test = nodemailer.createTransport({
+  pool: true,
+  service: NODE_MAILER_SERVICE_TEST,
+  host: NODE_MAILER_HOST_TEST,
+  secure: NODE_MAILER_SECURE_TEST,
+  port: NODE_MAILER_PORT_TEST,
+  auth: {
+    user: NODE_MAILER_USER_TEST,
+    pass: NODE_MAILER_PASSWORD_TEST,
+  },
+  tls: {
+    // do not fail on invalid certs
+    rejectUnauthorized: false,
+  },
+} as TransportOptions)
