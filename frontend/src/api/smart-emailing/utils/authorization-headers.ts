@@ -8,7 +8,4 @@ const authorizationHeaders_test = (): Headers => ({
   Authorization: process.env.NEXT_PUBLIC_SMART_EMAILING_TOKEN_TEST!
 })
 
-export default {
-  authorizationHeaders,
-  authorizationHeaders_test
-};
+export { authorizationHeaders, authorizationHeaders_test };

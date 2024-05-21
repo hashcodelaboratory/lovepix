@@ -1,4 +1,4 @@
-import withHost from "./with-host";
+import {withHost, withHost_test} from "./with-host";
 import {registerEndpoint, statusEndpoint} from "./endpoint-composer";
 import Endpoint from "../endpoint";
 

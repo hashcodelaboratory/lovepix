@@ -1,4 +1,4 @@
-import authorizationHeaders from "./authorization-headers";
+import {authorizationHeaders, authorizationHeaders_test} from "./authorization-headers";
 
 describe('api/smart-emailing/utils/authorization-headers.ts', () => {
   beforeEach(() => jest.clearAllMocks())
