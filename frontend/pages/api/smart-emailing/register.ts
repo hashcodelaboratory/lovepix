@@ -1,7 +1,7 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
 import axios from "axios";
 import {registerEndpoint} from "../../../src/api/smart-emailing/utils/endpoint-composer";
-import authorizationHeaders from "../../../src/api/smart-emailing/utils/authorization-headers";
+import {authorizationHeaders, authorizationHeaders_test} from "../../../src/api/smart-emailing/utils/authorization-headers";
 import {logRequestTrigger} from "../../../src/api/logger/logger";
 import RegistrationStatus from "../../../src/api/smart-emailing/registration-status";
 import ContactListStatus from "../../../src/api/smart-emailing/contact-list-status";
@@ -51,7 +51,10 @@ const register = async (
     const {email} = body
 
     const uri = registerEndpoint().href
-    const headers = authorizationHeaders()
+    const headers = {
+      ...authorizationHeaders(),
+      ...authorizationHeaders_test()
+    }
 
     logRequestTrigger(uri, req.method, req.body)
     const result = await axios.post(uri, {
