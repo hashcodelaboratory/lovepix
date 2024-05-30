@@ -1,11 +1,13 @@
-const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
+const stripeProd = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
+const stripeTest = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY_TEST);
 
 export default async function handler(req, res) {
   const _body = JSON.parse(req.body);
   if (req.method === 'POST') {
     try {
       // Create Checkout Sessions from body params.
-      const session = await stripe.checkout.sessions.create({
+      const stripeInstance = process.env.NODE_ENV === 'production' ? stripeProd : stripeTest;
+      const session = await stripeInstance.checkout.sessions.create({
         line_items: [
           {
             price_data: {
