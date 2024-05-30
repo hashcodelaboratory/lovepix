@@ -16,7 +16,8 @@
     "incremental": true,
     "baseUrl": "./src",
     "paths": {
-      "@icons/*": ["assets/icons/*"]
+      "@icons/*": ["assets/icons/*"],
+      "constants": ["frontend/src/api/superfaktura"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
