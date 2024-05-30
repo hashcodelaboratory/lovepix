@@ -9,9 +9,15 @@ type CustomShoppingCartProps = {
   order: Order
 }
 
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY ?? ''
-)
+const stripePublicKey = process.env.NODE_ENV === 'production'
+  ? process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY
+  : process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST;
+
+  if (!stripePublicKey) {
+    throw new Error('Stripe public key is not defined');
+  }
+  
+  const stripePromise = loadStripe(stripePublicKey);
 
 const CustomShoppingCart = ({ order }: CustomShoppingCartProps) => {
   if (!order)
